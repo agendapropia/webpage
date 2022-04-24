@@ -1,0 +1,383 @@
+.table-gear {
+  min-height: 100px !important;
+}
+
+.table-gear .menu-header-right {
+  padding: 15px 10px;
+  padding-right: 30px;
+}
+
+.table-gear .table-container {
+  width: 100%;
+  overflow-y: auto;
+  _overflow: auto;
+  margin: 0 0 1em;
+  height: auto;
+}
+
+.table-gear table {
+  width: 101%;
+  min-width: 400px;
+  padding: 6px 0px;
+  margin-left: -3px;
+  margin-bottom: 0px;
+
+  position: relative;
+  list-style-type: none;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+}
+
+.table-gear table tr:first-child td {
+  font-weight: bold;
+  color: #4e4e4e;
+  border-top: none;
+  background-color: #f6f6f6;
+}
+
+.table-gear table tr:first-child td:hover {
+  color: #2c2c2c;
+}
+
+.table-gear .menu-table {
+  padding-bottom: 15px;
+}
+
+.table-gear table tr {
+  border-left: 3px solid #ffffff !important;
+}
+
+.table-gear table .active {
+  background-color: #f3fdff !important;
+  border-left: 3px solid #337ab7 !important;
+}
+
+.table-gear table tr:last-child td {
+  border-bottom: 1px solid #e4eaec;
+}
+
+.table-gear table .icheckbox_flat-blue {
+  margin-right: 12px !important;
+}
+
+.table-gear table .img-avatar {
+  max-width: 30px;
+  margin-right: 10px;
+}
+
+.table-gear table tr:hover {
+  background-color: #fafafa;
+}
+
+.table-gear .image-item {
+  width: 60px;
+  height: 60px;
+  border-radius: 10%;
+  object-fit: cover;
+}
+
+/*LISTADO pub_table*/
+.table-gear table td {
+  max-width: 1000px;
+  font-weight: normal;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.table-gear table td:first-child {
+  min-width: auto;
+}
+
+@media (max-width: 768px) {
+  .table-gear .panel-body {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+
+  .table-gear .menu-header-right {
+    padding-right: 15px;
+  }
+}
+
+.table-gear .menu_footer {
+  padding: 13px 10px;
+  margin-top: 2px;
+}
+
+/*CSS PAGINATE*/
+.table-gear .paginate-block {
+  margin-right: -8px;
+  margin-top: -5px;
+}
+
+.table-gear .paginate {
+  display: inline-block;
+  margin-top: 0px;
+  margin-right: 10px;
+}
+
+.table-gear .paginate .btn {
+  border: 1px solid #e8e8e8 !important;
+  background-color: #ffffff;
+}
+
+.table-gear .paginate .btn-primary {
+  color: #fff;
+  border-color: #5e72e4;
+  background-color: #5e72e4;
+  box-shadow: 0 4px 6px rgb(50 50 93 / 11%);
+}
+
+.table-gear .block-filters {
+  padding-top: 3px;
+  margin-top: 10px;
+}
+
+.table-gear .block-filters .name {
+  font-size: 10px;
+  color: #616161;
+}
+
+.table-gear .paginate-label {
+  border-top: 1px solid #e4e7ed;
+  padding-top: 3px;
+  margin-top: 14px;
+}
+
+.table-gear .paginate-label .item {
+  padding: 2px 5px;
+  display: block;
+  width: auto;
+  height: auto;
+  text-align: left;
+  font-size: 14px;
+  font-weight: normal;
+  line-height: 10px;
+}
+
+.table-gear .paginate-label i {
+  padding-right: 6px;
+}
+
+.table-gear .paginate-total {
+  font-size: 13px;
+  font-style: italic;
+  color: #9e9c9c;
+}
+
+.table-gear .paginate .btn-paginate {
+  background-color: #fbfbfb;
+  color: #444;
+  border-color: #ddd;
+}
+
+.table-gear .paginate .btn-previous {
+  border-radius: 5px 0px 0px 5px;
+}
+
+.table-gear .paginate .btn-next {
+  border-radius: 0px 5px 5px 0px;
+}
+
+.table-gear .paginate .btn-paginate-disable {
+  background-color: #dcdcdc;
+}
+
+.table-gear .paginate .btn-paginate-act {
+  color: #ffffff;
+  font-weight: bold;
+  background-color: #206db0;
+  border-color: #206db0;
+}
+
+.table-gear .paginate .btn-paginate-act:hover {
+  color: #fbfbfb;
+  background-color: #21629a;
+}
+/*CSS PAGINATE */
+
+/* BUTTON TABLE */
+.table-gear .btn-mt {
+  border-radius: 4px;
+  padding: 3px 4px;
+  background-color: #efefef;
+  color: #adadad;
+  border: 1px solid #e4eaec;
+}
+
+/*
+ * This section is used to implement css for the LOADER
+ */
+.table-gear .overlay {
+  position: absolute !important;
+  top: 0px !important;
+  left: 0px !important;
+  width: 100% !important;
+  height: 100% !important;
+  background-color: rgba(255, 255, 255, 0.7) !important;
+  z-index: 10000 !important;
+  vertical-align: middle !important;
+  content: '' !important;
+}
+
+.table-gear .overlay .content {
+  position: absolute;
+  top: 46%;
+  left: 46%;
+  margin-left: -15px;
+  margin-top: -15px;
+  color: #404040;
+  font-size: 12px;
+}
+
+.table-gear .block-main-table {
+  position: relative;
+}
+.table-gear .btn-hide {
+  border: none;
+  padding: 0px;
+  background: transparent;
+}
+.table-gear .btn-tg {
+  font-size: 21px;
+  color: #525252;
+}
+.table-gear-min {
+  padding: 10px 10px 1px !important;
+}
+.label-warning {
+  color: #e7843c;
+  font-size: 10px;
+  padding-left: 2px;
+}
+.label-error {
+  color: #d64848;
+  font-size: 11px;
+  padding-left: 2px;
+  position: absolute;
+}
+.is-invalid {
+  border-color: #b9ada4 !important;
+}
+.is-required {
+  color: #d60606;
+  font-size: 12px;
+  padding-right: 2px;
+  font-weight: bold;
+}
+/*
+ * This section is used to implement css for the LOADER
+ */
+.modal-table-gear {
+  background: hsl(0deg 0% 0% / 35%);
+}
+
+.modal-table-gear .overlay {
+  position: absolute !important;
+  top: 0px !important;
+  left: 0px !important;
+  width: 100% !important;
+  height: 100% !important;
+  background-color: rgba(255, 255, 255, 0.7) !important;
+  z-index: 10000 !important;
+  vertical-align: middle !important;
+  content: '' !important;
+}
+
+.modal-table-gear .overlay .content {
+  position: absolute;
+  top: 46%;
+  left: 48%;
+  margin-left: -15px;
+  margin-top: -15px;
+  color: #404040;
+  font-size: 12px;
+}
+.modal-table-gear .modal-alert .overlay {
+  background-color: rgb(43 43 43 / 78%) !important;
+  border-radius: 0.4375rem;
+}
+
+.modal-table-gear .modal-alert .overlay .content {
+  left: 50%;
+  color: #ffffff !important;
+}
+
+.table-gear .filter_search {
+  padding-left: 8px !important;
+}
+
+.table-gear .filter {
+  height: 36px;
+  padding: 0px 10px;
+  margin-top: 0px;
+}
+.table-gear .select_filter {
+  margin-top: 2px;
+}
+.table-gear .filter-group {
+  height: 35px;
+}
+.table-gear .filter-group button {
+  padding: 0px 18px;
+}
+
+.alert-table-gear .close {
+  top: 18px !important;
+}
+
+.table-gear .card-filters {
+}
+
+.table-gear .card-content {
+  margin-top: 0px;
+}
+
+.table-gear .items-not-found {
+  padding: 25px 20px;
+  border-bottom: 1px solid #e8e8e8;
+  text-align: center;
+  margin-top: 0px;
+  font-style: italic;
+  font-size: 12px;
+  color: #9a9a9a;
+  display: none;
+}
+
+@media (max-width: 760px) {
+  .table-gear .card-content {
+    margin-top: 10px;
+  }
+
+  .table-gear .card-filters {
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+}
+
+@media (max-width: 768px) {
+  .table-gear .card-content {
+    margin-top: 10px;
+  }
+
+  .table-gear .card-filters {
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+
+  .table-gear .paginate-label {
+    display: none;
+  }
+}
+
+.modal-table-gear .table-gear .table-responsive {
+  overflow-y: auto;
+  max-height: 600px;
+}
+
+@media (max-width: 768px) {
+  .modal-table-gear .table-gear .table-responsive {
+    max-height: 500px;
+  }
+}
