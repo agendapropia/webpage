@@ -289,8 +289,8 @@ class searchByAutocomplete {
   }
 }
 
-let divSelect = $('#modal-create-menu-toppings').find('.storeSelect')
-let select = new searchByAutocomplete(divSelect, {
-  params: [{ name: 'order_id', value: 2 }],
-  url: '/store-manager/stores/search-by-autocomplete',
-})
+// let divSelect = $('#modal-create-menu-toppings').find('.storeSelect')
+// let select = new searchByAutocomplete(divSelect, {
+//   params: [{ name: 'order_id', value: 2 }],
+//   url: '/store-manager/stores/search-by-autocomplete',
+// })

@@ -17,7 +17,7 @@ class CreateUserProfilesTable extends Migration
             $table
                 ->id('user_id')
                 ->unique()
-                ->comment('relates to field piddet-users.users.id');
+                ->comment('relates to field agendapropia-users.users.id');
             $table->string('email')->unique();
             $table->integer('validated');
             $table->boolean('notifications_sms')->default(true);

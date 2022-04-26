@@ -3,7 +3,7 @@
 
     <x-slot name="content">
         <x-form method="POST" action="/accounts/users" name="form-create-user">
-            @include('modules.users.modals.form.create')
+            @include('modules.users.form.create')
         </x-form>
     </x-slot>
 

@@ -12,7 +12,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'Piddet'),
+    'name' => env('APP_NAME', 'Agenda Propia'),
 
     /*
     |--------------------------------------------------------------------------
@@ -51,7 +51,7 @@ return [
     |
     */
 
-    'url' => env('APP_URL', 'https://piddet.com'),
+    'url' => env('APP_URL', 'https://agendapropia.com.co'),
 
     'asset_url' => env('ASSET_URL', null),
 
