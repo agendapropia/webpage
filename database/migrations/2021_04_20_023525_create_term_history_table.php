@@ -18,11 +18,11 @@ class CreateTermHistoryTable extends Migration
             $table
                 ->bigInteger('use_id')
                 ->index()
-                ->comment('relates to field piddet-users.users.id');
+                ->comment('relates to field agendapropia-users.users.id');
             $table
                 ->integer('term_id')
                 ->index()
-                ->comment('relates to field piddet-users.terms.id');
+                ->comment('relates to field agendapropia-users.terms.id');
             $table->string('device');
             $table->string('ip');
             $table->string('os');

@@ -15,7 +15,7 @@ return [
     'menu-search' => 'Buscar',
 
     'menu-user-welcome' => 'Bienvenido!',
-    'menu-user-profile' => 'Mi perfil',
+    'menu-user-profile' => 'Perfil',
     'menu-user-sign-off' => 'Salir',
 
     'accounts' => 'Cuentas',
