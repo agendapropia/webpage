@@ -21,18 +21,10 @@ class DatabaseSeeder extends Seeder
             ->create();
         \App\Models\Users\Term::factory(1)->create(); 
         \App\Models\Users\Country::factory(1)->create();
-        \App\Models\Locations\City::factory(10)->create();
+        \App\Models\Utils\City::factory(10)->create();
         
-        \App\Models\Stores\Store::factory(10)->create();
-        \App\Models\Stores\StoreSchedule::factory(10)->create();
-        \App\Models\Stores\StoreUser::factory(10)->create();
-
-        \App\Models\Menus\Topping::factory(10)->create();
-
         $this->call(RolesSeeder::class);
         $this->call(UserGenderSeeder::class);
-        $this->call(StoreStatusSeeder::class);
-        $this->call(StoreTypeSeeder::class);
         $this->call(DaySeeder::class);
     }
 }

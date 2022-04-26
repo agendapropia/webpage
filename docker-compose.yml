@@ -1,14 +1,14 @@
 version: "3.7"
 
 services:
-  piddet:
+  agendapropia:
     build:
       args:
         uid: 1000
       context: ./
       dockerfile: ./docker/docker-file
-    image: piddet
-    container_name: piddet-app
+    image: agendapropia
+    container_name: agendapropia-app
     restart: unless-stopped
     working_dir: /var/www/
     volumes:
@@ -17,10 +17,10 @@ services:
       - appnet
   nginx:
     image: nginx:alpine
-    container_name: piddet-nginx
+    container_name: agendapropia-nginx
     restart: unless-stopped
     ports:
-      - 9010:80
+      - 9090:80
     volumes:
       - ./:/var/www
       - ./docker/nginx:/etc/nginx/conf.d/

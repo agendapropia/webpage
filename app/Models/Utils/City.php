@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Models\Stores;
+namespace App\Models\Utils;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class StoreStatus extends Model
+class City extends Model
 {
     use HasFactory;
 
@@ -14,10 +14,7 @@ class StoreStatus extends Model
      *
      * @var string
      */
-    protected $connection = 'mysql_stores';
-
-    protected $table = 'store_status';
-
+    protected $connection = 'mysql_utils';
 
     /**
      * The attributes that are mass assignable.

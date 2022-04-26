@@ -69,34 +69,3 @@ mix
     ],
     'public/js/modules/permissions/permissions-all.js',
   )
-
-  .scripts(
-    [
-      'resources/js/modules/stores/list.js',
-      'resources/js/modules/stores/create.js',
-      'resources/js/modules/stores/update.js',
-      'resources/js/modules/stores/status.js',
-      'resources/js/modules/stores/schedule.js',
-    ],
-    'public/js/modules/stores/all.js',
-  )
-  .scripts(
-    [
-      'resources/js/modules/menus/toppings/list.js',
-      'resources/js/modules/menus/toppings/create.js',
-      'resources/js/modules/menus/toppings/update.js',
-      'resources/js/modules/menus/toppings/status.js',
-      'resources/js/modules/menus/toppings/schedule.js',
-    ],
-    'public/js/modules/menus/toppings/all.js',
-  )
-  .scripts(
-    [
-      'resources/js/modules/menus/categories/list.js',
-      'resources/js/modules/menus/categories/create.js',
-      'resources/js/modules/menus/categories/update.js',
-      'resources/js/modules/menus/categories/status.js',
-      'resources/js/modules/menus/categories/schedule.js',
-    ],
-    'public/js/modules/menus/categories/all.js',
-  )

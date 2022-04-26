@@ -6,7 +6,7 @@
         </button>
         <!-- Brand -->
         <a class="navbar-brand pt-0" href="{{ route('home') }}">
-            <img src="{{ asset('argon') }}/img/brand/blue.png" class="navbar-brand-img" alt="...">
+            <img src="{{ asset('argon') }}/img/brand/logo.png" class="navbar-brand-img" alt="...">
         </a>
         <!-- User -->
         <ul class="nav align-items-center d-md-none">
@@ -31,7 +31,7 @@
                 <div class="row">
                     <div class="col-6 collapse-brand">
                         <a href="{{ route('home') }}">
-                            <img src="{{ asset('argon') }}/img/brand/blue.png">
+                            <img src="{{ asset('argon') }}/img/brand/logo_horizontal.png">
                         </a>
                     </div>
                     <div class="col-6 collapse-close">
@@ -63,69 +63,16 @@
                     </a>
                 </li>
             </ul>
+            
             <!-- Divider -->
             <hr class="my-3">
+
             <!-- Heading -->
             <h6 class="navbar-heading text-muted">Configuraciones</h6>
             <!-- Navigation -->
             <ul class="navbar-nav mb-md-3">
-                @can('user-module')
-                <li class="nav-item ">
-                    <a class="nav-link @yield('menu_account', '')" href="#navbar-account" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="navbar-account">
-                        <i class="fa fa-user text-primary"></i>
-                        <span class="nav-link-text">{{ __('menu.accounts') }}</span>
-                    </a>
-                    <div class="collapse @yield('menu_account_collapse', '')" id="navbar-account">
-                        <ul class="nav nav-sm flex-column">
-                            <li class="nav-item">
-                                <a class="nav-link @yield('menu_account_users', '')" href="{{ route('module-users') }}">
-                                    {{ __('menu.accounts-users') }}
-                                </a>
-                            </li>
-                            @can('role-module')
-                            <li class="nav-item">
-                                <a class="nav-link @yield('menu_account_roles', '')" href="{{ route('module-roles') }}">
-                                    {{ __('menu.accounts-roles') }}
-                                </a>
-                            </li>
-                            @endcan
-                            @can('permission-module')
-                            <li class="nav-item">
-                                <a class="nav-link @yield('menu_account_permissions', '')" href="{{ route('module-permissions') }}">
-                                    {{ __('menu.accounts-permissions') }}
-                                </a>
-                            </li>
-                            @endcan
-                        </ul>
-                    </div>
-                </li>
-                @endcan
-
-                @can('store-module')
-                <li class="nav-item ">
-                    <a class="nav-link @yield('menu_store_manager', '')" href="#navbar-stores" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="navbar-stores">
-                        <i class="fa fa-building text-primary"></i>
-                        <span class="nav-link-text">{{ __('menu.stores-manager') }}</span>
-                    </a>
-                    <div class="collapse @yield('menu_store_manager_collapse', '')" id="navbar-stores">
-                        <ul class="nav nav-sm flex-column">
-                            @can('store-module')
-                            <li class="nav-item">
-                                <a class="nav-link @yield('menu_store_manager_stores', '')" href="{{ route('route-stores') }}">
-                                    {{ __('menu.stores-stores') }}
-                                </a>
-                            </li>
-                            @endcan
-                        </ul>
-
-                    </div>
-                </li>
-                @endcan
-
-                @include('layouts.navbars.modules.menus')
-               
+                @include('layouts.navbars.modules.users-menu')
             </ul>
-
         </div>
     </div>
 </nav>

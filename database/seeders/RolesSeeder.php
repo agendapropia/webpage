@@ -40,26 +40,6 @@ class RolesSeeder extends Seeder
         Permission::create(['name' => 'role-delete']);
         Permission::create(['name' => 'role-update']);
         Permission::create(['name' => 'role-assign']);
-        
-        // stores manager
-        Permission::create(['name' => 'store-module']);
-        Permission::create(['name' => 'store-list']);
-        Permission::create(['name' => 'store-create']);
-        Permission::create(['name' => 'store-delete']);
-        Permission::create(['name' => 'store-update']);
-        Permission::create(['name' => 'store-schedule']);
-        Permission::create(['name' => 'store-schedule-update']);
-        Permission::create(['name' => 'store-schedule-delete']);
-
-        // menu
-        Permission::create(['name' => 'menu-topping-module']);
-        Permission::create(['name' => 'menu-topping-list']);
-        Permission::create(['name' => 'menu-topping-create']);
-        Permission::create(['name' => 'menu-topping-update']);
-        Permission::create(['name' => 'menu-categorie-module']);
-        Permission::create(['name' => 'menu-categorie-list']);
-        Permission::create(['name' => 'menu-categorie-create']);
-        Permission::create(['name' => 'menu-categorie-update']);
 
         $role = Role::create(['name' => 'super-admin']);
         $role->givePermissionTo(Permission::all());

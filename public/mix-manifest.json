@@ -5,8 +5,5 @@
     "/css/plugins.all.css": "/css/plugins.all.css",
     "/js/modules/users/all.js": "/js/modules/users/all.js",
     "/js/modules/permissions/roles-all.js": "/js/modules/permissions/roles-all.js",
-    "/js/modules/permissions/permissions-all.js": "/js/modules/permissions/permissions-all.js",
-    "/js/modules/stores/all.js": "/js/modules/stores/all.js",
-    "/js/modules/menus/toppings/all.js": "/js/modules/menus/toppings/all.js",
-    "/js/modules/menus/categories/all.js": "/js/modules/menus/categories/all.js"
+    "/js/modules/permissions/permissions-all.js": "/js/modules/permissions/permissions-all.js"
 }

@@ -2,8 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\Stores\Day;
-use App\Models\Stores\StoreStatus;
+use App\Models\Utils\Day;
 use Illuminate\Database\Seeder;
 
 class DaySeeder extends Seeder

@@ -13,7 +13,7 @@ class CreateDaysTable extends Migration
      */
     public function up()
     {
-        Schema::connection('mysql_stores')->create('days', function (
+        Schema::connection('mysql_utils')->create('days', function (
             Blueprint $table
         ) {
             $table->integerIncrements('id');
@@ -29,6 +29,6 @@ class CreateDaysTable extends Migration
      */
     public function down()
     {
-        Schema::connection('mysql_stores')->dropIfExists('days');
+        Schema::connection('mysql_utils')->dropIfExists('days');
     }
 }

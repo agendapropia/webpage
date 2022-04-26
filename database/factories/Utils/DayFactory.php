@@ -1,18 +1,18 @@
 <?php
 
-namespace Database\Factories\Menus;
+namespace Database\Factories\Utils;
 
-use App\Models\Menus\Category;
+use App\Models\Utils\Day;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class CategoryFactory extends Factory
+class DayFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = Category::class;
+    protected $model = Day::class;
 
     /**
      * Define the model's default state.
@@ -22,11 +22,7 @@ class CategoryFactory extends Factory
     public function definition()
     {
         return [
-            'id' => 1,
-            'status' => 1,
-            'name' => "Hamburguesas",
-            'icon' => "image.png",
-            'image' => 'image.png',
+            'name' => $this->faker->dayOfWeek()
         ];
     }
 }

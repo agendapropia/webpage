@@ -38,15 +38,5 @@ Route::group(
             require __DIR__ . '/web/users.php';
             require __DIR__ . '/web/permissions.php';
         });
-
-        /** user routes */
-        Route::group(['prefix' => 'store-manager'], function () {
-            require __DIR__ . '/web/stores.php';
-        });
-
-        /** menu routes */
-        Route::group(['prefix' => 'menu-manager'], function () {
-            require __DIR__ . '/web/menus.php';
-        });
     }
 );

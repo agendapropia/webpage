@@ -13,7 +13,7 @@ class CreateCitiesTable extends Migration
      */
     public function up()
     {
-        Schema::connection('mysql_stores')->create('cities', function (
+        Schema::connection('mysql_utils')->create('cities', function (
             Blueprint $table
         ) {
             $table->integerIncrements('id');
@@ -29,6 +29,6 @@ class CreateCitiesTable extends Migration
      */
     public function down()
     {
-        Schema::connection('mysql_stores')->dropIfExists('cities');
+        Schema::connection('mysql_utils')->dropIfExists('cities');
     }
 }

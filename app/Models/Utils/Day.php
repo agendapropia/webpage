@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\Stores;
+namespace App\Models\Utils;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -14,7 +14,7 @@ class Day extends Model
      *
      * @var string
      */
-    protected $connection = 'mysql_stores';
+    protected $connection = 'mysql_utils';
 
     /**
      * The attributes that are mass assignable.

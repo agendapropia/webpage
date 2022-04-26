@@ -1,18 +1,18 @@
 <?php
 
-namespace Database\Factories\Stores;
+namespace Database\Factories\Utils;
 
-use App\Models\Stores\Day;
+use App\Models\Utils\City;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class DayFactory extends Factory
+class CityFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = Day::class;
+    protected $model = City::class;
 
     /**
      * Define the model's default state.
@@ -22,7 +22,7 @@ class DayFactory extends Factory
     public function definition()
     {
         return [
-            'name' => $this->faker->dayOfWeek()
+            'name' => $this->faker->name(),
         ];
     }
 }
