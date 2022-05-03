@@ -2,7 +2,7 @@
     <x-slot name="title"><em class="fa fa-flag"></em> Actualizar permiso</x-slot>
 
     <x-slot name="content">
-        <x-form method="PUT" action="/accounts/permissions" name="form-update-permissions">
+        <x-form method="PUT" action="/admin/accounts/permissions" name="form-update-permissions">
             <x-form-input-hidden name="id"></x-form-input-hidden>
             @include('modules.permissions.modals.form.create-permissions')
         </x-form>

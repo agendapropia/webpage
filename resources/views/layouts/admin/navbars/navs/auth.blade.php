@@ -30,7 +30,7 @@
                     </div>
                 </a>
                 <div class="dropdown-menu dropdown-menu-arrow dropdown-menu-right">
-                    @include('layouts.navbars.blocks.menu-user')
+                    @include('layouts.admin.navbars.blocks.menu-user')
                 </div>
             </li>
         </ul>

@@ -10,7 +10,7 @@ function CreatePermissions() {
 
 // load data modal create
 let getDataPermission = new QueryAjax({
-  url: '/accounts/permissions/create',
+  url: '/admin/accounts/permissions/create',
   method: 'GET',
   listTable: permissionTable,
 })

@@ -8,5 +8,5 @@
         <ul class="items"></ul>
         <div class="selected-items"></div>
     </div>
-    <div class="label-error"></div>o
+    <div class="label-error"></div>
 </div>

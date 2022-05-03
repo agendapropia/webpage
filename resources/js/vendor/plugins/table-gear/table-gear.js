@@ -1,19 +1,6 @@
-/** Variable GLOBAL {token_csrf}*/
 var token_csrf = $('meta[name=csrf-token]').attr('content')
 
 class tableGear {
-  /**
-   *
-   * @param {element} content Contiene todo el block donde se va a ejecutal la clase
-   * @param {string} url Es la direccion donde se va a realizar la peticion
-   * @param {array} table Permite definir la estructura de la tabla por medio de un array {" ", "Nombre", "Apellido"}
-   * @param {string} functionOptional Permite ejecutar dicha funcion luego de traer los datos del AJAX
-   *
-   * @param {class} noneColumn "none-column" en los tds del template permiten ocultarlos.
-   *
-   * @version 1.0
-   */
-
   constructor(content, url, table, functionOptional = false) {
     this.content = content
     this.template = this.content.find('.template-list').html()
@@ -902,48 +889,6 @@ class tableGear {
 }
 
 /**
- *
- * @param {Element} select Example: $('.select')
- * @param {array} data Structure {id: 1, name: Pepe}
- * @param {int|string} selected
- * @param {String} name_default Default name of the first option
- */
-function LoadSelect(select, data, selected, name_default) {
-  let d = data
-  $(select).find('option').remove()
-
-  if (name_default) {
-    $(select).append(
-      '<option data-alt="" value="" class="c_gray_cl">' +
-        name_default +
-        '</option>',
-    )
-  } else {
-    $(select).append(
-      '<option data-alt="" value="" class="c_gray_cl">Selecciona...</option>',
-    )
-  }
-
-  $.each(d, function (key, value) {
-    $(select).append(
-      '<option data-alt="' +
-        d[key].alt +
-        '" value="' +
-        d[key].id +
-        '">' +
-        d[key].name +
-        '</option>',
-    )
-  })
-
-  selected
-    ? $(select)
-        .find('option[value="' + selected + '"]')
-        .attr('selected', 'selected')
-    : ''
-}
-
-/**
  * Other Functions
  * @name GET attribute URL
  */
@@ -1308,12 +1253,12 @@ class QueryAjax {
     this.listTable ? this.listTable.ModalLoader(status) : null
   }
   IsFormListTable() {
-    return this.listTable && this.form ? true : false
+    return this.form ? true : false
   }
   Query() {
     let cont = this
     this.Loader()
-    this.IsFormListTable() ? this.listTable.ModalClearForm(this.form) : null
+    this.IsFormListTable() ? UtilClearFormUi(this.form) : null
 
     this.StateXhr()
     this.UpdateForm()
@@ -1343,7 +1288,7 @@ class QueryAjax {
   }
   MapErrors(errors) {
     if (errors.status == 422 && this.IsFormListTable()) {
-      this.listTable.ModalValidateInputs(errors.responseJSON.errors, this.form)
+      UtilValidateInputs(errors.responseJSON.errors, this.form)
     } else {
       let exception_message
       let exception
@@ -1401,7 +1346,7 @@ function LoadFormInputs(div, data) {
 
 /**
  * This function loads a "select" through an array
- * 
+ *
  * @param {Element} select Example: $('.select')
  * @param {array} data Structure {id: 1, name: Pepe}
  * @param {int|string} selected
@@ -1443,10 +1388,10 @@ function LoadSelectUtil(select, data, selected, optionDefault) {
 
 /**
  * this function clear fields of a form
- * 
+ *
  * @param {form} form - form to be cleared
  */
-function CleanFormUtil(form) {
+function UtilClearFormUi(form) {
   let input = form.find('input')
   let select = form.find('select')
   let textarea = form.find('textarea')
@@ -1456,4 +1401,60 @@ function CleanFormUtil(form) {
   input.parent().find('.label-error').html('')
   select.parent().find('.label-error').html('')
   textarea.parent().find('.label-error').html('')
+}
+
+function UtilValidateInputs(errors, form) {
+  UtilClearFormUi(form)
+  $.each(errors, function (key, value) {
+    let input = form.find('input[name=' + key + ']')
+    let select = form.find('select[name=' + key + ']')
+    let textarea = form.find('textarea[name=' + key + ']')
+
+    input
+      .parent()
+      .find('.label-error')
+      .html('<i class="fa fa-exclamation-triangle"></i> ' + value)
+
+    if (input.hasClass('flatpickr-input')) {
+      input
+        .parent()
+        .parent()
+        .find('.label-error')
+        .html('<i class="fa fa-exclamation-triangle"></i> ' + value)
+    }
+
+    select
+      .parent()
+      .find('.label-error')
+      .html('<i class="fa fa-exclamation-triangle"></i> ' + value)
+
+    textarea
+      .parent()
+      .find('.label-error')
+      .html('<i class="fa fa-exclamation-triangle"></i> ' + value)
+
+    input.addClass('is-invalid')
+    select.addClass('is-invalid')
+    textarea.addClass('is-invalid')
+  })
+}
+
+function UtilFormClose(form) {
+  form.find("select").each(function() { this.selectedIndex = 0 });
+  form.find("input[type=text]").each(function() { this.value = '' });
+  form.find("input[type=password]").each(function() { this.value = '' });
+  form.find("textarea").each(function() { this.value = '' });
+  UtilClearFormUi(form)
+}
+
+/**
+ * @param {boolean} status
+ * @returns change modal loader status
+ */
+function UtilModalLoader(modal, status = true) {
+  if (status) {
+    modal.find('.overlay').show()
+  } else {
+    modal.find('.overlay').hide()
+  }
 }

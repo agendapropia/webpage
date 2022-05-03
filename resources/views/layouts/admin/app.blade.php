@@ -10,25 +10,28 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="csrf-token" content="{{ csrf_token() }}">
         <title>{{ config('app.name', 'Agenda Propia') }} | @yield('page_title', 'Bienvenido')</title>
-        @include('layouts.blocks.css')
+        @include('layouts.admin.blocks.css')
     </head>
     <body class="{{ $class ?? '' }}">
         @auth()
             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                 @csrf
             </form>
-            @include('layouts.navbars.sidebar')
+            @include('layouts.admin.navbars.sidebar')
         @endauth
         
         <div class="main-content">
-            @include('layouts.navbars.navbar')
+            @include('layouts.admin.navbars.navbar')
             @yield('content')
         </div>
 
         @guest()
-            @include('layouts.footers.guest')
+            @include('layouts.admin.footers.guest')
         @endguest
 
-        @include('layouts.blocks.js')
+        <!-- modal transversal -->
+        @include('layouts.admin.utils.change-of-password')
+
+        @include('layouts.admin.blocks.js')
     </body>
 </html>

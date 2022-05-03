@@ -16,6 +16,7 @@ return [
 
     'menu-user-welcome' => 'Bienvenido!',
     'menu-user-profile' => 'Perfil',
+    'menu-user-change-password' => 'Cambio de contraseña',
     'menu-user-sign-off' => 'Salir',
 
     'accounts' => 'Cuentas',
