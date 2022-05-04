@@ -3,7 +3,7 @@
     <div class="row">
         <div class="col-xl-2 col-md-3 card-filters">
             <div class="card p-3">
-                @include('layouts.plugins.tableGear.filter_search')
+                @include('layouts.admin.plugins.tableGear.filter_search')
 
                 @if(isset($filter))
                     <div class="block-filters">
@@ -14,7 +14,7 @@
 
                 <div class="paginate-label">
                     <div class="item">
-                        @include('layouts.plugins.tableGear.per_page')
+                        @include('layouts.admin.plugins.tableGear.per_page')
                     </div>
                 </div>
             </div>
@@ -28,8 +28,8 @@
                     </div>
                 </div>
                 <div class="form">
-                    @include('layouts.plugins.tableGear.filter_select_item')
-                    @include('layouts.plugins.tableGear.filter_update')
+                    @include('layouts.admin.plugins.tableGear.filter_select_item')
+                    @include('layouts.admin.plugins.tableGear.filter_update')
                     <div class="btn-group menu-select" role="group" style="display:inline-block;">
                         <button type="button" class="btn btn-secondary btn-sm dropdown-toggle" id="exampleGroupDrop2" data-toggle="dropdown" aria-expanded="false">
                             Opciones
@@ -45,8 +45,8 @@
                 </div>
             </div>
 
-            @include('layouts.plugins.tableGear.body_table')
-            @include('layouts.plugins.tableGear.footer')
+            @include('layouts.admin.plugins.tableGear.body_table')
+            @include('layouts.admin.plugins.tableGear.footer')
             {{ isset($template) ? $template : null }}
 
             <div class="overlay">

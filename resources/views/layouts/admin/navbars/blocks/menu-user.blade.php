@@ -5,6 +5,10 @@
     <em class="ni ni-single-02"></em>
     <span>{{ __('menu.menu-user-profile') }}</span>
 </a>
+<div class="dropdown-item button-modal-change-of-password">
+    <em class="fa fa-key"></em>
+    <span>{{ __('menu.menu-user-change-password') }}</span>
+</div>
 <div class="dropdown-divider"></div>
 <a href="{{ route('logout') }}" class="dropdown-item" onclick="event.preventDefault();
 document.getElementById('logout-form').submit();">

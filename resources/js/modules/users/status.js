@@ -29,7 +29,7 @@ function ButtonStatus() {
   queryStatusUser.Send()
 }
 let queryStatusUser = new QueryAjax({
-  url: '/accounts/users/status',
+  url: '/admin/accounts/users/status',
   method: 'PATCH',
   action: 'StatusUserModal',
   listTable: UserTable,

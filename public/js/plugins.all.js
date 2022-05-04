@@ -4606,22 +4606,9 @@ A=!!f.aria,E=q+"-"+Math.random().toString(36).replace("0.",""),g='<div class="'+
 if(m.length)m.on("click.i mouseover.i mouseout.i touchbegin.i touchend.i",function(b){var d=b[n],e=h(this);if(!c[s]){if("click"==d){if(h(b.target).is("a"))return;F(a,!1,!0)}else y&&(/ut|nd/.test(d)?(g[z](B),e[z](C)):(g[v](B),e[v](C)));if(J)b.stopPropagation();else return!1}});a.on("click.i focus.i blur.i keyup.i keydown.i keypress.i",function(b){var d=b[n];b=b.keyCode;if("click"==d)return!1;if("keydown"==d&&32==b)return c[n]==u&&c[l]||(c[l]?t(a,l):D(a,l)),!1;if("keyup"==d&&c[n]==u)!c[l]&&D(a,l);else if(/us|ur/.test(d))g["blur"==
 d?z:v](x)});d.on("click mousedown mouseup mouseover mouseout touchbegin.i touchend.i",function(b){var d=b[n],e=/wn|up/.test(d)?w:B;if(!c[s]){if("click"==d)F(a,!1,!0);else{if(/wn|er|in/.test(d))g[v](e);else g[z](e+" "+w);if(m.length&&y&&e==B)m[/ut|nd/.test(d)?z:v](C)}if(J)b.stopPropagation();else return!1}})})}})(window.jQuery||window.Zepto);
 
-/** Variable GLOBAL {token_csrf}*/
 var token_csrf = $('meta[name=csrf-token]').attr('content')
 
 class tableGear {
-  /**
-   *
-   * @param {element} content Contiene todo el block donde se va a ejecutal la clase
-   * @param {string} url Es la direccion donde se va a realizar la peticion
-   * @param {array} table Permite definir la estructura de la tabla por medio de un array {" ", "Nombre", "Apellido"}
-   * @param {string} functionOptional Permite ejecutar dicha funcion luego de traer los datos del AJAX
-   *
-   * @param {class} noneColumn "none-column" en los tds del template permiten ocultarlos.
-   *
-   * @version 1.0
-   */
-
   constructor(content, url, table, functionOptional = false) {
     this.content = content
     this.template = this.content.find('.template-list').html()
@@ -5510,48 +5497,6 @@ class tableGear {
 }
 
 /**
- *
- * @param {Element} select Example: $('.select')
- * @param {array} data Structure {id: 1, name: Pepe}
- * @param {int|string} selected
- * @param {String} name_default Default name of the first option
- */
-function LoadSelect(select, data, selected, name_default) {
-  let d = data
-  $(select).find('option').remove()
-
-  if (name_default) {
-    $(select).append(
-      '<option data-alt="" value="" class="c_gray_cl">' +
-        name_default +
-        '</option>',
-    )
-  } else {
-    $(select).append(
-      '<option data-alt="" value="" class="c_gray_cl">Selecciona...</option>',
-    )
-  }
-
-  $.each(d, function (key, value) {
-    $(select).append(
-      '<option data-alt="' +
-        d[key].alt +
-        '" value="' +
-        d[key].id +
-        '">' +
-        d[key].name +
-        '</option>',
-    )
-  })
-
-  selected
-    ? $(select)
-        .find('option[value="' + selected + '"]')
-        .attr('selected', 'selected')
-    : ''
-}
-
-/**
  * Other Functions
  * @name GET attribute URL
  */
@@ -5916,12 +5861,12 @@ class QueryAjax {
     this.listTable ? this.listTable.ModalLoader(status) : null
   }
   IsFormListTable() {
-    return this.listTable && this.form ? true : false
+    return this.form ? true : false
   }
   Query() {
     let cont = this
     this.Loader()
-    this.IsFormListTable() ? this.listTable.ModalClearForm(this.form) : null
+    this.IsFormListTable() ? UtilClearFormUi(this.form) : null
 
     this.StateXhr()
     this.UpdateForm()
@@ -5951,7 +5896,7 @@ class QueryAjax {
   }
   MapErrors(errors) {
     if (errors.status == 422 && this.IsFormListTable()) {
-      this.listTable.ModalValidateInputs(errors.responseJSON.errors, this.form)
+      UtilValidateInputs(errors.responseJSON.errors, this.form)
     } else {
       let exception_message
       let exception
@@ -6009,7 +5954,7 @@ function LoadFormInputs(div, data) {
 
 /**
  * This function loads a "select" through an array
- * 
+ *
  * @param {Element} select Example: $('.select')
  * @param {array} data Structure {id: 1, name: Pepe}
  * @param {int|string} selected
@@ -6051,10 +5996,10 @@ function LoadSelectUtil(select, data, selected, optionDefault) {
 
 /**
  * this function clear fields of a form
- * 
+ *
  * @param {form} form - form to be cleared
  */
-function CleanFormUtil(form) {
+function UtilClearFormUi(form) {
   let input = form.find('input')
   let select = form.find('select')
   let textarea = form.find('textarea')
@@ -6064,6 +6009,62 @@ function CleanFormUtil(form) {
   input.parent().find('.label-error').html('')
   select.parent().find('.label-error').html('')
   textarea.parent().find('.label-error').html('')
+}
+
+function UtilValidateInputs(errors, form) {
+  UtilClearFormUi(form)
+  $.each(errors, function (key, value) {
+    let input = form.find('input[name=' + key + ']')
+    let select = form.find('select[name=' + key + ']')
+    let textarea = form.find('textarea[name=' + key + ']')
+
+    input
+      .parent()
+      .find('.label-error')
+      .html('<i class="fa fa-exclamation-triangle"></i> ' + value)
+
+    if (input.hasClass('flatpickr-input')) {
+      input
+        .parent()
+        .parent()
+        .find('.label-error')
+        .html('<i class="fa fa-exclamation-triangle"></i> ' + value)
+    }
+
+    select
+      .parent()
+      .find('.label-error')
+      .html('<i class="fa fa-exclamation-triangle"></i> ' + value)
+
+    textarea
+      .parent()
+      .find('.label-error')
+      .html('<i class="fa fa-exclamation-triangle"></i> ' + value)
+
+    input.addClass('is-invalid')
+    select.addClass('is-invalid')
+    textarea.addClass('is-invalid')
+  })
+}
+
+function UtilFormClose(form) {
+  form.find("select").each(function() { this.selectedIndex = 0 });
+  form.find("input[type=text]").each(function() { this.value = '' });
+  form.find("input[type=password]").each(function() { this.value = '' });
+  form.find("textarea").each(function() { this.value = '' });
+  UtilClearFormUi(form)
+}
+
+/**
+ * @param {boolean} status
+ * @returns change modal loader status
+ */
+function UtilModalLoader(modal, status = true) {
+  if (status) {
+    modal.find('.overlay').show()
+  } else {
+    modal.find('.overlay').hide()
+  }
 }
 
 var tokenCsrf = $('meta[name=csrf-token]').attr('content')
@@ -6107,6 +6108,18 @@ class searchByAutocomplete {
     this.requestGetUrl()
     this.eventKeyupSearchField()
     this.evetOutsideContainer()
+  }
+  eventAddDataSelected(data) {
+    let obj = data instanceof Object
+    if (!obj) {
+      this.printLog('Not Object')
+      return false
+    }
+
+    let id = data.id
+    let name = data.name
+    let image = data.image
+    this.addItemSelected(id, name, image)
   }
   evetOutsideContainer() {
     this.containerId = this.container.attr('id')
@@ -6157,14 +6170,20 @@ class searchByAutocomplete {
       context.requestByEventKeyupSearch($(this).val())
     })
   }
-  setMessageSearch(status) {
+  setMessageSearch(status, messageType = 1) {
+    let messages = [
+      '<em class="fa fa-exclamation-circle"> Ocurrio un error',
+      '<em class="fa fa-exclamation-circle"> Mínimo tres caracteres para iniciar la busqueda',
+      '<em class="fa fa-exclamation-circle"> No se encontraron resultados',
+    ]
+    let classMessages = ['', 'label-error-search', 'label-error-result']
     if (status) {
-      this.labelError.addClass('label-error-search')
-      this.labelError.html(
-        '<em class="fa fa-exclamation-circle"> Mínimo tres caracteres para iniciar la busqueda',
-      )
+      this.labelError.addClass(classMessages[messageType])
+      this.labelError.html(messages[messageType])
     } else {
-      this.labelError.removeClass('label-error-search')
+      classMessages.forEach(function (value) {
+        this.labelError.removeClass(value)
+      }, this)
       this.labelError.text('')
     }
   }
@@ -6278,6 +6297,12 @@ class searchByAutocomplete {
     this.data = data.data
     this.resetItems(true)
 
+    if (!this.data.length) {
+      this.setMessageSearch(true, 2)
+      this.resetItems(false, false)
+      return true
+    }
+
     this.data.forEach(function (value, key) {
       this.ulItems.append(`<li data-id="${key}">
         ${value.name}
@@ -6288,13 +6313,25 @@ class searchByAutocomplete {
   }
   eventSelectItem() {
     let context = this
+    this.setMessageSearch(false)
     this.ulItems.find('li').click(function () {
-      context.selectedItems.push(context.data[$(this).attr('data-id')])
-      context.eventLimitItems()
-      context.resetItems(false, true)
-      context.listItems()
-      context.setInputHidden()
+      let elem = context.data[$(this).attr('data-id')]
+      let id = elem.id
+      let name = elem.name
+      let image = elem.image
+      context.addItemSelected(id, name, image)
     })
+  }
+  addItemSelected(id = '', name = '', image = '') {
+    this.selectedItems.push({
+      id: id,
+      name: name,
+      image: image,
+    })
+    this.eventLimitItems()
+    this.resetItems(false, true)
+    this.listItems()
+    this.setInputHidden()
   }
   setInputHidden() {
     this.inputHidden.val(this.getParameterToInput())
@@ -6321,9 +6358,19 @@ class searchByAutocomplete {
     if (this.selectedItems.length >= this.limitItems) {
       this.input.prop('disabled', true)
       this.iconInput.addClass('icon-disabled')
+      if (this.limitItems == 1) {
+        this.input.addClass('item-limit-display')
+        this.iconInput.addClass('item-limit-display')
+        this.divSelectedItems.addClass('display-unique')
+      }
     } else {
       this.input.prop('disabled', false)
       this.iconInput.removeClass('icon-disabled')
+      if (this.limitItems == 1) {
+        this.input.removeClass('item-limit-display')
+        this.iconInput.removeClass('item-limit-display')
+        this.divSelectedItems.removeClass('display-unique')
+      }
     }
   }
   listItems() {
@@ -6352,16 +6399,16 @@ class searchByAutocomplete {
       this.input.val('')
     }
   }
+  clearSelect() {
+    this.selectedItems = []
+    this.eventLimitItems()
+    this.resetItems(false)
+    this.listItems()
+  }
   printLog(message) {
     console.log(`ERROR_SEARCH_BY_AUTOCOMPLETE: ${message}`)
   }
 }
-
-// let divSelect = $('#modal-create-menu-toppings').find('.storeSelect')
-// let select = new searchByAutocomplete(divSelect, {
-//   params: [{ name: 'order_id', value: 2 }],
-//   url: '/store-manager/stores/search-by-autocomplete',
-// })
 
 //! moment.js
 
@@ -10973,4 +11020,49 @@ const settingHour24 = {
   noCalendar: true,
   dateFormat: 'H:i:S',
   static: true,
+}
+
+var modalChangePasswordUser = $('#modal-change-of-password')
+var formChangePasswordUser = $('#form-change-password-user')
+var messageErrorUserPass = modalChangePasswordUser.find(
+  '.error-change-password',
+)
+
+$(document).ready(function () {
+  modalChangePasswordUser.find('.button-send-password').click(function () {
+    messageErrorUserPass.text('')
+    messageErrorUserPass.hide()
+    UtilModalLoader(modalChangePasswordUser)
+    SendFormUpdateChangePasswordUser.Send()
+  })
+  $('.button-modal-change-of-password').click(function (e) {
+    e.preventDefault()
+    modalChangePasswordUser.modal('show')
+    messageErrorUserPass.text('')
+    messageErrorUserPass.hide()
+    UtilFormClose(formChangePasswordUser)
+  })
+})
+
+let SendFormUpdateChangePasswordUser = new QueryAjax({
+  form: 'form-change-password-user',
+  action: 'ActionUpdateChangePasswordUser',
+})
+
+function ActionUpdateChangePasswordUser(status, data) {
+  if (!status) {
+    console.log(status)
+  } else if (data.status) {
+    notify(
+      false,
+      'Usuario Actualizado',
+      'La contraseña se actualizo correctamente.',
+      2,
+    )
+    UtilFormClose(formChangePasswordUser)
+  } else {
+    messageErrorUserPass.html(data.message)
+    messageErrorUserPass.show()
+  }
+  UtilModalLoader(modalChangePasswordUser, false)
 }

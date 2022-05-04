@@ -19,7 +19,7 @@
                     </div>
                 </a>
                 <div class="dropdown-menu dropdown-menu-arrow dropdown-menu-right">
-                    @include('layouts.navbars.blocks.menu-user')
+                    @include('layouts.admin.navbars.blocks.menu-user')
                 </div>
             </li>
         </ul>
@@ -71,7 +71,7 @@
             <h6 class="navbar-heading text-muted">Configuraciones</h6>
             <!-- Navigation -->
             <ul class="navbar-nav mb-md-3">
-                @include('layouts.navbars.modules.users-menu')
+                @include('layouts.admin.navbars.modules.users-menu')
             </ul>
         </div>
     </div>

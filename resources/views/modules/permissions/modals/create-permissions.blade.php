@@ -2,7 +2,7 @@
     <x-slot name="title"><em class="si si-flag"></em> Crear Permiso</x-slot>
 
     <x-slot name="content">
-        <x-form method="POST" action="/accounts/permissions" name="form-create-permissions">
+        <x-form method="POST" action="/admin/accounts/permissions" name="form-create-permissions">
             @include('modules.permissions.modals.form.create-permissions')
         </x-form>
     </x-slot>

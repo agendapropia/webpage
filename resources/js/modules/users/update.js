@@ -4,7 +4,7 @@ let formUpdateUser = $('form[name=form-update-user]')
 
 //Funtion Modal Update
 function UpdateUser(data) {
-  UserTable.ModalClearForm(formUpdateUser)
+  UtilClearFormUi(formUpdateUser)
   queryUpdateUser.var.id = data.id
   formUpdateUser.find('input[name=id]').val(data.id)
   queryUpdateUser.Send()
@@ -12,24 +12,30 @@ function UpdateUser(data) {
 
 //Get data modal
 let queryUpdateUser = new QueryAjax({
-  url: '/accounts/users/update',
+  url: '/admin/accounts/users/update',
   method: 'GET',
   action: 'UpdateUserModal',
   listTable: UserTable,
 })
 function UpdateUserModal(status, result) {
   if (status) {
-    let select = modalUpdateUser.find('select[name=gender_id]')
-    UserTable.LoadSelect(
-      select,
+    LoadSelectUtil(
+      modalUpdateUser.find('select[name=gender_id]'),
       result.data.genders,
       result.data.user.gender_id,
     )
-    select = modalUpdateUser.find('select[name=phone_code]')
-    UserTable.LoadSelect(
-      select,
+    LoadSelectUtil(
+      modalUpdateUser.find('select[name=phone_code]'),
       result.data.countries,
       result.data.user.phone_code,
+    )
+    LoadSelectUtil(
+      modalUpdateUser.find('select[name=location]'),
+      [
+        { id: 'es', name: 'Español' },
+        { id: 'en', name: 'Ingles' },
+      ],
+      result.data.user.location,
     )
     LoadFormInputs(modalUpdateUser, result.data.user)
   }

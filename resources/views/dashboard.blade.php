@@ -1,10 +1,10 @@
-@extends('layouts.app')
+@extends('layouts.admin.app')
 
 @section('content')
-    @include('layouts.headers.cards')
+    @include('layouts.admin.headers.cards')
     
     <div class="container-fluid mt--7">
-        @include('layouts.footers.auth')
+        @include('layouts.admin.footers.auth')
     </div>
 @endsection
 

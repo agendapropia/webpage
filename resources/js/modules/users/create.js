@@ -2,23 +2,35 @@ let modalCreateUser = $('#modal-create-user')
 let formCreateUser = $('form[name=form-create-user]')
 
 function CreateUser() {
-  UserTable.ModalClearForm(formCreateUser)
+  UtilClearFormUi(formCreateUser)
   queryCreateUser.Send()
 }
 
 //Get data modal
 let queryCreateUser = new QueryAjax({
-  url: '/accounts/users/create',
+  url: '/admin/accounts/users/create',
   method: 'GET',
   action: 'CreateUserModal',
   listTable: UserTable,
 })
 function CreateUserModal(status, result) {
   if (status) {
-    let select = modalCreateUser.find('select[name=gender_id]')
-    UserTable.LoadSelect(select, result.data.genders)
-    select = modalCreateUser.find('select[name=phone_code]')
-    UserTable.LoadSelect(select, result.data.countries)
+    LoadSelectUtil(
+      modalCreateUser.find('select[name=gender_id]'),
+      result.data.genders,
+    )
+    LoadSelectUtil(
+      modalCreateUser.find('select[name=phone_code]'),
+      result.data.countries,
+    )
+    LoadSelectUtil(
+      modalCreateUser.find('select[name=location]'),
+      [
+        { id: 'es', name: 'Español' },
+        { id: 'en', name: 'Ingles' },
+      ],
+      'es',
+    )
   }
 }
 

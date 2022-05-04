@@ -40,6 +40,18 @@ class searchByAutocomplete {
     this.eventKeyupSearchField()
     this.evetOutsideContainer()
   }
+  eventAddDataSelected(data) {
+    let obj = data instanceof Object
+    if (!obj) {
+      this.printLog('Not Object')
+      return false
+    }
+
+    let id = data.id
+    let name = data.name
+    let image = data.image
+    this.addItemSelected(id, name, image)
+  }
   evetOutsideContainer() {
     this.containerId = this.container.attr('id')
     let context = this
@@ -89,14 +101,20 @@ class searchByAutocomplete {
       context.requestByEventKeyupSearch($(this).val())
     })
   }
-  setMessageSearch(status) {
+  setMessageSearch(status, messageType = 1) {
+    let messages = [
+      '<em class="fa fa-exclamation-circle"> Ocurrio un error',
+      '<em class="fa fa-exclamation-circle"> Mínimo tres caracteres para iniciar la busqueda',
+      '<em class="fa fa-exclamation-circle"> No se encontraron resultados',
+    ]
+    let classMessages = ['', 'label-error-search', 'label-error-result']
     if (status) {
-      this.labelError.addClass('label-error-search')
-      this.labelError.html(
-        '<em class="fa fa-exclamation-circle"> Mínimo tres caracteres para iniciar la busqueda',
-      )
+      this.labelError.addClass(classMessages[messageType])
+      this.labelError.html(messages[messageType])
     } else {
-      this.labelError.removeClass('label-error-search')
+      classMessages.forEach(function (value) {
+        this.labelError.removeClass(value)
+      }, this)
       this.labelError.text('')
     }
   }
@@ -210,6 +228,12 @@ class searchByAutocomplete {
     this.data = data.data
     this.resetItems(true)
 
+    if (!this.data.length) {
+      this.setMessageSearch(true, 2)
+      this.resetItems(false, false)
+      return true
+    }
+
     this.data.forEach(function (value, key) {
       this.ulItems.append(`<li data-id="${key}">
         ${value.name}
@@ -220,13 +244,25 @@ class searchByAutocomplete {
   }
   eventSelectItem() {
     let context = this
+    this.setMessageSearch(false)
     this.ulItems.find('li').click(function () {
-      context.selectedItems.push(context.data[$(this).attr('data-id')])
-      context.eventLimitItems()
-      context.resetItems(false, true)
-      context.listItems()
-      context.setInputHidden()
+      let elem = context.data[$(this).attr('data-id')]
+      let id = elem.id
+      let name = elem.name
+      let image = elem.image
+      context.addItemSelected(id, name, image)
     })
+  }
+  addItemSelected(id = '', name = '', image = '') {
+    this.selectedItems.push({
+      id: id,
+      name: name,
+      image: image,
+    })
+    this.eventLimitItems()
+    this.resetItems(false, true)
+    this.listItems()
+    this.setInputHidden()
   }
   setInputHidden() {
     this.inputHidden.val(this.getParameterToInput())
@@ -253,9 +289,19 @@ class searchByAutocomplete {
     if (this.selectedItems.length >= this.limitItems) {
       this.input.prop('disabled', true)
       this.iconInput.addClass('icon-disabled')
+      if (this.limitItems == 1) {
+        this.input.addClass('item-limit-display')
+        this.iconInput.addClass('item-limit-display')
+        this.divSelectedItems.addClass('display-unique')
+      }
     } else {
       this.input.prop('disabled', false)
       this.iconInput.removeClass('icon-disabled')
+      if (this.limitItems == 1) {
+        this.input.removeClass('item-limit-display')
+        this.iconInput.removeClass('item-limit-display')
+        this.divSelectedItems.removeClass('display-unique')
+      }
     }
   }
   listItems() {
@@ -284,13 +330,13 @@ class searchByAutocomplete {
       this.input.val('')
     }
   }
+  clearSelect() {
+    this.selectedItems = []
+    this.eventLimitItems()
+    this.resetItems(false)
+    this.listItems()
+  }
   printLog(message) {
     console.log(`ERROR_SEARCH_BY_AUTOCOMPLETE: ${message}`)
   }
 }
-
-// let divSelect = $('#modal-create-menu-toppings').find('.storeSelect')
-// let select = new searchByAutocomplete(divSelect, {
-//   params: [{ name: 'order_id', value: 2 }],
-//   url: '/store-manager/stores/search-by-autocomplete',
-// })

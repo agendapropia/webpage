@@ -2,7 +2,7 @@
     <x-slot name="title"><em class="fa fa-key"></em> Nuevo role</x-slot>
 
     <x-slot name="content">
-        <x-form method="POST" action="/accounts/roles" name="form-create-role">
+        <x-form method="POST" action="/admin/accounts/roles" name="form-create-role">
             @include('modules.permissions.modals.form.create-roles')
         </x-form>
     </x-slot>
