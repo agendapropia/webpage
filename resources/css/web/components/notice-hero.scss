@@ -1,0 +1,53 @@
+@import '../base/mixins.scss';
+
+.notice__card {
+  align-items: center;
+  background-color: var(--clr-white);
+  box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.16);
+  display: flex;
+  height: 198px;
+  justify-content: center;
+  object-fit: contain;
+  padding: 49px 24px;
+  position: absolute;
+  top: 340px;
+  width: 95%;
+  z-index: 1;
+  left: 10px;
+  h1 {
+    font-family: var(--ff-title);
+    font-size: 1.5625rem;
+    line-height: 2.125rem;
+    color: var(--clr-cyan-100);
+    text-align: center;
+  }
+  button {
+    border: 0;
+    position: absolute;
+    top: 180px;
+    font-weight: bold;
+  }
+  @include media-up(md) {
+    align-items: flex-start;
+    display: flex;
+    height: 198px;
+    justify-content: flex-start;
+    flex-direction: column;
+    width: 500px;
+    box-shadow: unset;
+    background-color: transparent;
+    left: 60px;
+    top: 300px;
+    margin-bottom: 10px;
+    h1 {
+      text-align: start;
+      font-size: 2rem;
+      line-height: 2.5rem;
+      color: var(--clr-white);
+    }
+    button {
+      border: 0;
+      font-weight: bold;
+    }
+  }
+}

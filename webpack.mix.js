@@ -14,7 +14,6 @@ const mix = require('laravel-mix')
 mix
   .js('resources/js/app.js', 'public/js')
   .sass('resources/sass/app.scss', 'public/css')
-
   /** Plugins */
   .scripts(
     [
@@ -40,7 +39,16 @@ mix
     ],
     'public/css/plugins.all.css',
   )
-
+  .sass(
+    'resources/css/web/global.scss',
+    'public/css/web/web-plugins.all.css',
+  )
+  .scripts(
+    [
+      'resources/js/web/**/*.js',
+    ],
+    'public/js/web/all.js',
+  )
   /** Modules Scripts */
   .scripts(
     [
