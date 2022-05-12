@@ -2,7 +2,7 @@ const MAX_SCROLL_HEIGHT = 300;
 
 const hamburger = document.querySelector('.navbar__hamburger');
 const body = document.querySelector('body');
-const header = document.querySelector('.navbar');
+const header = document.querySelector('.navbar-web');
 
 
 hamburger.addEventListener('click', () => {

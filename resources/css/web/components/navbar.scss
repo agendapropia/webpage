@@ -18,6 +18,12 @@
     -webkit-box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.28);
     -moz-box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.28);
     box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.28);
+
+    & .navbar__brand--show{
+      img {
+        display: block !important;
+      }
+    }
     .navbar__brand img:nth-child(1) {
       display: none;
     }

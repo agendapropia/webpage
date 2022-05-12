@@ -1,7 +1,6 @@
 <header>
-	<nav class="navbar navbar-web">
-		<div class="navbar__brand">
-			<img src="{{ asset('assets') }}/web/icons/ic-agenda.svg" alt="logo-agenda-propia" />
+	<nav class="navbar navbar--scrolled">
+		<div class="navbar__brand navbar__brand--show">
 			<img src="{{ asset('assets') }}/web/icons/ic-color-agenda.svg" alt="logo-agenda-propia" />
 		</div>
 		<button class="navbar__hamburger">
