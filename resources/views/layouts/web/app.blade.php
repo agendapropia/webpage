@@ -11,7 +11,6 @@
 </head>
 
 <body>
-	<x-web.menu.navbar />
 	<x-web.social-media />
 	<main>
 		@yield('content')

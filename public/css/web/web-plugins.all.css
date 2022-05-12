@@ -186,6 +186,12 @@
 
 @media (min-width: 768px) {
   .grid-event-most {
+    padding: 0 60px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .grid-event-most {
     display: grid;
     grid-template: 1fr/1fr 1fr;
     padding: 0 60px;
@@ -284,6 +290,7 @@
   font-family: var(--ff-text);
   color: var(--clr-cyan-100);
   margin-bottom: 7px;
+  padding-right: 5px;
 }
 
 .container-events-announ .wrapper-events-announ .container-text span {
@@ -486,6 +493,10 @@
   background-color: var(--clr-white);
   padding: 25px 12px !important;
   box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.28);
+}
+
+.navbar--scrolled .navbar__brand--show img {
+  display: block !important;
 }
 
 .navbar--scrolled .navbar__brand img:nth-child(1) {
@@ -749,8 +760,16 @@
 @media (min-width: 768px) {
   .section-histories {
     margin-top: 60px;
+    grid-template-columns: repeat(2, 1fr);
+    padding: 0 60px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .section-histories {
+    margin-top: 60px;
     grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: 50px repeat(2, minmax(0, 1fr));
+    grid-template-rows: 50px 225px auto;
     padding: 0 60px;
   }
 
@@ -818,6 +837,12 @@
 
 @media (min-width: 768px) {
   .section-histories .histories__title {
+    grid-column: 1/span 2;
+  }
+}
+
+@media (min-width: 1024px) {
+  .section-histories .histories__title {
     grid-column: 1/5;
     padding: 0;
   }
@@ -827,7 +852,6 @@
   width: 100%;
   height: auto;
   position: relative;
-  min-height: 280px;
 }
 
 .section-histories .container-reportage img {
@@ -1024,6 +1048,50 @@
 .splide-video .splide__pagination__page.is-active {
   background: var(--clr-cyan-100);
   transform: scale(1.1);
+}
+
+.hs-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
+}
+
+.hs-container-histories {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.hs-section-intro {
+  justify-content: center;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  padding: 8.5rem 2.3125rem 3.125rem 2.3125rem;
+}
+
+.hs-section-intro h1 {
+  font-family: var(--ff-title);
+  color: var(--clr-cyan-100);
+  margin-bottom: 1.625rem;
+  text-transform: uppercase;
+  font-weight: 100;
+}
+
+.hs-section-intro p {
+  font-family: var(--ff-text);
+  color: var(--clr-grey-500);
+  margin-bottom: 2.9375rem;
+}
+
+.hs-section-intro select {
+  background: var(--clr-primary);
+  color: var(--white);
+  border: 0;
+  border-radius: 1.875rem;
+  padding: 0.5rem 0 0.5rem 0.625rem;
+  font-family: var(--ff-text);
+  font-weight: 400;
+  font-size: 0.8125rem;
+  align-self: center;
 }
 
 /*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */
