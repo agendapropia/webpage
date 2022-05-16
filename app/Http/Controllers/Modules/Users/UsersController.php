@@ -29,7 +29,7 @@ class UsersController extends Controller
      */
     public function index()
     {
-        return view('modules.users.index');
+        return view('pages.admin.users.index');
     }
 
     /**

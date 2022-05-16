@@ -27,7 +27,7 @@ class PermissionsController extends Controller
     public function index()
     {
         $modules = PermissionModule::get();
-        return view('modules.permissions.permissions', compact('modules'));
+        return view('pages.admin.permissions.permissions', compact('modules'));
     }
 
     /**
