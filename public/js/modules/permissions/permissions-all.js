@@ -1,5 +1,5 @@
 let div = $('#tablePermissions')
-let route = '/accounts/permissions/list'
+let route = '/admin/accounts/permissions/list'
 let structure = [' ', 'Nombre', 'Description', 'Módulo', 'guard_name']
 
 var permissionTable = new tableGear(div, route, structure)
@@ -18,7 +18,7 @@ function CreatePermissions() {
 
 // load data modal create
 let getDataPermission = new QueryAjax({
-  url: '/accounts/permissions/create',
+  url: '/admin/accounts/permissions/create',
   method: 'GET',
   listTable: permissionTable,
 })

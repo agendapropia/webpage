@@ -24,7 +24,7 @@ class CreateUsersTable extends Migration
             $table->string('last_name');
             $table
                 ->boolean('gender_id')
-                ->comment('relates to field piddet-users.user_genders.id');
+                ->comment('relates to field agendapropia-users.user_genders.id');
             $table->string('phone_code', 10)->index();
             $table->string('phone_number', 30)->unique();
             $table->boolean('has_password')->default(false);
@@ -32,7 +32,7 @@ class CreateUsersTable extends Migration
             $table->string('location')->default('es');
             $table
                 ->boolean('term_accepted_id')
-                ->comment('relates to field piddet-users.terms.id');
+                ->comment('relates to field agendapropia-users.terms.id');
             $table->rememberToken();
             $table->timestamps();
         });

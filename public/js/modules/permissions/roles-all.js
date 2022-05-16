@@ -4,8 +4,8 @@ let formAssignPermissions = $('form[name=form-assign-permissions]')
 // funtion open modal assign
 function AssignPermissions(data) {
   modalAssignPermissions.find('.name_role').text(data.name)
-  assignPermissionTable.form.url = '/accounts/roles/' + data.id + '/permissions'
-  SendPermissionAssign.url = '/accounts/roles/' + data.id + '/assign'
+  assignPermissionTable.form.url = '/admin/accounts/roles/' + data.id + '/permissions'
+  SendPermissionAssign.url = '/admin/accounts/roles/' + data.id + '/assign'
   assignPermissionTable.refresh(false)
 }
 
@@ -13,7 +13,7 @@ function AssignPermissions(data) {
 let structure_array = [' ', 'Nombre', 'Description', 'Módulo']
 var assignPermissionTable = new tableGear(
   $('#assign-permissions'),
-  '/accounts/roles/_role_/permissions',
+  '/admin/accounts/roles/_role_/permissions',
   structure_array,
   'selectedDataPermission',
 )
@@ -54,7 +54,7 @@ function SendDataPermissionsRoles() {
 
 //Send assign permissions
 let SendPermissionAssign = new QueryAjax({
-  url: '/accounts/roles/_role_/assign',
+  url: '/admin/accounts/roles/_role_/assign',
   method: 'POST',
   action: 'FinishAssignPermission',
   listTable: assignPermissionTable,
@@ -67,7 +67,7 @@ function FinishAssignPermission(status, data) {
 }
 
 let div = $('#tableRoles')
-let route = '/accounts/roles/list'
+let route = '/admin/accounts/roles/list'
 let structure = [' ', 'Nombre', 'Description', 'guard_name']
 
 var roleTable = new tableGear(div, route, structure)

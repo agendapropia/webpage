@@ -3,7 +3,7 @@
         <div class="block block-transparent">
 
             @if(isset($filter_search))
-                @include('layouts.plugins.tableGear.filter_search')
+                @include('layouts.admin.plugins.tableGear.filter_search')
             @endif
 
             @if(isset($filter))
@@ -15,11 +15,11 @@
 
             <div class="form">
                 @if(isset($filter_select_item))
-                    @include('layouts.plugins.tableGear.filter_select_item')
+                    @include('layouts.admin.plugins.tableGear.filter_select_item')
                 @endif
 
                 @if(isset($filter_update))
-                    @include('layouts.plugins.tableGear.filter_update')
+                    @include('layouts.admin.plugins.tableGear.filter_update')
                 @endif
 
                 @if(isset($filter_select_item))
@@ -35,10 +35,10 @@
                 @endif
             </div>
 
-            @include('layouts.plugins.tableGear.body_table')
+            @include('layouts.admin.plugins.tableGear.body_table')
 
             @if(isset($filter_pagginate))
-                @include('layouts.plugins.tableGear.footer')
+                @include('layouts.admin.plugins.tableGear.footer')
             @endif
 
             {{ isset($template) ? $template : null }}

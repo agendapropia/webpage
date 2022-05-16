@@ -2,7 +2,7 @@
     <x-slot name="title"><em class="fa fa-key"></em> Actualizar Roles</x-slot>
 
     <x-slot name="content">
-        <x-form method="PUT" action="/accounts/roles" name="form-update-roles">
+        <x-form method="PUT" action="/admin/accounts/roles" name="form-update-roles">
             <x-form-input-hidden name="id"></x-form-input-hidden>
             @include('modules.permissions.modals.form.create-roles')
         </x-form>

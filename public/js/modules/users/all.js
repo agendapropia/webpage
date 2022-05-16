@@ -1,5 +1,5 @@
 let div = $('#tableUsers')
-let route = '/accounts/users/list'
+let route = '/admin/accounts/users/list'
 let structure = [' ', 'Estado', 'Nombre', 'Teléfono', 'Idioma']
 
 var UserTable = new tableGear(div, route, structure)
@@ -10,23 +10,35 @@ let modalCreateUser = $('#modal-create-user')
 let formCreateUser = $('form[name=form-create-user]')
 
 function CreateUser() {
-  UserTable.ModalClearForm(formCreateUser)
+  UtilClearFormUi(formCreateUser)
   queryCreateUser.Send()
 }
 
 //Get data modal
 let queryCreateUser = new QueryAjax({
-  url: '/accounts/users/create',
+  url: '/admin/accounts/users/create',
   method: 'GET',
   action: 'CreateUserModal',
   listTable: UserTable,
 })
 function CreateUserModal(status, result) {
   if (status) {
-    let select = modalCreateUser.find('select[name=gender_id]')
-    UserTable.LoadSelect(select, result.data.genders)
-    select = modalCreateUser.find('select[name=phone_code]')
-    UserTable.LoadSelect(select, result.data.countries)
+    LoadSelectUtil(
+      modalCreateUser.find('select[name=gender_id]'),
+      result.data.genders,
+    )
+    LoadSelectUtil(
+      modalCreateUser.find('select[name=phone_code]'),
+      result.data.countries,
+    )
+    LoadSelectUtil(
+      modalCreateUser.find('select[name=location]'),
+      [
+        { id: 'es', name: 'Español' },
+        { id: 'en', name: 'Ingles' },
+      ],
+      'es',
+    )
   }
 }
 
@@ -50,7 +62,7 @@ let formUpdateUser = $('form[name=form-update-user]')
 
 //Funtion Modal Update
 function UpdateUser(data) {
-  UserTable.ModalClearForm(formUpdateUser)
+  UtilClearFormUi(formUpdateUser)
   queryUpdateUser.var.id = data.id
   formUpdateUser.find('input[name=id]').val(data.id)
   queryUpdateUser.Send()
@@ -58,24 +70,30 @@ function UpdateUser(data) {
 
 //Get data modal
 let queryUpdateUser = new QueryAjax({
-  url: '/accounts/users/update',
+  url: '/admin/accounts/users/update',
   method: 'GET',
   action: 'UpdateUserModal',
   listTable: UserTable,
 })
 function UpdateUserModal(status, result) {
   if (status) {
-    let select = modalUpdateUser.find('select[name=gender_id]')
-    UserTable.LoadSelect(
-      select,
+    LoadSelectUtil(
+      modalUpdateUser.find('select[name=gender_id]'),
       result.data.genders,
       result.data.user.gender_id,
     )
-    select = modalUpdateUser.find('select[name=phone_code]')
-    UserTable.LoadSelect(
-      select,
+    LoadSelectUtil(
+      modalUpdateUser.find('select[name=phone_code]'),
       result.data.countries,
       result.data.user.phone_code,
+    )
+    LoadSelectUtil(
+      modalUpdateUser.find('select[name=location]'),
+      [
+        { id: 'es', name: 'Español' },
+        { id: 'en', name: 'Ingles' },
+      ],
+      result.data.user.location,
     )
     LoadFormInputs(modalUpdateUser, result.data.user)
   }
@@ -110,12 +128,11 @@ function ChangeStatusAction(data) {
     : '<i class="si si-check"></i>'
   modalStatusUser.find('.btn-action').html(ico + ' ' + message)
 
+  modalStatusUser.find('.button-status-send').text(message.toUpperCase())
   if (data.status_id) {
-    modalStatusUser.find('.modal-content').addClass('bg-gradient-danger')
-    modalStatusUser.find('.modal-content').removeClass('bg-gradient-primary')
+    modalStatusUser.find('.button-status-send').addClass('btn-danger')
   } else {
-    modalStatusUser.find('.modal-content').removeClass('bg-gradient-danger')
-    modalStatusUser.find('.modal-content').addClass('bg-gradient-primary')
+    modalStatusUser.find('.button-status-send').removeClass('btn-danger')
   }
 
   queryStatusUser.var.id = data.id
@@ -127,7 +144,7 @@ function ButtonStatus() {
   queryStatusUser.Send()
 }
 let queryStatusUser = new QueryAjax({
-  url: '/accounts/users/status',
+  url: '/admin/accounts/users/status',
   method: 'PATCH',
   action: 'StatusUserModal',
   listTable: UserTable,
@@ -148,8 +165,8 @@ function AssignRoles(data) {
   modalAssignRoles
     .find('.name_user')
     .text(data.first_name + ' ' + data.last_name)
-  assignRolesTable.form.url = '/accounts/users/' + data.id + '/roles'
-  SendRolesAssign.url = '/accounts/users/' + data.id + '/assign'
+  assignRolesTable.form.url = '/admin/accounts/users/' + data.id + '/roles'
+  SendRolesAssign.url = '/admin/accounts/users/' + data.id + '/assign'
   assignRolesTable.refresh(false)
 }
 
@@ -157,7 +174,7 @@ function AssignRoles(data) {
 let structure_array = [' ', 'Nombre', 'Description']
 var assignRolesTable = new tableGear(
   $('#assign-roles'),
-  '/accounts/roles/_role_/permissions',
+  '/admin/accounts/roles/_role_/permissions',
   structure_array,
   'selectedDataRoles',
 )
@@ -197,7 +214,7 @@ function SendDataUserRoles() {
 
 //Send assign permissions
 let SendRolesAssign = new QueryAjax({
-  url: '/accounts/roles/_role_/assign',
+  url: '/admin/accounts/roles/_role_/assign',
   method: 'POST',
   action: 'FinishAssignRoles',
   listTable: UserTable,

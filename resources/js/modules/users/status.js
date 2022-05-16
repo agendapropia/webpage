@@ -13,12 +13,11 @@ function ChangeStatusAction(data) {
     : '<i class="si si-check"></i>'
   modalStatusUser.find('.btn-action').html(ico + ' ' + message)
 
+  modalStatusUser.find('.button-status-send').text(message.toUpperCase())
   if (data.status_id) {
-    modalStatusUser.find('.modal-content').addClass('bg-gradient-danger')
-    modalStatusUser.find('.modal-content').removeClass('bg-gradient-primary')
+    modalStatusUser.find('.button-status-send').addClass('btn-danger')
   } else {
-    modalStatusUser.find('.modal-content').removeClass('bg-gradient-danger')
-    modalStatusUser.find('.modal-content').addClass('bg-gradient-primary')
+    modalStatusUser.find('.button-status-send').removeClass('btn-danger')
   }
 
   queryStatusUser.var.id = data.id
@@ -30,7 +29,7 @@ function ButtonStatus() {
   queryStatusUser.Send()
 }
 let queryStatusUser = new QueryAjax({
-  url: '/accounts/users/status',
+  url: '/admin/accounts/users/status',
   method: 'PATCH',
   action: 'StatusUserModal',
   listTable: UserTable,

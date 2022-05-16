@@ -15,11 +15,13 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('home');
 });
 
+Route::get('/historias', function () {
+    return view('histories');
+});
 Auth::routes();
-
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/home', [
         App\Http\Controllers\HomeController::class,
@@ -33,10 +35,12 @@ Route::group(
         'namespace' => 'App\Http\Controllers\Modules',
     ],
     function () {
-        /** user routes */
-        Route::group(['prefix' => 'accounts'], function () {
+        Route::group(['prefix' => 'admin/accounts'], function () {
             require __DIR__ . '/web/users.php';
             require __DIR__ . '/web/permissions.php';
+        });
+        Route::group(['prefix' => ''], function () {
+            require __DIR__ . '/web/auth.php';
         });
     }
 );

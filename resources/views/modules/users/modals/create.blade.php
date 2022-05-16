@@ -2,8 +2,8 @@
     <x-slot name="title"><em class="fa fa-user mr-2"></em>Crear Usuario</x-slot>
 
     <x-slot name="content">
-        <x-form method="POST" action="/accounts/users" name="form-create-user">
-            @include('modules.users.modals.form.create')
+        <x-form method="POST" action="/admin/accounts/users" name="form-create-user">
+            @include('modules.users.form.create')
         </x-form>
     </x-slot>
 

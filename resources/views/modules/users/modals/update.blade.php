@@ -2,9 +2,9 @@
     <x-slot name="title"><em class="fa fa-user mr-1"></em> Actualizar Usuario</x-slot>
 
     <x-slot name="content">
-        <x-form method="PUT" action="/accounts/users" name="form-update-user">
+        <x-form method="PUT" action="/admin/accounts/users" name="form-update-user">
             <x-form-input-hidden name="id"></x-form-input-hidden>
-            @include('modules.users.modals.form.create')
+            @include('modules.users.form.create')
         </x-form>
     </x-slot>
 

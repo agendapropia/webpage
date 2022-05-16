@@ -2,7 +2,7 @@
     <x-slot name="title"><em class="fa fa-key"></em> Asignar roles al usuario "<strong class="name_user"></strong>"</x-slot>
 
     <x-slot name="content">
-        @include('modules.users.modals.tables.table-roles')
+        @include('modules.users.partials.table-roles')
     </x-slot>
 
     <x-slot name="footer">

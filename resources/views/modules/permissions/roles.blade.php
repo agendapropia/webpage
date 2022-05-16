@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.admin.app')
 
 @section('page_title', __('menu.accounts-roles'))
 @section('navbar_title', __('menu.accounts-roles'))
@@ -23,7 +23,7 @@
     <!-- END Page Content -->
     
     <div class="container-fluid">
-        @include('layouts.footers.auth')
+        @include('layouts.admin.footers.auth')
     </div>
 
     <!-- Modals -->

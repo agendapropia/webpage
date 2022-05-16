@@ -5,8 +5,8 @@ function AssignRoles(data) {
   modalAssignRoles
     .find('.name_user')
     .text(data.first_name + ' ' + data.last_name)
-  assignRolesTable.form.url = '/accounts/users/' + data.id + '/roles'
-  SendRolesAssign.url = '/accounts/users/' + data.id + '/assign'
+  assignRolesTable.form.url = '/admin/accounts/users/' + data.id + '/roles'
+  SendRolesAssign.url = '/admin/accounts/users/' + data.id + '/assign'
   assignRolesTable.refresh(false)
 }
 
@@ -14,7 +14,7 @@ function AssignRoles(data) {
 let structure_array = [' ', 'Nombre', 'Description']
 var assignRolesTable = new tableGear(
   $('#assign-roles'),
-  '/accounts/roles/_role_/permissions',
+  '/admin/accounts/roles/_role_/permissions',
   structure_array,
   'selectedDataRoles',
 )
@@ -54,7 +54,7 @@ function SendDataUserRoles() {
 
 //Send assign permissions
 let SendRolesAssign = new QueryAjax({
-  url: '/accounts/roles/_role_/assign',
+  url: '/admin/accounts/roles/_role_/assign',
   method: 'POST',
   action: 'FinishAssignRoles',
   listTable: UserTable,
