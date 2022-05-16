@@ -1,4 +1,5 @@
-<em class="fa fa-th-list"></em> {{ __('tablegear.paginate_title') }}
+<!-- <em class="fa fa-th-list"></em>  -->
+{{ __('tablegear.paginate_title') }}
 <div class="btn-group" role="group">
     <button type="button" class="btn btn-outline btn-sm dropdown-toggle filter_row" id="exampleGroupDrop2" data-toggle="dropdown" aria-expanded="false" value="10">
         10
