@@ -15,11 +15,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('home');
+    return view('pages.web.home');
 });
 
 Route::get('/historias', function () {
-    return view('histories');
+    return view('pages.web.histories');
 });
 Auth::routes();
 Route::group(['middleware' => 'auth'], function () {

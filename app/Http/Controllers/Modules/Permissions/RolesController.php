@@ -26,7 +26,7 @@ class RolesController extends Controller
      */
     public function index()
     {
-        return view('modules.permissions.roles');
+        return view('pages.admin.permissions.roles');
     }
 
     /**
