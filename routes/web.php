@@ -39,6 +39,12 @@ Route::group(
             require __DIR__ . '/web/users.php';
             require __DIR__ . '/web/permissions.php';
         });
+        Route::group(['prefix' => 'admin/configurations'], function () {
+            require __DIR__ . '/web/regions.php';
+            require __DIR__ . '/web/tags.php';
+            require __DIR__ . '/web/countries.php';
+        });
+        
         Route::group(['prefix' => ''], function () {
             require __DIR__ . '/web/auth.php';
         });

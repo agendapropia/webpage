@@ -22,4 +22,14 @@ class Country extends Model
         'country_code',
         'timezone',
     ];
+
+    /**
+     * Search scope
+     */
+    public function scopeSearch($query, $value)
+    {
+        if (trim($value) != '') {
+            $query->where('c.name', 'like', "%$value%");
+        }
+    }
 }
