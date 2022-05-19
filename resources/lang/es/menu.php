@@ -37,4 +37,10 @@ return [
     'configurations' => 'Configuraciones',
     'configurations-regions' => 'Regiones',
     'configurations-tags' => 'Tags',
+    'configurations-alliedmedia' => 'Medios aliados',
+    'configurations-files' => 'Archivos',
+
+    'publications' => 'Cocreaciones',
+    'specials' => 'Especiales',
+    'articules' => 'Articulos',
 ];

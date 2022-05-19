@@ -62,7 +62,7 @@ class User extends Authenticatable
      */
     public function scopeStatus($query, $value)
     {
-        if(trim($value) != ""){
+        if (trim($value) != '') {
             $query->where('u.status', $value);
         }
     }
@@ -70,13 +70,14 @@ class User extends Authenticatable
     /**
      * Status scope
      */
-     public function scopeSearch($query, $value)
+    public function scopeSearch($query, $value)
     {
-        if(trim($value) != ""){
-            $query->where('u.uuid', $value)
-            ->orWhere('u.last_name', $value)
-            ->orWhere('u.first_name', $value)
-            ->orWhere('u.phone_code', $value);
+        if (trim($value) != '') {
+            $query
+                ->where('u.uuid', $value)
+                ->orWhere('u.last_name', 'like', "%$value%")
+                ->orWhere('u.first_name', $value)
+                ->orWhere('u.phone_code', $value);
         }
     }
 }

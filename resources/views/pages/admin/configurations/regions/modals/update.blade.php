@@ -1,5 +1,5 @@
 <x-admin.modals.modal id="modal-update-main">
-    <x-slot name="title"><em class="fa fa-user mr-1"></em> Actualizar Region</x-slot>
+    <x-slot name="title"><em class="fa fa-location-arrow mr-1"></em> Actualizar Region</x-slot>
 
     <x-slot name="content">
         <x-admin.forms.form method="PUT" action="/admin/configurations/regions" name="form-update-main">

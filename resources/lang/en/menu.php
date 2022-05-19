@@ -33,4 +33,12 @@ return [
     'menu-config' => 'Settings',
     'menu-categories' => 'Categories',
 
+
+    'configurations' => 'Configurations',
+    'configurations-regions' => 'Regions',
+    'configurations-tags' => 'Tags',
+
+    'publications' => 'Publications',
+    'specials' => 'Specials',
+    'articules' => 'Articules',
 ];
