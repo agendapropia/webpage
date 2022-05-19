@@ -10,6 +10,7 @@
     "/js/modules/configurations/regions/all.js": "/js/modules/configurations/regions/all.js",
     "/js/modules/configurations/tags/all.js": "/js/modules/configurations/tags/all.js",
     "/js/modules/specials/module/all.js": "/js/modules/specials/module/all.js",
+    "/js/modules/specials/alliedmedia/all.js": "/js/modules/specials/alliedmedia/all.js",
     "/js/modules/utils/images/all.js": "/js/modules/utils/images/all.js",
     "/js/web/all.js": "/js/web/all.js"
 }

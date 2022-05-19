@@ -37,7 +37,7 @@ return [
     'configurations' => 'Configuraciones',
     'configurations-regions' => 'Regiones',
     'configurations-tags' => 'Tags',
-    'configurations-media' => 'Medios aliados',
+    'configurations-alliedmedia' => 'Medios aliados',
     'configurations-files' => 'Archivos',
 
     'publications' => 'Cocreaciones',

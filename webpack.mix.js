@@ -68,6 +68,10 @@ mix
     'public/js/modules/specials/module/all.js',
   )
   .scripts(
+    ['resources/js/modules/specials/alliedmedia/*.js'],
+    'public/js/modules/specials/alliedmedia/all.js',
+  )
+  .scripts(
     ['resources/js/modules/utils/images/selections.js'],
     'public/js/modules/utils/images/all.js',
   )

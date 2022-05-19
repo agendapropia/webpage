@@ -32,7 +32,7 @@
     @include('pages.admin.specials.module.modals.create')
     @include('pages.admin.specials.module.modals.update')
     @include('pages.admin.specials.module.modals.users')
-    @include('pages.admin.utils.images.modals.selections')
+    @include('pages.admin.specials.module.modals.files')
 @endsection
 
 @push('js-after')

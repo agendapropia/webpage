@@ -98,3 +98,13 @@
 .hide {
   display: none;
 }
+
+.no-padding {
+  padding: 0px !important;
+}
+
+@media (max-width: 768px) {
+  .no-padding-mobile {
+    padding: 0px;
+  }
+}

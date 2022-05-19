@@ -128,8 +128,8 @@ class SpecialFilesController extends Controller
          */
         foreach ($files_delete as $file) {
             $fileDelete = SpecialFile::findOrFail($file);
-            $file_delete = File::findOrFail($fileDelete->file_id);
 
+            $file_delete = File::findOrFail($fileDelete->file_id);
             if ($file_delete->type == 1) {
                 $path = 'files/photos/' . $file_delete->name_tmp;
                 Storage::disk('s3')->delete($path);
@@ -139,8 +139,8 @@ class SpecialFilesController extends Controller
                 $path = 'files/documents/' . $file_delete->name_tmp;
                 Storage::disk('s3')->delete($path);
             }
-
             $fileDelete->delete();
+
             $file_delete->delete();
         }
 

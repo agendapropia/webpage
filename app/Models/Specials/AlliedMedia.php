@@ -21,7 +21,7 @@ class AlliedMedia extends Model
      *
      * @var array
      */
-    protected $fillable = ['id', 'name', 'icon', 'url'];
+    protected $fillable = ['id', 'name', 'image', 'url'];
 
     /**
      * search scope
