@@ -7,5 +7,7 @@
     "/js/web/all.js": "/js/web/all.js",
     "/js/modules/users/all.js": "/js/modules/users/all.js",
     "/js/modules/permissions/roles-all.js": "/js/modules/permissions/roles-all.js",
-    "/js/modules/permissions/permissions-all.js": "/js/modules/permissions/permissions-all.js"
+    "/js/modules/permissions/permissions-all.js": "/js/modules/permissions/permissions-all.js",
+    "/js/modules/configurations/regions/all.js": "/js/modules/configurations/regions/all.js",
+    "/js/modules/configurations/tags/all.js": "/js/modules/configurations/tags/all.js"
 }

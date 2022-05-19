@@ -71,7 +71,8 @@
             <h6 class="navbar-heading text-muted">Configuraciones</h6>
             <!-- Navigation -->
             <ul class="navbar-nav mb-md-3">
-                @include('layouts.admin.navbars.modules.users-menu')
+                @include('layouts.admin.navbars.modules.users-navbar')
+                @include('layouts.admin.navbars.modules.configurations-navbar')
             </ul>
         </div>
     </div>

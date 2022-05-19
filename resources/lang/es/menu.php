@@ -33,4 +33,8 @@ return [
     'menu-toppings' => 'Toppings',
     'menu-config' => 'Configurar',
     'menu-categories' => 'Categorías',
+
+    'configurations' => 'Configuraciones',
+    'configurations-regions' => 'Regiones',
+    'configurations-tags' => 'Tags',
 ];

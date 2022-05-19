@@ -6286,14 +6286,14 @@ class searchByAutocomplete {
     })
       .done(function (data) {
         context.eventLoading(false)
-        context.requestSuccessful(data)
+        context.requestSuccessfull(data)
       })
       .fail(function (errors) {
         context.eventLoading(false)
         context.requestFailed(errors)
       })
   }
-  requestSuccessful(data) {
+  requestSuccessfull(data) {
     this.data = data.data
     this.resetItems(true)
 
@@ -6397,12 +6397,13 @@ class searchByAutocomplete {
 
     if (clearField) {
       this.input.val('')
+      this.inputHidden.val('')
     }
   }
   clearSelect() {
     this.selectedItems = []
     this.eventLimitItems()
-    this.resetItems(false)
+    this.resetItems(false, true)
     this.listItems()
   }
   printLog(message) {

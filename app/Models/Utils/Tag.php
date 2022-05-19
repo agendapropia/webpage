@@ -5,7 +5,7 @@ namespace App\Models\Utils;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class City extends Model
+class Tag extends Model
 {
     use HasFactory;
 
@@ -21,5 +21,15 @@ class City extends Model
      *
      * @var array
      */
-    protected $fillable = ['id', 'name'];
+    protected $fillable = ['id', 'name', 'image', 'code'];
+
+    /**
+     * search scope
+     */
+    public function scopeSearch($query, $value)
+    {
+        if (trim($value) != '') {
+            $query->where('t.name', 'like', "%$value%");
+        }
+    }
 }

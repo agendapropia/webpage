@@ -35,20 +35,13 @@ mix
       'resources/css/vendor/plugins/table_gear/table_gear.css',
       'resources/css/vendor/plugins/table_gear/plugins_table_tech.css',
       'resources/css/vendor/plugins/icheck/all.css',
-      'resources/css/vendor/plugins/search-by-autocomplete.css',
+      'resources/css/vendor/plugins/search-autocomplete.css',
     ],
     'public/css/plugins.all.css',
   )
-  .sass(
-    'resources/css/web/global.scss',
-    'public/css/web/web-plugins.all.css',
-  )
-  .scripts(
-    [
-      'resources/js/web/**/*.js',
-    ],
-    'public/js/web/all.js',
-  )
+  .sass('resources/css/web/global.scss', 'public/css/web/web-plugins.all.css')
+  .scripts(['resources/js/web/**/*.js'], 'public/js/web/all.js')
+
   /** Modules Scripts */
   .scripts(
     [
@@ -60,7 +53,6 @@ mix
     ],
     'public/js/modules/users/all.js',
   )
-
   .scripts(
     [
       'resources/js/modules/permissions/permissions-assign.js',
@@ -70,7 +62,6 @@ mix
     ],
     'public/js/modules/permissions/roles-all.js',
   )
-
   .scripts(
     [
       'resources/js/modules/permissions/permissions-list.js',
@@ -78,4 +69,20 @@ mix
       'resources/js/modules/permissions/permissions-update.js',
     ],
     'public/js/modules/permissions/permissions-all.js',
+  )
+  .scripts(
+    [
+      'resources/js/modules/configurations/regions/list.js',
+      'resources/js/modules/configurations/regions/create.js',
+      'resources/js/modules/configurations/regions/update.js',
+    ],
+    'public/js/modules/configurations/regions/all.js',
+  )
+  .scripts(
+    [
+      'resources/js/modules/configurations/tags/list.js',
+      'resources/js/modules/configurations/tags/create.js',
+      'resources/js/modules/configurations/tags/update.js',
+    ],
+    'public/js/modules/configurations/tags/all.js',
   )

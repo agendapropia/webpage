@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCitiesTable extends Migration
+class CreateRegionTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,16 @@ class CreateCitiesTable extends Migration
      */
     public function up()
     {
-        Schema::connection('mysql_utils')->create('cities', function (
+        Schema::connection('mysql_utils')->create('regions', function (
             Blueprint $table
         ) {
             $table->integerIncrements('id');
+            $table->integer('country_id')
+                ->index()
+                ->comment('relates to field agendapropia-users.countries.id');;
             $table->string('name', 100);
+            $table->string('image', 256);
+            $table->string('icon', 256);
             $table->timestamps();
         });
     }
@@ -29,6 +34,6 @@ class CreateCitiesTable extends Migration
      */
     public function down()
     {
-        Schema::connection('mysql_utils')->dropIfExists('cities');
+        Schema::connection('mysql_utils')->dropIfExists('regions');
     }
 }
