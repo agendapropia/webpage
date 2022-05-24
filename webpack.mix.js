@@ -86,3 +86,11 @@ mix
     ],
     'public/js/modules/configurations/tags/all.js',
   )
+  .scripts(
+    [
+      'resources/js/modules/specials/module/list.js',
+      'resources/js/modules/specials/module/create.js',
+      'resources/js/modules/specials/module/update.js',
+    ],
+    'public/js/modules/specials/module/all.js',
+  )

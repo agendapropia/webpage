@@ -5,9 +5,11 @@ namespace App\Models\Specials;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class SpecialUsers extends Model
+class SpecialStatus extends Model
 {
     use HasFactory;
+
+    protected $table = 'special_status';
 
     /**
      * The connection name for the model.
@@ -21,5 +23,15 @@ class SpecialUsers extends Model
      *
      * @var array
      */
-    protected $fillable = ['id', 'special_id', 'user_id', 'special_role_id'];
+    protected $fillable = ['id', 'name', 'icon', 'label'];
+
+    /**
+     * search scope
+     */
+    public function scopeSearch($query, $value)
+    {
+        if (trim($value) != '') {
+            $query->where('ss.name', 'like', "%$value%");
+        }
+    }
 }

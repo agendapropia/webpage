@@ -5,12 +5,9 @@ namespace App\Models\Specials;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class SpecialImages extends Model
+class SpecialCountry extends Model
 {
     use HasFactory;
-
-    const TYPE_COVER = 'COVER';
-    const TYPE_SUMMARY = 'SUMMARY';
 
     /**
      * The connection name for the model.
@@ -24,5 +21,5 @@ class SpecialImages extends Model
      *
      * @var array
      */
-    protected $fillable = ['id', 'special_id', 'image_id', 'type', 'position'];
+    protected $fillable = ['id', 'special_id', 'county_id'];
 }

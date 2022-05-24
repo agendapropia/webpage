@@ -37,4 +37,9 @@ return [
         'filter_store' => 'Tienda',
         'filter_status' => 'Estados',
     ],
+    'specials' => [
+        'button_new' => 'Nuevo especial',
+        'filter_store' => 'Tienda',
+        'filter_status' => 'Estados',
+    ],
 ];

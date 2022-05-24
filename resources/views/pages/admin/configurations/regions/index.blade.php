@@ -2,6 +2,9 @@
 
 @section('page_title', __('menu.configurations-regions'))
 @section('navbar_title', __('menu.configurations-regions'))
+@section('navbar_title_icon')
+    <em class="fa fa-location-arrow mr-2"></em>
+@endsection
 
 <!-- menu -->
 @section('menu_configurations', 'active')

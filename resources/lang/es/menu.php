@@ -37,4 +37,6 @@ return [
     'configurations' => 'Configuraciones',
     'configurations-regions' => 'Regiones',
     'configurations-tags' => 'Tags',
+
+    'specials' => 'Especiales',
 ];

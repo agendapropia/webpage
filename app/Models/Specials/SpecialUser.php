@@ -5,7 +5,7 @@ namespace App\Models\Specials;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class SpecialCountries extends Model
+class SpecialUser extends Model
 {
     use HasFactory;
 
@@ -21,5 +21,5 @@ class SpecialCountries extends Model
      *
      * @var array
      */
-    protected $fillable = ['id', 'special_id', 'county_id'];
+    protected $fillable = ['id', 'special_id', 'user_id', 'special_role_id'];
 }

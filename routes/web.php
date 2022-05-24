@@ -44,6 +44,9 @@ Route::group(
             require __DIR__ . '/web/tags.php';
             require __DIR__ . '/web/countries.php';
         });
+        Route::group(['prefix' => 'admin/specials'], function () {
+            require __DIR__ . '/web/specials.php';
+        });
         
         Route::group(['prefix' => ''], function () {
             require __DIR__ . '/web/auth.php';

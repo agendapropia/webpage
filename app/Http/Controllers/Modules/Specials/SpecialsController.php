@@ -1,13 +1,15 @@
 <?php
 
-namespace App\Http\Controllers\Modules\Configurations\Regions;
+namespace App\Http\Controllers\Modules\Specials;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Specials\Special;
 use App\Models\Users\Country;
 use App\Models\Utils\Region;
+use Illuminate\Support\Facades\DB;
 
-class RegionsController extends Controller
+class SpecialsController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -19,42 +21,45 @@ class RegionsController extends Controller
     }
 
     /**
-     * Show the module regions.
-     * GET /configurations/regions
+     * Show the module specials.
+     * GET /admin/specials
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function index()
     {
-        return view('pages.admin.configurations.regions.index');
+        return view('pages.admin.specials.module.index');
     }
 
     /**
-     * List regions
-     * POST /configurations/regions/list
+     * List specials
+     * POST /admin/specials/list
      */
     public function list(Request $request)
     {
         $row = isset($request->_row) ? $request->_row : 10;
         $search = $request->get('_search');
 
-        $regions = Region::select(
-            'r.id',
-            'r.name',
-            'r.country_id',
-            'c.name as country_name'
+        $specials = Special::select(
+            's.id',
+            's.name',
+            's.publication_date',
+            's.number_views',
+            'ss.id as status_id', 
+            'ss.name as status_name',
+            'ss.label as status_label',
         )
-            ->from('regions as r')
-            ->join('agendapropia_users.countries as c', 'c.id', 'r.country_id')
+            ->from('specials as s')
+            ->join('special_status as ss', 'ss.id', 's.status_id')
             ->search($search)
-            ->orderBy('r.id', 'DESC')
+            ->orderBy('s.id', 'DESC')
             ->paginate($row);
 
-        return $this->responseJson(true, 'list regions', $regions);
+        return $this->responseJson(true, 'list specials', $specials);
     }
 
     /**
-     * Data modal create region
-     * GET /configurations/regions/create
+     * Data modal create special
+     * GET /admin/specials/create
      */
     public function createInfo(Request $request)
     {
@@ -63,7 +68,7 @@ class RegionsController extends Controller
 
     /**
      * Create user
-     * POST /configurations/regions
+     * POST /admin/specials
      */
     public function create(Request $request)
     {
@@ -84,7 +89,7 @@ class RegionsController extends Controller
 
     /**
      * Data modal update
-     * GET /configurations/regions/update
+     * GET /admin/specials/update
      */
     public function updateInfo(Request $request)
     {
@@ -105,7 +110,7 @@ class RegionsController extends Controller
 
     /**
      * Update
-     * PUT /configurations/regions
+     * PUT /admin/specials
      */
     public function update(Request $request)
     {

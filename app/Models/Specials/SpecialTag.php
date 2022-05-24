@@ -5,7 +5,7 @@ namespace App\Models\Specials;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Specials extends Model
+class SpecialTag extends Model
 {
     use HasFactory;
 
@@ -21,14 +21,5 @@ class Specials extends Model
      *
      * @var array
      */
-    protected $fillable = [
-        'id',
-        'slug',
-        'status_id',
-        'template_id',
-        'name',
-        'publication_date',
-        'hidden',
-        'number_views',
-    ];
+    protected $fillable = ['id', 'special_id', 'tag_id'];
 }

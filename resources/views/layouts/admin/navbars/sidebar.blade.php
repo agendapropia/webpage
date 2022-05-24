@@ -62,6 +62,7 @@
                         <i class="ni ni-tv-2 text-primary"></i> {{ __('dashboard.main') }}
                     </a>
                 </li>
+                @include('layouts.admin.navbars.modules.specials-sidebar')
             </ul>
             
             <!-- Divider -->
@@ -71,8 +72,8 @@
             <h6 class="navbar-heading text-muted">Configuraciones</h6>
             <!-- Navigation -->
             <ul class="navbar-nav mb-md-3">
-                @include('layouts.admin.navbars.modules.users-navbar')
-                @include('layouts.admin.navbars.modules.configurations-navbar')
+                @include('layouts.admin.navbars.modules.users-sidebar')
+                @include('layouts.admin.navbars.modules.configurations-sidebar')
             </ul>
         </div>
     </div>

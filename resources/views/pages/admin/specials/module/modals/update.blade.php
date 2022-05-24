@@ -1,10 +1,10 @@
 <x-admin.modals.modal id="modal-update-main">
-    <x-slot name="title"><em class="fa fa-hashtag mr-1"></em> Actualizar tag</x-slot>
+    <x-slot name="title"><em class="fa fa-user mr-1"></em> Actualizar Region</x-slot>
 
     <x-slot name="content">
-        <x-admin.forms.form method="PUT" action="/admin/configurations/tags" name="form-update-main">
+        <x-admin.forms.form method="PUT" action="/admin/configurations/regions" name="form-update-main">
             <x-admin.forms.form-input-hidden name="id"></x-admin.forms.form-input-hidden>
-            @include('pages.admin.configurations.tags.form.create')
+            @include('pages.admin.specials.module.form.create')
         </x-admin.forms.form>
     </x-slot>
 
