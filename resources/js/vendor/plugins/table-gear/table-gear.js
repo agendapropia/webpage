@@ -1205,6 +1205,7 @@ class QueryAjax {
     this.action = ''
     this.form = false //form_name
     this.listTable = false
+    this.loaderSelected = false
 
     let cont = this
     $.each(options, function (key, value) {
@@ -1234,6 +1235,7 @@ class QueryAjax {
   IsDataURL() {
     return this.method == 'GET' ? true : false
   }
+
   // actualiza la variable data_send que va ser enviada en la petiion AJAX
   UpdateForm() {
     if (this.form) {
@@ -1251,7 +1253,12 @@ class QueryAjax {
   }
   Loader(status = true) {
     this.listTable ? this.listTable.ModalLoader(status) : null
+
+    if (this.loaderSelected) {
+      status ? this.loaderSelected.show() : this.loaderSelected.hide()
+    }
   }
+
   IsFormListTable() {
     return this.form ? true : false
   }
@@ -1315,7 +1322,11 @@ class QueryAjax {
   }
   FormClose(status = true) {
     this.form ? this.form[0].reset() : null
-    this.form ? this.listTable.ModalClearForm(this.form) : null
+    if (this.form) {
+      if (this.listTable) {
+        this.listTable.ModalClearForm(this.form)
+      }
+    }
     if (status) {
       this.listTable ? this.listTable.modalSelect.modal('hide') : null
     }
@@ -1418,7 +1429,6 @@ function UtilValidateInputs(errors, form) {
     if (input.hasClass('flatpickr-input')) {
       input
         .parent()
-        .parent()
         .find('.label-error')
         .html('<i class="fa fa-exclamation-triangle"></i> ' + value)
     }
@@ -1440,10 +1450,18 @@ function UtilValidateInputs(errors, form) {
 }
 
 function UtilFormClose(form) {
-  form.find("select").each(function() { this.selectedIndex = 0 });
-  form.find("input[type=text]").each(function() { this.value = '' });
-  form.find("input[type=password]").each(function() { this.value = '' });
-  form.find("textarea").each(function() { this.value = '' });
+  form.find('select').each(function () {
+    this.selectedIndex = 0
+  })
+  form.find('input[type=text]').each(function () {
+    this.value = ''
+  })
+  form.find('input[type=password]').each(function () {
+    this.value = ''
+  })
+  form.find('textarea').each(function () {
+    this.value = ''
+  })
   UtilClearFormUi(form)
 }
 

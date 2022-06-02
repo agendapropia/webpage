@@ -2,6 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Models\Specials\Template;
+use App\Models\Users\Country;
 use App\Models\Utils\Day;
 use App\Models\Utils\ImageType;
 use App\Models\Utils\Language;
@@ -19,6 +21,35 @@ class UtilsSeeder extends Seeder
         $this->days();
         $this->imageTypes();
         $this->languages();
+        $this->countries();
+        $this->templates();
+    }
+
+    private function countries()
+    {
+        Country::create([
+            'status' => 1,
+            'name' => 'Colombia',
+            'icon' => 'country-code.png',
+            'country_code' => 57,
+            'timezone' => 'America/Bogota',
+        ]);
+
+        Country::create([
+            'status' => 2,
+            'name' => 'Mexico',
+            'icon' => 'country.png',
+            'country_code' => 52,
+            'timezone' => 'America/Bogota',
+        ]);
+
+        Country::create([
+            'status' => 3,
+            'name' => 'Brasil',
+            'icon' => 'country.png',
+            'country_code' => 56,
+            'timezone' => 'America/Bogota',
+        ]);
     }
 
     private function days()
@@ -102,6 +133,22 @@ class UtilsSeeder extends Seeder
         Language::create([
             'name' => 'Propia',
             'icon' => 'pr.png',
+        ]);
+    }
+
+    private function templates()
+    {
+        Template::create([
+            'name' => 'Base',
+            'slug' => 'template-base',
+        ]);
+        Template::create([
+            'name' => 'Pueblos andinos',
+            'slug' => 'template-pueblos-andinos',
+        ]);
+        Template::create([
+            'name' => 'Tierras fragmentadas',
+            'slug' => 'template-tierras-frag',
         ]);
     }
 }

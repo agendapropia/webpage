@@ -6,11 +6,8 @@ use App\Models\Specials\AlliedMedia;
 use App\Models\Specials\Special;
 use App\Models\Specials\SpecialAlliedMedia;
 use App\Models\Specials\SpecialCountry;
-use App\Models\Specials\SpecialRoles;
-use App\Models\Specials\Specials;
 use App\Models\Specials\SpecialStatus;
 use App\Models\Specials\SpecialTag;
-use App\Models\Specials\SpecialTags;
 use App\Models\Specials\SpecialUser;
 use Illuminate\Database\Seeder;
 
@@ -28,7 +25,7 @@ class SpecialSeeder extends Seeder
                 'id' => 4,
                 'name' => 'Inactivo',
                 'icon' => 'inactive.png',
-                'label' => 'badge-warning',
+                'label' => 'badge-dange',
             ],
             [
                 'id' => 1,
@@ -46,7 +43,7 @@ class SpecialSeeder extends Seeder
                 'id' => 3,
                 'name' => 'Programado',
                 'icon' => 'schedule.png',
-                'label' => 'badge-info',
+                'label' => 'badge-warning',
             ],
         ]);
 
@@ -65,25 +62,17 @@ class SpecialSeeder extends Seeder
                 'icon' => 'newyorktime.png',
                 'url' => 'https://newyorktime.com',
             ],
-        ]);
-
-        AlliedMedia::insert([
             [
-                'name' => 'Medium',
-                'icon' => 'medium.jpg',
-                'url' => 'https://medium.com',
-            ],
-            [
-                'name' => 'newyorktime',
-                'icon' => 'newyorktime.png',
-                'url' => 'https://newyorktime.com',
+                'name' => 'BCC',
+                'icon' => 'bcc.png',
+                'url' => 'https://bcc.com',
             ],
         ]);
 
         $special = Special::create([
             'name' => 'Especial de prueba',
-            'slug' => 'espacial-de-prueba',
-            'status_id' => 1,
+            'slug' => 'especial-de-prueba',
+            'status_id' => 3,
             'template_id' => 1,
             'publication_date' => '2022-05-10',
             'hidden' => true,

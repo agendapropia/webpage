@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\Specials\SpecialRoles;
+use App\Models\Specials\SpecialRole;
 use Illuminate\Database\Seeder;
 
 class SpecialRolesSeeder extends Seeder
@@ -14,15 +14,15 @@ class SpecialRolesSeeder extends Seeder
      */
     public function run()
     {
-        SpecialRoles::create([
+        SpecialRole::create([
             'name' => 'Editor',
             'icon' => 'editor.png',
         ]);
-        SpecialRoles::create([
+        SpecialRole::create([
             'name' => 'Fotográfia',
             'icon' => 'photo.png',
         ]);
-        SpecialRoles::create([
+        SpecialRole::create([
             'name' => 'Apoyo',
             'icon' => 'apoyo.png',
         ]);

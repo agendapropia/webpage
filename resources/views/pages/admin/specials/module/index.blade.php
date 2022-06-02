@@ -31,6 +31,8 @@
     <!-- Modals -->
     @include('pages.admin.specials.module.modals.create')
     @include('pages.admin.specials.module.modals.update')
+    @include('pages.admin.specials.module.modals.users')
+    @include('pages.admin.utils.images.modals.selections')
 @endsection
 
 @push('js-after')

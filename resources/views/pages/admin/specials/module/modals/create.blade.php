@@ -1,8 +1,8 @@
 <x-admin.modals.modal id="modal-create-main">
-    <x-slot name="title"><em class="fa fa-user mr-2"></em>Crear region</x-slot>
+    <x-slot name="title"><em class="fa fa-file-text mr-2"></em>Crear especial</x-slot>
 
     <x-slot name="content">
-        <x-admin.forms.form method="POST" action="/admin/configurations/regions" name="form-create-main">
+        <x-admin.forms.form method="POST" action="/admin/specials" name="form-create-main">
             @include('pages.admin.specials.module.form.create')
         </x-admin.forms.form>
     </x-slot>

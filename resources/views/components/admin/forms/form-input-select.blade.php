@@ -4,5 +4,8 @@
     <select class="form-control form-control-sm {{ isset($fieldClass) ? $fieldClass : '' }}" name="{{ isset($name) ? $name : 'name' }}" data-placeholder="{{ isset($placeholder) ? $placeholder : '' }}" autocomplete="{{ isset($autocomplete) ? $autocomplete : 'off' }}" />
     {{ $slot }}
     </select>
-    <div class="label-error"></div>
+    <small id="emailHelp" class="form-text text-muted">
+        {{ isset($description) ? $description : '' }}
+        <div class="label-error"></div>
+    </small>
 </div>

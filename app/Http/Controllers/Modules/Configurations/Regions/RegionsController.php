@@ -25,7 +25,8 @@ class RegionsController extends Controller
      */
     public function index()
     {
-        return view('pages.admin.configurations.regions.index');
+        $countries = Country::get();
+        return view('pages.admin.configurations.regions.index', compact('countries'));
     }
 
     /**
@@ -36,6 +37,7 @@ class RegionsController extends Controller
     {
         $row = isset($request->_row) ? $request->_row : 10;
         $search = $request->get('_search');
+        $country = $request->get('_country');
 
         $regions = Region::select(
             'r.id',
@@ -46,6 +48,7 @@ class RegionsController extends Controller
             ->from('regions as r')
             ->join('agendapropia_users.countries as c', 'c.id', 'r.country_id')
             ->search($search)
+            ->country($country)
             ->orderBy('r.id', 'DESC')
             ->paginate($row);
 
@@ -124,5 +127,26 @@ class RegionsController extends Controller
         $region->save();
 
         return $this->responseJson(true, 'region update', $region);
+    }
+
+    /**
+     * GET search by autocomplete
+     * POST /configurations/regions/search-by-autocomplete
+     */
+    public function searchByAutocomplete(Request $request)
+    {
+        $search = $request->get('_search');
+        $row = $request->get('_row') ?? 10;
+        $regions = Region::select(
+            'r.id',
+            'r.name',
+            'r.image'
+        )
+            ->from('regions as r')
+            ->search($search)
+            ->limit($row)
+            ->get();
+
+        return $this->responseJson(true, 'list regions', $regions);
     }
 }

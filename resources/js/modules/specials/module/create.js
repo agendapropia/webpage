@@ -5,6 +5,9 @@ function ActionMainCreate() {
   UtilFormClose(formCreateMain)
   queryCreateMain.Send()
   countrySelectCreate.clearSelect()
+  tagsSelectCreate.clearSelect()
+  alliedMediasSelectCreate.clearSelect()
+  modalCreateMain.find('input[name=publication_date]').flatpickr(settingDate)
 }
 
 // Autocomplete
@@ -13,7 +16,26 @@ let countrySelectCreate = new searchByAutocomplete(
   {
     params: [],
     url: '/admin/configurations/countries/search-by-autocomplete',
-    limitItems: 2,
+    limitItems: 10,
+    minimumCharactersToSearch: 1,
+  },
+)
+let tagsSelectCreate = new searchByAutocomplete(
+  formCreateMain.find('.tagsSelect'),
+  {
+    params: [],
+    url: '/admin/configurations/tags/search-by-autocomplete',
+    limitItems: 10,
+    minimumCharactersToSearch: 1,
+  },
+)
+let alliedMediasSelectCreate = new searchByAutocomplete(
+  formCreateMain.find('.alliedMediaSelect'),
+  {
+    params: [],
+    url: '/admin/specials/allied-media/search-by-autocomplete',
+    limitItems: 10,
+    minimumCharactersToSearch: 1,
   },
 )
 
@@ -25,6 +47,13 @@ let queryCreateMain = new QueryAjax({
   listTable: TableMain,
 })
 function CreateActionModal(status, result) {
+  if(status){
+    LoadSelectUtil(
+      modalCreateMain.find('select[name=template_id]'),
+      result.data.templates,
+      1
+    )
+  }
 }
 
 //Send data modal

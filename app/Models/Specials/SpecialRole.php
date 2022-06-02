@@ -5,7 +5,7 @@ namespace App\Models\Specials;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class SpecialRoles extends Model
+class SpecialRole extends Model
 {
     use HasFactory;
 

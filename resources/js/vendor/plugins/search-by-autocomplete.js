@@ -26,6 +26,7 @@ class searchByAutocomplete {
     this.data = []
     this.selectedItems = []
     this.limitItems = 1
+    this.minimumCharactersToSearch = 3
 
     let context = this
     $.each(settings, function (key, value) {
@@ -138,7 +139,7 @@ class searchByAutocomplete {
     this.interval = setInterval(
       function () {
         clearInterval(context.interval)
-        if (text.length >= 3) {
+        if (text.length >= context.minimumCharactersToSearch) {
           context.request()
         } else if (!text.length) {
           context.resetItems(false)
@@ -340,4 +341,13 @@ class searchByAutocomplete {
   printLog(message) {
     console.log(`ERROR_SEARCH_BY_AUTOCOMPLETE: ${message}`)
   }
+}
+
+function utilLoadAutoCompleteByArray(data, obj) {
+  data.forEach((element) => {
+    obj.eventAddDataSelected({
+      id: element.id,
+      name: element.name, 
+    })
+  })
 }

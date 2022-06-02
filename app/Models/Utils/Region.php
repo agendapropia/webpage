@@ -29,7 +29,17 @@ class Region extends Model
     public function scopeSearch($query, $value)
     {
         if (trim($value) != '') {
-            $query->where('r.name', 'like', "%$value%")->orWhere('c.name', $value);
+            $query->where('r.name', 'like', "%$value%");
+        }
+    }
+
+    /**
+     * country scope
+     */
+    public function scopeCountry($query, $value)
+    {
+        if (trim($value) != '') {
+            $query->where('r.country_id', $value);
         }
     }
 }

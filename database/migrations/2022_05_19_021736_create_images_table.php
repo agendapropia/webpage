@@ -18,7 +18,7 @@ class CreateImagesTable extends Migration
         ) {
             $table->integerIncrements('id');
             $table->integer('image_type_id')->index();
-            $table->integer('user_id');
+            $table->integer('user_id')->index();
             $table
                 ->integer('creator_user_id')
                 ->index()

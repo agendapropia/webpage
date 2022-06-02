@@ -20,14 +20,15 @@ class DatabaseSeeder extends Seeder
             ->has(UserProfile::factory()->count(1))
             ->create();
         \App\Models\Users\Term::factory(1)->create();
-        \App\Models\Users\Country::factory(1)->create();
         \App\Models\Utils\Region::factory(10)->create();
         \App\Models\Utils\Tag::factory(10)->create();
 
         $this->call(RolesSeeder::class);
         $this->call(UserGenderSeeder::class);
         $this->call(UtilsSeeder::class);
-        $this->call(SpecialSeeder::class);
         $this->call(SpecialRolesSeeder::class);
+        $this->call(SpecialSeeder::class);
+        $this->call(SpecialTwoSeeder::class);
+        $this->call(SpecialThreeSeeder::class);
     }
 }

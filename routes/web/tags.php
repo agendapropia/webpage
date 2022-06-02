@@ -41,4 +41,8 @@ Route::prefix('/tags')
         Route::get('/update', 'TagsController@updateInfo')->middleware(
             'permission:tag-update'
         );
+        Route::get(
+            '/search-by-autocomplete',
+            'TagsController@searchByAutocomplete'
+        );
     });

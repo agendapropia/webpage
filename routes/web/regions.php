@@ -41,4 +41,5 @@ Route::prefix('/regions')
         Route::get('/update', 'RegionsController@updateInfo')->middleware(
             'permission:region-update'
         );
+        Route::get('/search-by-autocomplete', 'RegionsController@searchByAutocomplete');
     });

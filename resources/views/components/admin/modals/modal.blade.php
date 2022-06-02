@@ -3,7 +3,10 @@
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content" style="background: #fdfdfd">
             <div class="modal-header">
-                <h5 class="modal-title">{{ isset($title) ? $title : 'Modal title'  }}</h5>
+                <h5 class="modal-title">
+                    {{ isset($title) ? $title : 'Modal title'  }}
+                    <span class="modal-subtitle"></span>
+                </h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -15,7 +18,7 @@
             <div class="modal-footer">
                 {{ isset($footer) ? $footer : ''  }}
             </div>
-            <div class="overlay" style="display: none;">
+            <div class="overlay overlay-modal" style="display: none;">
                 <div class="content">
                     <em class="fa fa-3x fa-cog fa-spin"></em>
                 </div>

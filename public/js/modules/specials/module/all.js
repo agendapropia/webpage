@@ -1,10 +1,26 @@
 let div = $('#tableMain')
 let route = '/admin/specials/list'
-let structure = [' ', 'Estado', 'Nombre', 'Fecha publicación', '# vistos']
+let structure = [' ', 'Estado', 'Nombre', 'Url', 'Fecha publicación', '# vistos']
 
 var TableMain = new tableGear(div, route, structure)
 TableMain.refresh(true)
 
+
+
+$('#file_list_box').find('.overlay').hide()
+
+// Campo Files
+var filesDocument = new updloadS3($('#fieldPublicTicket'), {
+	url: '/document/savefiles',
+	typeFile: 1,
+	id: 1,
+	reload: false,
+	altFunction: 'preloadPage'
+});
+
+function preloadPage(){
+	// location.reload(true);
+}
 let modalCreateMain = $('#modal-create-main')
 let formCreateMain = $('form[name=form-create-main]')
 
@@ -12,6 +28,9 @@ function ActionMainCreate() {
   UtilFormClose(formCreateMain)
   queryCreateMain.Send()
   countrySelectCreate.clearSelect()
+  tagsSelectCreate.clearSelect()
+  alliedMediasSelectCreate.clearSelect()
+  modalCreateMain.find('input[name=publication_date]').flatpickr(settingDate)
 }
 
 // Autocomplete
@@ -20,7 +39,26 @@ let countrySelectCreate = new searchByAutocomplete(
   {
     params: [],
     url: '/admin/configurations/countries/search-by-autocomplete',
-    limitItems: 2,
+    limitItems: 10,
+    minimumCharactersToSearch: 1,
+  },
+)
+let tagsSelectCreate = new searchByAutocomplete(
+  formCreateMain.find('.tagsSelect'),
+  {
+    params: [],
+    url: '/admin/configurations/tags/search-by-autocomplete',
+    limitItems: 10,
+    minimumCharactersToSearch: 1,
+  },
+)
+let alliedMediasSelectCreate = new searchByAutocomplete(
+  formCreateMain.find('.alliedMediaSelect'),
+  {
+    params: [],
+    url: '/admin/specials/allied-media/search-by-autocomplete',
+    limitItems: 10,
+    minimumCharactersToSearch: 1,
   },
 )
 
@@ -32,6 +70,13 @@ let queryCreateMain = new QueryAjax({
   listTable: TableMain,
 })
 function CreateActionModal(status, result) {
+  if(status){
+    LoadSelectUtil(
+      modalCreateMain.find('select[name=template_id]'),
+      result.data.templates,
+      1
+    )
+  }
 }
 
 //Send data modal
@@ -58,14 +103,37 @@ function ActionMainUpdate(data) {
   formUpdateMain.find('input[name=id]').val(data.id)
   queryInitialUpdateMain.Send()
   countrySelectUpdate.clearSelect()
+  tagsSelectUpdate.clearSelect()
+  alliedMediasSelectUpdate.clearSelect()
+  modalUpdateMain.find('input[name=publication_date]').flatpickr(settingDate)
 }
 
+// Autocomplete
 let countrySelectUpdate = new searchByAutocomplete(
   formUpdateMain.find('.countrySelect'),
   {
     params: [],
     url: '/admin/configurations/countries/search-by-autocomplete',
-    limitItems: 1,
+    limitItems: 10,
+    minimumCharactersToSearch: 1,
+  },
+)
+let tagsSelectUpdate = new searchByAutocomplete(
+  formUpdateMain.find('.tagsSelect'),
+  {
+    params: [],
+    url: '/admin/configurations/tags/search-by-autocomplete',
+    limitItems: 10,
+    minimumCharactersToSearch: 1,
+  },
+)
+let alliedMediasSelectUpdate = new searchByAutocomplete(
+  formUpdateMain.find('.alliedMediaSelect'),
+  {
+    params: [],
+    url: '/admin/specials/allied-media/search-by-autocomplete',
+    limitItems: 10,
+    minimumCharactersToSearch: 1,
   },
 )
 
@@ -78,13 +146,20 @@ let queryInitialUpdateMain = new QueryAjax({
 })
 function UpdateActionModal(status, result) {
   if (status) {
-    let country = result.data.country
-    countrySelectUpdate.eventAddDataSelected({
-      id: country.id,
-      name: country.name,
-    })
+    utilLoadAutoCompleteByArray(result.data.countries, countrySelectUpdate)
+    utilLoadAutoCompleteByArray(result.data.tags, tagsSelectUpdate)
+    utilLoadAutoCompleteByArray(
+      result.data.alliedMedia,
+      alliedMediasSelectUpdate,
+    )
 
-    LoadFormInputs(modalUpdateMain, result.data.region)
+    LoadSelectUtil(
+      modalUpdateMain.find('select[name=template_id]'),
+      result.data.templates,
+      result.data.special.template_id,
+    )
+
+    LoadFormInputs(modalUpdateMain, result.data.special)
   }
 }
 
@@ -96,8 +171,104 @@ let ActionMainUpdateSend = new QueryAjax({
 })
 function FunctionActionUpdateMain(status, data) {
   if (status) {
-    notify(false, 'Region Actualizado', 'Operación realizada exitosamente', 2)
+    notify(false, 'Especial Actualizado', 'Operación realizada exitosamente', 2)
     ActionMainUpdateSend.FormClose()
     TableMain.refresh()
   }
+}
+
+let modalSpecialUsers = $('#modal-special-users')
+let formCreateSpecialUsers = modalSpecialUsers.find(
+  'form[name=form-special-users]',
+)
+
+let divUser = $('#table-special-users')
+let routeUser = '/admin/specials/users/list'
+let structureUser = [' ', 'Nombre', 'Role']
+
+var TableSpecialUsers = new tableGear(divUser, routeUser, structureUser)
+TableSpecialUsers.modalSelect = modalSpecialUsers
+TableSpecialUsers.tablePaginate = false
+TableSpecialUsers.filter.row = 200
+
+function ActionModalUsers(data) {
+  UtilClearFormUi(formCreateSpecialUsers)
+
+  modalSpecialUsers.find('.modal-subtitle').text(` (${data.name})`)
+  TableSpecialUsers.filter.id = data.id
+  formCreateSpecialUsers.find('input[name=special_id]').val(data.id)
+
+  TableSpecialUsers.refresh(false)
+  userSelectUpdate.clearSelect()
+  QueryModalDataUsers.Send()
+}
+// Autocomplete
+let userSelectUpdate = new searchByAutocomplete(
+  formCreateSpecialUsers.find('.usersSelect'),
+  {
+    params: [],
+    url: '/admin/accounts/users/search-by-autocomplete',
+    limitItems: 1,
+    minimumCharactersToSearch: 1,
+  },
+)
+
+/** --------- METHOD CREATE --------- */
+
+let QueryModalDataUsers = new QueryAjax({
+  url: '/admin/specials/roles',
+  method: 'GET',
+  action: 'ActionModalDataUsers',
+  listTable: TableSpecialUsers,
+})
+function ActionModalDataUsers(status, result) {
+  if (status) {
+    LoadSelectUtil(
+      formCreateSpecialUsers.find('select[name=special_role_id]'),
+      result.data.roles,
+    )
+  }
+}
+let QueryModalCreateUsers = new QueryAjax({
+  form: 'form-special-users',
+  action: 'ActionModalCreateUsers',
+  loaderSelected: modalSpecialUsers.find('.overlay-modal'),
+})
+function ActionModalCreateUsers(status, result) {
+  if (!status) {
+    return false
+  }
+
+  if (result.status) {
+    notify(false, 'Usuario asociado', 'Operación realizada exitosamente', 2)
+    QueryModalCreateUsers.FormClose(false)
+    TableSpecialUsers.refresh(false)
+  } else {
+    notify(false, 'Usuario ya esta asociado', '', 1)
+    QueryModalCreateUsers.FormClose(false)
+  }
+
+  userSelectUpdate.clearSelect()
+}
+
+/** --------- METHOD DELETE --------- */
+
+function ButtonModalDeleteUsers(element) {
+  let id = $(element).parent().parent().data('id')
+  QueryModalDeleteUsers.var.id = id
+  QueryModalDeleteUsers.Send()
+}
+
+let QueryModalDeleteUsers = new QueryAjax({
+  url: '/admin/specials/users',
+  method: 'DELETE',
+  action: 'ActionModalDeleteUsers',
+  listTable: TableSpecialUsers,
+})
+function ActionModalDeleteUsers(status) {
+  if (!status) {
+    return false
+  }
+  notify(false, 'Usuario eliminado', 'Operación realizada exitosamente', 1)
+  TableSpecialUsers.refresh(false)
 }

@@ -40,4 +40,15 @@ Route::prefix('/')
         Route::get('/update', 'SpecialsController@updateInfo')->middleware(
             'permission:special-update'
         );
+
+        Route::get(
+            '/allied-media/search-by-autocomplete',
+            'AlliedMediaController@searchByAutocomplete'
+        );
+
+        Route::post('/users', 'SpecialUsersController@create');
+        Route::get('/users/list', 'SpecialUsersController@list');
+        Route::delete('/users', 'SpecialUsersController@delete');
+
+        Route::get('/roles', 'SpecialRolesController@get');
     });

@@ -47,9 +47,33 @@ Route::group(
         Route::group(['prefix' => 'admin/specials'], function () {
             require __DIR__ . '/web/specials.php';
         });
-        
+
         Route::group(['prefix' => ''], function () {
             require __DIR__ . '/web/auth.php';
         });
+    }
+);
+
+// -------------------------------------------------------------------------------
+// ---------------------------- FILES S3 AMAZON ----------------------------------
+// -------------------------------------------------------------------------------
+Route::group(
+    [
+        'namespace' => 'App\Http\Controllers\Utils',
+    ],
+    function () {
+        Route::post(
+            'uploadfiles_s3',
+            'UploadS3\UploadS3Controller@upload_files'
+        );
+        Route::post(
+            'destroyfiles_s3',
+            'UploadS3\UploadS3Controller@destroy_files'
+        );
+        Route::get('download_s3', 'UploadS3\UploadS3Controller@getFile');
+        Route::get(
+            'download_s3_public',
+            'UploadS3\UploadS3Controller@getFilePublic'
+        );
     }
 );
