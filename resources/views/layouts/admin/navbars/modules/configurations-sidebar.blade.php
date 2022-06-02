@@ -20,6 +20,20 @@
                         </a>
                     </li>
                 @endcan
+                @can('tag-module')
+                    <li class="nav-item">
+                        <a class="nav-link @yield('menu_configurations_tags', '')" href="{{ route('module-tags') }}">
+                            {{ __('menu.configurations-media') }}
+                        </a>
+                    </li>
+                @endcan
+                @can('tag-module')
+                    <li class="nav-item">
+                        <a class="nav-link @yield('menu_configurations_tags', '')" href="{{ route('module-tags') }}">
+                            {{ __('menu.configurations-files') }}
+                        </a>
+                    </li>
+                @endcan
             </ul>
         </div>
     </li>

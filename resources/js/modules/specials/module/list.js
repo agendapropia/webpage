@@ -10,7 +10,7 @@ TableMain.refresh(true)
 $('#file_list_box').find('.overlay').hide()
 
 // Campo Files
-var filesDocument = new updloadS3($('#fieldPublicTicket'), {
+var filesDocument = new updloadS3($('#modal-utils-imagen-selections'), {
 	url: '/document/savefiles',
 	typeFile: 1,
 	id: 1,

@@ -252,3 +252,94 @@
 .box_pad_right{
 	padding-right: 30px !important
 }
+
+
+#upload-s3{
+	display: block;
+    padding: 0px 20px;
+}
+#upload-s3 .upload-s3-list {
+	display: list-item;
+    min-height: 160px;
+    list-style-type: none;
+    margin: 0;
+    padding: 17px;
+    border: 2px #cacaca dashed;
+    margin-bottom: 7px;
+    background: #f4f4f4;
+    border-radius: 4px;
+}
+
+#upload-s3 .upload-s3-list .div_list {
+	width: 100%;
+    border: 1px solid #c9c9c9;
+    position: relative;
+    margin-bottom: 6px;
+    background: white;
+    border-radius: 4px;
+}
+
+#upload-s3 .upload-file{
+	display: table;
+    width: 100%;
+}
+
+#upload-s3 .upload-file .image{
+	display: table-cell;
+    width: 140px;
+    height: 140px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: #464646 !important;
+	background-size: 40%;
+	border-top-left-radius: 3px;
+    border-bottom-left-radius: 0px;
+}
+
+#upload-s3 .upload-file .content{
+	display: table-cell;
+	padding: 10px 10px;
+}
+#upload-s3 .upload-file .content .name{ font-size: 13px; font-weight: bold; }
+#upload-s3 .upload-file .content .source{ font-size: 9px; }
+#upload-s3 .upload-file .content .author{ font-size: 12px; margin-top: 12px; }
+#upload-s3 .upload-file .content .description{ font-size: 10px; }
+
+#upload-s3 .progress-bar{
+	color: transparent !important;
+}
+#upload-s3 .progress{
+    border-radius: 0 !important;
+	margin: 0px;
+	border-bottom-left-radius: 3px;
+}
+#upload-s3 .control{
+	display: block;
+    position: absolute;
+    top: 0px;
+    right: 5px;
+}
+#upload-s3 .control .btn-control{
+	cursor: pointer;
+    border: 1px solid #ba2121;
+    padding: 3px 4px;
+    margin-top: -1px;
+    background: #d72f2f;
+    color: white;
+    border-bottom-right-radius: 3px;
+    border-bottom-left-radius: 3px;
+	display: inline-block;
+}
+#upload-s3 .control .btn-delete{
+    border-color:  #ba2121;
+    background: #d72f2f;
+    color: white;
+}
+#upload-s3 .control .btn-edit{
+	border-color: #2065bf;
+    background: #2472d8;
+    color: white;
+}
+#upload-s3 .upload-s3-help{
+	font-size: 10px;
+}
