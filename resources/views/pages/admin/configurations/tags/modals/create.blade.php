@@ -1,5 +1,5 @@
 <x-admin.modals.modal id="modal-create-main">
-    <x-slot name="title"><em class="fa fa-user mr-2"></em>Crear region</x-slot>
+    <x-slot name="title"><em class="fa fa-hashtag mr-2"></em>Crear Tag</x-slot>
 
     <x-slot name="content">
         <x-admin.forms.form method="POST" action="/admin/configurations/tags" name="form-create-main">

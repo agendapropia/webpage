@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Permissions\Permission;
 use App\Models\Permissions\PermissionModule;
-use App\Models\Permissions\Role;
 
 class PermissionsController extends Controller
 {

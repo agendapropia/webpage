@@ -117,4 +117,24 @@ class TagsController extends Controller
 
         return $this->responseJson(true, 'tag update', $tag);
     }
+
+    /**
+     * GET search by autocomplete
+     * POST /configurations/tags/search-by-autocomplete
+     */
+    public function searchByAutocomplete(Request $request)
+    {
+        $search = $request->get('_search');
+        $row = $request->get('_row') ?? 10;
+        $tags = Tag::select(
+            't.id',
+            't.name'
+        )
+            ->from('tags as t')
+            ->search($search)
+            ->limit($row)
+            ->get();
+
+        return $this->responseJson(true, 'list tags', $tags);
+    }
 }

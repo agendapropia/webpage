@@ -46,4 +46,9 @@ Route::prefix('/users')
         Route::post('/{user_id}/assign', 'UsersController@assign')->middleware(
             'permission:role-assign'
         );
+
+        Route::get(
+            '/search-by-autocomplete',
+            'UsersController@searchByAutocomplete'
+        );
     });

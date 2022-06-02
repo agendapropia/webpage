@@ -12,6 +12,15 @@
     <x-slot name="menu_select">
     </x-slot>
 
+    <x-slot name="filter">
+        <select class="form-control filter filter_country">
+            <option value="">Países</option>
+            @foreach ($countries as $country)
+                <option value="{{ $country->id }}">{{ $country->name }}</option>
+            @endforeach
+        </select>
+    </x-slot>
+
     <x-slot name="template">
         <script class="template-list" type="text/x-custom-template">
             <tr data-url="panel" data-toggle="">

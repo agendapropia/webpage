@@ -1,7 +1,6 @@
 <?php
 
 return [
-
     /*
     |--------------------------------------------------------------------------
     | Default Filesystem Disk
@@ -29,7 +28,6 @@ return [
     */
 
     'disks' => [
-
         'local' => [
             'driver' => 'local',
             'root' => storage_path('app'),
@@ -38,20 +36,24 @@ return [
         'public' => [
             'driver' => 'local',
             'root' => storage_path('app/public'),
-            'url' => env('APP_URL').'/storage',
+            'url' => env('APP_URL') . '/storage',
             'visibility' => 'public',
         ],
 
         's3' => [
+            // 'driver' => 's3',
+            // 'key' => env('AWS_ACCESS_KEY_ID'),
+            // 'secret' => env('AWS_SECRET_ACCESS_KEY'),
+            // 'region' => env('AWS_DEFAULT_REGION'),
+            // 'bucket' => env('AWS_BUCKET'),
+            // 'url' => env('AWS_URL', '/files/images/'),
+            // 'endpoint' => env('AWS_ENDPOINT'),
             'driver' => 's3',
-            'key' => env('AWS_ACCESS_KEY_ID'),
-            'secret' => env('AWS_SECRET_ACCESS_KEY'),
-            'region' => env('AWS_DEFAULT_REGION'),
-            'bucket' => env('AWS_BUCKET'),
-            'url' => env('AWS_URL', '/files/images/'),
-            'endpoint' => env('AWS_ENDPOINT'),
+            'key' => 'AKIAJMN3RPUUG5OUP2AQ',
+            'secret' => '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',
+            'region' => 'us-west-1',
+            'bucket' => 'germith',
         ],
-
     ],
 
     /*
@@ -68,5 +70,4 @@ return [
     'links' => [
         public_path('storage') => storage_path('app/public'),
     ],
-
 ];

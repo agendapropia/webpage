@@ -2,6 +2,9 @@
 
 @section('page_title', __('menu.configurations-tags'))
 @section('navbar_title', __('menu.configurations-tags'))
+@section('navbar_title_icon')
+    <em class="fa fa-hashtag mr-2"></em>
+@endsection
 
 <!-- menu -->
 @section('menu_configurations', 'active')

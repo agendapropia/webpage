@@ -4,7 +4,7 @@
             <div class="col-lg-6 col-7">
                 <nav aria-label="breadcrumb" class="d-none d-md-inline-block">
                 <ol class="breadcrumb breadcrumb-links breadcrumb-dark breadcrumb-app">
-                    <li class="breadcrumb-item"><a href="/"><em class="fa fa-home"></em></a></li>
+                    <li class="breadcrumb-item"><a href="/home"><em class="fa fa-home"></em></a></li>
                     {{ $slot }}
                 </ol>
                 </nav>

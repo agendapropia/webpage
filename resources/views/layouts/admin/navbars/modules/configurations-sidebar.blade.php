@@ -1,10 +1,10 @@
 @can('configuration-module')
     <li class="nav-item ">
-        <a class="nav-link @yield('menu_configurations', '')" href="#navbar-account" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="navbar-account">
+        <a class="nav-link @yield('menu_configurations', '')" href="#navbar-configurations" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="navbar-configurations">
             <i class="fa fa-gear text-primary"></i>
             <span class="nav-link-text">{{ __('menu.configurations') }}</span>
         </a>
-        <div class="collapse @yield('menu_configurations_collapse', '')" id="navbar-account">
+        <div class="collapse @yield('menu_configurations_collapse', '')" id="navbar-configurations">
             <ul class="nav nav-sm flex-column">
                 @can('region-module')
                     <li class="nav-item">

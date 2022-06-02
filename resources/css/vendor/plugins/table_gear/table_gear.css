@@ -200,10 +200,13 @@
 /* BUTTON TABLE */
 .table-gear .btn-mt {
   border-radius: 4px;
-  padding: 3px 4px;
-  background-color: #efefef;
-  color: #adadad;
+  padding: 6px 9px;
+  background-color: #f9f9f9;
+  color: #616161;
   border: 1px solid #e4eaec;
+  box-shadow: none;
+  font-size: 12px;
+  margin: 0px 1px;
 }
 
 /*

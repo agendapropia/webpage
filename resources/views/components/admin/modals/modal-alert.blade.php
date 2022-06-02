@@ -22,7 +22,7 @@
                 {{ isset($footer) ? $footer : ''  }}
             </div>
 
-            <div class="overlay" style="display: none;">
+            <div class="overlay overlay-modal" style="display: none;">
                 <div class="content">
                     <em class="fa fa-3x fa-cog fa-spin"></em>
                 </div>
