@@ -6496,7 +6496,7 @@ class updloadS3 {
     this.sizeFile = 100
 
     this.send = content.find('.btn-primary')
-    this.listFiles = content.find('#photos_view')
+    this.listFiles = content.find('.upload-s3-list')
     this.imagen = content.find('.btn-upload')
     this.textarea = content.find('textarea[name=content]')
     this.checkbox = content.find('input[name=resp_public]')
@@ -6808,7 +6808,7 @@ class updloadS3 {
               form.find('.cont').hide()
 
               form
-                .find('.logo')
+                .find('.image')
                 .css(
                   'background-image',
                   'url(' +
@@ -6817,12 +6817,11 @@ class updloadS3 {
                     $(form).data('name') +
                     ')',
                 )
-              form.find('.logo').css('background-size', '100%')
             } else {
               form.find('.download').show()
-              form.find('.cont').find('.prog').hide()
-              form.find('.cont').find('.text').addClass('name_file')
+              form.find('.text').addClass('name_file')
             }
+			form.find('.progress').hide()
             cont.validate(true, data.id)
           }
 
@@ -6836,7 +6835,7 @@ class updloadS3 {
         request.open('post', APP_URL + cont.url_uploadFile)
         request.send(formdata)
 
-        form.find('.delete').click(function (e) {
+        form.find('.btn-delete').click(function (e) {
           e.preventDefault()
           request.abort()
 
@@ -7117,29 +7116,29 @@ function add_file(cont, data, type, name_ramdom) {
   if (type == 1) {
     var reader = new FileReader()
     reader.onload = function (e) {
-      $(name_fom + ' .logo').css(
+      $(name_fom + ' .image').css(
         'background-image',
         'url(' + e.target.result + ')',
       )
-      $(name_fom + ' .logo').css('background-size', '100%')
+      $(name_fom + ' .image').css('background-size', '100%')
     }
     reader.readAsDataURL(data.file)
   } else if (type == 2) {
     form
       .find('.download')
       .attr('onclick', "getFileS3('" + name_ramdom + "', 2)")
-    $(name_fom + ' .logo').css(
+    $(name_fom + ' .image').css(
       'background-image',
       'url(' + cont.files_url + 'app/ico/' + file_ico[data.ext] + ')',
     )
   } else if (type == 3) {
     form
-      .find('.logo')
+      .find('.image')
       .css(
         'background-image',
         'url(' + cont.files_url + 'thumbnails/' + data.name_tmp + ')',
       )
-    form.find('.logo').css('background-size', '100%')
+    form.find('.image').css('background-size', '100%')
     form.find('.cont').hide()
   } else if (type == 4) {
     form.find('.download').show()
@@ -7147,7 +7146,7 @@ function add_file(cont, data, type, name_ramdom) {
       .find('.download')
       .attr('onclick', "getFileS3('" + data.name_tmp + "', 2)")
     form
-      .find('.logo')
+      .find('.image')
       .css(
         'background-image',
         'url(' + cont.files_url + 'app/ico/' + file_ico[data.ext] + ')',

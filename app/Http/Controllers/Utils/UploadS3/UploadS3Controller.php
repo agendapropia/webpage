@@ -41,9 +41,7 @@ class UploadS3Controller extends Controller
             $state = $_POST['file_type'];
 
             $file = $request->file('file');
-            $filenamewithextension = $file->getClientOriginalName();
 
-            dump($file->getClientOriginalExtension());
             if ($state == 1) {
                 $image_thumb = Image::make($file)
                     ->widen(240, function ($constraint) {
