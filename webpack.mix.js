@@ -41,63 +41,36 @@ mix
     ],
     'public/css/plugins.all.css',
   )
-  .sass('resources/css/web/global.scss', 'public/css/web/web-plugins.all.css')
-  .scripts(['resources/js/web/**/*.js'], 'public/js/web/all.js')
 
   /** Modules Scripts */
   .scripts(
-    [
-      'resources/js/modules/users/list.js',
-      'resources/js/modules/users/create.js',
-      'resources/js/modules/users/update.js',
-      'resources/js/modules/users/status.js',
-      'resources/js/modules/users/assign.js',
-    ],
+    ['resources/js/modules/users/*.js'],
     'public/js/modules/users/all.js',
   )
   .scripts(
-    [
-      'resources/js/modules/permissions/permissions-assign.js',
-      'resources/js/modules/permissions/roles-list.js',
-      'resources/js/modules/permissions/roles-create.js',
-      'resources/js/modules/permissions/roles-update.js',
-    ],
+    ['resources/js/modules/permissions/*.js'],
     'public/js/modules/permissions/roles-all.js',
   )
   .scripts(
-    [
-      'resources/js/modules/permissions/permissions-list.js',
-      'resources/js/modules/permissions/permissions-create.js',
-      'resources/js/modules/permissions/permissions-update.js',
-    ],
+    ['resources/js/modules/permissions/*.js'],
     'public/js/modules/permissions/permissions-all.js',
   )
   .scripts(
-    [
-      'resources/js/modules/configurations/regions/list.js',
-      'resources/js/modules/configurations/regions/create.js',
-      'resources/js/modules/configurations/regions/update.js',
-    ],
+    ['resources/js/modules/configurations/regions/*.js'],
     'public/js/modules/configurations/regions/all.js',
   )
   .scripts(
-    [
-      'resources/js/modules/configurations/tags/list.js',
-      'resources/js/modules/configurations/tags/create.js',
-      'resources/js/modules/configurations/tags/update.js',
-    ],
+    ['resources/js/modules/configurations/tags/*.js'],
     'public/js/modules/configurations/tags/all.js',
   )
   .scripts(
-    [
-      'resources/js/modules/specials/module/list.js',
-      'resources/js/modules/specials/module/create.js',
-      'resources/js/modules/specials/module/update.js',
-      'resources/js/modules/specials/module/users.js',
-    ],
+    ['resources/js/modules/specials/module/*.js'],
     'public/js/modules/specials/module/all.js',
   )
   .scripts(
     ['resources/js/modules/utils/images/selections.js'],
     'public/js/modules/utils/images/all.js',
   )
+
+  .sass('resources/css/web/global.scss', 'public/css/web/web-plugins.all.css')
+  .scripts(['resources/js/web/**/*.js'], 'public/js/web/all.js')

@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Utils\UploadS3;
 use Illuminate\Http\Request;
 
 use App\Http\Controllers\Controller;
-use App\Models\Utils\Image as UtilsImage;
+use App\Models\Utils\File;
 use Illuminate\Support\Facades\Storage;
 
 use Image;
@@ -75,7 +75,7 @@ class UploadS3Controller extends Controller
         $type = $request->get('_type');
 
         if ($type == 1) {
-            $file = UtilsImage::findOrFail($request->get('_id'));
+            $file = File::findOrFail($request->get('_id'));
             $nameFile = $file->name_tmp;
 
             if ($file) {

@@ -1156,31 +1156,34 @@ span.flatpickr-weekday {
     padding: 0px 20px;
 }
 #upload-s3 .upload-s3-list {
-	display: list-item;
-    min-height: 160px;
+	min-height: 160px;
     list-style-type: none;
     margin: 0;
-    padding: 17px;
+    padding: 6px;
+    padding-bottom: 0px;
     border: 2px #cacaca dashed;
     margin-bottom: 7px;
     background: #f4f4f4;
     border-radius: 4px;
+    display: block;
+	position: relative;
 }
-
-#upload-s3 .upload-s3-list .div_list {
+#upload-s3 .upload-s3-list .item-list {
 	width: 100%;
     border: 1px solid #c9c9c9;
-    position: relative;
     margin-bottom: 6px;
     background: white;
     border-radius: 4px;
+	display: block;
+	position: relative;
 }
-
+#upload-s3 #template{
+	position: relative;
+}
 #upload-s3 .upload-file{
 	display: table;
     width: 100%;
 }
-
 #upload-s3 .upload-file .image{
 	display: table-cell;
     width: 140px;
@@ -1199,8 +1202,8 @@ span.flatpickr-weekday {
 }
 #upload-s3 .upload-file .content .name{ font-size: 13px; font-weight: bold; }
 #upload-s3 .upload-file .content .source{ font-size: 9px; }
-#upload-s3 .upload-file .content .author{ font-size: 12px; margin-top: 12px; }
-#upload-s3 .upload-file .content .description{ font-size: 10px; }
+#upload-s3 .upload-file .content .author{ font-size: 11px; margin-top: 12px; }
+#upload-s3 .upload-file .content .description{ font-size: 11px; }
 
 #upload-s3 .progress-bar{
 	color: transparent !important;
@@ -1240,6 +1243,45 @@ span.flatpickr-weekday {
 #upload-s3 .upload-s3-help{
 	font-size: 10px;
 }
+
+#upload-s3 .upload-s3-list .error{
+	position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    background: rgb(0 0 0 / 31%);
+    text-align: center;
+    padding-top: 7%;
+}
+
+#upload-s3 .modal-edit {
+	display: block;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    background: #ffffff;
+    padding: 10px 25px;
+}
+#upload-s3 .modal-edit .form-edit {
+	margin-top: 10px;
+}
+
+
+#upload-s3 .button-controls {
+	display: block;
+    margin-bottom: -30px;
+    margin-top: 20px;
+}
+#upload-s3 .button-controls .edit{
+	text-align: right;
+}
+#upload-s3 .button-controls .main{
+	text-align: left;
+}
+
 .table-gear {
   min-height: 100px !important;
 }

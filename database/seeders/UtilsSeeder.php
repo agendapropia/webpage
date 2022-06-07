@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use App\Models\Specials\Template;
 use App\Models\Users\Country;
 use App\Models\Utils\Day;
-use App\Models\Utils\ImageType;
+use App\Models\Utils\FileType;
 use App\Models\Utils\Language;
 use Illuminate\Database\Seeder;
 
@@ -19,7 +19,7 @@ class UtilsSeeder extends Seeder
     public function run()
     {
         $this->days();
-        $this->imageTypes();
+        $this->fileTypes();
         $this->languages();
         $this->countries();
         $this->templates();
@@ -92,27 +92,27 @@ class UtilsSeeder extends Seeder
         $day->save();
     }
 
-    private function imageTypes()
+    private function fileTypes()
     {
-        ImageType::create([
+        FileType::create([
             'name' => 'Imagen PNG',
             'type' => 'IMAGE',
             'icon' => 'image_png.png',
             'extension' => '.png',
         ]);
-        ImageType::create([
+        FileType::create([
             'name' => 'Imagen JPG',
             'type' => 'IMAGE',
             'icon' => 'image_jpg.png',
             'extension' => '.jpg',
         ]);
-        ImageType::create([
+        FileType::create([
             'name' => 'Imagen JPEG',
             'type' => 'IMAGE',
             'icon' => 'image_jpeg.png',
             'extension' => '.jpeg',
         ]);
-        ImageType::create([
+        FileType::create([
             'name' => 'Imagen gif',
             'type' => 'IMAGE',
             'icon' => 'image_gif.png',
