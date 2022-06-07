@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateImageTypesTable extends Migration
+class CreateFileTypesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateImageTypesTable extends Migration
      */
     public function up()
     {
-        Schema::connection('mysql_utils')->create('image_types', function (
+        Schema::connection('mysql_utils')->create('file_types', function (
             Blueprint $table
         ) {
             $table->integerIncrements('id');
@@ -32,6 +32,6 @@ class CreateImageTypesTable extends Migration
      */
     public function down()
     {
-        Schema::connection('mysql_utils')->dropIfExists('image_types');
+        Schema::connection('mysql_utils')->dropIfExists('file_types');
     }
 }

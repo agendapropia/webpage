@@ -51,4 +51,7 @@ Route::prefix('/')
         Route::delete('/users', 'SpecialUsersController@delete');
 
         Route::get('/roles', 'SpecialRolesController@get');
+
+        Route::post('/files', 'SpecialFilesController@create');
+        Route::get('/files', 'SpecialFilesController@get');
     });

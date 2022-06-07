@@ -5,7 +5,7 @@ namespace App\Models\Utils;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class ImageType extends Model
+class File extends Model
 {
     use HasFactory;
 
@@ -21,7 +21,16 @@ class ImageType extends Model
      *
      * @var array
      */
-    protected $fillable = ['id', 'name', 'type', 'icon', 'extension'];
+    protected $fillable = [
+        'id',
+        'imagen_type_id',
+        'user_id',
+        'creator_user_id',
+        'source',
+        'name',
+        'description',
+        'author',
+    ];
 
     /**
      * search scope
@@ -29,7 +38,7 @@ class ImageType extends Model
     public function scopeSearch($query, $value)
     {
         if (trim($value) != '') {
-            $query->where('it.name', 'like', "%$value%");
+            $query->where('i.name', 'like', "%$value%");
         }
     }
 }

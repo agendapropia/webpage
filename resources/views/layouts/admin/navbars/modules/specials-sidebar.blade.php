@@ -1,5 +1,5 @@
 @can('special-module')
-    <li class="nav-item ">
+    <li class="nav-item">
         <a class="nav-link @yield('menu_specials', '')" href="#navbar-specials" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="navbar-specials">
             <i class="fa fa-file-text text-primary"></i>
             <span class="nav-link-text">{{ __('menu.publications') }}</span>

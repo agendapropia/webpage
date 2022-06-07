@@ -1,26 +1,3 @@
-let div = $('#tableMain')
-let route = '/admin/specials/list'
-let structure = [' ', 'Estado', 'Nombre', 'Url', 'Fecha publicación', '# vistos']
-
-var TableMain = new tableGear(div, route, structure)
-TableMain.refresh(true)
-
-
-
-$('#file_list_box').find('.overlay').hide()
-
-// Campo Files
-var filesDocument = new updloadS3($('#modal-utils-imagen-selections'), {
-	url: '/document/savefiles',
-	typeFile: 1,
-	id: 1,
-	reload: false,
-	altFunction: 'preloadPage'
-});
-
-function preloadPage(){
-	// location.reload(true);
-}
 let modalCreateMain = $('#modal-create-main')
 let formCreateMain = $('form[name=form-create-main]')
 
@@ -93,6 +70,56 @@ function FinishActionCreateMain(status) {
   }
 }
 
+var divFiles = $('.div-files-class')
+var selectImageType = $('select[name=image_type]')
+
+var specialFiles = new updloadS3(divFiles, {
+  url: '/admin/specials/files',
+  typeFile: 1,
+  id: 1,
+  reload: false,
+})
+
+selectImageType.change(function () {
+  specialFiles.clear()
+  specialFiles.variables.source_id = $(this).val()
+  specialFiles.loading.show()
+
+  ActionQueryFilesList.var.type = $(this).val()
+  ActionQueryFilesList.Send()
+})
+
+function ActionFilesLoad(data) {
+  selectImageType.val(1)
+
+  specialFiles.clear()
+  specialFiles.variables.id = data.id
+  specialFiles.variables.external_id = data.id
+  specialFiles.variables.source_id = 1
+  specialFiles.loading.show()
+
+  ActionQueryFilesList.var.id = data.id
+  ActionQueryFilesList.var.type = 1
+  ActionQueryFilesList.Send()
+}
+
+let ActionQueryFilesList = new QueryAjax({
+  url: '/admin/specials/files',
+  method: 'GET',
+  action: 'FinishActionQueryFilesList',
+})
+function FinishActionQueryFilesList(status, data) {
+  if (status) {
+    specialFiles.loadData(data.data, ActionQueryFilesList.var.id)
+  }
+}
+
+let div = $('#tableMain')
+let route = '/admin/specials/list'
+let structure = [' ', 'Estado', 'Nombre', 'Url', 'Fecha publicación', '# vistos']
+
+var TableMain = new tableGear(div, route, structure)
+TableMain.refresh(true)
 let modalUpdateMain = $('#modal-update-main')
 let formUpdateMain = $('form[name=form-update-main]')
 

@@ -6459,6 +6459,8 @@ var protocol = pathArray[0]
 var host = pathArray[2]
 var APP_URL = protocol + '//' + host
 var URL_IMG = APP_URL + '/img/app/'
+const BUTTON_CONTROL_MAIN = 1
+const BUTTON_CONTROL_EDIT = 2
 
 class formFiles {
   constructor(url, data) {
@@ -6471,6 +6473,8 @@ class varQuery {
     this.id = id
     this.textarea = ''
     this.type = ''
+    this.external_id = 0
+    this.source_id = 0
     this.files = []
     this._token = $('meta[name=csrf-token]').attr('content')
   }
@@ -6487,6 +6491,8 @@ class updloadS3 {
     this.number = 0
     this.altFunction = false
     this.reload = true
+    this.formExternalId = 0
+    this.formSourceId = 0
 
     this.id = 0
     this.url = ''
@@ -6495,14 +6501,15 @@ class updloadS3 {
     this.typeFile = 1
     this.sizeFile = 100
 
-    this.send = content.find('.btn-primary')
+    this.send = content.find('.btn-save-files3')
     this.listFiles = content.find('.upload-s3-list')
     this.imagen = content.find('.btn-upload')
     this.textarea = content.find('textarea[name=content]')
     this.checkbox = content.find('input[name=resp_public]')
     this.inputFile = content.find('input[name=file]')
     this.template = $('#template-file')
-    this.loading = content.find('.loading')
+    this.loading = content.find('.overlay')
+    this.modalEdit = content.find('.modal-edit')
 
     let cont = this
     $.each(options, function (key, value) {
@@ -6511,6 +6518,8 @@ class updloadS3 {
 
     this.form = new formFiles(this.url, '')
     this.variables = new varQuery(this.id)
+    this.variables.external_id = this.formExternalId
+    this.variables.source_id = this.formSourceId
     this.xhr = ''
     this.statusMove = false
 
@@ -6533,11 +6542,39 @@ class updloadS3 {
     this.checkbox.change(function () {
       cont.changeCheckbox()
     })
+    this.content.find('.btn-edit-back').click(function () {
+      cont.actionDiv(1)
+    })
+    this.content.find('.btn-edit-save').click(function () {
+      cont.updateItemFile(this)
+    })
+    this.authorAutocomplete = new searchByAutocomplete(
+      this.modalEdit.find('.authorSelect'),
+      {
+        params: [],
+        url: '/admin/accounts/users/search-by-autocomplete',
+        limitItems: 1,
+        minimumCharactersToSearch: 1,
+      },
+    )
 
     this.move()
     this.btnSend(true)
 
     this.loading.hide()
+    this.actionDiv(1)
+  }
+  actionDiv(type = 1) {
+    this.content.find('.button-controls').find('.main').hide()
+    this.content.find('.button-controls').find('.edit').hide()
+    this.modalEdit.hide()
+
+    if (type == BUTTON_CONTROL_MAIN) {
+      this.content.find('.button-controls').find('.main').show()
+    } else if (type == BUTTON_CONTROL_EDIT) {
+      this.content.find('.button-controls').find('.edit').show()
+      this.modalEdit.show()
+    }
   }
   loadData(data, id) {
     this.variables.id = id
@@ -6548,32 +6585,35 @@ class updloadS3 {
     this.dataDelete = []
 
     $.each(data, function (key, value) {
-      value.ext = value.name.substring(value.name.lastIndexOf('.'))
       value['form_d'] = 'f_' + value.id
       value['cont'] = value.id
 
       let typeFile = TypeFile(value.ext)
-
-      add_file(cont, value, 2 + typeFile, value.name_tmp)
-
-      cont.data.push(
-        new filesItem(
-          value.id,
-          true,
-          value.name,
-          value.name_tmp,
-          0,
-          value.ext,
-          2,
-          typeFile,
-        ),
+      let file = new filesItem(
+        value.id,
+        true,
+        value.name,
+        value.name_tmp,
+        0,
+        value.ext,
+        2,
+        typeFile,
+        value['form_d'],
+        value.author_id,
+        value.author_name,
+        value.description,
       )
+
+      add_file(cont, file, 2 + typeFile)
+
+      cont.data.push(file)
 
       cont.load++
     })
 
     this.orderData()
     this.btnSend(true)
+    this.loading.hide()
   }
   move() {
     let cont = this
@@ -6599,9 +6639,10 @@ class updloadS3 {
       let id_li = $(value).attr('data-id')
       let index = cont.searchData(id_li, 'id')
 
-      cont.data[index].order = item
-      $(value).attr('data-order', item)
-
+      if (cont.data[index]) {
+        cont.data[index].order = item
+        $(value).attr('data-order', item)
+      }
       item++
     })
   }
@@ -6641,14 +6682,7 @@ class updloadS3 {
 
     this.xhr = $.post(this.form.url, this.form.data, function (result) {
       if (cont.reload) {
-        cont.listFiles.find('li:not(.ui-state-disabled)').remove()
-        cont.data = []
-        cont.dataDelete = []
-        cont.load = 0
-        cont.number = 0
-        cont.checkbox.prop('checked', false)
-        cont.textarea.val('')
-        cont.borderField ? cont.borderFiles() : null
+        cont.clear()
       }
       cont.optionDisabled(false)
       cont.btnSend(true)
@@ -6660,6 +6694,16 @@ class updloadS3 {
       cont.loading.hide()
       list_error(this, result) // Incomplete
     })
+  }
+  clear() {
+    this.listFiles.find('li:not(.ui-state-disabled)').remove()
+    this.data = []
+    this.dataDelete = []
+    this.load = 0
+    this.number = 0
+    this.checkbox.prop('checked', false)
+    this.textarea.val('')
+    this.borderField ? this.borderFiles() : null
   }
   validate(state = false, id = 0) {
     let loanding = 0
@@ -6691,11 +6735,11 @@ class updloadS3 {
       })
 
       if (loanding == 0)
-        !this.data.length && !this.textarea.val()
+        !this.data.length && !this.textarea.val() && !this.dataDelete.length
           ? this.btnSend(true)
           : this.btnSend(false)
     } else {
-      !this.data.length && !this.textarea.val()
+      !this.data.length && !this.textarea.val() && !this.dataDelete.length
         ? this.btnSend(true)
         : this.btnSend(false)
     }
@@ -6749,6 +6793,11 @@ class updloadS3 {
       size: file.size,
       ext: file.name.substring(file.name.lastIndexOf('.')),
       type: 1,
+      author: {
+        id: 1,
+        name: '',
+      },
+      description: '',
     }
 
     var state_file = file_type(data.ext, this.typeFile, data.name)
@@ -6760,7 +6809,18 @@ class updloadS3 {
       //Generamos el nombre tmp para el almacenar en el servidor
       var ramdom_name = name_ramdom(state_file)
 
-      add_file(this, data, state_file, ramdom_name + data.ext)
+      let fileItem = new filesItem(
+        data.id,
+        false,
+        data.name,
+        ramdom_name + data.ext,
+        data.size,
+        data.ext,
+        1,
+        state_file,
+        data.form_d,
+      )
+      add_file(this, fileItem, state_file, file)
 
       var percent
       var form = $('#' + data.form_d)
@@ -6772,24 +6832,14 @@ class updloadS3 {
       formdata.append('_token', $('meta[name=csrf-token]').attr('content'))
 
       this.load++
-      this.data.push(
-        new filesItem(
-          data.id,
-          false,
-          data.name,
-          ramdom_name + data.ext,
-          data.size,
-          data.ext,
-          1,
-          state_file,
-        ),
-      )
+      this.data.push(fileItem)
 
       this.validate()
       let cont = this
 
       function upload_data() {
         var request = new XMLHttpRequest() //request
+        form.find('.progress').show()
         request.upload.addEventListener('progress', function (e) {
           percent = Math.round((e.loaded / e.total) * 100)
           form
@@ -6800,8 +6850,8 @@ class updloadS3 {
 
         //progress completed load event
         request.addEventListener('load', function (e) {
-          if (e.currentTarget.status == 500) {
-            form.find('.cont').show()
+          if (e.currentTarget.status >= 400) {
+            form.find('.progress').hide()
             form.find('.error').show()
           } else if (e.total == 0) {
             if (data.type == 1) {
@@ -6821,7 +6871,8 @@ class updloadS3 {
               form.find('.download').show()
               form.find('.text').addClass('name_file')
             }
-			form.find('.progress').hide()
+
+            form.find('.progress').hide()
             cont.validate(true, data.id)
           }
 
@@ -6830,6 +6881,7 @@ class updloadS3 {
 
         request.addEventListener('error', function (e) {
           form.find('.error').show()
+          form.find('.progress').hide()
         })
 
         request.open('post', APP_URL + cont.url_uploadFile)
@@ -6866,6 +6918,39 @@ class updloadS3 {
       })
     }
   }
+  updateItemFile(btn) {
+    let id = $(btn).attr('data-id')
+    let key = null
+
+    this.data.forEach(function (element, index) {
+      if (element.id == parseInt(id)) {
+        key = index
+      }
+    })
+
+    this.data[key].name = this.modalEdit.find('input[name=name]').val()
+    this.data[key].description = this.modalEdit
+      .find('textarea[name=description]')
+      .val()
+
+    if (this.authorAutocomplete.selectedItems[0]) {
+      this.data[key].author.id = this.authorAutocomplete.selectedItems[0].id
+      this.data[key].author.name = this.authorAutocomplete.selectedItems[0].name
+    }
+
+    let form = this.content.find('#f_' + this.data[key].id)
+    form.find('.name').text(this.data[key].name)
+    form
+      .find('.description')
+      .html('<strong>Descripción: </strong>' + this.data[key].description)
+    form
+      .find('.author')
+      .html('<strong>Autor: </strong> ' + this.data[key].author.name)
+
+    this.actionDiv(1)
+
+    this.btnSend(false)
+  }
   delete_file_arc(name_file) {
     let cont = this
     $.ajax({
@@ -6883,11 +6968,21 @@ class updloadS3 {
   }
 }
 
-/**
- *
- */
 class filesItem {
-  constructor(id, state, name, name_tmp, size, ext, type, type_file) {
+  constructor(
+    id,
+    state,
+    name,
+    name_tmp,
+    size,
+    ext,
+    type,
+    type_file,
+    divIndex,
+    author_id = 0,
+    author_name = '',
+    description = '',
+  ) {
     this.id = id
     this.state = state
     this.name = name
@@ -6896,41 +6991,14 @@ class filesItem {
     this.ext = ext
     this.type = type
     this.type_file = type_file
+    this.author = {
+      id: author_id,
+      name: author_name,
+    }
+    this.description = description
+    this.divIndex = divIndex
   }
 }
-
-/**
- * Function Download
- */
-// let query = new query_API('/download_s3', 'POST', 'downloadS3');
-
-// function getFileS3(id, type=1)
-// {
-// 	notify(false, 'Descargando...', '', 4)
-// 	query.variables.type = type;
-// 	query.variables.id = id;
-// 	query.update()
-// }
-// function downloadS3(result)
-// {
-// 	document.getElementById("OpenPage").href = result.data
-// 	document.getElementById("OpenPage").click()
-// 	return false;
-// }
-/** End Download */
-
-/**
- * Function Download
- */
-// let queryPub = new query_API('/download_s3_public', 'POST', 'downloadS3');
-
-// function getFileS3Pub(name)
-// {
-// 	notify(false, 'Descargando...', '', 4)
-// 	queryPub.variables.id = name;
-// 	queryPub.update()
-// }
-// /** End Download */
 
 var file_ico = {
   '.zip': 'ico_archivo.png',
@@ -7010,6 +7078,7 @@ function file_type(ext, categories, name) {
     '.xlsb',
     '.pdf',
     '.PDF',
+    '.mp4'
   )
   if (jQuery.inArray(ext, ext_img) >= 0) {
     return 1
@@ -7085,22 +7154,21 @@ function file_size(size, size_default, name) {
 /**
  *
  * @param {class} cont Objeto de la clase updloadS3
- * @param {array} data Array con informacion de elemento a crear
+ * @param {filesItem} data con informacion de elemento a crear
  * @param {int} type 1: Img; 2: Documneto, 3: Img Cargado; 4: Documento Cargado;
- * @param {string} name_ramdom Nombre del archivo que esta en el repositorio.
  */
-function add_file(cont, data, type, name_ramdom) {
-  var name_fom = '#' + data.form_d
+function add_file(cont, data, type, file = '') {
+  var name_fom = '#' + data.divIndex
   cont.listFiles.append(
     '<li id="' +
-      data.form_d +
+      data.divIndex +
       '" data-id="0" data-state="0" data-name="' +
-      name_ramdom +
-      '" class="div_list item"></li>',
+      data.name_tmp +
+      '" class="item-list ui-state-default"></li>',
   )
   cont.template.clone().prependTo(name_fom).show()
 
-  var form = $('#' + data.form_d)
+  var form = cont.content.find('#' + data.divIndex)
 
   form.find('.error').hide()
   form.find('.download').hide()
@@ -7108,10 +7176,15 @@ function add_file(cont, data, type, name_ramdom) {
   form.children().attr('id', 'template')
 
   // Información
-  form.attr('data-id', data.cont)
+  form.attr('data-id', data.id)
   form.find('.name').text(data.name)
+  form.find('.source').text(data.name_tmp)
+  form
+    .find('.description')
+    .html('<strong>Descripción: </strong> ' + data.description)
+  form.find('.author').html('<strong>Autor: </strong> ' + data.author.name)
   form.find('.name').attr('title', data.name)
-  form.find('.delete').attr('data-id', data.cont)
+  form.find('.delete').attr('data-id', data.id)
 
   if (type == 1) {
     var reader = new FileReader()
@@ -7122,11 +7195,11 @@ function add_file(cont, data, type, name_ramdom) {
       )
       $(name_fom + ' .image').css('background-size', '100%')
     }
-    reader.readAsDataURL(data.file)
+    reader.readAsDataURL(file)
   } else if (type == 2) {
     form
       .find('.download')
-      .attr('onclick', "getFileS3('" + name_ramdom + "', 2)")
+      .attr('onclick', "getFileS3('" + data.name_tmp + "', 2)")
     $(name_fom + ' .image').css(
       'background-image',
       'url(' + cont.files_url + 'app/ico/' + file_ico[data.ext] + ')',
@@ -7139,7 +7212,6 @@ function add_file(cont, data, type, name_ramdom) {
         'url(' + cont.files_url + 'thumbnails/' + data.name_tmp + ')',
       )
     form.find('.image').css('background-size', '100%')
-    form.find('.cont').hide()
   } else if (type == 4) {
     form.find('.download').show()
     form
@@ -7151,12 +7223,12 @@ function add_file(cont, data, type, name_ramdom) {
         'background-image',
         'url(' + cont.files_url + 'app/ico/' + file_ico[data.ext] + ')',
       )
-    form.find('.cont').find('.prog').hide()
-    form.find('.cont').find('.text').addClass('name_file')
   }
 
+  form.find('.progress').hide()
+
   if (type == 4 || type == 3) {
-    form.find('.delete').click(function (e) {
+    form.find('.btn-delete').click(function (e) {
       e.preventDefault()
 
       let id = form.data('id')
@@ -7171,6 +7243,32 @@ function add_file(cont, data, type, name_ramdom) {
       cont.validateRemove(true)
     })
   }
+
+  form.find('.btn-edit').click(function (e) {
+    e.preventDefault()
+
+    let id = form.data('id')
+    let data = []
+    cont.data.forEach(function (element) {
+      if (element.id == id) {
+        data = element
+      }
+    })
+
+    cont.modalEdit.find('input[name=name]').val(data.name)
+    cont.modalEdit.find('textarea[name=description]').val(data.description)
+    cont.content.find('.btn-edit-save').attr('data-id', data.id)
+
+    cont.authorAutocomplete.clearSelect()
+    if (data.author.id != 0) {
+      cont.authorAutocomplete.eventAddDataSelected({
+        id: data.author.id,
+        name: data.author.name,
+      })
+    }
+
+    cont.actionDiv(2)
+  })
 }
 
 //! moment.js

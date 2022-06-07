@@ -21,7 +21,7 @@
                         <button class="btn btn-mt btn-primary" data-modal="#modal-update-main" data-action="ActionMainUpdate" onclick="TableMain.Modal(this);" title="Editar">
                             <i class="fa fa-cog" aria-hidden="true" title="Editar"></i>
                         </button>
-                        <button class="btn btn-mt btn-primary" data-modal="#modal-utils-imagen-selections" data-action="" onclick="TableMain.Modal(this);" title="Imágenes">
+                        <button class="btn btn-mt btn-primary" data-modal="#modal-utils-imagen-selections" data-action="ActionFilesLoad" onclick="TableMain.Modal(this);" title="Imágenes">
                             <i class="fa fa-image" aria-hidden="true" title="Imágenes"></i> 
                         </button>
                         <button class="btn btn-mt btn-primary" data-modal="#modal-special-users" data-action="ActionModalUsers" onclick="TableMain.Modal(this);" title="Usuarios">
