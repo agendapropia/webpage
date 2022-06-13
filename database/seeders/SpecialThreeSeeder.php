@@ -41,7 +41,7 @@ class SpecialThreeSeeder extends Seeder
 
         SpecialAlliedMedia::create([
             'special_id' => $special->id,
-            'allied_media_id' => 1,
+            'allied_media_id' => 1001,
         ]);
 
         SpecialTag::create([

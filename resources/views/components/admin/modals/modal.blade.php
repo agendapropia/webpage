@@ -15,7 +15,7 @@
             <div class="modal-body">
                 {{ isset($content) ? $content : 'Content'  }}
             </div>
-            <div class="modal-footer">
+            <div class="modal-footer {{ isset($footerClass) ? $footerClass : ''  }}">
                 {{ isset($footer) ? $footer : ''  }}
             </div>
             <div class="overlay overlay-modal" style="display: none;">

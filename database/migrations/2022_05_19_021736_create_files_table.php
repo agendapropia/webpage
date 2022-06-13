@@ -2,7 +2,6 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 class CreateFilesTable extends Migration
@@ -19,12 +18,16 @@ class CreateFilesTable extends Migration
         ) {
             $table->integerIncrements('id');
             $table->integer('file_type_id')->index();
+            $table
+                ->boolean('private')
+                ->index()
+                ->default(false);
             $table->integer('user_id')->index();
             $table
                 ->integer('creator_user_id')
                 ->index()
                 ->nullable();
-            $table->string('name_tmp', 256);
+            $table->string('name_tmp', 256)->unique();
             $table->string('name', 256);
             $table->text('description')->nullable();
             $table->string('author', 256)->nullable();

@@ -54,17 +54,17 @@ class SpecialSeeder extends Seeder
         AlliedMedia::insert([
             [
                 'name' => 'Medium',
-                'icon' => 'medium.jpg',
+                'image' => null,
                 'url' => 'https://medium.com',
             ],
             [
                 'name' => 'newyorktime',
-                'icon' => 'newyorktime.png',
+                'image' => null,
                 'url' => 'https://newyorktime.com',
             ],
             [
                 'name' => 'BCC',
-                'icon' => 'bcc.png',
+                'image' => null,
                 'url' => 'https://bcc.com',
             ],
         ]);
@@ -92,7 +92,7 @@ class SpecialSeeder extends Seeder
 
         SpecialAlliedMedia::create([
             'special_id' => $special->id,
-            'allied_media_id' => 1,
+            'allied_media_id' => 1000,
         ]);
 
         SpecialTag::create([

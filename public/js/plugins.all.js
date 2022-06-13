@@ -5295,7 +5295,7 @@ class tableGear {
 
     this.dataSelect = tr ? this.data[tr - 1].data : 0
 
-    this.modalSelect.modal('show')
+    this.modalSelect.modal({backdrop: 'static', keyboard: false})
     this.ModalLoader(false)
 
     action ? self[action](this.dataSelect) : false
@@ -6493,6 +6493,7 @@ class updloadS3 {
     this.reload = true
     this.formExternalId = 0
     this.formSourceId = 0
+    this.limitFiles = 3
 
     this.id = 0
     this.url = ''
@@ -6510,6 +6511,7 @@ class updloadS3 {
     this.template = $('#template-file')
     this.loading = content.find('.overlay')
     this.modalEdit = content.find('.modal-edit')
+    this.modalFiles = content.find('.modal-files')
 
     let cont = this
     $.each(options, function (key, value) {
@@ -6568,12 +6570,14 @@ class updloadS3 {
     this.content.find('.button-controls').find('.main').hide()
     this.content.find('.button-controls').find('.edit').hide()
     this.modalEdit.hide()
+    this.modalFiles.show()
 
     if (type == BUTTON_CONTROL_MAIN) {
       this.content.find('.button-controls').find('.main').show()
     } else if (type == BUTTON_CONTROL_EDIT) {
       this.content.find('.button-controls').find('.edit').show()
       this.modalEdit.show()
+      this.modalFiles.hide()
     }
   }
   loadData(data, id) {
@@ -6704,6 +6708,7 @@ class updloadS3 {
     this.checkbox.prop('checked', false)
     this.textarea.val('')
     this.borderField ? this.borderFiles() : null
+    this.actionDiv(1)
   }
   validate(state = false, id = 0) {
     let loanding = 0
@@ -6778,8 +6783,21 @@ class updloadS3 {
   changeInputFile(element) {
     for (var i = 0; i < element.files.length; ++i) {
       this.number++
-      var file = element.files[i]
-      this.uploadFile(file, this.number)
+
+      console.log(this.data.length)
+
+      if (this.data.length < this.limitFiles) {
+        var file = element.files[i]
+        this.uploadFile(file, this.number)
+      } else {
+        notify(
+          false,
+          'Limite de archivos',
+          `Se permiten solo ${this.limitFiles} archivo.`,
+          1,
+        )
+        break
+      }
     }
     this.inputFile.val('')
   }
@@ -6895,10 +6913,19 @@ class updloadS3 {
           let name = form.data('name')
           form.remove()
 
-          cont.data.forEach(function (elemento, indice, array) {
-            elemento.state ? cont.delete_file_arc(name) : null
-            elemento.id == id ? cont.data.splice(indice, 1) : null
+          let element = null
+          let index = 0
+          cont.data.forEach(function (value, indice) {
+            if (value.id == id) {
+              element = value
+              index = indice
+            }
           })
+
+          if (element != null) {
+            element.state ? cont.delete_file_arc(name) : null
+            cont.data.splice(index, 1)
+          }
 
           cont.validateRemove(true)
         })
@@ -6940,12 +6967,21 @@ class updloadS3 {
 
     let form = this.content.find('#f_' + this.data[key].id)
     form.find('.name').text(this.data[key].name)
+
     form
       .find('.description')
-      .html('<strong>Descripción: </strong>' + this.data[key].description)
+      .html(
+        this.data[key].description != ''
+          ? '<strong>Descripción: </strong> ' + this.data[key].description
+          : '',
+      )
     form
       .find('.author')
-      .html('<strong>Autor: </strong> ' + this.data[key].author.name)
+      .html(
+        this.data[key].author.name != null
+          ? '<strong>Autor: </strong> ' + this.data[key].author.name
+          : '',
+      )
 
     this.actionDiv(1)
 
@@ -6979,8 +7015,8 @@ class filesItem {
     type,
     type_file,
     divIndex,
-    author_id = 0,
-    author_name = '',
+    author_id = null,
+    author_name = null,
     description = '',
   ) {
     this.id = id
@@ -7017,6 +7053,7 @@ var file_ico = {
   '.xlsb': 'ico_excel.png',
   '.pdf': 'ico_pdf.png',
   '.PDF': 'ico_pdf.png',
+  '.mp4': 'ico_mp4.png',
 }
 
 var file_name = {
@@ -7053,7 +7090,7 @@ function name_ramdom(type) {
   if (type == 1) {
     return 'img_' + Date.parse(date) + '_' + rand()
   } else {
-    return 'doc_' + Date.parse(date) + '_' + rand()
+    return 'file_' + Date.parse(date) + '_' + rand()
   }
 }
 
@@ -7078,7 +7115,7 @@ function file_type(ext, categories, name) {
     '.xlsb',
     '.pdf',
     '.PDF',
-    '.mp4'
+    '.mp4',
   )
   if (jQuery.inArray(ext, ext_img) >= 0) {
     return 1
@@ -7181,8 +7218,18 @@ function add_file(cont, data, type, file = '') {
   form.find('.source').text(data.name_tmp)
   form
     .find('.description')
-    .html('<strong>Descripción: </strong> ' + data.description)
-  form.find('.author').html('<strong>Autor: </strong> ' + data.author.name)
+    .html(
+      data.description != ''
+        ? '<strong>Descripción: </strong> ' + data.description
+        : '',
+    )
+  form
+    .find('.author')
+    .html(
+      data.author.name != null
+        ? '<strong>Autor: </strong> ' + data.author.name
+        : '',
+    )
   form.find('.name').attr('title', data.name)
   form.find('.delete').attr('data-id', data.id)
 
@@ -7260,7 +7307,7 @@ function add_file(cont, data, type, file = '') {
     cont.content.find('.btn-edit-save').attr('data-id', data.id)
 
     cont.authorAutocomplete.clearSelect()
-    if (data.author.id != 0) {
+    if (data.author.id != 0 && data.author.id != null) {
       cont.authorAutocomplete.eventAddDataSelected({
         id: data.author.id,
         name: data.author.name,

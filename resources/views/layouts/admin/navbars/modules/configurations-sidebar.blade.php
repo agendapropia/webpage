@@ -22,8 +22,8 @@
                 @endcan
                 @can('tag-module')
                     <li class="nav-item">
-                        <a class="nav-link @yield('menu_configurations_tags', '')" href="{{ route('module-tags') }}">
-                            {{ __('menu.configurations-media') }}
+                        <a class="nav-link @yield('menu_configurations_alliedmedia', '')" href="{{ route('module-alliedmedia') }}">
+                            {{ __('menu.configurations-alliedmedia') }}
                         </a>
                     </li>
                 @endcan
