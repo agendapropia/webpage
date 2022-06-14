@@ -4,6 +4,11 @@ let formUpdateMain = $('form[name=form-update-main]')
 let selectLanguage = divUpdate.find('select[name=language_id]')
 let overlayContent = divUpdate.find('.overlay')
 
+var editorContent = new EditorJS({
+  holder: 'editorjs',
+  tools: settingEditor,
+})
+
 //Funtion Modal Update
 function ActionMainUpdate() {
   overlayContent.show()
@@ -29,9 +34,9 @@ function UpdateActionModal(status, result) {
     UtilFormClose(formUpdateMain)
     LoadFormInputs(divUpdate, result.data.content)
 
-    $('#editorjs').html();
-    editorContent.destroy();
-    
+    editorContent.destroy()
+    $('#editorjs').html()
+
     if (result.data.content.content) {
       editorContent = new EditorJS({
         holder: 'editorjs',

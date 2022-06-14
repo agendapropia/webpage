@@ -1,4 +1,11 @@
 const settingEditor = {
+  image: {
+    class: SimpleImage,
+    inlineToolbar: true,
+    config: {
+      placeholder: 'Ingresar la url',
+    },
+  },
   table: Table,
   paragraph: {
     class: Paragraph,
@@ -45,11 +52,6 @@ const settingEditor = {
   },
 }
 
-var editorContent = new EditorJS({
-  holder: 'editorjs',
-  tools: settingEditor
-})
-
 let buttonSaveContent = document.getElementById('special-btn-save')
 buttonSaveContent.addEventListener('click', function () {
   overlayContent.show()
@@ -88,6 +90,11 @@ let formUpdateMain = $('form[name=form-update-main]')
 let selectLanguage = divUpdate.find('select[name=language_id]')
 let overlayContent = divUpdate.find('.overlay')
 
+var editorContent = new EditorJS({
+  holder: 'editorjs',
+  tools: settingEditor,
+})
+
 //Funtion Modal Update
 function ActionMainUpdate() {
   overlayContent.show()
@@ -113,9 +120,9 @@ function UpdateActionModal(status, result) {
     UtilFormClose(formUpdateMain)
     LoadFormInputs(divUpdate, result.data.content)
 
-    $('#editorjs').html();
-    editorContent.destroy();
-    
+    editorContent.destroy()
+    $('#editorjs').html()
+
     if (result.data.content.content) {
       editorContent = new EditorJS({
         holder: 'editorjs',

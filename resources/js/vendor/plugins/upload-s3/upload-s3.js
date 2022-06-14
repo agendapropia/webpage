@@ -20,7 +20,8 @@ var APP_URL = protocol + '//' + host
 var URL_IMG = APP_URL + '/img/app/'
 const BUTTON_CONTROL_MAIN = 1
 const BUTTON_CONTROL_EDIT = 2
-
+const URL_S3_IMAGE =
+  'https://agendapropia-files.s3.us-east-2.amazonaws.com/files/images/'
 class formFiles {
   constructor(url, data) {
     this.url = url
@@ -86,7 +87,7 @@ class updloadS3 {
 
     this.url_uploadFile = '/uploadfiles_s3'
     this.url_removeFile = '/destroyfiles_s3'
-    this.files_url = 'https://agendapropia-files.s3.us-east-2.amazonaws.com/files/images/'
+    this.files_url = URL_S3_IMAGE
     this.awsBase = 'https://agendapropia-files.s3.us-east-2.amazonaws.com/'
 
     this.textarea.keyup(function () {
@@ -95,12 +96,14 @@ class updloadS3 {
     this.send.click(function () {
       cont.sendQuery(this)
     })
-    this.imagen.click(function () {
-      cont.inputFile.click()
-    })
-    this.inputFile.change(function () {
-      cont.changeInputFile(this)
-    })
+    if (this.inputFile) {
+      this.imagen.click(function () {
+        cont.inputFile.click()
+      })
+      this.inputFile.change(function () {
+        cont.changeInputFile(this)
+      })
+    }
     this.checkbox.change(function () {
       cont.changeCheckbox()
     })
@@ -344,8 +347,6 @@ class updloadS3 {
     for (var i = 0; i < element.files.length; ++i) {
       this.number++
 
-      console.log(this.data.length)
-
       if (this.data.length < this.limitFiles) {
         var file = element.files[i]
         this.uploadFile(file, this.number)
@@ -401,7 +402,7 @@ class updloadS3 {
       add_file(this, fileItem, state_file, file)
 
       var percent
-      var form = $('#' + data.form_d)
+      var form = this.content.find('.' + data.form_d)
       var formdata = new FormData()
 
       formdata.append('file', data.file)
@@ -525,7 +526,7 @@ class updloadS3 {
       this.data[key].author.name = this.authorAutocomplete.selectedItems[0].name
     }
 
-    let form = this.content.find('#f_' + this.data[key].id)
+    let form = this.content.find('.f_' + this.data[key].id)
     form.find('.name').text(this.data[key].name)
 
     form
@@ -593,6 +594,7 @@ class filesItem {
     }
     this.description = description
     this.divIndex = divIndex
+    this.name_tmp_complete = URL_S3_IMAGE + name_tmp
   }
 }
 
@@ -755,17 +757,13 @@ function file_size(size, size_default, name) {
  * @param {int} type 1: Img; 2: Documneto, 3: Img Cargado; 4: Documento Cargado;
  */
 function add_file(cont, data, type, file = '') {
-  var name_fom = '#' + data.divIndex
+  var name_fom = '.' + data.divIndex
   cont.listFiles.append(
-    '<li id="' +
-      data.divIndex +
-      '" data-id="0" data-state="0" data-name="' +
-      data.name_tmp +
-      '" class="item-list ui-state-default"></li>',
+    `<li data-id="0" data-state="0" data-name="${data.name_tmp}" class="${data.divIndex} item-list ui-state-default"></li>`,
   )
   cont.template.clone().prependTo(name_fom).show()
 
-  var form = cont.content.find('#' + data.divIndex)
+  var form = cont.content.find('.' + data.divIndex)
 
   form.find('.error').hide()
   form.find('.download').hide()
