@@ -31,6 +31,7 @@
     @include('pages.admin.users.modals.update')
     @include('pages.admin.users.modals.status')
     @include('pages.admin.users.modals.assign-roles')
+    @include('pages.admin.users.modals.files')
 @endsection
 
 @push('js-after')

@@ -22,10 +22,10 @@ class UploadS3Controller extends Controller
         $type = $_POST['type'];
 
         if ($type == 1) {
-            $path = 'files/photos/' . $name;
+            $path = 'files/images/' . $name;
             Storage::disk('s3')->delete($path);
 
-            $path = 'files/photos/thumbnails/' . $name;
+            $path = 'files/images/thumbnails/' . $name;
             Storage::disk('s3')->delete($path);
         } else {
             $path = 'files/documents/' . $name;
@@ -50,12 +50,12 @@ class UploadS3Controller extends Controller
                     ->encode($file->getClientOriginalExtension());
 
                 Storage::disk('s3')->put(
-                    'files/photos/' . $name,
+                    'files/images/' . $name,
                     fopen($file, 'r+'),
                     'public'
                 );
                 Storage::disk('s3')->put(
-                    'files/photos/thumbnails/' . $name,
+                    'files/images/thumbnails/' . $name,
                     (string) $image_thumb,
                     'public'
                 );

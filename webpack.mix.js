@@ -48,7 +48,7 @@ mix
     'public/js/modules/users/all.js',
   )
   .scripts(
-    ['resources/js/modules/permissions/*.js'],
+    ['resources/js/modules/roles/*.js'],
     'public/js/modules/permissions/roles-all.js',
   )
   .scripts(
@@ -70,6 +70,10 @@ mix
   .scripts(
     ['resources/js/modules/specials/alliedmedia/*.js'],
     'public/js/modules/specials/alliedmedia/all.js',
+  )
+  .scripts(
+    ['resources/js/modules/specials/contents/*.js'],
+    'public/js/modules/specials/contents/all.js',
   )
   .scripts(
     ['resources/js/modules/utils/images/selections.js'],

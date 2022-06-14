@@ -27,6 +27,9 @@
                         <button class="btn btn-mt btn-primary" data-modal="#modal-special-users" data-action="ActionModalUsers" onclick="TableMain.Modal(this);" title="Usuarios">
                             <i class="fa fa-user" aria-hidden="true"></i>
                         </button>
+                        <a class="btn btn-mt btn-mt-primary" href="/admin/specials/#_slug_#/contents" title="Contenidos">
+                            <i class="fa fa-file-text" aria-hidden="true"></i>
+                        </a>
                     @endCan
                 </td>
                 <td>

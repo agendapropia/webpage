@@ -5,11 +5,7 @@ namespace App\Http\Controllers\Modules\Specials;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Specials\AlliedMedia;
-use App\Models\Users\Country;
 use App\Models\Utils\File;
-use App\Models\Utils\FileType;
-use App\Models\Utils\Region;
-use App\Models\Utils\Tag;
 use Illuminate\Support\Facades\Auth;
 
 class AlliedMediaController extends Controller
@@ -151,54 +147,6 @@ class AlliedMediaController extends Controller
     }
 
     /**
-     * Create allied media files
-     * POST /admin/specials/allied-media/files
-     */
-    public function createFiles(Request $request)
-    {
-        $request->validate([
-            'external_id' => 'required|integer',
-            'source_id' => 'required|integer',
-            'files' => 'required|nullable',
-            'files_delete' => 'required|nullable',
-        ]);
-
-        $user = Auth::user();
-        $id = $request->get('id');
-
-        $files = json_decode($request->get('files'));
-        $files_delete = json_decode($request->get('files_delete'));
-
-        /** create new files */
-        foreach ($files as $file) {
-            if ($file->type == 1) {
-                File::createFile($file, $user, true);
-
-                $alliedMediaUpdate = AlliedMedia::findOrFail($id);
-                $alliedMediaUpdate->image = $file->name_tmp;
-                $alliedMediaUpdate->save();
-            } else {
-                $alliedMediaUpdate = AlliedMedia::findOrFail($id);
-                $alliedMediaUpdate->image = $file->name_tmp;
-                $alliedMediaUpdate->save();
-
-                File::updateFile(false, $file->name_tmp, $file);
-            }
-        }
-
-        /**
-         * delete files
-         */
-        foreach ($files_delete as $file) {
-            $fileDelete = AlliedMedia::findOrFail($file);
-            $fileDelete->image = File::IMAGE_DEFAULT;
-            $fileDelete->save();
-        }
-
-        return $this->responseJson(true, 'files created.', []);
-    }
-
-    /**
      * list allied media files
      * GET /admin/specials/allied-media/files
      */
@@ -223,5 +171,48 @@ class AlliedMediaController extends Controller
             ->get();
 
         return $this->responseJson(true, 'files', $files);
+    }
+
+    /**
+     * Create allied media files
+     * POST /admin/specials/allied-media/files
+     */
+    public function createFiles(Request $request)
+    {
+        $request->validate([
+            'external_id' => 'required|integer',
+            'source_id' => 'required|integer',
+            'files' => 'required|nullable',
+            'files_delete' => 'required|nullable',
+        ]);
+
+        $user = Auth::user();
+        $id = $request->get('id');
+
+        /** delete files */
+        foreach (json_decode($request->get('files_delete')) as $file) {
+            $fileDelete = AlliedMedia::findOrFail($file);
+            $fileDelete->image = File::IMAGE_DEFAULT;
+            $fileDelete->save();
+        }
+
+        /** create new files */
+        foreach (json_decode($request->get('files')) as $file) {
+            if ($file->type == 1) {
+                File::createFile($file, $user, true);
+
+                $alliedMediaUpdate = AlliedMedia::findOrFail($id);
+                $alliedMediaUpdate->image = $file->name_tmp;
+                $alliedMediaUpdate->save();
+            } else {
+                $alliedMediaUpdate = AlliedMedia::findOrFail($id);
+                $alliedMediaUpdate->image = $file->name_tmp;
+                $alliedMediaUpdate->save();
+
+                File::updateFile(false, $file->name_tmp, $file);
+            }
+        }
+
+        return $this->responseJson(true, 'files created.', []);
     }
 }

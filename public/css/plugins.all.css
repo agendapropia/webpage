@@ -103,11 +103,94 @@
   padding: 0px !important;
 }
 
+.row-sm {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.special-btn-save {
+  position: absolute;
+  top: 11px;
+  right: 11px;
+}
+
+.textarea-min-height {
+  min-height: 116px;
+}
+
+.overlay-div {
+  position: absolute !important;
+  top: 0px !important;
+  left: 0px !important;
+  width: 100% !important;
+  height: 100% !important;
+  background-color: rgba(255, 255, 255, 0.7) !important;
+  z-index: 10000 !important;
+  vertical-align: middle !important;
+  content: '' !important;
+}
+
+.overlay-div-transparent {
+  background-color: transparent !important;
+}
+
+.overlay-div .content {
+  position: absolute;
+  top: 46%;
+  left: 46%;
+  margin-left: -15px;
+  margin-top: -15px;
+  color: #404040;
+  font-size: 12px;
+}
+
+.fa-spin {
+  animation: fa-spin 1.6s infinite linear;
+}
+
+.div-card-header {
+  z-index: 1;
+  margin-top: -80px !important;
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 0px;
+  -webkit-box-shadow: 0px 3px 7px -8px rgb(0 0 0 / 75%);
+  -moz-box-shadow: 0px 3px 7px -8px rgba(0, 0, 0, 0.75);
+  box-shadow: 0px 3px 7px -8px rgb(0 0 0 / 75%);
+}
+
+.form-horizontal {
+  display: inline-flex;
+}
+
+.form-horizontal label {
+  margin-right: 8px;
+  margin-top: 5px;
+  display: inline-block;
+}
+
+.div-card-content {
+  background: #fafafa;
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
+}
+
+.div-card-body {
+  background: #ffffff;
+  border: 0px;
+  padding-top: 40px !important;
+}
+
+.div-card-body .icon {
+  width: 12px;
+  height: 12px;
+}
+
 @media (max-width: 768px) {
   .no-padding-mobile {
     padding: 0px;
   }
 }
+
 .flatpickr-calendar {
   background: transparent;
   opacity: 0;
@@ -1299,6 +1382,7 @@ span.flatpickr-weekday {
 		font-size: 13px;
 	}
   }
+
 .table-gear {
   min-height: 100px !important;
 }
@@ -1373,7 +1457,6 @@ span.flatpickr-weekday {
 .table-gear .image-item {
   display: inline-block;
   margin-left: 12px;
-  cursor: pointer;
   position: relative;
 }
 .table-gear .image-item img {
@@ -1382,10 +1465,15 @@ span.flatpickr-weekday {
   border-radius: 10%;
   object-fit: cover;
 }
+.table-gear .img-user img{
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+}
 .table-gear .image-item .image-hover {
   display: none;
 }
-.table-gear .image-item .image-hover div {
+.table-gear .image-change .image-hover div {
   font-size: 14px;
   color: #ffffff;
   margin-top: 30%;
@@ -1393,8 +1481,9 @@ span.flatpickr-weekday {
   display: inline-block;
   border-radius: 10%;
   padding: 3px 6px;
+  cursor: pointer;
 }
-.table-gear .image-item:hover .image-hover {
+.table-gear .image-change:hover .image-hover {
   display: block;
   position: absolute;
   top: 0;
@@ -1403,7 +1492,10 @@ span.flatpickr-weekday {
   background: rgba(0, 0, 0, 0.2);
   width: 100%;
   height: 100%;
-  border-radius: 10%;
+  cursor: pointer;
+}
+.table-gear .img-user .image-hover div, .table-gear .image-change:hover .image-hover {
+  border-radius: 50%;
 }
 
 /*LISTADO pub_table*/
@@ -1537,6 +1629,12 @@ span.flatpickr-weekday {
   box-shadow: none;
   font-size: 12px;
   margin: 0px 1px;
+}
+
+.table-gear .btn-mt-primary{
+  background-color: #017286;
+  color: #fff;
+  border-color: #035361;
 }
 
 /*

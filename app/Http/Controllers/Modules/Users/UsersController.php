@@ -8,6 +8,7 @@ use App\Models\Permissions\Role;
 use App\Models\User;
 use App\Models\Users\Country;
 use App\Models\Users\UserGender;
+use App\Models\Utils\File;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
@@ -52,13 +53,16 @@ class UsersController extends Controller
             'u.last_name',
             'u.phone_code',
             'u.phone_number',
-            'u.location'
+            'u.location',
+            'u.image as file'
         )
             ->from('users as u')
             ->status($status)
             ->search($search)
             ->orderBy('id', 'DESC')
             ->paginate($row);
+
+        $users = File::setPathAndImageDefault($users, 2);
 
         return $this->responseJson(true, 'list user', $users);
     }

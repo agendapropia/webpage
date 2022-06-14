@@ -49,11 +49,7 @@
         </div>
     </div>
 
-    <div class="overlay overlay-modal" style="display: none;">
-        <div class="content">
-            <em class="fa fa-3x fa-cog fa-spin"></em>
-        </div>
-    </div>
+    <x-admin.plugins.overlay></x-admin.plugins.overlay>
 </div>
 
 <div class="hide">

@@ -30,10 +30,10 @@ class CreateSpecialContentsTable extends Migration
                         'Relación con la tabla agendapropia_utils.language'
                     );
                 $table->boolean('status_id')->index();
-                $table->string('title', 256);
-                $table->string('subtitle', 256);
-                $table->text('summary');
-                $table->longText('content');
+                $table->string('title', 256)->nullable();
+                $table->string('subtitle', 256)->nullable();
+                $table->text('summary')->nullable();
+                $table->longText('content')->nullable();
                 $table->timestamps();
             }
         );

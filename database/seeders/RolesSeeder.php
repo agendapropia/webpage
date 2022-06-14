@@ -68,6 +68,12 @@ class RolesSeeder extends Seeder
         Permission::create(['name' => 'alliedmedia-create']);
         Permission::create(['name' => 'alliedmedia-delete']);
         Permission::create(['name' => 'alliedmedia-update']);
+        
+        Permission::create(['name' => 'content-module']);
+        Permission::create(['name' => 'content-list']);
+        Permission::create(['name' => 'content-create']);
+        Permission::create(['name' => 'content-delete']);
+        Permission::create(['name' => 'content-update']);
 
         $role = Role::create(['name' => 'super-admin']);
         $role->givePermissionTo(Permission::all());

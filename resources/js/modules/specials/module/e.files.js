@@ -8,7 +8,7 @@ var specialFiles = new updloadS3(divFiles, {
   typeFile: 1,
   id: 1,
   reload: false,
-  limitFiles: 1
+  limitFiles: 10
 })
 
 selectImageType.change(function () {

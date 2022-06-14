@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Modules\Specials;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Specials\SpecialUser;
+use App\Models\Utils\File;
 
 class SpecialUsersController extends Controller
 {
@@ -88,6 +89,7 @@ class SpecialUsersController extends Controller
             'u.id as user_id',
             'u.first_name as user_first_name',
             'u.last_name as user_last_name',
+            'u.image as file',
             'sr.id as role_id',
             'sr.name as role_name'
         )
@@ -97,6 +99,8 @@ class SpecialUsersController extends Controller
             ->where('su.special_id', $request->_id)
             ->orderBy($orderByColumn, $orderByType)
             ->paginate($row);
+
+        $specialUsers = File::setPathAndImageDefault($specialUsers, 2);
 
         return $this->responseJson(true, 'list special users', $specialUsers);
     }

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Models\Users\Term;
 use App\Models\Users\UserProfile;
+use App\Models\Utils\File;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -23,6 +24,7 @@ class User extends Authenticatable
         'status',
         'first_name',
         'last_name',
+        'image',
         'gender_id',
         'phone_code',
         'phone_number',
@@ -53,6 +55,14 @@ class User extends Authenticatable
     public function termAccepted()
     {
         return $this->hasOne(Term::class);
+    }
+
+    /**
+     * Get the user image.
+     */
+    public function getUserImage(User $user)
+    {
+        return File::setPathAndImageDefaultUnique($user->image, 2);
     }
 
     // - - - - - - - - - - - - Filters - - - - - - - - - - - - -

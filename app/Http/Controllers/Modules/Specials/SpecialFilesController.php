@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Modules\Specials;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Specials\SpecialFile;
-use App\Models\Specials\SpecialUser;
 use App\Models\Utils\File;
 use App\Models\Utils\FileType;
 use Illuminate\Support\Facades\Auth;

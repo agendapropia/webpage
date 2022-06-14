@@ -1,3 +1,10 @@
+let div = $('#tableMain')
+let route = '/admin/configurations/tags/list'
+let structure = [' ', 'Nombre', 'Code']
+
+var TableMain = new tableGear(div, route, structure)
+TableMain.refresh(true)
+
 let modalCreateMain = $('#modal-create-main')
 let formCreateMain = $('form[name=form-create-main]')
 
@@ -18,13 +25,6 @@ function FinishActionCreateMain(status) {
     TableMain.refresh()
   }
 }
-
-let div = $('#tableMain')
-let route = '/admin/configurations/tags/list'
-let structure = [' ', 'Nombre', 'Code']
-
-var TableMain = new tableGear(div, route, structure)
-TableMain.refresh(true)
 
 let modalUpdateMain = $('#modal-update-main')
 let formUpdateMain = $('form[name=form-update-main]')
