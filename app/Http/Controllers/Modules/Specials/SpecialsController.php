@@ -4,17 +4,11 @@ namespace App\Http\Controllers\Modules\Specials;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\Specials\AlliedMedia;
 use App\Models\Specials\Special;
 use App\Models\Specials\SpecialAlliedMedia;
 use App\Models\Specials\SpecialCountry;
 use App\Models\Specials\SpecialTag;
 use App\Models\Specials\Template;
-use App\Models\Users\Country;
-use App\Models\Utils\Region;
-use App\Models\Utils\Tag;
-use Facade\Ignition\DumpRecorder\Dump;
-use Illuminate\Support\Facades\DB;
 use stdClass;
 
 class SpecialsController extends Controller

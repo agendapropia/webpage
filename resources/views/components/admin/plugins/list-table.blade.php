@@ -49,11 +49,7 @@
             @include('layouts.admin.plugins.tableGear.footer')
             {{ isset($template) ? $template : null }}
 
-            <div class="overlay">
-                <div class="content">
-                    <i class="fa fa-3x fa-cog fa-spin"></i>
-                </div>
-            </div>
+            <x-admin.plugins.overlay></x-admin.plugins.overlay>
         </div>
     </div>
 </div>

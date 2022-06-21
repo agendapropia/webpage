@@ -6527,7 +6527,8 @@ class updloadS3 {
 
     this.url_uploadFile = '/uploadfiles_s3'
     this.url_removeFile = '/destroyfiles_s3'
-    this.files_url = 'https://s3-us-west-1.amazonaws.com/germith/files/photos/'
+    this.files_url = 'https://agendapropia-files.s3.us-east-2.amazonaws.com/files/images/'
+    this.awsBase = 'https://agendapropia-files.s3.us-east-2.amazonaws.com/'
 
     this.textarea.keyup(function () {
       cont.changeTextarea(this)
@@ -7249,14 +7250,14 @@ function add_file(cont, data, type, file = '') {
       .attr('onclick', "getFileS3('" + data.name_tmp + "', 2)")
     $(name_fom + ' .image').css(
       'background-image',
-      'url(' + cont.files_url + 'app/ico/' + file_ico[data.ext] + ')',
+      'url(' + cont.awsBase + 'app/file_types/' + file_ico[data.ext] + ')',
     )
   } else if (type == 3) {
     form
       .find('.image')
       .css(
         'background-image',
-        'url(' + cont.files_url + 'thumbnails/' + data.name_tmp + ')',
+        'url(' + cont.awsBase + 'thumbnails/' + data.name_tmp + ')',
       )
     form.find('.image').css('background-size', '100%')
   } else if (type == 4) {
@@ -7268,7 +7269,7 @@ function add_file(cont, data, type, file = '') {
       .find('.image')
       .css(
         'background-image',
-        'url(' + cont.files_url + 'app/ico/' + file_ico[data.ext] + ')',
+        'url(' + cont.awsBase + 'app/file_types/' + file_ico[data.ext] + ')',
       )
   }
 
@@ -11934,7 +11935,6 @@ const settingDate = {
   enableTime: false,
   dateFormat: "Y-m-d",
 }
-
 var modalChangePasswordUser = $('#modal-change-of-password')
 var formChangePasswordUser = $('#form-change-password-user')
 var messageErrorUserPass = modalChangePasswordUser.find(

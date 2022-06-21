@@ -10,9 +10,6 @@
     </x-slot>
 
     <x-slot name="menu_select">
-        <!-- <a class="dropdown-item" href="javascript:void(0)" data-modal="#modalCreateUser" data-action="createUserModal" onclick="userTable.Modal(this);">
-            <i class="fa fa-fw fa-check-square-o mr-5"></i>
-        </a> -->
     </x-slot>
 
     <x-slot name="filter">
@@ -38,10 +35,16 @@
                             <i class="fa fa-key" aria-hidden="true"></i>
                         </button>
                     @endCan
+                    <div class="image-item image-change img-user" data-modal="#modal-utils-imagen-selections" data-action="ActionFilesLoad" onclick="UserTable.Modal(this);">
+                        <img src="#_thumbnail_file_#" alt="#_name_#">
+                        <div class="image-hover">
+                            <div><em class="fa fa-image"></em></div>
+                        </div>
+                    </div>
                 </td>
                 <td>
                     <button class="btn-hide" data-modal="#modal-status-user" data-action="ChangeStatusAction" onclick="UserTable.Modal(this);"">
-                        <i class="btn-tg fa #_status_#"></i>
+                        <em class="btn-tg fa #_status_#"></em>
                     </button>
                 </td>
                 <td>

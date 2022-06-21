@@ -51,4 +51,12 @@ Route::prefix('/users')
             '/search-by-autocomplete',
             'UsersController@searchByAutocomplete'
         );
+
+        // Files
+        Route::post('/files', 'UserFilesController@createFiles')->middleware(
+            'permission:user-update'
+        );
+        Route::get('/files', 'UserFilesController@files')->middleware(
+            'permission:user-update'
+        );
     });

@@ -9,7 +9,8 @@ class File extends Model
 {
     const IMAGE_DEFAULT = null;
     const FILE_DEFAULT = 'default.png';
-    const PATH_FILES = 'https://s3-us-west-1.amazonaws.com/germith/files/photos/';
+    const FILE_PROFILE_DEFAULT = 'avatar.webp';
+    const PATH_FILES = 'https://agendapropia-files.s3.us-east-2.amazonaws.com/files/images/';
 
     use HasFactory;
 
@@ -104,11 +105,21 @@ class File extends Model
         $fileUpdate->save();
     }
 
-    static function setPathAndImageDefault($array)
+    /**
+     * return the full url of the file
+     *
+     * @param array $array list elements with parameters file
+     * @param int $type
+     */
+    static function setPathAndImageDefault($array, $type = 1)
     {
         foreach ($array as &$value) {
             if (empty($value->file)) {
-                $value->file = self::FILE_DEFAULT;
+                if ($type == 1) {
+                    $value->file = self::FILE_DEFAULT;
+                } else {
+                    $value->file = self::FILE_PROFILE_DEFAULT;
+                }
             }
 
             $value->thumbnail_file =
@@ -116,5 +127,24 @@ class File extends Model
             $value->file = self::PATH_FILES . $value->file;
         }
         return $array;
+    }
+
+    /**
+     * return the full url of the file
+     *
+     * @param string $image name image
+     * @param int $type
+     */
+    static function setPathAndImageDefaultUnique($image, $type = 1)
+    {
+        if (empty($image)) {
+            if ($type == 1) {
+                $image = self::FILE_DEFAULT;
+            } else {
+                $image = self::FILE_PROFILE_DEFAULT;
+            }
+        }
+
+        return self::PATH_FILES . 'thumbnails/' . $image;
     }
 }

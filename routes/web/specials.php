@@ -52,44 +52,4 @@ Route::prefix('/')
         // FILES
         Route::post('/files', 'SpecialFilesController@create');
         Route::get('/files', 'SpecialFilesController@get');
-
-        // ALIED MEDIA
-        Route::get('/allied-media', 'AlliedMediaController@index')
-            ->middleware('permission:alliedmedia-module')
-            ->name('module-alliedmedia');
-        Route::post(
-            '/allied-media',
-            'AlliedMediaController@create'
-        )->middleware('permission:alliedmedia-create');
-        Route::put('/allied-media', 'AlliedMediaController@update')->middleware(
-            'permission:alliedmedia-update'
-        );
-        Route::patch(
-            '/allied-media/status',
-            'AlliedMediaController@status'
-        )->middleware('permission:alliedmedia-update');
-        Route::get(
-            '/allied-media/list',
-            'AlliedMediaController@list'
-        )->middleware('permission:alliedmedia-list');
-        Route::get(
-            '/allied-media/create',
-            'AlliedMediaController@createInfo'
-        )->middleware('permission:alliedmedia-create');
-        Route::get(
-            '/allied-media/update',
-            'AlliedMediaController@updateInfo'
-        )->middleware('permission:alliedmedia-update');
-        Route::post(
-            '/allied-media/files',
-            'AlliedMediaController@createFiles'
-        )->middleware('permission:alliedmedia-update');
-        Route::get(
-            '/allied-media/files',
-            'AlliedMediaController@files'
-        )->middleware('permission:alliedmedia-update');
-        Route::get(
-            '/allied-media/search-by-autocomplete',
-            'AlliedMediaController@searchByAutocomplete'
-        );
     });

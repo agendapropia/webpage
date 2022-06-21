@@ -7,6 +7,12 @@
                         <button class="btn btn-danger btn-mt" onclick="ButtonModalDeleteUsers(this);"">
                             <i class="fa fa-trash" aria-hidden="true"></i>
                         </button>
+                        <div class="image-item">
+                            <img src="#_thumbnail_file_#" alt="#_name_#">
+                            <div class="image-hover">
+                                <div><em class="fa fa-image"></em></div>
+                            </div>
+                        </div>
                     </td>
                     <td>#_user_first_name_# #_user_last_name_#</td>
                     <td>#_role_name_#</td>
