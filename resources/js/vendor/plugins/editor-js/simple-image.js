@@ -121,7 +121,7 @@ class SimpleImage {
     this.editorFileS3.send.click(function () {
       cont.dataS3 = cont._setDataImages(cont.editorFileS3.data)
       cont._createImages(cont.dataS3)
-      this._openModal(false)
+      cont._openModal(false)
     })
 
     if (!this.data.images.length) {
@@ -131,6 +131,10 @@ class SimpleImage {
     return this.wrapper
   }
 
+  /**
+   * @private
+   * Add modal with template file
+   */
   _addModalFile() {
     let modalNameClass = 'modal_file_' + Math.floor(Math.random() * 1000 + 1)
     let modalTemplate = $($('#template-file-modal').html()).clone()
@@ -139,6 +143,10 @@ class SimpleImage {
     this.ModalFile = $('.' + modalNameClass)
   }
 
+  /**
+   * @private
+   * Open modal file
+   */
   _openModal(status = true) {
     if (status) {
       this.ModalFile.modal('show')

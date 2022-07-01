@@ -34,8 +34,8 @@ function UpdateActionModal(status, result) {
     UtilFormClose(formUpdateMain)
     LoadFormInputs(divUpdate, result.data.content)
 
-    editorContent.destroy()
     $('#editorjs').html()
+    editorContent.destroy()
 
     if (result.data.content.content) {
       editorContent = new EditorJS({

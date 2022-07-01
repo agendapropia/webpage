@@ -21,7 +21,7 @@ var URL_IMG = APP_URL + '/img/app/'
 const BUTTON_CONTROL_MAIN = 1
 const BUTTON_CONTROL_EDIT = 2
 const URL_S3_IMAGE =
-  'https://agendapropia-files.s3.us-east-2.amazonaws.com/files/images/'
+  'https://agendapropia-files.s3.us-east-2.amazonaws.com/'
 class formFiles {
   constructor(url, data) {
     this.url = url
@@ -87,8 +87,8 @@ class updloadS3 {
 
     this.url_uploadFile = '/uploadfiles_s3'
     this.url_removeFile = '/destroyfiles_s3'
-    this.files_url = URL_S3_IMAGE
-    this.awsBase = 'https://agendapropia-files.s3.us-east-2.amazonaws.com/'
+    this.files_url = URL_S3_IMAGE + 'files/images/'
+    this.awsBase = URL_S3_IMAGE
 
     this.textarea.keyup(function () {
       cont.changeTextarea(this)
@@ -594,7 +594,7 @@ class filesItem {
     }
     this.description = description
     this.divIndex = divIndex
-    this.name_tmp_complete = URL_S3_IMAGE + name_tmp
+    this.name_tmp_complete = URL_S3_IMAGE + 'files/images/' + name_tmp
   }
 }
 
@@ -814,7 +814,7 @@ function add_file(cont, data, type, file = '') {
       .find('.image')
       .css(
         'background-image',
-        'url(' + cont.awsBase + 'thumbnails/' + data.name_tmp + ')',
+        'url(' + cont.files_url + 'thumbnails/' + data.name_tmp + ')',
       )
     form.find('.image').css('background-size', '100%')
   } else if (type == 4) {
