@@ -25,6 +25,7 @@ mix
       'node_modules/flatpickr/dist/flatpickr.min.js',
       'resources/js/util/flatpickr.js',
       'resources/js/util/change-password-user.js',
+      'resources/js/vendor/plugins/editor-js/*.js',
     ],
     'public/js/plugins.all.js',
   )
@@ -38,6 +39,7 @@ mix
       'resources/css/vendor/plugins/table_gear/plugins_table_tech.css',
       'resources/css/vendor/plugins/icheck/all.css',
       'resources/css/vendor/plugins/search-autocomplete.css',
+      'resources/css/vendor/plugins/editor-js/*.css',
     ],
     'public/css/plugins.all.css',
   )

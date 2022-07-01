@@ -1,4 +1,11 @@
 const settingEditor = {
+  image: {
+    class: SimpleImage,
+    inlineToolbar: true,
+    config: {
+      placeholder: 'Ingresar la url',
+    },
+  },
   table: Table,
   paragraph: {
     class: Paragraph,
@@ -44,11 +51,6 @@ const settingEditor = {
     },
   },
 }
-
-var editorContent = new EditorJS({
-  holder: 'editorjs',
-  tools: settingEditor
-})
 
 let buttonSaveContent = document.getElementById('special-btn-save')
 buttonSaveContent.addEventListener('click', function () {

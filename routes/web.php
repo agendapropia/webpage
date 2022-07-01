@@ -49,6 +49,9 @@ Route::group(
             require __DIR__ . '/web/special-alliedmedia.php';
             require __DIR__ . '/web/special-contents.php';
         });
+        Route::group(['prefix' => 'admin'], function () {
+            require __DIR__ . '/web/files.php';
+        });
 
         Route::group(['prefix' => ''], function () {
             require __DIR__ . '/web/auth.php';
