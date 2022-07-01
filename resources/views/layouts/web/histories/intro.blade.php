@@ -1,10 +1,9 @@
 <section class="hs-section-intro">
-	<h1>Histories</h1>
+	<h1>Historias y Cocreación</h1>
 	<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum Lorem Ipsum</p>
-	<select name="" id="">
-		<option value="">Select a history</option>
-		<option value="">History 1</option>
-		<option value="">History 2</option>
-		<option value="">History 3</option>
-	</select>
+<div class="buttons">
+	<button  class="web-button" >Cocreación</button>
+	<button  class="web-button">Reportajes</button>
+	<button  class="web-button">Todo</button>
+<div>
 </section>

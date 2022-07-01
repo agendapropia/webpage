@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="296.781" height="172.895" viewBox="0 0 296.781 172.895">
+    <defs>
+        <clipPath id="f0vb5n7sfa">
+            <path data-name="Rectángulo 10550" style="fill:#f2f2f2" d="M0 0h296.781v172.895H0z"/>
+        </clipPath>
+    </defs>
+    <g data-name="Grupo 8917" style="opacity:.62">
+        <g data-name="Grupo 8834" style="clip-path:url(#f0vb5n7sfa)" transform="rotate(180 148.39 86.448)">
+            <g data-name="Grupo 8833" style="isolation:isolate">
+                <g data-name="Grupo 8832">
+                    <g data-name="Grupo 8831" style="clip-path:url(#f0vb5n7sfa)">
+                        <path data-name="Trazado 214" d="M13.257 95.723C7.689 103.309 2.11 111.224.478 120.114c-2.456 13.381 4.781 27.229 16.346 36.294s26.913 13.8 42.323 15.664c13.575 1.645 27.957 1.115 40.179-4.288 15.705-6.944 25.607-20.751 38.784-30.931s34.662-16.259 47.657-5.9c4.109 3.274 6.7 7.746 10.517 11.282 14.134 13.1 38.661 9.342 58.422 4.151 11.261-2.958 23-6.337 31.038-13.817 11.876-11.054 12.5-28.063 9.554-42.982-5.828-29.484-23.839-57.759-52.279-74.539S175.439-5.468 145.308 8.9c-26.736 12.75-42.964 37.342-69.435 50.142C49.687 71.706 31.434 70.96 13.257 95.723" transform="translate(0 .001)" style="fill:#f2f2f2"/>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
