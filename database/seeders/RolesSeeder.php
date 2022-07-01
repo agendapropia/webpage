@@ -29,18 +29,51 @@ class RolesSeeder extends Seeder
         Permission::create(['name' => 'user-delete']);
         Permission::create(['name' => 'user-update']);
         Permission::create(['name' => 'auth-change-password']);
+        
         Permission::create(['name' => 'permission-module']);
         Permission::create(['name' => 'permission-list']);
         Permission::create(['name' => 'permission-create']);
         Permission::create(['name' => 'permission-delete']);
         Permission::create(['name' => 'permission-update']);
         Permission::create(['name' => 'permission-assign']);
+
         Permission::create(['name' => 'role-module']);
         Permission::create(['name' => 'role-list']);
         Permission::create(['name' => 'role-create']);
         Permission::create(['name' => 'role-delete']);
         Permission::create(['name' => 'role-update']);
         Permission::create(['name' => 'role-assign']);
+
+        Permission::create(['name' => 'configuration-module']);
+        Permission::create(['name' => 'region-module']);
+        Permission::create(['name' => 'region-list']);
+        Permission::create(['name' => 'region-create']);
+        Permission::create(['name' => 'region-delete']);
+        Permission::create(['name' => 'region-update']);
+
+        Permission::create(['name' => 'tag-module']);
+        Permission::create(['name' => 'tag-list']);
+        Permission::create(['name' => 'tag-create']);
+        Permission::create(['name' => 'tag-delete']);
+        Permission::create(['name' => 'tag-update']);
+
+        Permission::create(['name' => 'special-module']);
+        Permission::create(['name' => 'special-list']);
+        Permission::create(['name' => 'special-create']);
+        Permission::create(['name' => 'special-delete']);
+        Permission::create(['name' => 'special-update']);
+        
+        Permission::create(['name' => 'alliedmedia-module']);
+        Permission::create(['name' => 'alliedmedia-list']);
+        Permission::create(['name' => 'alliedmedia-create']);
+        Permission::create(['name' => 'alliedmedia-delete']);
+        Permission::create(['name' => 'alliedmedia-update']);
+        
+        Permission::create(['name' => 'content-module']);
+        Permission::create(['name' => 'content-list']);
+        Permission::create(['name' => 'content-create']);
+        Permission::create(['name' => 'content-delete']);
+        Permission::create(['name' => 'content-update']);
 
         $role = Role::create(['name' => 'super-admin']);
         $role->givePermissionTo(Permission::all());

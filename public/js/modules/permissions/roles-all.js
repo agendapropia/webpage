@@ -1,3 +1,11 @@
+let div = $('#tableRoles')
+let route = '/admin/accounts/roles/list'
+let structure = [' ', 'Nombre', 'Description', 'guard_name']
+
+var roleTable = new tableGear(div, route, structure)
+roleTable.filter.status = ''
+roleTable.refresh(true)
+
 let modalAssignPermissions = $('#modal-assign-permissions')
 let formAssignPermissions = $('form[name=form-assign-permissions]')
 
@@ -65,14 +73,6 @@ function FinishAssignPermission(status, data) {
     SendPermissionAssign.FormClose()
   }
 }
-
-let div = $('#tableRoles')
-let route = '/admin/accounts/roles/list'
-let structure = [' ', 'Nombre', 'Description', 'guard_name']
-
-var roleTable = new tableGear(div, route, structure)
-roleTable.filter.status = ''
-roleTable.refresh(true)
 
 let modalCreateRoles = $('#modal-create-roles')
 let formCreateRoles = $('form[name=form-create-role]')

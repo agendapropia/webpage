@@ -46,4 +46,17 @@ Route::prefix('/users')
         Route::post('/{user_id}/assign', 'UsersController@assign')->middleware(
             'permission:role-assign'
         );
+
+        Route::get(
+            '/search-by-autocomplete',
+            'UsersController@searchByAutocomplete'
+        );
+
+        // Files
+        Route::post('/files', 'UserFilesController@createFiles')->middleware(
+            'permission:user-update'
+        );
+        Route::get('/files', 'UserFilesController@files')->middleware(
+            'permission:user-update'
+        );
     });

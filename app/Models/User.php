@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Models\Users\Term;
 use App\Models\Users\UserProfile;
+use App\Models\Utils\File;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -23,6 +24,7 @@ class User extends Authenticatable
         'status',
         'first_name',
         'last_name',
+        'image',
         'gender_id',
         'phone_code',
         'phone_number',
@@ -55,6 +57,14 @@ class User extends Authenticatable
         return $this->hasOne(Term::class);
     }
 
+    /**
+     * Get the user image.
+     */
+    public function getUserImage(User $user)
+    {
+        return File::setPathAndImageDefaultUnique($user->image, 2);
+    }
+
     // - - - - - - - - - - - - Filters - - - - - - - - - - - - -
 
     /**
@@ -62,7 +72,7 @@ class User extends Authenticatable
      */
     public function scopeStatus($query, $value)
     {
-        if(trim($value) != ""){
+        if (trim($value) != '') {
             $query->where('u.status', $value);
         }
     }
@@ -70,13 +80,14 @@ class User extends Authenticatable
     /**
      * Status scope
      */
-     public function scopeSearch($query, $value)
+    public function scopeSearch($query, $value)
     {
-        if(trim($value) != ""){
-            $query->where('u.uuid', $value)
-            ->orWhere('u.last_name', $value)
-            ->orWhere('u.first_name', $value)
-            ->orWhere('u.phone_code', $value);
+        if (trim($value) != '') {
+            $query
+                ->where('u.uuid', $value)
+                ->orWhere('u.last_name', 'like', "%$value%")
+                ->orWhere('u.first_name', $value)
+                ->orWhere('u.phone_code', $value);
         }
     }
 }

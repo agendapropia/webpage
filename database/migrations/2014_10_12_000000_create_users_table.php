@@ -24,12 +24,15 @@ class CreateUsersTable extends Migration
             $table->string('last_name');
             $table
                 ->boolean('gender_id')
-                ->comment('relates to field agendapropia-users.user_genders.id');
+                ->comment(
+                    'relates to field agendapropia-users.user_genders.id'
+                );
             $table->string('phone_code', 10)->index();
             $table->string('phone_number', 30)->unique();
             $table->boolean('has_password')->default(false);
             $table->string('password');
             $table->string('location')->default('es');
+            $table->string('image')->nullable();
             $table
                 ->boolean('term_accepted_id')
                 ->comment('relates to field agendapropia-users.terms.id');

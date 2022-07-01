@@ -18,7 +18,7 @@
 }
 
 .form-group-fields {
-  display: block;
+  display: flex;
   border: 1px solid #dadada;
   border-radius: 3px;
   padding: 10px;
@@ -26,12 +26,14 @@
   margin-bottom: 24px;
 }
 .form-group-fields .field-items {
-  display: inline-block;
-  width: 20%;
+  display: inline-table;
+  width: 25%;
 }
 .form-group-fields button {
+  display: inline-table;
   vertical-align: top;
-  margin-top: 33px;
+  margin: 28px 5px;
+  padding: 10px 20px;
 }
 @media (max-width: 768px) {
   .form-group-fields .field-items {
@@ -78,4 +80,113 @@
   margin-top: -15px;
   display: block;
   margin-bottom: 15px;
+}
+.form-subtitle {
+  margin-left: 15px;
+  margin-right: 15px;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  padding-bottom: 3px;
+  font-size: 12px;
+  font-weight: 600;
+  border-bottom: 1px solid #e6e6e6;
+  display: block;
+  width: 100%;
+  color: #32325d;
+}
+
+.hide {
+  display: none;
+}
+
+.no-padding {
+  padding: 0px !important;
+}
+
+.row-sm {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.special-btn-save {
+  position: absolute;
+  top: 11px;
+  right: 11px;
+}
+
+.textarea-min-height {
+  min-height: 116px;
+}
+
+.overlay-div {
+  position: absolute !important;
+  top: 0px !important;
+  left: 0px !important;
+  width: 100% !important;
+  height: 100% !important;
+  background-color: rgba(255, 255, 255, 0.7) !important;
+  z-index: 10000 !important;
+  vertical-align: middle !important;
+  content: '' !important;
+}
+
+.overlay-div-transparent {
+  background-color: transparent !important;
+}
+
+.overlay-div .content {
+  position: absolute;
+  top: 46%;
+  left: 46%;
+  margin-left: -15px;
+  margin-top: -15px;
+  color: #404040;
+  font-size: 12px;
+}
+
+.fa-spin {
+  animation: fa-spin 1.6s infinite linear;
+}
+
+.div-card-header {
+  z-index: 1;
+  margin-top: -80px !important;
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 0px;
+  -webkit-box-shadow: 0px 3px 7px -8px rgb(0 0 0 / 75%);
+  -moz-box-shadow: 0px 3px 7px -8px rgba(0, 0, 0, 0.75);
+  box-shadow: 0px 3px 7px -8px rgb(0 0 0 / 75%);
+}
+
+.form-horizontal {
+  display: inline-flex;
+}
+
+.form-horizontal label {
+  margin-right: 8px;
+  margin-top: 5px;
+  display: inline-block;
+}
+
+.div-card-content {
+  background: #fafafa;
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
+}
+
+.div-card-body {
+  background: #ffffff;
+  border: 0px;
+  padding-top: 40px !important;
+}
+
+.div-card-body .icon {
+  width: 12px;
+  height: 12px;
+}
+
+@media (max-width: 768px) {
+  .no-padding-mobile {
+    padding: 0px;
+  }
 }

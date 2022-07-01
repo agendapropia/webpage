@@ -8,6 +8,8 @@
 <link href="{{ asset('argon') }}/vendor/nucleo/css/nucleo.css" rel="stylesheet">
 <link href="{{ asset('argon') }}/vendor/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
 <link href="{{ asset('argon') }}/vendor/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet">
+<link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
+
 
 <!-- Argon CSS -->
 <link type="text/css" href="{{ asset('argon') }}/css/argon.css?v=1.0.0" rel="stylesheet">

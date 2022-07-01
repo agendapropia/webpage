@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Permissions\Permission;
 use App\Models\Permissions\PermissionModule;
-use App\Models\Permissions\Role;
 
 class PermissionsController extends Controller
 {
@@ -27,7 +26,7 @@ class PermissionsController extends Controller
     public function index()
     {
         $modules = PermissionModule::get();
-        return view('modules.permissions.permissions', compact('modules'));
+        return view('pages.admin.permissions.permissions', compact('modules'));
     }
 
     /**

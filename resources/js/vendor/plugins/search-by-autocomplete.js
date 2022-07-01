@@ -26,6 +26,7 @@ class searchByAutocomplete {
     this.data = []
     this.selectedItems = []
     this.limitItems = 1
+    this.minimumCharactersToSearch = 3
 
     let context = this
     $.each(settings, function (key, value) {
@@ -138,7 +139,7 @@ class searchByAutocomplete {
     this.interval = setInterval(
       function () {
         clearInterval(context.interval)
-        if (text.length >= 3) {
+        if (text.length >= context.minimumCharactersToSearch) {
           context.request()
         } else if (!text.length) {
           context.resetItems(false)
@@ -217,14 +218,14 @@ class searchByAutocomplete {
     })
       .done(function (data) {
         context.eventLoading(false)
-        context.requestSuccessful(data)
+        context.requestSuccessfull(data)
       })
       .fail(function (errors) {
         context.eventLoading(false)
         context.requestFailed(errors)
       })
   }
-  requestSuccessful(data) {
+  requestSuccessfull(data) {
     this.data = data.data
     this.resetItems(true)
 
@@ -328,15 +329,25 @@ class searchByAutocomplete {
 
     if (clearField) {
       this.input.val('')
+      this.inputHidden.val('')
     }
   }
   clearSelect() {
     this.selectedItems = []
     this.eventLimitItems()
-    this.resetItems(false)
+    this.resetItems(false, true)
     this.listItems()
   }
   printLog(message) {
     console.log(`ERROR_SEARCH_BY_AUTOCOMPLETE: ${message}`)
   }
+}
+
+function utilLoadAutoCompleteByArray(data, obj) {
+  data.forEach((element) => {
+    obj.eventAddDataSelected({
+      id: element.id,
+      name: element.name, 
+    })
+  })
 }

@@ -26,9 +26,23 @@ return [
         'filter_store_type' => 'Tipo de tienda',
         'filter_status' => 'Estados',
     ],
+    'regions' => [
+        'button_new' => 'Nuevo',
+    ],
+    'tags' => [
+        'button_new' => 'Nuevo',
+    ],
     'menu_categorie' => [
         'button_new' => 'Nueva categoría',
         'filter_store' => 'Tienda',
         'filter_status' => 'Estados',
+    ],
+    'specials' => [
+        'button_new' => 'Nuevo especial',
+        'filter_store' => 'Tienda',
+        'filter_status' => 'Estados',
+    ],
+    'alliedmedia' => [
+        'button_new' => 'Nuevo Medio Aliado',
     ],
 ];

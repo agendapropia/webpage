@@ -5295,7 +5295,7 @@ class tableGear {
 
     this.dataSelect = tr ? this.data[tr - 1].data : 0
 
-    this.modalSelect.modal('show')
+    this.modalSelect.modal({backdrop: 'static', keyboard: false})
     this.ModalLoader(false)
 
     action ? self[action](this.dataSelect) : false
@@ -5813,6 +5813,7 @@ class QueryAjax {
     this.action = ''
     this.form = false //form_name
     this.listTable = false
+    this.loaderSelected = false
 
     let cont = this
     $.each(options, function (key, value) {
@@ -5842,6 +5843,7 @@ class QueryAjax {
   IsDataURL() {
     return this.method == 'GET' ? true : false
   }
+
   // actualiza la variable data_send que va ser enviada en la petiion AJAX
   UpdateForm() {
     if (this.form) {
@@ -5859,7 +5861,12 @@ class QueryAjax {
   }
   Loader(status = true) {
     this.listTable ? this.listTable.ModalLoader(status) : null
+
+    if (this.loaderSelected) {
+      status ? this.loaderSelected.show() : this.loaderSelected.hide()
+    }
   }
+
   IsFormListTable() {
     return this.form ? true : false
   }
@@ -5923,7 +5930,11 @@ class QueryAjax {
   }
   FormClose(status = true) {
     this.form ? this.form[0].reset() : null
-    this.form ? this.listTable.ModalClearForm(this.form) : null
+    if (this.form) {
+      if (this.listTable) {
+        this.listTable.ModalClearForm(this.form)
+      }
+    }
     if (status) {
       this.listTable ? this.listTable.modalSelect.modal('hide') : null
     }
@@ -6026,7 +6037,6 @@ function UtilValidateInputs(errors, form) {
     if (input.hasClass('flatpickr-input')) {
       input
         .parent()
-        .parent()
         .find('.label-error')
         .html('<i class="fa fa-exclamation-triangle"></i> ' + value)
     }
@@ -6048,10 +6058,18 @@ function UtilValidateInputs(errors, form) {
 }
 
 function UtilFormClose(form) {
-  form.find("select").each(function() { this.selectedIndex = 0 });
-  form.find("input[type=text]").each(function() { this.value = '' });
-  form.find("input[type=password]").each(function() { this.value = '' });
-  form.find("textarea").each(function() { this.value = '' });
+  form.find('select').each(function () {
+    this.selectedIndex = 0
+  })
+  form.find('input[type=text]').each(function () {
+    this.value = ''
+  })
+  form.find('input[type=password]').each(function () {
+    this.value = ''
+  })
+  form.find('textarea').each(function () {
+    this.value = ''
+  })
   UtilClearFormUi(form)
 }
 
@@ -6095,6 +6113,7 @@ class searchByAutocomplete {
     this.data = []
     this.selectedItems = []
     this.limitItems = 1
+    this.minimumCharactersToSearch = 3
 
     let context = this
     $.each(settings, function (key, value) {
@@ -6207,7 +6226,7 @@ class searchByAutocomplete {
     this.interval = setInterval(
       function () {
         clearInterval(context.interval)
-        if (text.length >= 3) {
+        if (text.length >= context.minimumCharactersToSearch) {
           context.request()
         } else if (!text.length) {
           context.resetItems(false)
@@ -6286,14 +6305,14 @@ class searchByAutocomplete {
     })
       .done(function (data) {
         context.eventLoading(false)
-        context.requestSuccessful(data)
+        context.requestSuccessfull(data)
       })
       .fail(function (errors) {
         context.eventLoading(false)
         context.requestFailed(errors)
       })
   }
-  requestSuccessful(data) {
+  requestSuccessfull(data) {
     this.data = data.data
     this.resetItems(true)
 
@@ -6397,17 +6416,905 @@ class searchByAutocomplete {
 
     if (clearField) {
       this.input.val('')
+      this.inputHidden.val('')
     }
   }
   clearSelect() {
     this.selectedItems = []
     this.eventLimitItems()
-    this.resetItems(false)
+    this.resetItems(false, true)
     this.listItems()
   }
   printLog(message) {
     console.log(`ERROR_SEARCH_BY_AUTOCOMPLETE: ${message}`)
   }
+}
+
+function utilLoadAutoCompleteByArray(data, obj) {
+  data.forEach((element) => {
+    obj.eventAddDataSelected({
+      id: element.id,
+      name: element.name, 
+    })
+  })
+}
+
+/**
+ * REQUIRE
+ * sortable {url} https://cdnjs.cloudflare.com/ajax/libs/jquery-sortable/0.9.13/jquery-sortable-min.js
+ *
+ * INCLUDE
+ * -> Headers
+ * <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+ * <link rel="stylesheet" href="{{ asset('/vendor/plugins/filesS3/PublicS3.css') }}" type="text/css" />
+ *
+ * ->footer
+ * <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+ * <script src="{{ asset('/vendor/plugins/filesS3/PublicS3.js') }}" type="text/javascript"></script>
+ */
+
+// Variables GLOBALES
+var pathArray = location.href.split('/')
+var protocol = pathArray[0]
+var host = pathArray[2]
+var APP_URL = protocol + '//' + host
+var URL_IMG = APP_URL + '/img/app/'
+const BUTTON_CONTROL_MAIN = 1
+const BUTTON_CONTROL_EDIT = 2
+const URL_S3_IMAGE =
+  'https://agendapropia-files.s3.us-east-2.amazonaws.com/files/images/'
+class formFiles {
+  constructor(url, data) {
+    this.url = url
+    this.data = data
+  }
+}
+class varQuery {
+  constructor(id) {
+    this.id = id
+    this.textarea = ''
+    this.type = ''
+    this.external_id = 0
+    this.source_id = 0
+    this.files = []
+    this._token = $('meta[name=csrf-token]').attr('content')
+  }
+}
+
+// Variables de configuracion IMPORTANTES
+class updloadS3 {
+  constructor(content, options) {
+    this.content = content
+    this.state = 1
+    this.data = []
+    this.dataDelete = []
+    this.load = 0
+    this.number = 0
+    this.altFunction = false
+    this.reload = true
+    this.formExternalId = 0
+    this.formSourceId = 0
+    this.limitFiles = 3
+
+    this.id = 0
+    this.url = ''
+    this.borderField = true
+
+    this.typeFile = 1
+    this.sizeFile = 100
+
+    this.send = content.find('.btn-save-files3')
+    this.listFiles = content.find('.upload-s3-list')
+    this.imagen = content.find('.btn-upload')
+    this.textarea = content.find('textarea[name=content]')
+    this.checkbox = content.find('input[name=resp_public]')
+    this.inputFile = content.find('input[name=file]')
+    this.template = $('#template-file')
+    this.loading = content.find('.overlay')
+    this.modalEdit = content.find('.modal-edit')
+    this.modalFiles = content.find('.modal-files')
+
+    let cont = this
+    $.each(options, function (key, value) {
+      cont[key] = value
+    })
+
+    this.form = new formFiles(this.url, '')
+    this.variables = new varQuery(this.id)
+    this.variables.external_id = this.formExternalId
+    this.variables.source_id = this.formSourceId
+    this.xhr = ''
+    this.statusMove = false
+
+    this.url_uploadFile = '/uploadfiles_s3'
+    this.url_removeFile = '/destroyfiles_s3'
+    this.files_url = URL_S3_IMAGE
+    this.awsBase = 'https://agendapropia-files.s3.us-east-2.amazonaws.com/'
+
+    this.textarea.keyup(function () {
+      cont.changeTextarea(this)
+    })
+    this.send.click(function () {
+      cont.sendQuery(this)
+    })
+    if (this.inputFile) {
+      this.imagen.click(function () {
+        cont.inputFile.click()
+      })
+      this.inputFile.change(function () {
+        cont.changeInputFile(this)
+      })
+    }
+    this.checkbox.change(function () {
+      cont.changeCheckbox()
+    })
+    this.content.find('.btn-edit-back').click(function () {
+      cont.actionDiv(1)
+    })
+    this.content.find('.btn-edit-save').click(function () {
+      cont.updateItemFile(this)
+    })
+    this.authorAutocomplete = new searchByAutocomplete(
+      this.modalEdit.find('.authorSelect'),
+      {
+        params: [],
+        url: '/admin/accounts/users/search-by-autocomplete',
+        limitItems: 1,
+        minimumCharactersToSearch: 1,
+      },
+    )
+
+    this.move()
+    this.btnSend(true)
+
+    this.loading.hide()
+    this.actionDiv(1)
+  }
+  actionDiv(type = 1) {
+    this.content.find('.button-controls').find('.main').hide()
+    this.content.find('.button-controls').find('.edit').hide()
+    this.modalEdit.hide()
+    this.modalFiles.show()
+
+    if (type == BUTTON_CONTROL_MAIN) {
+      this.content.find('.button-controls').find('.main').show()
+    } else if (type == BUTTON_CONTROL_EDIT) {
+      this.content.find('.button-controls').find('.edit').show()
+      this.modalEdit.show()
+      this.modalFiles.hide()
+    }
+  }
+  loadData(data, id) {
+    this.variables.id = id
+
+    let cont = this
+    this.listFiles.find('li:not(.ui-state-disabled)').remove()
+    this.data = []
+    this.dataDelete = []
+
+    $.each(data, function (key, value) {
+      value['form_d'] = 'f_' + value.id
+      value['cont'] = value.id
+
+      let typeFile = TypeFile(value.ext)
+      let file = new filesItem(
+        value.id,
+        true,
+        value.name,
+        value.name_tmp,
+        0,
+        value.ext,
+        2,
+        typeFile,
+        value['form_d'],
+        value.author_id,
+        value.author_name,
+        value.description,
+      )
+
+      add_file(cont, file, 2 + typeFile)
+
+      cont.data.push(file)
+
+      cont.load++
+    })
+
+    this.orderData()
+    this.btnSend(true)
+    this.loading.hide()
+  }
+  move() {
+    let cont = this
+
+    this.listFiles.sortable({
+      items: 'li:not(.ui-state-disabled)',
+      revert: true,
+      opacity: 0.6,
+      cursor: 'move',
+      update: function () {
+        cont.orderData()
+        cont.statusMove = true
+        cont.validateMove()
+      },
+    })
+  }
+  orderData() {
+    let cont = this
+    let list = this.listFiles.find('li:not(.ui-state-disabled)')
+    let item = 1
+
+    $.each(list, function (key, value) {
+      let id_li = $(value).attr('data-id')
+      let index = cont.searchData(id_li, 'id')
+
+      if (cont.data[index]) {
+        cont.data[index].order = item
+        $(value).attr('data-order', item)
+      }
+      item++
+    })
+  }
+  searchData(value, index) {
+    let item = null
+    $.each(this.data, function (key, element) {
+      if (element[index] == value) {
+        item = key
+      }
+    })
+    return item
+  }
+  stateXhr() {
+    this.xhr && this.xhr.readyState != 4 ? this.xhr.abort() : null
+  }
+  updateForm() {
+    let form = this.variables
+    let data_send = '',
+      separ = ''
+
+    $.each(form, function (key, value) {
+      data_send += separ + '' + key + '=' + value
+      separ = '&'
+    })
+    this.form.data = data_send
+  }
+  sendQuery() {
+    this.optionDisabled(true)
+    this.variables.files = JSON.stringify(this.data)
+    this.variables.files_delete = JSON.stringify(this.dataDelete)
+    this.updateForm()
+
+    let cont = this
+    this.stateXhr()
+
+    this.loading.show()
+
+    this.xhr = $.post(this.form.url, this.form.data, function (result) {
+      if (cont.reload) {
+        cont.clear()
+      }
+      cont.optionDisabled(false)
+      cont.btnSend(true)
+
+      cont.altFunction ? self[cont.altFunction](result) : null
+
+      cont.loading.hide()
+    }).fail(function (result) {
+      cont.loading.hide()
+      list_error(this, result) // Incomplete
+    })
+  }
+  clear() {
+    this.listFiles.find('li:not(.ui-state-disabled)').remove()
+    this.data = []
+    this.dataDelete = []
+    this.load = 0
+    this.number = 0
+    this.checkbox.prop('checked', false)
+    this.textarea.val('')
+    this.borderField ? this.borderFiles() : null
+    this.actionDiv(1)
+  }
+  validate(state = false, id = 0) {
+    let loanding = 0
+    this.data.forEach(function (elemento, indice, array) {
+      state && elemento.id == id && elemento.type == 1
+        ? (elemento.state = true)
+        : null
+      !elemento.state && elemento.type == 1 ? loanding++ : null
+    })
+
+    loanding > 0 ? this.btnSend(true) : this.btnSend(false)
+
+    this.borderField ? this.borderFiles() : null
+  }
+  validateMove() {
+    let loanding = 0
+    this.data.forEach(function (elemento, indice, array) {
+      !elemento.state ? loanding++ : null
+    })
+
+    if (loanding == 0)
+      !this.statusMove ? this.btnSend(true) : this.btnSend(false)
+  }
+  validateRemove(state = false) {
+    if (state) {
+      let loanding = 0
+      this.data.forEach(function (elemento, indice, array) {
+        !elemento.state ? loanding++ : null
+      })
+
+      if (loanding == 0)
+        !this.data.length && !this.textarea.val() && !this.dataDelete.length
+          ? this.btnSend(true)
+          : this.btnSend(false)
+    } else {
+      !this.data.length && !this.textarea.val() && !this.dataDelete.length
+        ? this.btnSend(true)
+        : this.btnSend(false)
+    }
+    this.borderField ? this.borderFiles() : null
+    this.orderData()
+  }
+  optionDisabled(state) {
+    this.send.prop('disabled', state)
+    this.imagen.prop('disabled', state)
+    this.textarea.prop('disabled', state)
+    this.checkbox.prop('disabled', state)
+
+    state
+      ? this.listFiles.find('.delete').hide()
+      : this.listFiles.find('.delete').show()
+  }
+  borderFiles() {
+    this.data.length == 0
+      ? this.listFiles.removeClass('border-dashed')
+      : this.listFiles.addClass('border-dashed')
+  }
+  btnSend(state) {
+    this.send.prop('disabled', state)
+  }
+  changeCheckbox() {
+    this.variables.type = this.checkbox.is(':checked')
+  }
+  stateCheckbox() {
+    return this.checkbox.is(':checked')
+  }
+  changeTextarea(element) {
+    areatextHeight(element)
+    this.validateRemove(true)
+    this.variables.textarea = this.textarea.val()
+  }
+  changeInputFile(element) {
+    for (var i = 0; i < element.files.length; ++i) {
+      this.number++
+
+      if (this.data.length < this.limitFiles) {
+        var file = element.files[i]
+        this.uploadFile(file, this.number)
+      } else {
+        notify(
+          false,
+          'Limite de archivos',
+          `Se permiten solo ${this.limitFiles} archivo.`,
+          1,
+        )
+        break
+      }
+    }
+    this.inputFile.val('')
+  }
+  uploadFile(file, numb) {
+    var data = {
+      id: numb,
+      file: file,
+      form_d: 'f_' + numb,
+      cont: numb,
+      name: file.name.toString(),
+      size: file.size,
+      ext: file.name.substring(file.name.lastIndexOf('.')),
+      type: 1,
+      author: {
+        id: 1,
+        name: '',
+      },
+      description: '',
+    }
+
+    var state_file = file_type(data.ext, this.typeFile, data.name)
+    var state_size = file_size(data.size, this.sizeFile, data.name)
+    data.type = state_file
+
+    if (state_file && state_size) {
+      this.listFiles.show()
+      //Generamos el nombre tmp para el almacenar en el servidor
+      var ramdom_name = name_ramdom(state_file)
+
+      let fileItem = new filesItem(
+        data.id,
+        false,
+        data.name,
+        ramdom_name + data.ext,
+        data.size,
+        data.ext,
+        1,
+        state_file,
+        data.form_d,
+      )
+      add_file(this, fileItem, state_file, file)
+
+      var percent
+      var form = this.content.find('.' + data.form_d)
+      var formdata = new FormData()
+
+      formdata.append('file', data.file)
+      formdata.append('file_name', ramdom_name)
+      formdata.append('file_type', state_file)
+      formdata.append('_token', $('meta[name=csrf-token]').attr('content'))
+
+      this.load++
+      this.data.push(fileItem)
+
+      this.validate()
+      let cont = this
+
+      function upload_data() {
+        var request = new XMLHttpRequest() //request
+        form.find('.progress').show()
+        request.upload.addEventListener('progress', function (e) {
+          percent = Math.round((e.loaded / e.total) * 100)
+          form
+            .find('.progress-bar')
+            .width(percent + '%')
+            .html(percent + '%')
+        })
+
+        //progress completed load event
+        request.addEventListener('load', function (e) {
+          if (e.currentTarget.status >= 400) {
+            form.find('.progress').hide()
+            form.find('.error').show()
+          } else if (e.total == 0) {
+            if (data.type == 1) {
+              form.find('.cont').hide()
+
+              form
+                .find('.image')
+                .css(
+                  'background-image',
+                  'url(' +
+                    cont.files_url +
+                    'thumbnails/' +
+                    $(form).data('name') +
+                    ')',
+                )
+            } else {
+              form.find('.download').show()
+              form.find('.text').addClass('name_file')
+            }
+
+            form.find('.progress').hide()
+            cont.validate(true, data.id)
+          }
+
+          cont.orderData()
+        })
+
+        request.addEventListener('error', function (e) {
+          form.find('.error').show()
+          form.find('.progress').hide()
+        })
+
+        request.open('post', APP_URL + cont.url_uploadFile)
+        request.send(formdata)
+
+        form.find('.btn-delete').click(function (e) {
+          e.preventDefault()
+          request.abort()
+
+          let id = form.data('id')
+          let name = form.data('name')
+          form.remove()
+
+          let element = null
+          let index = 0
+          cont.data.forEach(function (value, indice) {
+            if (value.id == id) {
+              element = value
+              index = indice
+            }
+          })
+
+          if (element != null) {
+            element.state ? cont.delete_file_arc(name) : null
+            cont.data.splice(index, 1)
+          }
+
+          cont.validateRemove(true)
+        })
+      }
+
+      upload_data()
+
+      form.find('.preload').click(function (e) {
+        upload_data()
+        form.find('.error').hide()
+        form.find('.cont').show()
+        percent = 0
+        form
+          .find('.progress-bar')
+          .width(percent + '%')
+          .html(percent + '%')
+      })
+    }
+  }
+  updateItemFile(btn) {
+    let id = $(btn).attr('data-id')
+    let key = null
+
+    this.data.forEach(function (element, index) {
+      if (element.id == parseInt(id)) {
+        key = index
+      }
+    })
+
+    this.data[key].name = this.modalEdit.find('input[name=name]').val()
+    this.data[key].description = this.modalEdit
+      .find('textarea[name=description]')
+      .val()
+
+    if (this.authorAutocomplete.selectedItems[0]) {
+      this.data[key].author.id = this.authorAutocomplete.selectedItems[0].id
+      this.data[key].author.name = this.authorAutocomplete.selectedItems[0].name
+    }
+
+    let form = this.content.find('.f_' + this.data[key].id)
+    form.find('.name').text(this.data[key].name)
+
+    form
+      .find('.description')
+      .html(
+        this.data[key].description != ''
+          ? '<strong>Descripción: </strong> ' + this.data[key].description
+          : '',
+      )
+    form
+      .find('.author')
+      .html(
+        this.data[key].author.name != null
+          ? '<strong>Autor: </strong> ' + this.data[key].author.name
+          : '',
+      )
+
+    this.actionDiv(1)
+
+    this.btnSend(false)
+  }
+  delete_file_arc(name_file) {
+    let cont = this
+    $.ajax({
+      url: APP_URL + cont.url_removeFile,
+      type: 'POST',
+      timeout: 100000,
+      data: {
+        name: name_file,
+        type: 1,
+        _token: $('meta[name=csrf-token]').attr('content'),
+      },
+      error: function () {},
+      success: function (result) {},
+    })
+  }
+}
+
+class filesItem {
+  constructor(
+    id,
+    state,
+    name,
+    name_tmp,
+    size,
+    ext,
+    type,
+    type_file,
+    divIndex,
+    author_id = null,
+    author_name = null,
+    description = '',
+  ) {
+    this.id = id
+    this.state = state
+    this.name = name
+    this.name_tmp = name_tmp
+    this.size = size
+    this.ext = ext
+    this.type = type
+    this.type_file = type_file
+    this.author = {
+      id: author_id,
+      name: author_name,
+    }
+    this.description = description
+    this.divIndex = divIndex
+    this.name_tmp_complete = URL_S3_IMAGE + name_tmp
+  }
+}
+
+var file_ico = {
+  '.zip': 'ico_archivo.png',
+  '.rar': 'ico_archivo.png',
+  '.ppt': 'ico_point.png',
+  '.pptx': 'ico_point.png',
+  '.pps': 'ico_point.png',
+  '.doc': 'ico_word.png',
+  '.docx': 'ico_word.png',
+  '.accdb': 'ico_acces.png',
+  '.ccdb': 'ico_acces.png',
+  '.mdb': 'ico_acces.png',
+  '.xlsx': 'ico_excel.png',
+  '.xls': 'ico_excel.png',
+  '.xlsm': 'ico_excel.png',
+  '.xlsb': 'ico_excel.png',
+  '.pdf': 'ico_pdf.png',
+  '.PDF': 'ico_pdf.png',
+  '.mp4': 'ico_mp4.png',
+}
+
+var file_name = {
+  '.JPG': 'Imagen',
+  '.jpg': 'Imagen',
+  '.jpeg': 'Imagen',
+  '.gif': 'Imagen',
+  '.PNG': 'Imagen',
+  '.png': 'Imagen',
+  '.zip': 'Archivo comprimido',
+  '.rar': 'Archivo comprimido',
+  '.ppt': 'Power Point',
+  '.pptx': 'Power Point',
+  '.pps': 'Power Point',
+  '.doc': 'Documento de word',
+  '.docx': 'Documento de word',
+  '.accdb': 'Base datos Access',
+  '.ccdb': 'Base datos Access',
+  '.mdb': 'Base datos Access',
+  '.xlsx': 'Documento de excel',
+  '.xls': 'Documento de excel',
+  '.xlsm': 'Documento de excel',
+  '.xlsb': 'Documento de excel',
+  '.pdf': 'Documento PDF',
+  '.PDF': 'Documento PDF',
+}
+
+//name ramdom
+function name_ramdom(type) {
+  var rand = function () {
+    return Math.random().toString(36).substr(2)
+  }
+  var date = new Date()
+  if (type == 1) {
+    return 'img_' + Date.parse(date) + '_' + rand()
+  } else {
+    return 'file_' + Date.parse(date) + '_' + rand()
+  }
+}
+
+// Validamos el tipo de Archivo  1: todos los archivos; 2: Solo fotografias;
+function file_type(ext, categories, name) {
+  var ext_img = new Array('.JPG', '.jpg', '.jpeg', '.gif', '.PNG', '.png')
+  var ext_arg = new Array(
+    '.zip',
+    '.rar',
+    '.ppt',
+    '.pptx',
+    '.ppsx',
+    '.pps',
+    '.doc',
+    '.docx',
+    '.accdb',
+    '.ccdb',
+    '.mdb',
+    '.xlsx',
+    '.xls',
+    '.xlsm',
+    '.xlsb',
+    '.pdf',
+    '.PDF',
+    '.mp4',
+  )
+  if (jQuery.inArray(ext, ext_img) >= 0) {
+    return 1
+  } else if (jQuery.inArray(ext, ext_arg) >= 0 && categories == 1) {
+    return 2
+  } else {
+    notify(
+      null,
+      'No permitido',
+      'El archivo "' + name + '" no esta dentro de los formatos permitidos.',
+      1,
+    )
+    return 0
+  }
+}
+
+/**
+ *
+ * @param {string} ext Extencion del Archivo
+ */
+function TypeFile(ext) {
+  var ext_img = new Array('.JPG', '.jpg', '.jpeg', '.gif', '.PNG', '.png')
+  var ext_arg = new Array(
+    '.zip',
+    '.rar',
+    '.ppt',
+    '.pptx',
+    '.ppsx',
+    '.pps',
+    '.doc',
+    '.docx',
+    '.accdb',
+    '.ccdb',
+    '.mdb',
+    '.xlsx',
+    '.xls',
+    '.xlsm',
+    '.xlsb',
+    '.pdf',
+    '.PDF',
+  )
+
+  if (jQuery.inArray(ext, ext_img) >= 0) {
+    return 1
+  } else if (jQuery.inArray(ext, ext_arg) >= 0) {
+    return 2
+  } else {
+    return 0
+  }
+}
+
+/**
+ *
+ * @param {int} size Tamaño File
+ * @param {int} size_default Tamaño maximo
+ * @param {strin} name Nombre del Archivo
+ */
+function file_size(size, size_default, name) {
+  var size_max = 1000000 * size_default
+  if (size <= size_max) {
+    return 1
+  } else {
+    notify(
+      null,
+      'Supero el Tamaño',
+      'El archivo "' + name + '" excedió el peso permitido.',
+      1,
+    )
+    return 0
+  }
+}
+
+/**
+ *
+ * @param {class} cont Objeto de la clase updloadS3
+ * @param {filesItem} data con informacion de elemento a crear
+ * @param {int} type 1: Img; 2: Documneto, 3: Img Cargado; 4: Documento Cargado;
+ */
+function add_file(cont, data, type, file = '') {
+  var name_fom = '.' + data.divIndex
+  cont.listFiles.append(
+    `<li data-id="0" data-state="0" data-name="${data.name_tmp}" class="${data.divIndex} item-list ui-state-default"></li>`,
+  )
+  cont.template.clone().prependTo(name_fom).show()
+
+  var form = cont.content.find('.' + data.divIndex)
+
+  form.find('.error').hide()
+  form.find('.download').hide()
+
+  form.children().attr('id', 'template')
+
+  // Información
+  form.attr('data-id', data.id)
+  form.find('.name').text(data.name)
+  form.find('.source').text(data.name_tmp)
+  form
+    .find('.description')
+    .html(
+      data.description != ''
+        ? '<strong>Descripción: </strong> ' + data.description
+        : '',
+    )
+  form
+    .find('.author')
+    .html(
+      data.author.name != null
+        ? '<strong>Autor: </strong> ' + data.author.name
+        : '',
+    )
+  form.find('.name').attr('title', data.name)
+  form.find('.delete').attr('data-id', data.id)
+
+  if (type == 1) {
+    var reader = new FileReader()
+    reader.onload = function (e) {
+      $(name_fom + ' .image').css(
+        'background-image',
+        'url(' + e.target.result + ')',
+      )
+      $(name_fom + ' .image').css('background-size', '100%')
+    }
+    reader.readAsDataURL(file)
+  } else if (type == 2) {
+    form
+      .find('.download')
+      .attr('onclick', "getFileS3('" + data.name_tmp + "', 2)")
+    $(name_fom + ' .image').css(
+      'background-image',
+      'url(' + cont.awsBase + 'app/file_types/' + file_ico[data.ext] + ')',
+    )
+  } else if (type == 3) {
+    form
+      .find('.image')
+      .css(
+        'background-image',
+        'url(' + cont.awsBase + 'thumbnails/' + data.name_tmp + ')',
+      )
+    form.find('.image').css('background-size', '100%')
+  } else if (type == 4) {
+    form.find('.download').show()
+    form
+      .find('.download')
+      .attr('onclick', "getFileS3('" + data.name_tmp + "', 2)")
+    form
+      .find('.image')
+      .css(
+        'background-image',
+        'url(' + cont.awsBase + 'app/file_types/' + file_ico[data.ext] + ')',
+      )
+  }
+
+  form.find('.progress').hide()
+
+  if (type == 4 || type == 3) {
+    form.find('.btn-delete').click(function (e) {
+      e.preventDefault()
+
+      let id = form.data('id')
+      let name = form.data('name')
+      form.remove()
+
+      cont.data.forEach(function (elemento, indice, array) {
+        elemento.id == id ? cont.data.splice(indice, 1) : null
+      })
+
+      cont.dataDelete.push(id)
+      cont.validateRemove(true)
+    })
+  }
+
+  form.find('.btn-edit').click(function (e) {
+    e.preventDefault()
+
+    let id = form.data('id')
+    let data = []
+    cont.data.forEach(function (element) {
+      if (element.id == id) {
+        data = element
+      }
+    })
+
+    cont.modalEdit.find('input[name=name]').val(data.name)
+    cont.modalEdit.find('textarea[name=description]').val(data.description)
+    cont.content.find('.btn-edit-save').attr('data-id', data.id)
+
+    cont.authorAutocomplete.clearSelect()
+    if (data.author.id != 0 && data.author.id != null) {
+      cont.authorAutocomplete.eventAddDataSelected({
+        id: data.author.id,
+        name: data.author.name,
+      })
+    }
+
+    cont.actionDiv(2)
+  })
 }
 
 //! moment.js
@@ -11022,6 +11929,10 @@ const settingHour24 = {
   static: true,
 }
 
+const settingDate = {
+  enableTime: false,
+  dateFormat: "Y-m-d",
+}
 var modalChangePasswordUser = $('#modal-change-of-password')
 var formChangePasswordUser = $('#form-change-password-user')
 var messageErrorUserPass = modalChangePasswordUser.find(
@@ -11065,4 +11976,369 @@ function ActionUpdateChangePasswordUser(status, data) {
     messageErrorUserPass.show()
   }
   UtilModalLoader(modalChangePasswordUser, false)
+}
+
+/**
+ * Tool for creating image Blocks for Editor.js
+ * Made with «Creating a Block Tool» tutorial {@link https://editorjs.io/creating-a-block-tool}
+ *
+ * @typedef {object} ImageToolData — Input/Output data format for our Tool
+ * @property {string} url - image source URL
+ * @property {string} caption - image caption
+ * @property {boolean} withBorder - flag for adding a border
+ * @property {boolean} withBackground - flag for adding a background
+ * @property {boolean} stretched - flag for stretching image to the full width of content
+ *
+ * @typedef {object} ImageToolConfig
+ * @property {string} placeholder — custom placeholder for URL field
+ */
+class SimpleImage {
+  /**
+   * Our tool should be placed at the Toolbox, so describe an icon and title
+   */
+  static get toolbox() {
+    return {
+      title: 'Image',
+      icon:
+        '<svg width="17" height="15" viewBox="0 0 336 276" xmlns="http://www.w3.org/2000/svg"><path d="M291 150V79c0-19-15-34-34-34H79c-19 0-34 15-34 34v42l67-44 81 72 56-29 42 30zm0 52l-43-30-56 30-81-67-66 39v23c0 19 15 34 34 34h178c17 0 31-13 34-29zM79 0h178c44 0 79 35 79 79v118c0 44-35 79-79 79H79c-44 0-79-35-79-79V79C0 35 35 0 79 0z"/></svg>',
+    }
+  }
+
+  /**
+   * Allow render Image Blocks by pasting HTML tags, files and URLs
+   * @see {@link https://editorjs.io/paste-substitutions}
+   * @return {{tags: string[], files: {mimeTypes: string[], extensions: string[]}, patterns: {image: RegExp}}}
+   */
+  static get pasteConfig() {
+    return {
+      tags: ['IMG'],
+      files: {
+        mimeTypes: ['image/*'],
+        extensions: ['gif', 'jpg', 'png'], // You can specify extensions instead of mime-types
+      },
+      patterns: {
+        image: /https?:\/\/\S+\.(gif|jpe?g|tiff|png)$/i,
+      },
+    }
+  }
+
+  /**
+   * Automatic sanitize config
+   * @see {@link https://editorjs.io/sanitize-saved-data}
+   */
+  static get sanitize() {
+    return {
+      url: {},
+      caption: {
+        b: true,
+        a: {
+          href: true,
+        },
+        i: true,
+      },
+    }
+  }
+
+  /**
+   * Tool class constructor
+   * @param {ImageToolData} data — previously saved data
+   * @param {object} api — Editor.js Core API {@link  https://editorjs.io/api}
+   * @param {ImageToolConfig} config — custom config that we provide to our tool's user
+   */
+  constructor({ data, api, config }) {
+    this.api = api
+    this.config = config || {}
+    this.data = {
+      images: data.images || [],
+      withBorder: data.withBorder !== undefined ? data.withBorder : false,
+      withBackground:
+        data.withBackground !== undefined ? data.withBackground : false,
+      stretched: data.stretched !== undefined ? data.stretched : false,
+    }
+
+    this.wrapper = undefined
+    this.settings = [
+      {
+        name: 'withBorder',
+        icon: `<svg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M15.8 10.592v2.043h2.35v2.138H15.8v2.232h-2.25v-2.232h-2.4v-2.138h2.4v-2.28h2.25v.237h1.15-1.15zM1.9 8.455v-3.42c0-1.154.985-2.09 2.2-2.09h4.2v2.137H4.15v3.373H1.9zm0 2.137h2.25v3.325H8.3v2.138H4.1c-1.215 0-2.2-.936-2.2-2.09v-3.373zm15.05-2.137H14.7V5.082h-4.15V2.945h4.2c1.215 0 2.2.936 2.2 2.09v3.42z"/></svg>`,
+      },
+      {
+        name: 'stretched',
+        icon: `<svg width="17" height="10" viewBox="0 0 17 10" xmlns="http://www.w3.org/2000/svg"><path d="M13.568 5.925H4.056l1.703 1.703a1.125 1.125 0 0 1-1.59 1.591L.962 6.014A1.069 1.069 0 0 1 .588 4.26L4.38.469a1.069 1.069 0 0 1 1.512 1.511L4.084 3.787h9.606l-1.85-1.85a1.069 1.069 0 1 1 1.512-1.51l3.792 3.791a1.069 1.069 0 0 1-.475 1.788L13.514 9.16a1.125 1.125 0 0 1-1.59-1.591l1.644-1.644z"/></svg>`,
+      },
+      {
+        name: 'withBackground',
+        icon: `<svg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10.043 8.265l3.183-3.183h-2.924L4.75 10.636v2.923l4.15-4.15v2.351l-2.158 2.159H8.9v2.137H4.7c-1.215 0-2.2-.936-2.2-2.09v-8.93c0-1.154.985-2.09 2.2-2.09h10.663l.033-.033.034.034c1.178.04 2.12.96 2.12 2.089v3.23H15.3V5.359l-2.906 2.906h-2.35zM7.951 5.082H4.75v3.201l3.201-3.2zm5.099 7.078v3.04h4.15v-3.04h-4.15zm-1.1-2.137h6.35c.635 0 1.15.489 1.15 1.092v5.13c0 .603-.515 1.092-1.15 1.092h-6.35c-.635 0-1.15-.489-1.15-1.092v-5.13c0-.603.515-1.092 1.15-1.092z"/></svg>`,
+      },
+    ]
+  }
+
+  /**
+   * Return a Tool's UI
+   * @return {HTMLElement}
+   */
+  render() {
+    this.wrapper = document.createElement('div')
+    this.wrapper.classList.add('simple-image')
+
+    this._addModalFile()
+    this._addButtonModal()
+
+    if (this.data && this.data.images) {
+      this.dataS3 = this.data.images
+      this._createImages(this.dataS3)
+    }
+
+    this.editorFileS3 = new updloadS3(this.ModalFile.find('.div-files-class'), {
+      url: '/admin/files/items',
+      typeFile: 1,
+      id: 1,
+      reload: false,
+      limitFiles: 10,
+    })
+
+    var cont = this
+    this.editorFileS3.send.click(function () {
+      cont.dataS3 = cont._setDataImages(cont.editorFileS3.data)
+      cont._createImages(cont.dataS3)
+      this._openModal(false)
+    })
+
+    if (!this.data.images.length) {
+      this._openModal()
+    }
+
+    return this.wrapper
+  }
+
+  _addModalFile() {
+    let modalNameClass = 'modal_file_' + Math.floor(Math.random() * 1000 + 1)
+    let modalTemplate = $($('#template-file-modal').html()).clone()
+    modalTemplate.attr('class', 'modal fade modal-table-gear ' + modalNameClass)
+    $('.modals-files').append(modalTemplate)
+    this.ModalFile = $('.' + modalNameClass)
+  }
+
+  _openModal(status = true) {
+    if (status) {
+      this.ModalFile.modal('show')
+      this.ModalFile.find('.overlay').hide()
+    } else {
+      this.ModalFile.modal('hide')
+      this.ModalFile.find('.overlay').hide()
+    }
+  }
+
+  /**
+   * @private
+   * Add button open modal
+   */
+  _addButtonModal() {
+    const button = document.createElement('button')
+    button.type = 'button'
+    button.innerText = 'Editar'
+
+    button.value = this.config.placeholder || 'Paste an image URL...'
+    button.addEventListener('click', (event) => {
+      this.editorFileS3.clear()
+      if (this.dataS3) {
+        this.editorFileS3.loadData(this.dataS3, 1)
+      }
+      this.editorFileS3.loading.hide()
+      this._openModal()
+    })
+
+    this.wrapper.appendChild(button)
+  }
+
+  /**
+   * @private
+   * Create image with caption field
+   * @param {array} images — image source
+   * @param {object} datacomplete
+   */
+  _createImages(images) {
+    this.wrapper.innerHTML = ''
+    this._addButtonModal()
+
+    const galery = images.length > 6 ? 'general' : images.length
+    const divImages = document.createElement('div')
+    divImages.className = 'gallery-' + galery
+    var i = 1
+
+    images.forEach((image) => {
+      const divImage = document.createElement('figure')
+      divImage.className = 'gallery__item  gallery__item--' + i
+
+      const imageElement = document.createElement('img')
+      imageElement.src = image.name_tmp_complete
+      imageElement.className = 'gallery__img'
+      divImage.appendChild(imageElement)
+
+      // const divDescription = document.createElement('div')
+      // divDescription.className = "description"
+      // divDescription.innerHTML = image.description
+      // divImage.appendChild(divDescription)
+
+      divImages.appendChild(divImage)
+      i++
+    })
+    this.wrapper.appendChild(divImages)
+
+    this._acceptTuneView()
+  }
+
+  /**
+   * Extract data from the UI
+   * @param {HTMLElement} blockContent — element returned by render method
+   * @return {SimpleImageData}
+   */
+  save(blockContent) {
+    return Object.assign(this.data, {
+      images: this.dataS3,
+    })
+  }
+
+  /**
+   * Set data images by save
+   * @param {array} dataS3
+   * @returns {array}
+   */
+  _setDataImages(dataS3) {
+    if (!dataS3 && !data.isArray()) {
+      return false
+    }
+
+    dataS3 = this._sortImages(dataS3)
+
+    let data = []
+    dataS3.forEach((element) => {
+      data.push({
+        author_id: element.author.id,
+        author_name: element.author.name,
+        description: element.description,
+        ext: element.ext,
+        id: element.id + Math.floor(Math.random() * 10000 + 1),
+        name: element.name,
+        name_tmp: element.name_tmp,
+        name_tmp_complete: element.name_tmp_complete,
+        order: element.order,
+      })
+    })
+
+    return data
+  }
+
+  /**
+   * sort images
+   * @param {array} images
+   * @returns
+   */
+  _sortImages(images) {
+    return images.sort(function (a, b) {
+      if (a.order > b.order) {
+        return 1
+      }
+      if (a.order < b.order) {
+        return -1
+      }
+      return 0
+    })
+  }
+
+  /**
+   * Skip empty blocks
+   * @see {@link https://editorjs.io/saved-data-validation}
+   * @param {ImageToolConfig} savedData
+   * @return {boolean}
+   */
+  validate(savedData) {
+    return true
+  }
+
+  /**
+   * Making a Block settings: 'add border', 'add background', 'stretch to full width'
+   * @see https://editorjs.io/making-a-block-settings — tutorial
+   * @see https://editorjs.io/tools-api#rendersettings - API method description
+   * @return {HTMLDivElement}
+   */
+  renderSettings() {
+    const wrapper = document.createElement('div')
+
+    this.settings.forEach((tune) => {
+      let button = document.createElement('div')
+
+      button.classList.add(this.api.styles.settingsButton)
+      button.classList.toggle(
+        this.api.styles.settingsButtonActive,
+        this.data[tune.name],
+      )
+      button.innerHTML = tune.icon
+      wrapper.appendChild(button)
+
+      button.addEventListener('click', () => {
+        this._toggleTune(tune.name)
+        button.classList.toggle(this.api.styles.settingsButtonActive)
+      })
+    })
+
+    return wrapper
+  }
+
+  /**
+   * @private
+   * Click on the Settings Button
+   * @param {string} tune — tune name from this.settings
+   */
+  _toggleTune(tune) {
+    this.data[tune] = !this.data[tune]
+    this._acceptTuneView()
+  }
+
+  /**
+   * Add specified class corresponds with activated tunes
+   * @private
+   */
+  _acceptTuneView() {
+    this.settings.forEach((tune) => {
+      this.wrapper.classList.toggle(tune.name, !!this.data[tune.name])
+
+      if (tune.name === 'stretched') {
+        this.api.blocks.stretchBlock(
+          this.api.blocks.getCurrentBlockIndex(),
+          !!this.data.stretched,
+        )
+      }
+    })
+  }
+
+  /**
+   * Handle paste event
+   * @see https://editorjs.io/tools-api#onpaste - API description
+   * @param {CustomEvent }event
+   */
+  // onPaste(event) {
+  //   switch (event.type) {
+  //     case 'tag':
+  //       const imgTag = event.detail.data
+  //       this._createImage(imgTag.src)
+  //       break
+  //     case 'file':
+  //       /* We need to read file here as base64 string */
+  //       const file = event.detail.file
+  //       const reader = new FileReader()
+
+  //       reader.onload = (loadEvent) => {
+  //         this._createImage(loadEvent.target.result)
+  //       }
+
+  //       reader.readAsDataURL(file)
+  //       break
+  //     case 'pattern':
+  //       const src = event.detail.data
+
+  //       this._createImage(src)
+  //       break
+  //   }
+  // }
 }

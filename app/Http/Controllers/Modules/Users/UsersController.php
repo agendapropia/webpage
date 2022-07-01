@@ -8,6 +8,7 @@ use App\Models\Permissions\Role;
 use App\Models\User;
 use App\Models\Users\Country;
 use App\Models\Users\UserGender;
+use App\Models\Utils\File;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
@@ -29,7 +30,7 @@ class UsersController extends Controller
      */
     public function index()
     {
-        return view('modules.users.index');
+        return view('pages.admin.users.index');
     }
 
     /**
@@ -52,7 +53,8 @@ class UsersController extends Controller
             'u.last_name',
             'u.phone_code',
             'u.phone_number',
-            'u.location'
+            'u.location',
+            'u.image as file'
         )
             ->from('users as u')
             ->status($status)
@@ -60,7 +62,9 @@ class UsersController extends Controller
             ->orderBy('id', 'DESC')
             ->paginate($row);
 
-        return $this->responseJson(true, 'list user',  $users);
+        $users = File::setPathAndImageDefault($users, 2);
+
+        return $this->responseJson(true, 'list user', $users);
     }
 
     /**
@@ -86,7 +90,7 @@ class UsersController extends Controller
             ->orderBy('ro.id', 'DESC')
             ->paginate($row);
 
-        return $this->responseJson(true, 'list roles',  $roles);
+        return $this->responseJson(true, 'list roles', $roles);
     }
 
     /**
@@ -110,7 +114,7 @@ class UsersController extends Controller
             $user->removeRole($role->name);
         }
 
-        return $this->responseJson(true, 'assing role',  $user_id);
+        return $this->responseJson(true, 'assing role', $user_id);
     }
 
     /**
@@ -130,7 +134,7 @@ class UsersController extends Controller
             'countries' => $countries,
         ];
 
-        return $this->responseJson(true, 'create information',  $data);
+        return $this->responseJson(true, 'create information', $data);
     }
 
     /**
@@ -167,7 +171,7 @@ class UsersController extends Controller
         $user->has_password = 1;
         $user->save();
 
-        return $this->responseJson(true, 'user created',  $user);
+        return $this->responseJson(true, 'user created', $user);
     }
 
     /**
@@ -222,7 +226,7 @@ class UsersController extends Controller
             'countries' => $countries,
         ];
 
-        return $this->responseJson(true, 'update information',  $data);
+        return $this->responseJson(true, 'update information', $data);
     }
 
     /**
@@ -238,7 +242,7 @@ class UsersController extends Controller
             'gender_id' => 'required|integer',
             'phone_code' => 'required|min:1|integer',
             'phone_number' =>
-            'required|min:10|unique:users,phone_number,' . $request->id,
+                'required|min:10|unique:users,phone_number,' . $request->id,
             'location' => 'required|string|in:es,en',
         ]);
 
@@ -250,7 +254,7 @@ class UsersController extends Controller
         $user->fill($request->all());
         $user->save();
 
-        return $this->responseJson(true, 'user update',  $user);
+        return $this->responseJson(true, 'user update', $user);
     }
 
     /**
@@ -274,6 +278,26 @@ class UsersController extends Controller
             $this->responseJson(false, 'user not found');
         }
 
-        return $this->responseJson(true, 'user status update',  $user);
+        return $this->responseJson(true, 'user status update', $user);
+    }
+
+    /**
+     * GET search by autocomplete
+     * POST /users/search-by-autocomplete
+     */
+    public function searchByAutocomplete(Request $request)
+    {
+        $search = $request->get('_search');
+        $row = $request->get('_row') ?? 10;
+        $alliedMedia = User::select(
+            'u.id',
+            DB::raw('CONCAT(u.first_name, " ",u.last_name) as name')
+        )
+            ->from('users as u')
+            ->search($search)
+            ->limit($row)
+            ->get();
+
+        return $this->responseJson(true, 'list user', $alliedMedia);
     }
 }
