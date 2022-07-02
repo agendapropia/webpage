@@ -1,1 +1,12325 @@
-!function(e,t){"function"==typeof define&&define.amd?define(t):"object"==typeof exports?module.exports=t():e.PhotoSwipe=t()}(this,(function(){"use strict";return function(e,t,n,i){var a={features:null,bind:function(e,t,n,i){var a=(i?"remove":"add")+"EventListener";t=t.split(" ");for(var o=0;o<t.length;o++)t[o]&&e[a](t[o],n,!1)},isArray:function(e){return e instanceof Array},createEl:function(e,t){var n=document.createElement(t||"div");return e&&(n.className=e),n},getScrollY:function(){var e=window.pageYOffset;return void 0!==e?e:document.documentElement.scrollTop},unbind:function(e,t,n){a.bind(e,t,n,!0)},removeClass:function(e,t){var n=new RegExp("(\\s|^)"+t+"(\\s|$)");e.className=e.className.replace(n," ").replace(/^\s\s*/,"").replace(/\s\s*$/,"")},addClass:function(e,t){a.hasClass(e,t)||(e.className+=(e.className?" ":"")+t)},hasClass:function(e,t){return e.className&&new RegExp("(^|\\s)"+t+"(\\s|$)").test(e.className)},getChildByClass:function(e,t){for(var n=e.firstChild;n;){if(a.hasClass(n,t))return n;n=n.nextSibling}},arraySearch:function(e,t,n){for(var i=e.length;i--;)if(e[i][n]===t)return i;return-1},extend:function(e,t,n){for(var i in t)if(t.hasOwnProperty(i)){if(n&&e.hasOwnProperty(i))continue;e[i]=t[i]}},easing:{sine:{out:function(e){return Math.sin(e*(Math.PI/2))},inOut:function(e){return-(Math.cos(Math.PI*e)-1)/2}},cubic:{out:function(e){return--e*e*e+1}}},detectFeatures:function(){if(a.features)return a.features;var e=a.createEl().style,t="",n={};if(n.oldIE=document.all&&!document.addEventListener,n.touch="ontouchstart"in window,window.requestAnimationFrame&&(n.raf=window.requestAnimationFrame,n.caf=window.cancelAnimationFrame),n.pointerEvent=navigator.pointerEnabled||navigator.msPointerEnabled,!n.pointerEvent){var i=navigator.userAgent;if(/iP(hone|od)/.test(navigator.platform)){var o=navigator.appVersion.match(/OS (\d+)_(\d+)_?(\d+)?/);o&&o.length>0&&(o=parseInt(o[1],10))>=1&&o<8&&(n.isOldIOSPhone=!0)}var r=i.match(/Android\s([0-9\.]*)/),s=r?r[1]:0;(s=parseFloat(s))>=1&&(s<4.4&&(n.isOldAndroid=!0),n.androidVersion=s),n.isMobileOpera=/opera mini|opera mobi/i.test(i)}for(var l,d,c=["transform","perspective","animationName"],u=["","webkit","Moz","ms","O"],h=0;h<4;h++){t=u[h];for(var f=0;f<3;f++)l=c[f],d=t+(t?l.charAt(0).toUpperCase()+l.slice(1):l),!n[l]&&d in e&&(n[l]=d);t&&!n.raf&&(t=t.toLowerCase(),n.raf=window[t+"RequestAnimationFrame"],n.raf&&(n.caf=window[t+"CancelAnimationFrame"]||window[t+"CancelRequestAnimationFrame"]))}if(!n.raf){var m=0;n.raf=function(e){var t=(new Date).getTime(),n=Math.max(0,16-(t-m)),i=window.setTimeout((function(){e(t+n)}),n);return m=t+n,i},n.caf=function(e){clearTimeout(e)}}return n.svg=!!document.createElementNS&&!!document.createElementNS("http://www.w3.org/2000/svg","svg").createSVGRect,a.features=n,n}};a.detectFeatures(),a.features.oldIE&&(a.bind=function(e,t,n,i){t=t.split(" ");for(var a,o=(i?"detach":"attach")+"Event",r=function(){n.handleEvent.call(n)},s=0;s<t.length;s++)if(a=t[s])if("object"==typeof n&&n.handleEvent){if(i){if(!n["oldIE"+a])return!1}else n["oldIE"+a]=r;e[o]("on"+a,n["oldIE"+a])}else e[o]("on"+a,n)});var o=this,r={allowPanToNext:!0,spacing:.12,bgOpacity:1,mouseUsed:!1,loop:!0,pinchToClose:!0,closeOnScroll:!0,closeOnVerticalDrag:!0,verticalDragRange:.75,hideAnimationDuration:333,showAnimationDuration:333,showHideOpacity:!1,focus:!0,escKey:!0,arrowKeys:!0,mainScrollEndFriction:.35,panEndFriction:.35,isClickableElement:function(e){return"A"===e.tagName},getDoubleTapZoom:function(e,t){return e||t.initialZoomLevel<.7?1:1.33},maxSpreadZoom:1.33,modal:!0,scaleMode:"fit"};a.extend(r,i);var s,l,d,c,u,h,f,m,p,g,v,y,w,_,b,x,D,M,C,k,S,T,I,E,F,O,A,P,L,Y,N,R,H,$,U,j,W,z,G,V,Z,B,q,K,J,Q,X,ee,te,ne,ie,ae,oe,re,se,le,de={x:0,y:0},ce={x:0,y:0},ue={x:0,y:0},he={},fe=0,me={},pe={x:0,y:0},ge=0,ve=!0,ye=[],we={},_e=!1,be=function(e,t){a.extend(o,t.publicMethods),ye.push(e)},xe=function(e){var t=Ut();return e>t-1?e-t:e<0?t+e:e},De={},Me=function(e,t){return De[e]||(De[e]=[]),De[e].push(t)},Ce=function(e){var t=De[e];if(t){var n=Array.prototype.slice.call(arguments);n.shift();for(var i=0;i<t.length;i++)t[i].apply(o,n)}},ke=function(){return(new Date).getTime()},Se=function(e){re=e,o.bg.style.opacity=e*r.bgOpacity},Te=function(e,t,n,i,a){(!_e||a&&a!==o.currItem)&&(i/=a?a.fitRatio:o.currItem.fitRatio),e[T]=y+t+"px, "+n+"px"+w+" scale("+i+")"},Ie=function(e){te&&(e&&(g>o.currItem.fitRatio?_e||(Kt(o.currItem,!1,!0),_e=!0):_e&&(Kt(o.currItem),_e=!1)),Te(te,ue.x,ue.y,g))},Ee=function(e){e.container&&Te(e.container.style,e.initialPosition.x,e.initialPosition.y,e.initialZoomLevel,e)},Fe=function(e,t){t[T]=y+e+"px, 0px"+w},Oe=function(e,t){if(!r.loop&&t){var n=c+(pe.x*fe-e)/pe.x,i=Math.round(e-ct.x);(n<0&&i>0||n>=Ut()-1&&i<0)&&(e=ct.x+i*r.mainScrollEndFriction)}ct.x=e,Fe(e,u)},Ae=function(e,t){var n=ut[e]-me[e];return ce[e]+de[e]+n-n*(t/v)},Pe=function(e,t){e.x=t.x,e.y=t.y,t.id&&(e.id=t.id)},Le=function(e){e.x=Math.round(e.x),e.y=Math.round(e.y)},Ye=null,Ne=function(){Ye&&(a.unbind(document,"mousemove",Ne),a.addClass(e,"pswp--has_mouse"),r.mouseUsed=!0,Ce("mouseUsed")),Ye=setTimeout((function(){Ye=null}),100)},Re=function(e,t){var n=Vt(o.currItem,he,e);return t&&(ee=n),n},He=function(e){return e||(e=o.currItem),e.initialZoomLevel},$e=function(e){return e||(e=o.currItem),e.w>0?r.maxSpreadZoom:1},Ue=function(e,t,n,i){return i===o.currItem.initialZoomLevel?(n[e]=o.currItem.initialPosition[e],!0):(n[e]=Ae(e,i),n[e]>t.min[e]?(n[e]=t.min[e],!0):n[e]<t.max[e]&&(n[e]=t.max[e],!0))},je=function(e){var t="";r.escKey&&27===e.keyCode?t="close":r.arrowKeys&&(37===e.keyCode?t="prev":39===e.keyCode&&(t="next")),t&&(e.ctrlKey||e.altKey||e.shiftKey||e.metaKey||(e.preventDefault?e.preventDefault():e.returnValue=!1,o[t]()))},We=function(e){e&&(B||Z||ne||W)&&(e.preventDefault(),e.stopPropagation())},ze=function(){o.setScrollOffset(0,a.getScrollY())},Ge={},Ve=0,Ze=function(e){Ge[e]&&(Ge[e].raf&&O(Ge[e].raf),Ve--,delete Ge[e])},Be=function(e){Ge[e]&&Ze(e),Ge[e]||(Ve++,Ge[e]={})},qe=function(){for(var e in Ge)Ge.hasOwnProperty(e)&&Ze(e)},Ke=function(e,t,n,i,a,o,r){var s,l=ke();Be(e);var d=function(){if(Ge[e]){if((s=ke()-l)>=i)return Ze(e),o(n),void(r&&r());o((n-t)*a(s/i)+t),Ge[e].raf=F(d)}};d()},Je={shout:Ce,listen:Me,viewportSize:he,options:r,isMainScrollAnimating:function(){return ne},getZoomLevel:function(){return g},getCurrentIndex:function(){return c},isDragging:function(){return G},isZooming:function(){return Q},setScrollOffset:function(e,t){me.x=e,Y=me.y=t,Ce("updateScrollOffset",me)},applyZoomPan:function(e,t,n,i){ue.x=t,ue.y=n,g=e,Ie(i)},init:function(){if(!s&&!l){var n;o.framework=a,o.template=e,o.bg=a.getChildByClass(e,"pswp__bg"),A=e.className,s=!0,N=a.detectFeatures(),F=N.raf,O=N.caf,T=N.transform,L=N.oldIE,o.scrollWrap=a.getChildByClass(e,"pswp__scroll-wrap"),o.container=a.getChildByClass(o.scrollWrap,"pswp__container"),u=o.container.style,o.itemHolders=x=[{el:o.container.children[0],wrap:0,index:-1},{el:o.container.children[1],wrap:0,index:-1},{el:o.container.children[2],wrap:0,index:-1}],x[0].el.style.display=x[2].el.style.display="none",function(){if(T){var t=N.perspective&&!E;return y="translate"+(t?"3d(":"("),void(w=N.perspective?", 0px)":")")}T="left",a.addClass(e,"pswp--ie"),Fe=function(e,t){t.left=e+"px"},Ee=function(e){var t=e.fitRatio>1?1:e.fitRatio,n=e.container.style,i=t*e.w,a=t*e.h;n.width=i+"px",n.height=a+"px",n.left=e.initialPosition.x+"px",n.top=e.initialPosition.y+"px"},Ie=function(){if(te){var e=te,t=o.currItem,n=t.fitRatio>1?1:t.fitRatio,i=n*t.w,a=n*t.h;e.width=i+"px",e.height=a+"px",e.left=ue.x+"px",e.top=ue.y+"px"}}}(),p={resize:o.updateSize,orientationchange:function(){clearTimeout(R),R=setTimeout((function(){he.x!==o.scrollWrap.clientWidth&&o.updateSize()}),500)},scroll:ze,keydown:je,click:We};var i=N.isOldIOSPhone||N.isOldAndroid||N.isMobileOpera;for(N.animationName&&N.transform&&!i||(r.showAnimationDuration=r.hideAnimationDuration=0),n=0;n<ye.length;n++)o["init"+ye[n]]();if(t)(o.ui=new t(o,a)).init();Ce("firstUpdate"),c=c||r.index||0,(isNaN(c)||c<0||c>=Ut())&&(c=0),o.currItem=$t(c),(N.isOldIOSPhone||N.isOldAndroid)&&(ve=!1),e.setAttribute("aria-hidden","false"),r.modal&&(ve?e.style.position="fixed":(e.style.position="absolute",e.style.top=a.getScrollY()+"px")),void 0===Y&&(Ce("initialLayout"),Y=P=a.getScrollY());var d="pswp--open ";for(r.mainClass&&(d+=r.mainClass+" "),r.showHideOpacity&&(d+="pswp--animate_opacity "),d+=E?"pswp--touch":"pswp--notouch",d+=N.animationName?" pswp--css_animation":"",d+=N.svg?" pswp--svg":"",a.addClass(e,d),o.updateSize(),h=-1,ge=null,n=0;n<3;n++)Fe((n+h)*pe.x,x[n].el.style);L||a.bind(o.scrollWrap,m,o),Me("initialZoomInEnd",(function(){o.setContent(x[0],c-1),o.setContent(x[2],c+1),x[0].el.style.display=x[2].el.style.display="block",r.focus&&e.focus(),a.bind(document,"keydown",o),N.transform&&a.bind(o.scrollWrap,"click",o),r.mouseUsed||a.bind(document,"mousemove",Ne),a.bind(window,"resize scroll orientationchange",o),Ce("bindEvents")})),o.setContent(x[1],c),o.updateCurrItem(),Ce("afterInit"),ve||(_=setInterval((function(){Ve||G||Q||g!==o.currItem.initialZoomLevel||o.updateSize()}),1e3)),a.addClass(e,"pswp--visible")}},close:function(){s&&(s=!1,l=!0,Ce("close"),a.unbind(window,"resize scroll orientationchange",o),a.unbind(window,"scroll",p.scroll),a.unbind(document,"keydown",o),a.unbind(document,"mousemove",Ne),N.transform&&a.unbind(o.scrollWrap,"click",o),G&&a.unbind(window,f,o),clearTimeout(R),Ce("unbindEvents"),jt(o.currItem,null,!0,o.destroy))},destroy:function(){Ce("destroy"),Yt&&clearTimeout(Yt),e.setAttribute("aria-hidden","true"),e.className=A,_&&clearInterval(_),a.unbind(o.scrollWrap,m,o),a.unbind(window,"scroll",o),mt(),qe(),De=null},panTo:function(e,t,n){n||(e>ee.min.x?e=ee.min.x:e<ee.max.x&&(e=ee.max.x),t>ee.min.y?t=ee.min.y:t<ee.max.y&&(t=ee.max.y)),ue.x=e,ue.y=t,Ie()},handleEvent:function(e){e=e||window.event,p[e.type]&&p[e.type](e)},goTo:function(e){var t=(e=xe(e))-c;ge=t,c=e,o.currItem=$t(c),fe-=t,Oe(pe.x*fe),qe(),ne=!1,o.updateCurrItem()},next:function(){o.goTo(c+1)},prev:function(){o.goTo(c-1)},updateCurrZoomItem:function(e){if(e&&Ce("beforeChange",0),x[1].el.children.length){var t=x[1].el.children[0];te=a.hasClass(t,"pswp__zoom-wrap")?t.style:null}else te=null;ee=o.currItem.bounds,v=g=o.currItem.initialZoomLevel,ue.x=ee.center.x,ue.y=ee.center.y,e&&Ce("afterChange")},invalidateCurrItems:function(){b=!0;for(var e=0;e<3;e++)x[e].item&&(x[e].item.needsUpdate=!0)},updateCurrItem:function(e){if(0!==ge){var t,n=Math.abs(ge);if(!(e&&n<2)){o.currItem=$t(c),_e=!1,Ce("beforeChange",ge),n>=3&&(h+=ge+(ge>0?-3:3),n=3);for(var i=0;i<n;i++)ge>0?(t=x.shift(),x[2]=t,h++,Fe((h+2)*pe.x,t.el.style),o.setContent(t,c-n+i+1+1)):(t=x.pop(),x.unshift(t),h--,Fe(h*pe.x,t.el.style),o.setContent(t,c+n-i-1-1));if(te&&1===Math.abs(ge)){var a=$t(D);a.initialZoomLevel!==g&&(Vt(a,he),Kt(a),Ee(a))}ge=0,o.updateCurrZoomItem(),D=c,Ce("afterChange")}}},updateSize:function(t){if(!ve&&r.modal){var n=a.getScrollY();if(Y!==n&&(e.style.top=n+"px",Y=n),!t&&we.x===window.innerWidth&&we.y===window.innerHeight)return;we.x=window.innerWidth,we.y=window.innerHeight,e.style.height=we.y+"px"}if(he.x=o.scrollWrap.clientWidth,he.y=o.scrollWrap.clientHeight,ze(),pe.x=he.x+Math.round(he.x*r.spacing),pe.y=he.y,Oe(pe.x*fe),Ce("beforeResize"),void 0!==h){for(var i,s,l,d=0;d<3;d++)i=x[d],Fe((d+h)*pe.x,i.el.style),l=c+d-1,r.loop&&Ut()>2&&(l=xe(l)),(s=$t(l))&&(b||s.needsUpdate||!s.bounds)?(o.cleanSlide(s),o.setContent(i,l),1===d&&(o.currItem=s,o.updateCurrZoomItem(!0)),s.needsUpdate=!1):-1===i.index&&l>=0&&o.setContent(i,l),s&&s.container&&(Vt(s,he),Kt(s),Ee(s));b=!1}v=g=o.currItem.initialZoomLevel,(ee=o.currItem.bounds)&&(ue.x=ee.center.x,ue.y=ee.center.y,Ie(!0)),Ce("resize")},zoomTo:function(e,t,n,i,o){t&&(v=g,ut.x=Math.abs(t.x)-ue.x,ut.y=Math.abs(t.y)-ue.y,Pe(ce,ue));var r=Re(e,!1),s={};Ue("x",r,s,e),Ue("y",r,s,e);var l=g,d=ue.x,c=ue.y;Le(s);var u=function(t){1===t?(g=e,ue.x=s.x,ue.y=s.y):(g=(e-l)*t+l,ue.x=(s.x-d)*t+d,ue.y=(s.y-c)*t+c),o&&o(t),Ie(1===t)};n?Ke("customZoomTo",0,1,n,i||a.easing.sine.inOut,u):u(1)}},Qe={},Xe={},et={},tt={},nt={},it=[],at={},ot=[],rt={},st=0,lt={x:0,y:0},dt=0,ct={x:0,y:0},ut={x:0,y:0},ht={x:0,y:0},ft=function(e,t){return rt.x=Math.abs(e.x-t.x),rt.y=Math.abs(e.y-t.y),Math.sqrt(rt.x*rt.x+rt.y*rt.y)},mt=function(){q&&(O(q),q=null)},pt=function(){G&&(q=F(pt),It())},gt=function(e,t){return!(!e||e===document)&&(!(e.getAttribute("class")&&e.getAttribute("class").indexOf("pswp__scroll-wrap")>-1)&&(t(e)?e:gt(e.parentNode,t)))},vt={},yt=function(e,t){return vt.prevent=!gt(e.target,r.isClickableElement),Ce("preventDragEvent",e,t,vt),vt.prevent},wt=function(e,t){return t.x=e.pageX,t.y=e.pageY,t.id=e.identifier,t},_t=function(e,t,n){n.x=.5*(e.x+t.x),n.y=.5*(e.y+t.y)},bt=function(){var e=ue.y-o.currItem.initialPosition.y;return 1-Math.abs(e/(he.y/2))},xt={},Dt={},Mt=[],Ct=function(e){for(;Mt.length>0;)Mt.pop();return I?(le=0,it.forEach((function(e){0===le?Mt[0]=e:1===le&&(Mt[1]=e),le++}))):e.type.indexOf("touch")>-1?e.touches&&e.touches.length>0&&(Mt[0]=wt(e.touches[0],xt),e.touches.length>1&&(Mt[1]=wt(e.touches[1],Dt))):(xt.x=e.pageX,xt.y=e.pageY,xt.id="",Mt[0]=xt),Mt},kt=function(e,t){var n,i,a,s,l=ue[e]+t[e],d=t[e]>0,c=ct.x+t.x,u=ct.x-at.x;if(n=l>ee.min[e]||l<ee.max[e]?r.panEndFriction:1,l=ue[e]+t[e]*n,(r.allowPanToNext||g===o.currItem.initialZoomLevel)&&(te?"h"!==ie||"x"!==e||Z||(d?(l>ee.min[e]&&(n=r.panEndFriction,ee.min[e]-l,i=ee.min[e]-ce[e]),(i<=0||u<0)&&Ut()>1?(s=c,u<0&&c>at.x&&(s=at.x)):ee.min.x!==ee.max.x&&(a=l)):(l<ee.max[e]&&(n=r.panEndFriction,l-ee.max[e],i=ce[e]-ee.max[e]),(i<=0||u>0)&&Ut()>1?(s=c,u>0&&c<at.x&&(s=at.x)):ee.min.x!==ee.max.x&&(a=l))):s=c,"x"===e))return void 0!==s&&(Oe(s,!0),K=s!==at.x),ee.min.x!==ee.max.x&&(void 0!==a?ue.x=a:K||(ue.x+=t.x*n)),void 0!==s;ne||K||g>o.currItem.fitRatio&&(ue[e]+=t[e]*n)},St=function(e){if(!("mousedown"===e.type&&e.button>0))if(Ht)e.preventDefault();else if(!z||"mousedown"!==e.type){if(yt(e,!0)&&e.preventDefault(),Ce("pointerDown"),I){var t=a.arraySearch(it,e.pointerId,"id");t<0&&(t=it.length),it[t]={x:e.pageX,y:e.pageY,id:e.pointerId}}var n=Ct(e),i=n.length;J=null,qe(),G&&1!==i||(G=ae=!0,a.bind(window,f,o),j=se=oe=W=K=B=V=Z=!1,ie=null,Ce("firstTouchStart",n),Pe(ce,ue),de.x=de.y=0,Pe(tt,n[0]),Pe(nt,tt),at.x=pe.x*fe,ot=[{x:tt.x,y:tt.y}],$=H=ke(),Re(g,!0),mt(),pt()),!Q&&i>1&&!ne&&!K&&(v=g,Z=!1,Q=V=!0,de.y=de.x=0,Pe(ce,ue),Pe(Qe,n[0]),Pe(Xe,n[1]),_t(Qe,Xe,ht),ut.x=Math.abs(ht.x)-ue.x,ut.y=Math.abs(ht.y)-ue.y,X=ft(Qe,Xe))}},Tt=function(e){if(e.preventDefault(),I){var t=a.arraySearch(it,e.pointerId,"id");if(t>-1){var n=it[t];n.x=e.pageX,n.y=e.pageY}}if(G){var i=Ct(e);if(ie||B||Q)J=i;else if(ct.x!==pe.x*fe)ie="h";else{var o=Math.abs(i[0].x-tt.x)-Math.abs(i[0].y-tt.y);Math.abs(o)>=10&&(ie=o>0?"h":"v",J=i)}}},It=function(){if(J){var e=J.length;if(0!==e)if(Pe(Qe,J[0]),et.x=Qe.x-tt.x,et.y=Qe.y-tt.y,Q&&e>1){if(tt.x=Qe.x,tt.y=Qe.y,!et.x&&!et.y&&function(e,t){return e.x===t.x&&e.y===t.y}(J[1],Xe))return;Pe(Xe,J[1]),Z||(Z=!0,Ce("zoomGestureStarted"));var t=ft(Qe,Xe),n=Pt(t);n>o.currItem.initialZoomLevel+o.currItem.initialZoomLevel/15&&(se=!0);var i=1,a=He(),s=$e();if(n<a)if(r.pinchToClose&&!se&&v<=o.currItem.initialZoomLevel){var l=1-(a-n)/(a/1.2);Se(l),Ce("onPinchClose",l),oe=!0}else(i=(a-n)/a)>1&&(i=1),n=a-i*(a/3);else n>s&&((i=(n-s)/(6*a))>1&&(i=1),n=s+i*a);i<0&&(i=0),t,_t(Qe,Xe,lt),de.x+=lt.x-ht.x,de.y+=lt.y-ht.y,Pe(ht,lt),ue.x=Ae("x",n),ue.y=Ae("y",n),j=n>g,g=n,Ie()}else{if(!ie)return;if(ae&&(ae=!1,Math.abs(et.x)>=10&&(et.x-=J[0].x-nt.x),Math.abs(et.y)>=10&&(et.y-=J[0].y-nt.y)),tt.x=Qe.x,tt.y=Qe.y,0===et.x&&0===et.y)return;if("v"===ie&&r.closeOnVerticalDrag&&"fit"===r.scaleMode&&g===o.currItem.initialZoomLevel){de.y+=et.y,ue.y+=et.y;var d=bt();return W=!0,Ce("onVerticalDrag",d),Se(d),void Ie()}!function(e,t,n){if(e-$>50){var i=ot.length>2?ot.shift():{};i.x=t,i.y=n,ot.push(i),$=e}}(ke(),Qe.x,Qe.y),B=!0,ee=o.currItem.bounds,kt("x",et)||(kt("y",et),Le(ue),Ie())}}},Et=function(e){if(N.isOldAndroid){if(z&&"mouseup"===e.type)return;e.type.indexOf("touch")>-1&&(clearTimeout(z),z=setTimeout((function(){z=0}),600))}var t;if(Ce("pointerUp"),yt(e,!1)&&e.preventDefault(),I){var n=a.arraySearch(it,e.pointerId,"id");if(n>-1)if(t=it.splice(n,1)[0],navigator.pointerEnabled)t.type=e.pointerType||"mouse";else{t.type={4:"mouse",2:"touch",3:"pen"}[e.pointerType],t.type||(t.type=e.pointerType||"mouse")}}var i,s=Ct(e),l=s.length;if("mouseup"===e.type&&(l=0),2===l)return J=null,!0;1===l&&Pe(nt,s[0]),0!==l||ie||ne||(t||("mouseup"===e.type?t={x:e.pageX,y:e.pageY,type:"mouse"}:e.changedTouches&&e.changedTouches[0]&&(t={x:e.changedTouches[0].pageX,y:e.changedTouches[0].pageY,type:"touch"})),Ce("touchRelease",e,t));var d=-1;if(0===l&&(G=!1,a.unbind(window,f,o),mt(),Q?d=0:-1!==dt&&(d=ke()-dt)),dt=1===l?ke():-1,i=-1!==d&&d<150?"zoom":"swipe",Q&&l<2&&(Q=!1,1===l&&(i="zoomPointerUp"),Ce("zoomGestureEnded")),J=null,B||Z||ne||W)if(qe(),U||(U=Ft()),U.calculateSwipeSpeed("x"),W){if(bt()<r.verticalDragRange)o.close();else{var c=ue.y,u=re;Ke("verticalDrag",0,1,300,a.easing.cubic.out,(function(e){ue.y=(o.currItem.initialPosition.y-c)*e+c,Se((1-u)*e+u),Ie()})),Ce("onVerticalDrag",1)}}else{if((K||ne)&&0===l){if(At(i,U))return;i="zoomPointerUp"}ne||("swipe"===i?!K&&g>o.currItem.fitRatio&&Ot(U):Lt())}},Ft=function(){var e,t,n={lastFlickOffset:{},lastFlickDist:{},lastFlickSpeed:{},slowDownRatio:{},slowDownRatioReverse:{},speedDecelerationRatio:{},speedDecelerationRatioAbs:{},distanceOffset:{},backAnimDestination:{},backAnimStarted:{},calculateSwipeSpeed:function(i){ot.length>1?(e=ke()-$+50,t=ot[ot.length-2][i]):(e=ke()-H,t=nt[i]),n.lastFlickOffset[i]=tt[i]-t,n.lastFlickDist[i]=Math.abs(n.lastFlickOffset[i]),n.lastFlickDist[i]>20?n.lastFlickSpeed[i]=n.lastFlickOffset[i]/e:n.lastFlickSpeed[i]=0,Math.abs(n.lastFlickSpeed[i])<.1&&(n.lastFlickSpeed[i]=0),n.slowDownRatio[i]=.95,n.slowDownRatioReverse[i]=1-n.slowDownRatio[i],n.speedDecelerationRatio[i]=1},calculateOverBoundsAnimOffset:function(e,t){n.backAnimStarted[e]||(ue[e]>ee.min[e]?n.backAnimDestination[e]=ee.min[e]:ue[e]<ee.max[e]&&(n.backAnimDestination[e]=ee.max[e]),void 0!==n.backAnimDestination[e]&&(n.slowDownRatio[e]=.7,n.slowDownRatioReverse[e]=1-n.slowDownRatio[e],n.speedDecelerationRatioAbs[e]<.05&&(n.lastFlickSpeed[e]=0,n.backAnimStarted[e]=!0,Ke("bounceZoomPan"+e,ue[e],n.backAnimDestination[e],t||300,a.easing.sine.out,(function(t){ue[e]=t,Ie()})))))},calculateAnimOffset:function(e){n.backAnimStarted[e]||(n.speedDecelerationRatio[e]=n.speedDecelerationRatio[e]*(n.slowDownRatio[e]+n.slowDownRatioReverse[e]-n.slowDownRatioReverse[e]*n.timeDiff/10),n.speedDecelerationRatioAbs[e]=Math.abs(n.lastFlickSpeed[e]*n.speedDecelerationRatio[e]),n.distanceOffset[e]=n.lastFlickSpeed[e]*n.speedDecelerationRatio[e]*n.timeDiff,ue[e]+=n.distanceOffset[e])},panAnimLoop:function(){if(Ge.zoomPan&&(Ge.zoomPan.raf=F(n.panAnimLoop),n.now=ke(),n.timeDiff=n.now-n.lastNow,n.lastNow=n.now,n.calculateAnimOffset("x"),n.calculateAnimOffset("y"),Ie(),n.calculateOverBoundsAnimOffset("x"),n.calculateOverBoundsAnimOffset("y"),n.speedDecelerationRatioAbs.x<.05&&n.speedDecelerationRatioAbs.y<.05))return ue.x=Math.round(ue.x),ue.y=Math.round(ue.y),Ie(),void Ze("zoomPan")}};return n},Ot=function(e){if(e.calculateSwipeSpeed("y"),ee=o.currItem.bounds,e.backAnimDestination={},e.backAnimStarted={},Math.abs(e.lastFlickSpeed.x)<=.05&&Math.abs(e.lastFlickSpeed.y)<=.05)return e.speedDecelerationRatioAbs.x=e.speedDecelerationRatioAbs.y=0,e.calculateOverBoundsAnimOffset("x"),e.calculateOverBoundsAnimOffset("y"),!0;Be("zoomPan"),e.lastNow=ke(),e.panAnimLoop()},At=function(e,t){var n,i,s;if(ne||(st=c),"swipe"===e){var l=tt.x-nt.x,d=t.lastFlickDist.x<10;l>30&&(d||t.lastFlickOffset.x>20)?i=-1:l<-30&&(d||t.lastFlickOffset.x<-20)&&(i=1)}i&&((c+=i)<0?(c=r.loop?Ut()-1:0,s=!0):c>=Ut()&&(c=r.loop?0:Ut()-1,s=!0),s&&!r.loop||(ge+=i,fe-=i,n=!0));var u,h=pe.x*fe,f=Math.abs(h-ct.x);return n||h>ct.x==t.lastFlickSpeed.x>0?(u=Math.abs(t.lastFlickSpeed.x)>0?f/Math.abs(t.lastFlickSpeed.x):333,u=Math.min(u,400),u=Math.max(u,250)):u=333,st===c&&(n=!1),ne=!0,Ce("mainScrollAnimStart"),Ke("mainScroll",ct.x,h,u,a.easing.cubic.out,Oe,(function(){qe(),ne=!1,st=-1,(n||st!==c)&&o.updateCurrItem(),Ce("mainScrollAnimComplete")})),n&&o.updateCurrItem(!0),n},Pt=function(e){return 1/X*e*v},Lt=function(){var e=g,t=He(),n=$e();g<t?e=t:g>n&&(e=n);var i,r=re;return oe&&!j&&!se&&g<t?(o.close(),!0):(oe&&(i=function(e){Se((1-r)*e+r)}),o.zoomTo(e,0,200,a.easing.cubic.out,i),!0)};be("Gestures",{publicMethods:{initGestures:function(){var e=function(e,t,n,i,a){M=e+t,C=e+n,k=e+i,S=a?e+a:""};(I=N.pointerEvent)&&N.touch&&(N.touch=!1),I?navigator.pointerEnabled?e("pointer","down","move","up","cancel"):e("MSPointer","Down","Move","Up","Cancel"):N.touch?(e("touch","start","move","end","cancel"),E=!0):e("mouse","down","move","up"),f=C+" "+k+" "+S,m=M,I&&!E&&(E=navigator.maxTouchPoints>1||navigator.msMaxTouchPoints>1),o.likelyTouchDevice=E,p[M]=St,p[C]=Tt,p[k]=Et,S&&(p[S]=p[k]),N.touch&&(m+=" mousedown",f+=" mousemove mouseup",p.mousedown=p[M],p.mousemove=p[C],p.mouseup=p[k]),E||(r.allowPanToNext=!1)}}});var Yt,Nt,Rt,Ht,$t,Ut,jt=function(t,n,i,s){var l;Yt&&clearTimeout(Yt),Ht=!0,Rt=!0,t.initialLayout?(l=t.initialLayout,t.initialLayout=null):l=r.getThumbBoundsFn&&r.getThumbBoundsFn(c);var u=i?r.hideAnimationDuration:r.showAnimationDuration,h=function(){Ze("initialZoom"),i?(o.template.removeAttribute("style"),o.bg.removeAttribute("style")):(Se(1),n&&(n.style.display="block"),a.addClass(e,"pswp--animated-in"),Ce("initialZoom"+(i?"OutEnd":"InEnd"))),s&&s(),Ht=!1};if(!u||!l||void 0===l.x)return Ce("initialZoom"+(i?"Out":"In")),g=t.initialZoomLevel,Pe(ue,t.initialPosition),Ie(),e.style.opacity=i?0:1,Se(1),void(u?setTimeout((function(){h()}),u):h());var f,m;f=d,m=!o.currItem.src||o.currItem.loadError||r.showHideOpacity,t.miniImg&&(t.miniImg.style.webkitBackfaceVisibility="hidden"),i||(g=l.w/t.w,ue.x=l.x,ue.y=l.y-P,o[m?"template":"bg"].style.opacity=.001,Ie()),Be("initialZoom"),i&&!f&&a.removeClass(e,"pswp--animated-in"),m&&(i?a[(f?"remove":"add")+"Class"](e,"pswp--animate_opacity"):setTimeout((function(){a.addClass(e,"pswp--animate_opacity")}),30)),Yt=setTimeout((function(){if(Ce("initialZoom"+(i?"Out":"In")),i){var n=l.w/t.w,o={x:ue.x,y:ue.y},r=g,s=re,d=function(t){1===t?(g=n,ue.x=l.x,ue.y=l.y-Y):(g=(n-r)*t+r,ue.x=(l.x-o.x)*t+o.x,ue.y=(l.y-Y-o.y)*t+o.y),Ie(),m?e.style.opacity=1-t:Se(s-t*s)};f?Ke("initialZoom",0,1,u,a.easing.cubic.out,d,h):(d(1),Yt=setTimeout(h,u+20))}else g=t.initialZoomLevel,Pe(ue,t.initialPosition),Ie(),Se(1),m?e.style.opacity=1:Se(1),Yt=setTimeout(h,u+20)}),i?25:90)},Wt={},zt=[],Gt={index:0,errorMsg:'<div class="pswp__error-msg"><a href="%url%" target="_blank">The image</a> could not be loaded.</div>',forceProgressiveLoading:!1,preload:[1,1],getNumItemsFn:function(){return Nt.length}},Vt=function(e,t,n){if(e.src&&!e.loadError){var i=!n;if(i&&(e.vGap||(e.vGap={top:0,bottom:0}),Ce("parseVerticalMargin",e)),Wt.x=t.x,Wt.y=t.y-e.vGap.top-e.vGap.bottom,i){var a=Wt.x/e.w,o=Wt.y/e.h;e.fitRatio=a<o?a:o;var s=r.scaleMode;"orig"===s?n=1:"fit"===s&&(n=e.fitRatio),n>1&&(n=1),e.initialZoomLevel=n,e.bounds||(e.bounds={center:{x:0,y:0},max:{x:0,y:0},min:{x:0,y:0}})}if(!n)return;return function(e,t,n){var i=e.bounds;i.center.x=Math.round((Wt.x-t)/2),i.center.y=Math.round((Wt.y-n)/2)+e.vGap.top,i.max.x=t>Wt.x?Math.round(Wt.x-t):i.center.x,i.max.y=n>Wt.y?Math.round(Wt.y-n)+e.vGap.top:i.center.y,i.min.x=t>Wt.x?0:i.center.x,i.min.y=n>Wt.y?e.vGap.top:i.center.y}(e,e.w*n,e.h*n),i&&n===e.initialZoomLevel&&(e.initialPosition=e.bounds.center),e.bounds}return e.w=e.h=0,e.initialZoomLevel=e.fitRatio=1,e.bounds={center:{x:0,y:0},max:{x:0,y:0},min:{x:0,y:0}},e.initialPosition=e.bounds.center,e.bounds},Zt=function(e,t,n,i,a,r){t.loadError||i&&(t.imageAppended=!0,Kt(t,i,t===o.currItem&&_e),n.appendChild(i),r&&setTimeout((function(){t&&t.loaded&&t.placeholder&&(t.placeholder.style.display="none",t.placeholder=null)}),500))},Bt=function(e){e.loading=!0,e.loaded=!1;var t=e.img=a.createEl("pswp__img","img"),n=function(){e.loading=!1,e.loaded=!0,e.loadComplete?e.loadComplete(e):e.img=null,t.onload=t.onerror=null,t=null};return t.onload=n,t.onerror=function(){e.loadError=!0,n()},t.src=e.src,t},qt=function(e,t){if(e.src&&e.loadError&&e.container)return t&&(e.container.innerHTML=""),e.container.innerHTML=r.errorMsg.replace("%url%",e.src),!0},Kt=function(e,t,n){if(e.src){t||(t=e.container.lastChild);var i=n?e.w:Math.round(e.w*e.fitRatio),a=n?e.h:Math.round(e.h*e.fitRatio);e.placeholder&&!e.loaded&&(e.placeholder.style.width=i+"px",e.placeholder.style.height=a+"px"),t.style.width=i+"px",t.style.height=a+"px"}},Jt=function(){if(zt.length){for(var e,t=0;t<zt.length;t++)(e=zt[t]).holder.index===e.index&&Zt(e.index,e.item,e.baseDiv,e.img,0,e.clearPlaceholder);zt=[]}};be("Controller",{publicMethods:{lazyLoadItem:function(e){e=xe(e);var t=$t(e);t&&(!t.loaded&&!t.loading||b)&&(Ce("gettingData",e,t),t.src&&Bt(t))},initController:function(){a.extend(r,Gt,!0),o.items=Nt=n,$t=o.getItemAt,Ut=r.getNumItemsFn,r.loop,Ut()<3&&(r.loop=!1),Me("beforeChange",(function(e){var t,n=r.preload,i=null===e||e>=0,a=Math.min(n[0],Ut()),s=Math.min(n[1],Ut());for(t=1;t<=(i?s:a);t++)o.lazyLoadItem(c+t);for(t=1;t<=(i?a:s);t++)o.lazyLoadItem(c-t)})),Me("initialLayout",(function(){o.currItem.initialLayout=r.getThumbBoundsFn&&r.getThumbBoundsFn(c)})),Me("mainScrollAnimComplete",Jt),Me("initialZoomInEnd",Jt),Me("destroy",(function(){for(var e,t=0;t<Nt.length;t++)(e=Nt[t]).container&&(e.container=null),e.placeholder&&(e.placeholder=null),e.img&&(e.img=null),e.preloader&&(e.preloader=null),e.loadError&&(e.loaded=e.loadError=!1);zt=null}))},getItemAt:function(e){return e>=0&&(void 0!==Nt[e]&&Nt[e])},allowProgressiveImg:function(){return r.forceProgressiveLoading||!E||r.mouseUsed||screen.width>1200},setContent:function(e,t){r.loop&&(t=xe(t));var n=o.getItemAt(e.index);n&&(n.container=null);var i,l=o.getItemAt(t);if(l){Ce("gettingData",t,l),e.index=t,e.item=l;var d=l.container=a.createEl("pswp__zoom-wrap");if(!l.src&&l.html&&(l.html.tagName?d.appendChild(l.html):d.innerHTML=l.html),qt(l),Vt(l,he),!l.src||l.loadError||l.loaded)l.src&&!l.loadError&&((i=a.createEl("pswp__img","img")).style.opacity=1,i.src=l.src,Kt(l,i),Zt(0,l,d,i));else{if(l.loadComplete=function(n){if(s){if(e&&e.index===t){if(qt(n,!0))return n.loadComplete=n.img=null,Vt(n,he),Ee(n),void(e.index===c&&o.updateCurrZoomItem());n.imageAppended?!Ht&&n.placeholder&&(n.placeholder.style.display="none",n.placeholder=null):N.transform&&(ne||Ht)?zt.push({item:n,baseDiv:d,img:n.img,index:t,holder:e,clearPlaceholder:!0}):Zt(0,n,d,n.img,0,!0)}n.loadComplete=null,n.img=null,Ce("imageLoadComplete",t,n)}},a.features.transform){var u="pswp__img pswp__img--placeholder";u+=l.msrc?"":" pswp__img--placeholder--blank";var h=a.createEl(u,l.msrc?"img":"");l.msrc&&(h.src=l.msrc),Kt(l,h),d.appendChild(h),l.placeholder=h}l.loading||Bt(l),o.allowProgressiveImg()&&(!Rt&&N.transform?zt.push({item:l,baseDiv:d,img:l.img,index:t,holder:e}):Zt(0,l,d,l.img,0,!0))}Rt||t!==c?Ee(l):(te=d.style,jt(l,i||l.img)),e.el.innerHTML="",e.el.appendChild(d)}else e.el.innerHTML=""},cleanSlide:function(e){e.img&&(e.img.onload=e.img.onerror=null),e.loaded=e.loading=e.img=e.imageAppended=!1}}});var Qt,Xt,en={},tn=function(e,t,n){var i=document.createEvent("CustomEvent"),a={origEvent:e,target:e.target,releasePoint:t,pointerType:n||"touch"};i.initCustomEvent("pswpTap",!0,!0,a),e.target.dispatchEvent(i)};be("Tap",{publicMethods:{initTap:function(){Me("firstTouchStart",o.onTapStart),Me("touchRelease",o.onTapRelease),Me("destroy",(function(){en={},Qt=null}))},onTapStart:function(e){e.length>1&&(clearTimeout(Qt),Qt=null)},onTapRelease:function(e,t){var n,i;if(t&&(!B&&!V&&!Ve)){var o=t;if(Qt&&(clearTimeout(Qt),Qt=null,n=o,i=en,Math.abs(n.x-i.x)<25&&Math.abs(n.y-i.y)<25))return void Ce("doubleTap",o);if("mouse"===t.type)return void tn(e,t,"mouse");if("BUTTON"===e.target.tagName.toUpperCase()||a.hasClass(e.target,"pswp__single-tap"))return void tn(e,t);Pe(en,o),Qt=setTimeout((function(){tn(e,t),Qt=null}),300)}}}}),be("DesktopZoom",{publicMethods:{initDesktopZoom:function(){L||(E?Me("mouseUsed",(function(){o.setupDesktopZoom()})):o.setupDesktopZoom(!0))},setupDesktopZoom:function(t){Xt={};var n="wheel mousewheel DOMMouseScroll";Me("bindEvents",(function(){a.bind(e,n,o.handleMouseWheel)})),Me("unbindEvents",(function(){Xt&&a.unbind(e,n,o.handleMouseWheel)})),o.mouseZoomedIn=!1;var i,r=function(){o.mouseZoomedIn&&(a.removeClass(e,"pswp--zoomed-in"),o.mouseZoomedIn=!1),g<1?a.addClass(e,"pswp--zoom-allowed"):a.removeClass(e,"pswp--zoom-allowed"),s()},s=function(){i&&(a.removeClass(e,"pswp--dragging"),i=!1)};Me("resize",r),Me("afterChange",r),Me("pointerDown",(function(){o.mouseZoomedIn&&(i=!0,a.addClass(e,"pswp--dragging"))})),Me("pointerUp",s),t||r()},handleMouseWheel:function(e){if(g<=o.currItem.fitRatio)return r.modal&&(!r.closeOnScroll||Ve||G?e.preventDefault():T&&Math.abs(e.deltaY)>2&&(d=!0,o.close())),!0;if(e.stopPropagation(),Xt.x=0,"deltaX"in e)1===e.deltaMode?(Xt.x=18*e.deltaX,Xt.y=18*e.deltaY):(Xt.x=e.deltaX,Xt.y=e.deltaY);else if("wheelDelta"in e)e.wheelDeltaX&&(Xt.x=-.16*e.wheelDeltaX),e.wheelDeltaY?Xt.y=-.16*e.wheelDeltaY:Xt.y=-.16*e.wheelDelta;else{if(!("detail"in e))return;Xt.y=e.detail}Re(g,!0);var t=ue.x-Xt.x,n=ue.y-Xt.y;(r.modal||t<=ee.min.x&&t>=ee.max.x&&n<=ee.min.y&&n>=ee.max.y)&&e.preventDefault(),o.panTo(t,n)},toggleDesktopZoom:function(t){t=t||{x:he.x/2+me.x,y:he.y/2+me.y};var n=r.getDoubleTapZoom(!0,o.currItem),i=g===n;o.mouseZoomedIn=!i,o.zoomTo(i?o.currItem.initialZoomLevel:n,t,333),a[(i?"remove":"add")+"Class"](e,"pswp--zoomed-in")}}});var nn,an,on,rn,sn,ln,dn,cn,un,hn,fn,mn,pn={history:!0,galleryUID:1},gn=function(){return fn.hash.substring(1)},vn=function(){nn&&clearTimeout(nn),on&&clearTimeout(on)},yn=function(){var e=gn(),t={};if(e.length<5)return t;var n,i=e.split("&");for(n=0;n<i.length;n++)if(i[n]){var a=i[n].split("=");a.length<2||(t[a[0]]=a[1])}if(r.galleryPIDs){var o=t.pid;for(t.pid=0,n=0;n<Nt.length;n++)if(Nt[n].pid===o){t.pid=n;break}}else t.pid=parseInt(t.pid,10)-1;return t.pid<0&&(t.pid=0),t},wn=function(){if(on&&clearTimeout(on),Ve||G)on=setTimeout(wn,500);else{rn?clearTimeout(an):rn=!0;var e=c+1,t=$t(c);t.hasOwnProperty("pid")&&(e=t.pid);var n=dn+"&gid="+r.galleryUID+"&pid="+e;cn||-1===fn.hash.indexOf(n)&&(hn=!0);var i=fn.href.split("#")[0]+"#"+n;mn?"#"+n!==window.location.hash&&history[cn?"replaceState":"pushState"]("",document.title,i):cn?fn.replace(i):fn.hash=n,cn=!0,an=setTimeout((function(){rn=!1}),60)}};be("History",{publicMethods:{initHistory:function(){if(a.extend(r,pn,!0),r.history){fn=window.location,hn=!1,un=!1,cn=!1,dn=gn(),mn="pushState"in history,dn.indexOf("gid=")>-1&&(dn=(dn=dn.split("&gid=")[0]).split("?gid=")[0]),Me("afterChange",o.updateURL),Me("unbindEvents",(function(){a.unbind(window,"hashchange",o.onHashChange)}));var e=function(){ln=!0,un||(hn?history.back():dn?fn.hash=dn:mn?history.pushState("",document.title,fn.pathname+fn.search):fn.hash=""),vn()};Me("unbindEvents",(function(){d&&e()})),Me("destroy",(function(){ln||e()})),Me("firstUpdate",(function(){c=yn().pid}));var t=dn.indexOf("pid=");t>-1&&"&"===(dn=dn.substring(0,t)).slice(-1)&&(dn=dn.slice(0,-1)),setTimeout((function(){s&&a.bind(window,"hashchange",o.onHashChange)}),40)}},onHashChange:function(){if(gn()===dn)return un=!0,void o.close();rn||(sn=!0,o.goTo(yn().pid),sn=!1)},updateURL:function(){vn(),sn||(cn?nn=setTimeout(wn,800):wn())}}}),a.extend(o,Je)}})),function(e,t){"function"==typeof define&&define.amd?define(t):"object"==typeof exports?module.exports=t():e.PhotoSwipeUI_Default=t()}(this,(function(){"use strict";return function(e,t){var n,i,a,o,r,s,l,d,c,u,h,f,m,p,g,v,y,w,_=this,b=!1,x=!0,D=!0,M={barsSize:{top:44,bottom:"auto"},closeElClasses:["item","caption","zoom-wrap","ui","top-bar"],timeToIdle:4e3,timeToIdleOutside:1e3,loadingIndicatorDelay:1e3,addCaptionHTMLFn:function(e,t){return e.title?(t.children[0].innerHTML=e.title,!0):(t.children[0].innerHTML="",!1)},closeEl:!0,captionEl:!0,fullscreenEl:!0,zoomEl:!0,shareEl:!0,counterEl:!0,arrowEl:!0,preloaderEl:!0,tapToClose:!1,tapToToggleControls:!0,clickToCloseNonZoomable:!0,shareButtons:[{id:"facebook",label:"Share on Facebook",url:"https://www.facebook.com/sharer/sharer.php?u={{url}}"},{id:"twitter",label:"Tweet",url:"https://twitter.com/intent/tweet?text={{text}}&url={{url}}"},{id:"pinterest",label:"Pin it",url:"http://www.pinterest.com/pin/create/button/?url={{url}}&media={{image_url}}&description={{text}}"},{id:"download",label:"Download image",url:"{{raw_image_url}}",download:!0}],getImageURLForShare:function(){return e.currItem.src||""},getPageURLForShare:function(){return window.location.href},getTextForShare:function(){return e.currItem.title||""},indexIndicatorSep:" / ",fitControlsWidth:1200},C=function(e){if(v)return!0;e=e||window.event,g.timeToIdle&&g.mouseUsed&&!c&&P();for(var n,i,a=(e.target||e.srcElement).getAttribute("class")||"",o=0;o<R.length;o++)(n=R[o]).onTap&&a.indexOf("pswp__"+n.name)>-1&&(n.onTap(),i=!0);if(i){e.stopPropagation&&e.stopPropagation(),v=!0;var r=t.features.isOldAndroid?600:30;setTimeout((function(){v=!1}),r)}},k=function(e,n,i){t[(i?"add":"remove")+"Class"](e,"pswp__"+n)},S=function(){var e=1===g.getNumItemsFn();e!==p&&(k(i,"ui--one-slide",e),p=e)},T=function(){k(l,"share-modal--hidden",D)},I=function(){return(D=!D)?(t.removeClass(l,"pswp__share-modal--fade-in"),setTimeout((function(){D&&T()}),300)):(T(),setTimeout((function(){D||t.addClass(l,"pswp__share-modal--fade-in")}),30)),D||F(),!1},E=function(t){var n=(t=t||window.event).target||t.srcElement;return e.shout("shareLinkClick",t,n),!!n.href&&(!!n.hasAttribute("download")||(window.open(n.href,"pswp_share","scrollbars=yes,resizable=yes,toolbar=no,location=yes,width=550,height=420,top=100,left="+(window.screen?Math.round(screen.width/2-275):100)),D||I(),!1))},F=function(){for(var e,t,n,i,a="",o=0;o<g.shareButtons.length;o++)e=g.shareButtons[o],t=g.getImageURLForShare(e),n=g.getPageURLForShare(e),i=g.getTextForShare(e),a+='<a href="'+e.url.replace("{{url}}",encodeURIComponent(n)).replace("{{image_url}}",encodeURIComponent(t)).replace("{{raw_image_url}}",t).replace("{{text}}",encodeURIComponent(i))+'" target="_blank" class="pswp__share--'+e.id+'"'+(e.download?"download":"")+">"+e.label+"</a>",g.parseShareButtonOut&&(a=g.parseShareButtonOut(e,a));l.children[0].innerHTML=a,l.children[0].onclick=E},O=function(e){for(var n=0;n<g.closeElClasses.length;n++)if(t.hasClass(e,"pswp__"+g.closeElClasses[n]))return!0},A=0,P=function(){clearTimeout(w),A=0,c&&_.setIdle(!1)},L=function(e){var t=(e=e||window.event).relatedTarget||e.toElement;t&&"HTML"!==t.nodeName||(clearTimeout(w),w=setTimeout((function(){_.setIdle(!0)}),g.timeToIdleOutside))},Y=function(e){f!==e&&(k(h,"preloader--active",!e),f=e)},N=function(n){var r=n.vGap;if(!e.likelyTouchDevice||g.mouseUsed||screen.width>g.fitControlsWidth){var s=g.barsSize;if(g.captionEl&&"auto"===s.bottom)if(o||((o=t.createEl("pswp__caption pswp__caption--fake")).appendChild(t.createEl("pswp__caption__center")),i.insertBefore(o,a),t.addClass(i,"pswp__ui--fit")),g.addCaptionHTMLFn(n,o,!0)){var l=o.clientHeight;r.bottom=parseInt(l,10)||44}else r.bottom=s.top;else r.bottom="auto"===s.bottom?0:s.bottom;r.top=s.top}else r.top=r.bottom=0},R=[{name:"caption",option:"captionEl",onInit:function(e){a=e}},{name:"share-modal",option:"shareEl",onInit:function(e){l=e},onTap:function(){I()}},{name:"button--share",option:"shareEl",onInit:function(e){s=e},onTap:function(){I()}},{name:"button--zoom",option:"zoomEl",onTap:e.toggleDesktopZoom},{name:"counter",option:"counterEl",onInit:function(e){r=e}},{name:"button--close",option:"closeEl",onTap:e.close},{name:"button--arrow--left",option:"arrowEl",onTap:e.prev},{name:"button--arrow--right",option:"arrowEl",onTap:e.next},{name:"button--fs",option:"fullscreenEl",onTap:function(){n.isFullscreen()?n.exit():n.enter()}},{name:"preloader",option:"preloaderEl",onInit:function(e){h=e}}];_.init=function(){var r;t.extend(e.options,M,!0),g=e.options,i=t.getChildByClass(e.scrollWrap,"pswp__ui"),(u=e.listen)("onVerticalDrag",(function(e){x&&e<.95?_.hideControls():!x&&e>=.95&&_.showControls()})),u("onPinchClose",(function(e){x&&e<.9?(_.hideControls(),r=!0):r&&!x&&e>.9&&_.showControls()})),u("zoomGestureEnded",(function(){(r=!1)&&!x&&_.showControls()})),u("beforeChange",_.update),u("doubleTap",(function(t){var n=e.currItem.initialZoomLevel;e.getZoomLevel()!==n?e.zoomTo(n,t,333):e.zoomTo(g.getDoubleTapZoom(!1,e.currItem),t,333)})),u("preventDragEvent",(function(e,t,n){var i=e.target||e.srcElement;i&&i.getAttribute("class")&&e.type.indexOf("mouse")>-1&&(i.getAttribute("class").indexOf("__caption")>0||/(SMALL|STRONG|EM)/i.test(i.tagName))&&(n.prevent=!1)})),u("bindEvents",(function(){t.bind(i,"pswpTap click",C),t.bind(e.scrollWrap,"pswpTap",_.onGlobalTap),e.likelyTouchDevice||t.bind(e.scrollWrap,"mouseover",_.onMouseOver)})),u("unbindEvents",(function(){D||I(),y&&clearInterval(y),t.unbind(document,"mouseout",L),t.unbind(document,"mousemove",P),t.unbind(i,"pswpTap click",C),t.unbind(e.scrollWrap,"pswpTap",_.onGlobalTap),t.unbind(e.scrollWrap,"mouseover",_.onMouseOver),n&&(t.unbind(document,n.eventK,_.updateFullscreen),n.isFullscreen()&&(g.hideAnimationDuration=0,n.exit()),n=null)})),u("destroy",(function(){g.captionEl&&(o&&i.removeChild(o),t.removeClass(a,"pswp__caption--empty")),l&&(l.children[0].onclick=null),t.removeClass(i,"pswp__ui--over-close"),t.addClass(i,"pswp__ui--hidden"),_.setIdle(!1)})),g.showAnimationDuration||t.removeClass(i,"pswp__ui--hidden"),u("initialZoomIn",(function(){g.showAnimationDuration&&t.removeClass(i,"pswp__ui--hidden")})),u("initialZoomOut",(function(){t.addClass(i,"pswp__ui--hidden")})),u("parseVerticalMargin",N),function(){var e,n,a,o=function(i){if(i)for(var o=i.length,r=0;r<o;r++){e=i[r],n=e.className;for(var s=0;s<R.length;s++)a=R[s],n.indexOf("pswp__"+a.name)>-1&&(g[a.option]?(t.removeClass(e,"pswp__element--disabled"),a.onInit&&a.onInit(e)):t.addClass(e,"pswp__element--disabled"))}};o(i.children);var r=t.getChildByClass(i,"pswp__top-bar");r&&o(r.children)}(),g.shareEl&&s&&l&&(D=!0),S(),g.timeToIdle&&u("mouseUsed",(function(){t.bind(document,"mousemove",P),t.bind(document,"mouseout",L),y=setInterval((function(){2==++A&&_.setIdle(!0)}),g.timeToIdle/2)})),g.fullscreenEl&&!t.features.isOldAndroid&&(n||(n=_.getFullscreenAPI()),n?(t.bind(document,n.eventK,_.updateFullscreen),_.updateFullscreen(),t.addClass(e.template,"pswp--supports-fs")):t.removeClass(e.template,"pswp--supports-fs")),g.preloaderEl&&(Y(!0),u("beforeChange",(function(){clearTimeout(m),m=setTimeout((function(){e.currItem&&e.currItem.loading?(!e.allowProgressiveImg()||e.currItem.img&&!e.currItem.img.naturalWidth)&&Y(!1):Y(!0)}),g.loadingIndicatorDelay)})),u("imageLoadComplete",(function(t,n){e.currItem===n&&Y(!0)})))},_.setIdle=function(e){c=e,k(i,"ui--idle",e)},_.update=function(){x&&e.currItem?(_.updateIndexIndicator(),g.captionEl&&(g.addCaptionHTMLFn(e.currItem,a),k(a,"caption--empty",!e.currItem.title)),b=!0):b=!1,D||I(),S()},_.updateFullscreen=function(i){i&&setTimeout((function(){e.setScrollOffset(0,t.getScrollY())}),50),t[(n.isFullscreen()?"add":"remove")+"Class"](e.template,"pswp--fs")},_.updateIndexIndicator=function(){g.counterEl&&(r.innerHTML=e.getCurrentIndex()+1+g.indexIndicatorSep+g.getNumItemsFn())},_.onGlobalTap=function(n){var i=(n=n||window.event).target||n.srcElement;if(!v)if(n.detail&&"mouse"===n.detail.pointerType){if(O(i))return void e.close();t.hasClass(i,"pswp__img")&&(1===e.getZoomLevel()&&e.getZoomLevel()<=e.currItem.fitRatio?g.clickToCloseNonZoomable&&e.close():e.toggleDesktopZoom(n.detail.releasePoint))}else if(g.tapToToggleControls&&(x?_.hideControls():_.showControls()),g.tapToClose&&(t.hasClass(i,"pswp__img")||O(i)))return void e.close()},_.onMouseOver=function(e){var t=(e=e||window.event).target||e.srcElement;k(i,"ui--over-close",O(t))},_.hideControls=function(){t.addClass(i,"pswp__ui--hidden"),x=!1},_.showControls=function(){x=!0,b||_.update(),t.removeClass(i,"pswp__ui--hidden")},_.supportsFullscreen=function(){var e=document;return!!(e.exitFullscreen||e.mozCancelFullScreen||e.webkitExitFullscreen||e.msExitFullscreen)},_.getFullscreenAPI=function(){var t,n=document.documentElement,i="fullscreenchange";return n.requestFullscreen?t={enterK:"requestFullscreen",exitK:"exitFullscreen",elementK:"fullscreenElement",eventK:i}:n.mozRequestFullScreen?t={enterK:"mozRequestFullScreen",exitK:"mozCancelFullScreen",elementK:"mozFullScreenElement",eventK:"moz"+i}:n.webkitRequestFullscreen?t={enterK:"webkitRequestFullscreen",exitK:"webkitExitFullscreen",elementK:"webkitFullscreenElement",eventK:"webkit"+i}:n.msRequestFullscreen&&(t={enterK:"msRequestFullscreen",exitK:"msExitFullscreen",elementK:"msFullscreenElement",eventK:"MSFullscreenChange"}),t&&(t.enter=function(){if(d=g.closeOnScroll,g.closeOnScroll=!1,"webkitRequestFullscreen"!==this.enterK)return e.template[this.enterK]();e.template[this.enterK](Element.ALLOW_KEYBOARD_INPUT)},t.exit=function(){return g.closeOnScroll=d,document[this.exitK]()},t.isFullscreen=function(){return document[this.elementK]}),t}}})),function(e){"function"==typeof define&&define.amd?define(["jquery"],e):e("object"==typeof exports?require("jquery"):jQuery)}((function(e){function t(t,i,a){var o={content:{message:"object"==typeof i?i.message:i,title:i.title?i.title:"",icon:i.icon?i.icon:"",url:i.url?i.url:"#",target:i.target?i.target:"-"}};a=e.extend(!0,{},o,a),this.settings=e.extend(!0,{},n,a),this._defaults=n,"-"===this.settings.content.target&&(this.settings.content.target=this.settings.url_target),this.animations={start:"webkitAnimationStart oanimationstart MSAnimationStart animationstart",end:"webkitAnimationEnd oanimationend MSAnimationEnd animationend"},"number"==typeof this.settings.offset&&(this.settings.offset={x:this.settings.offset,y:this.settings.offset}),(this.settings.allow_duplicates||!this.settings.allow_duplicates&&!function(t){var n=!1;return e('[data-notify="container"]').each((function(i,a){var o=e(a),r=o.find('[data-notify="title"]').text().trim(),s=o.find('[data-notify="message"]').html().trim(),l=r===e("<div>"+t.settings.content.title+"</div>").html().trim(),d=s===e("<div>"+t.settings.content.message+"</div>").html().trim(),c=o.hasClass("alert-"+t.settings.type);return l&&d&&c&&(n=!0),!n})),n}(this))&&this.init()}var n={element:"body",position:null,type:"info",allow_dismiss:!0,allow_duplicates:!0,newest_on_top:!1,showProgressbar:!1,placement:{from:"top",align:"right"},offset:20,spacing:10,z_index:1031,delay:5e3,timer:1e3,url_target:"_blank",mouse_over:null,animate:{enter:"animated fadeInDown",exit:"animated fadeOutUp"},onShow:null,onShown:null,onClose:null,onClosed:null,icon_type:"class",template:'<div data-notify="container" class="col-xs-11 col-sm-4 alert alert-{0}" role="alert"><button type="button" aria-hidden="true" class="close" data-notify="dismiss">&times;</button><span data-notify="icon"></span> <span data-notify="title">{1}</span> <span data-notify="message">{2}</span><div class="progress" data-notify="progressbar"><div class="progress-bar progress-bar-{0}" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;"></div></div><a href="{3}" target="{4}" data-notify="url"></a></div>'};String.format=function(){for(var e=arguments[0],t=1;t<arguments.length;t++)e=e.replace(RegExp("\\{"+(t-1)+"\\}","gm"),arguments[t]);return e},e.extend(t.prototype,{init:function(){var e=this;this.buildNotify(),this.settings.content.icon&&this.setIcon(),"#"!=this.settings.content.url&&this.styleURL(),this.styleDismiss(),this.placement(),this.bind(),this.notify={$ele:this.$ele,update:function(t,n){var i={};for(var a in"string"==typeof t?i[t]=n:i=t,i)switch(a){case"type":this.$ele.removeClass("alert-"+e.settings.type),this.$ele.find('[data-notify="progressbar"] > .progress-bar').removeClass("progress-bar-"+e.settings.type),e.settings.type=i[a],this.$ele.addClass("alert-"+i[a]).find('[data-notify="progressbar"] > .progress-bar').addClass("progress-bar-"+i[a]);break;case"icon":var o=this.$ele.find('[data-notify="icon"]');"class"===e.settings.icon_type.toLowerCase()?o.removeClass(e.settings.content.icon).addClass(i[a]):(o.is("img")||o.find("img"),o.attr("src",i[a]));break;case"progress":var r=e.settings.delay-e.settings.delay*(i[a]/100);this.$ele.data("notify-delay",r),this.$ele.find('[data-notify="progressbar"] > div').attr("aria-valuenow",i[a]).css("width",i[a]+"%");break;case"url":this.$ele.find('[data-notify="url"]').attr("href",i[a]);break;case"target":this.$ele.find('[data-notify="url"]').attr("target",i[a]);break;default:this.$ele.find('[data-notify="'+a+'"]').html(i[a])}var s=this.$ele.outerHeight()+parseInt(e.settings.spacing)+parseInt(e.settings.offset.y);e.reposition(s)},close:function(){e.close()}}},buildNotify:function(){var t=this.settings.content;this.$ele=e(String.format(this.settings.template,this.settings.type,t.title,t.message,t.url,t.target)),this.$ele.attr("data-notify-position",this.settings.placement.from+"-"+this.settings.placement.align),this.settings.allow_dismiss||this.$ele.find('[data-notify="dismiss"]').css("display","none"),(this.settings.delay<=0&&!this.settings.showProgressbar||!this.settings.showProgressbar)&&this.$ele.find('[data-notify="progressbar"]').remove()},setIcon:function(){"class"===this.settings.icon_type.toLowerCase()?this.$ele.find('[data-notify="icon"]').addClass(this.settings.content.icon):this.$ele.find('[data-notify="icon"]').is("img")?this.$ele.find('[data-notify="icon"]').attr("src",this.settings.content.icon):this.$ele.find('[data-notify="icon"]').append('<img src="'+this.settings.content.icon+'" alt="Notify Icon" />')},styleDismiss:function(){this.$ele.find('[data-notify="dismiss"]').css({position:"absolute",right:"10px",top:"5px",zIndex:this.settings.z_index+2})},styleURL:function(){this.$ele.find('[data-notify="url"]').css({backgroundImage:"url(data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)",height:"100%",left:0,position:"absolute",top:0,width:"100%",zIndex:this.settings.z_index+1})},placement:function(){var t=this,n=this.settings.offset.y,i={display:"inline-block",margin:"0px auto",position:this.settings.position?this.settings.position:"body"===this.settings.element?"fixed":"absolute",transition:"all .5s ease-in-out",zIndex:this.settings.z_index},a=!1,o=this.settings;switch(e('[data-notify-position="'+this.settings.placement.from+"-"+this.settings.placement.align+'"]:not([data-closing="true"])').each((function(){n=Math.max(n,parseInt(e(this).css(o.placement.from))+parseInt(e(this).outerHeight())+parseInt(o.spacing))})),!0===this.settings.newest_on_top&&(n=this.settings.offset.y),i[this.settings.placement.from]=n+"px",this.settings.placement.align){case"left":case"right":i[this.settings.placement.align]=this.settings.offset.x+"px";break;case"center":i.left=0,i.right=0}this.$ele.css(i).addClass(this.settings.animate.enter),e.each(Array("webkit-","moz-","o-","ms-",""),(function(e,n){t.$ele[0].style[n+"AnimationIterationCount"]=1})),e(this.settings.element).append(this.$ele),!0===this.settings.newest_on_top&&(n=parseInt(n)+parseInt(this.settings.spacing)+this.$ele.outerHeight(),this.reposition(n)),e.isFunction(t.settings.onShow)&&t.settings.onShow.call(this.$ele),this.$ele.one(this.animations.start,(function(){a=!0})).one(this.animations.end,(function(){t.$ele.removeClass(t.settings.animate.enter),e.isFunction(t.settings.onShown)&&t.settings.onShown.call(this)})),setTimeout((function(){a||e.isFunction(t.settings.onShown)&&t.settings.onShown.call(this)}),600)},bind:function(){var t=this;if(this.$ele.find('[data-notify="dismiss"]').on("click",(function(){t.close()})),this.$ele.mouseover((function(){e(this).data("data-hover","true")})).mouseout((function(){e(this).data("data-hover","false")})),this.$ele.data("data-hover","false"),this.settings.delay>0){t.$ele.data("notify-delay",t.settings.delay);var n=setInterval((function(){var e=parseInt(t.$ele.data("notify-delay"))-t.settings.timer;if("false"===t.$ele.data("data-hover")&&"pause"===t.settings.mouse_over||"pause"!=t.settings.mouse_over){var i=(t.settings.delay-e)/t.settings.delay*100;t.$ele.data("notify-delay",e),t.$ele.find('[data-notify="progressbar"] > div').attr("aria-valuenow",i).css("width",i+"%")}e<=-t.settings.timer&&(clearInterval(n),t.close())}),t.settings.timer)}},close:function(){var t=this,n=parseInt(this.$ele.css(this.settings.placement.from)),i=!1;this.$ele.attr("data-closing","true").addClass(this.settings.animate.exit),t.reposition(n),e.isFunction(t.settings.onClose)&&t.settings.onClose.call(this.$ele),this.$ele.one(this.animations.start,(function(){i=!0})).one(this.animations.end,(function(){e(this).remove(),e.isFunction(t.settings.onClosed)&&t.settings.onClosed.call(this)})),setTimeout((function(){i||(t.$ele.remove(),t.settings.onClosed&&t.settings.onClosed(t.$ele))}),600)},reposition:function(t){var n=this,i='[data-notify-position="'+this.settings.placement.from+"-"+this.settings.placement.align+'"]:not([data-closing="true"])',a=this.$ele.nextAll(i);!0===this.settings.newest_on_top&&(a=this.$ele.prevAll(i)),a.each((function(){e(this).css(n.settings.placement.from,t),t=parseInt(t)+parseInt(n.settings.spacing)+e(this).outerHeight()}))}}),e.notify=function(e,n){return new t(this,e,n).notify},e.notifyDefaults=function(t){return n=e.extend(!0,{},n,t)},e.notifyClose=function(t){"warning"===t&&(t="danger"),void 0===t||"all"===t?e("[data-notify]").find('[data-notify="dismiss"]').trigger("click"):"success"===t||"info"===t||"warning"===t||"danger"===t?e(".alert-"+t+"[data-notify]").find('[data-notify="dismiss"]').trigger("click"):t?e(t+"[data-notify]").find('[data-notify="dismiss"]').trigger("click"):e('[data-notify-position="'+t+'"]').find('[data-notify="dismiss"]').trigger("click")},e.notifyCloseExcept=function(t){"warning"===t&&(t="danger"),"success"===t||"info"===t||"warning"===t||"danger"===t?e("[data-notify]").not(".alert-"+t).find('[data-notify="dismiss"]').trigger("click"):e("[data-notify]").not(t).find('[data-notify="dismiss"]').trigger("click")}})),function(e){function t(e,t,a){var o=e[0],r=/er/.test(a)?p:/bl/.test(a)?f:u,s=a==g?{checked:o[u],disabled:o[f],indeterminate:"true"==e.attr(p)||"false"==e.attr(m)}:o[r];if(/^(ch|di|in)/.test(a)&&!s)n(e,r);else if(/^(un|en|de)/.test(a)&&s)i(e,r);else if(a==g)for(r in s)s[r]?n(e,r,!0):i(e,r,!0);else t&&"toggle"!=a||(t||e[_]("ifClicked"),s?o[v]!==c&&i(e,r):n(e,r))}function n(t,n,a){var g=t[0],_=t.parent(),b=n==u,D=n==p,M=n==f,C=D?m:b?h:"enabled",k=o(t,C+r(g[v])),S=o(t,n+r(g[v]));if(!0!==g[n]){if(!a&&n==u&&g[v]==c&&g.name){var T=t.closest("form"),I='input[name="'+g.name+'"]';(I=T.length?T.find(I):e(I)).each((function(){this!==g&&e(this).data(l)&&i(e(this),n)}))}D?(g[n]=!0,g[u]&&i(t,u,"force")):(a||(g[n]=!0),b&&g[p]&&i(t,p,!1)),s(t,b,n,a)}g[f]&&o(t,x,!0)&&_.find("."+d).css(x,"default"),_[y](S||o(t,n)||""),M?_.attr("aria-disabled","true"):_.attr("aria-checked",D?"mixed":"true"),_[w](k||o(t,C)||"")}function i(e,t,n){var i=e[0],a=e.parent(),l=t==u,c=t==p,g=t==f,_=c?m:l?h:"enabled",b=o(e,_+r(i[v])),D=o(e,t+r(i[v]));!1!==i[t]&&(!c&&n&&"force"!=n||(i[t]=!1),s(e,l,_,n)),!i[f]&&o(e,x,!0)&&a.find("."+d).css(x,"pointer"),a[w](D||o(e,t)||""),g?a.attr("aria-disabled","false"):a.attr("aria-checked","false"),a[y](b||o(e,_)||"")}function a(t,n){t.data(l)&&(t.parent().html(t.attr("style",t.data(l).s||"")),n&&t[_](n),t.off(".i").unwrap(),e(b+'[for="'+t[0].id+'"]').add(t.closest(b)).off(".i"))}function o(e,t,n){if(e.data(l))return e.data(l).o[t+(n?"":"Class")]}function r(e){return e.charAt(0).toUpperCase()+e.slice(1)}function s(e,t,n,i){i||(t&&e[_]("ifToggled"),e[_]("ifChanged")[_]("if"+r(n)))}var l="iCheck",d=l+"-helper",c="radio",u="checked",h="un"+u,f="disabled",m="determinate",p="in"+m,g="update",v="type",y="addClass",w="removeClass",_="trigger",b="label",x="cursor",D=/ipad|iphone|ipod|android|blackberry|windows phone|opera mini|silk/i.test(navigator.userAgent);e.fn[l]=function(o,r){var s='input[type="checkbox"], input[type="'+c+'"]',h=e(),m=function(t){t.each((function(){var t=e(this);h=t.is(s)?h.add(t):h.add(t.find(s))}))};if(/^(check|uncheck|toggle|indeterminate|determinate|disable|enable|update|destroy)$/i.test(o))return o=o.toLowerCase(),m(this),h.each((function(){var n=e(this);"destroy"==o?a(n,"ifDestroyed"):t(n,!0,o),e.isFunction(r)&&r()}));if("object"!=typeof o&&o)return this;var x=e.extend({checkedClass:u,disabledClass:f,indeterminateClass:p,labelHover:!0,aria:!1},o),M=x.handle,C=x.hoverClass||"hover",k=x.focusClass||"focus",S=x.activeClass||"active",T=!!x.labelHover,I=x.labelHoverClass||"hover",E=0|(""+x.increaseArea).replace("%","");return"checkbox"!=M&&M!=c||(s='input[type="'+M+'"]'),-50>E&&(E=-50),m(this),h.each((function(){var o=e(this);a(o);var r=this,s=r.id,h={position:"absolute",top:m=-E+"%",left:m,display:"block",width:h=100+2*E+"%",height:h,margin:0,padding:0,background:"#fff",border:0,opacity:0},m=D?{position:"absolute",visibility:"hidden"}:E?h:{position:"absolute",opacity:0},p="checkbox"==r[v]?x.checkboxClass||"icheckbox":x.radioClass||"i"+c,M=e(b+'[for="'+s+'"]').add(o.closest(b)),F=!!x.aria,O=l+"-"+Math.random().toString(36).replace("0.",""),A='<div class="'+p+'" '+(F?'role="'+r[v]+'" ':"");M.length&&F&&M.each((function(){A+='aria-labelledby="',this.id?A+=this.id:(this.id=O,A+=O),A+='"'})),A=o.wrap(A+"/>")[_]("ifCreated").parent().append(x.insert),h=e('<ins class="'+d+'"/>').css(h).appendTo(A),o.data(l,{o:x,s:o.attr("style")}).css(m),x.inheritClass&&A[y](r.className||""),x.inheritID&&s&&A.attr("id",l+"-"+s),"static"==A.css("position")&&A.css("position","relative"),t(o,!0,g),M.length&&M.on("click.i mouseover.i mouseout.i touchbegin.i touchend.i",(function(n){var i=n[v],a=e(this);if(!r[f]){if("click"==i){if(e(n.target).is("a"))return;t(o,!1,!0)}else T&&(/ut|nd/.test(i)?(A[w](C),a[w](I)):(A[y](C),a[y](I)));if(!D)return!1;n.stopPropagation()}})),o.on("click.i focus.i blur.i keyup.i keydown.i keypress.i",(function(e){var t=e[v];return e=e.keyCode,"click"!=t&&("keydown"==t&&32==e?(r[v]==c&&r[u]||(r[u]?i(o,u):n(o,u)),!1):void("keyup"==t&&r[v]==c?!r[u]&&n(o,u):/us|ur/.test(t)&&A["blur"==t?w:y](k)))})),h.on("click mousedown mouseup mouseover mouseout touchbegin.i touchend.i",(function(e){var n=e[v],i=/wn|up/.test(n)?S:C;if(!r[f]){if("click"==n?t(o,!1,!0):(/wn|er|in/.test(n)?A[y](i):A[w](i+" "+S),M.length&&T&&i==C&&M[/ut|nd/.test(n)?w:y](I)),!D)return!1;e.stopPropagation()}}))}))}}(window.jQuery||window.Zepto);var token_csrf=$("meta[name=csrf-token]").attr("content");class tableGear{constructor(e,t,n,i=!1){this.content=e,this.template=this.content.find(".template-list").html(),this.loader=this.content.find(".overlay"),this.table=n,this.data="",this.dataSelect="",this.modalSelect="",this.data_complete="",this.method="GET",this.xhr="",this.lastCheckedListData=null,this.checks="",this.name_url="",this.meta_field_text={key:"",field:"",value:""},this.iconLeft="fa fa-arrow-left",this.iconRigth="fa fa-arrow-right",this.numberPage='<button type="button" class="btn ">\n\t\t\t                  <i class="wb-refresh" aria-hidden="true"></i>\n\t\t\t                </button>',this.form={url:t,data:"",pag:1},this.filter={search:"",row:10,token:token_csrf},this.functionOptional=i,this.hiddenColumn=!0,this.hiddenColumnAlt=!0,this.tablePaginate=!0,this.tableFilterRow=this.content.find(".filter_row"),this.keepUrl=!1,this.checkFunctionEnabler=!1,this.checkFunction="";let a=this;this.content.find(".filter_refresh").click((function(){a.refresh()})),this.content.find(".filter_select_1").click((function(){a.CheckboxSelect(!0)})),this.content.find(".filter_select_0").click((function(){a.CheckboxSelect(!1)})),this.content.find(".menu-select").hide()}AddUrlTable(){if(!this.keepUrl){var e="?",t=this.name_url;$.each(this.filter,(function(n,i){i&&"token"!=n&&(t+=e+n+"="+i,e="&")})),history.pushState({selector:""},"/"+this.name_url,t)}}RefreshUrl(){let e=this;this.keepUrl||$.each(e.filter,(function(t,n){if($.get(t)){e.filter[t]=$.get(t);let n=e.filter[t];if($(e.content).find(".filter_"+t+' option[value="'+$.get(t)+'"]').prop("selected",!0),$(e.content).find(".filter_"+t).val($.get(t)),"button"==$(".filter_"+t).prop("type")){var i=$(".filter_"+t).siblings().find("a");let a=null;$.each(i,(function(e,t){$(t).attr("value")==n&&(a=$(t).html())})),$(e.content).find(".filter_"+t).html(a)}}}))}StateXhr(){this.xhr&&4!=this.xhr.readyState&&this.xhr.abort()}SelectList(){return $(this.content).find("table")}PrintList(e){$(this.SelectList()).html(e)}AppendList(e){$(this.SelectList()).append(e)}isDataURL(){return"GET"==this.method}refreshForm(){let e=this.filter,t="",n="";$.each(e,(function(e,i){t+=n+"_"+e+"="+i,n="&"})),this.form.data=t}list(){let e=this;this.StateXhr(),this.refreshForm();let t=this.form.url+"?page="+this.form.pag;this.xhr=$.ajax({url:e.isDataURL()?t+"&"+this.form.data:t,data:e.isDataURL()?null:this.form.data,dataType:"json",type:e.method}).done((function(t){e.ResultData(t)})).fail((function(t){e.ResultError(t)}))}ResultData(e){this.data=e.data.data,this.data_complete=e,this.LoadListTable(),this.tablePaginate?this.paginate(6):this.tableFilterRow.hide(),this.AutoWidthTd(),this.CheckboxAddClass(),this.CheckboxShiftAdd(),this.loader.hide(),this.functionOptional&&self[this.functionOptional](e),this.ChangeFieldIcon(!1),e.data.data.length||this.DivItemsNotFound(!0)}DivItemsNotFound(e=!1){let t=e?"block":"none";$(this.content).find(".items-not-found").css("display",t)}FilterFunction(){let e=this;$.each(this.filter,(function(t,n){let i=t;if($(".filter_"+t).length)if("select-one"==$(".filter_"+t).prop("type"))e.content.find(".filter_"+t).change((function(){e.FilterRefresh(i,$(this).val())}));else if("text"==$(".filter_"+t).prop("type")){e.content.find(".filter_"+t).keyup((function(){e.meta_field_text.field=".filter_"+t,e.meta_field_text.key=t,e.meta_field_text.value=$(this).val(),e.IntervalClear(),e.IntervalField(),e.ChangeFieldIcon(!0),e.ChangeFieldMessage(!1)}))}else if("button"==$(".filter_"+t).prop("type")){let n=e.content.find(".filter_"+t);n.siblings().find("a").click((function(){n.html($(this).html()),n.val($(this).attr("value")),e.FilterRefresh(i,n.val())}))}}))}ChangeFieldMessage(e=!0){let t=this.content.find(".filter_"+this.meta_field_text.key+"_label"),n=this.meta_field_text.value;e&&n.length<=2&&n.length>0?t.show():t.hide()}ChangeFieldIcon(e=!0){let t="fa-spin",n="fa-search",i="fa-cog",a=this.content.find(".filter_"+this.meta_field_text.key+"_icon");e?(a.addClass(t),a.addClass(i),a.removeClass(n)):(a.removeClass(t),a.removeClass(i),a.addClass(n))}IntervalClear(){clearInterval(this.interval)}IntervalField(){let e=this;this.interval=setInterval((function(){e.QueryField()}),700,"JavaScript")}QueryField(){this.IntervalClear(),this.ChangeFieldMessage(),this.meta_field_text.value.length>=3?this.FilterRefresh(this.meta_field_text.key,this.meta_field_text.value):""!=this.filter[this.meta_field_text.key]?this.FilterRefresh(this.meta_field_text.key,""):this.ChangeFieldIcon(!1)}FilterRefresh(e,t){this.filter[e]=t,this.form.pag=1,this.refresh()}ResultError(e){this.loader.hide(),this.FailQuery(e)}LoadListTable(){let e=this,t=this.data_complete.data.data,n=$(this.template);this.data=[],this.PrintList(""),this.content.find(".JCLRgrips").remove();let i=n.clone();this.LoadDataTable(i,this.table,null,1,this.hiddenColumn,this.hiddenColumnAlt),this.AppendList(i),$.each(t,(function(t,i){let a=n.clone();e.LoadDataTable(a,i,t,2,e.hiddenColumn,e.hiddenColumnAlt),e.AppendList(a),e.data[t]=new structureData(t,i)}))}LoadDataTable(e,t,n,i,a,o){if(1==i){let n=e[0].cells;$.each(n,(function(e,n){$(n).html(t[e]),$(n).addClass("orderColumn")}))}else if(2==i){e.attr("data-id",t.id),e[0].innerHTML=e[0].innerHTML.replace("#key#","id_chk"+n),0!=t.state_tr&&0!=t.state_tr||$(e).addClass("state_"+t.state_tr),$.each(t,(function(t,n){e[0].innerHTML=e[0].innerHTML.replaceAll("#_"+t+"_#",n)}));let i=$(e[0]).find(".number");$.each(i,(function(e,t){let n=$(t).attr("data-currency"),i=$(t).attr("data-currency-right"),a=$(t).attr("data-decimals"),o="";o="null"!=$(t).html()?formatNumber.new($(t).html(),n,a):formatNumber.new(0,n,a),i?$(t).text(o+" "+i):$(t).text(o)}));let a=$(e[0]).find(".boolean");$.each(a,(function(e,t){let n=$(t).attr("data-true"),i=$(t).attr("data-false"),a="";a=1==$(t).html()?n:i,$(t).text(a)}))}o&&(e[0].innerHTML=e[0].innerHTML.replaceAll("none-alt-column","hide-column")),a&&(e[0].innerHTML=e[0].innerHTML.replaceAll("none-column","hide-column"))}paginate(e){let t=$(this.content).find(".paginate");t.html(""),this.PaginateBtn(e);var n=this;t.find(":button").click((function(){let e=$(this).data("state"),t=$(this).data("page"),i=n.data_complete.data.current_page;0==e?i--:1==e?i++:2==e&&(i=t),n.form.pag=i,n.refresh()}))}PaginateBtn(e){let t=this,n=$(this.content).find(".paginate"),i=this.data_complete.data,a=i.last_page,o=i.current_page,r=1;e>=a?e=a-1:o-e/2>=1&&(r=o+e/2<=a?o-e/2:a-e),t.PaginatePrintBnt(n,0,i.current_page-1,"Anterior",1,this.iconLeft,i);for(var s=r;s<=r+e;s++)t.PaginatePrintBnt(n,2,s,"Pagina "+s,0,s,i);t.PaginatePrintBnt(n,1,i.current_page+1,"Siguiente",1,this.iconRigth,i),$(this.content).find(".paginate-total").text("Total: "+i.total),n.click((function(){$("html,body").animate({scrollTop:$(t.content).offset().top-140},250)}))}PaginatePrintBnt(e,t,n,i,a,o,r){let s=this.numberPage,l=$(s).clone();l.attr("data-state",t),l.attr("data-page",n),l.attr("title",i),1==a?l.find("i").addClass(o):l.text(o),0==t&&l.addClass("btn-previous"),1==t&&l.addClass("btn-next"),0==t&&1==r.current_page&&l.attr("disabled",!0),1==t&&r.current_page==r.last_page&&l.attr("disabled",!0),2==t&&r.current_page==n&&l.addClass("btn-primary"),$(e).append(l)}FailQuery(e){500==e.status&&notify(3),404==e.status&&notify(1),422==e.status&&notify(4)}CheckboxAddClass(){$(this.content).find(".checkbox-icheck").iCheck({checkboxClass:"icheckbox_flat-blue",radioClass:"iradio_minimal",increaseArea:"20%"})}CheckboxSelect(e,t=!1,n=!1){let i=$(this.SelectList()),a=n||i.find("input:checkbox"),o=i.find(".check_everyboby"),r=a.parent().parent().parent();e?a.iCheck("check"):a.iCheck("uncheck"),e?r.addClass("active"):r.removeClass("active"),e?o.prop("checked",!0):o.prop("checked",!1),this.CheckboxCount()}CheckboxArraySelect(e,t){let n=this;$.each(this.data_complete.data.data,(function(i,a){a[e]==t&&n.CheckboxSelect(!0,!0,n.content.find("#id_chk"+i))}))}CheckboxCount(){let e=this.SelectList().find("input:checkbox");this.checks=[],this.checks.length=0;let t=this,n=0;for(let i=0;i<e.length;i++)e[i].checked&&(t.checks[n]=$(e[i]).parent().parent().parent().data("id"),n+=1);n?this.content.find(".menu-select").show():this.content.find(".menu-select").hide(),this.content.find(".menu-select").find(".number-selected").text(n),this.checkFunctionEnabler&&self[this.checkFunction](t.checks)}CheckboxShiftAdd(){let e=this.SelectList(),t=e.find(".iCheck-helper"),n=this;$(t).click((function(t){let i=e.find("input:checkbox"),a=$(this).siblings("input:checkbox"),o=a.parent().parent().parent();if(a.is(":checked")?o.addClass("active"):o.removeClass("active"),!n.lastCheckedListData)return n.lastCheckedListData=a,void n.CheckboxCount();if(t.shiftKey){let e=i.index(a),t=i.index(n.lastCheckedListData);for(let n=i.slice(Math.min(e,t),Math.max(e,t)+1).length-1;n>=0;n--){let o=$(i.slice(Math.min(e,t),Math.max(e,t)+1)[n]),r=o.parent().parent().parent();a.is(":checked")?r.addClass("active"):r.removeClass("active"),a.is(":checked")?o.iCheck("check"):o.iCheck("uncheck")}}n.lastCheckedListData=a,n.CheckboxCount()}))}ChangeRow(e){let t=$(e).html();this.filter.row=t,this.form.pag=1,this.refresh()}Modal(e){let t=$(e).parent().parent().index(),n=$(e).data("action");this.modalSelect=$($(e).data("modal")),this.dataSelect=t?this.data[t-1].data:0,this.modalSelect.modal({backdrop:"static",keyboard:!1}),this.ModalLoader(!1),n&&self[n](this.dataSelect);let i=this;this.modalSelect.find(".btn-close").click((function(){i.ModalClose()}))}ModalLoader(e){this.modalSelect&&(e?this.modalSelect.find(".overlay").show():this.modalSelect.find(".overlay").hide())}ModalClose(e=null){e&&e[0].reset(),this.ModalLoader(!1),this.modalSelect&&this.modalSelect.modal("hide"),e&&this.ModalClearForm(e)}ModalClearForm(e){let t=e.find("input"),n=e.find("select"),i=e.find("textarea");t.removeClass("is-invalid"),n.removeClass("is-invalid"),i.removeClass("is-invalid"),t.parent().find(".label-error").html(""),n.parent().find(".label-error").html(""),i.parent().find(".label-error").html("")}ModalValidateInputs(e,t){this.ModalClearForm(t),$.each(e,(function(e,n){let i=t.find("input[name="+e+"]"),a=t.find("select[name="+e+"]"),o=t.find("textarea[name="+e+"]");i.parent().find(".label-error").html('<i class="fa fa-exclamation-triangle"></i> '+n),i.hasClass("flatpickr-input")&&i.parent().parent().find(".label-error").html('<i class="fa fa-exclamation-triangle"></i> '+n),a.parent().find(".label-error").html('<i class="fa fa-exclamation-triangle"></i> '+n),o.parent().find(".label-error").html('<i class="fa fa-exclamation-triangle"></i> '+n),i.addClass("is-invalid"),a.addClass("is-invalid"),o.addClass("is-invalid")}))}ModalLoadForm(){let e=this;$.each(this.dataSelect,(function(t,n){e.modalSelect.find("form").find("input[name="+t+"]").val(n),e.modalSelect.find("form").find("textarea[name="+t+"]").val(n)}))}LoadSelect(e,t,n,i){let a=t;$(e).find("option").remove(),e.attr("data-placeholder")&&(i=e.attr("data-placeholder")),i?$(e).append('<option data-alt="" value="" class="c_gray_cl">'+i+"</option>"):$(e).append('<option data-alt="" value="" class="c_gray_cl">Selecciona...</option>'),$.each(a,(function(t,n){$(e).append($("<option>",{value:a[t].id,text:a[t].name}))})),n&&e.find('option[value="'+n+'"]').attr("selected","selected")}LoadCheck(e,t){t?e.attr("checked",!0):e.attr("checked",!1)}AutoWidthTd(){let e=this.SelectList().find("tr");var t=$(e[1]).find("td")[0];let n,i=$(t).find("i").length+$(t).find("input").length;switch(i){case 1:n=55;break;case 2:n=40;break;case 3:n=37;break;case 4:n=36;break;default:n=33}i&&($(e[0]).find("td")[0].width=i*n+"px")}refresh(e=!1){this.DivItemsNotFound(!1),e&&this.FilterFunction(),e&&this.RefreshUrl(),this.AddUrlTable(),this.refreshForm(),this.list(),this.checks=null,this.content.find(".menu-select").hide(),this.loader.show()}GetDataById(e){let t=[];return $.each(this.data,(function(n,i){e.find((e=>e===i.data.id))&&t.push(i.data)})),t}}jQuery.get=function(e){e=(e=e.replace(/[\[]/,"\\[")).replace(/[\]]/,"\\]");var t=new RegExp("[\\?&]"+e+"=([^&#]*)"),n=unescape(window.location.href),i=t.exec(n);return null===i?null:i[1]};class structureData{constructor(e,t){this.num=e,this.data=t}}function notify(e,t=null,n=null,i=null,a=2){var o=[{name:"info",icono:"fa fa-info mr-10"},{name:"danger",icono:"fa fa-ban mr-10"},{name:"success",icono:"fa fa-check mr-10"},{name:"warning",icono:"fa fa-warning mr-10"}],r=[{title:"defaul",text:"",numType:"1"},{title:"Comprueba tu Conexión",text:"No se puede conectar a la base de datos",numType:"1"},{title:"La operación se realizo con éxito",text:"",numType:"2"},{title:"Error Controller",text:"No se puede recibir información del controlador",numType:"1"},{title:"Problemas al validar los campos",text:"",numType:"1"}];e&&(t=r[e].title,n=r[e].text,i=r[e].numType),positionDev={from:"bottom",align:"right"},2==a?positionDev={from:"bottom",align:"left"}:3==a?positionDev={from:"top",align:"right"}:4==a&&(positionDev={from:"top",align:"left"}),$.notify({icon:o[i].icono,title:t,message:n},{element:"body",position:null,type:o[i].name,allow_dismiss:!0,newest_on_top:!1,showProgressbar:!1,placement:positionDev,offset:20,spacing:10,z_index:1800,delay:5e3,timer:100,margin_top:10,url_target:"_blank",mouse_over:null,animate:{enter:"animated fadeInDown",exit:"animated fadeOutUp"},onShow:null,onShown:null,onClose:null,onClosed:null,icon_type:"class",template:'<div class="alert alert-table-gear dark alert-alt alert-{0} alert-dismissible" role="alert">\n                        <button type="button" class="close" data-dismiss="alert" data-notify="dismiss" aria-label="Close">\n                            <span aria-hidden="true">×</span>\n                        </button>\n                        <span data-notify="icon"></span>\n                        {1}<br><a class="alert-link" href="javascript:void(0)">{2}</a>\n                    </div>'})}function GroupBy(e,t){return e.reduce((function(e,n){return(e[n[t]]=e[n[t]]||[]).push(n),e}),{})}let location_es={format:"YYYY-MM-DD",separator:" - ",applyLabel:"Aplicar",cancelLabel:"Cancelar",fromLabel:"From",toLabel:"To",customRangeLabel:"Custom",daysOfWeek:["Dom","Lun","Mar","Mie","Jue","Vie","Sab"],monthNames:["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"],firstDay:1};function FormatNumber(e,t){if(e+="",e=parseFloat(e.replace(/[^0-9\.]/g,"")),t=t||0,isNaN(e)||0===e)return parseFloat(0).toFixed(t);for(var n=(e=""+e.toFixed(t)).split("."),i=/(\d+)(\d{3})/;i.test(n[0]);)n[0]=n[0].replace(i,"$1.$2");return n.join(".")}String.prototype.replaceAll=function(e,t){return this.split(e).join(t)};var formatNumber={separador:".",sepDecimal:",",formatear:function(e){e=parseFloat(e).toFixed(this.decimals);for(var t=(e+="").split("."),n=t[0],i=t.length>1?this.sepDecimal+t[1]:"",a=/(\d+)(\d{3})/;a.test(n);)n=n.replace(a,"$1"+this.separador+"$2");return this.simbol+" "+(n+i)},new:function(e,t,n){return this.simbol=t||"",this.decimals=n||"",this.formatear(e)}};function loaderContent(e,t=!1){t?e.find(".overlay-modal").show():e.find(".overlay-modal").hide()}$.datepicker.regional.es={closeText:"Cerrar",prevText:"< Ant",nextText:"Sig >",currentText:"Hoy",monthNames:["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"],monthNamesShort:["Ene","Feb","Mar","Abr","May","Jun","Jul","Ago","Sep","Oct","Nov","Dic"],dayNames:["Domingo","Lunes","Martes","Miércoles","Jueves","Viernes","Sábado"],dayNamesShort:["Dom","Lun","Mar","Mié","Juv","Vie","Sáb"],dayNamesMin:["Do","Lu","Ma","Mi","Ju","Vi","Sá"],weekHeader:"Sm",dateFormat:"dd/mm/yy",firstDay:1,isRTL:!1,showMonthAfterYear:!1,yearSuffix:""},$.datepicker.setDefaults($.datepicker.regional.es);class QueryAjax{constructor(e){this.data="",this.xhr="",this.method="",this.url="",this.action="",this.form=!1,this.listTable=!1,this.loaderSelected=!1;let t=this;$.each(e,(function(e,n){t[e]=n})),this.LoadForm(),this.var={token:token_csrf},this.formatData={token:token_csrf}}LoadForm(){if(this.form){this.form=$('form[name="'+this.form+'"]');let e=this.form.attr("action"),t=this.form.attr("method");e&&(this.url=e),t&&(this.method=t)}}StateXhr(){this.xhr&&4!=this.xhr.readyState&&this.xhr.abort()}IsDataURL(){return"GET"==this.method}UpdateForm(){if(this.form)this.formatData=this.form.serialize();else{let e="",t="";$.each(this.var,(function(n,i){e+=t+"_"+n+"="+i,t="&"})),this.formatData=e}}Loader(e=!0){this.listTable&&this.listTable.ModalLoader(e),this.loaderSelected&&(e?this.loaderSelected.show():this.loaderSelected.hide())}IsFormListTable(){return!!this.form}Query(){let e=this;this.Loader(),this.IsFormListTable()&&UtilClearFormUi(this.form),this.StateXhr(),this.UpdateForm(),$.ajax({url:e.IsDataURL()?e.url+"?"+e.formatData:e.url,data:e.IsDataURL()?null:e.formatData,dataType:"json",type:e.method}).done((function(t){e.Loader(!1),e.ResultSuccess(t)})).fail((function(t){e.Loader(!1),e.ResultFailed(t)}))}ResultSuccess(e){this.data=e,this.action&&self[this.action](!0,e)}ResultFailed(e){this.MapErrors(e),this.data=e.responseJSON,this.action&&self[this.action](!1,e)}MapErrors(e){if(422==e.status&&this.IsFormListTable())UtilValidateInputs(e.responseJSON.errors,this.form);else{let t,n;e.hasOwnProperty("responseJSON")&&(t=e.responseJSON?e.responseJSON.message:"not found",n=e.responseJSON?e.responseJSON.exception:"not found",0==e.status&&(n="ERR_INTERNET_DISCONNECTED")),notify(!1,"Status: "+e.status+" Resource: "+this.method+": "+this.url,"Exception: "+n+" <br>Message: "+t,1)}}FormClose(e=!0){this.form&&this.form[0].reset(),this.form&&this.listTable&&this.listTable.ModalClearForm(this.form),e&&this.listTable&&this.listTable.modalSelect.modal("hide"),this.Loader(!1)}Send(){this.Query()}}function LoadFormInputs(e,t){$.each(t,(function(t,n){e.find("form").find("input[name="+t+"]").val(n),e.find("form").find("textarea[name="+t+"]").val(n)}))}function LoadSelectUtil(e,t,n,i){$(e).find("option").remove(),i?$(e).append('<option data-alt="" value="" class="c_gray_cl">'+i+"</option>"):$(e).append('<option data-alt="" value="" class="c_gray_cl">Selecciona...</option>'),$.each(t,(function(t,n){$(e).append('<option data-alt="'+n.alt+'" value="'+n.id+'">'+n.name+"</option>")})),n&&$(e).find('option[value="'+n+'"]').attr("selected","selected")}function UtilClearFormUi(e){let t=e.find("input"),n=e.find("select"),i=e.find("textarea");t.removeClass("is-invalid"),n.removeClass("is-invalid"),i.removeClass("is-invalid"),t.parent().find(".label-error").html(""),n.parent().find(".label-error").html(""),i.parent().find(".label-error").html("")}function UtilValidateInputs(e,t){UtilClearFormUi(t),$.each(e,(function(e,n){let i=t.find("input[name="+e+"]"),a=t.find("select[name="+e+"]"),o=t.find("textarea[name="+e+"]");i.parent().find(".label-error").html('<i class="fa fa-exclamation-triangle"></i> '+n),i.hasClass("flatpickr-input")&&i.parent().find(".label-error").html('<i class="fa fa-exclamation-triangle"></i> '+n),a.parent().find(".label-error").html('<i class="fa fa-exclamation-triangle"></i> '+n),o.parent().find(".label-error").html('<i class="fa fa-exclamation-triangle"></i> '+n),i.addClass("is-invalid"),a.addClass("is-invalid"),o.addClass("is-invalid")}))}function UtilFormClose(e){e.find("select").each((function(){this.selectedIndex=0})),e.find("input[type=text]").each((function(){this.value=""})),e.find("input[type=password]").each((function(){this.value=""})),e.find("textarea").each((function(){this.value=""})),UtilClearFormUi(e)}function UtilModalLoader(e,t=!0){t?e.find(".overlay").show():e.find(".overlay").hide()}var tokenCsrf=$("meta[name=csrf-token]").attr("content");class searchByAutocomplete{constructor(e,t){this.container=e,this.xhr=null,this.method="GET",this.url="",this.parameters=[],this.params=[],this.actionBefore=null,this.actionAfter=null,this.input=null,this.ulItems=null,this.divSelectedItems=null,this.inputHidden=null,this.labelError=null,this.animationClass="fa-spin",this.iconSearch="fa-search",this.iconLoading="fa-cog",this.paramSearch="search",this.data=[],this.selectedItems=[],this.limitItems=1,this.minimumCharactersToSearch=3;let n=this;$.each(t,(function(e,t){n[e]=t})),this.loadElementHtml(),this.loadParameters(),this.addParameter(this.paramSearch),this.resetItems(!1),this.requestGetUrl(),this.eventKeyupSearchField(),this.evetOutsideContainer()}eventAddDataSelected(e){if(!(e instanceof Object))return this.printLog("Not Object"),!1;let t=e.id,n=e.name,i=e.image;this.addItemSelected(t,n,i)}evetOutsideContainer(){this.containerId=this.container.attr("id");let e=this;window.addEventListener("click",(function(t){document.getElementById(e.containerId).contains(t.target)||e.resetItems(!1)}))}loadElementHtml(){this.input=this.container.find(".input-search"),this.input.length||this.printLog("Input search not found"),this.inputHidden=this.container.find(".input-hidden"),this.inputHidden.length||this.printLog("Input hidden not found"),this.ulItems=this.container.find(".items"),this.ulItems.length||this.printLog("ul-items not found"),this.iconInput=this.container.find(".icon-loading"),this.iconInput.length||this.printLog("iconInput not found"),this.labelError=this.container.find(".label-error"),this.labelError.length||this.printLog("labelError not found"),this.divSelectedItems=this.container.find(".selected-items"),this.divSelectedItems.length||this.printLog("divSelectedItems not found")}eventKeyupSearchField(){let e=this;this.input.keyup((function(){if(e.getParameter(e.paramSearch)==$(this).val())return!0;e.setParameter(e.paramSearch,$(this).val()),e.requestByEventKeyupSearch($(this).val())}))}setMessageSearch(e,t=1){let n=['<em class="fa fa-exclamation-circle"> Ocurrio un error','<em class="fa fa-exclamation-circle"> Mínimo tres caracteres para iniciar la busqueda','<em class="fa fa-exclamation-circle"> No se encontraron resultados'],i=["","label-error-search","label-error-result"];e?(this.labelError.addClass(i[t]),this.labelError.html(n[t])):(i.forEach((function(e){this.labelError.removeClass(e)}),this),this.labelError.text(""))}eventLoading(e){e?(this.iconInput.addClass(this.animationClass),this.iconInput.addClass(this.iconLoading),this.iconInput.removeClass(this.iconSearch)):(this.iconInput.removeClass(this.animationClass),this.iconInput.removeClass(this.iconLoading),this.iconInput.addClass(this.iconSearch))}requestByEventKeyupSearch(e){let t=this;clearInterval(this.interval),this.setMessageSearch(!1),this.eventLoading(!0),this.interval=setInterval((function(){clearInterval(t.interval),e.length>=t.minimumCharactersToSearch?t.request():e.length?(t.resetItems(!1),t.setMessageSearch(!0),t.eventLoading(!1)):(t.resetItems(!1),t.setMessageSearch(!1),t.eventLoading(!1))}),700,"JavaScript")}loadParameters(){this.params.forEach((function(e){"object"==typeof e&&this.addParameter(e.name,e.value)}),this)}addParameter(e,t){this.parameters.push({name:e,value:t})}setParameter(e,t){this.parameters.forEach((function(n,i){if(n.name==e)return this.parameters[i].value=t,!0}),this)}getParameter(e){let t=null;return this.parameters.forEach((function(n,i){n.name==e&&(t=this.parameters[i].value)}),this),t}requestGetUrl(){let e=this.url;if("GET"==this.method){let t="?_";$.each(this.parameters,(function(n,i){e+=`${t}${i.name}=${i.value}`,t="&_"}))}return e}requestGetData(){if("GET"==this.method)return[]}requestStateXhr(){this.xhr&&4!=this.xhr.readyState&&this.xhr.abort()}request(){this.requestStateXhr(),this.requestGetUrl();let e=this;this.xhr=$.ajax({url:e.requestGetUrl(),data:e.requestGetData(),dataType:"json",type:e.method}).done((function(t){e.eventLoading(!1),e.requestSuccessfull(t)})).fail((function(t){e.eventLoading(!1),e.requestFailed(t)}))}requestSuccessfull(e){if(this.data=e.data,this.resetItems(!0),!this.data.length)return this.setMessageSearch(!0,2),this.resetItems(!1,!1),!0;this.data.forEach((function(e,t){this.ulItems.append(`<li data-id="${t}">\n        ${e.name}\n      </li>`)}),this),this.eventSelectItem()}eventSelectItem(){let e=this;this.setMessageSearch(!1),this.ulItems.find("li").click((function(){let t=e.data[$(this).attr("data-id")],n=t.id,i=t.name,a=t.image;e.addItemSelected(n,i,a)}))}addItemSelected(e="",t="",n=""){this.selectedItems.push({id:e,name:t,image:n}),this.eventLimitItems(),this.resetItems(!1,!0),this.listItems(),this.setInputHidden()}setInputHidden(){this.inputHidden.val(this.getParameterToInput())}getParameterToInput(){let e="",t="";return $.each(this.selectedItems,(function(n,i){e+=`${t}${i.id}`,t=","})),e}eventRemoveItem(){let e=this;this.divSelectedItems.find("label em").click((function(){e.selectedItems.splice($(this).attr("data-id"),1),e.listItems(),e.eventLimitItems(),e.setInputHidden()}))}eventLimitItems(){this.selectedItems.length>=this.limitItems?(this.input.prop("disabled",!0),this.iconInput.addClass("icon-disabled"),1==this.limitItems&&(this.input.addClass("item-limit-display"),this.iconInput.addClass("item-limit-display"),this.divSelectedItems.addClass("display-unique"))):(this.input.prop("disabled",!1),this.iconInput.removeClass("icon-disabled"),1==this.limitItems&&(this.input.removeClass("item-limit-display"),this.iconInput.removeClass("item-limit-display"),this.divSelectedItems.removeClass("display-unique")))}listItems(){this.divSelectedItems.html(""),this.selectedItems.forEach((function(e,t){this.divSelectedItems.append(`<label class="badge badge-light">\n        ${e.name}\n        <em class="fa fa-close" data-id="${t}">\n      </label>`)}),this),this.eventRemoveItem()}requestFailed(e){this.resetItems(!1),this.printLog("request failed")}resetItems(e,t=!1){this.ulItems.html(""),e?this.ulItems.css("display","block"):this.ulItems.css("display","none"),t&&(this.input.val(""),this.inputHidden.val(""))}clearSelect(){this.selectedItems=[],this.eventLimitItems(),this.resetItems(!1,!0),this.listItems()}printLog(e){console.log(`ERROR_SEARCH_BY_AUTOCOMPLETE: ${e}`)}}function utilLoadAutoCompleteByArray(e,t){e.forEach((e=>{t.eventAddDataSelected({id:e.id,name:e.name})}))}var pathArray=location.href.split("/"),protocol=pathArray[0],host=pathArray[2],APP_URL=protocol+"//"+host,URL_IMG=APP_URL+"/img/app/";const BUTTON_CONTROL_MAIN=1,BUTTON_CONTROL_EDIT=2,URL_S3_IMAGE="https://agendapropia-files.s3.us-east-2.amazonaws.com/";class formFiles{constructor(e,t){this.url=e,this.data=t}}class varQuery{constructor(e){this.id=e,this.textarea="",this.type="",this.external_id=0,this.source_id=0,this.files=[],this._token=$("meta[name=csrf-token]").attr("content")}}class updloadS3{constructor(e,t){this.content=e,this.state=1,this.data=[],this.dataDelete=[],this.load=0,this.number=0,this.altFunction=!1,this.reload=!0,this.formExternalId=0,this.formSourceId=0,this.limitFiles=3,this.id=0,this.url="",this.borderField=!0,this.typeFile=1,this.sizeFile=100,this.send=e.find(".btn-save-files3"),this.listFiles=e.find(".upload-s3-list"),this.imagen=e.find(".btn-upload"),this.textarea=e.find("textarea[name=content]"),this.checkbox=e.find("input[name=resp_public]"),this.inputFile=e.find("input[name=file]"),this.template=$("#template-file"),this.loading=e.find(".overlay"),this.modalEdit=e.find(".modal-edit"),this.modalFiles=e.find(".modal-files");let n=this;$.each(t,(function(e,t){n[e]=t})),this.form=new formFiles(this.url,""),this.variables=new varQuery(this.id),this.variables.external_id=this.formExternalId,this.variables.source_id=this.formSourceId,this.xhr="",this.statusMove=!1,this.url_uploadFile="/uploadfiles_s3",this.url_removeFile="/destroyfiles_s3",this.files_url=URL_S3_IMAGE+"files/images/",this.awsBase=URL_S3_IMAGE,this.textarea.keyup((function(){n.changeTextarea(this)})),this.send.click((function(){n.sendQuery(this)})),this.inputFile&&(this.imagen.click((function(){n.inputFile.click()})),this.inputFile.change((function(){n.changeInputFile(this)}))),this.checkbox.change((function(){n.changeCheckbox()})),this.content.find(".btn-edit-back").click((function(){n.actionDiv(1)})),this.content.find(".btn-edit-save").click((function(){n.updateItemFile(this)})),this.authorAutocomplete=new searchByAutocomplete(this.modalEdit.find(".authorSelect"),{params:[],url:"/admin/accounts/users/search-by-autocomplete",limitItems:1,minimumCharactersToSearch:1}),this.move(),this.btnSend(!0),this.loading.hide(),this.actionDiv(1)}actionDiv(e=1){this.content.find(".button-controls").find(".main").hide(),this.content.find(".button-controls").find(".edit").hide(),this.modalEdit.hide(),this.modalFiles.show(),1==e?this.content.find(".button-controls").find(".main").show():2==e&&(this.content.find(".button-controls").find(".edit").show(),this.modalEdit.show(),this.modalFiles.hide())}loadData(e,t){this.variables.id=t;let n=this;this.listFiles.find("li:not(.ui-state-disabled)").remove(),this.data=[],this.dataDelete=[],$.each(e,(function(e,t){t.form_d="f_"+t.id,t.cont=t.id;let i=TypeFile(t.ext),a=new filesItem(t.id,!0,t.name,t.name_tmp,0,t.ext,2,i,t.form_d,t.author_id,t.author_name,t.description);add_file(n,a,2+i),n.data.push(a),n.load++})),this.orderData(),this.btnSend(!0),this.loading.hide()}move(){let e=this;this.listFiles.sortable({items:"li:not(.ui-state-disabled)",revert:!0,opacity:.6,cursor:"move",update:function(){e.orderData(),e.statusMove=!0,e.validateMove()}})}orderData(){let e=this,t=this.listFiles.find("li:not(.ui-state-disabled)"),n=1;$.each(t,(function(t,i){let a=$(i).attr("data-id"),o=e.searchData(a,"id");e.data[o]&&(e.data[o].order=n,$(i).attr("data-order",n)),n++}))}searchData(e,t){let n=null;return $.each(this.data,(function(i,a){a[t]==e&&(n=i)})),n}stateXhr(){this.xhr&&4!=this.xhr.readyState&&this.xhr.abort()}updateForm(){let e=this.variables,t="",n="";$.each(e,(function(e,i){t+=n+""+e+"="+i,n="&"})),this.form.data=t}sendQuery(){this.optionDisabled(!0),this.variables.files=JSON.stringify(this.data),this.variables.files_delete=JSON.stringify(this.dataDelete),this.updateForm();let e=this;this.stateXhr(),this.loading.show(),this.xhr=$.post(this.form.url,this.form.data,(function(t){e.reload&&e.clear(),e.optionDisabled(!1),e.btnSend(!0),e.altFunction&&self[e.altFunction](t),e.loading.hide()})).fail((function(t){e.loading.hide(),list_error(this,t)}))}clear(){this.listFiles.find("li:not(.ui-state-disabled)").remove(),this.data=[],this.dataDelete=[],this.load=0,this.number=0,this.checkbox.prop("checked",!1),this.textarea.val(""),this.borderField&&this.borderFiles(),this.actionDiv(1)}validate(e=!1,t=0){let n=0;this.data.forEach((function(i,a,o){e&&i.id==t&&1==i.type&&(i.state=!0),!i.state&&1==i.type&&n++})),n>0?this.btnSend(!0):this.btnSend(!1),this.borderField&&this.borderFiles()}validateMove(){let e=0;this.data.forEach((function(t,n,i){!t.state&&e++})),0==e&&(this.statusMove?this.btnSend(!1):this.btnSend(!0))}validateRemove(e=!1){if(e){let e=0;this.data.forEach((function(t,n,i){!t.state&&e++})),0==e&&(this.data.length||this.textarea.val()||this.dataDelete.length?this.btnSend(!1):this.btnSend(!0))}else this.data.length||this.textarea.val()||this.dataDelete.length?this.btnSend(!1):this.btnSend(!0);this.borderField&&this.borderFiles(),this.orderData()}optionDisabled(e){this.send.prop("disabled",e),this.imagen.prop("disabled",e),this.textarea.prop("disabled",e),this.checkbox.prop("disabled",e),e?this.listFiles.find(".delete").hide():this.listFiles.find(".delete").show()}borderFiles(){0==this.data.length?this.listFiles.removeClass("border-dashed"):this.listFiles.addClass("border-dashed")}btnSend(e){this.send.prop("disabled",e)}changeCheckbox(){this.variables.type=this.checkbox.is(":checked")}stateCheckbox(){return this.checkbox.is(":checked")}changeTextarea(e){areatextHeight(e),this.validateRemove(!0),this.variables.textarea=this.textarea.val()}changeInputFile(e){for(var t=0;t<e.files.length;++t){if(this.number++,!(this.data.length<this.limitFiles)){notify(!1,"Limite de archivos",`Se permiten solo ${this.limitFiles} archivo.`,1);break}var n=e.files[t];this.uploadFile(n,this.number)}this.inputFile.val("")}uploadFile(e,t){var n={id:t,file:e,form_d:"f_"+t,cont:t,name:e.name.toString(),size:e.size,ext:e.name.substring(e.name.lastIndexOf(".")),type:1,author:{id:1,name:""},description:""},i=file_type(n.ext,this.typeFile,n.name),a=file_size(n.size,this.sizeFile,n.name);if(n.type=i,i&&a){this.listFiles.show();var o=name_ramdom(i);let t=new filesItem(n.id,!1,n.name,o+n.ext,n.size,n.ext,1,i,n.form_d);var r;add_file(this,t,i,e);var s=this.content.find("."+n.form_d),l=new FormData;l.append("file",n.file),l.append("file_name",o),l.append("file_type",i),l.append("_token",$("meta[name=csrf-token]").attr("content")),this.load++,this.data.push(t),this.validate();let a=this;function d(){var e=new XMLHttpRequest;s.find(".progress").show(),e.upload.addEventListener("progress",(function(e){r=Math.round(e.loaded/e.total*100),s.find(".progress-bar").width(r+"%").html(r+"%")})),e.addEventListener("load",(function(e){e.currentTarget.status>=400?(s.find(".progress").hide(),s.find(".error").show()):0==e.total&&(1==n.type?(s.find(".cont").hide(),s.find(".image").css("background-image","url("+a.files_url+"thumbnails/"+$(s).data("name")+")")):(s.find(".download").show(),s.find(".text").addClass("name_file")),s.find(".progress").hide(),a.validate(!0,n.id)),a.orderData()})),e.addEventListener("error",(function(e){s.find(".error").show(),s.find(".progress").hide()})),e.open("post",APP_URL+a.url_uploadFile),e.send(l),s.find(".btn-delete").click((function(t){t.preventDefault(),e.abort();let n=s.data("id"),i=s.data("name");s.remove();let o=null,r=0;a.data.forEach((function(e,t){e.id==n&&(o=e,r=t)})),null!=o&&(o.state&&a.delete_file_arc(i),a.data.splice(r,1)),a.validateRemove(!0)}))}d(),s.find(".preload").click((function(e){d(),s.find(".error").hide(),s.find(".cont").show(),r=0,s.find(".progress-bar").width(r+"%").html(r+"%")}))}}updateItemFile(e){let t=$(e).attr("data-id"),n=null;this.data.forEach((function(e,i){e.id==parseInt(t)&&(n=i)})),this.data[n].name=this.modalEdit.find("input[name=name]").val(),this.data[n].description=this.modalEdit.find("textarea[name=description]").val(),this.authorAutocomplete.selectedItems[0]&&(this.data[n].author.id=this.authorAutocomplete.selectedItems[0].id,this.data[n].author.name=this.authorAutocomplete.selectedItems[0].name);let i=this.content.find(".f_"+this.data[n].id);i.find(".name").text(this.data[n].name),i.find(".description").html(""!=this.data[n].description?"<strong>Descripción: </strong> "+this.data[n].description:""),i.find(".author").html(null!=this.data[n].author.name?"<strong>Autor: </strong> "+this.data[n].author.name:""),this.actionDiv(1),this.btnSend(!1)}delete_file_arc(e){$.ajax({url:APP_URL+this.url_removeFile,type:"POST",timeout:1e5,data:{name:e,type:1,_token:$("meta[name=csrf-token]").attr("content")},error:function(){},success:function(e){}})}}class filesItem{constructor(e,t,n,i,a,o,r,s,l,d=null,c=null,u=""){this.id=e,this.state=t,this.name=n,this.name_tmp=i,this.size=a,this.ext=o,this.type=r,this.type_file=s,this.author={id:d,name:c},this.description=u,this.divIndex=l,this.name_tmp_complete=URL_S3_IMAGE+"files/images/"+i}}var file_ico={".zip":"ico_archivo.png",".rar":"ico_archivo.png",".ppt":"ico_point.png",".pptx":"ico_point.png",".pps":"ico_point.png",".doc":"ico_word.png",".docx":"ico_word.png",".accdb":"ico_acces.png",".ccdb":"ico_acces.png",".mdb":"ico_acces.png",".xlsx":"ico_excel.png",".xls":"ico_excel.png",".xlsm":"ico_excel.png",".xlsb":"ico_excel.png",".pdf":"ico_pdf.png",".PDF":"ico_pdf.png",".mp4":"ico_mp4.png"},file_name={".JPG":"Imagen",".jpg":"Imagen",".jpeg":"Imagen",".gif":"Imagen",".PNG":"Imagen",".png":"Imagen",".zip":"Archivo comprimido",".rar":"Archivo comprimido",".ppt":"Power Point",".pptx":"Power Point",".pps":"Power Point",".doc":"Documento de word",".docx":"Documento de word",".accdb":"Base datos Access",".ccdb":"Base datos Access",".mdb":"Base datos Access",".xlsx":"Documento de excel",".xls":"Documento de excel",".xlsm":"Documento de excel",".xlsb":"Documento de excel",".pdf":"Documento PDF",".PDF":"Documento PDF"};function name_ramdom(e){var t=function(){return Math.random().toString(36).substr(2)},n=new Date;return 1==e?"img_"+Date.parse(n)+"_"+t():"file_"+Date.parse(n)+"_"+t()}function file_type(e,t,n){var i=new Array(".JPG",".jpg",".jpeg",".gif",".PNG",".png"),a=new Array(".zip",".rar",".ppt",".pptx",".ppsx",".pps",".doc",".docx",".accdb",".ccdb",".mdb",".xlsx",".xls",".xlsm",".xlsb",".pdf",".PDF",".mp4");return jQuery.inArray(e,i)>=0?1:jQuery.inArray(e,a)>=0&&1==t?2:(notify(null,"No permitido",'El archivo "'+n+'" no esta dentro de los formatos permitidos.',1),0)}function TypeFile(e){var t=new Array(".JPG",".jpg",".jpeg",".gif",".PNG",".png"),n=new Array(".zip",".rar",".ppt",".pptx",".ppsx",".pps",".doc",".docx",".accdb",".ccdb",".mdb",".xlsx",".xls",".xlsm",".xlsb",".pdf",".PDF");return jQuery.inArray(e,t)>=0?1:jQuery.inArray(e,n)>=0?2:0}function file_size(e,t,n){return e<=1e6*t?1:(notify(null,"Supero el Tamaño",'El archivo "'+n+'" excedió el peso permitido.',1),0)}function add_file(e,t,n,i=""){var a="."+t.divIndex;e.listFiles.append(`<li data-id="0" data-state="0" data-name="${t.name_tmp}" class="${t.divIndex} item-list ui-state-default"></li>`),e.template.clone().prependTo(a).show();var o=e.content.find("."+t.divIndex);if(o.find(".error").hide(),o.find(".download").hide(),o.children().attr("id","template"),o.attr("data-id",t.id),o.find(".name").text(t.name),o.find(".source").text(t.name_tmp),o.find(".description").html(""!=t.description?"<strong>Descripción: </strong> "+t.description:""),o.find(".author").html(null!=t.author.name?"<strong>Autor: </strong> "+t.author.name:""),o.find(".name").attr("title",t.name),o.find(".delete").attr("data-id",t.id),1==n){var r=new FileReader;r.onload=function(e){$(a+" .image").css("background-image","url("+e.target.result+")"),$(a+" .image").css("background-size","100%")},r.readAsDataURL(i)}else 2==n?(o.find(".download").attr("onclick","getFileS3('"+t.name_tmp+"', 2)"),$(a+" .image").css("background-image","url("+e.awsBase+"app/file_types/"+file_ico[t.ext]+")")):3==n?(o.find(".image").css("background-image","url("+e.files_url+"thumbnails/"+t.name_tmp+")"),o.find(".image").css("background-size","100%")):4==n&&(o.find(".download").show(),o.find(".download").attr("onclick","getFileS3('"+t.name_tmp+"', 2)"),o.find(".image").css("background-image","url("+e.awsBase+"app/file_types/"+file_ico[t.ext]+")"));o.find(".progress").hide(),4!=n&&3!=n||o.find(".btn-delete").click((function(t){t.preventDefault();let n=o.data("id");o.data("name");o.remove(),e.data.forEach((function(t,i,a){t.id==n&&e.data.splice(i,1)})),e.dataDelete.push(n),e.validateRemove(!0)})),o.find(".btn-edit").click((function(t){t.preventDefault();let n=o.data("id"),i=[];e.data.forEach((function(e){e.id==n&&(i=e)})),e.modalEdit.find("input[name=name]").val(i.name),e.modalEdit.find("textarea[name=description]").val(i.description),e.content.find(".btn-edit-save").attr("data-id",i.id),e.authorAutocomplete.clearSelect(),0!=i.author.id&&null!=i.author.id&&e.authorAutocomplete.eventAddDataSelected({id:i.author.id,name:i.author.name}),e.actionDiv(2)}))}!function(e,t){"object"==typeof exports&&"undefined"!=typeof module?module.exports=t():"function"==typeof define&&define.amd?define(t):e.moment=t()}(this,(function(){"use strict";var e,t;function n(){return e.apply(null,arguments)}function i(e){return e instanceof Array||"[object Array]"===Object.prototype.toString.call(e)}function a(e){return null!=e&&"[object Object]"===Object.prototype.toString.call(e)}function o(e){return void 0===e}function r(e){return"number"==typeof e||"[object Number]"===Object.prototype.toString.call(e)}function s(e){return e instanceof Date||"[object Date]"===Object.prototype.toString.call(e)}function l(e,t){var n,i=[];for(n=0;n<e.length;++n)i.push(t(e[n],n));return i}function d(e,t){return Object.prototype.hasOwnProperty.call(e,t)}function c(e,t){for(var n in t)d(t,n)&&(e[n]=t[n]);return d(t,"toString")&&(e.toString=t.toString),d(t,"valueOf")&&(e.valueOf=t.valueOf),e}function u(e,t,n,i){return xt(e,t,n,i,!0).utc()}function h(e){return null==e._pf&&(e._pf={empty:!1,unusedTokens:[],unusedInput:[],overflow:-2,charsLeftOver:0,nullInput:!1,invalidMonth:null,invalidFormat:!1,userInvalidated:!1,iso:!1,parsedDateParts:[],meridiem:null,rfc2822:!1,weekdayMismatch:!1}),e._pf}function f(e){if(null==e._isValid){var n=h(e),i=t.call(n.parsedDateParts,(function(e){return null!=e})),a=!isNaN(e._d.getTime())&&n.overflow<0&&!n.empty&&!n.invalidMonth&&!n.invalidWeekday&&!n.weekdayMismatch&&!n.nullInput&&!n.invalidFormat&&!n.userInvalidated&&(!n.meridiem||n.meridiem&&i);if(e._strict&&(a=a&&0===n.charsLeftOver&&0===n.unusedTokens.length&&void 0===n.bigHour),null!=Object.isFrozen&&Object.isFrozen(e))return a;e._isValid=a}return e._isValid}function m(e){var t=u(NaN);return null!=e?c(h(t),e):h(t).userInvalidated=!0,t}t=Array.prototype.some?Array.prototype.some:function(e){for(var t=Object(this),n=t.length>>>0,i=0;i<n;i++)if(i in t&&e.call(this,t[i],i,t))return!0;return!1};var p=n.momentProperties=[];function g(e,t){var n,i,a;if(o(t._isAMomentObject)||(e._isAMomentObject=t._isAMomentObject),o(t._i)||(e._i=t._i),o(t._f)||(e._f=t._f),o(t._l)||(e._l=t._l),o(t._strict)||(e._strict=t._strict),o(t._tzm)||(e._tzm=t._tzm),o(t._isUTC)||(e._isUTC=t._isUTC),o(t._offset)||(e._offset=t._offset),o(t._pf)||(e._pf=h(t)),o(t._locale)||(e._locale=t._locale),p.length>0)for(n=0;n<p.length;n++)o(a=t[i=p[n]])||(e[i]=a);return e}var v=!1;function y(e){g(this,e),this._d=new Date(null!=e._d?e._d.getTime():NaN),this.isValid()||(this._d=new Date(NaN)),!1===v&&(v=!0,n.updateOffset(this),v=!1)}function w(e){return e instanceof y||null!=e&&null!=e._isAMomentObject}function _(e){return e<0?Math.ceil(e)||0:Math.floor(e)}function b(e){var t=+e,n=0;return 0!==t&&isFinite(t)&&(n=_(t)),n}function x(e,t,n){var i,a=Math.min(e.length,t.length),o=Math.abs(e.length-t.length),r=0;for(i=0;i<a;i++)(n&&e[i]!==t[i]||!n&&b(e[i])!==b(t[i]))&&r++;return r+o}function D(e){!1===n.suppressDeprecationWarnings&&"undefined"!=typeof console&&console.warn&&console.warn("Deprecation warning: "+e)}function M(e,t){var i=!0;return c((function(){if(null!=n.deprecationHandler&&n.deprecationHandler(null,e),i){for(var a,o=[],r=0;r<arguments.length;r++){if(a="","object"==typeof arguments[r]){for(var s in a+="\n["+r+"] ",arguments[0])a+=s+": "+arguments[0][s]+", ";a=a.slice(0,-2)}else a=arguments[r];o.push(a)}D(e+"\nArguments: "+Array.prototype.slice.call(o).join("")+"\n"+(new Error).stack),i=!1}return t.apply(this,arguments)}),t)}var C,k={};function S(e,t){null!=n.deprecationHandler&&n.deprecationHandler(e,t),k[e]||(D(t),k[e]=!0)}function T(e){return e instanceof Function||"[object Function]"===Object.prototype.toString.call(e)}function I(e,t){var n,i=c({},e);for(n in t)d(t,n)&&(a(e[n])&&a(t[n])?(i[n]={},c(i[n],e[n]),c(i[n],t[n])):null!=t[n]?i[n]=t[n]:delete i[n]);for(n in e)d(e,n)&&!d(t,n)&&a(e[n])&&(i[n]=c({},i[n]));return i}function E(e){null!=e&&this.set(e)}n.suppressDeprecationWarnings=!1,n.deprecationHandler=null,C=Object.keys?Object.keys:function(e){var t,n=[];for(t in e)d(e,t)&&n.push(t);return n};var F={};function O(e,t){var n=e.toLowerCase();F[n]=F[n+"s"]=F[t]=e}function A(e){return"string"==typeof e?F[e]||F[e.toLowerCase()]:void 0}function P(e){var t,n,i={};for(n in e)d(e,n)&&(t=A(n))&&(i[t]=e[n]);return i}var L={};function Y(e,t){L[e]=t}function N(e,t,n){var i=""+Math.abs(e),a=t-i.length;return(e>=0?n?"+":"":"-")+Math.pow(10,Math.max(0,a)).toString().substr(1)+i}var R=/(\[[^\[]*\])|(\\)?([Hh]mm(ss)?|Mo|MM?M?M?|Do|DDDo|DD?D?D?|ddd?d?|do?|w[o|w]?|W[o|W]?|Qo?|YYYYYY|YYYYY|YYYY|YY|gg(ggg?)?|GG(GGG?)?|e|E|a|A|hh?|HH?|kk?|mm?|ss?|S{1,9}|x|X|zz?|ZZ?|.)/g,H=/(\[[^\[]*\])|(\\)?(LTS|LT|LL?L?L?|l{1,4})/g,$={},U={};function j(e,t,n,i){var a=i;"string"==typeof i&&(a=function(){return this[i]()}),e&&(U[e]=a),t&&(U[t[0]]=function(){return N(a.apply(this,arguments),t[1],t[2])}),n&&(U[n]=function(){return this.localeData().ordinal(a.apply(this,arguments),e)})}function W(e,t){return e.isValid()?(t=z(t,e.localeData()),$[t]=$[t]||function(e){var t,n,i,a=e.match(R);for(t=0,n=a.length;t<n;t++)U[a[t]]?a[t]=U[a[t]]:a[t]=(i=a[t]).match(/\[[\s\S]/)?i.replace(/^\[|\]$/g,""):i.replace(/\\/g,"");return function(t){var i,o="";for(i=0;i<n;i++)o+=T(a[i])?a[i].call(t,e):a[i];return o}}(t),$[t](e)):e.localeData().invalidDate()}function z(e,t){var n=5;function i(e){return t.longDateFormat(e)||e}for(H.lastIndex=0;n>=0&&H.test(e);)e=e.replace(H,i),H.lastIndex=0,n-=1;return e}var G=/\d/,V=/\d\d/,Z=/\d{3}/,B=/\d{4}/,q=/[+-]?\d{6}/,K=/\d\d?/,J=/\d\d\d\d?/,Q=/\d\d\d\d\d\d?/,X=/\d{1,3}/,ee=/\d{1,4}/,te=/[+-]?\d{1,6}/,ne=/\d+/,ie=/[+-]?\d+/,ae=/Z|[+-]\d\d:?\d\d/gi,oe=/Z|[+-]\d\d(?::?\d\d)?/gi,re=/[0-9]{0,256}['a-z\u00A0-\u05FF\u0700-\uD7FF\uF900-\uFDCF\uFDF0-\uFF07\uFF10-\uFFEF]{1,256}|[\u0600-\u06FF\/]{1,256}(\s*?[\u0600-\u06FF]{1,256}){1,2}/i,se={};function le(e,t,n){se[e]=T(t)?t:function(e,i){return e&&n?n:t}}function de(e,t){return d(se,e)?se[e](t._strict,t._locale):new RegExp(ce(e.replace("\\","").replace(/\\(\[)|\\(\])|\[([^\]\[]*)\]|\\(.)/g,(function(e,t,n,i,a){return t||n||i||a}))))}function ce(e){return e.replace(/[-\/\\^$*+?.()|[\]{}]/g,"\\$&")}var ue={};function he(e,t){var n,i=t;for("string"==typeof e&&(e=[e]),r(t)&&(i=function(e,n){n[t]=b(e)}),n=0;n<e.length;n++)ue[e[n]]=i}function fe(e,t){he(e,(function(e,n,i,a){i._w=i._w||{},t(e,i._w,i,a)}))}function me(e,t,n){null!=t&&d(ue,e)&&ue[e](t,n._a,n,e)}function pe(e){return ge(e)?366:365}function ge(e){return e%4==0&&e%100!=0||e%400==0}j("Y",0,0,(function(){var e=this.year();return e<=9999?""+e:"+"+e})),j(0,["YY",2],0,(function(){return this.year()%100})),j(0,["YYYY",4],0,"year"),j(0,["YYYYY",5],0,"year"),j(0,["YYYYYY",6,!0],0,"year"),O("year","y"),Y("year",1),le("Y",ie),le("YY",K,V),le("YYYY",ee,B),le("YYYYY",te,q),le("YYYYYY",te,q),he(["YYYYY","YYYYYY"],0),he("YYYY",(function(e,t){t[0]=2===e.length?n.parseTwoDigitYear(e):b(e)})),he("YY",(function(e,t){t[0]=n.parseTwoDigitYear(e)})),he("Y",(function(e,t){t[0]=parseInt(e,10)})),n.parseTwoDigitYear=function(e){return b(e)+(b(e)>68?1900:2e3)};var ve,ye=we("FullYear",!0);function we(e,t){return function(i){return null!=i?(be(this,e,i),n.updateOffset(this,t),this):_e(this,e)}}function _e(e,t){return e.isValid()?e._d["get"+(e._isUTC?"UTC":"")+t]():NaN}function be(e,t,n){e.isValid()&&!isNaN(n)&&("FullYear"===t&&ge(e.year())&&1===e.month()&&29===e.date()?e._d["set"+(e._isUTC?"UTC":"")+t](n,e.month(),xe(n,e.month())):e._d["set"+(e._isUTC?"UTC":"")+t](n))}function xe(e,t){if(isNaN(e)||isNaN(t))return NaN;var n,i=(t%(n=12)+n)%n;return e+=(t-i)/12,1===i?ge(e)?29:28:31-i%7%2}ve=Array.prototype.indexOf?Array.prototype.indexOf:function(e){var t;for(t=0;t<this.length;++t)if(this[t]===e)return t;return-1},j("M",["MM",2],"Mo",(function(){return this.month()+1})),j("MMM",0,0,(function(e){return this.localeData().monthsShort(this,e)})),j("MMMM",0,0,(function(e){return this.localeData().months(this,e)})),O("month","M"),Y("month",8),le("M",K),le("MM",K,V),le("MMM",(function(e,t){return t.monthsShortRegex(e)})),le("MMMM",(function(e,t){return t.monthsRegex(e)})),he(["M","MM"],(function(e,t){t[1]=b(e)-1})),he(["MMM","MMMM"],(function(e,t,n,i){var a=n._locale.monthsParse(e,i,n._strict);null!=a?t[1]=a:h(n).invalidMonth=e}));var De=/D[oD]?(\[[^\[\]]*\]|\s)+MMMM?/,Me="January_February_March_April_May_June_July_August_September_October_November_December".split("_");var Ce="Jan_Feb_Mar_Apr_May_Jun_Jul_Aug_Sep_Oct_Nov_Dec".split("_");function ke(e,t,n){var i,a,o,r=e.toLocaleLowerCase();if(!this._monthsParse)for(this._monthsParse=[],this._longMonthsParse=[],this._shortMonthsParse=[],i=0;i<12;++i)o=u([2e3,i]),this._shortMonthsParse[i]=this.monthsShort(o,"").toLocaleLowerCase(),this._longMonthsParse[i]=this.months(o,"").toLocaleLowerCase();return n?"MMM"===t?-1!==(a=ve.call(this._shortMonthsParse,r))?a:null:-1!==(a=ve.call(this._longMonthsParse,r))?a:null:"MMM"===t?-1!==(a=ve.call(this._shortMonthsParse,r))||-1!==(a=ve.call(this._longMonthsParse,r))?a:null:-1!==(a=ve.call(this._longMonthsParse,r))||-1!==(a=ve.call(this._shortMonthsParse,r))?a:null}function Se(e,t){var n;if(!e.isValid())return e;if("string"==typeof t)if(/^\d+$/.test(t))t=b(t);else if(!r(t=e.localeData().monthsParse(t)))return e;return n=Math.min(e.date(),xe(e.year(),t)),e._d["set"+(e._isUTC?"UTC":"")+"Month"](t,n),e}function Te(e){return null!=e?(Se(this,e),n.updateOffset(this,!0),this):_e(this,"Month")}var Ie=re;var Ee=re;function Fe(){function e(e,t){return t.length-e.length}var t,n,i=[],a=[],o=[];for(t=0;t<12;t++)n=u([2e3,t]),i.push(this.monthsShort(n,"")),a.push(this.months(n,"")),o.push(this.months(n,"")),o.push(this.monthsShort(n,""));for(i.sort(e),a.sort(e),o.sort(e),t=0;t<12;t++)i[t]=ce(i[t]),a[t]=ce(a[t]);for(t=0;t<24;t++)o[t]=ce(o[t]);this._monthsRegex=new RegExp("^("+o.join("|")+")","i"),this._monthsShortRegex=this._monthsRegex,this._monthsStrictRegex=new RegExp("^("+a.join("|")+")","i"),this._monthsShortStrictRegex=new RegExp("^("+i.join("|")+")","i")}function Oe(e,t,n,i,a,o,r){var s;return e<100&&e>=0?(s=new Date(e+400,t,n,i,a,o,r),isFinite(s.getFullYear())&&s.setFullYear(e)):s=new Date(e,t,n,i,a,o,r),s}function Ae(e){var t;if(e<100&&e>=0){var n=Array.prototype.slice.call(arguments);n[0]=e+400,t=new Date(Date.UTC.apply(null,n)),isFinite(t.getUTCFullYear())&&t.setUTCFullYear(e)}else t=new Date(Date.UTC.apply(null,arguments));return t}function Pe(e,t,n){var i=7+t-n;return-((7+Ae(e,0,i).getUTCDay()-t)%7)+i-1}function Le(e,t,n,i,a){var o,r,s=1+7*(t-1)+(7+n-i)%7+Pe(e,i,a);return s<=0?r=pe(o=e-1)+s:s>pe(e)?(o=e+1,r=s-pe(e)):(o=e,r=s),{year:o,dayOfYear:r}}function Ye(e,t,n){var i,a,o=Pe(e.year(),t,n),r=Math.floor((e.dayOfYear()-o-1)/7)+1;return r<1?i=r+Ne(a=e.year()-1,t,n):r>Ne(e.year(),t,n)?(i=r-Ne(e.year(),t,n),a=e.year()+1):(a=e.year(),i=r),{week:i,year:a}}function Ne(e,t,n){var i=Pe(e,t,n),a=Pe(e+1,t,n);return(pe(e)-i+a)/7}j("w",["ww",2],"wo","week"),j("W",["WW",2],"Wo","isoWeek"),O("week","w"),O("isoWeek","W"),Y("week",5),Y("isoWeek",5),le("w",K),le("ww",K,V),le("W",K),le("WW",K,V),fe(["w","ww","W","WW"],(function(e,t,n,i){t[i.substr(0,1)]=b(e)}));function Re(e,t){return e.slice(t,7).concat(e.slice(0,t))}j("d",0,"do","day"),j("dd",0,0,(function(e){return this.localeData().weekdaysMin(this,e)})),j("ddd",0,0,(function(e){return this.localeData().weekdaysShort(this,e)})),j("dddd",0,0,(function(e){return this.localeData().weekdays(this,e)})),j("e",0,0,"weekday"),j("E",0,0,"isoWeekday"),O("day","d"),O("weekday","e"),O("isoWeekday","E"),Y("day",11),Y("weekday",11),Y("isoWeekday",11),le("d",K),le("e",K),le("E",K),le("dd",(function(e,t){return t.weekdaysMinRegex(e)})),le("ddd",(function(e,t){return t.weekdaysShortRegex(e)})),le("dddd",(function(e,t){return t.weekdaysRegex(e)})),fe(["dd","ddd","dddd"],(function(e,t,n,i){var a=n._locale.weekdaysParse(e,i,n._strict);null!=a?t.d=a:h(n).invalidWeekday=e})),fe(["d","e","E"],(function(e,t,n,i){t[i]=b(e)}));var He="Sunday_Monday_Tuesday_Wednesday_Thursday_Friday_Saturday".split("_");var $e="Sun_Mon_Tue_Wed_Thu_Fri_Sat".split("_");var Ue="Su_Mo_Tu_We_Th_Fr_Sa".split("_");function je(e,t,n){var i,a,o,r=e.toLocaleLowerCase();if(!this._weekdaysParse)for(this._weekdaysParse=[],this._shortWeekdaysParse=[],this._minWeekdaysParse=[],i=0;i<7;++i)o=u([2e3,1]).day(i),this._minWeekdaysParse[i]=this.weekdaysMin(o,"").toLocaleLowerCase(),this._shortWeekdaysParse[i]=this.weekdaysShort(o,"").toLocaleLowerCase(),this._weekdaysParse[i]=this.weekdays(o,"").toLocaleLowerCase();return n?"dddd"===t?-1!==(a=ve.call(this._weekdaysParse,r))?a:null:"ddd"===t?-1!==(a=ve.call(this._shortWeekdaysParse,r))?a:null:-1!==(a=ve.call(this._minWeekdaysParse,r))?a:null:"dddd"===t?-1!==(a=ve.call(this._weekdaysParse,r))||-1!==(a=ve.call(this._shortWeekdaysParse,r))||-1!==(a=ve.call(this._minWeekdaysParse,r))?a:null:"ddd"===t?-1!==(a=ve.call(this._shortWeekdaysParse,r))||-1!==(a=ve.call(this._weekdaysParse,r))||-1!==(a=ve.call(this._minWeekdaysParse,r))?a:null:-1!==(a=ve.call(this._minWeekdaysParse,r))||-1!==(a=ve.call(this._weekdaysParse,r))||-1!==(a=ve.call(this._shortWeekdaysParse,r))?a:null}var We=re;var ze=re;var Ge=re;function Ve(){function e(e,t){return t.length-e.length}var t,n,i,a,o,r=[],s=[],l=[],d=[];for(t=0;t<7;t++)n=u([2e3,1]).day(t),i=this.weekdaysMin(n,""),a=this.weekdaysShort(n,""),o=this.weekdays(n,""),r.push(i),s.push(a),l.push(o),d.push(i),d.push(a),d.push(o);for(r.sort(e),s.sort(e),l.sort(e),d.sort(e),t=0;t<7;t++)s[t]=ce(s[t]),l[t]=ce(l[t]),d[t]=ce(d[t]);this._weekdaysRegex=new RegExp("^("+d.join("|")+")","i"),this._weekdaysShortRegex=this._weekdaysRegex,this._weekdaysMinRegex=this._weekdaysRegex,this._weekdaysStrictRegex=new RegExp("^("+l.join("|")+")","i"),this._weekdaysShortStrictRegex=new RegExp("^("+s.join("|")+")","i"),this._weekdaysMinStrictRegex=new RegExp("^("+r.join("|")+")","i")}function Ze(){return this.hours()%12||12}function Be(e,t){j(e,0,0,(function(){return this.localeData().meridiem(this.hours(),this.minutes(),t)}))}function qe(e,t){return t._meridiemParse}j("H",["HH",2],0,"hour"),j("h",["hh",2],0,Ze),j("k",["kk",2],0,(function(){return this.hours()||24})),j("hmm",0,0,(function(){return""+Ze.apply(this)+N(this.minutes(),2)})),j("hmmss",0,0,(function(){return""+Ze.apply(this)+N(this.minutes(),2)+N(this.seconds(),2)})),j("Hmm",0,0,(function(){return""+this.hours()+N(this.minutes(),2)})),j("Hmmss",0,0,(function(){return""+this.hours()+N(this.minutes(),2)+N(this.seconds(),2)})),Be("a",!0),Be("A",!1),O("hour","h"),Y("hour",13),le("a",qe),le("A",qe),le("H",K),le("h",K),le("k",K),le("HH",K,V),le("hh",K,V),le("kk",K,V),le("hmm",J),le("hmmss",Q),le("Hmm",J),le("Hmmss",Q),he(["H","HH"],3),he(["k","kk"],(function(e,t,n){var i=b(e);t[3]=24===i?0:i})),he(["a","A"],(function(e,t,n){n._isPm=n._locale.isPM(e),n._meridiem=e})),he(["h","hh"],(function(e,t,n){t[3]=b(e),h(n).bigHour=!0})),he("hmm",(function(e,t,n){var i=e.length-2;t[3]=b(e.substr(0,i)),t[4]=b(e.substr(i)),h(n).bigHour=!0})),he("hmmss",(function(e,t,n){var i=e.length-4,a=e.length-2;t[3]=b(e.substr(0,i)),t[4]=b(e.substr(i,2)),t[5]=b(e.substr(a)),h(n).bigHour=!0})),he("Hmm",(function(e,t,n){var i=e.length-2;t[3]=b(e.substr(0,i)),t[4]=b(e.substr(i))})),he("Hmmss",(function(e,t,n){var i=e.length-4,a=e.length-2;t[3]=b(e.substr(0,i)),t[4]=b(e.substr(i,2)),t[5]=b(e.substr(a))}));var Ke,Je=we("Hours",!0),Qe={calendar:{sameDay:"[Today at] LT",nextDay:"[Tomorrow at] LT",nextWeek:"dddd [at] LT",lastDay:"[Yesterday at] LT",lastWeek:"[Last] dddd [at] LT",sameElse:"L"},longDateFormat:{LTS:"h:mm:ss A",LT:"h:mm A",L:"MM/DD/YYYY",LL:"MMMM D, YYYY",LLL:"MMMM D, YYYY h:mm A",LLLL:"dddd, MMMM D, YYYY h:mm A"},invalidDate:"Invalid date",ordinal:"%d",dayOfMonthOrdinalParse:/\d{1,2}/,relativeTime:{future:"in %s",past:"%s ago",s:"a few seconds",ss:"%d seconds",m:"a minute",mm:"%d minutes",h:"an hour",hh:"%d hours",d:"a day",dd:"%d days",M:"a month",MM:"%d months",y:"a year",yy:"%d years"},months:Me,monthsShort:Ce,week:{dow:0,doy:6},weekdays:He,weekdaysMin:Ue,weekdaysShort:$e,meridiemParse:/[ap]\.?m?\.?/i},Xe={},et={};function tt(e){return e?e.toLowerCase().replace("_","-"):e}function nt(e){var t=null;if(!Xe[e]&&"undefined"!=typeof module&&module&&module.exports)try{t=Ke._abbr,require("./locale/"+e),it(t)}catch(e){}return Xe[e]}function it(e,t){var n;return e&&((n=o(t)?ot(e):at(e,t))?Ke=n:"undefined"!=typeof console&&console.warn&&console.warn("Locale "+e+" not found. Did you forget to load it?")),Ke._abbr}function at(e,t){if(null!==t){var n,i=Qe;if(t.abbr=e,null!=Xe[e])S("defineLocaleOverride","use moment.updateLocale(localeName, config) to change an existing locale. moment.defineLocale(localeName, config) should only be used for creating a new locale See http://momentjs.com/guides/#/warnings/define-locale/ for more info."),i=Xe[e]._config;else if(null!=t.parentLocale)if(null!=Xe[t.parentLocale])i=Xe[t.parentLocale]._config;else{if(null==(n=nt(t.parentLocale)))return et[t.parentLocale]||(et[t.parentLocale]=[]),et[t.parentLocale].push({name:e,config:t}),null;i=n._config}return Xe[e]=new E(I(i,t)),et[e]&&et[e].forEach((function(e){at(e.name,e.config)})),it(e),Xe[e]}return delete Xe[e],null}function ot(e){var t;if(e&&e._locale&&e._locale._abbr&&(e=e._locale._abbr),!e)return Ke;if(!i(e)){if(t=nt(e))return t;e=[e]}return function(e){for(var t,n,i,a,o=0;o<e.length;){for(t=(a=tt(e[o]).split("-")).length,n=(n=tt(e[o+1]))?n.split("-"):null;t>0;){if(i=nt(a.slice(0,t).join("-")))return i;if(n&&n.length>=t&&x(a,n,!0)>=t-1)break;t--}o++}return Ke}(e)}function rt(e){var t,n=e._a;return n&&-2===h(e).overflow&&(t=n[1]<0||n[1]>11?1:n[2]<1||n[2]>xe(n[0],n[1])?2:n[3]<0||n[3]>24||24===n[3]&&(0!==n[4]||0!==n[5]||0!==n[6])?3:n[4]<0||n[4]>59?4:n[5]<0||n[5]>59?5:n[6]<0||n[6]>999?6:-1,h(e)._overflowDayOfYear&&(t<0||t>2)&&(t=2),h(e)._overflowWeeks&&-1===t&&(t=7),h(e)._overflowWeekday&&-1===t&&(t=8),h(e).overflow=t),e}function st(e,t,n){return null!=e?e:null!=t?t:n}function lt(e){var t,i,a,o,r,s=[];if(!e._d){for(a=function(e){var t=new Date(n.now());return e._useUTC?[t.getUTCFullYear(),t.getUTCMonth(),t.getUTCDate()]:[t.getFullYear(),t.getMonth(),t.getDate()]}(e),e._w&&null==e._a[2]&&null==e._a[1]&&function(e){var t,n,i,a,o,r,s,l;if(null!=(t=e._w).GG||null!=t.W||null!=t.E)o=1,r=4,n=st(t.GG,e._a[0],Ye(Dt(),1,4).year),i=st(t.W,1),((a=st(t.E,1))<1||a>7)&&(l=!0);else{o=e._locale._week.dow,r=e._locale._week.doy;var d=Ye(Dt(),o,r);n=st(t.gg,e._a[0],d.year),i=st(t.w,d.week),null!=t.d?((a=t.d)<0||a>6)&&(l=!0):null!=t.e?(a=t.e+o,(t.e<0||t.e>6)&&(l=!0)):a=o}i<1||i>Ne(n,o,r)?h(e)._overflowWeeks=!0:null!=l?h(e)._overflowWeekday=!0:(s=Le(n,i,a,o,r),e._a[0]=s.year,e._dayOfYear=s.dayOfYear)}(e),null!=e._dayOfYear&&(r=st(e._a[0],a[0]),(e._dayOfYear>pe(r)||0===e._dayOfYear)&&(h(e)._overflowDayOfYear=!0),i=Ae(r,0,e._dayOfYear),e._a[1]=i.getUTCMonth(),e._a[2]=i.getUTCDate()),t=0;t<3&&null==e._a[t];++t)e._a[t]=s[t]=a[t];for(;t<7;t++)e._a[t]=s[t]=null==e._a[t]?2===t?1:0:e._a[t];24===e._a[3]&&0===e._a[4]&&0===e._a[5]&&0===e._a[6]&&(e._nextDay=!0,e._a[3]=0),e._d=(e._useUTC?Ae:Oe).apply(null,s),o=e._useUTC?e._d.getUTCDay():e._d.getDay(),null!=e._tzm&&e._d.setUTCMinutes(e._d.getUTCMinutes()-e._tzm),e._nextDay&&(e._a[3]=24),e._w&&void 0!==e._w.d&&e._w.d!==o&&(h(e).weekdayMismatch=!0)}}var dt=/^\s*((?:[+-]\d{6}|\d{4})-(?:\d\d-\d\d|W\d\d-\d|W\d\d|\d\d\d|\d\d))(?:(T| )(\d\d(?::\d\d(?::\d\d(?:[.,]\d+)?)?)?)([\+\-]\d\d(?::?\d\d)?|\s*Z)?)?$/,ct=/^\s*((?:[+-]\d{6}|\d{4})(?:\d\d\d\d|W\d\d\d|W\d\d|\d\d\d|\d\d))(?:(T| )(\d\d(?:\d\d(?:\d\d(?:[.,]\d+)?)?)?)([\+\-]\d\d(?::?\d\d)?|\s*Z)?)?$/,ut=/Z|[+-]\d\d(?::?\d\d)?/,ht=[["YYYYYY-MM-DD",/[+-]\d{6}-\d\d-\d\d/],["YYYY-MM-DD",/\d{4}-\d\d-\d\d/],["GGGG-[W]WW-E",/\d{4}-W\d\d-\d/],["GGGG-[W]WW",/\d{4}-W\d\d/,!1],["YYYY-DDD",/\d{4}-\d{3}/],["YYYY-MM",/\d{4}-\d\d/,!1],["YYYYYYMMDD",/[+-]\d{10}/],["YYYYMMDD",/\d{8}/],["GGGG[W]WWE",/\d{4}W\d{3}/],["GGGG[W]WW",/\d{4}W\d{2}/,!1],["YYYYDDD",/\d{7}/]],ft=[["HH:mm:ss.SSSS",/\d\d:\d\d:\d\d\.\d+/],["HH:mm:ss,SSSS",/\d\d:\d\d:\d\d,\d+/],["HH:mm:ss",/\d\d:\d\d:\d\d/],["HH:mm",/\d\d:\d\d/],["HHmmss.SSSS",/\d\d\d\d\d\d\.\d+/],["HHmmss,SSSS",/\d\d\d\d\d\d,\d+/],["HHmmss",/\d\d\d\d\d\d/],["HHmm",/\d\d\d\d/],["HH",/\d\d/]],mt=/^\/?Date\((\-?\d+)/i;function pt(e){var t,n,i,a,o,r,s=e._i,l=dt.exec(s)||ct.exec(s);if(l){for(h(e).iso=!0,t=0,n=ht.length;t<n;t++)if(ht[t][1].exec(l[1])){a=ht[t][0],i=!1!==ht[t][2];break}if(null==a)return void(e._isValid=!1);if(l[3]){for(t=0,n=ft.length;t<n;t++)if(ft[t][1].exec(l[3])){o=(l[2]||" ")+ft[t][0];break}if(null==o)return void(e._isValid=!1)}if(!i&&null!=o)return void(e._isValid=!1);if(l[4]){if(!ut.exec(l[4]))return void(e._isValid=!1);r="Z"}e._f=a+(o||"")+(r||""),_t(e)}else e._isValid=!1}var gt=/^(?:(Mon|Tue|Wed|Thu|Fri|Sat|Sun),?\s)?(\d{1,2})\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s(\d{2,4})\s(\d\d):(\d\d)(?::(\d\d))?\s(?:(UT|GMT|[ECMP][SD]T)|([Zz])|([+-]\d{4}))$/;function vt(e){var t=parseInt(e,10);return t<=49?2e3+t:t<=999?1900+t:t}var yt={UT:0,GMT:0,EDT:-240,EST:-300,CDT:-300,CST:-360,MDT:-360,MST:-420,PDT:-420,PST:-480};function wt(e){var t,n,i,a,o,r,s,l=gt.exec(e._i.replace(/\([^)]*\)|[\n\t]/g," ").replace(/(\s\s+)/g," ").replace(/^\s\s*/,"").replace(/\s\s*$/,""));if(l){var d=(t=l[4],n=l[3],i=l[2],a=l[5],o=l[6],r=l[7],s=[vt(t),Ce.indexOf(n),parseInt(i,10),parseInt(a,10),parseInt(o,10)],r&&s.push(parseInt(r,10)),s);if(!function(e,t,n){return!e||$e.indexOf(e)===new Date(t[0],t[1],t[2]).getDay()||(h(n).weekdayMismatch=!0,n._isValid=!1,!1)}(l[1],d,e))return;e._a=d,e._tzm=function(e,t,n){if(e)return yt[e];if(t)return 0;var i=parseInt(n,10),a=i%100;return(i-a)/100*60+a}(l[8],l[9],l[10]),e._d=Ae.apply(null,e._a),e._d.setUTCMinutes(e._d.getUTCMinutes()-e._tzm),h(e).rfc2822=!0}else e._isValid=!1}function _t(e){if(e._f!==n.ISO_8601)if(e._f!==n.RFC_2822){e._a=[],h(e).empty=!0;var t,i,a,o,r,s=""+e._i,l=s.length,d=0;for(a=z(e._f,e._locale).match(R)||[],t=0;t<a.length;t++)o=a[t],(i=(s.match(de(o,e))||[])[0])&&((r=s.substr(0,s.indexOf(i))).length>0&&h(e).unusedInput.push(r),s=s.slice(s.indexOf(i)+i.length),d+=i.length),U[o]?(i?h(e).empty=!1:h(e).unusedTokens.push(o),me(o,i,e)):e._strict&&!i&&h(e).unusedTokens.push(o);h(e).charsLeftOver=l-d,s.length>0&&h(e).unusedInput.push(s),e._a[3]<=12&&!0===h(e).bigHour&&e._a[3]>0&&(h(e).bigHour=void 0),h(e).parsedDateParts=e._a.slice(0),h(e).meridiem=e._meridiem,e._a[3]=function(e,t,n){var i;if(null==n)return t;return null!=e.meridiemHour?e.meridiemHour(t,n):null!=e.isPM?((i=e.isPM(n))&&t<12&&(t+=12),i||12!==t||(t=0),t):t}(e._locale,e._a[3],e._meridiem),lt(e),rt(e)}else wt(e);else pt(e)}function bt(e){var t=e._i,d=e._f;return e._locale=e._locale||ot(e._l),null===t||void 0===d&&""===t?m({nullInput:!0}):("string"==typeof t&&(e._i=t=e._locale.preparse(t)),w(t)?new y(rt(t)):(s(t)?e._d=t:i(d)?function(e){var t,n,i,a,o;if(0===e._f.length)return h(e).invalidFormat=!0,void(e._d=new Date(NaN));for(a=0;a<e._f.length;a++)o=0,t=g({},e),null!=e._useUTC&&(t._useUTC=e._useUTC),t._f=e._f[a],_t(t),f(t)&&(o+=h(t).charsLeftOver,o+=10*h(t).unusedTokens.length,h(t).score=o,(null==i||o<i)&&(i=o,n=t));c(e,n||t)}(e):d?_t(e):function(e){var t=e._i;o(t)?e._d=new Date(n.now()):s(t)?e._d=new Date(t.valueOf()):"string"==typeof t?function(e){var t=mt.exec(e._i);null===t?(pt(e),!1===e._isValid&&(delete e._isValid,wt(e),!1===e._isValid&&(delete e._isValid,n.createFromInputFallback(e)))):e._d=new Date(+t[1])}(e):i(t)?(e._a=l(t.slice(0),(function(e){return parseInt(e,10)})),lt(e)):a(t)?function(e){if(!e._d){var t=P(e._i);e._a=l([t.year,t.month,t.day||t.date,t.hour,t.minute,t.second,t.millisecond],(function(e){return e&&parseInt(e,10)})),lt(e)}}(e):r(t)?e._d=new Date(t):n.createFromInputFallback(e)}(e),f(e)||(e._d=null),e))}function xt(e,t,n,o,r){var s,l={};return!0!==n&&!1!==n||(o=n,n=void 0),(a(e)&&function(e){if(Object.getOwnPropertyNames)return 0===Object.getOwnPropertyNames(e).length;var t;for(t in e)if(e.hasOwnProperty(t))return!1;return!0}(e)||i(e)&&0===e.length)&&(e=void 0),l._isAMomentObject=!0,l._useUTC=l._isUTC=r,l._l=n,l._i=e,l._f=t,l._strict=o,(s=new y(rt(bt(l))))._nextDay&&(s.add(1,"d"),s._nextDay=void 0),s}function Dt(e,t,n,i){return xt(e,t,n,i,!1)}n.createFromInputFallback=M("value provided is not in a recognized RFC2822 or ISO format. moment construction falls back to js Date(), which is not reliable across all browsers and versions. Non RFC2822/ISO date formats are discouraged and will be removed in an upcoming major release. Please refer to http://momentjs.com/guides/#/warnings/js-date/ for more info.",(function(e){e._d=new Date(e._i+(e._useUTC?" UTC":""))})),n.ISO_8601=function(){},n.RFC_2822=function(){};var Mt=M("moment().min is deprecated, use moment.max instead. http://momentjs.com/guides/#/warnings/min-max/",(function(){var e=Dt.apply(null,arguments);return this.isValid()&&e.isValid()?e<this?this:e:m()})),Ct=M("moment().max is deprecated, use moment.min instead. http://momentjs.com/guides/#/warnings/min-max/",(function(){var e=Dt.apply(null,arguments);return this.isValid()&&e.isValid()?e>this?this:e:m()}));function kt(e,t){var n,a;if(1===t.length&&i(t[0])&&(t=t[0]),!t.length)return Dt();for(n=t[0],a=1;a<t.length;++a)t[a].isValid()&&!t[a][e](n)||(n=t[a]);return n}var St=["year","quarter","month","week","day","hour","minute","second","millisecond"];function Tt(e){var t=P(e),n=t.year||0,i=t.quarter||0,a=t.month||0,o=t.week||t.isoWeek||0,r=t.day||0,s=t.hour||0,l=t.minute||0,d=t.second||0,c=t.millisecond||0;this._isValid=function(e){for(var t in e)if(-1===ve.call(St,t)||null!=e[t]&&isNaN(e[t]))return!1;for(var n=!1,i=0;i<St.length;++i)if(e[St[i]]){if(n)return!1;parseFloat(e[St[i]])!==b(e[St[i]])&&(n=!0)}return!0}(t),this._milliseconds=+c+1e3*d+6e4*l+1e3*s*60*60,this._days=+r+7*o,this._months=+a+3*i+12*n,this._data={},this._locale=ot(),this._bubble()}function It(e){return e instanceof Tt}function Et(e){return e<0?-1*Math.round(-1*e):Math.round(e)}function Ft(e,t){j(e,0,0,(function(){var e=this.utcOffset(),n="+";return e<0&&(e=-e,n="-"),n+N(~~(e/60),2)+t+N(~~e%60,2)}))}Ft("Z",":"),Ft("ZZ",""),le("Z",oe),le("ZZ",oe),he(["Z","ZZ"],(function(e,t,n){n._useUTC=!0,n._tzm=At(oe,e)}));var Ot=/([\+\-]|\d\d)/gi;function At(e,t){var n=(t||"").match(e);if(null===n)return null;var i=((n[n.length-1]||[])+"").match(Ot)||["-",0,0],a=60*i[1]+b(i[2]);return 0===a?0:"+"===i[0]?a:-a}function Pt(e,t){var i,a;return t._isUTC?(i=t.clone(),a=(w(e)||s(e)?e.valueOf():Dt(e).valueOf())-i.valueOf(),i._d.setTime(i._d.valueOf()+a),n.updateOffset(i,!1),i):Dt(e).local()}function Lt(e){return 15*-Math.round(e._d.getTimezoneOffset()/15)}function Yt(){return!!this.isValid()&&(this._isUTC&&0===this._offset)}n.updateOffset=function(){};var Nt=/^(\-|\+)?(?:(\d*)[. ])?(\d+)\:(\d+)(?:\:(\d+)(\.\d*)?)?$/,Rt=/^(-|\+)?P(?:([-+]?[0-9,.]*)Y)?(?:([-+]?[0-9,.]*)M)?(?:([-+]?[0-9,.]*)W)?(?:([-+]?[0-9,.]*)D)?(?:T(?:([-+]?[0-9,.]*)H)?(?:([-+]?[0-9,.]*)M)?(?:([-+]?[0-9,.]*)S)?)?$/;function Ht(e,t){var n,i,a,o=e,s=null;return It(e)?o={ms:e._milliseconds,d:e._days,M:e._months}:r(e)?(o={},t?o[t]=e:o.milliseconds=e):(s=Nt.exec(e))?(n="-"===s[1]?-1:1,o={y:0,d:b(s[2])*n,h:b(s[3])*n,m:b(s[4])*n,s:b(s[5])*n,ms:b(Et(1e3*s[6]))*n}):(s=Rt.exec(e))?(n="-"===s[1]?-1:1,o={y:$t(s[2],n),M:$t(s[3],n),w:$t(s[4],n),d:$t(s[5],n),h:$t(s[6],n),m:$t(s[7],n),s:$t(s[8],n)}):null==o?o={}:"object"==typeof o&&("from"in o||"to"in o)&&(a=function(e,t){var n;if(!e.isValid()||!t.isValid())return{milliseconds:0,months:0};t=Pt(t,e),e.isBefore(t)?n=Ut(e,t):((n=Ut(t,e)).milliseconds=-n.milliseconds,n.months=-n.months);return n}(Dt(o.from),Dt(o.to)),(o={}).ms=a.milliseconds,o.M=a.months),i=new Tt(o),It(e)&&d(e,"_locale")&&(i._locale=e._locale),i}function $t(e,t){var n=e&&parseFloat(e.replace(",","."));return(isNaN(n)?0:n)*t}function Ut(e,t){var n={};return n.months=t.month()-e.month()+12*(t.year()-e.year()),e.clone().add(n.months,"M").isAfter(t)&&--n.months,n.milliseconds=+t-+e.clone().add(n.months,"M"),n}function jt(e,t){return function(n,i){var a;return null===i||isNaN(+i)||(S(t,"moment()."+t+"(period, number) is deprecated. Please use moment()."+t+"(number, period). See http://momentjs.com/guides/#/warnings/add-inverted-param/ for more info."),a=n,n=i,i=a),Wt(this,Ht(n="string"==typeof n?+n:n,i),e),this}}function Wt(e,t,i,a){var o=t._milliseconds,r=Et(t._days),s=Et(t._months);e.isValid()&&(a=null==a||a,s&&Se(e,_e(e,"Month")+s*i),r&&be(e,"Date",_e(e,"Date")+r*i),o&&e._d.setTime(e._d.valueOf()+o*i),a&&n.updateOffset(e,r||s))}Ht.fn=Tt.prototype,Ht.invalid=function(){return Ht(NaN)};var zt=jt(1,"add"),Gt=jt(-1,"subtract");function Vt(e,t){var n=12*(t.year()-e.year())+(t.month()-e.month()),i=e.clone().add(n,"months");return-(n+(t-i<0?(t-i)/(i-e.clone().add(n-1,"months")):(t-i)/(e.clone().add(n+1,"months")-i)))||0}function Zt(e){var t;return void 0===e?this._locale._abbr:(null!=(t=ot(e))&&(this._locale=t),this)}n.defaultFormat="YYYY-MM-DDTHH:mm:ssZ",n.defaultFormatUtc="YYYY-MM-DDTHH:mm:ss[Z]";var Bt=M("moment().lang() is deprecated. Instead, use moment().localeData() to get the language configuration. Use moment().locale() to change languages.",(function(e){return void 0===e?this.localeData():this.locale(e)}));function qt(){return this._locale}var Kt=1e3,Jt=6e4,Qt=36e5,Xt=126227808e5;function en(e,t){return(e%t+t)%t}function tn(e,t,n){return e<100&&e>=0?new Date(e+400,t,n)-Xt:new Date(e,t,n).valueOf()}function nn(e,t,n){return e<100&&e>=0?Date.UTC(e+400,t,n)-Xt:Date.UTC(e,t,n)}function an(e,t){j(0,[e,e.length],0,t)}function on(e,t,n,i,a){var o;return null==e?Ye(this,i,a).year:(t>(o=Ne(e,i,a))&&(t=o),rn.call(this,e,t,n,i,a))}function rn(e,t,n,i,a){var o=Le(e,t,n,i,a),r=Ae(o.year,0,o.dayOfYear);return this.year(r.getUTCFullYear()),this.month(r.getUTCMonth()),this.date(r.getUTCDate()),this}j(0,["gg",2],0,(function(){return this.weekYear()%100})),j(0,["GG",2],0,(function(){return this.isoWeekYear()%100})),an("gggg","weekYear"),an("ggggg","weekYear"),an("GGGG","isoWeekYear"),an("GGGGG","isoWeekYear"),O("weekYear","gg"),O("isoWeekYear","GG"),Y("weekYear",1),Y("isoWeekYear",1),le("G",ie),le("g",ie),le("GG",K,V),le("gg",K,V),le("GGGG",ee,B),le("gggg",ee,B),le("GGGGG",te,q),le("ggggg",te,q),fe(["gggg","ggggg","GGGG","GGGGG"],(function(e,t,n,i){t[i.substr(0,2)]=b(e)})),fe(["gg","GG"],(function(e,t,i,a){t[a]=n.parseTwoDigitYear(e)})),j("Q",0,"Qo","quarter"),O("quarter","Q"),Y("quarter",7),le("Q",G),he("Q",(function(e,t){t[1]=3*(b(e)-1)})),j("D",["DD",2],"Do","date"),O("date","D"),Y("date",9),le("D",K),le("DD",K,V),le("Do",(function(e,t){return e?t._dayOfMonthOrdinalParse||t._ordinalParse:t._dayOfMonthOrdinalParseLenient})),he(["D","DD"],2),he("Do",(function(e,t){t[2]=b(e.match(K)[0])}));var sn=we("Date",!0);j("DDD",["DDDD",3],"DDDo","dayOfYear"),O("dayOfYear","DDD"),Y("dayOfYear",4),le("DDD",X),le("DDDD",Z),he(["DDD","DDDD"],(function(e,t,n){n._dayOfYear=b(e)})),j("m",["mm",2],0,"minute"),O("minute","m"),Y("minute",14),le("m",K),le("mm",K,V),he(["m","mm"],4);var ln=we("Minutes",!1);j("s",["ss",2],0,"second"),O("second","s"),Y("second",15),le("s",K),le("ss",K,V),he(["s","ss"],5);var dn,cn=we("Seconds",!1);for(j("S",0,0,(function(){return~~(this.millisecond()/100)})),j(0,["SS",2],0,(function(){return~~(this.millisecond()/10)})),j(0,["SSS",3],0,"millisecond"),j(0,["SSSS",4],0,(function(){return 10*this.millisecond()})),j(0,["SSSSS",5],0,(function(){return 100*this.millisecond()})),j(0,["SSSSSS",6],0,(function(){return 1e3*this.millisecond()})),j(0,["SSSSSSS",7],0,(function(){return 1e4*this.millisecond()})),j(0,["SSSSSSSS",8],0,(function(){return 1e5*this.millisecond()})),j(0,["SSSSSSSSS",9],0,(function(){return 1e6*this.millisecond()})),O("millisecond","ms"),Y("millisecond",16),le("S",X,G),le("SS",X,V),le("SSS",X,Z),dn="SSSS";dn.length<=9;dn+="S")le(dn,ne);function un(e,t){t[6]=b(1e3*("0."+e))}for(dn="S";dn.length<=9;dn+="S")he(dn,un);var hn=we("Milliseconds",!1);j("z",0,0,"zoneAbbr"),j("zz",0,0,"zoneName");var fn=y.prototype;function mn(e){return e}fn.add=zt,fn.calendar=function(e,t){var i=e||Dt(),a=Pt(i,this).startOf("day"),o=n.calendarFormat(this,a)||"sameElse",r=t&&(T(t[o])?t[o].call(this,i):t[o]);return this.format(r||this.localeData().calendar(o,this,Dt(i)))},fn.clone=function(){return new y(this)},fn.diff=function(e,t,n){var i,a,o;if(!this.isValid())return NaN;if(!(i=Pt(e,this)).isValid())return NaN;switch(a=6e4*(i.utcOffset()-this.utcOffset()),t=A(t)){case"year":o=Vt(this,i)/12;break;case"month":o=Vt(this,i);break;case"quarter":o=Vt(this,i)/3;break;case"second":o=(this-i)/1e3;break;case"minute":o=(this-i)/6e4;break;case"hour":o=(this-i)/36e5;break;case"day":o=(this-i-a)/864e5;break;case"week":o=(this-i-a)/6048e5;break;default:o=this-i}return n?o:_(o)},fn.endOf=function(e){var t;if(void 0===(e=A(e))||"millisecond"===e||!this.isValid())return this;var i=this._isUTC?nn:tn;switch(e){case"year":t=i(this.year()+1,0,1)-1;break;case"quarter":t=i(this.year(),this.month()-this.month()%3+3,1)-1;break;case"month":t=i(this.year(),this.month()+1,1)-1;break;case"week":t=i(this.year(),this.month(),this.date()-this.weekday()+7)-1;break;case"isoWeek":t=i(this.year(),this.month(),this.date()-(this.isoWeekday()-1)+7)-1;break;case"day":case"date":t=i(this.year(),this.month(),this.date()+1)-1;break;case"hour":t=this._d.valueOf(),t+=Qt-en(t+(this._isUTC?0:this.utcOffset()*Jt),Qt)-1;break;case"minute":t=this._d.valueOf(),t+=Jt-en(t,Jt)-1;break;case"second":t=this._d.valueOf(),t+=Kt-en(t,Kt)-1}return this._d.setTime(t),n.updateOffset(this,!0),this},fn.format=function(e){e||(e=this.isUtc()?n.defaultFormatUtc:n.defaultFormat);var t=W(this,e);return this.localeData().postformat(t)},fn.from=function(e,t){return this.isValid()&&(w(e)&&e.isValid()||Dt(e).isValid())?Ht({to:this,from:e}).locale(this.locale()).humanize(!t):this.localeData().invalidDate()},fn.fromNow=function(e){return this.from(Dt(),e)},fn.to=function(e,t){return this.isValid()&&(w(e)&&e.isValid()||Dt(e).isValid())?Ht({from:this,to:e}).locale(this.locale()).humanize(!t):this.localeData().invalidDate()},fn.toNow=function(e){return this.to(Dt(),e)},fn.get=function(e){return T(this[e=A(e)])?this[e]():this},fn.invalidAt=function(){return h(this).overflow},fn.isAfter=function(e,t){var n=w(e)?e:Dt(e);return!(!this.isValid()||!n.isValid())&&("millisecond"===(t=A(t)||"millisecond")?this.valueOf()>n.valueOf():n.valueOf()<this.clone().startOf(t).valueOf())},fn.isBefore=function(e,t){var n=w(e)?e:Dt(e);return!(!this.isValid()||!n.isValid())&&("millisecond"===(t=A(t)||"millisecond")?this.valueOf()<n.valueOf():this.clone().endOf(t).valueOf()<n.valueOf())},fn.isBetween=function(e,t,n,i){var a=w(e)?e:Dt(e),o=w(t)?t:Dt(t);return!!(this.isValid()&&a.isValid()&&o.isValid())&&(("("===(i=i||"()")[0]?this.isAfter(a,n):!this.isBefore(a,n))&&(")"===i[1]?this.isBefore(o,n):!this.isAfter(o,n)))},fn.isSame=function(e,t){var n,i=w(e)?e:Dt(e);return!(!this.isValid()||!i.isValid())&&("millisecond"===(t=A(t)||"millisecond")?this.valueOf()===i.valueOf():(n=i.valueOf(),this.clone().startOf(t).valueOf()<=n&&n<=this.clone().endOf(t).valueOf()))},fn.isSameOrAfter=function(e,t){return this.isSame(e,t)||this.isAfter(e,t)},fn.isSameOrBefore=function(e,t){return this.isSame(e,t)||this.isBefore(e,t)},fn.isValid=function(){return f(this)},fn.lang=Bt,fn.locale=Zt,fn.localeData=qt,fn.max=Ct,fn.min=Mt,fn.parsingFlags=function(){return c({},h(this))},fn.set=function(e,t){if("object"==typeof e)for(var n=function(e){var t=[];for(var n in e)t.push({unit:n,priority:L[n]});return t.sort((function(e,t){return e.priority-t.priority})),t}(e=P(e)),i=0;i<n.length;i++)this[n[i].unit](e[n[i].unit]);else if(T(this[e=A(e)]))return this[e](t);return this},fn.startOf=function(e){var t;if(void 0===(e=A(e))||"millisecond"===e||!this.isValid())return this;var i=this._isUTC?nn:tn;switch(e){case"year":t=i(this.year(),0,1);break;case"quarter":t=i(this.year(),this.month()-this.month()%3,1);break;case"month":t=i(this.year(),this.month(),1);break;case"week":t=i(this.year(),this.month(),this.date()-this.weekday());break;case"isoWeek":t=i(this.year(),this.month(),this.date()-(this.isoWeekday()-1));break;case"day":case"date":t=i(this.year(),this.month(),this.date());break;case"hour":t=this._d.valueOf(),t-=en(t+(this._isUTC?0:this.utcOffset()*Jt),Qt);break;case"minute":t=this._d.valueOf(),t-=en(t,Jt);break;case"second":t=this._d.valueOf(),t-=en(t,Kt)}return this._d.setTime(t),n.updateOffset(this,!0),this},fn.subtract=Gt,fn.toArray=function(){var e=this;return[e.year(),e.month(),e.date(),e.hour(),e.minute(),e.second(),e.millisecond()]},fn.toObject=function(){var e=this;return{years:e.year(),months:e.month(),date:e.date(),hours:e.hours(),minutes:e.minutes(),seconds:e.seconds(),milliseconds:e.milliseconds()}},fn.toDate=function(){return new Date(this.valueOf())},fn.toISOString=function(e){if(!this.isValid())return null;var t=!0!==e,n=t?this.clone().utc():this;return n.year()<0||n.year()>9999?W(n,t?"YYYYYY-MM-DD[T]HH:mm:ss.SSS[Z]":"YYYYYY-MM-DD[T]HH:mm:ss.SSSZ"):T(Date.prototype.toISOString)?t?this.toDate().toISOString():new Date(this.valueOf()+60*this.utcOffset()*1e3).toISOString().replace("Z",W(n,"Z")):W(n,t?"YYYY-MM-DD[T]HH:mm:ss.SSS[Z]":"YYYY-MM-DD[T]HH:mm:ss.SSSZ")},fn.inspect=function(){if(!this.isValid())return"moment.invalid(/* "+this._i+" */)";var e="moment",t="";this.isLocal()||(e=0===this.utcOffset()?"moment.utc":"moment.parseZone",t="Z");var n="["+e+'("]',i=0<=this.year()&&this.year()<=9999?"YYYY":"YYYYYY",a=t+'[")]';return this.format(n+i+"-MM-DD[T]HH:mm:ss.SSS"+a)},fn.toJSON=function(){return this.isValid()?this.toISOString():null},fn.toString=function(){return this.clone().locale("en").format("ddd MMM DD YYYY HH:mm:ss [GMT]ZZ")},fn.unix=function(){return Math.floor(this.valueOf()/1e3)},fn.valueOf=function(){return this._d.valueOf()-6e4*(this._offset||0)},fn.creationData=function(){return{input:this._i,format:this._f,locale:this._locale,isUTC:this._isUTC,strict:this._strict}},fn.year=ye,fn.isLeapYear=function(){return ge(this.year())},fn.weekYear=function(e){return on.call(this,e,this.week(),this.weekday(),this.localeData()._week.dow,this.localeData()._week.doy)},fn.isoWeekYear=function(e){return on.call(this,e,this.isoWeek(),this.isoWeekday(),1,4)},fn.quarter=fn.quarters=function(e){return null==e?Math.ceil((this.month()+1)/3):this.month(3*(e-1)+this.month()%3)},fn.month=Te,fn.daysInMonth=function(){return xe(this.year(),this.month())},fn.week=fn.weeks=function(e){var t=this.localeData().week(this);return null==e?t:this.add(7*(e-t),"d")},fn.isoWeek=fn.isoWeeks=function(e){var t=Ye(this,1,4).week;return null==e?t:this.add(7*(e-t),"d")},fn.weeksInYear=function(){var e=this.localeData()._week;return Ne(this.year(),e.dow,e.doy)},fn.isoWeeksInYear=function(){return Ne(this.year(),1,4)},fn.date=sn,fn.day=fn.days=function(e){if(!this.isValid())return null!=e?this:NaN;var t=this._isUTC?this._d.getUTCDay():this._d.getDay();return null!=e?(e=function(e,t){return"string"!=typeof e?e:isNaN(e)?"number"==typeof(e=t.weekdaysParse(e))?e:null:parseInt(e,10)}(e,this.localeData()),this.add(e-t,"d")):t},fn.weekday=function(e){if(!this.isValid())return null!=e?this:NaN;var t=(this.day()+7-this.localeData()._week.dow)%7;return null==e?t:this.add(e-t,"d")},fn.isoWeekday=function(e){if(!this.isValid())return null!=e?this:NaN;if(null!=e){var t=function(e,t){return"string"==typeof e?t.weekdaysParse(e)%7||7:isNaN(e)?null:e}(e,this.localeData());return this.day(this.day()%7?t:t-7)}return this.day()||7},fn.dayOfYear=function(e){var t=Math.round((this.clone().startOf("day")-this.clone().startOf("year"))/864e5)+1;return null==e?t:this.add(e-t,"d")},fn.hour=fn.hours=Je,fn.minute=fn.minutes=ln,fn.second=fn.seconds=cn,fn.millisecond=fn.milliseconds=hn,fn.utcOffset=function(e,t,i){var a,o=this._offset||0;if(!this.isValid())return null!=e?this:NaN;if(null!=e){if("string"==typeof e){if(null===(e=At(oe,e)))return this}else Math.abs(e)<16&&!i&&(e*=60);return!this._isUTC&&t&&(a=Lt(this)),this._offset=e,this._isUTC=!0,null!=a&&this.add(a,"m"),o!==e&&(!t||this._changeInProgress?Wt(this,Ht(e-o,"m"),1,!1):this._changeInProgress||(this._changeInProgress=!0,n.updateOffset(this,!0),this._changeInProgress=null)),this}return this._isUTC?o:Lt(this)},fn.utc=function(e){return this.utcOffset(0,e)},fn.local=function(e){return this._isUTC&&(this.utcOffset(0,e),this._isUTC=!1,e&&this.subtract(Lt(this),"m")),this},fn.parseZone=function(){if(null!=this._tzm)this.utcOffset(this._tzm,!1,!0);else if("string"==typeof this._i){var e=At(ae,this._i);null!=e?this.utcOffset(e):this.utcOffset(0,!0)}return this},fn.hasAlignedHourOffset=function(e){return!!this.isValid()&&(e=e?Dt(e).utcOffset():0,(this.utcOffset()-e)%60==0)},fn.isDST=function(){return this.utcOffset()>this.clone().month(0).utcOffset()||this.utcOffset()>this.clone().month(5).utcOffset()},fn.isLocal=function(){return!!this.isValid()&&!this._isUTC},fn.isUtcOffset=function(){return!!this.isValid()&&this._isUTC},fn.isUtc=Yt,fn.isUTC=Yt,fn.zoneAbbr=function(){return this._isUTC?"UTC":""},fn.zoneName=function(){return this._isUTC?"Coordinated Universal Time":""},fn.dates=M("dates accessor is deprecated. Use date instead.",sn),fn.months=M("months accessor is deprecated. Use month instead",Te),fn.years=M("years accessor is deprecated. Use year instead",ye),fn.zone=M("moment().zone is deprecated, use moment().utcOffset instead. http://momentjs.com/guides/#/warnings/zone/",(function(e,t){return null!=e?("string"!=typeof e&&(e=-e),this.utcOffset(e,t),this):-this.utcOffset()})),fn.isDSTShifted=M("isDSTShifted is deprecated. See http://momentjs.com/guides/#/warnings/dst-shifted/ for more information",(function(){if(!o(this._isDSTShifted))return this._isDSTShifted;var e={};if(g(e,this),(e=bt(e))._a){var t=e._isUTC?u(e._a):Dt(e._a);this._isDSTShifted=this.isValid()&&x(e._a,t.toArray())>0}else this._isDSTShifted=!1;return this._isDSTShifted}));var pn=E.prototype;function gn(e,t,n,i){var a=ot(),o=u().set(i,t);return a[n](o,e)}function vn(e,t,n){if(r(e)&&(t=e,e=void 0),e=e||"",null!=t)return gn(e,t,n,"month");var i,a=[];for(i=0;i<12;i++)a[i]=gn(e,i,n,"month");return a}function yn(e,t,n,i){"boolean"==typeof e?(r(t)&&(n=t,t=void 0),t=t||""):(n=t=e,e=!1,r(t)&&(n=t,t=void 0),t=t||"");var a,o=ot(),s=e?o._week.dow:0;if(null!=n)return gn(t,(n+s)%7,i,"day");var l=[];for(a=0;a<7;a++)l[a]=gn(t,(a+s)%7,i,"day");return l}pn.calendar=function(e,t,n){var i=this._calendar[e]||this._calendar.sameElse;return T(i)?i.call(t,n):i},pn.longDateFormat=function(e){var t=this._longDateFormat[e],n=this._longDateFormat[e.toUpperCase()];return t||!n?t:(this._longDateFormat[e]=n.replace(/MMMM|MM|DD|dddd/g,(function(e){return e.slice(1)})),this._longDateFormat[e])},pn.invalidDate=function(){return this._invalidDate},pn.ordinal=function(e){return this._ordinal.replace("%d",e)},pn.preparse=mn,pn.postformat=mn,pn.relativeTime=function(e,t,n,i){var a=this._relativeTime[n];return T(a)?a(e,t,n,i):a.replace(/%d/i,e)},pn.pastFuture=function(e,t){var n=this._relativeTime[e>0?"future":"past"];return T(n)?n(t):n.replace(/%s/i,t)},pn.set=function(e){var t,n;for(n in e)T(t=e[n])?this[n]=t:this["_"+n]=t;this._config=e,this._dayOfMonthOrdinalParseLenient=new RegExp((this._dayOfMonthOrdinalParse.source||this._ordinalParse.source)+"|"+/\d{1,2}/.source)},pn.months=function(e,t){return e?i(this._months)?this._months[e.month()]:this._months[(this._months.isFormat||De).test(t)?"format":"standalone"][e.month()]:i(this._months)?this._months:this._months.standalone},pn.monthsShort=function(e,t){return e?i(this._monthsShort)?this._monthsShort[e.month()]:this._monthsShort[De.test(t)?"format":"standalone"][e.month()]:i(this._monthsShort)?this._monthsShort:this._monthsShort.standalone},pn.monthsParse=function(e,t,n){var i,a,o;if(this._monthsParseExact)return ke.call(this,e,t,n);for(this._monthsParse||(this._monthsParse=[],this._longMonthsParse=[],this._shortMonthsParse=[]),i=0;i<12;i++){if(a=u([2e3,i]),n&&!this._longMonthsParse[i]&&(this._longMonthsParse[i]=new RegExp("^"+this.months(a,"").replace(".","")+"$","i"),this._shortMonthsParse[i]=new RegExp("^"+this.monthsShort(a,"").replace(".","")+"$","i")),n||this._monthsParse[i]||(o="^"+this.months(a,"")+"|^"+this.monthsShort(a,""),this._monthsParse[i]=new RegExp(o.replace(".",""),"i")),n&&"MMMM"===t&&this._longMonthsParse[i].test(e))return i;if(n&&"MMM"===t&&this._shortMonthsParse[i].test(e))return i;if(!n&&this._monthsParse[i].test(e))return i}},pn.monthsRegex=function(e){return this._monthsParseExact?(d(this,"_monthsRegex")||Fe.call(this),e?this._monthsStrictRegex:this._monthsRegex):(d(this,"_monthsRegex")||(this._monthsRegex=Ee),this._monthsStrictRegex&&e?this._monthsStrictRegex:this._monthsRegex)},pn.monthsShortRegex=function(e){return this._monthsParseExact?(d(this,"_monthsRegex")||Fe.call(this),e?this._monthsShortStrictRegex:this._monthsShortRegex):(d(this,"_monthsShortRegex")||(this._monthsShortRegex=Ie),this._monthsShortStrictRegex&&e?this._monthsShortStrictRegex:this._monthsShortRegex)},pn.week=function(e){return Ye(e,this._week.dow,this._week.doy).week},pn.firstDayOfYear=function(){return this._week.doy},pn.firstDayOfWeek=function(){return this._week.dow},pn.weekdays=function(e,t){var n=i(this._weekdays)?this._weekdays:this._weekdays[e&&!0!==e&&this._weekdays.isFormat.test(t)?"format":"standalone"];return!0===e?Re(n,this._week.dow):e?n[e.day()]:n},pn.weekdaysMin=function(e){return!0===e?Re(this._weekdaysMin,this._week.dow):e?this._weekdaysMin[e.day()]:this._weekdaysMin},pn.weekdaysShort=function(e){return!0===e?Re(this._weekdaysShort,this._week.dow):e?this._weekdaysShort[e.day()]:this._weekdaysShort},pn.weekdaysParse=function(e,t,n){var i,a,o;if(this._weekdaysParseExact)return je.call(this,e,t,n);for(this._weekdaysParse||(this._weekdaysParse=[],this._minWeekdaysParse=[],this._shortWeekdaysParse=[],this._fullWeekdaysParse=[]),i=0;i<7;i++){if(a=u([2e3,1]).day(i),n&&!this._fullWeekdaysParse[i]&&(this._fullWeekdaysParse[i]=new RegExp("^"+this.weekdays(a,"").replace(".","\\.?")+"$","i"),this._shortWeekdaysParse[i]=new RegExp("^"+this.weekdaysShort(a,"").replace(".","\\.?")+"$","i"),this._minWeekdaysParse[i]=new RegExp("^"+this.weekdaysMin(a,"").replace(".","\\.?")+"$","i")),this._weekdaysParse[i]||(o="^"+this.weekdays(a,"")+"|^"+this.weekdaysShort(a,"")+"|^"+this.weekdaysMin(a,""),this._weekdaysParse[i]=new RegExp(o.replace(".",""),"i")),n&&"dddd"===t&&this._fullWeekdaysParse[i].test(e))return i;if(n&&"ddd"===t&&this._shortWeekdaysParse[i].test(e))return i;if(n&&"dd"===t&&this._minWeekdaysParse[i].test(e))return i;if(!n&&this._weekdaysParse[i].test(e))return i}},pn.weekdaysRegex=function(e){return this._weekdaysParseExact?(d(this,"_weekdaysRegex")||Ve.call(this),e?this._weekdaysStrictRegex:this._weekdaysRegex):(d(this,"_weekdaysRegex")||(this._weekdaysRegex=We),this._weekdaysStrictRegex&&e?this._weekdaysStrictRegex:this._weekdaysRegex)},pn.weekdaysShortRegex=function(e){return this._weekdaysParseExact?(d(this,"_weekdaysRegex")||Ve.call(this),e?this._weekdaysShortStrictRegex:this._weekdaysShortRegex):(d(this,"_weekdaysShortRegex")||(this._weekdaysShortRegex=ze),this._weekdaysShortStrictRegex&&e?this._weekdaysShortStrictRegex:this._weekdaysShortRegex)},pn.weekdaysMinRegex=function(e){return this._weekdaysParseExact?(d(this,"_weekdaysRegex")||Ve.call(this),e?this._weekdaysMinStrictRegex:this._weekdaysMinRegex):(d(this,"_weekdaysMinRegex")||(this._weekdaysMinRegex=Ge),this._weekdaysMinStrictRegex&&e?this._weekdaysMinStrictRegex:this._weekdaysMinRegex)},pn.isPM=function(e){return"p"===(e+"").toLowerCase().charAt(0)},pn.meridiem=function(e,t,n){return e>11?n?"pm":"PM":n?"am":"AM"},it("en",{dayOfMonthOrdinalParse:/\d{1,2}(th|st|nd|rd)/,ordinal:function(e){var t=e%10;return e+(1===b(e%100/10)?"th":1===t?"st":2===t?"nd":3===t?"rd":"th")}}),n.lang=M("moment.lang is deprecated. Use moment.locale instead.",it),n.langData=M("moment.langData is deprecated. Use moment.localeData instead.",ot);var wn=Math.abs;function _n(e,t,n,i){var a=Ht(t,n);return e._milliseconds+=i*a._milliseconds,e._days+=i*a._days,e._months+=i*a._months,e._bubble()}function bn(e){return e<0?Math.floor(e):Math.ceil(e)}function xn(e){return 4800*e/146097}function Dn(e){return 146097*e/4800}function Mn(e){return function(){return this.as(e)}}var Cn=Mn("ms"),kn=Mn("s"),Sn=Mn("m"),Tn=Mn("h"),In=Mn("d"),En=Mn("w"),Fn=Mn("M"),On=Mn("Q"),An=Mn("y");function Pn(e){return function(){return this.isValid()?this._data[e]:NaN}}var Ln=Pn("milliseconds"),Yn=Pn("seconds"),Nn=Pn("minutes"),Rn=Pn("hours"),Hn=Pn("days"),$n=Pn("months"),Un=Pn("years");var jn=Math.round,Wn={ss:44,s:45,m:45,h:22,d:26,M:11};function zn(e,t,n,i,a){return a.relativeTime(t||1,!!n,e,i)}var Gn=Math.abs;function Vn(e){return(e>0)-(e<0)||+e}function Zn(){if(!this.isValid())return this.localeData().invalidDate();var e,t,n=Gn(this._milliseconds)/1e3,i=Gn(this._days),a=Gn(this._months);e=_(n/60),t=_(e/60),n%=60,e%=60;var o=_(a/12),r=a%=12,s=i,l=t,d=e,c=n?n.toFixed(3).replace(/\.?0+$/,""):"",u=this.asSeconds();if(!u)return"P0D";var h=u<0?"-":"",f=Vn(this._months)!==Vn(u)?"-":"",m=Vn(this._days)!==Vn(u)?"-":"",p=Vn(this._milliseconds)!==Vn(u)?"-":"";return h+"P"+(o?f+o+"Y":"")+(r?f+r+"M":"")+(s?m+s+"D":"")+(l||d||c?"T":"")+(l?p+l+"H":"")+(d?p+d+"M":"")+(c?p+c+"S":"")}var Bn=Tt.prototype;return Bn.isValid=function(){return this._isValid},Bn.abs=function(){var e=this._data;return this._milliseconds=wn(this._milliseconds),this._days=wn(this._days),this._months=wn(this._months),e.milliseconds=wn(e.milliseconds),e.seconds=wn(e.seconds),e.minutes=wn(e.minutes),e.hours=wn(e.hours),e.months=wn(e.months),e.years=wn(e.years),this},Bn.add=function(e,t){return _n(this,e,t,1)},Bn.subtract=function(e,t){return _n(this,e,t,-1)},Bn.as=function(e){if(!this.isValid())return NaN;var t,n,i=this._milliseconds;if("month"===(e=A(e))||"quarter"===e||"year"===e)switch(t=this._days+i/864e5,n=this._months+xn(t),e){case"month":return n;case"quarter":return n/3;case"year":return n/12}else switch(t=this._days+Math.round(Dn(this._months)),e){case"week":return t/7+i/6048e5;case"day":return t+i/864e5;case"hour":return 24*t+i/36e5;case"minute":return 1440*t+i/6e4;case"second":return 86400*t+i/1e3;case"millisecond":return Math.floor(864e5*t)+i;default:throw new Error("Unknown unit "+e)}},Bn.asMilliseconds=Cn,Bn.asSeconds=kn,Bn.asMinutes=Sn,Bn.asHours=Tn,Bn.asDays=In,Bn.asWeeks=En,Bn.asMonths=Fn,Bn.asQuarters=On,Bn.asYears=An,Bn.valueOf=function(){return this.isValid()?this._milliseconds+864e5*this._days+this._months%12*2592e6+31536e6*b(this._months/12):NaN},Bn._bubble=function(){var e,t,n,i,a,o=this._milliseconds,r=this._days,s=this._months,l=this._data;return o>=0&&r>=0&&s>=0||o<=0&&r<=0&&s<=0||(o+=864e5*bn(Dn(s)+r),r=0,s=0),l.milliseconds=o%1e3,e=_(o/1e3),l.seconds=e%60,t=_(e/60),l.minutes=t%60,n=_(t/60),l.hours=n%24,r+=_(n/24),s+=a=_(xn(r)),r-=bn(Dn(a)),i=_(s/12),s%=12,l.days=r,l.months=s,l.years=i,this},Bn.clone=function(){return Ht(this)},Bn.get=function(e){return e=A(e),this.isValid()?this[e+"s"]():NaN},Bn.milliseconds=Ln,Bn.seconds=Yn,Bn.minutes=Nn,Bn.hours=Rn,Bn.days=Hn,Bn.weeks=function(){return _(this.days()/7)},Bn.months=$n,Bn.years=Un,Bn.humanize=function(e){if(!this.isValid())return this.localeData().invalidDate();var t=this.localeData(),n=function(e,t,n){var i=Ht(e).abs(),a=jn(i.as("s")),o=jn(i.as("m")),r=jn(i.as("h")),s=jn(i.as("d")),l=jn(i.as("M")),d=jn(i.as("y")),c=a<=Wn.ss&&["s",a]||a<Wn.s&&["ss",a]||o<=1&&["m"]||o<Wn.m&&["mm",o]||r<=1&&["h"]||r<Wn.h&&["hh",r]||s<=1&&["d"]||s<Wn.d&&["dd",s]||l<=1&&["M"]||l<Wn.M&&["MM",l]||d<=1&&["y"]||["yy",d];return c[2]=t,c[3]=+e>0,c[4]=n,zn.apply(null,c)}(this,!e,t);return e&&(n=t.pastFuture(+this,n)),t.postformat(n)},Bn.toISOString=Zn,Bn.toString=Zn,Bn.toJSON=Zn,Bn.locale=Zt,Bn.localeData=qt,Bn.toIsoString=M("toIsoString() is deprecated. Please use toISOString() instead (notice the capitals)",Zn),Bn.lang=Bt,j("X",0,0,"unix"),j("x",0,0,"valueOf"),le("x",ie),le("X",/[+-]?\d+(\.\d{1,3})?/),he("X",(function(e,t,n){n._d=new Date(1e3*parseFloat(e,10))})),he("x",(function(e,t,n){n._d=new Date(b(e))})),n.version="2.24.0",e=Dt,n.fn=fn,n.min=function(){var e=[].slice.call(arguments,0);return kt("isBefore",e)},n.max=function(){var e=[].slice.call(arguments,0);return kt("isAfter",e)},n.now=function(){return Date.now?Date.now():+new Date},n.utc=u,n.unix=function(e){return Dt(1e3*e)},n.months=function(e,t){return vn(e,t,"months")},n.isDate=s,n.locale=it,n.invalid=m,n.duration=Ht,n.isMoment=w,n.weekdays=function(e,t,n){return yn(e,t,n,"weekdays")},n.parseZone=function(){return Dt.apply(null,arguments).parseZone()},n.localeData=ot,n.isDuration=It,n.monthsShort=function(e,t){return vn(e,t,"monthsShort")},n.weekdaysMin=function(e,t,n){return yn(e,t,n,"weekdaysMin")},n.defineLocale=at,n.updateLocale=function(e,t){if(null!=t){var n,i,a=Qe;null!=(i=nt(e))&&(a=i._config),(n=new E(t=I(a,t))).parentLocale=Xe[e],Xe[e]=n,it(e)}else null!=Xe[e]&&(null!=Xe[e].parentLocale?Xe[e]=Xe[e].parentLocale:null!=Xe[e]&&delete Xe[e]);return Xe[e]},n.locales=function(){return C(Xe)},n.weekdaysShort=function(e,t,n){return yn(e,t,n,"weekdaysShort")},n.normalizeUnits=A,n.relativeTimeRounding=function(e){return void 0===e?jn:"function"==typeof e&&(jn=e,!0)},n.relativeTimeThreshold=function(e,t){return void 0!==Wn[e]&&(void 0===t?Wn[e]:(Wn[e]=t,"s"===e&&(Wn.ss=t-1),!0))},n.calendarFormat=function(e,t){var n=e.diff(t,"days",!0);return n<-6?"sameElse":n<-1?"lastWeek":n<0?"lastDay":n<1?"sameDay":n<2?"nextDay":n<7?"nextWeek":"sameElse"},n.prototype=fn,n.HTML5_FMT={DATETIME_LOCAL:"YYYY-MM-DDTHH:mm",DATETIME_LOCAL_SECONDS:"YYYY-MM-DDTHH:mm:ss",DATETIME_LOCAL_MS:"YYYY-MM-DDTHH:mm:ss.SSS",DATE:"YYYY-MM-DD",TIME:"HH:mm",TIME_SECONDS:"HH:mm:ss",TIME_MS:"HH:mm:ss.SSS",WEEK:"GGGG-[W]WW",MONTH:"YYYY-MM"},n})),function(e,t){"object"==typeof exports&&"undefined"!=typeof module?module.exports=t():"function"==typeof define&&define.amd?define(t):(e="undefined"!=typeof globalThis?globalThis:e||self).flatpickr=t()}(this,(function(){"use strict";var e=function(){return(e=Object.assign||function(e){for(var t,n=1,i=arguments.length;n<i;n++)for(var a in t=arguments[n])Object.prototype.hasOwnProperty.call(t,a)&&(e[a]=t[a]);return e}).apply(this,arguments)};function t(){for(var e=0,t=0,n=arguments.length;t<n;t++)e+=arguments[t].length;var i=Array(e),a=0;for(t=0;t<n;t++)for(var o=arguments[t],r=0,s=o.length;r<s;r++,a++)i[a]=o[r];return i}var n=["onChange","onClose","onDayCreate","onDestroy","onKeyDown","onMonthChange","onOpen","onParseConfig","onReady","onValueUpdate","onYearChange","onPreCalendarPosition"],i={_disable:[],allowInput:!1,allowInvalidPreload:!1,altFormat:"F j, Y",altInput:!1,altInputClass:"form-control input",animate:"object"==typeof window&&-1===window.navigator.userAgent.indexOf("MSIE"),ariaDateFormat:"F j, Y",autoFillDefaultTime:!0,clickOpens:!0,closeOnSelect:!0,conjunction:", ",dateFormat:"Y-m-d",defaultHour:12,defaultMinute:0,defaultSeconds:0,disable:[],disableMobile:!1,enableSeconds:!1,enableTime:!1,errorHandler:function(e){return"undefined"!=typeof console&&console.warn(e)},getWeek:function(e){var t=new Date(e.getTime());t.setHours(0,0,0,0),t.setDate(t.getDate()+3-(t.getDay()+6)%7);var n=new Date(t.getFullYear(),0,4);return 1+Math.round(((t.getTime()-n.getTime())/864e5-3+(n.getDay()+6)%7)/7)},hourIncrement:1,ignoredFocusElements:[],inline:!1,locale:"default",minuteIncrement:5,mode:"single",monthSelectorType:"dropdown",nextArrow:"<svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='0 0 17 17'><g></g><path d='M13.207 8.472l-7.854 7.854-0.707-0.707 7.146-7.146-7.146-7.148 0.707-0.707 7.854 7.854z' /></svg>",noCalendar:!1,now:new Date,onChange:[],onClose:[],onDayCreate:[],onDestroy:[],onKeyDown:[],onMonthChange:[],onOpen:[],onParseConfig:[],onReady:[],onValueUpdate:[],onYearChange:[],onPreCalendarPosition:[],plugins:[],position:"auto",positionElement:void 0,prevArrow:"<svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='0 0 17 17'><g></g><path d='M5.207 8.471l7.146 7.147-0.707 0.707-7.853-7.854 7.854-7.853 0.707 0.707-7.147 7.146z' /></svg>",shorthandCurrentMonth:!1,showMonths:1,static:!1,time_24hr:!1,weekNumbers:!1,wrap:!1},a={weekdays:{shorthand:["Sun","Mon","Tue","Wed","Thu","Fri","Sat"],longhand:["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"]},months:{shorthand:["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],longhand:["January","February","March","April","May","June","July","August","September","October","November","December"]},daysInMonth:[31,28,31,30,31,30,31,31,30,31,30,31],firstDayOfWeek:0,ordinal:function(e){var t=e%100;if(t>3&&t<21)return"th";switch(t%10){case 1:return"st";case 2:return"nd";case 3:return"rd";default:return"th"}},rangeSeparator:" to ",weekAbbreviation:"Wk",scrollTitle:"Scroll to increment",toggleTitle:"Click to toggle",amPM:["AM","PM"],yearAriaLabel:"Year",monthAriaLabel:"Month",hourAriaLabel:"Hour",minuteAriaLabel:"Minute",time_24hr:!1},o=function(e,t){return void 0===t&&(t=2),("000"+e).slice(-1*t)},r=function(e){return!0===e?1:0};function s(e,t){var n;return function(){var i=this,a=arguments;clearTimeout(n),n=setTimeout((function(){return e.apply(i,a)}),t)}}var l=function(e){return e instanceof Array?e:[e]};function d(e,t,n){if(!0===n)return e.classList.add(t);e.classList.remove(t)}function c(e,t,n){var i=window.document.createElement(e);return t=t||"",n=n||"",i.className=t,void 0!==n&&(i.textContent=n),i}function u(e){for(;e.firstChild;)e.removeChild(e.firstChild)}function h(e,t){return t(e)?e:e.parentNode?h(e.parentNode,t):void 0}function f(e,t){var n=c("div","numInputWrapper"),i=c("input","numInput "+e),a=c("span","arrowUp"),o=c("span","arrowDown");if(-1===navigator.userAgent.indexOf("MSIE 9.0")?i.type="number":(i.type="text",i.pattern="\\d*"),void 0!==t)for(var r in t)i.setAttribute(r,t[r]);return n.appendChild(i),n.appendChild(a),n.appendChild(o),n}function m(e){try{return"function"==typeof e.composedPath?e.composedPath()[0]:e.target}catch(t){return e.target}}var p=function(){},g=function(e,t,n){return n.months[t?"shorthand":"longhand"][e]},v={D:p,F:function(e,t,n){e.setMonth(n.months.longhand.indexOf(t))},G:function(e,t){e.setHours((e.getHours()>=12?12:0)+parseFloat(t))},H:function(e,t){e.setHours(parseFloat(t))},J:function(e,t){e.setDate(parseFloat(t))},K:function(e,t,n){e.setHours(e.getHours()%12+12*r(new RegExp(n.amPM[1],"i").test(t)))},M:function(e,t,n){e.setMonth(n.months.shorthand.indexOf(t))},S:function(e,t){e.setSeconds(parseFloat(t))},U:function(e,t){return new Date(1e3*parseFloat(t))},W:function(e,t,n){var i=parseInt(t),a=new Date(e.getFullYear(),0,2+7*(i-1),0,0,0,0);return a.setDate(a.getDate()-a.getDay()+n.firstDayOfWeek),a},Y:function(e,t){e.setFullYear(parseFloat(t))},Z:function(e,t){return new Date(t)},d:function(e,t){e.setDate(parseFloat(t))},h:function(e,t){e.setHours((e.getHours()>=12?12:0)+parseFloat(t))},i:function(e,t){e.setMinutes(parseFloat(t))},j:function(e,t){e.setDate(parseFloat(t))},l:p,m:function(e,t){e.setMonth(parseFloat(t)-1)},n:function(e,t){e.setMonth(parseFloat(t)-1)},s:function(e,t){e.setSeconds(parseFloat(t))},u:function(e,t){return new Date(parseFloat(t))},w:p,y:function(e,t){e.setFullYear(2e3+parseFloat(t))}},y={D:"",F:"",G:"(\\d\\d|\\d)",H:"(\\d\\d|\\d)",J:"(\\d\\d|\\d)\\w+",K:"",M:"",S:"(\\d\\d|\\d)",U:"(.+)",W:"(\\d\\d|\\d)",Y:"(\\d{4})",Z:"(.+)",d:"(\\d\\d|\\d)",h:"(\\d\\d|\\d)",i:"(\\d\\d|\\d)",j:"(\\d\\d|\\d)",l:"",m:"(\\d\\d|\\d)",n:"(\\d\\d|\\d)",s:"(\\d\\d|\\d)",u:"(.+)",w:"(\\d\\d|\\d)",y:"(\\d{2})"},w={Z:function(e){return e.toISOString()},D:function(e,t,n){return t.weekdays.shorthand[w.w(e,t,n)]},F:function(e,t,n){return g(w.n(e,t,n)-1,!1,t)},G:function(e,t,n){return o(w.h(e,t,n))},H:function(e){return o(e.getHours())},J:function(e,t){return void 0!==t.ordinal?e.getDate()+t.ordinal(e.getDate()):e.getDate()},K:function(e,t){return t.amPM[r(e.getHours()>11)]},M:function(e,t){return g(e.getMonth(),!0,t)},S:function(e){return o(e.getSeconds())},U:function(e){return e.getTime()/1e3},W:function(e,t,n){return n.getWeek(e)},Y:function(e){return o(e.getFullYear(),4)},d:function(e){return o(e.getDate())},h:function(e){return e.getHours()%12?e.getHours()%12:12},i:function(e){return o(e.getMinutes())},j:function(e){return e.getDate()},l:function(e,t){return t.weekdays.longhand[e.getDay()]},m:function(e){return o(e.getMonth()+1)},n:function(e){return e.getMonth()+1},s:function(e){return e.getSeconds()},u:function(e){return e.getTime()},w:function(e){return e.getDay()},y:function(e){return String(e.getFullYear()).substring(2)}},_=function(e){var t=e.config,n=void 0===t?i:t,o=e.l10n,r=void 0===o?a:o,s=e.isMobile,l=void 0!==s&&s;return function(e,t,i){var a=i||r;return void 0===n.formatDate||l?t.split("").map((function(t,i,o){return w[t]&&"\\"!==o[i-1]?w[t](e,a,n):"\\"!==t?t:""})).join(""):n.formatDate(e,t,a)}},b=function(e){var t=e.config,n=void 0===t?i:t,o=e.l10n,r=void 0===o?a:o;return function(e,t,a,o){if(0===e||e){var s,l=o||r,d=e;if(e instanceof Date)s=new Date(e.getTime());else if("string"!=typeof e&&void 0!==e.toFixed)s=new Date(e);else if("string"==typeof e){var c=t||(n||i).dateFormat,u=String(e).trim();if("today"===u)s=new Date,a=!0;else if(n&&n.parseDate)s=n.parseDate(e,c);else if(/Z$/.test(u)||/GMT$/.test(u))s=new Date(e);else{for(var h=void 0,f=[],m=0,p=0,g="";m<c.length;m++){var w=c[m],_="\\"===w,b="\\"===c[m-1]||_;if(y[w]&&!b){g+=y[w];var x=new RegExp(g).exec(e);x&&(h=!0)&&f["Y"!==w?"push":"unshift"]({fn:v[w],val:x[++p]})}else _||(g+=".")}s=n&&n.noCalendar?new Date((new Date).setHours(0,0,0,0)):new Date((new Date).getFullYear(),0,1,0,0,0,0),f.forEach((function(e){var t=e.fn,n=e.val;return s=t(s,n,l)||s})),s=h?s:void 0}}if(s instanceof Date&&!isNaN(s.getTime()))return!0===a&&s.setHours(0,0,0,0),s;n.errorHandler(new Error("Invalid date provided: "+d))}}};function x(e,t,n){return void 0===n&&(n=!0),!1!==n?new Date(e.getTime()).setHours(0,0,0,0)-new Date(t.getTime()).setHours(0,0,0,0):e.getTime()-t.getTime()}var D=function(e,t,n){return 3600*e+60*t+n};function M(e){var t=e.defaultHour,n=e.defaultMinute,i=e.defaultSeconds;if(void 0!==e.minDate){var a=e.minDate.getHours(),o=e.minDate.getMinutes(),r=e.minDate.getSeconds();t<a&&(t=a),t===a&&n<o&&(n=o),t===a&&n===o&&i<r&&(i=e.minDate.getSeconds())}if(void 0!==e.maxDate){var s=e.maxDate.getHours(),l=e.maxDate.getMinutes();(t=Math.min(t,s))===s&&(n=Math.min(l,n)),t===s&&n===l&&(i=e.maxDate.getSeconds())}return{hours:t,minutes:n,seconds:i}}function C(p,v){var w={config:e(e({},i),S.defaultConfig),l10n:a};function C(){var e;return(null===(e=w.calendarContainer)||void 0===e?void 0:e.getRootNode()).activeElement||document.activeElement}function k(e){return e.bind(w)}function T(){var e=w.config;!1===e.weekNumbers&&1===e.showMonths||!0!==e.noCalendar&&window.requestAnimationFrame((function(){if(void 0!==w.calendarContainer&&(w.calendarContainer.style.visibility="hidden",w.calendarContainer.style.display="block"),void 0!==w.daysContainer){var t=(w.days.offsetWidth+1)*e.showMonths;w.daysContainer.style.width=t+"px",w.calendarContainer.style.width=t+(void 0!==w.weekWrapper?w.weekWrapper.offsetWidth:0)+"px",w.calendarContainer.style.removeProperty("visibility"),w.calendarContainer.style.removeProperty("display")}}))}function I(e){if(0===w.selectedDates.length){var t=void 0===w.config.minDate||x(new Date,w.config.minDate)>=0?new Date:new Date(w.config.minDate.getTime()),n=M(w.config);t.setHours(n.hours,n.minutes,n.seconds,t.getMilliseconds()),w.selectedDates=[t],w.latestSelectedDateObj=t}void 0!==e&&"blur"!==e.type&&function(e){e.preventDefault();var t="keydown"===e.type,n=m(e),i=n;void 0!==w.amPM&&n===w.amPM&&(w.amPM.textContent=w.l10n.amPM[r(w.amPM.textContent===w.l10n.amPM[0])]);var a=parseFloat(i.getAttribute("min")),s=parseFloat(i.getAttribute("max")),l=parseFloat(i.getAttribute("step")),d=parseInt(i.value,10),c=d+l*(e.delta||(t?38===e.which?1:-1:0));if(void 0!==i.value&&2===i.value.length){var u=i===w.hourElement,h=i===w.minuteElement;c<a?(c=s+c+r(!u)+(r(u)&&r(!w.amPM)),h&&R(void 0,-1,w.hourElement)):c>s&&(c=i===w.hourElement?c-s-r(!w.amPM):a,h&&R(void 0,1,w.hourElement)),w.amPM&&u&&(1===l?c+d===23:Math.abs(c-d)>l)&&(w.amPM.textContent=w.l10n.amPM[r(w.amPM.textContent===w.l10n.amPM[0])]),i.value=o(c)}}(e);var i=w._input.value;E(),xe(),w._input.value!==i&&w._debouncedChange()}function E(){if(void 0!==w.hourElement&&void 0!==w.minuteElement){var e,t,n=(parseInt(w.hourElement.value.slice(-2),10)||0)%24,i=(parseInt(w.minuteElement.value,10)||0)%60,a=void 0!==w.secondElement?(parseInt(w.secondElement.value,10)||0)%60:0;void 0!==w.amPM&&(e=n,t=w.amPM.textContent,n=e%12+12*r(t===w.l10n.amPM[1]));var o=void 0!==w.config.minTime||w.config.minDate&&w.minDateHasTime&&w.latestSelectedDateObj&&0===x(w.latestSelectedDateObj,w.config.minDate,!0),s=void 0!==w.config.maxTime||w.config.maxDate&&w.maxDateHasTime&&w.latestSelectedDateObj&&0===x(w.latestSelectedDateObj,w.config.maxDate,!0);if(void 0!==w.config.maxTime&&void 0!==w.config.minTime&&w.config.minTime>w.config.maxTime){var l=D(w.config.minTime.getHours(),w.config.minTime.getMinutes(),w.config.minTime.getSeconds()),d=D(w.config.maxTime.getHours(),w.config.maxTime.getMinutes(),w.config.maxTime.getSeconds()),c=D(n,i,a);if(c>d&&c<l){var u=function(e){var t=Math.floor(e/3600),n=(e-3600*t)/60;return[t,n,e-3600*t-60*n]}(l);n=u[0],i=u[1],a=u[2]}}else{if(s){var h=void 0!==w.config.maxTime?w.config.maxTime:w.config.maxDate;(n=Math.min(n,h.getHours()))===h.getHours()&&(i=Math.min(i,h.getMinutes())),i===h.getMinutes()&&(a=Math.min(a,h.getSeconds()))}if(o){var f=void 0!==w.config.minTime?w.config.minTime:w.config.minDate;(n=Math.max(n,f.getHours()))===f.getHours()&&i<f.getMinutes()&&(i=f.getMinutes()),i===f.getMinutes()&&(a=Math.max(a,f.getSeconds()))}}O(n,i,a)}}function F(e){var t=e||w.latestSelectedDateObj;t&&t instanceof Date&&O(t.getHours(),t.getMinutes(),t.getSeconds())}function O(e,t,n){void 0!==w.latestSelectedDateObj&&w.latestSelectedDateObj.setHours(e%24,t,n||0,0),w.hourElement&&w.minuteElement&&!w.isMobile&&(w.hourElement.value=o(w.config.time_24hr?e:(12+e)%12+12*r(e%12==0)),w.minuteElement.value=o(t),void 0!==w.amPM&&(w.amPM.textContent=w.l10n.amPM[r(e>=12)]),void 0!==w.secondElement&&(w.secondElement.value=o(n)))}function A(e){var t=m(e),n=parseInt(t.value)+(e.delta||0);(n/1e3>1||"Enter"===e.key&&!/[^\d]/.test(n.toString()))&&X(n)}function P(e,t,n,i){return t instanceof Array?t.forEach((function(t){return P(e,t,n,i)})):e instanceof Array?e.forEach((function(e){return P(e,t,n,i)})):(e.addEventListener(t,n,i),void w._handlers.push({remove:function(){return e.removeEventListener(t,n,i)}}))}function L(){ve("onChange")}function Y(e,t){var n=void 0!==e?w.parseDate(e):w.latestSelectedDateObj||(w.config.minDate&&w.config.minDate>w.now?w.config.minDate:w.config.maxDate&&w.config.maxDate<w.now?w.config.maxDate:w.now),i=w.currentYear,a=w.currentMonth;try{void 0!==n&&(w.currentYear=n.getFullYear(),w.currentMonth=n.getMonth())}catch(e){e.message="Invalid date supplied: "+n,w.config.errorHandler(e)}t&&w.currentYear!==i&&(ve("onYearChange"),G()),!t||w.currentYear===i&&w.currentMonth===a||ve("onMonthChange"),w.redraw()}function N(e){var t=m(e);~t.className.indexOf("arrow")&&R(e,t.classList.contains("arrowUp")?1:-1)}function R(e,t,n){var i=e&&m(e),a=n||i&&i.parentNode&&i.parentNode.firstChild,o=ye("increment");o.delta=t,a&&a.dispatchEvent(o)}function H(e,t,n,i){var a=ee(t,!0),o=c("span",e,t.getDate().toString());return o.dateObj=t,o.$i=i,o.setAttribute("aria-label",w.formatDate(t,w.config.ariaDateFormat)),-1===e.indexOf("hidden")&&0===x(t,w.now)&&(w.todayDateElem=o,o.classList.add("today"),o.setAttribute("aria-current","date")),a?(o.tabIndex=-1,we(t)&&(o.classList.add("selected"),w.selectedDateElem=o,"range"===w.config.mode&&(d(o,"startRange",w.selectedDates[0]&&0===x(t,w.selectedDates[0],!0)),d(o,"endRange",w.selectedDates[1]&&0===x(t,w.selectedDates[1],!0)),"nextMonthDay"===e&&o.classList.add("inRange")))):o.classList.add("flatpickr-disabled"),"range"===w.config.mode&&function(e){return!("range"!==w.config.mode||w.selectedDates.length<2)&&x(e,w.selectedDates[0])>=0&&x(e,w.selectedDates[1])<=0}(t)&&!we(t)&&o.classList.add("inRange"),w.weekNumbers&&1===w.config.showMonths&&"prevMonthDay"!==e&&n%7==1&&w.weekNumbers.insertAdjacentHTML("beforeend","<span class='flatpickr-day'>"+w.config.getWeek(t)+"</span>"),ve("onDayCreate",o),o}function $(e){e.focus(),"range"===w.config.mode&&ae(e)}function U(e){for(var t=e>0?0:w.config.showMonths-1,n=e>0?w.config.showMonths:-1,i=t;i!=n;i+=e)for(var a=w.daysContainer.children[i],o=e>0?0:a.children.length-1,r=e>0?a.children.length:-1,s=o;s!=r;s+=e){var l=a.children[s];if(-1===l.className.indexOf("hidden")&&ee(l.dateObj))return l}}function j(e,t){var n=C(),i=te(n||document.body),a=void 0!==e?e:i?n:void 0!==w.selectedDateElem&&te(w.selectedDateElem)?w.selectedDateElem:void 0!==w.todayDateElem&&te(w.todayDateElem)?w.todayDateElem:U(t>0?1:-1);void 0===a?w._input.focus():i?function(e,t){for(var n=-1===e.className.indexOf("Month")?e.dateObj.getMonth():w.currentMonth,i=t>0?w.config.showMonths:-1,a=t>0?1:-1,o=n-w.currentMonth;o!=i;o+=a)for(var r=w.daysContainer.children[o],s=n-w.currentMonth===o?e.$i+t:t<0?r.children.length-1:0,l=r.children.length,d=s;d>=0&&d<l&&d!=(t>0?l:-1);d+=a){var c=r.children[d];if(-1===c.className.indexOf("hidden")&&ee(c.dateObj)&&Math.abs(e.$i-d)>=Math.abs(t))return $(c)}w.changeMonth(a),j(U(a),0)}(a,t):$(a)}function W(e,t){for(var n=(new Date(e,t,1).getDay()-w.l10n.firstDayOfWeek+7)%7,i=w.utils.getDaysInMonth((t-1+12)%12,e),a=w.utils.getDaysInMonth(t,e),o=window.document.createDocumentFragment(),r=w.config.showMonths>1,s=r?"prevMonthDay hidden":"prevMonthDay",l=r?"nextMonthDay hidden":"nextMonthDay",d=i+1-n,u=0;d<=i;d++,u++)o.appendChild(H("flatpickr-day "+s,new Date(e,t-1,d),d,u));for(d=1;d<=a;d++,u++)o.appendChild(H("flatpickr-day",new Date(e,t,d),d,u));for(var h=a+1;h<=42-n&&(1===w.config.showMonths||u%7!=0);h++,u++)o.appendChild(H("flatpickr-day "+l,new Date(e,t+1,h%a),h,u));var f=c("div","dayContainer");return f.appendChild(o),f}function z(){if(void 0!==w.daysContainer){u(w.daysContainer),w.weekNumbers&&u(w.weekNumbers);for(var e=document.createDocumentFragment(),t=0;t<w.config.showMonths;t++){var n=new Date(w.currentYear,w.currentMonth,1);n.setMonth(w.currentMonth+t),e.appendChild(W(n.getFullYear(),n.getMonth()))}w.daysContainer.appendChild(e),w.days=w.daysContainer.firstChild,"range"===w.config.mode&&1===w.selectedDates.length&&ae()}}function G(){if(!(w.config.showMonths>1||"dropdown"!==w.config.monthSelectorType)){var e=function(e){return!(void 0!==w.config.minDate&&w.currentYear===w.config.minDate.getFullYear()&&e<w.config.minDate.getMonth()||void 0!==w.config.maxDate&&w.currentYear===w.config.maxDate.getFullYear()&&e>w.config.maxDate.getMonth())};w.monthsDropdownContainer.tabIndex=-1,w.monthsDropdownContainer.innerHTML="";for(var t=0;t<12;t++)if(e(t)){var n=c("option","flatpickr-monthDropdown-month");n.value=new Date(w.currentYear,t).getMonth().toString(),n.textContent=g(t,w.config.shorthandCurrentMonth,w.l10n),n.tabIndex=-1,w.currentMonth===t&&(n.selected=!0),w.monthsDropdownContainer.appendChild(n)}}}function V(){var e,t=c("div","flatpickr-month"),n=window.document.createDocumentFragment();w.config.showMonths>1||"static"===w.config.monthSelectorType?e=c("span","cur-month"):(w.monthsDropdownContainer=c("select","flatpickr-monthDropdown-months"),w.monthsDropdownContainer.setAttribute("aria-label",w.l10n.monthAriaLabel),P(w.monthsDropdownContainer,"change",(function(e){var t=m(e),n=parseInt(t.value,10);w.changeMonth(n-w.currentMonth),ve("onMonthChange")})),G(),e=w.monthsDropdownContainer);var i=f("cur-year",{tabindex:"-1"}),a=i.getElementsByTagName("input")[0];a.setAttribute("aria-label",w.l10n.yearAriaLabel),w.config.minDate&&a.setAttribute("min",w.config.minDate.getFullYear().toString()),w.config.maxDate&&(a.setAttribute("max",w.config.maxDate.getFullYear().toString()),a.disabled=!!w.config.minDate&&w.config.minDate.getFullYear()===w.config.maxDate.getFullYear());var o=c("div","flatpickr-current-month");return o.appendChild(e),o.appendChild(i),n.appendChild(o),t.appendChild(n),{container:t,yearElement:a,monthElement:e}}function Z(){u(w.monthNav),w.monthNav.appendChild(w.prevMonthNav),w.config.showMonths&&(w.yearElements=[],w.monthElements=[]);for(var e=w.config.showMonths;e--;){var t=V();w.yearElements.push(t.yearElement),w.monthElements.push(t.monthElement),w.monthNav.appendChild(t.container)}w.monthNav.appendChild(w.nextMonthNav)}function B(){w.weekdayContainer?u(w.weekdayContainer):w.weekdayContainer=c("div","flatpickr-weekdays");for(var e=w.config.showMonths;e--;){var t=c("div","flatpickr-weekdaycontainer");w.weekdayContainer.appendChild(t)}return q(),w.weekdayContainer}function q(){if(w.weekdayContainer){var e=w.l10n.firstDayOfWeek,n=t(w.l10n.weekdays.shorthand);e>0&&e<n.length&&(n=t(n.splice(e,n.length),n.splice(0,e)));for(var i=w.config.showMonths;i--;)w.weekdayContainer.children[i].innerHTML="\n      <span class='flatpickr-weekday'>\n        "+n.join("</span><span class='flatpickr-weekday'>")+"\n      </span>\n      "}}function K(e,t){void 0===t&&(t=!0);var n=t?e:e-w.currentMonth;n<0&&!0===w._hidePrevMonthArrow||n>0&&!0===w._hideNextMonthArrow||(w.currentMonth+=n,(w.currentMonth<0||w.currentMonth>11)&&(w.currentYear+=w.currentMonth>11?1:-1,w.currentMonth=(w.currentMonth+12)%12,ve("onYearChange"),G()),z(),ve("onMonthChange"),_e())}function J(e){return w.calendarContainer.contains(e)}function Q(e){if(w.isOpen&&!w.config.inline){var t=m(e),n=J(t),i=!(t===w.input||t===w.altInput||w.element.contains(t)||e.path&&e.path.indexOf&&(~e.path.indexOf(w.input)||~e.path.indexOf(w.altInput))||n||J(e.relatedTarget)),a=!w.config.ignoredFocusElements.some((function(e){return e.contains(t)}));i&&a&&(w.config.allowInput&&w.setDate(w._input.value,!1,w.config.altInput?w.config.altFormat:w.config.dateFormat),void 0!==w.timeContainer&&void 0!==w.minuteElement&&void 0!==w.hourElement&&""!==w.input.value&&void 0!==w.input.value&&I(),w.close(),w.config&&"range"===w.config.mode&&1===w.selectedDates.length&&w.clear(!1))}}function X(e){if(!(!e||w.config.minDate&&e<w.config.minDate.getFullYear()||w.config.maxDate&&e>w.config.maxDate.getFullYear())){var t=e,n=w.currentYear!==t;w.currentYear=t||w.currentYear,w.config.maxDate&&w.currentYear===w.config.maxDate.getFullYear()?w.currentMonth=Math.min(w.config.maxDate.getMonth(),w.currentMonth):w.config.minDate&&w.currentYear===w.config.minDate.getFullYear()&&(w.currentMonth=Math.max(w.config.minDate.getMonth(),w.currentMonth)),n&&(w.redraw(),ve("onYearChange"),G())}}function ee(e,t){var n;void 0===t&&(t=!0);var i=w.parseDate(e,void 0,t);if(w.config.minDate&&i&&x(i,w.config.minDate,void 0!==t?t:!w.minDateHasTime)<0||w.config.maxDate&&i&&x(i,w.config.maxDate,void 0!==t?t:!w.maxDateHasTime)>0)return!1;if(!w.config.enable&&0===w.config.disable.length)return!0;if(void 0===i)return!1;for(var a=!!w.config.enable,o=null!==(n=w.config.enable)&&void 0!==n?n:w.config.disable,r=0,s=void 0;r<o.length;r++){if("function"==typeof(s=o[r])&&s(i))return a;if(s instanceof Date&&void 0!==i&&s.getTime()===i.getTime())return a;if("string"==typeof s){var l=w.parseDate(s,void 0,!0);return l&&l.getTime()===i.getTime()?a:!a}if("object"==typeof s&&void 0!==i&&s.from&&s.to&&i.getTime()>=s.from.getTime()&&i.getTime()<=s.to.getTime())return a}return!a}function te(e){return void 0!==w.daysContainer&&-1===e.className.indexOf("hidden")&&-1===e.className.indexOf("flatpickr-disabled")&&w.daysContainer.contains(e)}function ne(e){e.target!==w._input||!(w.selectedDates.length>0||w._input.value.length>0)||e.relatedTarget&&J(e.relatedTarget)||w.setDate(w._input.value,!0,e.target===w.altInput?w.config.altFormat:w.config.dateFormat)}function ie(e){var t=m(e),n=w.config.wrap?p.contains(t):t===w._input,i=w.config.allowInput,a=w.isOpen&&(!i||!n),o=w.config.inline&&n&&!i;if(13===e.keyCode&&n){if(i)return w.setDate(w._input.value,!0,t===w.altInput?w.config.altFormat:w.config.dateFormat),w.close(),t.blur();w.open()}else if(J(t)||a||o){var r=!!w.timeContainer&&w.timeContainer.contains(t);switch(e.keyCode){case 13:r?(e.preventDefault(),I(),ue()):he(e);break;case 27:e.preventDefault(),ue();break;case 8:case 46:n&&!w.config.allowInput&&(e.preventDefault(),w.clear());break;case 37:case 39:if(r||n)w.hourElement&&w.hourElement.focus();else{e.preventDefault();var s=C();if(void 0!==w.daysContainer&&(!1===i||s&&te(s))){var l=39===e.keyCode?1:-1;e.ctrlKey?(e.stopPropagation(),K(l),j(U(1),0)):j(void 0,l)}}break;case 38:case 40:e.preventDefault();var d=40===e.keyCode?1:-1;w.daysContainer&&void 0!==t.$i||t===w.input||t===w.altInput?e.ctrlKey?(e.stopPropagation(),X(w.currentYear-d),j(U(1),0)):r||j(void 0,7*d):t===w.currentYearElement?X(w.currentYear-d):w.config.enableTime&&(!r&&w.hourElement&&w.hourElement.focus(),I(e),w._debouncedChange());break;case 9:if(r){var c=[w.hourElement,w.minuteElement,w.secondElement,w.amPM].concat(w.pluginElements).filter((function(e){return e})),u=c.indexOf(t);if(-1!==u){var h=c[u+(e.shiftKey?-1:1)];e.preventDefault(),(h||w._input).focus()}}else!w.config.noCalendar&&w.daysContainer&&w.daysContainer.contains(t)&&e.shiftKey&&(e.preventDefault(),w._input.focus())}}if(void 0!==w.amPM&&t===w.amPM)switch(e.key){case w.l10n.amPM[0].charAt(0):case w.l10n.amPM[0].charAt(0).toLowerCase():w.amPM.textContent=w.l10n.amPM[0],E(),xe();break;case w.l10n.amPM[1].charAt(0):case w.l10n.amPM[1].charAt(0).toLowerCase():w.amPM.textContent=w.l10n.amPM[1],E(),xe()}(n||J(t))&&ve("onKeyDown",e)}function ae(e,t){if(void 0===t&&(t="flatpickr-day"),1===w.selectedDates.length&&(!e||e.classList.contains(t)&&!e.classList.contains("flatpickr-disabled"))){for(var n=e?e.dateObj.getTime():w.days.firstElementChild.dateObj.getTime(),i=w.parseDate(w.selectedDates[0],void 0,!0).getTime(),a=Math.min(n,w.selectedDates[0].getTime()),o=Math.max(n,w.selectedDates[0].getTime()),r=!1,s=0,l=0,d=a;d<o;d+=864e5)ee(new Date(d),!0)||(r=r||d>a&&d<o,d<i&&(!s||d>s)?s=d:d>i&&(!l||d<l)&&(l=d));Array.from(w.rContainer.querySelectorAll("*:nth-child(-n+"+w.config.showMonths+") > ."+t)).forEach((function(t){var a,o,d,c=t.dateObj.getTime(),u=s>0&&c<s||l>0&&c>l;if(u)return t.classList.add("notAllowed"),void["inRange","startRange","endRange"].forEach((function(e){t.classList.remove(e)}));r&&!u||(["startRange","inRange","endRange","notAllowed"].forEach((function(e){t.classList.remove(e)})),void 0!==e&&(e.classList.add(n<=w.selectedDates[0].getTime()?"startRange":"endRange"),i<n&&c===i?t.classList.add("startRange"):i>n&&c===i&&t.classList.add("endRange"),c>=s&&(0===l||c<=l)&&(o=i,d=n,(a=c)>Math.min(o,d)&&a<Math.max(o,d))&&t.classList.add("inRange")))}))}}function oe(){!w.isOpen||w.config.static||w.config.inline||de()}function re(e){return function(t){var n=w.config["_"+e+"Date"]=w.parseDate(t,w.config.dateFormat),i=w.config["_"+("min"===e?"max":"min")+"Date"];void 0!==n&&(w["min"===e?"minDateHasTime":"maxDateHasTime"]=n.getHours()>0||n.getMinutes()>0||n.getSeconds()>0),w.selectedDates&&(w.selectedDates=w.selectedDates.filter((function(e){return ee(e)})),w.selectedDates.length||"min"!==e||F(n),xe()),w.daysContainer&&(ce(),void 0!==n?w.currentYearElement[e]=n.getFullYear().toString():w.currentYearElement.removeAttribute(e),w.currentYearElement.disabled=!!i&&void 0!==n&&i.getFullYear()===n.getFullYear())}}function se(){return w.config.wrap?p.querySelector("[data-input]"):p}function le(){"object"!=typeof w.config.locale&&void 0===S.l10ns[w.config.locale]&&w.config.errorHandler(new Error("flatpickr: invalid locale "+w.config.locale)),w.l10n=e(e({},S.l10ns.default),"object"==typeof w.config.locale?w.config.locale:"default"!==w.config.locale?S.l10ns[w.config.locale]:void 0),y.D="("+w.l10n.weekdays.shorthand.join("|")+")",y.l="("+w.l10n.weekdays.longhand.join("|")+")",y.M="("+w.l10n.months.shorthand.join("|")+")",y.F="("+w.l10n.months.longhand.join("|")+")",y.K="("+w.l10n.amPM[0]+"|"+w.l10n.amPM[1]+"|"+w.l10n.amPM[0].toLowerCase()+"|"+w.l10n.amPM[1].toLowerCase()+")",void 0===e(e({},v),JSON.parse(JSON.stringify(p.dataset||{}))).time_24hr&&void 0===S.defaultConfig.time_24hr&&(w.config.time_24hr=w.l10n.time_24hr),w.formatDate=_(w),w.parseDate=b({config:w.config,l10n:w.l10n})}function de(e){if("function"!=typeof w.config.position){if(void 0!==w.calendarContainer){ve("onPreCalendarPosition");var t=e||w._positionElement,n=Array.prototype.reduce.call(w.calendarContainer.children,(function(e,t){return e+t.offsetHeight}),0),i=w.calendarContainer.offsetWidth,a=w.config.position.split(" "),o=a[0],r=a.length>1?a[1]:null,s=t.getBoundingClientRect(),l=window.innerHeight-s.bottom,c="above"===o||"below"!==o&&l<n&&s.top>n,u=window.pageYOffset+s.top+(c?-n-2:t.offsetHeight+2);if(d(w.calendarContainer,"arrowTop",!c),d(w.calendarContainer,"arrowBottom",c),!w.config.inline){var h=window.pageXOffset+s.left,f=!1,m=!1;"center"===r?(h-=(i-s.width)/2,f=!0):"right"===r&&(h-=i-s.width,m=!0),d(w.calendarContainer,"arrowLeft",!f&&!m),d(w.calendarContainer,"arrowCenter",f),d(w.calendarContainer,"arrowRight",m);var p=window.document.body.offsetWidth-(window.pageXOffset+s.right),g=h+i>window.document.body.offsetWidth,v=p+i>window.document.body.offsetWidth;if(d(w.calendarContainer,"rightMost",g),!w.config.static)if(w.calendarContainer.style.top=u+"px",g)if(v){var y=function(){for(var e=null,t=0;t<document.styleSheets.length;t++){var n=document.styleSheets[t];if(n.cssRules){try{n.cssRules}catch(e){continue}e=n;break}}return null!=e?e:(i=document.createElement("style"),document.head.appendChild(i),i.sheet);var i}();if(void 0===y)return;var _=window.document.body.offsetWidth,b=Math.max(0,_/2-i/2),x=y.cssRules.length,D="{left:"+s.left+"px;right:auto;}";d(w.calendarContainer,"rightMost",!1),d(w.calendarContainer,"centerMost",!0),y.insertRule(".flatpickr-calendar.centerMost:before,.flatpickr-calendar.centerMost:after"+D,x),w.calendarContainer.style.left=b+"px",w.calendarContainer.style.right="auto"}else w.calendarContainer.style.left="auto",w.calendarContainer.style.right=p+"px";else w.calendarContainer.style.left=h+"px",w.calendarContainer.style.right="auto"}}}else w.config.position(w,e)}function ce(){w.config.noCalendar||w.isMobile||(G(),_e(),z())}function ue(){w._input.focus(),-1!==window.navigator.userAgent.indexOf("MSIE")||void 0!==navigator.msMaxTouchPoints?setTimeout(w.close,0):w.close()}function he(e){e.preventDefault(),e.stopPropagation();var t=h(m(e),(function(e){return e.classList&&e.classList.contains("flatpickr-day")&&!e.classList.contains("flatpickr-disabled")&&!e.classList.contains("notAllowed")}));if(void 0!==t){var n=t,i=w.latestSelectedDateObj=new Date(n.dateObj.getTime()),a=(i.getMonth()<w.currentMonth||i.getMonth()>w.currentMonth+w.config.showMonths-1)&&"range"!==w.config.mode;if(w.selectedDateElem=n,"single"===w.config.mode)w.selectedDates=[i];else if("multiple"===w.config.mode){var o=we(i);o?w.selectedDates.splice(parseInt(o),1):w.selectedDates.push(i)}else"range"===w.config.mode&&(2===w.selectedDates.length&&w.clear(!1,!1),w.latestSelectedDateObj=i,w.selectedDates.push(i),0!==x(i,w.selectedDates[0],!0)&&w.selectedDates.sort((function(e,t){return e.getTime()-t.getTime()})));if(E(),a){var r=w.currentYear!==i.getFullYear();w.currentYear=i.getFullYear(),w.currentMonth=i.getMonth(),r&&(ve("onYearChange"),G()),ve("onMonthChange")}if(_e(),z(),xe(),a||"range"===w.config.mode||1!==w.config.showMonths?void 0!==w.selectedDateElem&&void 0===w.hourElement&&w.selectedDateElem&&w.selectedDateElem.focus():$(n),void 0!==w.hourElement&&void 0!==w.hourElement&&w.hourElement.focus(),w.config.closeOnSelect){var s="single"===w.config.mode&&!w.config.enableTime,l="range"===w.config.mode&&2===w.selectedDates.length&&!w.config.enableTime;(s||l)&&ue()}L()}}w.parseDate=b({config:w.config,l10n:w.l10n}),w._handlers=[],w.pluginElements=[],w.loadedPlugins=[],w._bind=P,w._setHoursFromDate=F,w._positionCalendar=de,w.changeMonth=K,w.changeYear=X,w.clear=function(e,t){if(void 0===e&&(e=!0),void 0===t&&(t=!0),w.input.value="",void 0!==w.altInput&&(w.altInput.value=""),void 0!==w.mobileInput&&(w.mobileInput.value=""),w.selectedDates=[],w.latestSelectedDateObj=void 0,!0===t&&(w.currentYear=w._initialDate.getFullYear(),w.currentMonth=w._initialDate.getMonth()),!0===w.config.enableTime){var n=M(w.config);O(n.hours,n.minutes,n.seconds)}w.redraw(),e&&ve("onChange")},w.close=function(){w.isOpen=!1,w.isMobile||(void 0!==w.calendarContainer&&w.calendarContainer.classList.remove("open"),void 0!==w._input&&w._input.classList.remove("active")),ve("onClose")},w.onMouseOver=ae,w._createElement=c,w.createDay=H,w.destroy=function(){void 0!==w.config&&ve("onDestroy");for(var e=w._handlers.length;e--;)w._handlers[e].remove();if(w._handlers=[],w.mobileInput)w.mobileInput.parentNode&&w.mobileInput.parentNode.removeChild(w.mobileInput),w.mobileInput=void 0;else if(w.calendarContainer&&w.calendarContainer.parentNode)if(w.config.static&&w.calendarContainer.parentNode){var t=w.calendarContainer.parentNode;if(t.lastChild&&t.removeChild(t.lastChild),t.parentNode){for(;t.firstChild;)t.parentNode.insertBefore(t.firstChild,t);t.parentNode.removeChild(t)}}else w.calendarContainer.parentNode.removeChild(w.calendarContainer);w.altInput&&(w.input.type="text",w.altInput.parentNode&&w.altInput.parentNode.removeChild(w.altInput),delete w.altInput),w.input&&(w.input.type=w.input._type,w.input.classList.remove("flatpickr-input"),w.input.removeAttribute("readonly")),["_showTimeInput","latestSelectedDateObj","_hideNextMonthArrow","_hidePrevMonthArrow","__hideNextMonthArrow","__hidePrevMonthArrow","isMobile","isOpen","selectedDateElem","minDateHasTime","maxDateHasTime","days","daysContainer","_input","_positionElement","innerContainer","rContainer","monthNav","todayDateElem","calendarContainer","weekdayContainer","prevMonthNav","nextMonthNav","monthsDropdownContainer","currentMonthElement","currentYearElement","navigationCurrentMonth","selectedDateElem","config"].forEach((function(e){try{delete w[e]}catch(e){}}))},w.isEnabled=ee,w.jumpToDate=Y,w.updateValue=xe,w.open=function(e,t){if(void 0===t&&(t=w._positionElement),!0===w.isMobile){if(e){e.preventDefault();var n=m(e);n&&n.blur()}return void 0!==w.mobileInput&&(w.mobileInput.focus(),w.mobileInput.click()),void ve("onOpen")}if(!w._input.disabled&&!w.config.inline){var i=w.isOpen;w.isOpen=!0,i||(w.calendarContainer.classList.add("open"),w._input.classList.add("active"),ve("onOpen"),de(t)),!0===w.config.enableTime&&!0===w.config.noCalendar&&(!1!==w.config.allowInput||void 0!==e&&w.timeContainer.contains(e.relatedTarget)||setTimeout((function(){return w.hourElement.select()}),50))}},w.redraw=ce,w.set=function(e,t){if(null!==e&&"object"==typeof e)for(var i in Object.assign(w.config,e),e)void 0!==fe[i]&&fe[i].forEach((function(e){return e()}));else w.config[e]=t,void 0!==fe[e]?fe[e].forEach((function(e){return e()})):n.indexOf(e)>-1&&(w.config[e]=l(t));w.redraw(),xe(!0)},w.setDate=function(e,t,n){if(void 0===t&&(t=!1),void 0===n&&(n=w.config.dateFormat),0!==e&&!e||e instanceof Array&&0===e.length)return w.clear(t);me(e,n),w.latestSelectedDateObj=w.selectedDates[w.selectedDates.length-1],w.redraw(),Y(void 0,t),F(),0===w.selectedDates.length&&w.clear(!1),xe(t),t&&ve("onChange")},w.toggle=function(e){if(!0===w.isOpen)return w.close();w.open(e)};var fe={locale:[le,q],showMonths:[Z,T,B],minDate:[Y],maxDate:[Y],positionElement:[ge],clickOpens:[function(){!0===w.config.clickOpens?(P(w._input,"focus",w.open),P(w._input,"click",w.open)):(w._input.removeEventListener("focus",w.open),w._input.removeEventListener("click",w.open))}]};function me(e,t){var n=[];if(e instanceof Array)n=e.map((function(e){return w.parseDate(e,t)}));else if(e instanceof Date||"number"==typeof e)n=[w.parseDate(e,t)];else if("string"==typeof e)switch(w.config.mode){case"single":case"time":n=[w.parseDate(e,t)];break;case"multiple":n=e.split(w.config.conjunction).map((function(e){return w.parseDate(e,t)}));break;case"range":n=e.split(w.l10n.rangeSeparator).map((function(e){return w.parseDate(e,t)}))}else w.config.errorHandler(new Error("Invalid date supplied: "+JSON.stringify(e)));w.selectedDates=w.config.allowInvalidPreload?n:n.filter((function(e){return e instanceof Date&&ee(e,!1)})),"range"===w.config.mode&&w.selectedDates.sort((function(e,t){return e.getTime()-t.getTime()}))}function pe(e){return e.slice().map((function(e){return"string"==typeof e||"number"==typeof e||e instanceof Date?w.parseDate(e,void 0,!0):e&&"object"==typeof e&&e.from&&e.to?{from:w.parseDate(e.from,void 0),to:w.parseDate(e.to,void 0)}:e})).filter((function(e){return e}))}function ge(){w._positionElement=w.config.positionElement||w._input}function ve(e,t){if(void 0!==w.config){var n=w.config[e];if(void 0!==n&&n.length>0)for(var i=0;n[i]&&i<n.length;i++)n[i](w.selectedDates,w.input.value,w,t);"onChange"===e&&(w.input.dispatchEvent(ye("change")),w.input.dispatchEvent(ye("input")))}}function ye(e){var t=document.createEvent("Event");return t.initEvent(e,!0,!0),t}function we(e){for(var t=0;t<w.selectedDates.length;t++){var n=w.selectedDates[t];if(n instanceof Date&&0===x(n,e))return""+t}return!1}function _e(){w.config.noCalendar||w.isMobile||!w.monthNav||(w.yearElements.forEach((function(e,t){var n=new Date(w.currentYear,w.currentMonth,1);n.setMonth(w.currentMonth+t),w.config.showMonths>1||"static"===w.config.monthSelectorType?w.monthElements[t].textContent=g(n.getMonth(),w.config.shorthandCurrentMonth,w.l10n)+" ":w.monthsDropdownContainer.value=n.getMonth().toString(),e.value=n.getFullYear().toString()})),w._hidePrevMonthArrow=void 0!==w.config.minDate&&(w.currentYear===w.config.minDate.getFullYear()?w.currentMonth<=w.config.minDate.getMonth():w.currentYear<w.config.minDate.getFullYear()),w._hideNextMonthArrow=void 0!==w.config.maxDate&&(w.currentYear===w.config.maxDate.getFullYear()?w.currentMonth+1>w.config.maxDate.getMonth():w.currentYear>w.config.maxDate.getFullYear()))}function be(e){return w.selectedDates.map((function(t){return w.formatDate(t,e)})).filter((function(e,t,n){return"range"!==w.config.mode||w.config.enableTime||n.indexOf(e)===t})).join("range"!==w.config.mode?w.config.conjunction:w.l10n.rangeSeparator)}function xe(e){void 0===e&&(e=!0),void 0!==w.mobileInput&&w.mobileFormatStr&&(w.mobileInput.value=void 0!==w.latestSelectedDateObj?w.formatDate(w.latestSelectedDateObj,w.mobileFormatStr):""),w.input.value=be(w.config.dateFormat),void 0!==w.altInput&&(w.altInput.value=be(w.config.altFormat)),!1!==e&&ve("onValueUpdate")}function De(e){var t=m(e),n=w.prevMonthNav.contains(t),i=w.nextMonthNav.contains(t);n||i?K(n?-1:1):w.yearElements.indexOf(t)>=0?t.select():t.classList.contains("arrowUp")?w.changeYear(w.currentYear+1):t.classList.contains("arrowDown")&&w.changeYear(w.currentYear-1)}return function(){w.element=w.input=p,w.isOpen=!1,function(){var t=["wrap","weekNumbers","allowInput","allowInvalidPreload","clickOpens","time_24hr","enableTime","noCalendar","altInput","shorthandCurrentMonth","inline","static","enableSeconds","disableMobile"],a=e(e({},JSON.parse(JSON.stringify(p.dataset||{}))),v),o={};w.config.parseDate=a.parseDate,w.config.formatDate=a.formatDate,Object.defineProperty(w.config,"enable",{get:function(){return w.config._enable},set:function(e){w.config._enable=pe(e)}}),Object.defineProperty(w.config,"disable",{get:function(){return w.config._disable},set:function(e){w.config._disable=pe(e)}});var r="time"===a.mode;if(!a.dateFormat&&(a.enableTime||r)){var s=S.defaultConfig.dateFormat||i.dateFormat;o.dateFormat=a.noCalendar||r?"H:i"+(a.enableSeconds?":S":""):s+" H:i"+(a.enableSeconds?":S":"")}if(a.altInput&&(a.enableTime||r)&&!a.altFormat){var d=S.defaultConfig.altFormat||i.altFormat;o.altFormat=a.noCalendar||r?"h:i"+(a.enableSeconds?":S K":" K"):d+" h:i"+(a.enableSeconds?":S":"")+" K"}Object.defineProperty(w.config,"minDate",{get:function(){return w.config._minDate},set:re("min")}),Object.defineProperty(w.config,"maxDate",{get:function(){return w.config._maxDate},set:re("max")});var c=function(e){return function(t){w.config["min"===e?"_minTime":"_maxTime"]=w.parseDate(t,"H:i:S")}};Object.defineProperty(w.config,"minTime",{get:function(){return w.config._minTime},set:c("min")}),Object.defineProperty(w.config,"maxTime",{get:function(){return w.config._maxTime},set:c("max")}),"time"===a.mode&&(w.config.noCalendar=!0,w.config.enableTime=!0),Object.assign(w.config,o,a);for(var u=0;u<t.length;u++)w.config[t[u]]=!0===w.config[t[u]]||"true"===w.config[t[u]];for(n.filter((function(e){return void 0!==w.config[e]})).forEach((function(e){w.config[e]=l(w.config[e]||[]).map(k)})),w.isMobile=!w.config.disableMobile&&!w.config.inline&&"single"===w.config.mode&&!w.config.disable.length&&!w.config.enable&&!w.config.weekNumbers&&/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent),u=0;u<w.config.plugins.length;u++){var h=w.config.plugins[u](w)||{};for(var f in h)n.indexOf(f)>-1?w.config[f]=l(h[f]).map(k).concat(w.config[f]):void 0===a[f]&&(w.config[f]=h[f])}a.altInputClass||(w.config.altInputClass=se().className+" "+w.config.altInputClass),ve("onParseConfig")}(),le(),w.input=se(),w.input?(w.input._type=w.input.type,w.input.type="text",w.input.classList.add("flatpickr-input"),w._input=w.input,w.config.altInput&&(w.altInput=c(w.input.nodeName,w.config.altInputClass),w._input=w.altInput,w.altInput.placeholder=w.input.placeholder,w.altInput.disabled=w.input.disabled,w.altInput.required=w.input.required,w.altInput.tabIndex=w.input.tabIndex,w.altInput.type="text",w.input.setAttribute("type","hidden"),!w.config.static&&w.input.parentNode&&w.input.parentNode.insertBefore(w.altInput,w.input.nextSibling)),w.config.allowInput||w._input.setAttribute("readonly","readonly"),ge()):w.config.errorHandler(new Error("Invalid input element specified")),function(){w.selectedDates=[],w.now=w.parseDate(w.config.now)||new Date;var e=w.config.defaultDate||("INPUT"!==w.input.nodeName&&"TEXTAREA"!==w.input.nodeName||!w.input.placeholder||w.input.value!==w.input.placeholder?w.input.value:null);e&&me(e,w.config.dateFormat),w._initialDate=w.selectedDates.length>0?w.selectedDates[0]:w.config.minDate&&w.config.minDate.getTime()>w.now.getTime()?w.config.minDate:w.config.maxDate&&w.config.maxDate.getTime()<w.now.getTime()?w.config.maxDate:w.now,w.currentYear=w._initialDate.getFullYear(),w.currentMonth=w._initialDate.getMonth(),w.selectedDates.length>0&&(w.latestSelectedDateObj=w.selectedDates[0]),void 0!==w.config.minTime&&(w.config.minTime=w.parseDate(w.config.minTime,"H:i")),void 0!==w.config.maxTime&&(w.config.maxTime=w.parseDate(w.config.maxTime,"H:i")),w.minDateHasTime=!!w.config.minDate&&(w.config.minDate.getHours()>0||w.config.minDate.getMinutes()>0||w.config.minDate.getSeconds()>0),w.maxDateHasTime=!!w.config.maxDate&&(w.config.maxDate.getHours()>0||w.config.maxDate.getMinutes()>0||w.config.maxDate.getSeconds()>0)}(),w.utils={getDaysInMonth:function(e,t){return void 0===e&&(e=w.currentMonth),void 0===t&&(t=w.currentYear),1===e&&(t%4==0&&t%100!=0||t%400==0)?29:w.l10n.daysInMonth[e]}},w.isMobile||function(){var e=window.document.createDocumentFragment();if(w.calendarContainer=c("div","flatpickr-calendar"),w.calendarContainer.tabIndex=-1,!w.config.noCalendar){if(e.appendChild((w.monthNav=c("div","flatpickr-months"),w.yearElements=[],w.monthElements=[],w.prevMonthNav=c("span","flatpickr-prev-month"),w.prevMonthNav.innerHTML=w.config.prevArrow,w.nextMonthNav=c("span","flatpickr-next-month"),w.nextMonthNav.innerHTML=w.config.nextArrow,Z(),Object.defineProperty(w,"_hidePrevMonthArrow",{get:function(){return w.__hidePrevMonthArrow},set:function(e){w.__hidePrevMonthArrow!==e&&(d(w.prevMonthNav,"flatpickr-disabled",e),w.__hidePrevMonthArrow=e)}}),Object.defineProperty(w,"_hideNextMonthArrow",{get:function(){return w.__hideNextMonthArrow},set:function(e){w.__hideNextMonthArrow!==e&&(d(w.nextMonthNav,"flatpickr-disabled",e),w.__hideNextMonthArrow=e)}}),w.currentYearElement=w.yearElements[0],_e(),w.monthNav)),w.innerContainer=c("div","flatpickr-innerContainer"),w.config.weekNumbers){var t=function(){w.calendarContainer.classList.add("hasWeeks");var e=c("div","flatpickr-weekwrapper");e.appendChild(c("span","flatpickr-weekday",w.l10n.weekAbbreviation));var t=c("div","flatpickr-weeks");return e.appendChild(t),{weekWrapper:e,weekNumbers:t}}(),n=t.weekWrapper,i=t.weekNumbers;w.innerContainer.appendChild(n),w.weekNumbers=i,w.weekWrapper=n}w.rContainer=c("div","flatpickr-rContainer"),w.rContainer.appendChild(B()),w.daysContainer||(w.daysContainer=c("div","flatpickr-days"),w.daysContainer.tabIndex=-1),z(),w.rContainer.appendChild(w.daysContainer),w.innerContainer.appendChild(w.rContainer),e.appendChild(w.innerContainer)}w.config.enableTime&&e.appendChild(function(){w.calendarContainer.classList.add("hasTime"),w.config.noCalendar&&w.calendarContainer.classList.add("noCalendar");var e=M(w.config);w.timeContainer=c("div","flatpickr-time"),w.timeContainer.tabIndex=-1;var t=c("span","flatpickr-time-separator",":"),n=f("flatpickr-hour",{"aria-label":w.l10n.hourAriaLabel});w.hourElement=n.getElementsByTagName("input")[0];var i=f("flatpickr-minute",{"aria-label":w.l10n.minuteAriaLabel});if(w.minuteElement=i.getElementsByTagName("input")[0],w.hourElement.tabIndex=w.minuteElement.tabIndex=-1,w.hourElement.value=o(w.latestSelectedDateObj?w.latestSelectedDateObj.getHours():w.config.time_24hr?e.hours:function(e){switch(e%24){case 0:case 12:return 12;default:return e%12}}(e.hours)),w.minuteElement.value=o(w.latestSelectedDateObj?w.latestSelectedDateObj.getMinutes():e.minutes),w.hourElement.setAttribute("step",w.config.hourIncrement.toString()),w.minuteElement.setAttribute("step",w.config.minuteIncrement.toString()),w.hourElement.setAttribute("min",w.config.time_24hr?"0":"1"),w.hourElement.setAttribute("max",w.config.time_24hr?"23":"12"),w.hourElement.setAttribute("maxlength","2"),w.minuteElement.setAttribute("min","0"),w.minuteElement.setAttribute("max","59"),w.minuteElement.setAttribute("maxlength","2"),w.timeContainer.appendChild(n),w.timeContainer.appendChild(t),w.timeContainer.appendChild(i),w.config.time_24hr&&w.timeContainer.classList.add("time24hr"),w.config.enableSeconds){w.timeContainer.classList.add("hasSeconds");var a=f("flatpickr-second");w.secondElement=a.getElementsByTagName("input")[0],w.secondElement.value=o(w.latestSelectedDateObj?w.latestSelectedDateObj.getSeconds():e.seconds),w.secondElement.setAttribute("step",w.minuteElement.getAttribute("step")),w.secondElement.setAttribute("min","0"),w.secondElement.setAttribute("max","59"),w.secondElement.setAttribute("maxlength","2"),w.timeContainer.appendChild(c("span","flatpickr-time-separator",":")),w.timeContainer.appendChild(a)}return w.config.time_24hr||(w.amPM=c("span","flatpickr-am-pm",w.l10n.amPM[r((w.latestSelectedDateObj?w.hourElement.value:w.config.defaultHour)>11)]),w.amPM.title=w.l10n.toggleTitle,w.amPM.tabIndex=-1,w.timeContainer.appendChild(w.amPM)),w.timeContainer}()),d(w.calendarContainer,"rangeMode","range"===w.config.mode),d(w.calendarContainer,"animate",!0===w.config.animate),d(w.calendarContainer,"multiMonth",w.config.showMonths>1),w.calendarContainer.appendChild(e);var a=void 0!==w.config.appendTo&&void 0!==w.config.appendTo.nodeType;if((w.config.inline||w.config.static)&&(w.calendarContainer.classList.add(w.config.inline?"inline":"static"),w.config.inline&&(!a&&w.element.parentNode?w.element.parentNode.insertBefore(w.calendarContainer,w._input.nextSibling):void 0!==w.config.appendTo&&w.config.appendTo.appendChild(w.calendarContainer)),w.config.static)){var s=c("div","flatpickr-wrapper");w.element.parentNode&&w.element.parentNode.insertBefore(s,w.element),s.appendChild(w.element),w.altInput&&s.appendChild(w.altInput),s.appendChild(w.calendarContainer)}w.config.static||w.config.inline||(void 0!==w.config.appendTo?w.config.appendTo:window.document.body).appendChild(w.calendarContainer)}(),function(){if(w.config.wrap&&["open","close","toggle","clear"].forEach((function(e){Array.prototype.forEach.call(w.element.querySelectorAll("[data-"+e+"]"),(function(t){return P(t,"click",w[e])}))})),w.isMobile)!function(){var e=w.config.enableTime?w.config.noCalendar?"time":"datetime-local":"date";w.mobileInput=c("input",w.input.className+" flatpickr-mobile"),w.mobileInput.tabIndex=1,w.mobileInput.type=e,w.mobileInput.disabled=w.input.disabled,w.mobileInput.required=w.input.required,w.mobileInput.placeholder=w.input.placeholder,w.mobileFormatStr="datetime-local"===e?"Y-m-d\\TH:i:S":"date"===e?"Y-m-d":"H:i:S",w.selectedDates.length>0&&(w.mobileInput.defaultValue=w.mobileInput.value=w.formatDate(w.selectedDates[0],w.mobileFormatStr)),w.config.minDate&&(w.mobileInput.min=w.formatDate(w.config.minDate,"Y-m-d")),w.config.maxDate&&(w.mobileInput.max=w.formatDate(w.config.maxDate,"Y-m-d")),w.input.getAttribute("step")&&(w.mobileInput.step=String(w.input.getAttribute("step"))),w.input.type="hidden",void 0!==w.altInput&&(w.altInput.type="hidden");try{w.input.parentNode&&w.input.parentNode.insertBefore(w.mobileInput,w.input.nextSibling)}catch(e){}P(w.mobileInput,"change",(function(e){w.setDate(m(e).value,!1,w.mobileFormatStr),ve("onChange"),ve("onClose")}))}();else{var e=s(oe,50);if(w._debouncedChange=s(L,300),w.daysContainer&&!/iPhone|iPad|iPod/i.test(navigator.userAgent)&&P(w.daysContainer,"mouseover",(function(e){"range"===w.config.mode&&ae(m(e))})),P(w._input,"keydown",ie),void 0!==w.calendarContainer&&P(w.calendarContainer,"keydown",ie),w.config.inline||w.config.static||P(window,"resize",e),void 0!==window.ontouchstart?P(window.document,"touchstart",Q):P(window.document,"mousedown",Q),P(window.document,"focus",Q,{capture:!0}),!0===w.config.clickOpens&&(P(w._input,"focus",w.open),P(w._input,"click",w.open)),void 0!==w.daysContainer&&(P(w.monthNav,"click",De),P(w.monthNav,["keyup","increment"],A),P(w.daysContainer,"click",he)),void 0!==w.timeContainer&&void 0!==w.minuteElement&&void 0!==w.hourElement){P(w.timeContainer,["increment"],I),P(w.timeContainer,"blur",I,{capture:!0}),P(w.timeContainer,"click",N),P([w.hourElement,w.minuteElement],["focus","click"],(function(e){return m(e).select()})),void 0!==w.secondElement&&P(w.secondElement,"focus",(function(){return w.secondElement&&w.secondElement.select()})),void 0!==w.amPM&&P(w.amPM,"click",(function(e){I(e)}))}w.config.allowInput&&P(w._input,"blur",ne)}}(),(w.selectedDates.length||w.config.noCalendar)&&(w.config.enableTime&&F(w.config.noCalendar?w.latestSelectedDateObj:void 0),xe(!1)),T();var t=/^((?!chrome|android).)*safari/i.test(navigator.userAgent);!w.isMobile&&t&&de(),ve("onReady")}(),w}function k(e,t){for(var n=Array.prototype.slice.call(e).filter((function(e){return e instanceof HTMLElement})),i=[],a=0;a<n.length;a++){var o=n[a];try{if(null!==o.getAttribute("data-fp-omit"))continue;void 0!==o._flatpickr&&(o._flatpickr.destroy(),o._flatpickr=void 0),o._flatpickr=C(o,t||{}),i.push(o._flatpickr)}catch(e){console.error(e)}}return 1===i.length?i[0]:i}"function"!=typeof Object.assign&&(Object.assign=function(e){for(var t=[],n=1;n<arguments.length;n++)t[n-1]=arguments[n];if(!e)throw TypeError("Cannot convert undefined or null to object");for(var i=function(t){t&&Object.keys(t).forEach((function(n){return e[n]=t[n]}))},a=0,o=t;a<o.length;a++){var r=o[a];i(r)}return e}),"undefined"!=typeof HTMLElement&&"undefined"!=typeof HTMLCollection&&"undefined"!=typeof NodeList&&(HTMLCollection.prototype.flatpickr=NodeList.prototype.flatpickr=function(e){return k(this,e)},HTMLElement.prototype.flatpickr=function(e){return k([this],e)});var S=function(e,t){return"string"==typeof e?k(window.document.querySelectorAll(e),t):e instanceof Node?k([e],t):k(e,t)};return S.defaultConfig={},S.l10ns={en:e({},a),default:e({},a)},S.localize=function(t){S.l10ns.default=e(e({},S.l10ns.default),t)},S.setDefaults=function(t){S.defaultConfig=e(e({},S.defaultConfig),t)},S.parseDate=b({}),S.formatDate=_({}),S.compareDates=x,"undefined"!=typeof jQuery&&void 0!==jQuery.fn&&(jQuery.fn.flatpickr=function(e){return k(this,e)}),Date.prototype.fp_incr=function(e){return new Date(this.getFullYear(),this.getMonth(),this.getDate()+("string"==typeof e?parseInt(e,10):e))},"undefined"!=typeof window&&(window.flatpickr=S),S}));const settingHour24={enableTime:!0,noCalendar:!0,dateFormat:"H:i:S",static:!0},settingDate={enableTime:!1,dateFormat:"Y-m-d"};var modalChangePasswordUser=$("#modal-change-of-password"),formChangePasswordUser=$("#form-change-password-user"),messageErrorUserPass=modalChangePasswordUser.find(".error-change-password");$(document).ready((function(){modalChangePasswordUser.find(".button-send-password").click((function(){messageErrorUserPass.text(""),messageErrorUserPass.hide(),UtilModalLoader(modalChangePasswordUser),SendFormUpdateChangePasswordUser.Send()})),$(".button-modal-change-of-password").click((function(e){e.preventDefault(),modalChangePasswordUser.modal("show"),messageErrorUserPass.text(""),messageErrorUserPass.hide(),UtilFormClose(formChangePasswordUser)}))}));let SendFormUpdateChangePasswordUser=new QueryAjax({form:"form-change-password-user",action:"ActionUpdateChangePasswordUser"});function ActionUpdateChangePasswordUser(e,t){e?t.status?(notify(!1,"Usuario Actualizado","La contraseña se actualizo correctamente.",2),UtilFormClose(formChangePasswordUser)):(messageErrorUserPass.html(t.message),messageErrorUserPass.show()):console.log(e),UtilModalLoader(modalChangePasswordUser,!1)}class SimpleImage{static get toolbox(){return{title:"Image",icon:'<svg width="17" height="15" viewBox="0 0 336 276" xmlns="http://www.w3.org/2000/svg"><path d="M291 150V79c0-19-15-34-34-34H79c-19 0-34 15-34 34v42l67-44 81 72 56-29 42 30zm0 52l-43-30-56 30-81-67-66 39v23c0 19 15 34 34 34h178c17 0 31-13 34-29zM79 0h178c44 0 79 35 79 79v118c0 44-35 79-79 79H79c-44 0-79-35-79-79V79C0 35 35 0 79 0z"/></svg>'}}static get pasteConfig(){return{tags:["IMG"],files:{mimeTypes:["image/*"],extensions:["gif","jpg","png"]},patterns:{image:/https?:\/\/\S+\.(gif|jpe?g|tiff|png)$/i}}}static get sanitize(){return{url:{},caption:{b:!0,a:{href:!0},i:!0}}}constructor({data:e,api:t,config:n}){this.api=t,this.config=n||{},this.data={images:e.images||[],withBorder:void 0!==e.withBorder&&e.withBorder,withBackground:void 0!==e.withBackground&&e.withBackground,stretched:void 0!==e.stretched&&e.stretched},this.wrapper=void 0,this.settings=[{name:"withBorder",icon:'<svg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M15.8 10.592v2.043h2.35v2.138H15.8v2.232h-2.25v-2.232h-2.4v-2.138h2.4v-2.28h2.25v.237h1.15-1.15zM1.9 8.455v-3.42c0-1.154.985-2.09 2.2-2.09h4.2v2.137H4.15v3.373H1.9zm0 2.137h2.25v3.325H8.3v2.138H4.1c-1.215 0-2.2-.936-2.2-2.09v-3.373zm15.05-2.137H14.7V5.082h-4.15V2.945h4.2c1.215 0 2.2.936 2.2 2.09v3.42z"/></svg>'},{name:"stretched",icon:'<svg width="17" height="10" viewBox="0 0 17 10" xmlns="http://www.w3.org/2000/svg"><path d="M13.568 5.925H4.056l1.703 1.703a1.125 1.125 0 0 1-1.59 1.591L.962 6.014A1.069 1.069 0 0 1 .588 4.26L4.38.469a1.069 1.069 0 0 1 1.512 1.511L4.084 3.787h9.606l-1.85-1.85a1.069 1.069 0 1 1 1.512-1.51l3.792 3.791a1.069 1.069 0 0 1-.475 1.788L13.514 9.16a1.125 1.125 0 0 1-1.59-1.591l1.644-1.644z"/></svg>'},{name:"withBackground",icon:'<svg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10.043 8.265l3.183-3.183h-2.924L4.75 10.636v2.923l4.15-4.15v2.351l-2.158 2.159H8.9v2.137H4.7c-1.215 0-2.2-.936-2.2-2.09v-8.93c0-1.154.985-2.09 2.2-2.09h10.663l.033-.033.034.034c1.178.04 2.12.96 2.12 2.089v3.23H15.3V5.359l-2.906 2.906h-2.35zM7.951 5.082H4.75v3.201l3.201-3.2zm5.099 7.078v3.04h4.15v-3.04h-4.15zm-1.1-2.137h6.35c.635 0 1.15.489 1.15 1.092v5.13c0 .603-.515 1.092-1.15 1.092h-6.35c-.635 0-1.15-.489-1.15-1.092v-5.13c0-.603.515-1.092 1.15-1.092z"/></svg>'}]}render(){this.wrapper=document.createElement("div"),this.wrapper.classList.add("simple-image"),this._addModalFile(),this._addButtonModal(),this.data&&this.data.images&&(this.dataS3=this.data.images,this._createImages(this.dataS3)),this.editorFileS3=new updloadS3(this.ModalFile.find(".div-files-class"),{url:"/admin/files/items",typeFile:1,id:1,reload:!1,limitFiles:10});var e=this;return this.editorFileS3.send.click((function(){e.dataS3=e._setDataImages(e.editorFileS3.data),e._createImages(e.dataS3),e._openModal(!1)})),this.data.images.length||this._openModal(),this.wrapper}_addModalFile(){let e="modal_file_"+Math.floor(1e3*Math.random()+1),t=$($("#template-file-modal").html()).clone();t.attr("class","modal fade modal-table-gear "+e),$(".modals-files").append(t),this.ModalFile=$("."+e)}_openModal(e=!0){e?(this.ModalFile.modal("show"),this.ModalFile.find(".overlay").hide()):(this.ModalFile.modal("hide"),this.ModalFile.find(".overlay").hide())}_addButtonModal(){const e=document.createElement("button");e.type="button",e.innerText="Editar",e.value=this.config.placeholder||"Paste an image URL...",e.addEventListener("click",(e=>{this.editorFileS3.clear(),this.dataS3&&this.editorFileS3.loadData(this.dataS3,1),this.editorFileS3.loading.hide(),this._openModal()})),this.wrapper.appendChild(e)}_createImages(e){this.wrapper.innerHTML="",this._addButtonModal();const t=e.length>6?"general":e.length,n=document.createElement("div");n.className="gallery-"+t;var i=1;e.forEach((e=>{const t=document.createElement("figure");t.className="gallery__item  gallery__item--"+i;const a=document.createElement("img");a.src=e.name_tmp_complete,a.className="gallery__img",t.appendChild(a),n.appendChild(t),i++})),this.wrapper.appendChild(n),this._acceptTuneView()}save(e){return Object.assign(this.data,{images:this.dataS3})}_setDataImages(e){if(!e&&!t.isArray())return!1;e=this._sortImages(e);let t=[];return e.forEach((e=>{t.push({author_id:e.author.id,author_name:e.author.name,description:e.description,ext:e.ext,id:e.id+Math.floor(1e4*Math.random()+1),name:e.name,name_tmp:e.name_tmp,name_tmp_complete:e.name_tmp_complete,order:e.order})})),t}_sortImages(e){return e.sort((function(e,t){return e.order>t.order?1:e.order<t.order?-1:0}))}validate(e){return 0!=e.images.length}renderSettings(){const e=document.createElement("div");return this.settings.forEach((t=>{let n=document.createElement("div");n.classList.add(this.api.styles.settingsButton),n.classList.toggle(this.api.styles.settingsButtonActive,this.data[t.name]),n.innerHTML=t.icon,e.appendChild(n),n.addEventListener("click",(()=>{this._toggleTune(t.name),n.classList.toggle(this.api.styles.settingsButtonActive)}))})),e}_toggleTune(e){this.data[e]=!this.data[e],this._acceptTuneView()}_acceptTuneView(){this.settings.forEach((e=>{this.wrapper.classList.toggle(e.name,!!this.data[e.name]),"stretched"===e.name&&this.api.blocks.stretchBlock(this.api.blocks.getCurrentBlockIndex(),!!this.data.stretched)}))}}
+/*! PhotoSwipe - v4.1.2 - 2017-04-05
+* http://photoswipe.com
+* Copyright (c) 2017 Dmitry Semenov; */
+(function (root, factory) { 
+	if (typeof define === 'function' && define.amd) {
+		define(factory);
+	} else if (typeof exports === 'object') {
+		module.exports = factory();
+	} else {
+		root.PhotoSwipe = factory();
+	}
+})(this, function () {
+
+	'use strict';
+	var PhotoSwipe = function(template, UiClass, items, options){
+
+/*>>framework-bridge*/
+/**
+ *
+ * Set of generic functions used by gallery.
+ * 
+ * You're free to modify anything here as long as functionality is kept.
+ * 
+ */
+var framework = {
+	features: null,
+	bind: function(target, type, listener, unbind) {
+		var methodName = (unbind ? 'remove' : 'add') + 'EventListener';
+		type = type.split(' ');
+		for(var i = 0; i < type.length; i++) {
+			if(type[i]) {
+				target[methodName]( type[i], listener, false);
+			}
+		}
+	},
+	isArray: function(obj) {
+		return (obj instanceof Array);
+	},
+	createEl: function(classes, tag) {
+		var el = document.createElement(tag || 'div');
+		if(classes) {
+			el.className = classes;
+		}
+		return el;
+	},
+	getScrollY: function() {
+		var yOffset = window.pageYOffset;
+		return yOffset !== undefined ? yOffset : document.documentElement.scrollTop;
+	},
+	unbind: function(target, type, listener) {
+		framework.bind(target,type,listener,true);
+	},
+	removeClass: function(el, className) {
+		var reg = new RegExp('(\\s|^)' + className + '(\\s|$)');
+		el.className = el.className.replace(reg, ' ').replace(/^\s\s*/, '').replace(/\s\s*$/, ''); 
+	},
+	addClass: function(el, className) {
+		if( !framework.hasClass(el,className) ) {
+			el.className += (el.className ? ' ' : '') + className;
+		}
+	},
+	hasClass: function(el, className) {
+		return el.className && new RegExp('(^|\\s)' + className + '(\\s|$)').test(el.className);
+	},
+	getChildByClass: function(parentEl, childClassName) {
+		var node = parentEl.firstChild;
+		while(node) {
+			if( framework.hasClass(node, childClassName) ) {
+				return node;
+			}
+			node = node.nextSibling;
+		}
+	},
+	arraySearch: function(array, value, key) {
+		var i = array.length;
+		while(i--) {
+			if(array[i][key] === value) {
+				return i;
+			} 
+		}
+		return -1;
+	},
+	extend: function(o1, o2, preventOverwrite) {
+		for (var prop in o2) {
+			if (o2.hasOwnProperty(prop)) {
+				if(preventOverwrite && o1.hasOwnProperty(prop)) {
+					continue;
+				}
+				o1[prop] = o2[prop];
+			}
+		}
+	},
+	easing: {
+		sine: {
+			out: function(k) {
+				return Math.sin(k * (Math.PI / 2));
+			},
+			inOut: function(k) {
+				return - (Math.cos(Math.PI * k) - 1) / 2;
+			}
+		},
+		cubic: {
+			out: function(k) {
+				return --k * k * k + 1;
+			}
+		}
+		/*
+			elastic: {
+				out: function ( k ) {
+
+					var s, a = 0.1, p = 0.4;
+					if ( k === 0 ) return 0;
+					if ( k === 1 ) return 1;
+					if ( !a || a < 1 ) { a = 1; s = p / 4; }
+					else s = p * Math.asin( 1 / a ) / ( 2 * Math.PI );
+					return ( a * Math.pow( 2, - 10 * k) * Math.sin( ( k - s ) * ( 2 * Math.PI ) / p ) + 1 );
+
+				},
+			},
+			back: {
+				out: function ( k ) {
+					var s = 1.70158;
+					return --k * k * ( ( s + 1 ) * k + s ) + 1;
+				}
+			}
+		*/
+	},
+
+	/**
+	 * 
+	 * @return {object}
+	 * 
+	 * {
+	 *  raf : request animation frame function
+	 *  caf : cancel animation frame function
+	 *  transfrom : transform property key (with vendor), or null if not supported
+	 *  oldIE : IE8 or below
+	 * }
+	 * 
+	 */
+	detectFeatures: function() {
+		if(framework.features) {
+			return framework.features;
+		}
+		var helperEl = framework.createEl(),
+			helperStyle = helperEl.style,
+			vendor = '',
+			features = {};
+
+		// IE8 and below
+		features.oldIE = document.all && !document.addEventListener;
+
+		features.touch = 'ontouchstart' in window;
+
+		if(window.requestAnimationFrame) {
+			features.raf = window.requestAnimationFrame;
+			features.caf = window.cancelAnimationFrame;
+		}
+
+		features.pointerEvent = navigator.pointerEnabled || navigator.msPointerEnabled;
+
+		// fix false-positive detection of old Android in new IE
+		// (IE11 ua string contains "Android 4.0")
+		
+		if(!features.pointerEvent) { 
+
+			var ua = navigator.userAgent;
+
+			// Detect if device is iPhone or iPod and if it's older than iOS 8
+			// http://stackoverflow.com/a/14223920
+			// 
+			// This detection is made because of buggy top/bottom toolbars
+			// that don't trigger window.resize event.
+			// For more info refer to _isFixedPosition variable in core.js
+
+			if (/iP(hone|od)/.test(navigator.platform)) {
+				var v = (navigator.appVersion).match(/OS (\d+)_(\d+)_?(\d+)?/);
+				if(v && v.length > 0) {
+					v = parseInt(v[1], 10);
+					if(v >= 1 && v < 8 ) {
+						features.isOldIOSPhone = true;
+					}
+				}
+			}
+
+			// Detect old Android (before KitKat)
+			// due to bugs related to position:fixed
+			// http://stackoverflow.com/questions/7184573/pick-up-the-android-version-in-the-browser-by-javascript
+			
+			var match = ua.match(/Android\s([0-9\.]*)/);
+			var androidversion =  match ? match[1] : 0;
+			androidversion = parseFloat(androidversion);
+			if(androidversion >= 1 ) {
+				if(androidversion < 4.4) {
+					features.isOldAndroid = true; // for fixed position bug & performance
+				}
+				features.androidVersion = androidversion; // for touchend bug
+			}	
+			features.isMobileOpera = /opera mini|opera mobi/i.test(ua);
+
+			// p.s. yes, yes, UA sniffing is bad, propose your solution for above bugs.
+		}
+		
+		var styleChecks = ['transform', 'perspective', 'animationName'],
+			vendors = ['', 'webkit','Moz','ms','O'],
+			styleCheckItem,
+			styleName;
+
+		for(var i = 0; i < 4; i++) {
+			vendor = vendors[i];
+
+			for(var a = 0; a < 3; a++) {
+				styleCheckItem = styleChecks[a];
+
+				// uppercase first letter of property name, if vendor is present
+				styleName = vendor + (vendor ? 
+										styleCheckItem.charAt(0).toUpperCase() + styleCheckItem.slice(1) : 
+										styleCheckItem);
+			
+				if(!features[styleCheckItem] && styleName in helperStyle ) {
+					features[styleCheckItem] = styleName;
+				}
+			}
+
+			if(vendor && !features.raf) {
+				vendor = vendor.toLowerCase();
+				features.raf = window[vendor+'RequestAnimationFrame'];
+				if(features.raf) {
+					features.caf = window[vendor+'CancelAnimationFrame'] || 
+									window[vendor+'CancelRequestAnimationFrame'];
+				}
+			}
+		}
+			
+		if(!features.raf) {
+			var lastTime = 0;
+			features.raf = function(fn) {
+				var currTime = new Date().getTime();
+				var timeToCall = Math.max(0, 16 - (currTime - lastTime));
+				var id = window.setTimeout(function() { fn(currTime + timeToCall); }, timeToCall);
+				lastTime = currTime + timeToCall;
+				return id;
+			};
+			features.caf = function(id) { clearTimeout(id); };
+		}
+
+		// Detect SVG support
+		features.svg = !!document.createElementNS && 
+						!!document.createElementNS('http://www.w3.org/2000/svg', 'svg').createSVGRect;
+
+		framework.features = features;
+
+		return features;
+	}
+};
+
+framework.detectFeatures();
+
+// Override addEventListener for old versions of IE
+if(framework.features.oldIE) {
+
+	framework.bind = function(target, type, listener, unbind) {
+		
+		type = type.split(' ');
+
+		var methodName = (unbind ? 'detach' : 'attach') + 'Event',
+			evName,
+			_handleEv = function() {
+				listener.handleEvent.call(listener);
+			};
+
+		for(var i = 0; i < type.length; i++) {
+			evName = type[i];
+			if(evName) {
+
+				if(typeof listener === 'object' && listener.handleEvent) {
+					if(!unbind) {
+						listener['oldIE' + evName] = _handleEv;
+					} else {
+						if(!listener['oldIE' + evName]) {
+							return false;
+						}
+					}
+
+					target[methodName]( 'on' + evName, listener['oldIE' + evName]);
+				} else {
+					target[methodName]( 'on' + evName, listener);
+				}
+
+			}
+		}
+	};
+	
+}
+
+/*>>framework-bridge*/
+
+/*>>core*/
+//function(template, UiClass, items, options)
+
+var self = this;
+
+/**
+ * Static vars, don't change unless you know what you're doing.
+ */
+var DOUBLE_TAP_RADIUS = 25, 
+	NUM_HOLDERS = 3;
+
+/**
+ * Options
+ */
+var _options = {
+	allowPanToNext:true,
+	spacing: 0.12,
+	bgOpacity: 1,
+	mouseUsed: false,
+	loop: true,
+	pinchToClose: true,
+	closeOnScroll: true,
+	closeOnVerticalDrag: true,
+	verticalDragRange: 0.75,
+	hideAnimationDuration: 333,
+	showAnimationDuration: 333,
+	showHideOpacity: false,
+	focus: true,
+	escKey: true,
+	arrowKeys: true,
+	mainScrollEndFriction: 0.35,
+	panEndFriction: 0.35,
+	isClickableElement: function(el) {
+        return el.tagName === 'A';
+    },
+    getDoubleTapZoom: function(isMouseClick, item) {
+    	if(isMouseClick) {
+    		return 1;
+    	} else {
+    		return item.initialZoomLevel < 0.7 ? 1 : 1.33;
+    	}
+    },
+    maxSpreadZoom: 1.33,
+	modal: true,
+
+	// not fully implemented yet
+	scaleMode: 'fit' // TODO
+};
+framework.extend(_options, options);
+
+
+/**
+ * Private helper variables & functions
+ */
+
+var _getEmptyPoint = function() { 
+		return {x:0,y:0}; 
+	};
+
+var _isOpen,
+	_isDestroying,
+	_closedByScroll,
+	_currentItemIndex,
+	_containerStyle,
+	_containerShiftIndex,
+	_currPanDist = _getEmptyPoint(),
+	_startPanOffset = _getEmptyPoint(),
+	_panOffset = _getEmptyPoint(),
+	_upMoveEvents, // drag move, drag end & drag cancel events array
+	_downEvents, // drag start events array
+	_globalEventHandlers,
+	_viewportSize = {},
+	_currZoomLevel,
+	_startZoomLevel,
+	_translatePrefix,
+	_translateSufix,
+	_updateSizeInterval,
+	_itemsNeedUpdate,
+	_currPositionIndex = 0,
+	_offset = {},
+	_slideSize = _getEmptyPoint(), // size of slide area, including spacing
+	_itemHolders,
+	_prevItemIndex,
+	_indexDiff = 0, // difference of indexes since last content update
+	_dragStartEvent,
+	_dragMoveEvent,
+	_dragEndEvent,
+	_dragCancelEvent,
+	_transformKey,
+	_pointerEventEnabled,
+	_isFixedPosition = true,
+	_likelyTouchDevice,
+	_modules = [],
+	_requestAF,
+	_cancelAF,
+	_initalClassName,
+	_initalWindowScrollY,
+	_oldIE,
+	_currentWindowScrollY,
+	_features,
+	_windowVisibleSize = {},
+	_renderMaxResolution = false,
+	_orientationChangeTimeout,
+
+
+	// Registers PhotoSWipe module (History, Controller ...)
+	_registerModule = function(name, module) {
+		framework.extend(self, module.publicMethods);
+		_modules.push(name);
+	},
+
+	_getLoopedId = function(index) {
+		var numSlides = _getNumItems();
+		if(index > numSlides - 1) {
+			return index - numSlides;
+		} else  if(index < 0) {
+			return numSlides + index;
+		}
+		return index;
+	},
+	
+	// Micro bind/trigger
+	_listeners = {},
+	_listen = function(name, fn) {
+		if(!_listeners[name]) {
+			_listeners[name] = [];
+		}
+		return _listeners[name].push(fn);
+	},
+	_shout = function(name) {
+		var listeners = _listeners[name];
+
+		if(listeners) {
+			var args = Array.prototype.slice.call(arguments);
+			args.shift();
+
+			for(var i = 0; i < listeners.length; i++) {
+				listeners[i].apply(self, args);
+			}
+		}
+	},
+
+	_getCurrentTime = function() {
+		return new Date().getTime();
+	},
+	_applyBgOpacity = function(opacity) {
+		_bgOpacity = opacity;
+		self.bg.style.opacity = opacity * _options.bgOpacity;
+	},
+
+	_applyZoomTransform = function(styleObj,x,y,zoom,item) {
+		if(!_renderMaxResolution || (item && item !== self.currItem) ) {
+			zoom = zoom / (item ? item.fitRatio : self.currItem.fitRatio);	
+		}
+			
+		styleObj[_transformKey] = _translatePrefix + x + 'px, ' + y + 'px' + _translateSufix + ' scale(' + zoom + ')';
+	},
+	_applyCurrentZoomPan = function( allowRenderResolution ) {
+		if(_currZoomElementStyle) {
+
+			if(allowRenderResolution) {
+				if(_currZoomLevel > self.currItem.fitRatio) {
+					if(!_renderMaxResolution) {
+						_setImageSize(self.currItem, false, true);
+						_renderMaxResolution = true;
+					}
+				} else {
+					if(_renderMaxResolution) {
+						_setImageSize(self.currItem);
+						_renderMaxResolution = false;
+					}
+				}
+			}
+			
+
+			_applyZoomTransform(_currZoomElementStyle, _panOffset.x, _panOffset.y, _currZoomLevel);
+		}
+	},
+	_applyZoomPanToItem = function(item) {
+		if(item.container) {
+
+			_applyZoomTransform(item.container.style, 
+								item.initialPosition.x, 
+								item.initialPosition.y, 
+								item.initialZoomLevel,
+								item);
+		}
+	},
+	_setTranslateX = function(x, elStyle) {
+		elStyle[_transformKey] = _translatePrefix + x + 'px, 0px' + _translateSufix;
+	},
+	_moveMainScroll = function(x, dragging) {
+
+		if(!_options.loop && dragging) {
+			var newSlideIndexOffset = _currentItemIndex + (_slideSize.x * _currPositionIndex - x) / _slideSize.x,
+				delta = Math.round(x - _mainScrollPos.x);
+
+			if( (newSlideIndexOffset < 0 && delta > 0) || 
+				(newSlideIndexOffset >= _getNumItems() - 1 && delta < 0) ) {
+				x = _mainScrollPos.x + delta * _options.mainScrollEndFriction;
+			} 
+		}
+		
+		_mainScrollPos.x = x;
+		_setTranslateX(x, _containerStyle);
+	},
+	_calculatePanOffset = function(axis, zoomLevel) {
+		var m = _midZoomPoint[axis] - _offset[axis];
+		return _startPanOffset[axis] + _currPanDist[axis] + m - m * ( zoomLevel / _startZoomLevel );
+	},
+	
+	_equalizePoints = function(p1, p2) {
+		p1.x = p2.x;
+		p1.y = p2.y;
+		if(p2.id) {
+			p1.id = p2.id;
+		}
+	},
+	_roundPoint = function(p) {
+		p.x = Math.round(p.x);
+		p.y = Math.round(p.y);
+	},
+
+	_mouseMoveTimeout = null,
+	_onFirstMouseMove = function() {
+		// Wait until mouse move event is fired at least twice during 100ms
+		// We do this, because some mobile browsers trigger it on touchstart
+		if(_mouseMoveTimeout ) { 
+			framework.unbind(document, 'mousemove', _onFirstMouseMove);
+			framework.addClass(template, 'pswp--has_mouse');
+			_options.mouseUsed = true;
+			_shout('mouseUsed');
+		}
+		_mouseMoveTimeout = setTimeout(function() {
+			_mouseMoveTimeout = null;
+		}, 100);
+	},
+
+	_bindEvents = function() {
+		framework.bind(document, 'keydown', self);
+
+		if(_features.transform) {
+			// don't bind click event in browsers that don't support transform (mostly IE8)
+			framework.bind(self.scrollWrap, 'click', self);
+		}
+		
+
+		if(!_options.mouseUsed) {
+			framework.bind(document, 'mousemove', _onFirstMouseMove);
+		}
+
+		framework.bind(window, 'resize scroll orientationchange', self);
+
+		_shout('bindEvents');
+	},
+
+	_unbindEvents = function() {
+		framework.unbind(window, 'resize scroll orientationchange', self);
+		framework.unbind(window, 'scroll', _globalEventHandlers.scroll);
+		framework.unbind(document, 'keydown', self);
+		framework.unbind(document, 'mousemove', _onFirstMouseMove);
+
+		if(_features.transform) {
+			framework.unbind(self.scrollWrap, 'click', self);
+		}
+
+		if(_isDragging) {
+			framework.unbind(window, _upMoveEvents, self);
+		}
+
+		clearTimeout(_orientationChangeTimeout);
+
+		_shout('unbindEvents');
+	},
+	
+	_calculatePanBounds = function(zoomLevel, update) {
+		var bounds = _calculateItemSize( self.currItem, _viewportSize, zoomLevel );
+		if(update) {
+			_currPanBounds = bounds;
+		}
+		return bounds;
+	},
+	
+	_getMinZoomLevel = function(item) {
+		if(!item) {
+			item = self.currItem;
+		}
+		return item.initialZoomLevel;
+	},
+	_getMaxZoomLevel = function(item) {
+		if(!item) {
+			item = self.currItem;
+		}
+		return item.w > 0 ? _options.maxSpreadZoom : 1;
+	},
+
+	// Return true if offset is out of the bounds
+	_modifyDestPanOffset = function(axis, destPanBounds, destPanOffset, destZoomLevel) {
+		if(destZoomLevel === self.currItem.initialZoomLevel) {
+			destPanOffset[axis] = self.currItem.initialPosition[axis];
+			return true;
+		} else {
+			destPanOffset[axis] = _calculatePanOffset(axis, destZoomLevel); 
+
+			if(destPanOffset[axis] > destPanBounds.min[axis]) {
+				destPanOffset[axis] = destPanBounds.min[axis];
+				return true;
+			} else if(destPanOffset[axis] < destPanBounds.max[axis] ) {
+				destPanOffset[axis] = destPanBounds.max[axis];
+				return true;
+			}
+		}
+		return false;
+	},
+
+	_setupTransforms = function() {
+
+		if(_transformKey) {
+			// setup 3d transforms
+			var allow3dTransform = _features.perspective && !_likelyTouchDevice;
+			_translatePrefix = 'translate' + (allow3dTransform ? '3d(' : '(');
+			_translateSufix = _features.perspective ? ', 0px)' : ')';	
+			return;
+		}
+
+		// Override zoom/pan/move functions in case old browser is used (most likely IE)
+		// (so they use left/top/width/height, instead of CSS transform)
+	
+		_transformKey = 'left';
+		framework.addClass(template, 'pswp--ie');
+
+		_setTranslateX = function(x, elStyle) {
+			elStyle.left = x + 'px';
+		};
+		_applyZoomPanToItem = function(item) {
+
+			var zoomRatio = item.fitRatio > 1 ? 1 : item.fitRatio,
+				s = item.container.style,
+				w = zoomRatio * item.w,
+				h = zoomRatio * item.h;
+
+			s.width = w + 'px';
+			s.height = h + 'px';
+			s.left = item.initialPosition.x + 'px';
+			s.top = item.initialPosition.y + 'px';
+
+		};
+		_applyCurrentZoomPan = function() {
+			if(_currZoomElementStyle) {
+
+				var s = _currZoomElementStyle,
+					item = self.currItem,
+					zoomRatio = item.fitRatio > 1 ? 1 : item.fitRatio,
+					w = zoomRatio * item.w,
+					h = zoomRatio * item.h;
+
+				s.width = w + 'px';
+				s.height = h + 'px';
+
+
+				s.left = _panOffset.x + 'px';
+				s.top = _panOffset.y + 'px';
+			}
+			
+		};
+	},
+
+	_onKeyDown = function(e) {
+		var keydownAction = '';
+		if(_options.escKey && e.keyCode === 27) { 
+			keydownAction = 'close';
+		} else if(_options.arrowKeys) {
+			if(e.keyCode === 37) {
+				keydownAction = 'prev';
+			} else if(e.keyCode === 39) { 
+				keydownAction = 'next';
+			}
+		}
+
+		if(keydownAction) {
+			// don't do anything if special key pressed to prevent from overriding default browser actions
+			// e.g. in Chrome on Mac cmd+arrow-left returns to previous page
+			if( !e.ctrlKey && !e.altKey && !e.shiftKey && !e.metaKey ) {
+				if(e.preventDefault) {
+					e.preventDefault();
+				} else {
+					e.returnValue = false;
+				} 
+				self[keydownAction]();
+			}
+		}
+	},
+
+	_onGlobalClick = function(e) {
+		if(!e) {
+			return;
+		}
+
+		// don't allow click event to pass through when triggering after drag or some other gesture
+		if(_moved || _zoomStarted || _mainScrollAnimating || _verticalDragInitiated) {
+			e.preventDefault();
+			e.stopPropagation();
+		}
+	},
+
+	_updatePageScrollOffset = function() {
+		self.setScrollOffset(0, framework.getScrollY());		
+	};
+	
+
+
+	
+
+
+
+// Micro animation engine
+var _animations = {},
+	_numAnimations = 0,
+	_stopAnimation = function(name) {
+		if(_animations[name]) {
+			if(_animations[name].raf) {
+				_cancelAF( _animations[name].raf );
+			}
+			_numAnimations--;
+			delete _animations[name];
+		}
+	},
+	_registerStartAnimation = function(name) {
+		if(_animations[name]) {
+			_stopAnimation(name);
+		}
+		if(!_animations[name]) {
+			_numAnimations++;
+			_animations[name] = {};
+		}
+	},
+	_stopAllAnimations = function() {
+		for (var prop in _animations) {
+
+			if( _animations.hasOwnProperty( prop ) ) {
+				_stopAnimation(prop);
+			} 
+			
+		}
+	},
+	_animateProp = function(name, b, endProp, d, easingFn, onUpdate, onComplete) {
+		var startAnimTime = _getCurrentTime(), t;
+		_registerStartAnimation(name);
+
+		var animloop = function(){
+			if ( _animations[name] ) {
+				
+				t = _getCurrentTime() - startAnimTime; // time diff
+				//b - beginning (start prop)
+				//d - anim duration
+
+				if ( t >= d ) {
+					_stopAnimation(name);
+					onUpdate(endProp);
+					if(onComplete) {
+						onComplete();
+					}
+					return;
+				}
+				onUpdate( (endProp - b) * easingFn(t/d) + b );
+
+				_animations[name].raf = _requestAF(animloop);
+			}
+		};
+		animloop();
+	};
+	
+
+
+var publicMethods = {
+
+	// make a few local variables and functions public
+	shout: _shout,
+	listen: _listen,
+	viewportSize: _viewportSize,
+	options: _options,
+
+	isMainScrollAnimating: function() {
+		return _mainScrollAnimating;
+	},
+	getZoomLevel: function() {
+		return _currZoomLevel;
+	},
+	getCurrentIndex: function() {
+		return _currentItemIndex;
+	},
+	isDragging: function() {
+		return _isDragging;
+	},	
+	isZooming: function() {
+		return _isZooming;
+	},
+	setScrollOffset: function(x,y) {
+		_offset.x = x;
+		_currentWindowScrollY = _offset.y = y;
+		_shout('updateScrollOffset', _offset);
+	},
+	applyZoomPan: function(zoomLevel,panX,panY,allowRenderResolution) {
+		_panOffset.x = panX;
+		_panOffset.y = panY;
+		_currZoomLevel = zoomLevel;
+		_applyCurrentZoomPan( allowRenderResolution );
+	},
+
+	init: function() {
+
+		if(_isOpen || _isDestroying) {
+			return;
+		}
+
+		var i;
+
+		self.framework = framework; // basic functionality
+		self.template = template; // root DOM element of PhotoSwipe
+		self.bg = framework.getChildByClass(template, 'pswp__bg');
+
+		_initalClassName = template.className;
+		_isOpen = true;
+				
+		_features = framework.detectFeatures();
+		_requestAF = _features.raf;
+		_cancelAF = _features.caf;
+		_transformKey = _features.transform;
+		_oldIE = _features.oldIE;
+		
+		self.scrollWrap = framework.getChildByClass(template, 'pswp__scroll-wrap');
+		self.container = framework.getChildByClass(self.scrollWrap, 'pswp__container');
+
+		_containerStyle = self.container.style; // for fast access
+
+		// Objects that hold slides (there are only 3 in DOM)
+		self.itemHolders = _itemHolders = [
+			{el:self.container.children[0] , wrap:0, index: -1},
+			{el:self.container.children[1] , wrap:0, index: -1},
+			{el:self.container.children[2] , wrap:0, index: -1}
+		];
+
+		// hide nearby item holders until initial zoom animation finishes (to avoid extra Paints)
+		_itemHolders[0].el.style.display = _itemHolders[2].el.style.display = 'none';
+
+		_setupTransforms();
+
+		// Setup global events
+		_globalEventHandlers = {
+			resize: self.updateSize,
+
+			// Fixes: iOS 10.3 resize event
+			// does not update scrollWrap.clientWidth instantly after resize
+			// https://github.com/dimsemenov/PhotoSwipe/issues/1315
+			orientationchange: function() {
+				clearTimeout(_orientationChangeTimeout);
+				_orientationChangeTimeout = setTimeout(function() {
+					if(_viewportSize.x !== self.scrollWrap.clientWidth) {
+						self.updateSize();
+					}
+				}, 500);
+			},
+			scroll: _updatePageScrollOffset,
+			keydown: _onKeyDown,
+			click: _onGlobalClick
+		};
+
+		// disable show/hide effects on old browsers that don't support CSS animations or transforms, 
+		// old IOS, Android and Opera mobile. Blackberry seems to work fine, even older models.
+		var oldPhone = _features.isOldIOSPhone || _features.isOldAndroid || _features.isMobileOpera;
+		if(!_features.animationName || !_features.transform || oldPhone) {
+			_options.showAnimationDuration = _options.hideAnimationDuration = 0;
+		}
+
+		// init modules
+		for(i = 0; i < _modules.length; i++) {
+			self['init' + _modules[i]]();
+		}
+		
+		// init
+		if(UiClass) {
+			var ui = self.ui = new UiClass(self, framework);
+			ui.init();
+		}
+
+		_shout('firstUpdate');
+		_currentItemIndex = _currentItemIndex || _options.index || 0;
+		// validate index
+		if( isNaN(_currentItemIndex) || _currentItemIndex < 0 || _currentItemIndex >= _getNumItems() ) {
+			_currentItemIndex = 0;
+		}
+		self.currItem = _getItemAt( _currentItemIndex );
+
+		
+		if(_features.isOldIOSPhone || _features.isOldAndroid) {
+			_isFixedPosition = false;
+		}
+		
+		template.setAttribute('aria-hidden', 'false');
+		if(_options.modal) {
+			if(!_isFixedPosition) {
+				template.style.position = 'absolute';
+				template.style.top = framework.getScrollY() + 'px';
+			} else {
+				template.style.position = 'fixed';
+			}
+		}
+
+		if(_currentWindowScrollY === undefined) {
+			_shout('initialLayout');
+			_currentWindowScrollY = _initalWindowScrollY = framework.getScrollY();
+		}
+		
+		// add classes to root element of PhotoSwipe
+		var rootClasses = 'pswp--open ';
+		if(_options.mainClass) {
+			rootClasses += _options.mainClass + ' ';
+		}
+		if(_options.showHideOpacity) {
+			rootClasses += 'pswp--animate_opacity ';
+		}
+		rootClasses += _likelyTouchDevice ? 'pswp--touch' : 'pswp--notouch';
+		rootClasses += _features.animationName ? ' pswp--css_animation' : '';
+		rootClasses += _features.svg ? ' pswp--svg' : '';
+		framework.addClass(template, rootClasses);
+
+		self.updateSize();
+
+		// initial update
+		_containerShiftIndex = -1;
+		_indexDiff = null;
+		for(i = 0; i < NUM_HOLDERS; i++) {
+			_setTranslateX( (i+_containerShiftIndex) * _slideSize.x, _itemHolders[i].el.style);
+		}
+
+		if(!_oldIE) {
+			framework.bind(self.scrollWrap, _downEvents, self); // no dragging for old IE
+		}	
+
+		_listen('initialZoomInEnd', function() {
+			self.setContent(_itemHolders[0], _currentItemIndex-1);
+			self.setContent(_itemHolders[2], _currentItemIndex+1);
+
+			_itemHolders[0].el.style.display = _itemHolders[2].el.style.display = 'block';
+
+			if(_options.focus) {
+				// focus causes layout, 
+				// which causes lag during the animation, 
+				// that's why we delay it untill the initial zoom transition ends
+				template.focus();
+			}
+			 
+
+			_bindEvents();
+		});
+
+		// set content for center slide (first time)
+		self.setContent(_itemHolders[1], _currentItemIndex);
+		
+		self.updateCurrItem();
+
+		_shout('afterInit');
+
+		if(!_isFixedPosition) {
+
+			// On all versions of iOS lower than 8.0, we check size of viewport every second.
+			// 
+			// This is done to detect when Safari top & bottom bars appear, 
+			// as this action doesn't trigger any events (like resize). 
+			// 
+			// On iOS8 they fixed this.
+			// 
+			// 10 Nov 2014: iOS 7 usage ~40%. iOS 8 usage 56%.
+			
+			_updateSizeInterval = setInterval(function() {
+				if(!_numAnimations && !_isDragging && !_isZooming && (_currZoomLevel === self.currItem.initialZoomLevel)  ) {
+					self.updateSize();
+				}
+			}, 1000);
+		}
+
+		framework.addClass(template, 'pswp--visible');
+	},
+
+	// Close the gallery, then destroy it
+	close: function() {
+		if(!_isOpen) {
+			return;
+		}
+
+		_isOpen = false;
+		_isDestroying = true;
+		_shout('close');
+		_unbindEvents();
+
+		_showOrHide(self.currItem, null, true, self.destroy);
+	},
+
+	// destroys the gallery (unbinds events, cleans up intervals and timeouts to avoid memory leaks)
+	destroy: function() {
+		_shout('destroy');
+
+		if(_showOrHideTimeout) {
+			clearTimeout(_showOrHideTimeout);
+		}
+		
+		template.setAttribute('aria-hidden', 'true');
+		template.className = _initalClassName;
+
+		if(_updateSizeInterval) {
+			clearInterval(_updateSizeInterval);
+		}
+
+		framework.unbind(self.scrollWrap, _downEvents, self);
+
+		// we unbind scroll event at the end, as closing animation may depend on it
+		framework.unbind(window, 'scroll', self);
+
+		_stopDragUpdateLoop();
+
+		_stopAllAnimations();
+
+		_listeners = null;
+	},
+
+	/**
+	 * Pan image to position
+	 * @param {Number} x     
+	 * @param {Number} y     
+	 * @param {Boolean} force Will ignore bounds if set to true.
+	 */
+	panTo: function(x,y,force) {
+		if(!force) {
+			if(x > _currPanBounds.min.x) {
+				x = _currPanBounds.min.x;
+			} else if(x < _currPanBounds.max.x) {
+				x = _currPanBounds.max.x;
+			}
+
+			if(y > _currPanBounds.min.y) {
+				y = _currPanBounds.min.y;
+			} else if(y < _currPanBounds.max.y) {
+				y = _currPanBounds.max.y;
+			}
+		}
+		
+		_panOffset.x = x;
+		_panOffset.y = y;
+		_applyCurrentZoomPan();
+	},
+	
+	handleEvent: function (e) {
+		e = e || window.event;
+		if(_globalEventHandlers[e.type]) {
+			_globalEventHandlers[e.type](e);
+		}
+	},
+
+
+	goTo: function(index) {
+
+		index = _getLoopedId(index);
+
+		var diff = index - _currentItemIndex;
+		_indexDiff = diff;
+
+		_currentItemIndex = index;
+		self.currItem = _getItemAt( _currentItemIndex );
+		_currPositionIndex -= diff;
+		
+		_moveMainScroll(_slideSize.x * _currPositionIndex);
+		
+
+		_stopAllAnimations();
+		_mainScrollAnimating = false;
+
+		self.updateCurrItem();
+	},
+	next: function() {
+		self.goTo( _currentItemIndex + 1);
+	},
+	prev: function() {
+		self.goTo( _currentItemIndex - 1);
+	},
+
+	// update current zoom/pan objects
+	updateCurrZoomItem: function(emulateSetContent) {
+		if(emulateSetContent) {
+			_shout('beforeChange', 0);
+		}
+
+		// itemHolder[1] is middle (current) item
+		if(_itemHolders[1].el.children.length) {
+			var zoomElement = _itemHolders[1].el.children[0];
+			if( framework.hasClass(zoomElement, 'pswp__zoom-wrap') ) {
+				_currZoomElementStyle = zoomElement.style;
+			} else {
+				_currZoomElementStyle = null;
+			}
+		} else {
+			_currZoomElementStyle = null;
+		}
+		
+		_currPanBounds = self.currItem.bounds;	
+		_startZoomLevel = _currZoomLevel = self.currItem.initialZoomLevel;
+
+		_panOffset.x = _currPanBounds.center.x;
+		_panOffset.y = _currPanBounds.center.y;
+
+		if(emulateSetContent) {
+			_shout('afterChange');
+		}
+	},
+
+
+	invalidateCurrItems: function() {
+		_itemsNeedUpdate = true;
+		for(var i = 0; i < NUM_HOLDERS; i++) {
+			if( _itemHolders[i].item ) {
+				_itemHolders[i].item.needsUpdate = true;
+			}
+		}
+	},
+
+	updateCurrItem: function(beforeAnimation) {
+
+		if(_indexDiff === 0) {
+			return;
+		}
+
+		var diffAbs = Math.abs(_indexDiff),
+			tempHolder;
+
+		if(beforeAnimation && diffAbs < 2) {
+			return;
+		}
+
+
+		self.currItem = _getItemAt( _currentItemIndex );
+		_renderMaxResolution = false;
+		
+		_shout('beforeChange', _indexDiff);
+
+		if(diffAbs >= NUM_HOLDERS) {
+			_containerShiftIndex += _indexDiff + (_indexDiff > 0 ? -NUM_HOLDERS : NUM_HOLDERS);
+			diffAbs = NUM_HOLDERS;
+		}
+		for(var i = 0; i < diffAbs; i++) {
+			if(_indexDiff > 0) {
+				tempHolder = _itemHolders.shift();
+				_itemHolders[NUM_HOLDERS-1] = tempHolder; // move first to last
+
+				_containerShiftIndex++;
+				_setTranslateX( (_containerShiftIndex+2) * _slideSize.x, tempHolder.el.style);
+				self.setContent(tempHolder, _currentItemIndex - diffAbs + i + 1 + 1);
+			} else {
+				tempHolder = _itemHolders.pop();
+				_itemHolders.unshift( tempHolder ); // move last to first
+
+				_containerShiftIndex--;
+				_setTranslateX( _containerShiftIndex * _slideSize.x, tempHolder.el.style);
+				self.setContent(tempHolder, _currentItemIndex + diffAbs - i - 1 - 1);
+			}
+			
+		}
+
+		// reset zoom/pan on previous item
+		if(_currZoomElementStyle && Math.abs(_indexDiff) === 1) {
+
+			var prevItem = _getItemAt(_prevItemIndex);
+			if(prevItem.initialZoomLevel !== _currZoomLevel) {
+				_calculateItemSize(prevItem , _viewportSize );
+				_setImageSize(prevItem);
+				_applyZoomPanToItem( prevItem ); 				
+			}
+
+		}
+
+		// reset diff after update
+		_indexDiff = 0;
+
+		self.updateCurrZoomItem();
+
+		_prevItemIndex = _currentItemIndex;
+
+		_shout('afterChange');
+		
+	},
+
+
+
+	updateSize: function(force) {
+		
+		if(!_isFixedPosition && _options.modal) {
+			var windowScrollY = framework.getScrollY();
+			if(_currentWindowScrollY !== windowScrollY) {
+				template.style.top = windowScrollY + 'px';
+				_currentWindowScrollY = windowScrollY;
+			}
+			if(!force && _windowVisibleSize.x === window.innerWidth && _windowVisibleSize.y === window.innerHeight) {
+				return;
+			}
+			_windowVisibleSize.x = window.innerWidth;
+			_windowVisibleSize.y = window.innerHeight;
+
+			//template.style.width = _windowVisibleSize.x + 'px';
+			template.style.height = _windowVisibleSize.y + 'px';
+		}
+
+
+
+		_viewportSize.x = self.scrollWrap.clientWidth;
+		_viewportSize.y = self.scrollWrap.clientHeight;
+
+		_updatePageScrollOffset();
+
+		_slideSize.x = _viewportSize.x + Math.round(_viewportSize.x * _options.spacing);
+		_slideSize.y = _viewportSize.y;
+
+		_moveMainScroll(_slideSize.x * _currPositionIndex);
+
+		_shout('beforeResize'); // even may be used for example to switch image sources
+
+
+		// don't re-calculate size on inital size update
+		if(_containerShiftIndex !== undefined) {
+
+			var holder,
+				item,
+				hIndex;
+
+			for(var i = 0; i < NUM_HOLDERS; i++) {
+				holder = _itemHolders[i];
+				_setTranslateX( (i+_containerShiftIndex) * _slideSize.x, holder.el.style);
+
+				hIndex = _currentItemIndex+i-1;
+
+				if(_options.loop && _getNumItems() > 2) {
+					hIndex = _getLoopedId(hIndex);
+				}
+
+				// update zoom level on items and refresh source (if needsUpdate)
+				item = _getItemAt( hIndex );
+
+				// re-render gallery item if `needsUpdate`,
+				// or doesn't have `bounds` (entirely new slide object)
+				if( item && (_itemsNeedUpdate || item.needsUpdate || !item.bounds) ) {
+
+					self.cleanSlide( item );
+					
+					self.setContent( holder, hIndex );
+
+					// if "center" slide
+					if(i === 1) {
+						self.currItem = item;
+						self.updateCurrZoomItem(true);
+					}
+
+					item.needsUpdate = false;
+
+				} else if(holder.index === -1 && hIndex >= 0) {
+					// add content first time
+					self.setContent( holder, hIndex );
+				}
+				if(item && item.container) {
+					_calculateItemSize(item, _viewportSize);
+					_setImageSize(item);
+					_applyZoomPanToItem( item );
+				}
+				
+			}
+			_itemsNeedUpdate = false;
+		}	
+
+		_startZoomLevel = _currZoomLevel = self.currItem.initialZoomLevel;
+		_currPanBounds = self.currItem.bounds;
+
+		if(_currPanBounds) {
+			_panOffset.x = _currPanBounds.center.x;
+			_panOffset.y = _currPanBounds.center.y;
+			_applyCurrentZoomPan( true );
+		}
+		
+		_shout('resize');
+	},
+	
+	// Zoom current item to
+	zoomTo: function(destZoomLevel, centerPoint, speed, easingFn, updateFn) {
+		/*
+			if(destZoomLevel === 'fit') {
+				destZoomLevel = self.currItem.fitRatio;
+			} else if(destZoomLevel === 'fill') {
+				destZoomLevel = self.currItem.fillRatio;
+			}
+		*/
+
+		if(centerPoint) {
+			_startZoomLevel = _currZoomLevel;
+			_midZoomPoint.x = Math.abs(centerPoint.x) - _panOffset.x ;
+			_midZoomPoint.y = Math.abs(centerPoint.y) - _panOffset.y ;
+			_equalizePoints(_startPanOffset, _panOffset);
+		}
+
+		var destPanBounds = _calculatePanBounds(destZoomLevel, false),
+			destPanOffset = {};
+
+		_modifyDestPanOffset('x', destPanBounds, destPanOffset, destZoomLevel);
+		_modifyDestPanOffset('y', destPanBounds, destPanOffset, destZoomLevel);
+
+		var initialZoomLevel = _currZoomLevel;
+		var initialPanOffset = {
+			x: _panOffset.x,
+			y: _panOffset.y
+		};
+
+		_roundPoint(destPanOffset);
+
+		var onUpdate = function(now) {
+			if(now === 1) {
+				_currZoomLevel = destZoomLevel;
+				_panOffset.x = destPanOffset.x;
+				_panOffset.y = destPanOffset.y;
+			} else {
+				_currZoomLevel = (destZoomLevel - initialZoomLevel) * now + initialZoomLevel;
+				_panOffset.x = (destPanOffset.x - initialPanOffset.x) * now + initialPanOffset.x;
+				_panOffset.y = (destPanOffset.y - initialPanOffset.y) * now + initialPanOffset.y;
+			}
+
+			if(updateFn) {
+				updateFn(now);
+			}
+
+			_applyCurrentZoomPan( now === 1 );
+		};
+
+		if(speed) {
+			_animateProp('customZoomTo', 0, 1, speed, easingFn || framework.easing.sine.inOut, onUpdate);
+		} else {
+			onUpdate(1);
+		}
+	}
+
+
+};
+
+
+/*>>core*/
+
+/*>>gestures*/
+/**
+ * Mouse/touch/pointer event handlers.
+ * 
+ * separated from @core.js for readability
+ */
+
+var MIN_SWIPE_DISTANCE = 30,
+	DIRECTION_CHECK_OFFSET = 10; // amount of pixels to drag to determine direction of swipe
+
+var _gestureStartTime,
+	_gestureCheckSpeedTime,
+
+	// pool of objects that are used during dragging of zooming
+	p = {}, // first point
+	p2 = {}, // second point (for zoom gesture)
+	delta = {},
+	_currPoint = {},
+	_startPoint = {},
+	_currPointers = [],
+	_startMainScrollPos = {},
+	_releaseAnimData,
+	_posPoints = [], // array of points during dragging, used to determine type of gesture
+	_tempPoint = {},
+
+	_isZoomingIn,
+	_verticalDragInitiated,
+	_oldAndroidTouchEndTimeout,
+	_currZoomedItemIndex = 0,
+	_centerPoint = _getEmptyPoint(),
+	_lastReleaseTime = 0,
+	_isDragging, // at least one pointer is down
+	_isMultitouch, // at least two _pointers are down
+	_zoomStarted, // zoom level changed during zoom gesture
+	_moved,
+	_dragAnimFrame,
+	_mainScrollShifted,
+	_currentPoints, // array of current touch points
+	_isZooming,
+	_currPointsDistance,
+	_startPointsDistance,
+	_currPanBounds,
+	_mainScrollPos = _getEmptyPoint(),
+	_currZoomElementStyle,
+	_mainScrollAnimating, // true, if animation after swipe gesture is running
+	_midZoomPoint = _getEmptyPoint(),
+	_currCenterPoint = _getEmptyPoint(),
+	_direction,
+	_isFirstMove,
+	_opacityChanged,
+	_bgOpacity,
+	_wasOverInitialZoom,
+
+	_isEqualPoints = function(p1, p2) {
+		return p1.x === p2.x && p1.y === p2.y;
+	},
+	_isNearbyPoints = function(touch0, touch1) {
+		return Math.abs(touch0.x - touch1.x) < DOUBLE_TAP_RADIUS && Math.abs(touch0.y - touch1.y) < DOUBLE_TAP_RADIUS;
+	},
+	_calculatePointsDistance = function(p1, p2) {
+		_tempPoint.x = Math.abs( p1.x - p2.x );
+		_tempPoint.y = Math.abs( p1.y - p2.y );
+		return Math.sqrt(_tempPoint.x * _tempPoint.x + _tempPoint.y * _tempPoint.y);
+	},
+	_stopDragUpdateLoop = function() {
+		if(_dragAnimFrame) {
+			_cancelAF(_dragAnimFrame);
+			_dragAnimFrame = null;
+		}
+	},
+	_dragUpdateLoop = function() {
+		if(_isDragging) {
+			_dragAnimFrame = _requestAF(_dragUpdateLoop);
+			_renderMovement();
+		}
+	},
+	_canPan = function() {
+		return !(_options.scaleMode === 'fit' && _currZoomLevel ===  self.currItem.initialZoomLevel);
+	},
+	
+	// find the closest parent DOM element
+	_closestElement = function(el, fn) {
+	  	if(!el || el === document) {
+	  		return false;
+	  	}
+
+	  	// don't search elements above pswp__scroll-wrap
+	  	if(el.getAttribute('class') && el.getAttribute('class').indexOf('pswp__scroll-wrap') > -1 ) {
+	  		return false;
+	  	}
+
+	  	if( fn(el) ) {
+	  		return el;
+	  	}
+
+	  	return _closestElement(el.parentNode, fn);
+	},
+
+	_preventObj = {},
+	_preventDefaultEventBehaviour = function(e, isDown) {
+	    _preventObj.prevent = !_closestElement(e.target, _options.isClickableElement);
+
+		_shout('preventDragEvent', e, isDown, _preventObj);
+		return _preventObj.prevent;
+
+	},
+	_convertTouchToPoint = function(touch, p) {
+		p.x = touch.pageX;
+		p.y = touch.pageY;
+		p.id = touch.identifier;
+		return p;
+	},
+	_findCenterOfPoints = function(p1, p2, pCenter) {
+		pCenter.x = (p1.x + p2.x) * 0.5;
+		pCenter.y = (p1.y + p2.y) * 0.5;
+	},
+	_pushPosPoint = function(time, x, y) {
+		if(time - _gestureCheckSpeedTime > 50) {
+			var o = _posPoints.length > 2 ? _posPoints.shift() : {};
+			o.x = x;
+			o.y = y; 
+			_posPoints.push(o);
+			_gestureCheckSpeedTime = time;
+		}
+	},
+
+	_calculateVerticalDragOpacityRatio = function() {
+		var yOffset = _panOffset.y - self.currItem.initialPosition.y; // difference between initial and current position
+		return 1 -  Math.abs( yOffset / (_viewportSize.y / 2)  );
+	},
+
+	
+	// points pool, reused during touch events
+	_ePoint1 = {},
+	_ePoint2 = {},
+	_tempPointsArr = [],
+	_tempCounter,
+	_getTouchPoints = function(e) {
+		// clean up previous points, without recreating array
+		while(_tempPointsArr.length > 0) {
+			_tempPointsArr.pop();
+		}
+
+		if(!_pointerEventEnabled) {
+			if(e.type.indexOf('touch') > -1) {
+
+				if(e.touches && e.touches.length > 0) {
+					_tempPointsArr[0] = _convertTouchToPoint(e.touches[0], _ePoint1);
+					if(e.touches.length > 1) {
+						_tempPointsArr[1] = _convertTouchToPoint(e.touches[1], _ePoint2);
+					}
+				}
+				
+			} else {
+				_ePoint1.x = e.pageX;
+				_ePoint1.y = e.pageY;
+				_ePoint1.id = '';
+				_tempPointsArr[0] = _ePoint1;//_ePoint1;
+			}
+		} else {
+			_tempCounter = 0;
+			// we can use forEach, as pointer events are supported only in modern browsers
+			_currPointers.forEach(function(p) {
+				if(_tempCounter === 0) {
+					_tempPointsArr[0] = p;
+				} else if(_tempCounter === 1) {
+					_tempPointsArr[1] = p;
+				}
+				_tempCounter++;
+
+			});
+		}
+		return _tempPointsArr;
+	},
+
+	_panOrMoveMainScroll = function(axis, delta) {
+
+		var panFriction,
+			overDiff = 0,
+			newOffset = _panOffset[axis] + delta[axis],
+			startOverDiff,
+			dir = delta[axis] > 0,
+			newMainScrollPosition = _mainScrollPos.x + delta.x,
+			mainScrollDiff = _mainScrollPos.x - _startMainScrollPos.x,
+			newPanPos,
+			newMainScrollPos;
+
+		// calculate fdistance over the bounds and friction
+		if(newOffset > _currPanBounds.min[axis] || newOffset < _currPanBounds.max[axis]) {
+			panFriction = _options.panEndFriction;
+			// Linear increasing of friction, so at 1/4 of viewport it's at max value. 
+			// Looks not as nice as was expected. Left for history.
+			// panFriction = (1 - (_panOffset[axis] + delta[axis] + panBounds.min[axis]) / (_viewportSize[axis] / 4) );
+		} else {
+			panFriction = 1;
+		}
+		
+		newOffset = _panOffset[axis] + delta[axis] * panFriction;
+
+		// move main scroll or start panning
+		if(_options.allowPanToNext || _currZoomLevel === self.currItem.initialZoomLevel) {
+
+
+			if(!_currZoomElementStyle) {
+				
+				newMainScrollPos = newMainScrollPosition;
+
+			} else if(_direction === 'h' && axis === 'x' && !_zoomStarted ) {
+				
+				if(dir) {
+					if(newOffset > _currPanBounds.min[axis]) {
+						panFriction = _options.panEndFriction;
+						overDiff = _currPanBounds.min[axis] - newOffset;
+						startOverDiff = _currPanBounds.min[axis] - _startPanOffset[axis];
+					}
+					
+					// drag right
+					if( (startOverDiff <= 0 || mainScrollDiff < 0) && _getNumItems() > 1 ) {
+						newMainScrollPos = newMainScrollPosition;
+						if(mainScrollDiff < 0 && newMainScrollPosition > _startMainScrollPos.x) {
+							newMainScrollPos = _startMainScrollPos.x;
+						}
+					} else {
+						if(_currPanBounds.min.x !== _currPanBounds.max.x) {
+							newPanPos = newOffset;
+						}
+						
+					}
+
+				} else {
+
+					if(newOffset < _currPanBounds.max[axis] ) {
+						panFriction =_options.panEndFriction;
+						overDiff = newOffset - _currPanBounds.max[axis];
+						startOverDiff = _startPanOffset[axis] - _currPanBounds.max[axis];
+					}
+
+					if( (startOverDiff <= 0 || mainScrollDiff > 0) && _getNumItems() > 1 ) {
+						newMainScrollPos = newMainScrollPosition;
+
+						if(mainScrollDiff > 0 && newMainScrollPosition < _startMainScrollPos.x) {
+							newMainScrollPos = _startMainScrollPos.x;
+						}
+
+					} else {
+						if(_currPanBounds.min.x !== _currPanBounds.max.x) {
+							newPanPos = newOffset;
+						}
+					}
+
+				}
+
+
+				//
+			}
+
+			if(axis === 'x') {
+
+				if(newMainScrollPos !== undefined) {
+					_moveMainScroll(newMainScrollPos, true);
+					if(newMainScrollPos === _startMainScrollPos.x) {
+						_mainScrollShifted = false;
+					} else {
+						_mainScrollShifted = true;
+					}
+				}
+
+				if(_currPanBounds.min.x !== _currPanBounds.max.x) {
+					if(newPanPos !== undefined) {
+						_panOffset.x = newPanPos;
+					} else if(!_mainScrollShifted) {
+						_panOffset.x += delta.x * panFriction;
+					}
+				}
+
+				return newMainScrollPos !== undefined;
+			}
+
+		}
+
+		if(!_mainScrollAnimating) {
+			
+			if(!_mainScrollShifted) {
+				if(_currZoomLevel > self.currItem.fitRatio) {
+					_panOffset[axis] += delta[axis] * panFriction;
+				
+				}
+			}
+
+			
+		}
+		
+	},
+
+	// Pointerdown/touchstart/mousedown handler
+	_onDragStart = function(e) {
+
+		// Allow dragging only via left mouse button.
+		// As this handler is not added in IE8 - we ignore e.which
+		// 
+		// http://www.quirksmode.org/js/events_properties.html
+		// https://developer.mozilla.org/en-US/docs/Web/API/event.button
+		if(e.type === 'mousedown' && e.button > 0  ) {
+			return;
+		}
+
+		if(_initialZoomRunning) {
+			e.preventDefault();
+			return;
+		}
+
+		if(_oldAndroidTouchEndTimeout && e.type === 'mousedown') {
+			return;
+		}
+
+		if(_preventDefaultEventBehaviour(e, true)) {
+			e.preventDefault();
+		}
+
+
+
+		_shout('pointerDown');
+
+		if(_pointerEventEnabled) {
+			var pointerIndex = framework.arraySearch(_currPointers, e.pointerId, 'id');
+			if(pointerIndex < 0) {
+				pointerIndex = _currPointers.length;
+			}
+			_currPointers[pointerIndex] = {x:e.pageX, y:e.pageY, id: e.pointerId};
+		}
+		
+
+
+		var startPointsList = _getTouchPoints(e),
+			numPoints = startPointsList.length;
+
+		_currentPoints = null;
+
+		_stopAllAnimations();
+
+		// init drag
+		if(!_isDragging || numPoints === 1) {
+
+			
+
+			_isDragging = _isFirstMove = true;
+			framework.bind(window, _upMoveEvents, self);
+
+			_isZoomingIn = 
+				_wasOverInitialZoom = 
+				_opacityChanged = 
+				_verticalDragInitiated = 
+				_mainScrollShifted = 
+				_moved = 
+				_isMultitouch = 
+				_zoomStarted = false;
+
+			_direction = null;
+
+			_shout('firstTouchStart', startPointsList);
+
+			_equalizePoints(_startPanOffset, _panOffset);
+
+			_currPanDist.x = _currPanDist.y = 0;
+			_equalizePoints(_currPoint, startPointsList[0]);
+			_equalizePoints(_startPoint, _currPoint);
+
+			//_equalizePoints(_startMainScrollPos, _mainScrollPos);
+			_startMainScrollPos.x = _slideSize.x * _currPositionIndex;
+
+			_posPoints = [{
+				x: _currPoint.x,
+				y: _currPoint.y
+			}];
+
+			_gestureCheckSpeedTime = _gestureStartTime = _getCurrentTime();
+
+			//_mainScrollAnimationEnd(true);
+			_calculatePanBounds( _currZoomLevel, true );
+			
+			// Start rendering
+			_stopDragUpdateLoop();
+			_dragUpdateLoop();
+			
+		}
+
+		// init zoom
+		if(!_isZooming && numPoints > 1 && !_mainScrollAnimating && !_mainScrollShifted) {
+			_startZoomLevel = _currZoomLevel;
+			_zoomStarted = false; // true if zoom changed at least once
+
+			_isZooming = _isMultitouch = true;
+			_currPanDist.y = _currPanDist.x = 0;
+
+			_equalizePoints(_startPanOffset, _panOffset);
+
+			_equalizePoints(p, startPointsList[0]);
+			_equalizePoints(p2, startPointsList[1]);
+
+			_findCenterOfPoints(p, p2, _currCenterPoint);
+
+			_midZoomPoint.x = Math.abs(_currCenterPoint.x) - _panOffset.x;
+			_midZoomPoint.y = Math.abs(_currCenterPoint.y) - _panOffset.y;
+			_currPointsDistance = _startPointsDistance = _calculatePointsDistance(p, p2);
+		}
+
+
+	},
+
+	// Pointermove/touchmove/mousemove handler
+	_onDragMove = function(e) {
+
+		e.preventDefault();
+
+		if(_pointerEventEnabled) {
+			var pointerIndex = framework.arraySearch(_currPointers, e.pointerId, 'id');
+			if(pointerIndex > -1) {
+				var p = _currPointers[pointerIndex];
+				p.x = e.pageX;
+				p.y = e.pageY; 
+			}
+		}
+
+		if(_isDragging) {
+			var touchesList = _getTouchPoints(e);
+			if(!_direction && !_moved && !_isZooming) {
+
+				if(_mainScrollPos.x !== _slideSize.x * _currPositionIndex) {
+					// if main scroll position is shifted – direction is always horizontal
+					_direction = 'h';
+				} else {
+					var diff = Math.abs(touchesList[0].x - _currPoint.x) - Math.abs(touchesList[0].y - _currPoint.y);
+					// check the direction of movement
+					if(Math.abs(diff) >= DIRECTION_CHECK_OFFSET) {
+						_direction = diff > 0 ? 'h' : 'v';
+						_currentPoints = touchesList;
+					}
+				}
+				
+			} else {
+				_currentPoints = touchesList;
+			}
+		}	
+	},
+	// 
+	_renderMovement =  function() {
+
+		if(!_currentPoints) {
+			return;
+		}
+
+		var numPoints = _currentPoints.length;
+
+		if(numPoints === 0) {
+			return;
+		}
+
+		_equalizePoints(p, _currentPoints[0]);
+
+		delta.x = p.x - _currPoint.x;
+		delta.y = p.y - _currPoint.y;
+
+		if(_isZooming && numPoints > 1) {
+			// Handle behaviour for more than 1 point
+
+			_currPoint.x = p.x;
+			_currPoint.y = p.y;
+		
+			// check if one of two points changed
+			if( !delta.x && !delta.y && _isEqualPoints(_currentPoints[1], p2) ) {
+				return;
+			}
+
+			_equalizePoints(p2, _currentPoints[1]);
+
+
+			if(!_zoomStarted) {
+				_zoomStarted = true;
+				_shout('zoomGestureStarted');
+			}
+			
+			// Distance between two points
+			var pointsDistance = _calculatePointsDistance(p,p2);
+
+			var zoomLevel = _calculateZoomLevel(pointsDistance);
+
+			// slightly over the of initial zoom level
+			if(zoomLevel > self.currItem.initialZoomLevel + self.currItem.initialZoomLevel / 15) {
+				_wasOverInitialZoom = true;
+			}
+
+			// Apply the friction if zoom level is out of the bounds
+			var zoomFriction = 1,
+				minZoomLevel = _getMinZoomLevel(),
+				maxZoomLevel = _getMaxZoomLevel();
+
+			if ( zoomLevel < minZoomLevel ) {
+				
+				if(_options.pinchToClose && !_wasOverInitialZoom && _startZoomLevel <= self.currItem.initialZoomLevel) {
+					// fade out background if zooming out
+					var minusDiff = minZoomLevel - zoomLevel;
+					var percent = 1 - minusDiff / (minZoomLevel / 1.2);
+
+					_applyBgOpacity(percent);
+					_shout('onPinchClose', percent);
+					_opacityChanged = true;
+				} else {
+					zoomFriction = (minZoomLevel - zoomLevel) / minZoomLevel;
+					if(zoomFriction > 1) {
+						zoomFriction = 1;
+					}
+					zoomLevel = minZoomLevel - zoomFriction * (minZoomLevel / 3);
+				}
+				
+			} else if ( zoomLevel > maxZoomLevel ) {
+				// 1.5 - extra zoom level above the max. E.g. if max is x6, real max 6 + 1.5 = 7.5
+				zoomFriction = (zoomLevel - maxZoomLevel) / ( minZoomLevel * 6 );
+				if(zoomFriction > 1) {
+					zoomFriction = 1;
+				}
+				zoomLevel = maxZoomLevel + zoomFriction * minZoomLevel;
+			}
+
+			if(zoomFriction < 0) {
+				zoomFriction = 0;
+			}
+
+			// distance between touch points after friction is applied
+			_currPointsDistance = pointsDistance;
+
+			// _centerPoint - The point in the middle of two pointers
+			_findCenterOfPoints(p, p2, _centerPoint);
+		
+			// paning with two pointers pressed
+			_currPanDist.x += _centerPoint.x - _currCenterPoint.x;
+			_currPanDist.y += _centerPoint.y - _currCenterPoint.y;
+			_equalizePoints(_currCenterPoint, _centerPoint);
+
+			_panOffset.x = _calculatePanOffset('x', zoomLevel);
+			_panOffset.y = _calculatePanOffset('y', zoomLevel);
+
+			_isZoomingIn = zoomLevel > _currZoomLevel;
+			_currZoomLevel = zoomLevel;
+			_applyCurrentZoomPan();
+
+		} else {
+
+			// handle behaviour for one point (dragging or panning)
+
+			if(!_direction) {
+				return;
+			}
+
+			if(_isFirstMove) {
+				_isFirstMove = false;
+
+				// subtract drag distance that was used during the detection direction  
+
+				if( Math.abs(delta.x) >= DIRECTION_CHECK_OFFSET) {
+					delta.x -= _currentPoints[0].x - _startPoint.x;
+				}
+				
+				if( Math.abs(delta.y) >= DIRECTION_CHECK_OFFSET) {
+					delta.y -= _currentPoints[0].y - _startPoint.y;
+				}
+			}
+
+			_currPoint.x = p.x;
+			_currPoint.y = p.y;
+
+			// do nothing if pointers position hasn't changed
+			if(delta.x === 0 && delta.y === 0) {
+				return;
+			}
+
+			if(_direction === 'v' && _options.closeOnVerticalDrag) {
+				if(!_canPan()) {
+					_currPanDist.y += delta.y;
+					_panOffset.y += delta.y;
+
+					var opacityRatio = _calculateVerticalDragOpacityRatio();
+
+					_verticalDragInitiated = true;
+					_shout('onVerticalDrag', opacityRatio);
+
+					_applyBgOpacity(opacityRatio);
+					_applyCurrentZoomPan();
+					return ;
+				}
+			}
+
+			_pushPosPoint(_getCurrentTime(), p.x, p.y);
+
+			_moved = true;
+			_currPanBounds = self.currItem.bounds;
+			
+			var mainScrollChanged = _panOrMoveMainScroll('x', delta);
+			if(!mainScrollChanged) {
+				_panOrMoveMainScroll('y', delta);
+
+				_roundPoint(_panOffset);
+				_applyCurrentZoomPan();
+			}
+
+		}
+
+	},
+	
+	// Pointerup/pointercancel/touchend/touchcancel/mouseup event handler
+	_onDragRelease = function(e) {
+
+		if(_features.isOldAndroid ) {
+
+			if(_oldAndroidTouchEndTimeout && e.type === 'mouseup') {
+				return;
+			}
+
+			// on Android (v4.1, 4.2, 4.3 & possibly older) 
+			// ghost mousedown/up event isn't preventable via e.preventDefault,
+			// which causes fake mousedown event
+			// so we block mousedown/up for 600ms
+			if( e.type.indexOf('touch') > -1 ) {
+				clearTimeout(_oldAndroidTouchEndTimeout);
+				_oldAndroidTouchEndTimeout = setTimeout(function() {
+					_oldAndroidTouchEndTimeout = 0;
+				}, 600);
+			}
+			
+		}
+
+		_shout('pointerUp');
+
+		if(_preventDefaultEventBehaviour(e, false)) {
+			e.preventDefault();
+		}
+
+		var releasePoint;
+
+		if(_pointerEventEnabled) {
+			var pointerIndex = framework.arraySearch(_currPointers, e.pointerId, 'id');
+			
+			if(pointerIndex > -1) {
+				releasePoint = _currPointers.splice(pointerIndex, 1)[0];
+
+				if(navigator.pointerEnabled) {
+					releasePoint.type = e.pointerType || 'mouse';
+				} else {
+					var MSPOINTER_TYPES = {
+						4: 'mouse', // event.MSPOINTER_TYPE_MOUSE
+						2: 'touch', // event.MSPOINTER_TYPE_TOUCH 
+						3: 'pen' // event.MSPOINTER_TYPE_PEN
+					};
+					releasePoint.type = MSPOINTER_TYPES[e.pointerType];
+
+					if(!releasePoint.type) {
+						releasePoint.type = e.pointerType || 'mouse';
+					}
+				}
+
+			}
+		}
+
+		var touchList = _getTouchPoints(e),
+			gestureType,
+			numPoints = touchList.length;
+
+		if(e.type === 'mouseup') {
+			numPoints = 0;
+		}
+
+		// Do nothing if there were 3 touch points or more
+		if(numPoints === 2) {
+			_currentPoints = null;
+			return true;
+		}
+
+		// if second pointer released
+		if(numPoints === 1) {
+			_equalizePoints(_startPoint, touchList[0]);
+		}				
+
+
+		// pointer hasn't moved, send "tap release" point
+		if(numPoints === 0 && !_direction && !_mainScrollAnimating) {
+			if(!releasePoint) {
+				if(e.type === 'mouseup') {
+					releasePoint = {x: e.pageX, y: e.pageY, type:'mouse'};
+				} else if(e.changedTouches && e.changedTouches[0]) {
+					releasePoint = {x: e.changedTouches[0].pageX, y: e.changedTouches[0].pageY, type:'touch'};
+				}		
+			}
+
+			_shout('touchRelease', e, releasePoint);
+		}
+
+		// Difference in time between releasing of two last touch points (zoom gesture)
+		var releaseTimeDiff = -1;
+
+		// Gesture completed, no pointers left
+		if(numPoints === 0) {
+			_isDragging = false;
+			framework.unbind(window, _upMoveEvents, self);
+
+			_stopDragUpdateLoop();
+
+			if(_isZooming) {
+				// Two points released at the same time
+				releaseTimeDiff = 0;
+			} else if(_lastReleaseTime !== -1) {
+				releaseTimeDiff = _getCurrentTime() - _lastReleaseTime;
+			}
+		}
+		_lastReleaseTime = numPoints === 1 ? _getCurrentTime() : -1;
+		
+		if(releaseTimeDiff !== -1 && releaseTimeDiff < 150) {
+			gestureType = 'zoom';
+		} else {
+			gestureType = 'swipe';
+		}
+
+		if(_isZooming && numPoints < 2) {
+			_isZooming = false;
+
+			// Only second point released
+			if(numPoints === 1) {
+				gestureType = 'zoomPointerUp';
+			}
+			_shout('zoomGestureEnded');
+		}
+
+		_currentPoints = null;
+		if(!_moved && !_zoomStarted && !_mainScrollAnimating && !_verticalDragInitiated) {
+			// nothing to animate
+			return;
+		}
+	
+		_stopAllAnimations();
+
+		
+		if(!_releaseAnimData) {
+			_releaseAnimData = _initDragReleaseAnimationData();
+		}
+		
+		_releaseAnimData.calculateSwipeSpeed('x');
+
+
+		if(_verticalDragInitiated) {
+
+			var opacityRatio = _calculateVerticalDragOpacityRatio();
+
+			if(opacityRatio < _options.verticalDragRange) {
+				self.close();
+			} else {
+				var initalPanY = _panOffset.y,
+					initialBgOpacity = _bgOpacity;
+
+				_animateProp('verticalDrag', 0, 1, 300, framework.easing.cubic.out, function(now) {
+					
+					_panOffset.y = (self.currItem.initialPosition.y - initalPanY) * now + initalPanY;
+
+					_applyBgOpacity(  (1 - initialBgOpacity) * now + initialBgOpacity );
+					_applyCurrentZoomPan();
+				});
+
+				_shout('onVerticalDrag', 1);
+			}
+
+			return;
+		}
+
+
+		// main scroll 
+		if(  (_mainScrollShifted || _mainScrollAnimating) && numPoints === 0) {
+			var itemChanged = _finishSwipeMainScrollGesture(gestureType, _releaseAnimData);
+			if(itemChanged) {
+				return;
+			}
+			gestureType = 'zoomPointerUp';
+		}
+
+		// prevent zoom/pan animation when main scroll animation runs
+		if(_mainScrollAnimating) {
+			return;
+		}
+		
+		// Complete simple zoom gesture (reset zoom level if it's out of the bounds)  
+		if(gestureType !== 'swipe') {
+			_completeZoomGesture();
+			return;
+		}
+	
+		// Complete pan gesture if main scroll is not shifted, and it's possible to pan current image
+		if(!_mainScrollShifted && _currZoomLevel > self.currItem.fitRatio) {
+			_completePanGesture(_releaseAnimData);
+		}
+	},
+
+
+	// Returns object with data about gesture
+	// It's created only once and then reused
+	_initDragReleaseAnimationData  = function() {
+		// temp local vars
+		var lastFlickDuration,
+			tempReleasePos;
+
+		// s = this
+		var s = {
+			lastFlickOffset: {},
+			lastFlickDist: {},
+			lastFlickSpeed: {},
+			slowDownRatio:  {},
+			slowDownRatioReverse:  {},
+			speedDecelerationRatio:  {},
+			speedDecelerationRatioAbs:  {},
+			distanceOffset:  {},
+			backAnimDestination: {},
+			backAnimStarted: {},
+			calculateSwipeSpeed: function(axis) {
+				
+
+				if( _posPoints.length > 1) {
+					lastFlickDuration = _getCurrentTime() - _gestureCheckSpeedTime + 50;
+					tempReleasePos = _posPoints[_posPoints.length-2][axis];
+				} else {
+					lastFlickDuration = _getCurrentTime() - _gestureStartTime; // total gesture duration
+					tempReleasePos = _startPoint[axis];
+				}
+				s.lastFlickOffset[axis] = _currPoint[axis] - tempReleasePos;
+				s.lastFlickDist[axis] = Math.abs(s.lastFlickOffset[axis]);
+				if(s.lastFlickDist[axis] > 20) {
+					s.lastFlickSpeed[axis] = s.lastFlickOffset[axis] / lastFlickDuration;
+				} else {
+					s.lastFlickSpeed[axis] = 0;
+				}
+				if( Math.abs(s.lastFlickSpeed[axis]) < 0.1 ) {
+					s.lastFlickSpeed[axis] = 0;
+				}
+				
+				s.slowDownRatio[axis] = 0.95;
+				s.slowDownRatioReverse[axis] = 1 - s.slowDownRatio[axis];
+				s.speedDecelerationRatio[axis] = 1;
+			},
+
+			calculateOverBoundsAnimOffset: function(axis, speed) {
+				if(!s.backAnimStarted[axis]) {
+
+					if(_panOffset[axis] > _currPanBounds.min[axis]) {
+						s.backAnimDestination[axis] = _currPanBounds.min[axis];
+						
+					} else if(_panOffset[axis] < _currPanBounds.max[axis]) {
+						s.backAnimDestination[axis] = _currPanBounds.max[axis];
+					}
+
+					if(s.backAnimDestination[axis] !== undefined) {
+						s.slowDownRatio[axis] = 0.7;
+						s.slowDownRatioReverse[axis] = 1 - s.slowDownRatio[axis];
+						if(s.speedDecelerationRatioAbs[axis] < 0.05) {
+
+							s.lastFlickSpeed[axis] = 0;
+							s.backAnimStarted[axis] = true;
+
+							_animateProp('bounceZoomPan'+axis,_panOffset[axis], 
+								s.backAnimDestination[axis], 
+								speed || 300, 
+								framework.easing.sine.out, 
+								function(pos) {
+									_panOffset[axis] = pos;
+									_applyCurrentZoomPan();
+								}
+							);
+
+						}
+					}
+				}
+			},
+
+			// Reduces the speed by slowDownRatio (per 10ms)
+			calculateAnimOffset: function(axis) {
+				if(!s.backAnimStarted[axis]) {
+					s.speedDecelerationRatio[axis] = s.speedDecelerationRatio[axis] * (s.slowDownRatio[axis] + 
+												s.slowDownRatioReverse[axis] - 
+												s.slowDownRatioReverse[axis] * s.timeDiff / 10);
+
+					s.speedDecelerationRatioAbs[axis] = Math.abs(s.lastFlickSpeed[axis] * s.speedDecelerationRatio[axis]);
+					s.distanceOffset[axis] = s.lastFlickSpeed[axis] * s.speedDecelerationRatio[axis] * s.timeDiff;
+					_panOffset[axis] += s.distanceOffset[axis];
+
+				}
+			},
+
+			panAnimLoop: function() {
+				if ( _animations.zoomPan ) {
+					_animations.zoomPan.raf = _requestAF(s.panAnimLoop);
+
+					s.now = _getCurrentTime();
+					s.timeDiff = s.now - s.lastNow;
+					s.lastNow = s.now;
+					
+					s.calculateAnimOffset('x');
+					s.calculateAnimOffset('y');
+
+					_applyCurrentZoomPan();
+					
+					s.calculateOverBoundsAnimOffset('x');
+					s.calculateOverBoundsAnimOffset('y');
+
+
+					if (s.speedDecelerationRatioAbs.x < 0.05 && s.speedDecelerationRatioAbs.y < 0.05) {
+
+						// round pan position
+						_panOffset.x = Math.round(_panOffset.x);
+						_panOffset.y = Math.round(_panOffset.y);
+						_applyCurrentZoomPan();
+						
+						_stopAnimation('zoomPan');
+						return;
+					}
+				}
+
+			}
+		};
+		return s;
+	},
+
+	_completePanGesture = function(animData) {
+		// calculate swipe speed for Y axis (paanning)
+		animData.calculateSwipeSpeed('y');
+
+		_currPanBounds = self.currItem.bounds;
+		
+		animData.backAnimDestination = {};
+		animData.backAnimStarted = {};
+
+		// Avoid acceleration animation if speed is too low
+		if(Math.abs(animData.lastFlickSpeed.x) <= 0.05 && Math.abs(animData.lastFlickSpeed.y) <= 0.05 ) {
+			animData.speedDecelerationRatioAbs.x = animData.speedDecelerationRatioAbs.y = 0;
+
+			// Run pan drag release animation. E.g. if you drag image and release finger without momentum.
+			animData.calculateOverBoundsAnimOffset('x');
+			animData.calculateOverBoundsAnimOffset('y');
+			return true;
+		}
+
+		// Animation loop that controls the acceleration after pan gesture ends
+		_registerStartAnimation('zoomPan');
+		animData.lastNow = _getCurrentTime();
+		animData.panAnimLoop();
+	},
+
+
+	_finishSwipeMainScrollGesture = function(gestureType, _releaseAnimData) {
+		var itemChanged;
+		if(!_mainScrollAnimating) {
+			_currZoomedItemIndex = _currentItemIndex;
+		}
+
+
+		
+		var itemsDiff;
+
+		if(gestureType === 'swipe') {
+			var totalShiftDist = _currPoint.x - _startPoint.x,
+				isFastLastFlick = _releaseAnimData.lastFlickDist.x < 10;
+
+			// if container is shifted for more than MIN_SWIPE_DISTANCE, 
+			// and last flick gesture was in right direction
+			if(totalShiftDist > MIN_SWIPE_DISTANCE && 
+				(isFastLastFlick || _releaseAnimData.lastFlickOffset.x > 20) ) {
+				// go to prev item
+				itemsDiff = -1;
+			} else if(totalShiftDist < -MIN_SWIPE_DISTANCE && 
+				(isFastLastFlick || _releaseAnimData.lastFlickOffset.x < -20) ) {
+				// go to next item
+				itemsDiff = 1;
+			}
+		}
+
+		var nextCircle;
+
+		if(itemsDiff) {
+			
+			_currentItemIndex += itemsDiff;
+
+			if(_currentItemIndex < 0) {
+				_currentItemIndex = _options.loop ? _getNumItems()-1 : 0;
+				nextCircle = true;
+			} else if(_currentItemIndex >= _getNumItems()) {
+				_currentItemIndex = _options.loop ? 0 : _getNumItems()-1;
+				nextCircle = true;
+			}
+
+			if(!nextCircle || _options.loop) {
+				_indexDiff += itemsDiff;
+				_currPositionIndex -= itemsDiff;
+				itemChanged = true;
+			}
+			
+
+			
+		}
+
+		var animateToX = _slideSize.x * _currPositionIndex;
+		var animateToDist = Math.abs( animateToX - _mainScrollPos.x );
+		var finishAnimDuration;
+
+
+		if(!itemChanged && animateToX > _mainScrollPos.x !== _releaseAnimData.lastFlickSpeed.x > 0) {
+			// "return to current" duration, e.g. when dragging from slide 0 to -1
+			finishAnimDuration = 333; 
+		} else {
+			finishAnimDuration = Math.abs(_releaseAnimData.lastFlickSpeed.x) > 0 ? 
+									animateToDist / Math.abs(_releaseAnimData.lastFlickSpeed.x) : 
+									333;
+
+			finishAnimDuration = Math.min(finishAnimDuration, 400);
+			finishAnimDuration = Math.max(finishAnimDuration, 250);
+		}
+
+		if(_currZoomedItemIndex === _currentItemIndex) {
+			itemChanged = false;
+		}
+		
+		_mainScrollAnimating = true;
+		
+		_shout('mainScrollAnimStart');
+
+		_animateProp('mainScroll', _mainScrollPos.x, animateToX, finishAnimDuration, framework.easing.cubic.out, 
+			_moveMainScroll,
+			function() {
+				_stopAllAnimations();
+				_mainScrollAnimating = false;
+				_currZoomedItemIndex = -1;
+				
+				if(itemChanged || _currZoomedItemIndex !== _currentItemIndex) {
+					self.updateCurrItem();
+				}
+				
+				_shout('mainScrollAnimComplete');
+			}
+		);
+
+		if(itemChanged) {
+			self.updateCurrItem(true);
+		}
+
+		return itemChanged;
+	},
+
+	_calculateZoomLevel = function(touchesDistance) {
+		return  1 / _startPointsDistance * touchesDistance * _startZoomLevel;
+	},
+
+	// Resets zoom if it's out of bounds
+	_completeZoomGesture = function() {
+		var destZoomLevel = _currZoomLevel,
+			minZoomLevel = _getMinZoomLevel(),
+			maxZoomLevel = _getMaxZoomLevel();
+
+		if ( _currZoomLevel < minZoomLevel ) {
+			destZoomLevel = minZoomLevel;
+		} else if ( _currZoomLevel > maxZoomLevel ) {
+			destZoomLevel = maxZoomLevel;
+		}
+
+		var destOpacity = 1,
+			onUpdate,
+			initialOpacity = _bgOpacity;
+
+		if(_opacityChanged && !_isZoomingIn && !_wasOverInitialZoom && _currZoomLevel < minZoomLevel) {
+			//_closedByScroll = true;
+			self.close();
+			return true;
+		}
+
+		if(_opacityChanged) {
+			onUpdate = function(now) {
+				_applyBgOpacity(  (destOpacity - initialOpacity) * now + initialOpacity );
+			};
+		}
+
+		self.zoomTo(destZoomLevel, 0, 200,  framework.easing.cubic.out, onUpdate);
+		return true;
+	};
+
+
+_registerModule('Gestures', {
+	publicMethods: {
+
+		initGestures: function() {
+
+			// helper function that builds touch/pointer/mouse events
+			var addEventNames = function(pref, down, move, up, cancel) {
+				_dragStartEvent = pref + down;
+				_dragMoveEvent = pref + move;
+				_dragEndEvent = pref + up;
+				if(cancel) {
+					_dragCancelEvent = pref + cancel;
+				} else {
+					_dragCancelEvent = '';
+				}
+			};
+
+			_pointerEventEnabled = _features.pointerEvent;
+			if(_pointerEventEnabled && _features.touch) {
+				// we don't need touch events, if browser supports pointer events
+				_features.touch = false;
+			}
+
+			if(_pointerEventEnabled) {
+				if(navigator.pointerEnabled) {
+					addEventNames('pointer', 'down', 'move', 'up', 'cancel');
+				} else {
+					// IE10 pointer events are case-sensitive
+					addEventNames('MSPointer', 'Down', 'Move', 'Up', 'Cancel');
+				}
+			} else if(_features.touch) {
+				addEventNames('touch', 'start', 'move', 'end', 'cancel');
+				_likelyTouchDevice = true;
+			} else {
+				addEventNames('mouse', 'down', 'move', 'up');	
+			}
+
+			_upMoveEvents = _dragMoveEvent + ' ' + _dragEndEvent  + ' ' +  _dragCancelEvent;
+			_downEvents = _dragStartEvent;
+
+			if(_pointerEventEnabled && !_likelyTouchDevice) {
+				_likelyTouchDevice = (navigator.maxTouchPoints > 1) || (navigator.msMaxTouchPoints > 1);
+			}
+			// make variable public
+			self.likelyTouchDevice = _likelyTouchDevice; 
+			
+			_globalEventHandlers[_dragStartEvent] = _onDragStart;
+			_globalEventHandlers[_dragMoveEvent] = _onDragMove;
+			_globalEventHandlers[_dragEndEvent] = _onDragRelease; // the Kraken
+
+			if(_dragCancelEvent) {
+				_globalEventHandlers[_dragCancelEvent] = _globalEventHandlers[_dragEndEvent];
+			}
+
+			// Bind mouse events on device with detected hardware touch support, in case it supports multiple types of input.
+			if(_features.touch) {
+				_downEvents += ' mousedown';
+				_upMoveEvents += ' mousemove mouseup';
+				_globalEventHandlers.mousedown = _globalEventHandlers[_dragStartEvent];
+				_globalEventHandlers.mousemove = _globalEventHandlers[_dragMoveEvent];
+				_globalEventHandlers.mouseup = _globalEventHandlers[_dragEndEvent];
+			}
+
+			if(!_likelyTouchDevice) {
+				// don't allow pan to next slide from zoomed state on Desktop
+				_options.allowPanToNext = false;
+			}
+		}
+
+	}
+});
+
+
+/*>>gestures*/
+
+/*>>show-hide-transition*/
+/**
+ * show-hide-transition.js:
+ *
+ * Manages initial opening or closing transition.
+ *
+ * If you're not planning to use transition for gallery at all,
+ * you may set options hideAnimationDuration and showAnimationDuration to 0,
+ * and just delete startAnimation function.
+ * 
+ */
+
+
+var _showOrHideTimeout,
+	_showOrHide = function(item, img, out, completeFn) {
+
+		if(_showOrHideTimeout) {
+			clearTimeout(_showOrHideTimeout);
+		}
+
+		_initialZoomRunning = true;
+		_initialContentSet = true;
+		
+		// dimensions of small thumbnail {x:,y:,w:}.
+		// Height is optional, as calculated based on large image.
+		var thumbBounds; 
+		if(item.initialLayout) {
+			thumbBounds = item.initialLayout;
+			item.initialLayout = null;
+		} else {
+			thumbBounds = _options.getThumbBoundsFn && _options.getThumbBoundsFn(_currentItemIndex);
+		}
+
+		var duration = out ? _options.hideAnimationDuration : _options.showAnimationDuration;
+
+		var onComplete = function() {
+			_stopAnimation('initialZoom');
+			if(!out) {
+				_applyBgOpacity(1);
+				if(img) {
+					img.style.display = 'block';
+				}
+				framework.addClass(template, 'pswp--animated-in');
+				_shout('initialZoom' + (out ? 'OutEnd' : 'InEnd'));
+			} else {
+				self.template.removeAttribute('style');
+				self.bg.removeAttribute('style');
+			}
+
+			if(completeFn) {
+				completeFn();
+			}
+			_initialZoomRunning = false;
+		};
+
+		// if bounds aren't provided, just open gallery without animation
+		if(!duration || !thumbBounds || thumbBounds.x === undefined) {
+
+			_shout('initialZoom' + (out ? 'Out' : 'In') );
+
+			_currZoomLevel = item.initialZoomLevel;
+			_equalizePoints(_panOffset,  item.initialPosition );
+			_applyCurrentZoomPan();
+
+			template.style.opacity = out ? 0 : 1;
+			_applyBgOpacity(1);
+
+			if(duration) {
+				setTimeout(function() {
+					onComplete();
+				}, duration);
+			} else {
+				onComplete();
+			}
+
+			return;
+		}
+
+		var startAnimation = function() {
+			var closeWithRaf = _closedByScroll,
+				fadeEverything = !self.currItem.src || self.currItem.loadError || _options.showHideOpacity;
+			
+			// apply hw-acceleration to image
+			if(item.miniImg) {
+				item.miniImg.style.webkitBackfaceVisibility = 'hidden';
+			}
+
+			if(!out) {
+				_currZoomLevel = thumbBounds.w / item.w;
+				_panOffset.x = thumbBounds.x;
+				_panOffset.y = thumbBounds.y - _initalWindowScrollY;
+
+				self[fadeEverything ? 'template' : 'bg'].style.opacity = 0.001;
+				_applyCurrentZoomPan();
+			}
+
+			_registerStartAnimation('initialZoom');
+			
+			if(out && !closeWithRaf) {
+				framework.removeClass(template, 'pswp--animated-in');
+			}
+
+			if(fadeEverything) {
+				if(out) {
+					framework[ (closeWithRaf ? 'remove' : 'add') + 'Class' ](template, 'pswp--animate_opacity');
+				} else {
+					setTimeout(function() {
+						framework.addClass(template, 'pswp--animate_opacity');
+					}, 30);
+				}
+			}
+
+			_showOrHideTimeout = setTimeout(function() {
+
+				_shout('initialZoom' + (out ? 'Out' : 'In') );
+				
+
+				if(!out) {
+
+					// "in" animation always uses CSS transitions (instead of rAF).
+					// CSS transition work faster here, 
+					// as developer may also want to animate other things, 
+					// like ui on top of sliding area, which can be animated just via CSS
+					
+					_currZoomLevel = item.initialZoomLevel;
+					_equalizePoints(_panOffset,  item.initialPosition );
+					_applyCurrentZoomPan();
+					_applyBgOpacity(1);
+
+					if(fadeEverything) {
+						template.style.opacity = 1;
+					} else {
+						_applyBgOpacity(1);
+					}
+
+					_showOrHideTimeout = setTimeout(onComplete, duration + 20);
+				} else {
+
+					// "out" animation uses rAF only when PhotoSwipe is closed by browser scroll, to recalculate position
+					var destZoomLevel = thumbBounds.w / item.w,
+						initialPanOffset = {
+							x: _panOffset.x,
+							y: _panOffset.y
+						},
+						initialZoomLevel = _currZoomLevel,
+						initalBgOpacity = _bgOpacity,
+						onUpdate = function(now) {
+							
+							if(now === 1) {
+								_currZoomLevel = destZoomLevel;
+								_panOffset.x = thumbBounds.x;
+								_panOffset.y = thumbBounds.y  - _currentWindowScrollY;
+							} else {
+								_currZoomLevel = (destZoomLevel - initialZoomLevel) * now + initialZoomLevel;
+								_panOffset.x = (thumbBounds.x - initialPanOffset.x) * now + initialPanOffset.x;
+								_panOffset.y = (thumbBounds.y - _currentWindowScrollY - initialPanOffset.y) * now + initialPanOffset.y;
+							}
+							
+							_applyCurrentZoomPan();
+							if(fadeEverything) {
+								template.style.opacity = 1 - now;
+							} else {
+								_applyBgOpacity( initalBgOpacity - now * initalBgOpacity );
+							}
+						};
+
+					if(closeWithRaf) {
+						_animateProp('initialZoom', 0, 1, duration, framework.easing.cubic.out, onUpdate, onComplete);
+					} else {
+						onUpdate(1);
+						_showOrHideTimeout = setTimeout(onComplete, duration + 20);
+					}
+				}
+			
+			}, out ? 25 : 90); // Main purpose of this delay is to give browser time to paint and
+					// create composite layers of PhotoSwipe UI parts (background, controls, caption, arrows).
+					// Which avoids lag at the beginning of scale transition.
+		};
+		startAnimation();
+
+		
+	};
+
+/*>>show-hide-transition*/
+
+/*>>items-controller*/
+/**
+*
+* Controller manages gallery items, their dimensions, and their content.
+* 
+*/
+
+var _items,
+	_tempPanAreaSize = {},
+	_imagesToAppendPool = [],
+	_initialContentSet,
+	_initialZoomRunning,
+	_controllerDefaultOptions = {
+		index: 0,
+		errorMsg: '<div class="pswp__error-msg"><a href="%url%" target="_blank">The image</a> could not be loaded.</div>',
+		forceProgressiveLoading: false, // TODO
+		preload: [1,1],
+		getNumItemsFn: function() {
+			return _items.length;
+		}
+	};
+
+
+var _getItemAt,
+	_getNumItems,
+	_initialIsLoop,
+	_getZeroBounds = function() {
+		return {
+			center:{x:0,y:0}, 
+			max:{x:0,y:0}, 
+			min:{x:0,y:0}
+		};
+	},
+	_calculateSingleItemPanBounds = function(item, realPanElementW, realPanElementH ) {
+		var bounds = item.bounds;
+
+		// position of element when it's centered
+		bounds.center.x = Math.round((_tempPanAreaSize.x - realPanElementW) / 2);
+		bounds.center.y = Math.round((_tempPanAreaSize.y - realPanElementH) / 2) + item.vGap.top;
+
+		// maximum pan position
+		bounds.max.x = (realPanElementW > _tempPanAreaSize.x) ? 
+							Math.round(_tempPanAreaSize.x - realPanElementW) : 
+							bounds.center.x;
+		
+		bounds.max.y = (realPanElementH > _tempPanAreaSize.y) ? 
+							Math.round(_tempPanAreaSize.y - realPanElementH) + item.vGap.top : 
+							bounds.center.y;
+		
+		// minimum pan position
+		bounds.min.x = (realPanElementW > _tempPanAreaSize.x) ? 0 : bounds.center.x;
+		bounds.min.y = (realPanElementH > _tempPanAreaSize.y) ? item.vGap.top : bounds.center.y;
+	},
+	_calculateItemSize = function(item, viewportSize, zoomLevel) {
+
+		if (item.src && !item.loadError) {
+			var isInitial = !zoomLevel;
+			
+			if(isInitial) {
+				if(!item.vGap) {
+					item.vGap = {top:0,bottom:0};
+				}
+				// allows overriding vertical margin for individual items
+				_shout('parseVerticalMargin', item);
+			}
+
+
+			_tempPanAreaSize.x = viewportSize.x;
+			_tempPanAreaSize.y = viewportSize.y - item.vGap.top - item.vGap.bottom;
+
+			if (isInitial) {
+				var hRatio = _tempPanAreaSize.x / item.w;
+				var vRatio = _tempPanAreaSize.y / item.h;
+
+				item.fitRatio = hRatio < vRatio ? hRatio : vRatio;
+				//item.fillRatio = hRatio > vRatio ? hRatio : vRatio;
+
+				var scaleMode = _options.scaleMode;
+
+				if (scaleMode === 'orig') {
+					zoomLevel = 1;
+				} else if (scaleMode === 'fit') {
+					zoomLevel = item.fitRatio;
+				}
+
+				if (zoomLevel > 1) {
+					zoomLevel = 1;
+				}
+
+				item.initialZoomLevel = zoomLevel;
+				
+				if(!item.bounds) {
+					// reuse bounds object
+					item.bounds = _getZeroBounds(); 
+				}
+			}
+
+			if(!zoomLevel) {
+				return;
+			}
+
+			_calculateSingleItemPanBounds(item, item.w * zoomLevel, item.h * zoomLevel);
+
+			if (isInitial && zoomLevel === item.initialZoomLevel) {
+				item.initialPosition = item.bounds.center;
+			}
+
+			return item.bounds;
+		} else {
+			item.w = item.h = 0;
+			item.initialZoomLevel = item.fitRatio = 1;
+			item.bounds = _getZeroBounds();
+			item.initialPosition = item.bounds.center;
+
+			// if it's not image, we return zero bounds (content is not zoomable)
+			return item.bounds;
+		}
+		
+	},
+
+	
+
+
+	_appendImage = function(index, item, baseDiv, img, preventAnimation, keepPlaceholder) {
+		
+
+		if(item.loadError) {
+			return;
+		}
+
+		if(img) {
+
+			item.imageAppended = true;
+			_setImageSize(item, img, (item === self.currItem && _renderMaxResolution) );
+			
+			baseDiv.appendChild(img);
+
+			if(keepPlaceholder) {
+				setTimeout(function() {
+					if(item && item.loaded && item.placeholder) {
+						item.placeholder.style.display = 'none';
+						item.placeholder = null;
+					}
+				}, 500);
+			}
+		}
+	},
+	
+
+
+	_preloadImage = function(item) {
+		item.loading = true;
+		item.loaded = false;
+		var img = item.img = framework.createEl('pswp__img', 'img');
+		var onComplete = function() {
+			item.loading = false;
+			item.loaded = true;
+
+			if(item.loadComplete) {
+				item.loadComplete(item);
+			} else {
+				item.img = null; // no need to store image object
+			}
+			img.onload = img.onerror = null;
+			img = null;
+		};
+		img.onload = onComplete;
+		img.onerror = function() {
+			item.loadError = true;
+			onComplete();
+		};		
+
+		img.src = item.src;// + '?a=' + Math.random();
+
+		return img;
+	},
+	_checkForError = function(item, cleanUp) {
+		if(item.src && item.loadError && item.container) {
+
+			if(cleanUp) {
+				item.container.innerHTML = '';
+			}
+
+			item.container.innerHTML = _options.errorMsg.replace('%url%',  item.src );
+			return true;
+			
+		}
+	},
+	_setImageSize = function(item, img, maxRes) {
+		if(!item.src) {
+			return;
+		}
+
+		if(!img) {
+			img = item.container.lastChild;
+		}
+
+		var w = maxRes ? item.w : Math.round(item.w * item.fitRatio),
+			h = maxRes ? item.h : Math.round(item.h * item.fitRatio);
+		
+		if(item.placeholder && !item.loaded) {
+			item.placeholder.style.width = w + 'px';
+			item.placeholder.style.height = h + 'px';
+		}
+
+		img.style.width = w + 'px';
+		img.style.height = h + 'px';
+	},
+	_appendImagesPool = function() {
+
+		if(_imagesToAppendPool.length) {
+			var poolItem;
+
+			for(var i = 0; i < _imagesToAppendPool.length; i++) {
+				poolItem = _imagesToAppendPool[i];
+				if( poolItem.holder.index === poolItem.index ) {
+					_appendImage(poolItem.index, poolItem.item, poolItem.baseDiv, poolItem.img, false, poolItem.clearPlaceholder);
+				}
+			}
+			_imagesToAppendPool = [];
+		}
+	};
+	
+
+
+_registerModule('Controller', {
+
+	publicMethods: {
+
+		lazyLoadItem: function(index) {
+			index = _getLoopedId(index);
+			var item = _getItemAt(index);
+
+			if(!item || ((item.loaded || item.loading) && !_itemsNeedUpdate)) {
+				return;
+			}
+
+			_shout('gettingData', index, item);
+
+			if (!item.src) {
+				return;
+			}
+
+			_preloadImage(item);
+		},
+		initController: function() {
+			framework.extend(_options, _controllerDefaultOptions, true);
+			self.items = _items = items;
+			_getItemAt = self.getItemAt;
+			_getNumItems = _options.getNumItemsFn; //self.getNumItems;
+
+
+
+			_initialIsLoop = _options.loop;
+			if(_getNumItems() < 3) {
+				_options.loop = false; // disable loop if less then 3 items
+			}
+
+			_listen('beforeChange', function(diff) {
+
+				var p = _options.preload,
+					isNext = diff === null ? true : (diff >= 0),
+					preloadBefore = Math.min(p[0], _getNumItems() ),
+					preloadAfter = Math.min(p[1], _getNumItems() ),
+					i;
+
+
+				for(i = 1; i <= (isNext ? preloadAfter : preloadBefore); i++) {
+					self.lazyLoadItem(_currentItemIndex+i);
+				}
+				for(i = 1; i <= (isNext ? preloadBefore : preloadAfter); i++) {
+					self.lazyLoadItem(_currentItemIndex-i);
+				}
+			});
+
+			_listen('initialLayout', function() {
+				self.currItem.initialLayout = _options.getThumbBoundsFn && _options.getThumbBoundsFn(_currentItemIndex);
+			});
+
+			_listen('mainScrollAnimComplete', _appendImagesPool);
+			_listen('initialZoomInEnd', _appendImagesPool);
+
+
+
+			_listen('destroy', function() {
+				var item;
+				for(var i = 0; i < _items.length; i++) {
+					item = _items[i];
+					// remove reference to DOM elements, for GC
+					if(item.container) {
+						item.container = null; 
+					}
+					if(item.placeholder) {
+						item.placeholder = null;
+					}
+					if(item.img) {
+						item.img = null;
+					}
+					if(item.preloader) {
+						item.preloader = null;
+					}
+					if(item.loadError) {
+						item.loaded = item.loadError = false;
+					}
+				}
+				_imagesToAppendPool = null;
+			});
+		},
+
+
+		getItemAt: function(index) {
+			if (index >= 0) {
+				return _items[index] !== undefined ? _items[index] : false;
+			}
+			return false;
+		},
+
+		allowProgressiveImg: function() {
+			// 1. Progressive image loading isn't working on webkit/blink 
+			//    when hw-acceleration (e.g. translateZ) is applied to IMG element.
+			//    That's why in PhotoSwipe parent element gets zoom transform, not image itself.
+			//    
+			// 2. Progressive image loading sometimes blinks in webkit/blink when applying animation to parent element.
+			//    That's why it's disabled on touch devices (mainly because of swipe transition)
+			//    
+			// 3. Progressive image loading sometimes doesn't work in IE (up to 11).
+
+			// Don't allow progressive loading on non-large touch devices
+			return _options.forceProgressiveLoading || !_likelyTouchDevice || _options.mouseUsed || screen.width > 1200; 
+			// 1200 - to eliminate touch devices with large screen (like Chromebook Pixel)
+		},
+
+		setContent: function(holder, index) {
+
+			if(_options.loop) {
+				index = _getLoopedId(index);
+			}
+
+			var prevItem = self.getItemAt(holder.index);
+			if(prevItem) {
+				prevItem.container = null;
+			}
+	
+			var item = self.getItemAt(index),
+				img;
+			
+			if(!item) {
+				holder.el.innerHTML = '';
+				return;
+			}
+
+			// allow to override data
+			_shout('gettingData', index, item);
+
+			holder.index = index;
+			holder.item = item;
+
+			// base container DIV is created only once for each of 3 holders
+			var baseDiv = item.container = framework.createEl('pswp__zoom-wrap'); 
+
+			
+
+			if(!item.src && item.html) {
+				if(item.html.tagName) {
+					baseDiv.appendChild(item.html);
+				} else {
+					baseDiv.innerHTML = item.html;
+				}
+			}
+
+			_checkForError(item);
+
+			_calculateItemSize(item, _viewportSize);
+			
+			if(item.src && !item.loadError && !item.loaded) {
+
+				item.loadComplete = function(item) {
+
+					// gallery closed before image finished loading
+					if(!_isOpen) {
+						return;
+					}
+
+					// check if holder hasn't changed while image was loading
+					if(holder && holder.index === index ) {
+						if( _checkForError(item, true) ) {
+							item.loadComplete = item.img = null;
+							_calculateItemSize(item, _viewportSize);
+							_applyZoomPanToItem(item);
+
+							if(holder.index === _currentItemIndex) {
+								// recalculate dimensions
+								self.updateCurrZoomItem();
+							}
+							return;
+						}
+						if( !item.imageAppended ) {
+							if(_features.transform && (_mainScrollAnimating || _initialZoomRunning) ) {
+								_imagesToAppendPool.push({
+									item:item,
+									baseDiv:baseDiv,
+									img:item.img,
+									index:index,
+									holder:holder,
+									clearPlaceholder:true
+								});
+							} else {
+								_appendImage(index, item, baseDiv, item.img, _mainScrollAnimating || _initialZoomRunning, true);
+							}
+						} else {
+							// remove preloader & mini-img
+							if(!_initialZoomRunning && item.placeholder) {
+								item.placeholder.style.display = 'none';
+								item.placeholder = null;
+							}
+						}
+					}
+
+					item.loadComplete = null;
+					item.img = null; // no need to store image element after it's added
+
+					_shout('imageLoadComplete', index, item);
+				};
+
+				if(framework.features.transform) {
+					
+					var placeholderClassName = 'pswp__img pswp__img--placeholder'; 
+					placeholderClassName += (item.msrc ? '' : ' pswp__img--placeholder--blank');
+
+					var placeholder = framework.createEl(placeholderClassName, item.msrc ? 'img' : '');
+					if(item.msrc) {
+						placeholder.src = item.msrc;
+					}
+					
+					_setImageSize(item, placeholder);
+
+					baseDiv.appendChild(placeholder);
+					item.placeholder = placeholder;
+
+				}
+				
+
+				
+
+				if(!item.loading) {
+					_preloadImage(item);
+				}
+
+
+				if( self.allowProgressiveImg() ) {
+					// just append image
+					if(!_initialContentSet && _features.transform) {
+						_imagesToAppendPool.push({
+							item:item, 
+							baseDiv:baseDiv, 
+							img:item.img, 
+							index:index, 
+							holder:holder
+						});
+					} else {
+						_appendImage(index, item, baseDiv, item.img, true, true);
+					}
+				}
+				
+			} else if(item.src && !item.loadError) {
+				// image object is created every time, due to bugs of image loading & delay when switching images
+				img = framework.createEl('pswp__img', 'img');
+				img.style.opacity = 1;
+				img.src = item.src;
+				_setImageSize(item, img);
+				_appendImage(index, item, baseDiv, img, true);
+			}
+			
+
+			if(!_initialContentSet && index === _currentItemIndex) {
+				_currZoomElementStyle = baseDiv.style;
+				_showOrHide(item, (img ||item.img) );
+			} else {
+				_applyZoomPanToItem(item);
+			}
+
+			holder.el.innerHTML = '';
+			holder.el.appendChild(baseDiv);
+		},
+
+		cleanSlide: function( item ) {
+			if(item.img ) {
+				item.img.onload = item.img.onerror = null;
+			}
+			item.loaded = item.loading = item.img = item.imageAppended = false;
+		}
+
+	}
+});
+
+/*>>items-controller*/
+
+/*>>tap*/
+/**
+ * tap.js:
+ *
+ * Displatches tap and double-tap events.
+ * 
+ */
+
+var tapTimer,
+	tapReleasePoint = {},
+	_dispatchTapEvent = function(origEvent, releasePoint, pointerType) {		
+		var e = document.createEvent( 'CustomEvent' ),
+			eDetail = {
+				origEvent:origEvent, 
+				target:origEvent.target, 
+				releasePoint: releasePoint, 
+				pointerType:pointerType || 'touch'
+			};
+
+		e.initCustomEvent( 'pswpTap', true, true, eDetail );
+		origEvent.target.dispatchEvent(e);
+	};
+
+_registerModule('Tap', {
+	publicMethods: {
+		initTap: function() {
+			_listen('firstTouchStart', self.onTapStart);
+			_listen('touchRelease', self.onTapRelease);
+			_listen('destroy', function() {
+				tapReleasePoint = {};
+				tapTimer = null;
+			});
+		},
+		onTapStart: function(touchList) {
+			if(touchList.length > 1) {
+				clearTimeout(tapTimer);
+				tapTimer = null;
+			}
+		},
+		onTapRelease: function(e, releasePoint) {
+			if(!releasePoint) {
+				return;
+			}
+
+			if(!_moved && !_isMultitouch && !_numAnimations) {
+				var p0 = releasePoint;
+				if(tapTimer) {
+					clearTimeout(tapTimer);
+					tapTimer = null;
+
+					// Check if taped on the same place
+					if ( _isNearbyPoints(p0, tapReleasePoint) ) {
+						_shout('doubleTap', p0);
+						return;
+					}
+				}
+
+				if(releasePoint.type === 'mouse') {
+					_dispatchTapEvent(e, releasePoint, 'mouse');
+					return;
+				}
+
+				var clickedTagName = e.target.tagName.toUpperCase();
+				// avoid double tap delay on buttons and elements that have class pswp__single-tap
+				if(clickedTagName === 'BUTTON' || framework.hasClass(e.target, 'pswp__single-tap') ) {
+					_dispatchTapEvent(e, releasePoint);
+					return;
+				}
+
+				_equalizePoints(tapReleasePoint, p0);
+
+				tapTimer = setTimeout(function() {
+					_dispatchTapEvent(e, releasePoint);
+					tapTimer = null;
+				}, 300);
+			}
+		}
+	}
+});
+
+/*>>tap*/
+
+/*>>desktop-zoom*/
+/**
+ *
+ * desktop-zoom.js:
+ *
+ * - Binds mousewheel event for paning zoomed image.
+ * - Manages "dragging", "zoomed-in", "zoom-out" classes.
+ *   (which are used for cursors and zoom icon)
+ * - Adds toggleDesktopZoom function.
+ * 
+ */
+
+var _wheelDelta;
+	
+_registerModule('DesktopZoom', {
+
+	publicMethods: {
+
+		initDesktopZoom: function() {
+
+			if(_oldIE) {
+				// no zoom for old IE (<=8)
+				return;
+			}
+
+			if(_likelyTouchDevice) {
+				// if detected hardware touch support, we wait until mouse is used,
+				// and only then apply desktop-zoom features
+				_listen('mouseUsed', function() {
+					self.setupDesktopZoom();
+				});
+			} else {
+				self.setupDesktopZoom(true);
+			}
+
+		},
+
+		setupDesktopZoom: function(onInit) {
+
+			_wheelDelta = {};
+
+			var events = 'wheel mousewheel DOMMouseScroll';
+			
+			_listen('bindEvents', function() {
+				framework.bind(template, events,  self.handleMouseWheel);
+			});
+
+			_listen('unbindEvents', function() {
+				if(_wheelDelta) {
+					framework.unbind(template, events, self.handleMouseWheel);
+				}
+			});
+
+			self.mouseZoomedIn = false;
+
+			var hasDraggingClass,
+				updateZoomable = function() {
+					if(self.mouseZoomedIn) {
+						framework.removeClass(template, 'pswp--zoomed-in');
+						self.mouseZoomedIn = false;
+					}
+					if(_currZoomLevel < 1) {
+						framework.addClass(template, 'pswp--zoom-allowed');
+					} else {
+						framework.removeClass(template, 'pswp--zoom-allowed');
+					}
+					removeDraggingClass();
+				},
+				removeDraggingClass = function() {
+					if(hasDraggingClass) {
+						framework.removeClass(template, 'pswp--dragging');
+						hasDraggingClass = false;
+					}
+				};
+
+			_listen('resize' , updateZoomable);
+			_listen('afterChange' , updateZoomable);
+			_listen('pointerDown', function() {
+				if(self.mouseZoomedIn) {
+					hasDraggingClass = true;
+					framework.addClass(template, 'pswp--dragging');
+				}
+			});
+			_listen('pointerUp', removeDraggingClass);
+
+			if(!onInit) {
+				updateZoomable();
+			}
+			
+		},
+
+		handleMouseWheel: function(e) {
+
+			if(_currZoomLevel <= self.currItem.fitRatio) {
+				if( _options.modal ) {
+
+					if (!_options.closeOnScroll || _numAnimations || _isDragging) {
+						e.preventDefault();
+					} else if(_transformKey && Math.abs(e.deltaY) > 2) {
+						// close PhotoSwipe
+						// if browser supports transforms & scroll changed enough
+						_closedByScroll = true;
+						self.close();
+					}
+
+				}
+				return true;
+			}
+
+			// allow just one event to fire
+			e.stopPropagation();
+
+			// https://developer.mozilla.org/en-US/docs/Web/Events/wheel
+			_wheelDelta.x = 0;
+
+			if('deltaX' in e) {
+				if(e.deltaMode === 1 /* DOM_DELTA_LINE */) {
+					// 18 - average line height
+					_wheelDelta.x = e.deltaX * 18;
+					_wheelDelta.y = e.deltaY * 18;
+				} else {
+					_wheelDelta.x = e.deltaX;
+					_wheelDelta.y = e.deltaY;
+				}
+			} else if('wheelDelta' in e) {
+				if(e.wheelDeltaX) {
+					_wheelDelta.x = -0.16 * e.wheelDeltaX;
+				}
+				if(e.wheelDeltaY) {
+					_wheelDelta.y = -0.16 * e.wheelDeltaY;
+				} else {
+					_wheelDelta.y = -0.16 * e.wheelDelta;
+				}
+			} else if('detail' in e) {
+				_wheelDelta.y = e.detail;
+			} else {
+				return;
+			}
+
+			_calculatePanBounds(_currZoomLevel, true);
+
+			var newPanX = _panOffset.x - _wheelDelta.x,
+				newPanY = _panOffset.y - _wheelDelta.y;
+
+			// only prevent scrolling in nonmodal mode when not at edges
+			if (_options.modal ||
+				(
+				newPanX <= _currPanBounds.min.x && newPanX >= _currPanBounds.max.x &&
+				newPanY <= _currPanBounds.min.y && newPanY >= _currPanBounds.max.y
+				) ) {
+				e.preventDefault();
+			}
+
+			// TODO: use rAF instead of mousewheel?
+			self.panTo(newPanX, newPanY);
+		},
+
+		toggleDesktopZoom: function(centerPoint) {
+			centerPoint = centerPoint || {x:_viewportSize.x/2 + _offset.x, y:_viewportSize.y/2 + _offset.y };
+
+			var doubleTapZoomLevel = _options.getDoubleTapZoom(true, self.currItem);
+			var zoomOut = _currZoomLevel === doubleTapZoomLevel;
+			
+			self.mouseZoomedIn = !zoomOut;
+
+			self.zoomTo(zoomOut ? self.currItem.initialZoomLevel : doubleTapZoomLevel, centerPoint, 333);
+			framework[ (!zoomOut ? 'add' : 'remove') + 'Class'](template, 'pswp--zoomed-in');
+		}
+
+	}
+});
+
+
+/*>>desktop-zoom*/
+
+/*>>history*/
+/**
+ *
+ * history.js:
+ *
+ * - Back button to close gallery.
+ * 
+ * - Unique URL for each slide: example.com/&pid=1&gid=3
+ *   (where PID is picture index, and GID and gallery index)
+ *   
+ * - Switch URL when slides change.
+ * 
+ */
+
+
+var _historyDefaultOptions = {
+	history: true,
+	galleryUID: 1
+};
+
+var _historyUpdateTimeout,
+	_hashChangeTimeout,
+	_hashAnimCheckTimeout,
+	_hashChangedByScript,
+	_hashChangedByHistory,
+	_hashReseted,
+	_initialHash,
+	_historyChanged,
+	_closedFromURL,
+	_urlChangedOnce,
+	_windowLoc,
+
+	_supportsPushState,
+
+	_getHash = function() {
+		return _windowLoc.hash.substring(1);
+	},
+	_cleanHistoryTimeouts = function() {
+
+		if(_historyUpdateTimeout) {
+			clearTimeout(_historyUpdateTimeout);
+		}
+
+		if(_hashAnimCheckTimeout) {
+			clearTimeout(_hashAnimCheckTimeout);
+		}
+	},
+
+	// pid - Picture index
+	// gid - Gallery index
+	_parseItemIndexFromURL = function() {
+		var hash = _getHash(),
+			params = {};
+
+		if(hash.length < 5) { // pid=1
+			return params;
+		}
+
+		var i, vars = hash.split('&');
+		for (i = 0; i < vars.length; i++) {
+			if(!vars[i]) {
+				continue;
+			}
+			var pair = vars[i].split('=');	
+			if(pair.length < 2) {
+				continue;
+			}
+			params[pair[0]] = pair[1];
+		}
+		if(_options.galleryPIDs) {
+			// detect custom pid in hash and search for it among the items collection
+			var searchfor = params.pid;
+			params.pid = 0; // if custom pid cannot be found, fallback to the first item
+			for(i = 0; i < _items.length; i++) {
+				if(_items[i].pid === searchfor) {
+					params.pid = i;
+					break;
+				}
+			}
+		} else {
+			params.pid = parseInt(params.pid,10)-1;
+		}
+		if( params.pid < 0 ) {
+			params.pid = 0;
+		}
+		return params;
+	},
+	_updateHash = function() {
+
+		if(_hashAnimCheckTimeout) {
+			clearTimeout(_hashAnimCheckTimeout);
+		}
+
+
+		if(_numAnimations || _isDragging) {
+			// changing browser URL forces layout/paint in some browsers, which causes noticable lag during animation
+			// that's why we update hash only when no animations running
+			_hashAnimCheckTimeout = setTimeout(_updateHash, 500);
+			return;
+		}
+		
+		if(_hashChangedByScript) {
+			clearTimeout(_hashChangeTimeout);
+		} else {
+			_hashChangedByScript = true;
+		}
+
+
+		var pid = (_currentItemIndex + 1);
+		var item = _getItemAt( _currentItemIndex );
+		if(item.hasOwnProperty('pid')) {
+			// carry forward any custom pid assigned to the item
+			pid = item.pid;
+		}
+		var newHash = _initialHash + '&'  +  'gid=' + _options.galleryUID + '&' + 'pid=' + pid;
+
+		if(!_historyChanged) {
+			if(_windowLoc.hash.indexOf(newHash) === -1) {
+				_urlChangedOnce = true;
+			}
+			// first time - add new hisory record, then just replace
+		}
+
+		var newURL = _windowLoc.href.split('#')[0] + '#' +  newHash;
+
+		if( _supportsPushState ) {
+
+			if('#' + newHash !== window.location.hash) {
+				history[_historyChanged ? 'replaceState' : 'pushState']('', document.title, newURL);
+			}
+
+		} else {
+			if(_historyChanged) {
+				_windowLoc.replace( newURL );
+			} else {
+				_windowLoc.hash = newHash;
+			}
+		}
+		
+		
+
+		_historyChanged = true;
+		_hashChangeTimeout = setTimeout(function() {
+			_hashChangedByScript = false;
+		}, 60);
+	};
+
+
+
+	
+
+_registerModule('History', {
+
+	
+
+	publicMethods: {
+		initHistory: function() {
+
+			framework.extend(_options, _historyDefaultOptions, true);
+
+			if( !_options.history ) {
+				return;
+			}
+
+
+			_windowLoc = window.location;
+			_urlChangedOnce = false;
+			_closedFromURL = false;
+			_historyChanged = false;
+			_initialHash = _getHash();
+			_supportsPushState = ('pushState' in history);
+
+
+			if(_initialHash.indexOf('gid=') > -1) {
+				_initialHash = _initialHash.split('&gid=')[0];
+				_initialHash = _initialHash.split('?gid=')[0];
+			}
+			
+
+			_listen('afterChange', self.updateURL);
+			_listen('unbindEvents', function() {
+				framework.unbind(window, 'hashchange', self.onHashChange);
+			});
+
+
+			var returnToOriginal = function() {
+				_hashReseted = true;
+				if(!_closedFromURL) {
+
+					if(_urlChangedOnce) {
+						history.back();
+					} else {
+
+						if(_initialHash) {
+							_windowLoc.hash = _initialHash;
+						} else {
+							if (_supportsPushState) {
+
+								// remove hash from url without refreshing it or scrolling to top
+								history.pushState('', document.title,  _windowLoc.pathname + _windowLoc.search );
+							} else {
+								_windowLoc.hash = '';
+							}
+						}
+					}
+					
+				}
+
+				_cleanHistoryTimeouts();
+			};
+
+
+			_listen('unbindEvents', function() {
+				if(_closedByScroll) {
+					// if PhotoSwipe is closed by scroll, we go "back" before the closing animation starts
+					// this is done to keep the scroll position
+					returnToOriginal();
+				}
+			});
+			_listen('destroy', function() {
+				if(!_hashReseted) {
+					returnToOriginal();
+				}
+			});
+			_listen('firstUpdate', function() {
+				_currentItemIndex = _parseItemIndexFromURL().pid;
+			});
+
+			
+
+			
+			var index = _initialHash.indexOf('pid=');
+			if(index > -1) {
+				_initialHash = _initialHash.substring(0, index);
+				if(_initialHash.slice(-1) === '&') {
+					_initialHash = _initialHash.slice(0, -1);
+				}
+			}
+			
+
+			setTimeout(function() {
+				if(_isOpen) { // hasn't destroyed yet
+					framework.bind(window, 'hashchange', self.onHashChange);
+				}
+			}, 40);
+			
+		},
+		onHashChange: function() {
+
+			if(_getHash() === _initialHash) {
+
+				_closedFromURL = true;
+				self.close();
+				return;
+			}
+			if(!_hashChangedByScript) {
+
+				_hashChangedByHistory = true;
+				self.goTo( _parseItemIndexFromURL().pid );
+				_hashChangedByHistory = false;
+			}
+			
+		},
+		updateURL: function() {
+
+			// Delay the update of URL, to avoid lag during transition, 
+			// and to not to trigger actions like "refresh page sound" or "blinking favicon" to often
+			
+			_cleanHistoryTimeouts();
+			
+
+			if(_hashChangedByHistory) {
+				return;
+			}
+
+			if(!_historyChanged) {
+				_updateHash(); // first time
+			} else {
+				_historyUpdateTimeout = setTimeout(_updateHash, 800);
+			}
+		}
+	
+	}
+});
+
+
+/*>>history*/
+	framework.extend(self, publicMethods); };
+	return PhotoSwipe;
+});
+/*! PhotoSwipe Default UI - 4.1.2 - 2017-04-05
+* http://photoswipe.com
+* Copyright (c) 2017 Dmitry Semenov; */
+/**
+*
+* UI on top of main sliding area (caption, arrows, close button, etc.).
+* Built just using public methods/properties of PhotoSwipe.
+* 
+*/
+(function (root, factory) { 
+	if (typeof define === 'function' && define.amd) {
+		define(factory);
+	} else if (typeof exports === 'object') {
+		module.exports = factory();
+	} else {
+		root.PhotoSwipeUI_Default = factory();
+	}
+})(this, function () {
+
+	'use strict';
+
+
+
+var PhotoSwipeUI_Default =
+ function(pswp, framework) {
+
+	var ui = this;
+	var _overlayUIUpdated = false,
+		_controlsVisible = true,
+		_fullscrenAPI,
+		_controls,
+		_captionContainer,
+		_fakeCaptionContainer,
+		_indexIndicator,
+		_shareButton,
+		_shareModal,
+		_shareModalHidden = true,
+		_initalCloseOnScrollValue,
+		_isIdle,
+		_listen,
+
+		_loadingIndicator,
+		_loadingIndicatorHidden,
+		_loadingIndicatorTimeout,
+
+		_galleryHasOneSlide,
+
+		_options,
+		_defaultUIOptions = {
+			barsSize: {top:44, bottom:'auto'},
+			closeElClasses: ['item', 'caption', 'zoom-wrap', 'ui', 'top-bar'], 
+			timeToIdle: 4000, 
+			timeToIdleOutside: 1000,
+			loadingIndicatorDelay: 1000, // 2s
+			
+			addCaptionHTMLFn: function(item, captionEl /*, isFake */) {
+				if(!item.title) {
+					captionEl.children[0].innerHTML = '';
+					return false;
+				}
+				captionEl.children[0].innerHTML = item.title;
+				return true;
+			},
+
+			closeEl:true,
+			captionEl: true,
+			fullscreenEl: true,
+			zoomEl: true,
+			shareEl: true,
+			counterEl: true,
+			arrowEl: true,
+			preloaderEl: true,
+
+			tapToClose: false,
+			tapToToggleControls: true,
+
+			clickToCloseNonZoomable: true,
+
+			shareButtons: [
+				{id:'facebook', label:'Share on Facebook', url:'https://www.facebook.com/sharer/sharer.php?u={{url}}'},
+				{id:'twitter', label:'Tweet', url:'https://twitter.com/intent/tweet?text={{text}}&url={{url}}'},
+				{id:'pinterest', label:'Pin it', url:'http://www.pinterest.com/pin/create/button/'+
+													'?url={{url}}&media={{image_url}}&description={{text}}'},
+				{id:'download', label:'Download image', url:'{{raw_image_url}}', download:true}
+			],
+			getImageURLForShare: function( /* shareButtonData */ ) {
+				return pswp.currItem.src || '';
+			},
+			getPageURLForShare: function( /* shareButtonData */ ) {
+				return window.location.href;
+			},
+			getTextForShare: function( /* shareButtonData */ ) {
+				return pswp.currItem.title || '';
+			},
+				
+			indexIndicatorSep: ' / ',
+			fitControlsWidth: 1200
+
+		},
+		_blockControlsTap,
+		_blockControlsTapTimeout;
+
+
+
+	var _onControlsTap = function(e) {
+			if(_blockControlsTap) {
+				return true;
+			}
+
+
+			e = e || window.event;
+
+			if(_options.timeToIdle && _options.mouseUsed && !_isIdle) {
+				// reset idle timer
+				_onIdleMouseMove();
+			}
+
+
+			var target = e.target || e.srcElement,
+				uiElement,
+				clickedClass = target.getAttribute('class') || '',
+				found;
+
+			for(var i = 0; i < _uiElements.length; i++) {
+				uiElement = _uiElements[i];
+				if(uiElement.onTap && clickedClass.indexOf('pswp__' + uiElement.name ) > -1 ) {
+					uiElement.onTap();
+					found = true;
+
+				}
+			}
+
+			if(found) {
+				if(e.stopPropagation) {
+					e.stopPropagation();
+				}
+				_blockControlsTap = true;
+
+				// Some versions of Android don't prevent ghost click event 
+				// when preventDefault() was called on touchstart and/or touchend.
+				// 
+				// This happens on v4.3, 4.2, 4.1, 
+				// older versions strangely work correctly, 
+				// but just in case we add delay on all of them)	
+				var tapDelay = framework.features.isOldAndroid ? 600 : 30;
+				_blockControlsTapTimeout = setTimeout(function() {
+					_blockControlsTap = false;
+				}, tapDelay);
+			}
+
+		},
+		_fitControlsInViewport = function() {
+			return !pswp.likelyTouchDevice || _options.mouseUsed || screen.width > _options.fitControlsWidth;
+		},
+		_togglePswpClass = function(el, cName, add) {
+			framework[ (add ? 'add' : 'remove') + 'Class' ](el, 'pswp__' + cName);
+		},
+
+		// add class when there is just one item in the gallery
+		// (by default it hides left/right arrows and 1ofX counter)
+		_countNumItems = function() {
+			var hasOneSlide = (_options.getNumItemsFn() === 1);
+
+			if(hasOneSlide !== _galleryHasOneSlide) {
+				_togglePswpClass(_controls, 'ui--one-slide', hasOneSlide);
+				_galleryHasOneSlide = hasOneSlide;
+			}
+		},
+		_toggleShareModalClass = function() {
+			_togglePswpClass(_shareModal, 'share-modal--hidden', _shareModalHidden);
+		},
+		_toggleShareModal = function() {
+
+			_shareModalHidden = !_shareModalHidden;
+			
+			
+			if(!_shareModalHidden) {
+				_toggleShareModalClass();
+				setTimeout(function() {
+					if(!_shareModalHidden) {
+						framework.addClass(_shareModal, 'pswp__share-modal--fade-in');
+					}
+				}, 30);
+			} else {
+				framework.removeClass(_shareModal, 'pswp__share-modal--fade-in');
+				setTimeout(function() {
+					if(_shareModalHidden) {
+						_toggleShareModalClass();
+					}
+				}, 300);
+			}
+			
+			if(!_shareModalHidden) {
+				_updateShareURLs();
+			}
+			return false;
+		},
+
+		_openWindowPopup = function(e) {
+			e = e || window.event;
+			var target = e.target || e.srcElement;
+
+			pswp.shout('shareLinkClick', e, target);
+
+			if(!target.href) {
+				return false;
+			}
+
+			if( target.hasAttribute('download') ) {
+				return true;
+			}
+
+			window.open(target.href, 'pswp_share', 'scrollbars=yes,resizable=yes,toolbar=no,'+
+										'location=yes,width=550,height=420,top=100,left=' + 
+										(window.screen ? Math.round(screen.width / 2 - 275) : 100)  );
+
+			if(!_shareModalHidden) {
+				_toggleShareModal();
+			}
+			
+			return false;
+		},
+		_updateShareURLs = function() {
+			var shareButtonOut = '',
+				shareButtonData,
+				shareURL,
+				image_url,
+				page_url,
+				share_text;
+
+			for(var i = 0; i < _options.shareButtons.length; i++) {
+				shareButtonData = _options.shareButtons[i];
+
+				image_url = _options.getImageURLForShare(shareButtonData);
+				page_url = _options.getPageURLForShare(shareButtonData);
+				share_text = _options.getTextForShare(shareButtonData);
+
+				shareURL = shareButtonData.url.replace('{{url}}', encodeURIComponent(page_url) )
+									.replace('{{image_url}}', encodeURIComponent(image_url) )
+									.replace('{{raw_image_url}}', image_url )
+									.replace('{{text}}', encodeURIComponent(share_text) );
+
+				shareButtonOut += '<a href="' + shareURL + '" target="_blank" '+
+									'class="pswp__share--' + shareButtonData.id + '"' +
+									(shareButtonData.download ? 'download' : '') + '>' + 
+									shareButtonData.label + '</a>';
+
+				if(_options.parseShareButtonOut) {
+					shareButtonOut = _options.parseShareButtonOut(shareButtonData, shareButtonOut);
+				}
+			}
+			_shareModal.children[0].innerHTML = shareButtonOut;
+			_shareModal.children[0].onclick = _openWindowPopup;
+
+		},
+		_hasCloseClass = function(target) {
+			for(var  i = 0; i < _options.closeElClasses.length; i++) {
+				if( framework.hasClass(target, 'pswp__' + _options.closeElClasses[i]) ) {
+					return true;
+				}
+			}
+		},
+		_idleInterval,
+		_idleTimer,
+		_idleIncrement = 0,
+		_onIdleMouseMove = function() {
+			clearTimeout(_idleTimer);
+			_idleIncrement = 0;
+			if(_isIdle) {
+				ui.setIdle(false);
+			}
+		},
+		_onMouseLeaveWindow = function(e) {
+			e = e ? e : window.event;
+			var from = e.relatedTarget || e.toElement;
+			if (!from || from.nodeName === 'HTML') {
+				clearTimeout(_idleTimer);
+				_idleTimer = setTimeout(function() {
+					ui.setIdle(true);
+				}, _options.timeToIdleOutside);
+			}
+		},
+		_setupFullscreenAPI = function() {
+			if(_options.fullscreenEl && !framework.features.isOldAndroid) {
+				if(!_fullscrenAPI) {
+					_fullscrenAPI = ui.getFullscreenAPI();
+				}
+				if(_fullscrenAPI) {
+					framework.bind(document, _fullscrenAPI.eventK, ui.updateFullscreen);
+					ui.updateFullscreen();
+					framework.addClass(pswp.template, 'pswp--supports-fs');
+				} else {
+					framework.removeClass(pswp.template, 'pswp--supports-fs');
+				}
+			}
+		},
+		_setupLoadingIndicator = function() {
+			// Setup loading indicator
+			if(_options.preloaderEl) {
+			
+				_toggleLoadingIndicator(true);
+
+				_listen('beforeChange', function() {
+
+					clearTimeout(_loadingIndicatorTimeout);
+
+					// display loading indicator with delay
+					_loadingIndicatorTimeout = setTimeout(function() {
+
+						if(pswp.currItem && pswp.currItem.loading) {
+
+							if( !pswp.allowProgressiveImg() || (pswp.currItem.img && !pswp.currItem.img.naturalWidth)  ) {
+								// show preloader if progressive loading is not enabled, 
+								// or image width is not defined yet (because of slow connection)
+								_toggleLoadingIndicator(false); 
+								// items-controller.js function allowProgressiveImg
+							}
+							
+						} else {
+							_toggleLoadingIndicator(true); // hide preloader
+						}
+
+					}, _options.loadingIndicatorDelay);
+					
+				});
+				_listen('imageLoadComplete', function(index, item) {
+					if(pswp.currItem === item) {
+						_toggleLoadingIndicator(true);
+					}
+				});
+
+			}
+		},
+		_toggleLoadingIndicator = function(hide) {
+			if( _loadingIndicatorHidden !== hide ) {
+				_togglePswpClass(_loadingIndicator, 'preloader--active', !hide);
+				_loadingIndicatorHidden = hide;
+			}
+		},
+		_applyNavBarGaps = function(item) {
+			var gap = item.vGap;
+
+			if( _fitControlsInViewport() ) {
+				
+				var bars = _options.barsSize; 
+				if(_options.captionEl && bars.bottom === 'auto') {
+					if(!_fakeCaptionContainer) {
+						_fakeCaptionContainer = framework.createEl('pswp__caption pswp__caption--fake');
+						_fakeCaptionContainer.appendChild( framework.createEl('pswp__caption__center') );
+						_controls.insertBefore(_fakeCaptionContainer, _captionContainer);
+						framework.addClass(_controls, 'pswp__ui--fit');
+					}
+					if( _options.addCaptionHTMLFn(item, _fakeCaptionContainer, true) ) {
+
+						var captionSize = _fakeCaptionContainer.clientHeight;
+						gap.bottom = parseInt(captionSize,10) || 44;
+					} else {
+						gap.bottom = bars.top; // if no caption, set size of bottom gap to size of top
+					}
+				} else {
+					gap.bottom = bars.bottom === 'auto' ? 0 : bars.bottom;
+				}
+				
+				// height of top bar is static, no need to calculate it
+				gap.top = bars.top;
+			} else {
+				gap.top = gap.bottom = 0;
+			}
+		},
+		_setupIdle = function() {
+			// Hide controls when mouse is used
+			if(_options.timeToIdle) {
+				_listen('mouseUsed', function() {
+					
+					framework.bind(document, 'mousemove', _onIdleMouseMove);
+					framework.bind(document, 'mouseout', _onMouseLeaveWindow);
+
+					_idleInterval = setInterval(function() {
+						_idleIncrement++;
+						if(_idleIncrement === 2) {
+							ui.setIdle(true);
+						}
+					}, _options.timeToIdle / 2);
+				});
+			}
+		},
+		_setupHidingControlsDuringGestures = function() {
+
+			// Hide controls on vertical drag
+			_listen('onVerticalDrag', function(now) {
+				if(_controlsVisible && now < 0.95) {
+					ui.hideControls();
+				} else if(!_controlsVisible && now >= 0.95) {
+					ui.showControls();
+				}
+			});
+
+			// Hide controls when pinching to close
+			var pinchControlsHidden;
+			_listen('onPinchClose' , function(now) {
+				if(_controlsVisible && now < 0.9) {
+					ui.hideControls();
+					pinchControlsHidden = true;
+				} else if(pinchControlsHidden && !_controlsVisible && now > 0.9) {
+					ui.showControls();
+				}
+			});
+
+			_listen('zoomGestureEnded', function() {
+				pinchControlsHidden = false;
+				if(pinchControlsHidden && !_controlsVisible) {
+					ui.showControls();
+				}
+			});
+
+		};
+
+
+
+	var _uiElements = [
+		{ 
+			name: 'caption', 
+			option: 'captionEl',
+			onInit: function(el) {  
+				_captionContainer = el; 
+			} 
+		},
+		{ 
+			name: 'share-modal', 
+			option: 'shareEl',
+			onInit: function(el) {  
+				_shareModal = el;
+			},
+			onTap: function() {
+				_toggleShareModal();
+			} 
+		},
+		{ 
+			name: 'button--share', 
+			option: 'shareEl',
+			onInit: function(el) { 
+				_shareButton = el;
+			},
+			onTap: function() {
+				_toggleShareModal();
+			} 
+		},
+		{ 
+			name: 'button--zoom', 
+			option: 'zoomEl',
+			onTap: pswp.toggleDesktopZoom
+		},
+		{ 
+			name: 'counter', 
+			option: 'counterEl',
+			onInit: function(el) {  
+				_indexIndicator = el;
+			} 
+		},
+		{ 
+			name: 'button--close', 
+			option: 'closeEl',
+			onTap: pswp.close
+		},
+		{ 
+			name: 'button--arrow--left', 
+			option: 'arrowEl',
+			onTap: pswp.prev
+		},
+		{ 
+			name: 'button--arrow--right', 
+			option: 'arrowEl',
+			onTap: pswp.next
+		},
+		{ 
+			name: 'button--fs', 
+			option: 'fullscreenEl',
+			onTap: function() {  
+				if(_fullscrenAPI.isFullscreen()) {
+					_fullscrenAPI.exit();
+				} else {
+					_fullscrenAPI.enter();
+				}
+			} 
+		},
+		{ 
+			name: 'preloader', 
+			option: 'preloaderEl',
+			onInit: function(el) {  
+				_loadingIndicator = el;
+			} 
+		}
+
+	];
+
+	var _setupUIElements = function() {
+		var item,
+			classAttr,
+			uiElement;
+
+		var loopThroughChildElements = function(sChildren) {
+			if(!sChildren) {
+				return;
+			}
+
+			var l = sChildren.length;
+			for(var i = 0; i < l; i++) {
+				item = sChildren[i];
+				classAttr = item.className;
+
+				for(var a = 0; a < _uiElements.length; a++) {
+					uiElement = _uiElements[a];
+
+					if(classAttr.indexOf('pswp__' + uiElement.name) > -1  ) {
+
+						if( _options[uiElement.option] ) { // if element is not disabled from options
+							
+							framework.removeClass(item, 'pswp__element--disabled');
+							if(uiElement.onInit) {
+								uiElement.onInit(item);
+							}
+							
+							//item.style.display = 'block';
+						} else {
+							framework.addClass(item, 'pswp__element--disabled');
+							//item.style.display = 'none';
+						}
+					}
+				}
+			}
+		};
+		loopThroughChildElements(_controls.children);
+
+		var topBar =  framework.getChildByClass(_controls, 'pswp__top-bar');
+		if(topBar) {
+			loopThroughChildElements( topBar.children );
+		}
+	};
+
+
+	
+
+	ui.init = function() {
+
+		// extend options
+		framework.extend(pswp.options, _defaultUIOptions, true);
+
+		// create local link for fast access
+		_options = pswp.options;
+
+		// find pswp__ui element
+		_controls = framework.getChildByClass(pswp.scrollWrap, 'pswp__ui');
+
+		// create local link
+		_listen = pswp.listen;
+
+
+		_setupHidingControlsDuringGestures();
+
+		// update controls when slides change
+		_listen('beforeChange', ui.update);
+
+		// toggle zoom on double-tap
+		_listen('doubleTap', function(point) {
+			var initialZoomLevel = pswp.currItem.initialZoomLevel;
+			if(pswp.getZoomLevel() !== initialZoomLevel) {
+				pswp.zoomTo(initialZoomLevel, point, 333);
+			} else {
+				pswp.zoomTo(_options.getDoubleTapZoom(false, pswp.currItem), point, 333);
+			}
+		});
+
+		// Allow text selection in caption
+		_listen('preventDragEvent', function(e, isDown, preventObj) {
+			var t = e.target || e.srcElement;
+			if(
+				t && 
+				t.getAttribute('class') && e.type.indexOf('mouse') > -1 && 
+				( t.getAttribute('class').indexOf('__caption') > 0 || (/(SMALL|STRONG|EM)/i).test(t.tagName) ) 
+			) {
+				preventObj.prevent = false;
+			}
+		});
+
+		// bind events for UI
+		_listen('bindEvents', function() {
+			framework.bind(_controls, 'pswpTap click', _onControlsTap);
+			framework.bind(pswp.scrollWrap, 'pswpTap', ui.onGlobalTap);
+
+			if(!pswp.likelyTouchDevice) {
+				framework.bind(pswp.scrollWrap, 'mouseover', ui.onMouseOver);
+			}
+		});
+
+		// unbind events for UI
+		_listen('unbindEvents', function() {
+			if(!_shareModalHidden) {
+				_toggleShareModal();
+			}
+
+			if(_idleInterval) {
+				clearInterval(_idleInterval);
+			}
+			framework.unbind(document, 'mouseout', _onMouseLeaveWindow);
+			framework.unbind(document, 'mousemove', _onIdleMouseMove);
+			framework.unbind(_controls, 'pswpTap click', _onControlsTap);
+			framework.unbind(pswp.scrollWrap, 'pswpTap', ui.onGlobalTap);
+			framework.unbind(pswp.scrollWrap, 'mouseover', ui.onMouseOver);
+
+			if(_fullscrenAPI) {
+				framework.unbind(document, _fullscrenAPI.eventK, ui.updateFullscreen);
+				if(_fullscrenAPI.isFullscreen()) {
+					_options.hideAnimationDuration = 0;
+					_fullscrenAPI.exit();
+				}
+				_fullscrenAPI = null;
+			}
+		});
+
+
+		// clean up things when gallery is destroyed
+		_listen('destroy', function() {
+			if(_options.captionEl) {
+				if(_fakeCaptionContainer) {
+					_controls.removeChild(_fakeCaptionContainer);
+				}
+				framework.removeClass(_captionContainer, 'pswp__caption--empty');
+			}
+
+			if(_shareModal) {
+				_shareModal.children[0].onclick = null;
+			}
+			framework.removeClass(_controls, 'pswp__ui--over-close');
+			framework.addClass( _controls, 'pswp__ui--hidden');
+			ui.setIdle(false);
+		});
+		
+
+		if(!_options.showAnimationDuration) {
+			framework.removeClass( _controls, 'pswp__ui--hidden');
+		}
+		_listen('initialZoomIn', function() {
+			if(_options.showAnimationDuration) {
+				framework.removeClass( _controls, 'pswp__ui--hidden');
+			}
+		});
+		_listen('initialZoomOut', function() {
+			framework.addClass( _controls, 'pswp__ui--hidden');
+		});
+
+		_listen('parseVerticalMargin', _applyNavBarGaps);
+		
+		_setupUIElements();
+
+		if(_options.shareEl && _shareButton && _shareModal) {
+			_shareModalHidden = true;
+		}
+
+		_countNumItems();
+
+		_setupIdle();
+
+		_setupFullscreenAPI();
+
+		_setupLoadingIndicator();
+	};
+
+	ui.setIdle = function(isIdle) {
+		_isIdle = isIdle;
+		_togglePswpClass(_controls, 'ui--idle', isIdle);
+	};
+
+	ui.update = function() {
+		// Don't update UI if it's hidden
+		if(_controlsVisible && pswp.currItem) {
+			
+			ui.updateIndexIndicator();
+
+			if(_options.captionEl) {
+				_options.addCaptionHTMLFn(pswp.currItem, _captionContainer);
+
+				_togglePswpClass(_captionContainer, 'caption--empty', !pswp.currItem.title);
+			}
+
+			_overlayUIUpdated = true;
+
+		} else {
+			_overlayUIUpdated = false;
+		}
+
+		if(!_shareModalHidden) {
+			_toggleShareModal();
+		}
+
+		_countNumItems();
+	};
+
+	ui.updateFullscreen = function(e) {
+
+		if(e) {
+			// some browsers change window scroll position during the fullscreen
+			// so PhotoSwipe updates it just in case
+			setTimeout(function() {
+				pswp.setScrollOffset( 0, framework.getScrollY() );
+			}, 50);
+		}
+		
+		// toogle pswp--fs class on root element
+		framework[ (_fullscrenAPI.isFullscreen() ? 'add' : 'remove') + 'Class' ](pswp.template, 'pswp--fs');
+	};
+
+	ui.updateIndexIndicator = function() {
+		if(_options.counterEl) {
+			_indexIndicator.innerHTML = (pswp.getCurrentIndex()+1) + 
+										_options.indexIndicatorSep + 
+										_options.getNumItemsFn();
+		}
+	};
+	
+	ui.onGlobalTap = function(e) {
+		e = e || window.event;
+		var target = e.target || e.srcElement;
+
+		if(_blockControlsTap) {
+			return;
+		}
+
+		if(e.detail && e.detail.pointerType === 'mouse') {
+
+			// close gallery if clicked outside of the image
+			if(_hasCloseClass(target)) {
+				pswp.close();
+				return;
+			}
+
+			if(framework.hasClass(target, 'pswp__img')) {
+				if(pswp.getZoomLevel() === 1 && pswp.getZoomLevel() <= pswp.currItem.fitRatio) {
+					if(_options.clickToCloseNonZoomable) {
+						pswp.close();
+					}
+				} else {
+					pswp.toggleDesktopZoom(e.detail.releasePoint);
+				}
+			}
+			
+		} else {
+
+			// tap anywhere (except buttons) to toggle visibility of controls
+			if(_options.tapToToggleControls) {
+				if(_controlsVisible) {
+					ui.hideControls();
+				} else {
+					ui.showControls();
+				}
+			}
+
+			// tap to close gallery
+			if(_options.tapToClose && (framework.hasClass(target, 'pswp__img') || _hasCloseClass(target)) ) {
+				pswp.close();
+				return;
+			}
+			
+		}
+	};
+	ui.onMouseOver = function(e) {
+		e = e || window.event;
+		var target = e.target || e.srcElement;
+
+		// add class when mouse is over an element that should close the gallery
+		_togglePswpClass(_controls, 'ui--over-close', _hasCloseClass(target));
+	};
+
+	ui.hideControls = function() {
+		framework.addClass(_controls,'pswp__ui--hidden');
+		_controlsVisible = false;
+	};
+
+	ui.showControls = function() {
+		_controlsVisible = true;
+		if(!_overlayUIUpdated) {
+			ui.update();
+		}
+		framework.removeClass(_controls,'pswp__ui--hidden');
+	};
+
+	ui.supportsFullscreen = function() {
+		var d = document;
+		return !!(d.exitFullscreen || d.mozCancelFullScreen || d.webkitExitFullscreen || d.msExitFullscreen);
+	};
+
+	ui.getFullscreenAPI = function() {
+		var dE = document.documentElement,
+			api,
+			tF = 'fullscreenchange';
+
+		if (dE.requestFullscreen) {
+			api = {
+				enterK: 'requestFullscreen',
+				exitK: 'exitFullscreen',
+				elementK: 'fullscreenElement',
+				eventK: tF
+			};
+
+		} else if(dE.mozRequestFullScreen ) {
+			api = {
+				enterK: 'mozRequestFullScreen',
+				exitK: 'mozCancelFullScreen',
+				elementK: 'mozFullScreenElement',
+				eventK: 'moz' + tF
+			};
+
+			
+
+		} else if(dE.webkitRequestFullscreen) {
+			api = {
+				enterK: 'webkitRequestFullscreen',
+				exitK: 'webkitExitFullscreen',
+				elementK: 'webkitFullscreenElement',
+				eventK: 'webkit' + tF
+			};
+
+		} else if(dE.msRequestFullscreen) {
+			api = {
+				enterK: 'msRequestFullscreen',
+				exitK: 'msExitFullscreen',
+				elementK: 'msFullscreenElement',
+				eventK: 'MSFullscreenChange'
+			};
+		}
+
+		if(api) {
+			api.enter = function() { 
+				// disable close-on-scroll in fullscreen
+				_initalCloseOnScrollValue = _options.closeOnScroll; 
+				_options.closeOnScroll = false; 
+
+				if(this.enterK === 'webkitRequestFullscreen') {
+					pswp.template[this.enterK]( Element.ALLOW_KEYBOARD_INPUT );
+				} else {
+					return pswp.template[this.enterK](); 
+				}
+			};
+			api.exit = function() { 
+				_options.closeOnScroll = _initalCloseOnScrollValue;
+
+				return document[this.exitK](); 
+
+			};
+			api.isFullscreen = function() { return document[this.elementK]; };
+		}
+
+		return api;
+	};
+
+
+
+};
+return PhotoSwipeUI_Default;
+
+
+});
+
+!function(t){"function"==typeof define&&define.amd?define(["jquery"],t):t("object"==typeof exports?require("jquery"):jQuery)}(function(t){function s(s){var e=!1;return t('[data-notify="container"]').each(function(i,n){var a=t(n),o=a.find('[data-notify="title"]').text().trim(),r=a.find('[data-notify="message"]').html().trim(),l=o===t("<div>"+s.settings.content.title+"</div>").html().trim(),d=r===t("<div>"+s.settings.content.message+"</div>").html().trim(),g=a.hasClass("alert-"+s.settings.type);return l&&d&&g&&(e=!0),!e}),e}function e(e,n,a){var o={content:{message:"object"==typeof n?n.message:n,title:n.title?n.title:"",icon:n.icon?n.icon:"",url:n.url?n.url:"#",target:n.target?n.target:"-"}};a=t.extend(!0,{},o,a),this.settings=t.extend(!0,{},i,a),this._defaults=i,"-"===this.settings.content.target&&(this.settings.content.target=this.settings.url_target),this.animations={start:"webkitAnimationStart oanimationstart MSAnimationStart animationstart",end:"webkitAnimationEnd oanimationend MSAnimationEnd animationend"},"number"==typeof this.settings.offset&&(this.settings.offset={x:this.settings.offset,y:this.settings.offset}),(this.settings.allow_duplicates||!this.settings.allow_duplicates&&!s(this))&&this.init()}var i={element:"body",position:null,type:"info",allow_dismiss:!0,allow_duplicates:!0,newest_on_top:!1,showProgressbar:!1,placement:{from:"top",align:"right"},offset:20,spacing:10,z_index:1031,delay:5e3,timer:1e3,url_target:"_blank",mouse_over:null,animate:{enter:"animated fadeInDown",exit:"animated fadeOutUp"},onShow:null,onShown:null,onClose:null,onClosed:null,icon_type:"class",template:'<div data-notify="container" class="col-xs-11 col-sm-4 alert alert-{0}" role="alert"><button type="button" aria-hidden="true" class="close" data-notify="dismiss">&times;</button><span data-notify="icon"></span> <span data-notify="title">{1}</span> <span data-notify="message">{2}</span><div class="progress" data-notify="progressbar"><div class="progress-bar progress-bar-{0}" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;"></div></div><a href="{3}" target="{4}" data-notify="url"></a></div>'};String.format=function(){for(var t=arguments[0],s=1;s<arguments.length;s++)t=t.replace(RegExp("\\{"+(s-1)+"\\}","gm"),arguments[s]);return t},t.extend(e.prototype,{init:function(){var t=this;this.buildNotify(),this.settings.content.icon&&this.setIcon(),"#"!=this.settings.content.url&&this.styleURL(),this.styleDismiss(),this.placement(),this.bind(),this.notify={$ele:this.$ele,update:function(s,e){var i={};"string"==typeof s?i[s]=e:i=s;for(var n in i)switch(n){case"type":this.$ele.removeClass("alert-"+t.settings.type),this.$ele.find('[data-notify="progressbar"] > .progress-bar').removeClass("progress-bar-"+t.settings.type),t.settings.type=i[n],this.$ele.addClass("alert-"+i[n]).find('[data-notify="progressbar"] > .progress-bar').addClass("progress-bar-"+i[n]);break;case"icon":var a=this.$ele.find('[data-notify="icon"]');"class"===t.settings.icon_type.toLowerCase()?a.removeClass(t.settings.content.icon).addClass(i[n]):(a.is("img")||a.find("img"),a.attr("src",i[n]));break;case"progress":var o=t.settings.delay-t.settings.delay*(i[n]/100);this.$ele.data("notify-delay",o),this.$ele.find('[data-notify="progressbar"] > div').attr("aria-valuenow",i[n]).css("width",i[n]+"%");break;case"url":this.$ele.find('[data-notify="url"]').attr("href",i[n]);break;case"target":this.$ele.find('[data-notify="url"]').attr("target",i[n]);break;default:this.$ele.find('[data-notify="'+n+'"]').html(i[n])}var r=this.$ele.outerHeight()+parseInt(t.settings.spacing)+parseInt(t.settings.offset.y);t.reposition(r)},close:function(){t.close()}}},buildNotify:function(){var s=this.settings.content;this.$ele=t(String.format(this.settings.template,this.settings.type,s.title,s.message,s.url,s.target)),this.$ele.attr("data-notify-position",this.settings.placement.from+"-"+this.settings.placement.align),this.settings.allow_dismiss||this.$ele.find('[data-notify="dismiss"]').css("display","none"),(this.settings.delay<=0&&!this.settings.showProgressbar||!this.settings.showProgressbar)&&this.$ele.find('[data-notify="progressbar"]').remove()},setIcon:function(){"class"===this.settings.icon_type.toLowerCase()?this.$ele.find('[data-notify="icon"]').addClass(this.settings.content.icon):this.$ele.find('[data-notify="icon"]').is("img")?this.$ele.find('[data-notify="icon"]').attr("src",this.settings.content.icon):this.$ele.find('[data-notify="icon"]').append('<img src="'+this.settings.content.icon+'" alt="Notify Icon" />')},styleDismiss:function(){this.$ele.find('[data-notify="dismiss"]').css({position:"absolute",right:"10px",top:"5px",zIndex:this.settings.z_index+2})},styleURL:function(){this.$ele.find('[data-notify="url"]').css({backgroundImage:"url(data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)",height:"100%",left:0,position:"absolute",top:0,width:"100%",zIndex:this.settings.z_index+1})},placement:function(){var s=this,e=this.settings.offset.y,i={display:"inline-block",margin:"0px auto",position:this.settings.position?this.settings.position:"body"===this.settings.element?"fixed":"absolute",transition:"all .5s ease-in-out",zIndex:this.settings.z_index},n=!1,a=this.settings;switch(t('[data-notify-position="'+this.settings.placement.from+"-"+this.settings.placement.align+'"]:not([data-closing="true"])').each(function(){e=Math.max(e,parseInt(t(this).css(a.placement.from))+parseInt(t(this).outerHeight())+parseInt(a.spacing))}),this.settings.newest_on_top===!0&&(e=this.settings.offset.y),i[this.settings.placement.from]=e+"px",this.settings.placement.align){case"left":case"right":i[this.settings.placement.align]=this.settings.offset.x+"px";break;case"center":i.left=0,i.right=0}this.$ele.css(i).addClass(this.settings.animate.enter),t.each(Array("webkit-","moz-","o-","ms-",""),function(t,e){s.$ele[0].style[e+"AnimationIterationCount"]=1}),t(this.settings.element).append(this.$ele),this.settings.newest_on_top===!0&&(e=parseInt(e)+parseInt(this.settings.spacing)+this.$ele.outerHeight(),this.reposition(e)),t.isFunction(s.settings.onShow)&&s.settings.onShow.call(this.$ele),this.$ele.one(this.animations.start,function(){n=!0}).one(this.animations.end,function(){s.$ele.removeClass(s.settings.animate.enter),t.isFunction(s.settings.onShown)&&s.settings.onShown.call(this)}),setTimeout(function(){n||t.isFunction(s.settings.onShown)&&s.settings.onShown.call(this)},600)},bind:function(){var s=this;if(this.$ele.find('[data-notify="dismiss"]').on("click",function(){s.close()}),this.$ele.mouseover(function(){t(this).data("data-hover","true")}).mouseout(function(){t(this).data("data-hover","false")}),this.$ele.data("data-hover","false"),this.settings.delay>0){s.$ele.data("notify-delay",s.settings.delay);var e=setInterval(function(){var t=parseInt(s.$ele.data("notify-delay"))-s.settings.timer;if("false"===s.$ele.data("data-hover")&&"pause"===s.settings.mouse_over||"pause"!=s.settings.mouse_over){var i=(s.settings.delay-t)/s.settings.delay*100;s.$ele.data("notify-delay",t),s.$ele.find('[data-notify="progressbar"] > div').attr("aria-valuenow",i).css("width",i+"%")}t<=-s.settings.timer&&(clearInterval(e),s.close())},s.settings.timer)}},close:function(){var s=this,e=parseInt(this.$ele.css(this.settings.placement.from)),i=!1;this.$ele.attr("data-closing","true").addClass(this.settings.animate.exit),s.reposition(e),t.isFunction(s.settings.onClose)&&s.settings.onClose.call(this.$ele),this.$ele.one(this.animations.start,function(){i=!0}).one(this.animations.end,function(){t(this).remove(),t.isFunction(s.settings.onClosed)&&s.settings.onClosed.call(this)}),setTimeout(function(){i||(s.$ele.remove(),s.settings.onClosed&&s.settings.onClosed(s.$ele))},600)},reposition:function(s){var e=this,i='[data-notify-position="'+this.settings.placement.from+"-"+this.settings.placement.align+'"]:not([data-closing="true"])',n=this.$ele.nextAll(i);this.settings.newest_on_top===!0&&(n=this.$ele.prevAll(i)),n.each(function(){t(this).css(e.settings.placement.from,s),s=parseInt(s)+parseInt(e.settings.spacing)+t(this).outerHeight()})}}),t.notify=function(t,s){var i=new e(this,t,s);return i.notify},t.notifyDefaults=function(s){return i=t.extend(!0,{},i,s)},t.notifyClose=function(s){"warning"===s&&(s="danger"),"undefined"==typeof s||"all"===s?t("[data-notify]").find('[data-notify="dismiss"]').trigger("click"):"success"===s||"info"===s||"warning"===s||"danger"===s?t(".alert-"+s+"[data-notify]").find('[data-notify="dismiss"]').trigger("click"):s?t(s+"[data-notify]").find('[data-notify="dismiss"]').trigger("click"):t('[data-notify-position="'+s+'"]').find('[data-notify="dismiss"]').trigger("click")},t.notifyCloseExcept=function(s){"warning"===s&&(s="danger"),"success"===s||"info"===s||"warning"===s||"danger"===s?t("[data-notify]").not(".alert-"+s).find('[data-notify="dismiss"]').trigger("click"):t("[data-notify]").not(s).find('[data-notify="dismiss"]').trigger("click")}});
+/*! iCheck v1.0.1 by Damir Sultanov, http://git.io/arlzeA, MIT Licensed */
+(function(h){function F(a,b,d){var c=a[0],e=/er/.test(d)?m:/bl/.test(d)?s:l,f=d==H?{checked:c[l],disabled:c[s],indeterminate:"true"==a.attr(m)||"false"==a.attr(w)}:c[e];if(/^(ch|di|in)/.test(d)&&!f)D(a,e);else if(/^(un|en|de)/.test(d)&&f)t(a,e);else if(d==H)for(e in f)f[e]?D(a,e,!0):t(a,e,!0);else if(!b||"toggle"==d){if(!b)a[p]("ifClicked");f?c[n]!==u&&t(a,e):D(a,e)}}function D(a,b,d){var c=a[0],e=a.parent(),f=b==l,A=b==m,B=b==s,K=A?w:f?E:"enabled",p=k(a,K+x(c[n])),N=k(a,b+x(c[n]));if(!0!==c[b]){if(!d&&
+b==l&&c[n]==u&&c.name){var C=a.closest("form"),r='input[name="'+c.name+'"]',r=C.length?C.find(r):h(r);r.each(function(){this!==c&&h(this).data(q)&&t(h(this),b)})}A?(c[b]=!0,c[l]&&t(a,l,"force")):(d||(c[b]=!0),f&&c[m]&&t(a,m,!1));L(a,f,b,d)}c[s]&&k(a,y,!0)&&e.find("."+I).css(y,"default");e[v](N||k(a,b)||"");B?e.attr("aria-disabled","true"):e.attr("aria-checked",A?"mixed":"true");e[z](p||k(a,K)||"")}function t(a,b,d){var c=a[0],e=a.parent(),f=b==l,h=b==m,q=b==s,p=h?w:f?E:"enabled",t=k(a,p+x(c[n])),
+u=k(a,b+x(c[n]));if(!1!==c[b]){if(h||!d||"force"==d)c[b]=!1;L(a,f,p,d)}!c[s]&&k(a,y,!0)&&e.find("."+I).css(y,"pointer");e[z](u||k(a,b)||"");q?e.attr("aria-disabled","false"):e.attr("aria-checked","false");e[v](t||k(a,p)||"")}function M(a,b){if(a.data(q)){a.parent().html(a.attr("style",a.data(q).s||""));if(b)a[p](b);a.off(".i").unwrap();h(G+'[for="'+a[0].id+'"]').add(a.closest(G)).off(".i")}}function k(a,b,d){if(a.data(q))return a.data(q).o[b+(d?"":"Class")]}function x(a){return a.charAt(0).toUpperCase()+
+a.slice(1)}function L(a,b,d,c){if(!c){if(b)a[p]("ifToggled");a[p]("ifChanged")[p]("if"+x(d))}}var q="iCheck",I=q+"-helper",u="radio",l="checked",E="un"+l,s="disabled",w="determinate",m="in"+w,H="update",n="type",v="addClass",z="removeClass",p="trigger",G="label",y="cursor",J=/ipad|iphone|ipod|android|blackberry|windows phone|opera mini|silk/i.test(navigator.userAgent);h.fn[q]=function(a,b){var d='input[type="checkbox"], input[type="'+u+'"]',c=h(),e=function(a){a.each(function(){var a=h(this);c=a.is(d)?
+c.add(a):c.add(a.find(d))})};if(/^(check|uncheck|toggle|indeterminate|determinate|disable|enable|update|destroy)$/i.test(a))return a=a.toLowerCase(),e(this),c.each(function(){var c=h(this);"destroy"==a?M(c,"ifDestroyed"):F(c,!0,a);h.isFunction(b)&&b()});if("object"!=typeof a&&a)return this;var f=h.extend({checkedClass:l,disabledClass:s,indeterminateClass:m,labelHover:!0,aria:!1},a),k=f.handle,B=f.hoverClass||"hover",x=f.focusClass||"focus",w=f.activeClass||"active",y=!!f.labelHover,C=f.labelHoverClass||
+"hover",r=(""+f.increaseArea).replace("%","")|0;if("checkbox"==k||k==u)d='input[type="'+k+'"]';-50>r&&(r=-50);e(this);return c.each(function(){var a=h(this);M(a);var c=this,b=c.id,e=-r+"%",d=100+2*r+"%",d={position:"absolute",top:e,left:e,display:"block",width:d,height:d,margin:0,padding:0,background:"#fff",border:0,opacity:0},e=J?{position:"absolute",visibility:"hidden"}:r?d:{position:"absolute",opacity:0},k="checkbox"==c[n]?f.checkboxClass||"icheckbox":f.radioClass||"i"+u,m=h(G+'[for="'+b+'"]').add(a.closest(G)),
+A=!!f.aria,E=q+"-"+Math.random().toString(36).replace("0.",""),g='<div class="'+k+'" '+(A?'role="'+c[n]+'" ':"");m.length&&A&&m.each(function(){g+='aria-labelledby="';this.id?g+=this.id:(this.id=E,g+=E);g+='"'});g=a.wrap(g+"/>")[p]("ifCreated").parent().append(f.insert);d=h('<ins class="'+I+'"/>').css(d).appendTo(g);a.data(q,{o:f,s:a.attr("style")}).css(e);f.inheritClass&&g[v](c.className||"");f.inheritID&&b&&g.attr("id",q+"-"+b);"static"==g.css("position")&&g.css("position","relative");F(a,!0,H);
+if(m.length)m.on("click.i mouseover.i mouseout.i touchbegin.i touchend.i",function(b){var d=b[n],e=h(this);if(!c[s]){if("click"==d){if(h(b.target).is("a"))return;F(a,!1,!0)}else y&&(/ut|nd/.test(d)?(g[z](B),e[z](C)):(g[v](B),e[v](C)));if(J)b.stopPropagation();else return!1}});a.on("click.i focus.i blur.i keyup.i keydown.i keypress.i",function(b){var d=b[n];b=b.keyCode;if("click"==d)return!1;if("keydown"==d&&32==b)return c[n]==u&&c[l]||(c[l]?t(a,l):D(a,l)),!1;if("keyup"==d&&c[n]==u)!c[l]&&D(a,l);else if(/us|ur/.test(d))g["blur"==
+d?z:v](x)});d.on("click mousedown mouseup mouseover mouseout touchbegin.i touchend.i",function(b){var d=b[n],e=/wn|up/.test(d)?w:B;if(!c[s]){if("click"==d)F(a,!1,!0);else{if(/wn|er|in/.test(d))g[v](e);else g[z](e+" "+w);if(m.length&&y&&e==B)m[/ut|nd/.test(d)?z:v](C)}if(J)b.stopPropagation();else return!1}})})}})(window.jQuery||window.Zepto);
+
+var token_csrf = $('meta[name=csrf-token]').attr('content')
+
+class tableGear {
+  constructor(content, url, table, functionOptional = false) {
+    this.content = content
+    this.template = this.content.find('.template-list').html()
+    this.loader = this.content.find('.overlay')
+
+    this.table = table
+    this.data = ''
+    this.dataSelect = ''
+    this.modalSelect = ''
+    this.data_complete = ''
+
+    this.method = 'GET'
+    this.xhr = ''
+    this.lastCheckedListData = null
+    this.checks = ''
+    this.name_url = ''
+    this.meta_field_text = {
+      key: '',
+      field: '',
+      value: '',
+    }
+
+    this.iconLeft = 'fa fa-arrow-left'
+    this.iconRigth = 'fa fa-arrow-right'
+    this.numberPage = `<button type="button" class="btn ">
+			                  <i class="wb-refresh" aria-hidden="true"></i>
+			                </button>`
+
+    this.form = {
+      url: url,
+      data: '',
+      pag: 1,
+    }
+    this.filter = {
+      search: '',
+      row: 10,
+      token: token_csrf,
+    }
+    this.functionOptional = functionOptional
+    this.hiddenColumn = true
+    this.hiddenColumnAlt = true
+    this.tablePaginate = true
+    this.tableFilterRow = this.content.find('.filter_row')
+    this.keepUrl = false
+
+    this.checkFunctionEnabler = false
+    this.checkFunction = ''
+
+    let cont = this
+    this.content.find('.filter_refresh').click(function () {
+      cont.refresh()
+    })
+    this.content.find('.filter_select_1').click(function () {
+      cont.CheckboxSelect(true)
+    })
+    this.content.find('.filter_select_0').click(function () {
+      cont.CheckboxSelect(false)
+    })
+    this.content.find('.menu-select').hide()
+  }
+  // actualiza la url aplicando los filtros en una variable tipo GET
+  AddUrlTable() {
+    if (!this.keepUrl) {
+      var sim = '?'
+      var url = this.name_url
+      $.each(this.filter, function (key, value) {
+        if (value && key != 'token') {
+          url += sim + key + '=' + value
+          sim = '&'
+        }
+      })
+      history.pushState(
+        {
+          selector: '',
+        },
+        '/' + this.name_url,
+        url,
+      )
+    }
+  }
+  // toma las variables GET de la url y actualiza los filtros
+  RefreshUrl() {
+    let cont = this
+
+    if (!this.keepUrl) {
+      $.each(cont.filter, function (key, value) {
+        if ($.get(key)) {
+          cont.filter[key] = $.get(key)
+          let valueFilter = cont.filter[key]
+          $(cont.content)
+            .find('.filter_' + key + ' option[value="' + $.get(key) + '"]')
+            .prop('selected', true)
+          $(cont.content)
+            .find('.filter_' + key + '')
+            .val($.get(key))
+
+          if ($('.filter_' + key).prop('type') == 'button') {
+            var options = $('.filter_' + key)
+              .siblings()
+              .find('a')
+            let text = null
+            $.each(options, function (key, value) {
+              if ($(value).attr('value') == valueFilter) {
+                text = $(value).html()
+              }
+            })
+            $(cont.content)
+              .find('.filter_' + key + '')
+              .html(text)
+          }
+        }
+      })
+    }
+  }
+  // verifica la variable y almacena la nueva peticion AJAX
+  StateXhr() {
+    if (this.xhr && this.xhr.readyState != 4) {
+      this.xhr.abort()
+    }
+  }
+  // permite seleccional las tabla donde se van a incluir los datos
+  SelectList() {
+    return $(this.content).find('table')
+  }
+  // limpia la tabla invocando a .list_table
+  PrintList(data) {
+    $(this.SelectList()).html(data)
+  }
+  // anade contenido a la tabla invocando a .list_table
+  AppendList(data) {
+    $(this.SelectList()).append(data)
+  }
+  isDataURL() {
+    return this.method == 'GET' ? true : false
+  }
+  // actualiza la variable data_send que va ser enviada en la petiion AJAX
+  refreshForm() {
+    let form = this.filter
+    let data_send = '',
+      separ = ''
+
+    $.each(form, function (key, value) {
+      data_send += separ + '_' + key + '=' + value
+      separ = '&'
+    })
+    this.form.data = data_send
+  }
+  // realiza la peticion AJAX al servidor
+  list() {
+    let cont = this
+    this.StateXhr()
+    this.refreshForm()
+
+    let url_finish = this.form.url + '?page=' + this.form.pag
+
+    this.xhr = $.ajax({
+      url: cont.isDataURL() ? url_finish + '&' + this.form.data : url_finish,
+      data: cont.isDataURL() ? null : this.form.data,
+      dataType: 'json',
+      type: cont.method,
+    })
+      .done(function (result) {
+        cont.ResultData(result)
+      })
+      .fail(function (errors) {
+        cont.ResultError(errors)
+      })
+  }
+  // ejecuta la infomracion que llego luego de la peticion AJAX
+  ResultData(result) {
+    let cont = this
+    this.data = result.data.data
+    this.data_complete = result
+
+    // lista la informacion de la tabla
+    this.LoadListTable()
+
+    // oculta el paginate de la tabla
+    this.tablePaginate ? this.paginate(6) : this.tableFilterRow.hide()
+
+    // ajusta el tamano de la primera columna
+    this.AutoWidthTd()
+
+    this.CheckboxAddClass()
+    this.CheckboxShiftAdd()
+
+    // oculta el cargador
+    this.loader.hide()
+
+    // ejecuta la funcion opcional
+    this.functionOptional ? self[cont.functionOptional](result) : false
+
+    // detemos loading
+    this.ChangeFieldIcon(false)
+
+    if (!result.data.data.length) {
+      this.DivItemsNotFound(true)
+    }
+  }
+  // mostrar el div de no hay registros
+  DivItemsNotFound(status = false) {
+    let display = status ? 'block' : 'none'
+    $(this.content).find('.items-not-found').css('display', display)
+  }
+  // crea las funciones para los filtros
+  FilterFunction() {
+    let cont = this
+
+    $.each(this.filter, function (key, value) {
+      let campo = key
+
+      if ($('.filter_' + key).length) {
+        if ($('.filter_' + key).prop('type') == 'select-one') {
+          cont.content.find('.filter_' + key).change(function () {
+            cont.FilterRefresh(campo, $(this).val())
+          })
+        } else if ($('.filter_' + key).prop('type') == 'text') {
+          let status_update = false
+
+          cont.content.find('.filter_' + key).keyup(function () {
+            cont.meta_field_text.field = '.filter_' + key
+            cont.meta_field_text.key = key
+            cont.meta_field_text.value = $(this).val()
+
+            cont.IntervalClear()
+            cont.IntervalField()
+            cont.ChangeFieldIcon(true)
+            cont.ChangeFieldMessage(false)
+          })
+        } else if ($('.filter_' + key).prop('type') == 'button') {
+          let obj = cont.content.find('.filter_' + key)
+          obj
+            .siblings()
+            .find('a')
+            .click(function () {
+              obj.html($(this).html())
+              obj.val($(this).attr('value'))
+              cont.FilterRefresh(campo, obj.val())
+            })
+        }
+      }
+    })
+  }
+  ChangeFieldMessage(status = true) {
+    let label = this.content.find(
+      '.filter_' + this.meta_field_text.key + '_label',
+    )
+    let value = this.meta_field_text.value
+    if (!status) {
+      label.hide()
+    } else if (value.length <= 2 && value.length > 0) {
+      label.show()
+    } else {
+      label.hide()
+    }
+  }
+  ChangeFieldIcon(status = true) {
+    let class_spin = 'fa-spin'
+    let class_icon_search = 'fa-search'
+    let class_icon_loading = 'fa-cog'
+    let i = this.content.find('.filter_' + this.meta_field_text.key + '_icon')
+
+    if (status) {
+      i.addClass(class_spin)
+      i.addClass(class_icon_loading)
+      i.removeClass(class_icon_search)
+    } else {
+      i.removeClass(class_spin)
+      i.removeClass(class_icon_loading)
+      i.addClass(class_icon_search)
+    }
+  }
+  //Detiene el intervalo para realizar la consulta de los input text
+  IntervalClear() {
+    clearInterval(this.interval)
+  }
+  //Inicia el intervalo para consulta input text
+  IntervalField() {
+    let cont = this
+    this.interval = setInterval(
+      function () {
+        cont.QueryField()
+      },
+      700,
+      'JavaScript',
+    )
+  }
+  //Aplica la consulta input text
+  QueryField() {
+    this.IntervalClear()
+    this.ChangeFieldMessage()
+    if (this.meta_field_text.value.length >= 3) {
+      this.FilterRefresh(this.meta_field_text.key, this.meta_field_text.value)
+    } else {
+      if (this.filter[this.meta_field_text.key] != '') {
+        this.FilterRefresh(this.meta_field_text.key, '')
+      } else {
+        // detemos loading
+        this.ChangeFieldIcon(false)
+      }
+    }
+  }
+  FilterRefresh(camp, value) {
+    this.filter[camp] = value
+    this.form.pag = 1
+    this.refresh()
+  }
+  // ejecuta los errores de la peticion AJAX
+  ResultError(result) {
+    this.loader.hide()
+    this.FailQuery(result)
+  }
+  // listDataTable
+  LoadListTable() {
+    let cont = this
+    let data = this.data_complete.data.data
+    let tmp = $(this.template)
+
+    this.data = []
+    this.PrintList('')
+    this.content.find('.JCLRgrips').remove()
+
+    // muestra el trbody de la tabla
+    let itemTitleTable = tmp.clone()
+    this.LoadDataTable(
+      itemTitleTable,
+      this.table,
+      null,
+      1,
+      this.hiddenColumn,
+      this.hiddenColumnAlt,
+    )
+    this.AppendList(itemTitleTable)
+
+    $.each(data, function (key, value) {
+      // clona he anade la fila de la table
+      let item = tmp.clone()
+      cont.LoadDataTable(
+        item,
+        value,
+        key,
+        2,
+        cont.hiddenColumn,
+        cont.hiddenColumnAlt,
+      )
+      cont.AppendList(item)
+
+      // guarda la informacion en la variable this.data
+      cont.data[key] = new structureData(key, value)
+    })
+  }
+  // carga los datos en el td
+  LoadDataTable(item, data, key, type, hidden, hidden_alt) {
+    // tipo 1 carga la informacion del encabezado de la tabla
+    if (type == 1) {
+      let tds = item[0].cells
+      $.each(tds, function (i, element) {
+        $(element).html(data[i])
+        $(element).addClass('orderColumn')
+      })
+    }
+    // tipo 2 carga la informacion de filas de la tabla
+    else if (type == 2) {
+      //informacion del tr
+      item.attr('data-id', data.id)
+      item[0].innerHTML = item[0].innerHTML.replace('#key#', 'id_chk' + key)
+
+      // valida si la consulta trae el campo "state_tr" para cambiar el estado del tr
+      if (data.state_tr == 0 || data.state_tr == false) {
+        $(item).addClass('state_' + data.state_tr)
+      }
+
+      //carga los tds
+      $.each(data, function (i, data) {
+        item[0].innerHTML = item[0].innerHTML.replaceAll('#_' + i + '_#', data)
+      })
+
+      /** Format Number */
+      let numberTr = $(item[0]).find('.number')
+      $.each(numberTr, function (key, value) {
+        let currency = $(value).attr('data-currency')
+        let currency_right = $(value).attr('data-currency-right')
+        let decimals = $(value).attr('data-decimals')
+        let numberFormated = ''
+        if ($(value).html() != 'null') {
+          numberFormated = formatNumber.new($(value).html(), currency, decimals)
+        } else {
+          numberFormated = formatNumber.new(0, currency, decimals)
+        }
+        currency_right
+          ? $(value).text(numberFormated + ' ' + currency_right)
+          : $(value).text(numberFormated)
+      })
+
+      /** Format booblean */
+      let booleanTr = $(item[0]).find('.boolean')
+      $.each(booleanTr, function (key, value) {
+        let trueString = $(value).attr('data-true')
+        let falseString = $(value).attr('data-false')
+        let booleanString = ''
+        if ($(value).html() == 1) {
+          booleanString = trueString
+        } else {
+          booleanString = falseString
+        }
+        $(value).text(booleanString)
+      })
+    }
+
+    // si hay campos para ocultar lo hace
+    hidden_alt
+      ? (item[0].innerHTML = item[0].innerHTML.replaceAll(
+          'none-alt-column',
+          'hide-column',
+        ))
+      : null
+    hidden
+      ? (item[0].innerHTML = item[0].innerHTML.replaceAll(
+          'none-column',
+          'hide-column',
+        ))
+      : null
+  }
+
+  // paginations la tabla
+  paginate(num) {
+    //Selecciona el div donde se pintaran los botones de paginacion.
+    let divPaginate = $(this.content).find('.paginate')
+    divPaginate.html('')
+
+    this.PaginateBtn(num)
+    var cont = this
+
+    //funcion que se encarga de imprimir los botones.
+    divPaginate.find(':button').click(function () {
+      let type = $(this).data('state')
+      let page = $(this).data('page')
+      let pag = cont.data_complete.data.current_page
+
+      if (type == 0) {
+        pag--
+      } else if (type == 1) {
+        pag++
+      } else if (type == 2) {
+        pag = page
+      }
+
+      cont.form.pag = pag
+      cont.refresh()
+    })
+  }
+  // paginations crea el los botones
+  PaginateBtn(numRows) {
+    let cont = this
+    let divPaginate = $(this.content).find('.paginate')
+    let data = this.data_complete.data
+
+    let num_p = data.last_page //4
+    let num_page = data.current_page
+    let for_i = 1
+
+    if (numRows >= num_p) {
+      numRows = num_p - 1
+    } else {
+      if (num_page - numRows / 2 >= 1) {
+        if (num_page + numRows / 2 <= num_p) {
+          for_i = num_page - numRows / 2
+        } else {
+          for_i = num_p - numRows
+        }
+      }
+    }
+
+    cont.PaginatePrintBnt(
+      divPaginate,
+      0,
+      data.current_page - 1,
+      'Anterior',
+      1,
+      this.iconLeft,
+      data,
+    )
+    for (var i = for_i; i <= for_i + numRows; i++) {
+      cont.PaginatePrintBnt(divPaginate, 2, i, 'Pagina ' + i, 0, i, data)
+    }
+    cont.PaginatePrintBnt(
+      divPaginate,
+      1,
+      data.current_page + 1,
+      'Siguiente',
+      1,
+      this.iconRigth,
+      data,
+    )
+
+    let tot = $(this.content).find('.paginate-total')
+    tot.text('Total: ' + data.total)
+
+    divPaginate.click(function () {
+      $('html,body').animate(
+        {
+          scrollTop: $(cont.content).offset().top - 140,
+        },
+        250,
+      )
+    })
+  }
+  // paginations print btn
+  PaginatePrintBnt(div, state, page, title, type, value, data) {
+    let temp = this.numberPage
+    let btn = $(temp).clone()
+
+    btn.attr('data-state', state)
+    btn.attr('data-page', page)
+    btn.attr('title', title)
+
+    if (type == 1) {
+      btn.find('i').addClass(value)
+    } else {
+      btn.text(value)
+    }
+
+    state == 0 ? btn.addClass('btn-previous') : ''
+    state == 1 ? btn.addClass('btn-next') : ''
+
+    if (state == 0) data.current_page == 1 ? btn.attr('disabled', true) : ''
+
+    if (state == 1)
+      data.current_page == data.last_page ? btn.attr('disabled', true) : ''
+
+    if (state == 2) data.current_page == page ? btn.addClass('btn-primary') : ''
+
+    $(div).append(btn)
+  }
+
+  /**
+   * @description show errors in notifications
+   * @param {Array} errors
+   */
+  FailQuery(errors) {
+    errors.status == 500 ? notify(3) : null
+    errors.status == 404 ? notify(1) : null
+    errors.status == 422 ? notify(4) : null
+  }
+
+  /**
+   * @description Apply css to checkboox
+   */
+  CheckboxAddClass() {
+    $(this.content).find('.checkbox-icheck').iCheck({
+      checkboxClass: 'icheckbox_flat-blue',
+      radioClass: 'iradio_minimal',
+      increaseArea: '20%',
+    })
+  }
+
+  /**
+   * @description Function Select all (true/false)
+   */
+  CheckboxSelect(state, type = false, element = false) {
+    let content = $(this.SelectList())
+    let checkGroup = element ? element : content.find('input:checkbox')
+    let c_everyboby = content.find('.check_everyboby')
+    let default_tr = checkGroup.parent().parent().parent()
+
+    state ? checkGroup.iCheck('check') : checkGroup.iCheck('uncheck')
+    state ? default_tr.addClass('active') : default_tr.removeClass('active')
+    state
+      ? c_everyboby.prop('checked', true)
+      : c_everyboby.prop('checked', false)
+
+    this.CheckboxCount()
+  }
+
+  /**
+   * @description Function Select all (true/false)
+   */
+  CheckboxArraySelect(key, value) {
+    let cont = this
+    $.each(this.data_complete.data.data, function (elemt, data) {
+      if (data[key] == value) {
+        cont.CheckboxSelect(true, true, cont.content.find('#id_chk' + elemt))
+      }
+    })
+  }
+
+  /**
+   * @description saves the checks of the list in this.data
+   */
+  CheckboxCount() {
+    let checkGroup = this.SelectList().find('input:checkbox')
+    this.checks = []
+    this.checks.length = 0
+
+    let class_tr = this
+    let cont = 0
+    for (let x = 0; x < checkGroup.length; x++) {
+      if (checkGroup[x].checked) {
+        class_tr.checks[cont] = $(checkGroup[x])
+          .parent()
+          .parent()
+          .parent()
+          .data('id')
+        cont = cont + 1
+      }
+    }
+
+    cont
+      ? this.content.find('.menu-select').show()
+      : this.content.find('.menu-select').hide()
+    this.content.find('.menu-select').find('.number-selected').text(cont)
+
+    this.checkFunctionEnabler ? self[this.checkFunction](class_tr.checks) : null
+  }
+
+  /**
+   * @description Select one and select shiftkey of the list (Check)
+   */
+  CheckboxShiftAdd() {
+    let div = this.SelectList()
+    let chkboxes = div.find('.iCheck-helper')
+    let class_tr = this
+
+    $(chkboxes).click(function (e) {
+      let checkGroup = div.find('input:checkbox')
+      let check = $(this).siblings('input:checkbox')
+      let tr_default = check.parent().parent().parent()
+
+      check.is(':checked')
+        ? tr_default.addClass('active')
+        : tr_default.removeClass('active')
+
+      if (!class_tr.lastCheckedListData) {
+        class_tr.lastCheckedListData = check
+        class_tr.CheckboxCount()
+        return
+      }
+
+      if (e.shiftKey) {
+        let start = checkGroup.index(check)
+        let end = checkGroup.index(class_tr.lastCheckedListData)
+
+        let sliceCheck = checkGroup.slice(
+          Math.min(start, end),
+          Math.max(start, end) + 1,
+        )
+
+        for (let i = sliceCheck.length - 1; i >= 0; i--) {
+          let default_check = $(
+            checkGroup.slice(Math.min(start, end), Math.max(start, end) + 1)[i],
+          )
+          let default_tr = default_check.parent().parent().parent()
+
+          check.is(':checked')
+            ? default_tr.addClass('active')
+            : default_tr.removeClass('active')
+          check.is(':checked')
+            ? default_check.iCheck('check')
+            : default_check.iCheck('uncheck')
+        }
+      }
+
+      class_tr.lastCheckedListData = check
+      class_tr.CheckboxCount()
+    })
+  }
+  /**
+   * @description Function Select all (true/false)
+   */
+  ChangeRow(element) {
+    let rows = $(element).html()
+    this.filter.row = rows
+    this.form.pag = 1
+    this.refresh()
+  }
+  /**
+   * @description Execute Action from the buttons
+   */
+  Modal(element) {
+    let tr = $(element).parent().parent().index()
+    let action = $(element).data('action')
+
+    this.modalSelect = $($(element).data('modal'))
+
+    this.dataSelect = tr ? this.data[tr - 1].data : 0
+
+    this.modalSelect.modal({backdrop: 'static', keyboard: false})
+    this.ModalLoader(false)
+
+    action ? self[action](this.dataSelect) : false
+
+    let cont = this
+    this.modalSelect.find('.btn-close').click(function () {
+      cont.ModalClose()
+    })
+  }
+  /**
+   * @param {boolean} status
+   * @returns change modal loader status
+   */
+  ModalLoader(status) {
+    if (this.modalSelect) {
+      if (status) {
+        this.modalSelect.find('.overlay').show()
+      } else {
+        this.modalSelect.find('.overlay').hide()
+      }
+    }
+  }
+  /**
+   * @description Basic functions of modal closure
+   * @param {form} form modals list
+   */
+  ModalClose(form = null) {
+    form ? form[0].reset() : null
+    this.ModalLoader(false)
+
+    if (this.modalSelect) {
+      this.modalSelect.modal('hide')
+    }
+
+    form ? this.ModalClearForm(form) : null
+  }
+  ModalClearForm(form) {
+    let input = form.find('input')
+    let select = form.find('select')
+    let textarea = form.find('textarea')
+    input.removeClass('is-invalid')
+    select.removeClass('is-invalid')
+    textarea.removeClass('is-invalid')
+    input.parent().find('.label-error').html('')
+    select.parent().find('.label-error').html('')
+    textarea.parent().find('.label-error').html('')
+  }
+  ModalValidateInputs(errors, form) {
+    this.ModalClearForm(form)
+
+    $.each(errors, function (key, value) {
+      let input = form.find('input[name=' + key + ']')
+      let select = form.find('select[name=' + key + ']')
+      let textarea = form.find('textarea[name=' + key + ']')
+
+      input
+        .parent()
+        .find('.label-error')
+        .html('<i class="fa fa-exclamation-triangle"></i> ' + value)
+
+      if (input.hasClass('flatpickr-input')) {
+        input
+          .parent()
+          .parent()
+          .find('.label-error')
+          .html('<i class="fa fa-exclamation-triangle"></i> ' + value)
+      }
+
+      select
+        .parent()
+        .find('.label-error')
+        .html('<i class="fa fa-exclamation-triangle"></i> ' + value)
+
+      textarea
+        .parent()
+        .find('.label-error')
+        .html('<i class="fa fa-exclamation-triangle"></i> ' + value)
+
+      input.addClass('is-invalid')
+      select.addClass('is-invalid')
+      textarea.addClass('is-invalid')
+    })
+  }
+  ModalLoadForm() {
+    let cont = this
+    $.each(this.dataSelect, function (key, value) {
+      cont.modalSelect
+        .find('form')
+        .find('input[name=' + key + ']')
+        .val(value)
+      cont.modalSelect
+        .find('form')
+        .find('textarea[name=' + key + ']')
+        .val(value)
+    })
+  }
+
+  /**
+   *
+   * @param {Element} select Example: $('.select')
+   * @param {array} data Structure {id: 1, name: Pepe}
+   * @param {int|string} selected
+   * @param {String} name_default Default name of the first option
+   */
+  LoadSelect(select, data, selected, name_default) {
+    let d = data
+    $(select).find('option').remove()
+    select.attr('data-placeholder')
+      ? (name_default = select.attr('data-placeholder'))
+      : null
+    if (name_default) {
+      $(select).append(
+        '<option data-alt="" value="" class="c_gray_cl">' +
+          name_default +
+          '</option>',
+      )
+    } else {
+      $(select).append(
+        '<option data-alt="" value="" class="c_gray_cl">Selecciona...</option>',
+      )
+    }
+
+    $.each(d, function (key, value) {
+      $(select).append(
+        $('<option>', {
+          value: d[key].id,
+          text: d[key].name,
+        }),
+      )
+    })
+
+    selected
+      ? select
+          .find('option[value="' + selected + '"]')
+          .attr('selected', 'selected')
+      : ''
+  }
+  /**
+   *
+   * @param {Element} radio The html div where is going to be displayed the radio options Example: $('.radio')
+   * @param {array} data The array of the objects to be displayed, it must has id and name Structure {id: 1, name: Pepe}
+   * @param {int|string} selected The pre defined value of the radio button
+   * @param {String} dataField The field of the database related to the input, it must be exactly as in the database
+   */
+  LoadCheck(check, selected) {
+    selected ? check.attr('checked', true) : check.attr('checked', false)
+  }
+  // ajusta tamano de las columnas 1 de la tabla
+  AutoWidthTd() {
+    let div = this.SelectList().find('tr')
+    var td = $(div[1]).find('td')[0]
+
+    let cont = $(td).find('i').length + $(td).find('input').length
+    let camp
+
+    switch (cont) {
+      case 1:
+        camp = 55
+        break
+      case 2:
+        camp = 40
+        break
+      case 3:
+        camp = 37
+        break
+      case 4:
+        camp = 36
+        break
+      default:
+        camp = 33
+        break
+    }
+
+    cont ? ($(div[0]).find('td')[0].width = cont * camp + 'px') : null
+  }
+  // ejecuta la CLASS
+  refresh(state = false) {
+    this.DivItemsNotFound(false)
+    state ? this.FilterFunction() : null
+    state ? this.RefreshUrl() : null
+
+    this.AddUrlTable()
+    this.refreshForm()
+    this.list()
+    this.checks = null
+
+    this.content.find('.menu-select').hide()
+    this.loader.show()
+  }
+  GetDataById(idArray) {
+    let ansArray = []
+    $.each(this.data, function (key, value) {
+      if (idArray.find((x) => x === value.data.id)) {
+        ansArray.push(value.data)
+      }
+    })
+    return ansArray
+  }
+}
+
+/**
+ * Other Functions
+ * @name GET attribute URL
+ */
+;(function ($) {
+  $.get = function (key) {
+    key = key.replace(/[\[]/, '\\[')
+    key = key.replace(/[\]]/, '\\]')
+    var pattern = '[\\?&]' + key + '=([^&#]*)'
+    var regex = new RegExp(pattern)
+    var url = unescape(window.location.href)
+    var results = regex.exec(url)
+    if (results === null) {
+      return null
+    } else {
+      return results[1]
+    }
+  }
+})(jQuery)
+
+/**
+ * @description Structure data
+ */
+class structureData {
+  constructor(num, data) {
+    this.num = num
+    this.data = data
+  }
+}
+
+/**
+ *
+ * @param {*} type
+ * @param {*} title
+ * @param {*} text
+ * @param {*} numType
+ * @param {int|min=1|max=4} position
+ */
+function notify(type, title = null, text = null, numType = null, position = 2) {
+  var msnType = [
+    {
+      name: 'info',
+      icono: 'fa fa-info mr-10',
+    },
+    {
+      name: 'danger',
+      icono: 'fa fa-ban mr-10',
+    },
+    {
+      name: 'success',
+      icono: 'fa fa-check mr-10',
+    },
+    {
+      name: 'warning',
+      icono: 'fa fa-warning mr-10',
+    },
+  ]
+
+  var notifyDefault = [
+    {
+      title: 'defaul',
+      text: '',
+      numType: '1',
+    },
+    {
+      title: 'Comprueba tu Conexión',
+      text: 'No se puede conectar a la base de datos',
+      numType: '1',
+    },
+    {
+      title: 'La operación se realizo con éxito',
+      text: '',
+      numType: '2',
+    },
+    {
+      title: 'Error Controller',
+      text: 'No se puede recibir información del controlador',
+      numType: '1',
+    },
+    {
+      title: 'Problemas al validar los campos',
+      text: '',
+      numType: '1',
+    },
+  ]
+
+  if (type) {
+    title = notifyDefault[type].title
+    text = notifyDefault[type].text
+    numType = notifyDefault[type].numType
+  }
+
+  positionDev = {
+    from: 'bottom',
+    align: 'right',
+  }
+  if (position == 2) {
+    positionDev = {
+      from: 'bottom',
+      align: 'left',
+    }
+  } else if (position == 3) {
+    positionDev = {
+      from: 'top',
+      align: 'right',
+    }
+  } else if (position == 4) {
+    positionDev = {
+      from: 'top',
+      align: 'left',
+    }
+  }
+
+  $.notify(
+    {
+      icon: msnType[numType].icono,
+      title: title,
+      message: text,
+    },
+    {
+      element: 'body',
+      position: null,
+      type: msnType[numType].name,
+      allow_dismiss: true,
+      newest_on_top: false,
+      showProgressbar: false,
+      placement: positionDev,
+      offset: 20,
+      spacing: 10,
+      z_index: 1800,
+      delay: 5000,
+      timer: 100,
+      margin_top: 10,
+      url_target: '_blank',
+      mouse_over: null,
+      animate: {
+        enter: 'animated fadeInDown',
+        exit: 'animated fadeOutUp',
+      },
+      onShow: null,
+      onShown: null,
+      onClose: null,
+      onClosed: null,
+      icon_type: 'class',
+      template: `<div class="alert alert-table-gear dark alert-alt alert-{0} alert-dismissible" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" data-notify="dismiss" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                        <span data-notify="icon"></span>
+                        {1}<br><a class="alert-link" href="javascript:void(0)">{2}</a>
+                    </div>`,
+    },
+  )
+}
+
+/**
+ * This function groups an array by a key.
+ *
+ * @param {array} array The array of the data that is going to be grouped
+ * @param {string} key The key value by which the aray is going to be grouped
+ *
+ * @returns {array} The array grouped by the keys
+ */
+function GroupBy(array, key) {
+  return array.reduce(function (rv, x) {
+    ;(rv[x[key]] = rv[x[key]] || []).push(x)
+    return rv
+  }, {})
+}
+
+let location_es = {
+  format: 'YYYY-MM-DD',
+  separator: ' - ',
+  applyLabel: 'Aplicar',
+  cancelLabel: 'Cancelar',
+  fromLabel: 'From',
+  toLabel: 'To',
+  customRangeLabel: 'Custom',
+  daysOfWeek: ['Dom', 'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab'],
+  monthNames: [
+    'Enero',
+    'Febrero',
+    'Marzo',
+    'Abril',
+    'Mayo',
+    'Junio',
+    'Julio',
+    'Agosto',
+    'Septiembre',
+    'Octubre',
+    'Noviembre',
+    'Diciembre',
+  ],
+  firstDay: 1,
+}
+
+String.prototype.replaceAll = function (search, replacement) {
+  var target = this
+  return target.split(search).join(replacement)
+}
+
+/**
+ * Function to format number as currency
+ */
+function FormatNumber(amount, decimals) {
+  amount += ''
+  amount = parseFloat(amount.replace(/[^0-9\.]/g, ''))
+
+  decimals = decimals || 0
+  if (isNaN(amount) || amount === 0) return parseFloat(0).toFixed(decimals)
+
+  amount = '' + amount.toFixed(decimals)
+  var amount_parts = amount.split('.'),
+    regexp = /(\d+)(\d{3})/
+
+  while (regexp.test(amount_parts[0]))
+    amount_parts[0] = amount_parts[0].replace(regexp, '$1' + '.' + '$2')
+
+  return amount_parts.join('.')
+}
+/**
+ * Function to format number as currency
+ */
+var formatNumber = {
+  separador: '.',
+  sepDecimal: ',',
+  formatear: function (num) {
+    num = parseFloat(num).toFixed(this.decimals)
+    num += ''
+    var splitStr = num.split('.')
+    var splitLeft = splitStr[0]
+    var splitRight = splitStr.length > 1 ? this.sepDecimal + splitStr[1] : ''
+    var regx = /(\d+)(\d{3})/
+
+    while (regx.test(splitLeft)) {
+      splitLeft = splitLeft.replace(regx, '$1' + this.separador + '$2')
+    }
+    return this.simbol + ' ' + (splitLeft + splitRight)
+  },
+  new: function (num, simbol, decimals) {
+    this.simbol = simbol || ''
+    this.decimals = decimals || ''
+    return this.formatear(num)
+  },
+}
+
+/** show|hide loader modal */
+function loaderContent(modal, s = false) {
+  s ? modal.find('.overlay-modal').show() : modal.find('.overlay-modal').hide()
+}
+
+/**
+ * DATE Select show or hide days
+ */
+$.datepicker.regional['es'] = {
+  closeText: 'Cerrar',
+  prevText: '< Ant',
+  nextText: 'Sig >',
+  currentText: 'Hoy',
+  monthNames: [
+    'Enero',
+    'Febrero',
+    'Marzo',
+    'Abril',
+    'Mayo',
+    'Junio',
+    'Julio',
+    'Agosto',
+    'Septiembre',
+    'Octubre',
+    'Noviembre',
+    'Diciembre',
+  ],
+  monthNamesShort: [
+    'Ene',
+    'Feb',
+    'Mar',
+    'Abr',
+    'May',
+    'Jun',
+    'Jul',
+    'Ago',
+    'Sep',
+    'Oct',
+    'Nov',
+    'Dic',
+  ],
+  dayNames: [
+    'Domingo',
+    'Lunes',
+    'Martes',
+    'Miércoles',
+    'Jueves',
+    'Viernes',
+    'Sábado',
+  ],
+  dayNamesShort: ['Dom', 'Lun', 'Mar', 'Mié', 'Juv', 'Vie', 'Sáb'],
+  dayNamesMin: ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sá'],
+  weekHeader: 'Sm',
+  dateFormat: 'dd/mm/yy',
+  firstDay: 1,
+  isRTL: false,
+  showMonthAfterYear: false,
+  yearSuffix: '',
+}
+$.datepicker.setDefaults($.datepicker.regional['es'])
+
+/** QueryAjax */
+class QueryAjax {
+  constructor(options) {
+    this.data = ''
+    this.xhr = ''
+    this.method = ''
+    this.url = ''
+    this.action = ''
+    this.form = false //form_name
+    this.listTable = false
+    this.loaderSelected = false
+
+    let cont = this
+    $.each(options, function (key, value) {
+      cont[key] = value
+    })
+
+    this.LoadForm()
+    this.var = {
+      token: token_csrf,
+    }
+    this.formatData = {
+      token: token_csrf,
+    }
+  }
+  LoadForm() {
+    if (this.form) {
+      this.form = $('form[name="' + this.form + '"]')
+      let action = this.form.attr('action')
+      let method = this.form.attr('method')
+      action ? (this.url = action) : null
+      method ? (this.method = method) : null
+    }
+  }
+  StateXhr() {
+    if (this.xhr && this.xhr.readyState != 4) this.xhr.abort()
+  }
+  IsDataURL() {
+    return this.method == 'GET' ? true : false
+  }
+
+  // actualiza la variable data_send que va ser enviada en la petiion AJAX
+  UpdateForm() {
+    if (this.form) {
+      this.formatData = this.form.serialize()
+    } else {
+      let cont = this
+      let data_send = '',
+        separ = ''
+      $.each(this.var, function (key, value) {
+        data_send += separ + '_' + key + '=' + value
+        separ = '&'
+      })
+      this.formatData = data_send
+    }
+  }
+  Loader(status = true) {
+    this.listTable ? this.listTable.ModalLoader(status) : null
+
+    if (this.loaderSelected) {
+      status ? this.loaderSelected.show() : this.loaderSelected.hide()
+    }
+  }
+
+  IsFormListTable() {
+    return this.form ? true : false
+  }
+  Query() {
+    let cont = this
+    this.Loader()
+    this.IsFormListTable() ? UtilClearFormUi(this.form) : null
+
+    this.StateXhr()
+    this.UpdateForm()
+    $.ajax({
+      url: cont.IsDataURL() ? cont.url + '?' + cont.formatData : cont.url,
+      data: cont.IsDataURL() ? null : cont.formatData,
+      dataType: 'json',
+      type: cont.method,
+    })
+      .done(function (result) {
+        cont.Loader(false)
+        cont.ResultSuccess(result)
+      })
+      .fail(function (errors) {
+        cont.Loader(false)
+        cont.ResultFailed(errors)
+      })
+  }
+  ResultSuccess(result) {
+    this.data = result
+    this.action ? self[this.action](true, result) : false
+  }
+  ResultFailed(errors) {
+    this.MapErrors(errors)
+    this.data = errors.responseJSON
+    this.action ? self[this.action](false, errors) : false
+  }
+  MapErrors(errors) {
+    if (errors.status == 422 && this.IsFormListTable()) {
+      UtilValidateInputs(errors.responseJSON.errors, this.form)
+    } else {
+      let exception_message
+      let exception
+      if (errors.hasOwnProperty('responseJSON')) {
+        exception_message = errors.responseJSON
+          ? errors.responseJSON.message
+          : 'not found'
+        exception = errors.responseJSON
+          ? errors.responseJSON.exception
+          : 'not found'
+        errors.status == 0 ? (exception = 'ERR_INTERNET_DISCONNECTED') : null
+      }
+      let title =
+        'Status: ' +
+        errors.status +
+        ' Resource: ' +
+        this.method +
+        ': ' +
+        this.url
+      let message =
+        'Exception: ' + exception + ' <br>Message: ' + exception_message
+      notify(false, title, message, 1)
+    }
+  }
+  FormClose(status = true) {
+    this.form ? this.form[0].reset() : null
+    if (this.form) {
+      if (this.listTable) {
+        this.listTable.ModalClearForm(this.form)
+      }
+    }
+    if (status) {
+      this.listTable ? this.listTable.modalSelect.modal('hide') : null
+    }
+    this.Loader(false)
+  }
+  Send() {
+    this.Query()
+  }
+}
+
+/**
+ * Carga los datos del formulario
+ * @param {object} div
+ * @param {array} data
+ */
+function LoadFormInputs(div, data) {
+  $.each(data, function (key, value) {
+    div
+      .find('form')
+      .find('input[name=' + key + ']')
+      .val(value)
+    div
+      .find('form')
+      .find('textarea[name=' + key + ']')
+      .val(value)
+  })
+}
+
+/**
+ * This function loads a "select" through an array
+ *
+ * @param {Element} select Example: $('.select')
+ * @param {array} data Structure {id: 1, name: Pepe}
+ * @param {int|string} selected
+ * @param {String} optionDefault Default name of the first option
+ */
+function LoadSelectUtil(select, data, selected, optionDefault) {
+  $(select).find('option').remove()
+
+  if (optionDefault) {
+    $(select).append(
+      '<option data-alt="" value="" class="c_gray_cl">' +
+        optionDefault +
+        '</option>',
+    )
+  } else {
+    $(select).append(
+      '<option data-alt="" value="" class="c_gray_cl">Selecciona...</option>',
+    )
+  }
+
+  $.each(data, function (key, value) {
+    $(select).append(
+      '<option data-alt="' +
+        value.alt +
+        '" value="' +
+        value.id +
+        '">' +
+        value.name +
+        '</option>',
+    )
+  })
+
+  selected
+    ? $(select)
+        .find('option[value="' + selected + '"]')
+        .attr('selected', 'selected')
+    : ''
+}
+
+/**
+ * this function clear fields of a form
+ *
+ * @param {form} form - form to be cleared
+ */
+function UtilClearFormUi(form) {
+  let input = form.find('input')
+  let select = form.find('select')
+  let textarea = form.find('textarea')
+  input.removeClass('is-invalid')
+  select.removeClass('is-invalid')
+  textarea.removeClass('is-invalid')
+  input.parent().find('.label-error').html('')
+  select.parent().find('.label-error').html('')
+  textarea.parent().find('.label-error').html('')
+}
+
+function UtilValidateInputs(errors, form) {
+  UtilClearFormUi(form)
+  $.each(errors, function (key, value) {
+    let input = form.find('input[name=' + key + ']')
+    let select = form.find('select[name=' + key + ']')
+    let textarea = form.find('textarea[name=' + key + ']')
+
+    input
+      .parent()
+      .find('.label-error')
+      .html('<i class="fa fa-exclamation-triangle"></i> ' + value)
+
+    if (input.hasClass('flatpickr-input')) {
+      input
+        .parent()
+        .find('.label-error')
+        .html('<i class="fa fa-exclamation-triangle"></i> ' + value)
+    }
+
+    select
+      .parent()
+      .find('.label-error')
+      .html('<i class="fa fa-exclamation-triangle"></i> ' + value)
+
+    textarea
+      .parent()
+      .find('.label-error')
+      .html('<i class="fa fa-exclamation-triangle"></i> ' + value)
+
+    input.addClass('is-invalid')
+    select.addClass('is-invalid')
+    textarea.addClass('is-invalid')
+  })
+}
+
+function UtilFormClose(form) {
+  form.find('select').each(function () {
+    this.selectedIndex = 0
+  })
+  form.find('input[type=text]').each(function () {
+    this.value = ''
+  })
+  form.find('input[type=password]').each(function () {
+    this.value = ''
+  })
+  form.find('textarea').each(function () {
+    this.value = ''
+  })
+  UtilClearFormUi(form)
+}
+
+/**
+ * @param {boolean} status
+ * @returns change modal loader status
+ */
+function UtilModalLoader(modal, status = true) {
+  if (status) {
+    modal.find('.overlay').show()
+  } else {
+    modal.find('.overlay').hide()
+  }
+}
+
+var tokenCsrf = $('meta[name=csrf-token]').attr('content')
+
+class searchByAutocomplete {
+  constructor(container, settings) {
+    this.container = container
+
+    this.xhr = null
+    this.method = 'GET'
+    this.url = ''
+    this.parameters = []
+    this.params = []
+
+    this.actionBefore = null
+    this.actionAfter = null
+
+    this.input = null
+    this.ulItems = null
+    this.divSelectedItems = null
+    this.inputHidden = null
+    this.labelError = null
+    this.animationClass = 'fa-spin'
+    this.iconSearch = 'fa-search'
+    this.iconLoading = 'fa-cog'
+    this.paramSearch = 'search'
+
+    this.data = []
+    this.selectedItems = []
+    this.limitItems = 1
+    this.minimumCharactersToSearch = 3
+
+    let context = this
+    $.each(settings, function (key, value) {
+      context[key] = value
+    })
+
+    this.loadElementHtml()
+    this.loadParameters()
+    this.addParameter(this.paramSearch)
+    this.resetItems(false)
+    this.requestGetUrl()
+    this.eventKeyupSearchField()
+    this.evetOutsideContainer()
+  }
+  eventAddDataSelected(data) {
+    let obj = data instanceof Object
+    if (!obj) {
+      this.printLog('Not Object')
+      return false
+    }
+
+    let id = data.id
+    let name = data.name
+    let image = data.image
+    this.addItemSelected(id, name, image)
+  }
+  evetOutsideContainer() {
+    this.containerId = this.container.attr('id')
+    let context = this
+    window.addEventListener('click', function (e) {
+      if (!document.getElementById(context.containerId).contains(e.target)) {
+        context.resetItems(false)
+      }
+    })
+  }
+  loadElementHtml() {
+    this.input = this.container.find('.input-search')
+    if (!this.input.length) {
+      this.printLog('Input search not found')
+    }
+
+    this.inputHidden = this.container.find('.input-hidden')
+    if (!this.inputHidden.length) {
+      this.printLog('Input hidden not found')
+    }
+
+    this.ulItems = this.container.find('.items')
+    if (!this.ulItems.length) {
+      this.printLog('ul-items not found')
+    }
+
+    this.iconInput = this.container.find('.icon-loading')
+    if (!this.iconInput.length) {
+      this.printLog('iconInput not found')
+    }
+
+    this.labelError = this.container.find('.label-error')
+    if (!this.labelError.length) {
+      this.printLog('labelError not found')
+    }
+    this.divSelectedItems = this.container.find('.selected-items')
+    if (!this.divSelectedItems.length) {
+      this.printLog('divSelectedItems not found')
+    }
+  }
+  eventKeyupSearchField() {
+    let context = this
+    this.input.keyup(function () {
+      if (context.getParameter(context.paramSearch) == $(this).val()) {
+        return true
+      }
+      context.setParameter(context.paramSearch, $(this).val())
+      context.requestByEventKeyupSearch($(this).val())
+    })
+  }
+  setMessageSearch(status, messageType = 1) {
+    let messages = [
+      '<em class="fa fa-exclamation-circle"> Ocurrio un error',
+      '<em class="fa fa-exclamation-circle"> Mínimo tres caracteres para iniciar la busqueda',
+      '<em class="fa fa-exclamation-circle"> No se encontraron resultados',
+    ]
+    let classMessages = ['', 'label-error-search', 'label-error-result']
+    if (status) {
+      this.labelError.addClass(classMessages[messageType])
+      this.labelError.html(messages[messageType])
+    } else {
+      classMessages.forEach(function (value) {
+        this.labelError.removeClass(value)
+      }, this)
+      this.labelError.text('')
+    }
+  }
+  eventLoading(status) {
+    if (status) {
+      this.iconInput.addClass(this.animationClass)
+      this.iconInput.addClass(this.iconLoading)
+      this.iconInput.removeClass(this.iconSearch)
+    } else {
+      this.iconInput.removeClass(this.animationClass)
+      this.iconInput.removeClass(this.iconLoading)
+      this.iconInput.addClass(this.iconSearch)
+    }
+  }
+  requestByEventKeyupSearch(text) {
+    let context = this
+    clearInterval(this.interval)
+    this.setMessageSearch(false)
+    this.eventLoading(true)
+
+    this.interval = setInterval(
+      function () {
+        clearInterval(context.interval)
+        if (text.length >= context.minimumCharactersToSearch) {
+          context.request()
+        } else if (!text.length) {
+          context.resetItems(false)
+          context.setMessageSearch(false)
+          context.eventLoading(false)
+        } else {
+          context.resetItems(false)
+          context.setMessageSearch(true)
+          context.eventLoading(false)
+        }
+      },
+      700,
+      'JavaScript',
+    )
+  }
+  loadParameters() {
+    this.params.forEach(function (value) {
+      if (typeof value === 'object') {
+        this.addParameter(value.name, value.value)
+      }
+    }, this)
+  }
+  addParameter(name, value) {
+    this.parameters.push({ name: name, value: value })
+  }
+  setParameter(paramName, paramValue) {
+    this.parameters.forEach(function (value, key) {
+      if (value.name == paramName) {
+        this.parameters[key].value = paramValue
+        return true
+      }
+    }, this)
+  }
+  getParameter(paramName) {
+    let result = null
+    this.parameters.forEach(function (value, key) {
+      if (value.name == paramName) {
+        result = this.parameters[key].value
+      }
+    }, this)
+
+    return result
+  }
+  requestGetUrl() {
+    let url = this.url
+
+    if (this.method == 'GET') {
+      let separator = '?_'
+      $.each(this.parameters, function (key, value) {
+        url += `${separator}${value.name}=${value.value}`
+        separator = '&_'
+      })
+    }
+    return url
+  }
+  requestGetData() {
+    if (this.method == 'GET') {
+      return []
+    }
+  }
+  requestStateXhr() {
+    if (this.xhr && this.xhr.readyState != 4) {
+      this.xhr.abort()
+    }
+  }
+  request() {
+    this.requestStateXhr()
+    this.requestGetUrl()
+
+    let context = this
+    this.xhr = $.ajax({
+      url: context.requestGetUrl(),
+      data: context.requestGetData(),
+      dataType: 'json',
+      type: context.method,
+    })
+      .done(function (data) {
+        context.eventLoading(false)
+        context.requestSuccessfull(data)
+      })
+      .fail(function (errors) {
+        context.eventLoading(false)
+        context.requestFailed(errors)
+      })
+  }
+  requestSuccessfull(data) {
+    this.data = data.data
+    this.resetItems(true)
+
+    if (!this.data.length) {
+      this.setMessageSearch(true, 2)
+      this.resetItems(false, false)
+      return true
+    }
+
+    this.data.forEach(function (value, key) {
+      this.ulItems.append(`<li data-id="${key}">
+        ${value.name}
+      </li>`)
+    }, this)
+
+    this.eventSelectItem()
+  }
+  eventSelectItem() {
+    let context = this
+    this.setMessageSearch(false)
+    this.ulItems.find('li').click(function () {
+      let elem = context.data[$(this).attr('data-id')]
+      let id = elem.id
+      let name = elem.name
+      let image = elem.image
+      context.addItemSelected(id, name, image)
+    })
+  }
+  addItemSelected(id = '', name = '', image = '') {
+    this.selectedItems.push({
+      id: id,
+      name: name,
+      image: image,
+    })
+    this.eventLimitItems()
+    this.resetItems(false, true)
+    this.listItems()
+    this.setInputHidden()
+  }
+  setInputHidden() {
+    this.inputHidden.val(this.getParameterToInput())
+  }
+  getParameterToInput() {
+    let data = ''
+    let separator = ''
+    $.each(this.selectedItems, function (key, value) {
+      data += `${separator}${value.id}`
+      separator = ','
+    })
+    return data
+  }
+  eventRemoveItem() {
+    let context = this
+    this.divSelectedItems.find('label em').click(function () {
+      context.selectedItems.splice($(this).attr('data-id'), 1)
+      context.listItems()
+      context.eventLimitItems()
+      context.setInputHidden()
+    })
+  }
+  eventLimitItems() {
+    if (this.selectedItems.length >= this.limitItems) {
+      this.input.prop('disabled', true)
+      this.iconInput.addClass('icon-disabled')
+      if (this.limitItems == 1) {
+        this.input.addClass('item-limit-display')
+        this.iconInput.addClass('item-limit-display')
+        this.divSelectedItems.addClass('display-unique')
+      }
+    } else {
+      this.input.prop('disabled', false)
+      this.iconInput.removeClass('icon-disabled')
+      if (this.limitItems == 1) {
+        this.input.removeClass('item-limit-display')
+        this.iconInput.removeClass('item-limit-display')
+        this.divSelectedItems.removeClass('display-unique')
+      }
+    }
+  }
+  listItems() {
+    this.divSelectedItems.html('')
+    this.selectedItems.forEach(function (value, key) {
+      this.divSelectedItems.append(`<label class="badge badge-light">
+        ${value.name}
+        <em class="fa fa-close" data-id="${key}">
+      </label>`)
+    }, this)
+    this.eventRemoveItem()
+  }
+  requestFailed(errors) {
+    this.resetItems(false)
+    this.printLog('request failed')
+  }
+  resetItems(status, clearField = false) {
+    this.ulItems.html('')
+    if (status) {
+      this.ulItems.css('display', 'block')
+    } else {
+      this.ulItems.css('display', 'none')
+    }
+
+    if (clearField) {
+      this.input.val('')
+      this.inputHidden.val('')
+    }
+  }
+  clearSelect() {
+    this.selectedItems = []
+    this.eventLimitItems()
+    this.resetItems(false, true)
+    this.listItems()
+  }
+  printLog(message) {
+    console.log(`ERROR_SEARCH_BY_AUTOCOMPLETE: ${message}`)
+  }
+}
+
+function utilLoadAutoCompleteByArray(data, obj) {
+  data.forEach((element) => {
+    obj.eventAddDataSelected({
+      id: element.id,
+      name: element.name, 
+    })
+  })
+}
+
+/**
+ * REQUIRE
+ * sortable {url} https://cdnjs.cloudflare.com/ajax/libs/jquery-sortable/0.9.13/jquery-sortable-min.js
+ *
+ * INCLUDE
+ * -> Headers
+ * <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+ * <link rel="stylesheet" href="{{ asset('/vendor/plugins/filesS3/PublicS3.css') }}" type="text/css" />
+ *
+ * ->footer
+ * <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+ * <script src="{{ asset('/vendor/plugins/filesS3/PublicS3.js') }}" type="text/javascript"></script>
+ */
+
+// Variables GLOBALES
+var pathArray = location.href.split('/')
+var protocol = pathArray[0]
+var host = pathArray[2]
+var APP_URL = protocol + '//' + host
+var URL_IMG = APP_URL + '/img/app/'
+const BUTTON_CONTROL_MAIN = 1
+const BUTTON_CONTROL_EDIT = 2
+const URL_S3_IMAGE =
+  'https://agendapropia-files.s3.us-east-2.amazonaws.com/'
+class formFiles {
+  constructor(url, data) {
+    this.url = url
+    this.data = data
+  }
+}
+class varQuery {
+  constructor(id) {
+    this.id = id
+    this.textarea = ''
+    this.type = ''
+    this.external_id = 0
+    this.source_id = 0
+    this.files = []
+    this._token = $('meta[name=csrf-token]').attr('content')
+  }
+}
+
+// Variables de configuracion IMPORTANTES
+class updloadS3 {
+  constructor(content, options) {
+    this.content = content
+    this.state = 1
+    this.data = []
+    this.dataDelete = []
+    this.load = 0
+    this.number = 0
+    this.altFunction = false
+    this.reload = true
+    this.formExternalId = 0
+    this.formSourceId = 0
+    this.limitFiles = 3
+
+    this.id = 0
+    this.url = ''
+    this.borderField = true
+
+    this.typeFile = 1
+    this.sizeFile = 100
+
+    this.send = content.find('.btn-save-files3')
+    this.listFiles = content.find('.upload-s3-list')
+    this.imagen = content.find('.btn-upload')
+    this.textarea = content.find('textarea[name=content]')
+    this.checkbox = content.find('input[name=resp_public]')
+    this.inputFile = content.find('input[name=file]')
+    this.template = $('#template-file')
+    this.loading = content.find('.overlay')
+    this.modalEdit = content.find('.modal-edit')
+    this.modalFiles = content.find('.modal-files')
+
+    let cont = this
+    $.each(options, function (key, value) {
+      cont[key] = value
+    })
+
+    this.form = new formFiles(this.url, '')
+    this.variables = new varQuery(this.id)
+    this.variables.external_id = this.formExternalId
+    this.variables.source_id = this.formSourceId
+    this.xhr = ''
+    this.statusMove = false
+
+    this.url_uploadFile = '/uploadfiles_s3'
+    this.url_removeFile = '/destroyfiles_s3'
+    this.files_url = URL_S3_IMAGE + 'files/images/'
+    this.awsBase = URL_S3_IMAGE
+
+    this.textarea.keyup(function () {
+      cont.changeTextarea(this)
+    })
+    this.send.click(function () {
+      cont.sendQuery(this)
+    })
+    if (this.inputFile) {
+      this.imagen.click(function () {
+        cont.inputFile.click()
+      })
+      this.inputFile.change(function () {
+        cont.changeInputFile(this)
+      })
+    }
+    this.checkbox.change(function () {
+      cont.changeCheckbox()
+    })
+    this.content.find('.btn-edit-back').click(function () {
+      cont.actionDiv(1)
+    })
+    this.content.find('.btn-edit-save').click(function () {
+      cont.updateItemFile(this)
+    })
+    this.authorAutocomplete = new searchByAutocomplete(
+      this.modalEdit.find('.authorSelect'),
+      {
+        params: [],
+        url: '/admin/accounts/users/search-by-autocomplete',
+        limitItems: 1,
+        minimumCharactersToSearch: 1,
+      },
+    )
+
+    this.move()
+    this.btnSend(true)
+
+    this.loading.hide()
+    this.actionDiv(1)
+  }
+  actionDiv(type = 1) {
+    this.content.find('.button-controls').find('.main').hide()
+    this.content.find('.button-controls').find('.edit').hide()
+    this.modalEdit.hide()
+    this.modalFiles.show()
+
+    if (type == BUTTON_CONTROL_MAIN) {
+      this.content.find('.button-controls').find('.main').show()
+    } else if (type == BUTTON_CONTROL_EDIT) {
+      this.content.find('.button-controls').find('.edit').show()
+      this.modalEdit.show()
+      this.modalFiles.hide()
+    }
+  }
+  loadData(data, id) {
+    this.variables.id = id
+
+    let cont = this
+    this.listFiles.find('li:not(.ui-state-disabled)').remove()
+    this.data = []
+    this.dataDelete = []
+
+    $.each(data, function (key, value) {
+      value['form_d'] = 'f_' + value.id
+      value['cont'] = value.id
+
+      let typeFile = TypeFile(value.ext)
+      let file = new filesItem(
+        value.id,
+        true,
+        value.name,
+        value.name_tmp,
+        0,
+        value.ext,
+        2,
+        typeFile,
+        value['form_d'],
+        value.author_id,
+        value.author_name,
+        value.description,
+      )
+
+      add_file(cont, file, 2 + typeFile)
+
+      cont.data.push(file)
+
+      cont.load++
+    })
+
+    this.orderData()
+    this.btnSend(true)
+    this.loading.hide()
+  }
+  move() {
+    let cont = this
+
+    this.listFiles.sortable({
+      items: 'li:not(.ui-state-disabled)',
+      revert: true,
+      opacity: 0.6,
+      cursor: 'move',
+      update: function () {
+        cont.orderData()
+        cont.statusMove = true
+        cont.validateMove()
+      },
+    })
+  }
+  orderData() {
+    let cont = this
+    let list = this.listFiles.find('li:not(.ui-state-disabled)')
+    let item = 1
+
+    $.each(list, function (key, value) {
+      let id_li = $(value).attr('data-id')
+      let index = cont.searchData(id_li, 'id')
+
+      if (cont.data[index]) {
+        cont.data[index].order = item
+        $(value).attr('data-order', item)
+      }
+      item++
+    })
+  }
+  searchData(value, index) {
+    let item = null
+    $.each(this.data, function (key, element) {
+      if (element[index] == value) {
+        item = key
+      }
+    })
+    return item
+  }
+  stateXhr() {
+    this.xhr && this.xhr.readyState != 4 ? this.xhr.abort() : null
+  }
+  updateForm() {
+    let form = this.variables
+    let data_send = '',
+      separ = ''
+
+    $.each(form, function (key, value) {
+      data_send += separ + '' + key + '=' + value
+      separ = '&'
+    })
+    this.form.data = data_send
+  }
+  sendQuery() {
+    this.optionDisabled(true)
+    this.variables.files = JSON.stringify(this.data)
+    this.variables.files_delete = JSON.stringify(this.dataDelete)
+    this.updateForm()
+
+    let cont = this
+    this.stateXhr()
+
+    this.loading.show()
+
+    this.xhr = $.post(this.form.url, this.form.data, function (result) {
+      if (cont.reload) {
+        cont.clear()
+      }
+      cont.optionDisabled(false)
+      cont.btnSend(true)
+
+      cont.altFunction ? self[cont.altFunction](result) : null
+
+      cont.loading.hide()
+    }).fail(function (result) {
+      cont.loading.hide()
+      list_error(this, result) // Incomplete
+    })
+  }
+  clear() {
+    this.listFiles.find('li:not(.ui-state-disabled)').remove()
+    this.data = []
+    this.dataDelete = []
+    this.load = 0
+    this.number = 0
+    this.checkbox.prop('checked', false)
+    this.textarea.val('')
+    this.borderField ? this.borderFiles() : null
+    this.actionDiv(1)
+  }
+  validate(state = false, id = 0) {
+    let loanding = 0
+    this.data.forEach(function (elemento, indice, array) {
+      state && elemento.id == id && elemento.type == 1
+        ? (elemento.state = true)
+        : null
+      !elemento.state && elemento.type == 1 ? loanding++ : null
+    })
+
+    loanding > 0 ? this.btnSend(true) : this.btnSend(false)
+
+    this.borderField ? this.borderFiles() : null
+  }
+  validateMove() {
+    let loanding = 0
+    this.data.forEach(function (elemento, indice, array) {
+      !elemento.state ? loanding++ : null
+    })
+
+    if (loanding == 0)
+      !this.statusMove ? this.btnSend(true) : this.btnSend(false)
+  }
+  validateRemove(state = false) {
+    if (state) {
+      let loanding = 0
+      this.data.forEach(function (elemento, indice, array) {
+        !elemento.state ? loanding++ : null
+      })
+
+      if (loanding == 0)
+        !this.data.length && !this.textarea.val() && !this.dataDelete.length
+          ? this.btnSend(true)
+          : this.btnSend(false)
+    } else {
+      !this.data.length && !this.textarea.val() && !this.dataDelete.length
+        ? this.btnSend(true)
+        : this.btnSend(false)
+    }
+    this.borderField ? this.borderFiles() : null
+    this.orderData()
+  }
+  optionDisabled(state) {
+    this.send.prop('disabled', state)
+    this.imagen.prop('disabled', state)
+    this.textarea.prop('disabled', state)
+    this.checkbox.prop('disabled', state)
+
+    state
+      ? this.listFiles.find('.delete').hide()
+      : this.listFiles.find('.delete').show()
+  }
+  borderFiles() {
+    this.data.length == 0
+      ? this.listFiles.removeClass('border-dashed')
+      : this.listFiles.addClass('border-dashed')
+  }
+  btnSend(state) {
+    this.send.prop('disabled', state)
+  }
+  changeCheckbox() {
+    this.variables.type = this.checkbox.is(':checked')
+  }
+  stateCheckbox() {
+    return this.checkbox.is(':checked')
+  }
+  changeTextarea(element) {
+    areatextHeight(element)
+    this.validateRemove(true)
+    this.variables.textarea = this.textarea.val()
+  }
+  changeInputFile(element) {
+    for (var i = 0; i < element.files.length; ++i) {
+      this.number++
+
+      if (this.data.length < this.limitFiles) {
+        var file = element.files[i]
+        this.uploadFile(file, this.number)
+      } else {
+        notify(
+          false,
+          'Limite de archivos',
+          `Se permiten solo ${this.limitFiles} archivo.`,
+          1,
+        )
+        break
+      }
+    }
+    this.inputFile.val('')
+  }
+  uploadFile(file, numb) {
+    var data = {
+      id: numb,
+      file: file,
+      form_d: 'f_' + numb,
+      cont: numb,
+      name: file.name.toString(),
+      size: file.size,
+      ext: file.name.substring(file.name.lastIndexOf('.')),
+      type: 1,
+      author: {
+        id: 1,
+        name: '',
+      },
+      description: '',
+    }
+
+    var state_file = file_type(data.ext, this.typeFile, data.name)
+    var state_size = file_size(data.size, this.sizeFile, data.name)
+    data.type = state_file
+
+    if (state_file && state_size) {
+      this.listFiles.show()
+      //Generamos el nombre tmp para el almacenar en el servidor
+      var ramdom_name = name_ramdom(state_file)
+
+      let fileItem = new filesItem(
+        data.id,
+        false,
+        data.name,
+        ramdom_name + data.ext,
+        data.size,
+        data.ext,
+        1,
+        state_file,
+        data.form_d,
+      )
+      add_file(this, fileItem, state_file, file)
+
+      var percent
+      var form = this.content.find('.' + data.form_d)
+      var formdata = new FormData()
+
+      formdata.append('file', data.file)
+      formdata.append('file_name', ramdom_name)
+      formdata.append('file_type', state_file)
+      formdata.append('_token', $('meta[name=csrf-token]').attr('content'))
+
+      this.load++
+      this.data.push(fileItem)
+
+      this.validate()
+      let cont = this
+
+      function upload_data() {
+        var request = new XMLHttpRequest() //request
+        form.find('.progress').show()
+        request.upload.addEventListener('progress', function (e) {
+          percent = Math.round((e.loaded / e.total) * 100)
+          form
+            .find('.progress-bar')
+            .width(percent + '%')
+            .html(percent + '%')
+        })
+
+        //progress completed load event
+        request.addEventListener('load', function (e) {
+          if (e.currentTarget.status >= 400) {
+            form.find('.progress').hide()
+            form.find('.error').show()
+          } else if (e.total == 0) {
+            if (data.type == 1) {
+              form.find('.cont').hide()
+
+              form
+                .find('.image')
+                .css(
+                  'background-image',
+                  'url(' +
+                    cont.files_url +
+                    'thumbnails/' +
+                    $(form).data('name') +
+                    ')',
+                )
+            } else {
+              form.find('.download').show()
+              form.find('.text').addClass('name_file')
+            }
+
+            form.find('.progress').hide()
+            cont.validate(true, data.id)
+          }
+
+          cont.orderData()
+        })
+
+        request.addEventListener('error', function (e) {
+          form.find('.error').show()
+          form.find('.progress').hide()
+        })
+
+        request.open('post', APP_URL + cont.url_uploadFile)
+        request.send(formdata)
+
+        form.find('.btn-delete').click(function (e) {
+          e.preventDefault()
+          request.abort()
+
+          let id = form.data('id')
+          let name = form.data('name')
+          form.remove()
+
+          let element = null
+          let index = 0
+          cont.data.forEach(function (value, indice) {
+            if (value.id == id) {
+              element = value
+              index = indice
+            }
+          })
+
+          if (element != null) {
+            element.state ? cont.delete_file_arc(name) : null
+            cont.data.splice(index, 1)
+          }
+
+          cont.validateRemove(true)
+        })
+      }
+
+      upload_data()
+
+      form.find('.preload').click(function (e) {
+        upload_data()
+        form.find('.error').hide()
+        form.find('.cont').show()
+        percent = 0
+        form
+          .find('.progress-bar')
+          .width(percent + '%')
+          .html(percent + '%')
+      })
+    }
+  }
+  updateItemFile(btn) {
+    let id = $(btn).attr('data-id')
+    let key = null
+
+    this.data.forEach(function (element, index) {
+      if (element.id == parseInt(id)) {
+        key = index
+      }
+    })
+
+    this.data[key].name = this.modalEdit.find('input[name=name]').val()
+    this.data[key].description = this.modalEdit
+      .find('textarea[name=description]')
+      .val()
+
+    if (this.authorAutocomplete.selectedItems[0]) {
+      this.data[key].author.id = this.authorAutocomplete.selectedItems[0].id
+      this.data[key].author.name = this.authorAutocomplete.selectedItems[0].name
+    }
+
+    let form = this.content.find('.f_' + this.data[key].id)
+    form.find('.name').text(this.data[key].name)
+
+    form
+      .find('.description')
+      .html(
+        this.data[key].description != ''
+          ? '<strong>Descripción: </strong> ' + this.data[key].description
+          : '',
+      )
+    form
+      .find('.author')
+      .html(
+        this.data[key].author.name != null
+          ? '<strong>Autor: </strong> ' + this.data[key].author.name
+          : '',
+      )
+
+    this.actionDiv(1)
+
+    this.btnSend(false)
+  }
+  delete_file_arc(name_file) {
+    let cont = this
+    $.ajax({
+      url: APP_URL + cont.url_removeFile,
+      type: 'POST',
+      timeout: 100000,
+      data: {
+        name: name_file,
+        type: 1,
+        _token: $('meta[name=csrf-token]').attr('content'),
+      },
+      error: function () {},
+      success: function (result) {},
+    })
+  }
+}
+
+class filesItem {
+  constructor(
+    id,
+    state,
+    name,
+    name_tmp,
+    size,
+    ext,
+    type,
+    type_file,
+    divIndex,
+    author_id = null,
+    author_name = null,
+    description = '',
+  ) {
+    this.id = id
+    this.state = state
+    this.name = name
+    this.name_tmp = name_tmp
+    this.size = size
+    this.ext = ext
+    this.type = type
+    this.type_file = type_file
+    this.author = {
+      id: author_id,
+      name: author_name,
+    }
+    this.description = description
+    this.divIndex = divIndex
+    this.name_tmp_complete = URL_S3_IMAGE + 'files/images/' + name_tmp
+  }
+}
+
+var file_ico = {
+  '.zip': 'ico_archivo.png',
+  '.rar': 'ico_archivo.png',
+  '.ppt': 'ico_point.png',
+  '.pptx': 'ico_point.png',
+  '.pps': 'ico_point.png',
+  '.doc': 'ico_word.png',
+  '.docx': 'ico_word.png',
+  '.accdb': 'ico_acces.png',
+  '.ccdb': 'ico_acces.png',
+  '.mdb': 'ico_acces.png',
+  '.xlsx': 'ico_excel.png',
+  '.xls': 'ico_excel.png',
+  '.xlsm': 'ico_excel.png',
+  '.xlsb': 'ico_excel.png',
+  '.pdf': 'ico_pdf.png',
+  '.PDF': 'ico_pdf.png',
+  '.mp4': 'ico_mp4.png',
+}
+
+var file_name = {
+  '.JPG': 'Imagen',
+  '.jpg': 'Imagen',
+  '.jpeg': 'Imagen',
+  '.gif': 'Imagen',
+  '.PNG': 'Imagen',
+  '.png': 'Imagen',
+  '.zip': 'Archivo comprimido',
+  '.rar': 'Archivo comprimido',
+  '.ppt': 'Power Point',
+  '.pptx': 'Power Point',
+  '.pps': 'Power Point',
+  '.doc': 'Documento de word',
+  '.docx': 'Documento de word',
+  '.accdb': 'Base datos Access',
+  '.ccdb': 'Base datos Access',
+  '.mdb': 'Base datos Access',
+  '.xlsx': 'Documento de excel',
+  '.xls': 'Documento de excel',
+  '.xlsm': 'Documento de excel',
+  '.xlsb': 'Documento de excel',
+  '.pdf': 'Documento PDF',
+  '.PDF': 'Documento PDF',
+}
+
+//name ramdom
+function name_ramdom(type) {
+  var rand = function () {
+    return Math.random().toString(36).substr(2)
+  }
+  var date = new Date()
+  if (type == 1) {
+    return 'img_' + Date.parse(date) + '_' + rand()
+  } else {
+    return 'file_' + Date.parse(date) + '_' + rand()
+  }
+}
+
+// Validamos el tipo de Archivo  1: todos los archivos; 2: Solo fotografias;
+function file_type(ext, categories, name) {
+  var ext_img = new Array('.JPG', '.jpg', '.jpeg', '.gif', '.PNG', '.png')
+  var ext_arg = new Array(
+    '.zip',
+    '.rar',
+    '.ppt',
+    '.pptx',
+    '.ppsx',
+    '.pps',
+    '.doc',
+    '.docx',
+    '.accdb',
+    '.ccdb',
+    '.mdb',
+    '.xlsx',
+    '.xls',
+    '.xlsm',
+    '.xlsb',
+    '.pdf',
+    '.PDF',
+    '.mp4',
+  )
+  if (jQuery.inArray(ext, ext_img) >= 0) {
+    return 1
+  } else if (jQuery.inArray(ext, ext_arg) >= 0 && categories == 1) {
+    return 2
+  } else {
+    notify(
+      null,
+      'No permitido',
+      'El archivo "' + name + '" no esta dentro de los formatos permitidos.',
+      1,
+    )
+    return 0
+  }
+}
+
+/**
+ *
+ * @param {string} ext Extencion del Archivo
+ */
+function TypeFile(ext) {
+  var ext_img = new Array('.JPG', '.jpg', '.jpeg', '.gif', '.PNG', '.png')
+  var ext_arg = new Array(
+    '.zip',
+    '.rar',
+    '.ppt',
+    '.pptx',
+    '.ppsx',
+    '.pps',
+    '.doc',
+    '.docx',
+    '.accdb',
+    '.ccdb',
+    '.mdb',
+    '.xlsx',
+    '.xls',
+    '.xlsm',
+    '.xlsb',
+    '.pdf',
+    '.PDF',
+  )
+
+  if (jQuery.inArray(ext, ext_img) >= 0) {
+    return 1
+  } else if (jQuery.inArray(ext, ext_arg) >= 0) {
+    return 2
+  } else {
+    return 0
+  }
+}
+
+/**
+ *
+ * @param {int} size Tamaño File
+ * @param {int} size_default Tamaño maximo
+ * @param {strin} name Nombre del Archivo
+ */
+function file_size(size, size_default, name) {
+  var size_max = 1000000 * size_default
+  if (size <= size_max) {
+    return 1
+  } else {
+    notify(
+      null,
+      'Supero el Tamaño',
+      'El archivo "' + name + '" excedió el peso permitido.',
+      1,
+    )
+    return 0
+  }
+}
+
+/**
+ *
+ * @param {class} cont Objeto de la clase updloadS3
+ * @param {filesItem} data con informacion de elemento a crear
+ * @param {int} type 1: Img; 2: Documneto, 3: Img Cargado; 4: Documento Cargado;
+ */
+function add_file(cont, data, type, file = '') {
+  var name_fom = '.' + data.divIndex
+  cont.listFiles.append(
+    `<li data-id="0" data-state="0" data-name="${data.name_tmp}" class="${data.divIndex} item-list ui-state-default"></li>`,
+  )
+  cont.template.clone().prependTo(name_fom).show()
+
+  var form = cont.content.find('.' + data.divIndex)
+
+  form.find('.error').hide()
+  form.find('.download').hide()
+
+  form.children().attr('id', 'template')
+
+  // Información
+  form.attr('data-id', data.id)
+  form.find('.name').text(data.name)
+  form.find('.source').text(data.name_tmp)
+  form
+    .find('.description')
+    .html(
+      data.description != ''
+        ? '<strong>Descripción: </strong> ' + data.description
+        : '',
+    )
+  form
+    .find('.author')
+    .html(
+      data.author.name != null
+        ? '<strong>Autor: </strong> ' + data.author.name
+        : '',
+    )
+  form.find('.name').attr('title', data.name)
+  form.find('.delete').attr('data-id', data.id)
+
+  if (type == 1) {
+    var reader = new FileReader()
+    reader.onload = function (e) {
+      $(name_fom + ' .image').css(
+        'background-image',
+        'url(' + e.target.result + ')',
+      )
+      $(name_fom + ' .image').css('background-size', '100%')
+    }
+    reader.readAsDataURL(file)
+  } else if (type == 2) {
+    form
+      .find('.download')
+      .attr('onclick', "getFileS3('" + data.name_tmp + "', 2)")
+    $(name_fom + ' .image').css(
+      'background-image',
+      'url(' + cont.awsBase + 'app/file_types/' + file_ico[data.ext] + ')',
+    )
+  } else if (type == 3) {
+    form
+      .find('.image')
+      .css(
+        'background-image',
+        'url(' + cont.files_url + 'thumbnails/' + data.name_tmp + ')',
+      )
+    form.find('.image').css('background-size', '100%')
+  } else if (type == 4) {
+    form.find('.download').show()
+    form
+      .find('.download')
+      .attr('onclick', "getFileS3('" + data.name_tmp + "', 2)")
+    form
+      .find('.image')
+      .css(
+        'background-image',
+        'url(' + cont.awsBase + 'app/file_types/' + file_ico[data.ext] + ')',
+      )
+  }
+
+  form.find('.progress').hide()
+
+  if (type == 4 || type == 3) {
+    form.find('.btn-delete').click(function (e) {
+      e.preventDefault()
+
+      let id = form.data('id')
+      let name = form.data('name')
+      form.remove()
+
+      cont.data.forEach(function (elemento, indice, array) {
+        elemento.id == id ? cont.data.splice(indice, 1) : null
+      })
+
+      cont.dataDelete.push(id)
+      cont.validateRemove(true)
+    })
+  }
+
+  form.find('.btn-edit').click(function (e) {
+    e.preventDefault()
+
+    let id = form.data('id')
+    let data = []
+    cont.data.forEach(function (element) {
+      if (element.id == id) {
+        data = element
+      }
+    })
+
+    cont.modalEdit.find('input[name=name]').val(data.name)
+    cont.modalEdit.find('textarea[name=description]').val(data.description)
+    cont.content.find('.btn-edit-save').attr('data-id', data.id)
+
+    cont.authorAutocomplete.clearSelect()
+    if (data.author.id != 0 && data.author.id != null) {
+      cont.authorAutocomplete.eventAddDataSelected({
+        id: data.author.id,
+        name: data.author.name,
+      })
+    }
+
+    cont.actionDiv(2)
+  })
+}
+
+//! moment.js
+
+;(function (global, factory) {
+    typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
+    typeof define === 'function' && define.amd ? define(factory) :
+    global.moment = factory()
+}(this, (function () { 'use strict';
+
+    var hookCallback;
+
+    function hooks () {
+        return hookCallback.apply(null, arguments);
+    }
+
+    // This is done to register the method called with moment()
+    // without creating circular dependencies.
+    function setHookCallback (callback) {
+        hookCallback = callback;
+    }
+
+    function isArray(input) {
+        return input instanceof Array || Object.prototype.toString.call(input) === '[object Array]';
+    }
+
+    function isObject(input) {
+        // IE8 will treat undefined and null as object if it wasn't for
+        // input != null
+        return input != null && Object.prototype.toString.call(input) === '[object Object]';
+    }
+
+    function isObjectEmpty(obj) {
+        if (Object.getOwnPropertyNames) {
+            return (Object.getOwnPropertyNames(obj).length === 0);
+        } else {
+            var k;
+            for (k in obj) {
+                if (obj.hasOwnProperty(k)) {
+                    return false;
+                }
+            }
+            return true;
+        }
+    }
+
+    function isUndefined(input) {
+        return input === void 0;
+    }
+
+    function isNumber(input) {
+        return typeof input === 'number' || Object.prototype.toString.call(input) === '[object Number]';
+    }
+
+    function isDate(input) {
+        return input instanceof Date || Object.prototype.toString.call(input) === '[object Date]';
+    }
+
+    function map(arr, fn) {
+        var res = [], i;
+        for (i = 0; i < arr.length; ++i) {
+            res.push(fn(arr[i], i));
+        }
+        return res;
+    }
+
+    function hasOwnProp(a, b) {
+        return Object.prototype.hasOwnProperty.call(a, b);
+    }
+
+    function extend(a, b) {
+        for (var i in b) {
+            if (hasOwnProp(b, i)) {
+                a[i] = b[i];
+            }
+        }
+
+        if (hasOwnProp(b, 'toString')) {
+            a.toString = b.toString;
+        }
+
+        if (hasOwnProp(b, 'valueOf')) {
+            a.valueOf = b.valueOf;
+        }
+
+        return a;
+    }
+
+    function createUTC (input, format, locale, strict) {
+        return createLocalOrUTC(input, format, locale, strict, true).utc();
+    }
+
+    function defaultParsingFlags() {
+        // We need to deep clone this object.
+        return {
+            empty           : false,
+            unusedTokens    : [],
+            unusedInput     : [],
+            overflow        : -2,
+            charsLeftOver   : 0,
+            nullInput       : false,
+            invalidMonth    : null,
+            invalidFormat   : false,
+            userInvalidated : false,
+            iso             : false,
+            parsedDateParts : [],
+            meridiem        : null,
+            rfc2822         : false,
+            weekdayMismatch : false
+        };
+    }
+
+    function getParsingFlags(m) {
+        if (m._pf == null) {
+            m._pf = defaultParsingFlags();
+        }
+        return m._pf;
+    }
+
+    var some;
+    if (Array.prototype.some) {
+        some = Array.prototype.some;
+    } else {
+        some = function (fun) {
+            var t = Object(this);
+            var len = t.length >>> 0;
+
+            for (var i = 0; i < len; i++) {
+                if (i in t && fun.call(this, t[i], i, t)) {
+                    return true;
+                }
+            }
+
+            return false;
+        };
+    }
+
+    function isValid(m) {
+        if (m._isValid == null) {
+            var flags = getParsingFlags(m);
+            var parsedParts = some.call(flags.parsedDateParts, function (i) {
+                return i != null;
+            });
+            var isNowValid = !isNaN(m._d.getTime()) &&
+                flags.overflow < 0 &&
+                !flags.empty &&
+                !flags.invalidMonth &&
+                !flags.invalidWeekday &&
+                !flags.weekdayMismatch &&
+                !flags.nullInput &&
+                !flags.invalidFormat &&
+                !flags.userInvalidated &&
+                (!flags.meridiem || (flags.meridiem && parsedParts));
+
+            if (m._strict) {
+                isNowValid = isNowValid &&
+                    flags.charsLeftOver === 0 &&
+                    flags.unusedTokens.length === 0 &&
+                    flags.bigHour === undefined;
+            }
+
+            if (Object.isFrozen == null || !Object.isFrozen(m)) {
+                m._isValid = isNowValid;
+            }
+            else {
+                return isNowValid;
+            }
+        }
+        return m._isValid;
+    }
+
+    function createInvalid (flags) {
+        var m = createUTC(NaN);
+        if (flags != null) {
+            extend(getParsingFlags(m), flags);
+        }
+        else {
+            getParsingFlags(m).userInvalidated = true;
+        }
+
+        return m;
+    }
+
+    // Plugins that add properties should also add the key here (null value),
+    // so we can properly clone ourselves.
+    var momentProperties = hooks.momentProperties = [];
+
+    function copyConfig(to, from) {
+        var i, prop, val;
+
+        if (!isUndefined(from._isAMomentObject)) {
+            to._isAMomentObject = from._isAMomentObject;
+        }
+        if (!isUndefined(from._i)) {
+            to._i = from._i;
+        }
+        if (!isUndefined(from._f)) {
+            to._f = from._f;
+        }
+        if (!isUndefined(from._l)) {
+            to._l = from._l;
+        }
+        if (!isUndefined(from._strict)) {
+            to._strict = from._strict;
+        }
+        if (!isUndefined(from._tzm)) {
+            to._tzm = from._tzm;
+        }
+        if (!isUndefined(from._isUTC)) {
+            to._isUTC = from._isUTC;
+        }
+        if (!isUndefined(from._offset)) {
+            to._offset = from._offset;
+        }
+        if (!isUndefined(from._pf)) {
+            to._pf = getParsingFlags(from);
+        }
+        if (!isUndefined(from._locale)) {
+            to._locale = from._locale;
+        }
+
+        if (momentProperties.length > 0) {
+            for (i = 0; i < momentProperties.length; i++) {
+                prop = momentProperties[i];
+                val = from[prop];
+                if (!isUndefined(val)) {
+                    to[prop] = val;
+                }
+            }
+        }
+
+        return to;
+    }
+
+    var updateInProgress = false;
+
+    // Moment prototype object
+    function Moment(config) {
+        copyConfig(this, config);
+        this._d = new Date(config._d != null ? config._d.getTime() : NaN);
+        if (!this.isValid()) {
+            this._d = new Date(NaN);
+        }
+        // Prevent infinite loop in case updateOffset creates new moment
+        // objects.
+        if (updateInProgress === false) {
+            updateInProgress = true;
+            hooks.updateOffset(this);
+            updateInProgress = false;
+        }
+    }
+
+    function isMoment (obj) {
+        return obj instanceof Moment || (obj != null && obj._isAMomentObject != null);
+    }
+
+    function absFloor (number) {
+        if (number < 0) {
+            // -0 -> 0
+            return Math.ceil(number) || 0;
+        } else {
+            return Math.floor(number);
+        }
+    }
+
+    function toInt(argumentForCoercion) {
+        var coercedNumber = +argumentForCoercion,
+            value = 0;
+
+        if (coercedNumber !== 0 && isFinite(coercedNumber)) {
+            value = absFloor(coercedNumber);
+        }
+
+        return value;
+    }
+
+    // compare two arrays, return the number of differences
+    function compareArrays(array1, array2, dontConvert) {
+        var len = Math.min(array1.length, array2.length),
+            lengthDiff = Math.abs(array1.length - array2.length),
+            diffs = 0,
+            i;
+        for (i = 0; i < len; i++) {
+            if ((dontConvert && array1[i] !== array2[i]) ||
+                (!dontConvert && toInt(array1[i]) !== toInt(array2[i]))) {
+                diffs++;
+            }
+        }
+        return diffs + lengthDiff;
+    }
+
+    function warn(msg) {
+        if (hooks.suppressDeprecationWarnings === false &&
+                (typeof console !==  'undefined') && console.warn) {
+            console.warn('Deprecation warning: ' + msg);
+        }
+    }
+
+    function deprecate(msg, fn) {
+        var firstTime = true;
+
+        return extend(function () {
+            if (hooks.deprecationHandler != null) {
+                hooks.deprecationHandler(null, msg);
+            }
+            if (firstTime) {
+                var args = [];
+                var arg;
+                for (var i = 0; i < arguments.length; i++) {
+                    arg = '';
+                    if (typeof arguments[i] === 'object') {
+                        arg += '\n[' + i + '] ';
+                        for (var key in arguments[0]) {
+                            arg += key + ': ' + arguments[0][key] + ', ';
+                        }
+                        arg = arg.slice(0, -2); // Remove trailing comma and space
+                    } else {
+                        arg = arguments[i];
+                    }
+                    args.push(arg);
+                }
+                warn(msg + '\nArguments: ' + Array.prototype.slice.call(args).join('') + '\n' + (new Error()).stack);
+                firstTime = false;
+            }
+            return fn.apply(this, arguments);
+        }, fn);
+    }
+
+    var deprecations = {};
+
+    function deprecateSimple(name, msg) {
+        if (hooks.deprecationHandler != null) {
+            hooks.deprecationHandler(name, msg);
+        }
+        if (!deprecations[name]) {
+            warn(msg);
+            deprecations[name] = true;
+        }
+    }
+
+    hooks.suppressDeprecationWarnings = false;
+    hooks.deprecationHandler = null;
+
+    function isFunction(input) {
+        return input instanceof Function || Object.prototype.toString.call(input) === '[object Function]';
+    }
+
+    function set (config) {
+        var prop, i;
+        for (i in config) {
+            prop = config[i];
+            if (isFunction(prop)) {
+                this[i] = prop;
+            } else {
+                this['_' + i] = prop;
+            }
+        }
+        this._config = config;
+        // Lenient ordinal parsing accepts just a number in addition to
+        // number + (possibly) stuff coming from _dayOfMonthOrdinalParse.
+        // TODO: Remove "ordinalParse" fallback in next major release.
+        this._dayOfMonthOrdinalParseLenient = new RegExp(
+            (this._dayOfMonthOrdinalParse.source || this._ordinalParse.source) +
+                '|' + (/\d{1,2}/).source);
+    }
+
+    function mergeConfigs(parentConfig, childConfig) {
+        var res = extend({}, parentConfig), prop;
+        for (prop in childConfig) {
+            if (hasOwnProp(childConfig, prop)) {
+                if (isObject(parentConfig[prop]) && isObject(childConfig[prop])) {
+                    res[prop] = {};
+                    extend(res[prop], parentConfig[prop]);
+                    extend(res[prop], childConfig[prop]);
+                } else if (childConfig[prop] != null) {
+                    res[prop] = childConfig[prop];
+                } else {
+                    delete res[prop];
+                }
+            }
+        }
+        for (prop in parentConfig) {
+            if (hasOwnProp(parentConfig, prop) &&
+                    !hasOwnProp(childConfig, prop) &&
+                    isObject(parentConfig[prop])) {
+                // make sure changes to properties don't modify parent config
+                res[prop] = extend({}, res[prop]);
+            }
+        }
+        return res;
+    }
+
+    function Locale(config) {
+        if (config != null) {
+            this.set(config);
+        }
+    }
+
+    var keys;
+
+    if (Object.keys) {
+        keys = Object.keys;
+    } else {
+        keys = function (obj) {
+            var i, res = [];
+            for (i in obj) {
+                if (hasOwnProp(obj, i)) {
+                    res.push(i);
+                }
+            }
+            return res;
+        };
+    }
+
+    var defaultCalendar = {
+        sameDay : '[Today at] LT',
+        nextDay : '[Tomorrow at] LT',
+        nextWeek : 'dddd [at] LT',
+        lastDay : '[Yesterday at] LT',
+        lastWeek : '[Last] dddd [at] LT',
+        sameElse : 'L'
+    };
+
+    function calendar (key, mom, now) {
+        var output = this._calendar[key] || this._calendar['sameElse'];
+        return isFunction(output) ? output.call(mom, now) : output;
+    }
+
+    var defaultLongDateFormat = {
+        LTS  : 'h:mm:ss A',
+        LT   : 'h:mm A',
+        L    : 'MM/DD/YYYY',
+        LL   : 'MMMM D, YYYY',
+        LLL  : 'MMMM D, YYYY h:mm A',
+        LLLL : 'dddd, MMMM D, YYYY h:mm A'
+    };
+
+    function longDateFormat (key) {
+        var format = this._longDateFormat[key],
+            formatUpper = this._longDateFormat[key.toUpperCase()];
+
+        if (format || !formatUpper) {
+            return format;
+        }
+
+        this._longDateFormat[key] = formatUpper.replace(/MMMM|MM|DD|dddd/g, function (val) {
+            return val.slice(1);
+        });
+
+        return this._longDateFormat[key];
+    }
+
+    var defaultInvalidDate = 'Invalid date';
+
+    function invalidDate () {
+        return this._invalidDate;
+    }
+
+    var defaultOrdinal = '%d';
+    var defaultDayOfMonthOrdinalParse = /\d{1,2}/;
+
+    function ordinal (number) {
+        return this._ordinal.replace('%d', number);
+    }
+
+    var defaultRelativeTime = {
+        future : 'in %s',
+        past   : '%s ago',
+        s  : 'a few seconds',
+        ss : '%d seconds',
+        m  : 'a minute',
+        mm : '%d minutes',
+        h  : 'an hour',
+        hh : '%d hours',
+        d  : 'a day',
+        dd : '%d days',
+        M  : 'a month',
+        MM : '%d months',
+        y  : 'a year',
+        yy : '%d years'
+    };
+
+    function relativeTime (number, withoutSuffix, string, isFuture) {
+        var output = this._relativeTime[string];
+        return (isFunction(output)) ?
+            output(number, withoutSuffix, string, isFuture) :
+            output.replace(/%d/i, number);
+    }
+
+    function pastFuture (diff, output) {
+        var format = this._relativeTime[diff > 0 ? 'future' : 'past'];
+        return isFunction(format) ? format(output) : format.replace(/%s/i, output);
+    }
+
+    var aliases = {};
+
+    function addUnitAlias (unit, shorthand) {
+        var lowerCase = unit.toLowerCase();
+        aliases[lowerCase] = aliases[lowerCase + 's'] = aliases[shorthand] = unit;
+    }
+
+    function normalizeUnits(units) {
+        return typeof units === 'string' ? aliases[units] || aliases[units.toLowerCase()] : undefined;
+    }
+
+    function normalizeObjectUnits(inputObject) {
+        var normalizedInput = {},
+            normalizedProp,
+            prop;
+
+        for (prop in inputObject) {
+            if (hasOwnProp(inputObject, prop)) {
+                normalizedProp = normalizeUnits(prop);
+                if (normalizedProp) {
+                    normalizedInput[normalizedProp] = inputObject[prop];
+                }
+            }
+        }
+
+        return normalizedInput;
+    }
+
+    var priorities = {};
+
+    function addUnitPriority(unit, priority) {
+        priorities[unit] = priority;
+    }
+
+    function getPrioritizedUnits(unitsObj) {
+        var units = [];
+        for (var u in unitsObj) {
+            units.push({unit: u, priority: priorities[u]});
+        }
+        units.sort(function (a, b) {
+            return a.priority - b.priority;
+        });
+        return units;
+    }
+
+    function zeroFill(number, targetLength, forceSign) {
+        var absNumber = '' + Math.abs(number),
+            zerosToFill = targetLength - absNumber.length,
+            sign = number >= 0;
+        return (sign ? (forceSign ? '+' : '') : '-') +
+            Math.pow(10, Math.max(0, zerosToFill)).toString().substr(1) + absNumber;
+    }
+
+    var formattingTokens = /(\[[^\[]*\])|(\\)?([Hh]mm(ss)?|Mo|MM?M?M?|Do|DDDo|DD?D?D?|ddd?d?|do?|w[o|w]?|W[o|W]?|Qo?|YYYYYY|YYYYY|YYYY|YY|gg(ggg?)?|GG(GGG?)?|e|E|a|A|hh?|HH?|kk?|mm?|ss?|S{1,9}|x|X|zz?|ZZ?|.)/g;
+
+    var localFormattingTokens = /(\[[^\[]*\])|(\\)?(LTS|LT|LL?L?L?|l{1,4})/g;
+
+    var formatFunctions = {};
+
+    var formatTokenFunctions = {};
+
+    // token:    'M'
+    // padded:   ['MM', 2]
+    // ordinal:  'Mo'
+    // callback: function () { this.month() + 1 }
+    function addFormatToken (token, padded, ordinal, callback) {
+        var func = callback;
+        if (typeof callback === 'string') {
+            func = function () {
+                return this[callback]();
+            };
+        }
+        if (token) {
+            formatTokenFunctions[token] = func;
+        }
+        if (padded) {
+            formatTokenFunctions[padded[0]] = function () {
+                return zeroFill(func.apply(this, arguments), padded[1], padded[2]);
+            };
+        }
+        if (ordinal) {
+            formatTokenFunctions[ordinal] = function () {
+                return this.localeData().ordinal(func.apply(this, arguments), token);
+            };
+        }
+    }
+
+    function removeFormattingTokens(input) {
+        if (input.match(/\[[\s\S]/)) {
+            return input.replace(/^\[|\]$/g, '');
+        }
+        return input.replace(/\\/g, '');
+    }
+
+    function makeFormatFunction(format) {
+        var array = format.match(formattingTokens), i, length;
+
+        for (i = 0, length = array.length; i < length; i++) {
+            if (formatTokenFunctions[array[i]]) {
+                array[i] = formatTokenFunctions[array[i]];
+            } else {
+                array[i] = removeFormattingTokens(array[i]);
+            }
+        }
+
+        return function (mom) {
+            var output = '', i;
+            for (i = 0; i < length; i++) {
+                output += isFunction(array[i]) ? array[i].call(mom, format) : array[i];
+            }
+            return output;
+        };
+    }
+
+    // format date using native date object
+    function formatMoment(m, format) {
+        if (!m.isValid()) {
+            return m.localeData().invalidDate();
+        }
+
+        format = expandFormat(format, m.localeData());
+        formatFunctions[format] = formatFunctions[format] || makeFormatFunction(format);
+
+        return formatFunctions[format](m);
+    }
+
+    function expandFormat(format, locale) {
+        var i = 5;
+
+        function replaceLongDateFormatTokens(input) {
+            return locale.longDateFormat(input) || input;
+        }
+
+        localFormattingTokens.lastIndex = 0;
+        while (i >= 0 && localFormattingTokens.test(format)) {
+            format = format.replace(localFormattingTokens, replaceLongDateFormatTokens);
+            localFormattingTokens.lastIndex = 0;
+            i -= 1;
+        }
+
+        return format;
+    }
+
+    var match1         = /\d/;            //       0 - 9
+    var match2         = /\d\d/;          //      00 - 99
+    var match3         = /\d{3}/;         //     000 - 999
+    var match4         = /\d{4}/;         //    0000 - 9999
+    var match6         = /[+-]?\d{6}/;    // -999999 - 999999
+    var match1to2      = /\d\d?/;         //       0 - 99
+    var match3to4      = /\d\d\d\d?/;     //     999 - 9999
+    var match5to6      = /\d\d\d\d\d\d?/; //   99999 - 999999
+    var match1to3      = /\d{1,3}/;       //       0 - 999
+    var match1to4      = /\d{1,4}/;       //       0 - 9999
+    var match1to6      = /[+-]?\d{1,6}/;  // -999999 - 999999
+
+    var matchUnsigned  = /\d+/;           //       0 - inf
+    var matchSigned    = /[+-]?\d+/;      //    -inf - inf
+
+    var matchOffset    = /Z|[+-]\d\d:?\d\d/gi; // +00:00 -00:00 +0000 -0000 or Z
+    var matchShortOffset = /Z|[+-]\d\d(?::?\d\d)?/gi; // +00 -00 +00:00 -00:00 +0000 -0000 or Z
+
+    var matchTimestamp = /[+-]?\d+(\.\d{1,3})?/; // 123456789 123456789.123
+
+    // any word (or two) characters or numbers including two/three word month in arabic.
+    // includes scottish gaelic two word and hyphenated months
+    var matchWord = /[0-9]{0,256}['a-z\u00A0-\u05FF\u0700-\uD7FF\uF900-\uFDCF\uFDF0-\uFF07\uFF10-\uFFEF]{1,256}|[\u0600-\u06FF\/]{1,256}(\s*?[\u0600-\u06FF]{1,256}){1,2}/i;
+
+    var regexes = {};
+
+    function addRegexToken (token, regex, strictRegex) {
+        regexes[token] = isFunction(regex) ? regex : function (isStrict, localeData) {
+            return (isStrict && strictRegex) ? strictRegex : regex;
+        };
+    }
+
+    function getParseRegexForToken (token, config) {
+        if (!hasOwnProp(regexes, token)) {
+            return new RegExp(unescapeFormat(token));
+        }
+
+        return regexes[token](config._strict, config._locale);
+    }
+
+    // Code from http://stackoverflow.com/questions/3561493/is-there-a-regexp-escape-function-in-javascript
+    function unescapeFormat(s) {
+        return regexEscape(s.replace('\\', '').replace(/\\(\[)|\\(\])|\[([^\]\[]*)\]|\\(.)/g, function (matched, p1, p2, p3, p4) {
+            return p1 || p2 || p3 || p4;
+        }));
+    }
+
+    function regexEscape(s) {
+        return s.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
+    }
+
+    var tokens = {};
+
+    function addParseToken (token, callback) {
+        var i, func = callback;
+        if (typeof token === 'string') {
+            token = [token];
+        }
+        if (isNumber(callback)) {
+            func = function (input, array) {
+                array[callback] = toInt(input);
+            };
+        }
+        for (i = 0; i < token.length; i++) {
+            tokens[token[i]] = func;
+        }
+    }
+
+    function addWeekParseToken (token, callback) {
+        addParseToken(token, function (input, array, config, token) {
+            config._w = config._w || {};
+            callback(input, config._w, config, token);
+        });
+    }
+
+    function addTimeToArrayFromToken(token, input, config) {
+        if (input != null && hasOwnProp(tokens, token)) {
+            tokens[token](input, config._a, config, token);
+        }
+    }
+
+    var YEAR = 0;
+    var MONTH = 1;
+    var DATE = 2;
+    var HOUR = 3;
+    var MINUTE = 4;
+    var SECOND = 5;
+    var MILLISECOND = 6;
+    var WEEK = 7;
+    var WEEKDAY = 8;
+
+    // FORMATTING
+
+    addFormatToken('Y', 0, 0, function () {
+        var y = this.year();
+        return y <= 9999 ? '' + y : '+' + y;
+    });
+
+    addFormatToken(0, ['YY', 2], 0, function () {
+        return this.year() % 100;
+    });
+
+    addFormatToken(0, ['YYYY',   4],       0, 'year');
+    addFormatToken(0, ['YYYYY',  5],       0, 'year');
+    addFormatToken(0, ['YYYYYY', 6, true], 0, 'year');
+
+    // ALIASES
+
+    addUnitAlias('year', 'y');
+
+    // PRIORITIES
+
+    addUnitPriority('year', 1);
+
+    // PARSING
+
+    addRegexToken('Y',      matchSigned);
+    addRegexToken('YY',     match1to2, match2);
+    addRegexToken('YYYY',   match1to4, match4);
+    addRegexToken('YYYYY',  match1to6, match6);
+    addRegexToken('YYYYYY', match1to6, match6);
+
+    addParseToken(['YYYYY', 'YYYYYY'], YEAR);
+    addParseToken('YYYY', function (input, array) {
+        array[YEAR] = input.length === 2 ? hooks.parseTwoDigitYear(input) : toInt(input);
+    });
+    addParseToken('YY', function (input, array) {
+        array[YEAR] = hooks.parseTwoDigitYear(input);
+    });
+    addParseToken('Y', function (input, array) {
+        array[YEAR] = parseInt(input, 10);
+    });
+
+    // HELPERS
+
+    function daysInYear(year) {
+        return isLeapYear(year) ? 366 : 365;
+    }
+
+    function isLeapYear(year) {
+        return (year % 4 === 0 && year % 100 !== 0) || year % 400 === 0;
+    }
+
+    // HOOKS
+
+    hooks.parseTwoDigitYear = function (input) {
+        return toInt(input) + (toInt(input) > 68 ? 1900 : 2000);
+    };
+
+    // MOMENTS
+
+    var getSetYear = makeGetSet('FullYear', true);
+
+    function getIsLeapYear () {
+        return isLeapYear(this.year());
+    }
+
+    function makeGetSet (unit, keepTime) {
+        return function (value) {
+            if (value != null) {
+                set$1(this, unit, value);
+                hooks.updateOffset(this, keepTime);
+                return this;
+            } else {
+                return get(this, unit);
+            }
+        };
+    }
+
+    function get (mom, unit) {
+        return mom.isValid() ?
+            mom._d['get' + (mom._isUTC ? 'UTC' : '') + unit]() : NaN;
+    }
+
+    function set$1 (mom, unit, value) {
+        if (mom.isValid() && !isNaN(value)) {
+            if (unit === 'FullYear' && isLeapYear(mom.year()) && mom.month() === 1 && mom.date() === 29) {
+                mom._d['set' + (mom._isUTC ? 'UTC' : '') + unit](value, mom.month(), daysInMonth(value, mom.month()));
+            }
+            else {
+                mom._d['set' + (mom._isUTC ? 'UTC' : '') + unit](value);
+            }
+        }
+    }
+
+    // MOMENTS
+
+    function stringGet (units) {
+        units = normalizeUnits(units);
+        if (isFunction(this[units])) {
+            return this[units]();
+        }
+        return this;
+    }
+
+
+    function stringSet (units, value) {
+        if (typeof units === 'object') {
+            units = normalizeObjectUnits(units);
+            var prioritized = getPrioritizedUnits(units);
+            for (var i = 0; i < prioritized.length; i++) {
+                this[prioritized[i].unit](units[prioritized[i].unit]);
+            }
+        } else {
+            units = normalizeUnits(units);
+            if (isFunction(this[units])) {
+                return this[units](value);
+            }
+        }
+        return this;
+    }
+
+    function mod(n, x) {
+        return ((n % x) + x) % x;
+    }
+
+    var indexOf;
+
+    if (Array.prototype.indexOf) {
+        indexOf = Array.prototype.indexOf;
+    } else {
+        indexOf = function (o) {
+            // I know
+            var i;
+            for (i = 0; i < this.length; ++i) {
+                if (this[i] === o) {
+                    return i;
+                }
+            }
+            return -1;
+        };
+    }
+
+    function daysInMonth(year, month) {
+        if (isNaN(year) || isNaN(month)) {
+            return NaN;
+        }
+        var modMonth = mod(month, 12);
+        year += (month - modMonth) / 12;
+        return modMonth === 1 ? (isLeapYear(year) ? 29 : 28) : (31 - modMonth % 7 % 2);
+    }
+
+    // FORMATTING
+
+    addFormatToken('M', ['MM', 2], 'Mo', function () {
+        return this.month() + 1;
+    });
+
+    addFormatToken('MMM', 0, 0, function (format) {
+        return this.localeData().monthsShort(this, format);
+    });
+
+    addFormatToken('MMMM', 0, 0, function (format) {
+        return this.localeData().months(this, format);
+    });
+
+    // ALIASES
+
+    addUnitAlias('month', 'M');
+
+    // PRIORITY
+
+    addUnitPriority('month', 8);
+
+    // PARSING
+
+    addRegexToken('M',    match1to2);
+    addRegexToken('MM',   match1to2, match2);
+    addRegexToken('MMM',  function (isStrict, locale) {
+        return locale.monthsShortRegex(isStrict);
+    });
+    addRegexToken('MMMM', function (isStrict, locale) {
+        return locale.monthsRegex(isStrict);
+    });
+
+    addParseToken(['M', 'MM'], function (input, array) {
+        array[MONTH] = toInt(input) - 1;
+    });
+
+    addParseToken(['MMM', 'MMMM'], function (input, array, config, token) {
+        var month = config._locale.monthsParse(input, token, config._strict);
+        // if we didn't find a month name, mark the date as invalid.
+        if (month != null) {
+            array[MONTH] = month;
+        } else {
+            getParsingFlags(config).invalidMonth = input;
+        }
+    });
+
+    // LOCALES
+
+    var MONTHS_IN_FORMAT = /D[oD]?(\[[^\[\]]*\]|\s)+MMMM?/;
+    var defaultLocaleMonths = 'January_February_March_April_May_June_July_August_September_October_November_December'.split('_');
+    function localeMonths (m, format) {
+        if (!m) {
+            return isArray(this._months) ? this._months :
+                this._months['standalone'];
+        }
+        return isArray(this._months) ? this._months[m.month()] :
+            this._months[(this._months.isFormat || MONTHS_IN_FORMAT).test(format) ? 'format' : 'standalone'][m.month()];
+    }
+
+    var defaultLocaleMonthsShort = 'Jan_Feb_Mar_Apr_May_Jun_Jul_Aug_Sep_Oct_Nov_Dec'.split('_');
+    function localeMonthsShort (m, format) {
+        if (!m) {
+            return isArray(this._monthsShort) ? this._monthsShort :
+                this._monthsShort['standalone'];
+        }
+        return isArray(this._monthsShort) ? this._monthsShort[m.month()] :
+            this._monthsShort[MONTHS_IN_FORMAT.test(format) ? 'format' : 'standalone'][m.month()];
+    }
+
+    function handleStrictParse(monthName, format, strict) {
+        var i, ii, mom, llc = monthName.toLocaleLowerCase();
+        if (!this._monthsParse) {
+            // this is not used
+            this._monthsParse = [];
+            this._longMonthsParse = [];
+            this._shortMonthsParse = [];
+            for (i = 0; i < 12; ++i) {
+                mom = createUTC([2000, i]);
+                this._shortMonthsParse[i] = this.monthsShort(mom, '').toLocaleLowerCase();
+                this._longMonthsParse[i] = this.months(mom, '').toLocaleLowerCase();
+            }
+        }
+
+        if (strict) {
+            if (format === 'MMM') {
+                ii = indexOf.call(this._shortMonthsParse, llc);
+                return ii !== -1 ? ii : null;
+            } else {
+                ii = indexOf.call(this._longMonthsParse, llc);
+                return ii !== -1 ? ii : null;
+            }
+        } else {
+            if (format === 'MMM') {
+                ii = indexOf.call(this._shortMonthsParse, llc);
+                if (ii !== -1) {
+                    return ii;
+                }
+                ii = indexOf.call(this._longMonthsParse, llc);
+                return ii !== -1 ? ii : null;
+            } else {
+                ii = indexOf.call(this._longMonthsParse, llc);
+                if (ii !== -1) {
+                    return ii;
+                }
+                ii = indexOf.call(this._shortMonthsParse, llc);
+                return ii !== -1 ? ii : null;
+            }
+        }
+    }
+
+    function localeMonthsParse (monthName, format, strict) {
+        var i, mom, regex;
+
+        if (this._monthsParseExact) {
+            return handleStrictParse.call(this, monthName, format, strict);
+        }
+
+        if (!this._monthsParse) {
+            this._monthsParse = [];
+            this._longMonthsParse = [];
+            this._shortMonthsParse = [];
+        }
+
+        // TODO: add sorting
+        // Sorting makes sure if one month (or abbr) is a prefix of another
+        // see sorting in computeMonthsParse
+        for (i = 0; i < 12; i++) {
+            // make the regex if we don't have it already
+            mom = createUTC([2000, i]);
+            if (strict && !this._longMonthsParse[i]) {
+                this._longMonthsParse[i] = new RegExp('^' + this.months(mom, '').replace('.', '') + '$', 'i');
+                this._shortMonthsParse[i] = new RegExp('^' + this.monthsShort(mom, '').replace('.', '') + '$', 'i');
+            }
+            if (!strict && !this._monthsParse[i]) {
+                regex = '^' + this.months(mom, '') + '|^' + this.monthsShort(mom, '');
+                this._monthsParse[i] = new RegExp(regex.replace('.', ''), 'i');
+            }
+            // test the regex
+            if (strict && format === 'MMMM' && this._longMonthsParse[i].test(monthName)) {
+                return i;
+            } else if (strict && format === 'MMM' && this._shortMonthsParse[i].test(monthName)) {
+                return i;
+            } else if (!strict && this._monthsParse[i].test(monthName)) {
+                return i;
+            }
+        }
+    }
+
+    // MOMENTS
+
+    function setMonth (mom, value) {
+        var dayOfMonth;
+
+        if (!mom.isValid()) {
+            // No op
+            return mom;
+        }
+
+        if (typeof value === 'string') {
+            if (/^\d+$/.test(value)) {
+                value = toInt(value);
+            } else {
+                value = mom.localeData().monthsParse(value);
+                // TODO: Another silent failure?
+                if (!isNumber(value)) {
+                    return mom;
+                }
+            }
+        }
+
+        dayOfMonth = Math.min(mom.date(), daysInMonth(mom.year(), value));
+        mom._d['set' + (mom._isUTC ? 'UTC' : '') + 'Month'](value, dayOfMonth);
+        return mom;
+    }
+
+    function getSetMonth (value) {
+        if (value != null) {
+            setMonth(this, value);
+            hooks.updateOffset(this, true);
+            return this;
+        } else {
+            return get(this, 'Month');
+        }
+    }
+
+    function getDaysInMonth () {
+        return daysInMonth(this.year(), this.month());
+    }
+
+    var defaultMonthsShortRegex = matchWord;
+    function monthsShortRegex (isStrict) {
+        if (this._monthsParseExact) {
+            if (!hasOwnProp(this, '_monthsRegex')) {
+                computeMonthsParse.call(this);
+            }
+            if (isStrict) {
+                return this._monthsShortStrictRegex;
+            } else {
+                return this._monthsShortRegex;
+            }
+        } else {
+            if (!hasOwnProp(this, '_monthsShortRegex')) {
+                this._monthsShortRegex = defaultMonthsShortRegex;
+            }
+            return this._monthsShortStrictRegex && isStrict ?
+                this._monthsShortStrictRegex : this._monthsShortRegex;
+        }
+    }
+
+    var defaultMonthsRegex = matchWord;
+    function monthsRegex (isStrict) {
+        if (this._monthsParseExact) {
+            if (!hasOwnProp(this, '_monthsRegex')) {
+                computeMonthsParse.call(this);
+            }
+            if (isStrict) {
+                return this._monthsStrictRegex;
+            } else {
+                return this._monthsRegex;
+            }
+        } else {
+            if (!hasOwnProp(this, '_monthsRegex')) {
+                this._monthsRegex = defaultMonthsRegex;
+            }
+            return this._monthsStrictRegex && isStrict ?
+                this._monthsStrictRegex : this._monthsRegex;
+        }
+    }
+
+    function computeMonthsParse () {
+        function cmpLenRev(a, b) {
+            return b.length - a.length;
+        }
+
+        var shortPieces = [], longPieces = [], mixedPieces = [],
+            i, mom;
+        for (i = 0; i < 12; i++) {
+            // make the regex if we don't have it already
+            mom = createUTC([2000, i]);
+            shortPieces.push(this.monthsShort(mom, ''));
+            longPieces.push(this.months(mom, ''));
+            mixedPieces.push(this.months(mom, ''));
+            mixedPieces.push(this.monthsShort(mom, ''));
+        }
+        // Sorting makes sure if one month (or abbr) is a prefix of another it
+        // will match the longer piece.
+        shortPieces.sort(cmpLenRev);
+        longPieces.sort(cmpLenRev);
+        mixedPieces.sort(cmpLenRev);
+        for (i = 0; i < 12; i++) {
+            shortPieces[i] = regexEscape(shortPieces[i]);
+            longPieces[i] = regexEscape(longPieces[i]);
+        }
+        for (i = 0; i < 24; i++) {
+            mixedPieces[i] = regexEscape(mixedPieces[i]);
+        }
+
+        this._monthsRegex = new RegExp('^(' + mixedPieces.join('|') + ')', 'i');
+        this._monthsShortRegex = this._monthsRegex;
+        this._monthsStrictRegex = new RegExp('^(' + longPieces.join('|') + ')', 'i');
+        this._monthsShortStrictRegex = new RegExp('^(' + shortPieces.join('|') + ')', 'i');
+    }
+
+    function createDate (y, m, d, h, M, s, ms) {
+        // can't just apply() to create a date:
+        // https://stackoverflow.com/q/181348
+        var date;
+        // the date constructor remaps years 0-99 to 1900-1999
+        if (y < 100 && y >= 0) {
+            // preserve leap years using a full 400 year cycle, then reset
+            date = new Date(y + 400, m, d, h, M, s, ms);
+            if (isFinite(date.getFullYear())) {
+                date.setFullYear(y);
+            }
+        } else {
+            date = new Date(y, m, d, h, M, s, ms);
+        }
+
+        return date;
+    }
+
+    function createUTCDate (y) {
+        var date;
+        // the Date.UTC function remaps years 0-99 to 1900-1999
+        if (y < 100 && y >= 0) {
+            var args = Array.prototype.slice.call(arguments);
+            // preserve leap years using a full 400 year cycle, then reset
+            args[0] = y + 400;
+            date = new Date(Date.UTC.apply(null, args));
+            if (isFinite(date.getUTCFullYear())) {
+                date.setUTCFullYear(y);
+            }
+        } else {
+            date = new Date(Date.UTC.apply(null, arguments));
+        }
+
+        return date;
+    }
+
+    // start-of-first-week - start-of-year
+    function firstWeekOffset(year, dow, doy) {
+        var // first-week day -- which january is always in the first week (4 for iso, 1 for other)
+            fwd = 7 + dow - doy,
+            // first-week day local weekday -- which local weekday is fwd
+            fwdlw = (7 + createUTCDate(year, 0, fwd).getUTCDay() - dow) % 7;
+
+        return -fwdlw + fwd - 1;
+    }
+
+    // https://en.wikipedia.org/wiki/ISO_week_date#Calculating_a_date_given_the_year.2C_week_number_and_weekday
+    function dayOfYearFromWeeks(year, week, weekday, dow, doy) {
+        var localWeekday = (7 + weekday - dow) % 7,
+            weekOffset = firstWeekOffset(year, dow, doy),
+            dayOfYear = 1 + 7 * (week - 1) + localWeekday + weekOffset,
+            resYear, resDayOfYear;
+
+        if (dayOfYear <= 0) {
+            resYear = year - 1;
+            resDayOfYear = daysInYear(resYear) + dayOfYear;
+        } else if (dayOfYear > daysInYear(year)) {
+            resYear = year + 1;
+            resDayOfYear = dayOfYear - daysInYear(year);
+        } else {
+            resYear = year;
+            resDayOfYear = dayOfYear;
+        }
+
+        return {
+            year: resYear,
+            dayOfYear: resDayOfYear
+        };
+    }
+
+    function weekOfYear(mom, dow, doy) {
+        var weekOffset = firstWeekOffset(mom.year(), dow, doy),
+            week = Math.floor((mom.dayOfYear() - weekOffset - 1) / 7) + 1,
+            resWeek, resYear;
+
+        if (week < 1) {
+            resYear = mom.year() - 1;
+            resWeek = week + weeksInYear(resYear, dow, doy);
+        } else if (week > weeksInYear(mom.year(), dow, doy)) {
+            resWeek = week - weeksInYear(mom.year(), dow, doy);
+            resYear = mom.year() + 1;
+        } else {
+            resYear = mom.year();
+            resWeek = week;
+        }
+
+        return {
+            week: resWeek,
+            year: resYear
+        };
+    }
+
+    function weeksInYear(year, dow, doy) {
+        var weekOffset = firstWeekOffset(year, dow, doy),
+            weekOffsetNext = firstWeekOffset(year + 1, dow, doy);
+        return (daysInYear(year) - weekOffset + weekOffsetNext) / 7;
+    }
+
+    // FORMATTING
+
+    addFormatToken('w', ['ww', 2], 'wo', 'week');
+    addFormatToken('W', ['WW', 2], 'Wo', 'isoWeek');
+
+    // ALIASES
+
+    addUnitAlias('week', 'w');
+    addUnitAlias('isoWeek', 'W');
+
+    // PRIORITIES
+
+    addUnitPriority('week', 5);
+    addUnitPriority('isoWeek', 5);
+
+    // PARSING
+
+    addRegexToken('w',  match1to2);
+    addRegexToken('ww', match1to2, match2);
+    addRegexToken('W',  match1to2);
+    addRegexToken('WW', match1to2, match2);
+
+    addWeekParseToken(['w', 'ww', 'W', 'WW'], function (input, week, config, token) {
+        week[token.substr(0, 1)] = toInt(input);
+    });
+
+    // HELPERS
+
+    // LOCALES
+
+    function localeWeek (mom) {
+        return weekOfYear(mom, this._week.dow, this._week.doy).week;
+    }
+
+    var defaultLocaleWeek = {
+        dow : 0, // Sunday is the first day of the week.
+        doy : 6  // The week that contains Jan 6th is the first week of the year.
+    };
+
+    function localeFirstDayOfWeek () {
+        return this._week.dow;
+    }
+
+    function localeFirstDayOfYear () {
+        return this._week.doy;
+    }
+
+    // MOMENTS
+
+    function getSetWeek (input) {
+        var week = this.localeData().week(this);
+        return input == null ? week : this.add((input - week) * 7, 'd');
+    }
+
+    function getSetISOWeek (input) {
+        var week = weekOfYear(this, 1, 4).week;
+        return input == null ? week : this.add((input - week) * 7, 'd');
+    }
+
+    // FORMATTING
+
+    addFormatToken('d', 0, 'do', 'day');
+
+    addFormatToken('dd', 0, 0, function (format) {
+        return this.localeData().weekdaysMin(this, format);
+    });
+
+    addFormatToken('ddd', 0, 0, function (format) {
+        return this.localeData().weekdaysShort(this, format);
+    });
+
+    addFormatToken('dddd', 0, 0, function (format) {
+        return this.localeData().weekdays(this, format);
+    });
+
+    addFormatToken('e', 0, 0, 'weekday');
+    addFormatToken('E', 0, 0, 'isoWeekday');
+
+    // ALIASES
+
+    addUnitAlias('day', 'd');
+    addUnitAlias('weekday', 'e');
+    addUnitAlias('isoWeekday', 'E');
+
+    // PRIORITY
+    addUnitPriority('day', 11);
+    addUnitPriority('weekday', 11);
+    addUnitPriority('isoWeekday', 11);
+
+    // PARSING
+
+    addRegexToken('d',    match1to2);
+    addRegexToken('e',    match1to2);
+    addRegexToken('E',    match1to2);
+    addRegexToken('dd',   function (isStrict, locale) {
+        return locale.weekdaysMinRegex(isStrict);
+    });
+    addRegexToken('ddd',   function (isStrict, locale) {
+        return locale.weekdaysShortRegex(isStrict);
+    });
+    addRegexToken('dddd',   function (isStrict, locale) {
+        return locale.weekdaysRegex(isStrict);
+    });
+
+    addWeekParseToken(['dd', 'ddd', 'dddd'], function (input, week, config, token) {
+        var weekday = config._locale.weekdaysParse(input, token, config._strict);
+        // if we didn't get a weekday name, mark the date as invalid
+        if (weekday != null) {
+            week.d = weekday;
+        } else {
+            getParsingFlags(config).invalidWeekday = input;
+        }
+    });
+
+    addWeekParseToken(['d', 'e', 'E'], function (input, week, config, token) {
+        week[token] = toInt(input);
+    });
+
+    // HELPERS
+
+    function parseWeekday(input, locale) {
+        if (typeof input !== 'string') {
+            return input;
+        }
+
+        if (!isNaN(input)) {
+            return parseInt(input, 10);
+        }
+
+        input = locale.weekdaysParse(input);
+        if (typeof input === 'number') {
+            return input;
+        }
+
+        return null;
+    }
+
+    function parseIsoWeekday(input, locale) {
+        if (typeof input === 'string') {
+            return locale.weekdaysParse(input) % 7 || 7;
+        }
+        return isNaN(input) ? null : input;
+    }
+
+    // LOCALES
+    function shiftWeekdays (ws, n) {
+        return ws.slice(n, 7).concat(ws.slice(0, n));
+    }
+
+    var defaultLocaleWeekdays = 'Sunday_Monday_Tuesday_Wednesday_Thursday_Friday_Saturday'.split('_');
+    function localeWeekdays (m, format) {
+        var weekdays = isArray(this._weekdays) ? this._weekdays :
+            this._weekdays[(m && m !== true && this._weekdays.isFormat.test(format)) ? 'format' : 'standalone'];
+        return (m === true) ? shiftWeekdays(weekdays, this._week.dow)
+            : (m) ? weekdays[m.day()] : weekdays;
+    }
+
+    var defaultLocaleWeekdaysShort = 'Sun_Mon_Tue_Wed_Thu_Fri_Sat'.split('_');
+    function localeWeekdaysShort (m) {
+        return (m === true) ? shiftWeekdays(this._weekdaysShort, this._week.dow)
+            : (m) ? this._weekdaysShort[m.day()] : this._weekdaysShort;
+    }
+
+    var defaultLocaleWeekdaysMin = 'Su_Mo_Tu_We_Th_Fr_Sa'.split('_');
+    function localeWeekdaysMin (m) {
+        return (m === true) ? shiftWeekdays(this._weekdaysMin, this._week.dow)
+            : (m) ? this._weekdaysMin[m.day()] : this._weekdaysMin;
+    }
+
+    function handleStrictParse$1(weekdayName, format, strict) {
+        var i, ii, mom, llc = weekdayName.toLocaleLowerCase();
+        if (!this._weekdaysParse) {
+            this._weekdaysParse = [];
+            this._shortWeekdaysParse = [];
+            this._minWeekdaysParse = [];
+
+            for (i = 0; i < 7; ++i) {
+                mom = createUTC([2000, 1]).day(i);
+                this._minWeekdaysParse[i] = this.weekdaysMin(mom, '').toLocaleLowerCase();
+                this._shortWeekdaysParse[i] = this.weekdaysShort(mom, '').toLocaleLowerCase();
+                this._weekdaysParse[i] = this.weekdays(mom, '').toLocaleLowerCase();
+            }
+        }
+
+        if (strict) {
+            if (format === 'dddd') {
+                ii = indexOf.call(this._weekdaysParse, llc);
+                return ii !== -1 ? ii : null;
+            } else if (format === 'ddd') {
+                ii = indexOf.call(this._shortWeekdaysParse, llc);
+                return ii !== -1 ? ii : null;
+            } else {
+                ii = indexOf.call(this._minWeekdaysParse, llc);
+                return ii !== -1 ? ii : null;
+            }
+        } else {
+            if (format === 'dddd') {
+                ii = indexOf.call(this._weekdaysParse, llc);
+                if (ii !== -1) {
+                    return ii;
+                }
+                ii = indexOf.call(this._shortWeekdaysParse, llc);
+                if (ii !== -1) {
+                    return ii;
+                }
+                ii = indexOf.call(this._minWeekdaysParse, llc);
+                return ii !== -1 ? ii : null;
+            } else if (format === 'ddd') {
+                ii = indexOf.call(this._shortWeekdaysParse, llc);
+                if (ii !== -1) {
+                    return ii;
+                }
+                ii = indexOf.call(this._weekdaysParse, llc);
+                if (ii !== -1) {
+                    return ii;
+                }
+                ii = indexOf.call(this._minWeekdaysParse, llc);
+                return ii !== -1 ? ii : null;
+            } else {
+                ii = indexOf.call(this._minWeekdaysParse, llc);
+                if (ii !== -1) {
+                    return ii;
+                }
+                ii = indexOf.call(this._weekdaysParse, llc);
+                if (ii !== -1) {
+                    return ii;
+                }
+                ii = indexOf.call(this._shortWeekdaysParse, llc);
+                return ii !== -1 ? ii : null;
+            }
+        }
+    }
+
+    function localeWeekdaysParse (weekdayName, format, strict) {
+        var i, mom, regex;
+
+        if (this._weekdaysParseExact) {
+            return handleStrictParse$1.call(this, weekdayName, format, strict);
+        }
+
+        if (!this._weekdaysParse) {
+            this._weekdaysParse = [];
+            this._minWeekdaysParse = [];
+            this._shortWeekdaysParse = [];
+            this._fullWeekdaysParse = [];
+        }
+
+        for (i = 0; i < 7; i++) {
+            // make the regex if we don't have it already
+
+            mom = createUTC([2000, 1]).day(i);
+            if (strict && !this._fullWeekdaysParse[i]) {
+                this._fullWeekdaysParse[i] = new RegExp('^' + this.weekdays(mom, '').replace('.', '\\.?') + '$', 'i');
+                this._shortWeekdaysParse[i] = new RegExp('^' + this.weekdaysShort(mom, '').replace('.', '\\.?') + '$', 'i');
+                this._minWeekdaysParse[i] = new RegExp('^' + this.weekdaysMin(mom, '').replace('.', '\\.?') + '$', 'i');
+            }
+            if (!this._weekdaysParse[i]) {
+                regex = '^' + this.weekdays(mom, '') + '|^' + this.weekdaysShort(mom, '') + '|^' + this.weekdaysMin(mom, '');
+                this._weekdaysParse[i] = new RegExp(regex.replace('.', ''), 'i');
+            }
+            // test the regex
+            if (strict && format === 'dddd' && this._fullWeekdaysParse[i].test(weekdayName)) {
+                return i;
+            } else if (strict && format === 'ddd' && this._shortWeekdaysParse[i].test(weekdayName)) {
+                return i;
+            } else if (strict && format === 'dd' && this._minWeekdaysParse[i].test(weekdayName)) {
+                return i;
+            } else if (!strict && this._weekdaysParse[i].test(weekdayName)) {
+                return i;
+            }
+        }
+    }
+
+    // MOMENTS
+
+    function getSetDayOfWeek (input) {
+        if (!this.isValid()) {
+            return input != null ? this : NaN;
+        }
+        var day = this._isUTC ? this._d.getUTCDay() : this._d.getDay();
+        if (input != null) {
+            input = parseWeekday(input, this.localeData());
+            return this.add(input - day, 'd');
+        } else {
+            return day;
+        }
+    }
+
+    function getSetLocaleDayOfWeek (input) {
+        if (!this.isValid()) {
+            return input != null ? this : NaN;
+        }
+        var weekday = (this.day() + 7 - this.localeData()._week.dow) % 7;
+        return input == null ? weekday : this.add(input - weekday, 'd');
+    }
+
+    function getSetISODayOfWeek (input) {
+        if (!this.isValid()) {
+            return input != null ? this : NaN;
+        }
+
+        // behaves the same as moment#day except
+        // as a getter, returns 7 instead of 0 (1-7 range instead of 0-6)
+        // as a setter, sunday should belong to the previous week.
+
+        if (input != null) {
+            var weekday = parseIsoWeekday(input, this.localeData());
+            return this.day(this.day() % 7 ? weekday : weekday - 7);
+        } else {
+            return this.day() || 7;
+        }
+    }
+
+    var defaultWeekdaysRegex = matchWord;
+    function weekdaysRegex (isStrict) {
+        if (this._weekdaysParseExact) {
+            if (!hasOwnProp(this, '_weekdaysRegex')) {
+                computeWeekdaysParse.call(this);
+            }
+            if (isStrict) {
+                return this._weekdaysStrictRegex;
+            } else {
+                return this._weekdaysRegex;
+            }
+        } else {
+            if (!hasOwnProp(this, '_weekdaysRegex')) {
+                this._weekdaysRegex = defaultWeekdaysRegex;
+            }
+            return this._weekdaysStrictRegex && isStrict ?
+                this._weekdaysStrictRegex : this._weekdaysRegex;
+        }
+    }
+
+    var defaultWeekdaysShortRegex = matchWord;
+    function weekdaysShortRegex (isStrict) {
+        if (this._weekdaysParseExact) {
+            if (!hasOwnProp(this, '_weekdaysRegex')) {
+                computeWeekdaysParse.call(this);
+            }
+            if (isStrict) {
+                return this._weekdaysShortStrictRegex;
+            } else {
+                return this._weekdaysShortRegex;
+            }
+        } else {
+            if (!hasOwnProp(this, '_weekdaysShortRegex')) {
+                this._weekdaysShortRegex = defaultWeekdaysShortRegex;
+            }
+            return this._weekdaysShortStrictRegex && isStrict ?
+                this._weekdaysShortStrictRegex : this._weekdaysShortRegex;
+        }
+    }
+
+    var defaultWeekdaysMinRegex = matchWord;
+    function weekdaysMinRegex (isStrict) {
+        if (this._weekdaysParseExact) {
+            if (!hasOwnProp(this, '_weekdaysRegex')) {
+                computeWeekdaysParse.call(this);
+            }
+            if (isStrict) {
+                return this._weekdaysMinStrictRegex;
+            } else {
+                return this._weekdaysMinRegex;
+            }
+        } else {
+            if (!hasOwnProp(this, '_weekdaysMinRegex')) {
+                this._weekdaysMinRegex = defaultWeekdaysMinRegex;
+            }
+            return this._weekdaysMinStrictRegex && isStrict ?
+                this._weekdaysMinStrictRegex : this._weekdaysMinRegex;
+        }
+    }
+
+
+    function computeWeekdaysParse () {
+        function cmpLenRev(a, b) {
+            return b.length - a.length;
+        }
+
+        var minPieces = [], shortPieces = [], longPieces = [], mixedPieces = [],
+            i, mom, minp, shortp, longp;
+        for (i = 0; i < 7; i++) {
+            // make the regex if we don't have it already
+            mom = createUTC([2000, 1]).day(i);
+            minp = this.weekdaysMin(mom, '');
+            shortp = this.weekdaysShort(mom, '');
+            longp = this.weekdays(mom, '');
+            minPieces.push(minp);
+            shortPieces.push(shortp);
+            longPieces.push(longp);
+            mixedPieces.push(minp);
+            mixedPieces.push(shortp);
+            mixedPieces.push(longp);
+        }
+        // Sorting makes sure if one weekday (or abbr) is a prefix of another it
+        // will match the longer piece.
+        minPieces.sort(cmpLenRev);
+        shortPieces.sort(cmpLenRev);
+        longPieces.sort(cmpLenRev);
+        mixedPieces.sort(cmpLenRev);
+        for (i = 0; i < 7; i++) {
+            shortPieces[i] = regexEscape(shortPieces[i]);
+            longPieces[i] = regexEscape(longPieces[i]);
+            mixedPieces[i] = regexEscape(mixedPieces[i]);
+        }
+
+        this._weekdaysRegex = new RegExp('^(' + mixedPieces.join('|') + ')', 'i');
+        this._weekdaysShortRegex = this._weekdaysRegex;
+        this._weekdaysMinRegex = this._weekdaysRegex;
+
+        this._weekdaysStrictRegex = new RegExp('^(' + longPieces.join('|') + ')', 'i');
+        this._weekdaysShortStrictRegex = new RegExp('^(' + shortPieces.join('|') + ')', 'i');
+        this._weekdaysMinStrictRegex = new RegExp('^(' + minPieces.join('|') + ')', 'i');
+    }
+
+    // FORMATTING
+
+    function hFormat() {
+        return this.hours() % 12 || 12;
+    }
+
+    function kFormat() {
+        return this.hours() || 24;
+    }
+
+    addFormatToken('H', ['HH', 2], 0, 'hour');
+    addFormatToken('h', ['hh', 2], 0, hFormat);
+    addFormatToken('k', ['kk', 2], 0, kFormat);
+
+    addFormatToken('hmm', 0, 0, function () {
+        return '' + hFormat.apply(this) + zeroFill(this.minutes(), 2);
+    });
+
+    addFormatToken('hmmss', 0, 0, function () {
+        return '' + hFormat.apply(this) + zeroFill(this.minutes(), 2) +
+            zeroFill(this.seconds(), 2);
+    });
+
+    addFormatToken('Hmm', 0, 0, function () {
+        return '' + this.hours() + zeroFill(this.minutes(), 2);
+    });
+
+    addFormatToken('Hmmss', 0, 0, function () {
+        return '' + this.hours() + zeroFill(this.minutes(), 2) +
+            zeroFill(this.seconds(), 2);
+    });
+
+    function meridiem (token, lowercase) {
+        addFormatToken(token, 0, 0, function () {
+            return this.localeData().meridiem(this.hours(), this.minutes(), lowercase);
+        });
+    }
+
+    meridiem('a', true);
+    meridiem('A', false);
+
+    // ALIASES
+
+    addUnitAlias('hour', 'h');
+
+    // PRIORITY
+    addUnitPriority('hour', 13);
+
+    // PARSING
+
+    function matchMeridiem (isStrict, locale) {
+        return locale._meridiemParse;
+    }
+
+    addRegexToken('a',  matchMeridiem);
+    addRegexToken('A',  matchMeridiem);
+    addRegexToken('H',  match1to2);
+    addRegexToken('h',  match1to2);
+    addRegexToken('k',  match1to2);
+    addRegexToken('HH', match1to2, match2);
+    addRegexToken('hh', match1to2, match2);
+    addRegexToken('kk', match1to2, match2);
+
+    addRegexToken('hmm', match3to4);
+    addRegexToken('hmmss', match5to6);
+    addRegexToken('Hmm', match3to4);
+    addRegexToken('Hmmss', match5to6);
+
+    addParseToken(['H', 'HH'], HOUR);
+    addParseToken(['k', 'kk'], function (input, array, config) {
+        var kInput = toInt(input);
+        array[HOUR] = kInput === 24 ? 0 : kInput;
+    });
+    addParseToken(['a', 'A'], function (input, array, config) {
+        config._isPm = config._locale.isPM(input);
+        config._meridiem = input;
+    });
+    addParseToken(['h', 'hh'], function (input, array, config) {
+        array[HOUR] = toInt(input);
+        getParsingFlags(config).bigHour = true;
+    });
+    addParseToken('hmm', function (input, array, config) {
+        var pos = input.length - 2;
+        array[HOUR] = toInt(input.substr(0, pos));
+        array[MINUTE] = toInt(input.substr(pos));
+        getParsingFlags(config).bigHour = true;
+    });
+    addParseToken('hmmss', function (input, array, config) {
+        var pos1 = input.length - 4;
+        var pos2 = input.length - 2;
+        array[HOUR] = toInt(input.substr(0, pos1));
+        array[MINUTE] = toInt(input.substr(pos1, 2));
+        array[SECOND] = toInt(input.substr(pos2));
+        getParsingFlags(config).bigHour = true;
+    });
+    addParseToken('Hmm', function (input, array, config) {
+        var pos = input.length - 2;
+        array[HOUR] = toInt(input.substr(0, pos));
+        array[MINUTE] = toInt(input.substr(pos));
+    });
+    addParseToken('Hmmss', function (input, array, config) {
+        var pos1 = input.length - 4;
+        var pos2 = input.length - 2;
+        array[HOUR] = toInt(input.substr(0, pos1));
+        array[MINUTE] = toInt(input.substr(pos1, 2));
+        array[SECOND] = toInt(input.substr(pos2));
+    });
+
+    // LOCALES
+
+    function localeIsPM (input) {
+        // IE8 Quirks Mode & IE7 Standards Mode do not allow accessing strings like arrays
+        // Using charAt should be more compatible.
+        return ((input + '').toLowerCase().charAt(0) === 'p');
+    }
+
+    var defaultLocaleMeridiemParse = /[ap]\.?m?\.?/i;
+    function localeMeridiem (hours, minutes, isLower) {
+        if (hours > 11) {
+            return isLower ? 'pm' : 'PM';
+        } else {
+            return isLower ? 'am' : 'AM';
+        }
+    }
+
+
+    // MOMENTS
+
+    // Setting the hour should keep the time, because the user explicitly
+    // specified which hour they want. So trying to maintain the same hour (in
+    // a new timezone) makes sense. Adding/subtracting hours does not follow
+    // this rule.
+    var getSetHour = makeGetSet('Hours', true);
+
+    var baseConfig = {
+        calendar: defaultCalendar,
+        longDateFormat: defaultLongDateFormat,
+        invalidDate: defaultInvalidDate,
+        ordinal: defaultOrdinal,
+        dayOfMonthOrdinalParse: defaultDayOfMonthOrdinalParse,
+        relativeTime: defaultRelativeTime,
+
+        months: defaultLocaleMonths,
+        monthsShort: defaultLocaleMonthsShort,
+
+        week: defaultLocaleWeek,
+
+        weekdays: defaultLocaleWeekdays,
+        weekdaysMin: defaultLocaleWeekdaysMin,
+        weekdaysShort: defaultLocaleWeekdaysShort,
+
+        meridiemParse: defaultLocaleMeridiemParse
+    };
+
+    // internal storage for locale config files
+    var locales = {};
+    var localeFamilies = {};
+    var globalLocale;
+
+    function normalizeLocale(key) {
+        return key ? key.toLowerCase().replace('_', '-') : key;
+    }
+
+    // pick the locale from the array
+    // try ['en-au', 'en-gb'] as 'en-au', 'en-gb', 'en', as in move through the list trying each
+    // substring from most specific to least, but move to the next array item if it's a more specific variant than the current root
+    function chooseLocale(names) {
+        var i = 0, j, next, locale, split;
+
+        while (i < names.length) {
+            split = normalizeLocale(names[i]).split('-');
+            j = split.length;
+            next = normalizeLocale(names[i + 1]);
+            next = next ? next.split('-') : null;
+            while (j > 0) {
+                locale = loadLocale(split.slice(0, j).join('-'));
+                if (locale) {
+                    return locale;
+                }
+                if (next && next.length >= j && compareArrays(split, next, true) >= j - 1) {
+                    //the next array item is better than a shallower substring of this one
+                    break;
+                }
+                j--;
+            }
+            i++;
+        }
+        return globalLocale;
+    }
+
+    function loadLocale(name) {
+        var oldLocale = null;
+        // TODO: Find a better way to register and load all the locales in Node
+        if (!locales[name] && (typeof module !== 'undefined') &&
+                module && module.exports) {
+            try {
+                oldLocale = globalLocale._abbr;
+                var aliasedRequire = require;
+                aliasedRequire('./locale/' + name);
+                getSetGlobalLocale(oldLocale);
+            } catch (e) {}
+        }
+        return locales[name];
+    }
+
+    // This function will load locale and then set the global locale.  If
+    // no arguments are passed in, it will simply return the current global
+    // locale key.
+    function getSetGlobalLocale (key, values) {
+        var data;
+        if (key) {
+            if (isUndefined(values)) {
+                data = getLocale(key);
+            }
+            else {
+                data = defineLocale(key, values);
+            }
+
+            if (data) {
+                // moment.duration._locale = moment._locale = data;
+                globalLocale = data;
+            }
+            else {
+                if ((typeof console !==  'undefined') && console.warn) {
+                    //warn user if arguments are passed but the locale could not be set
+                    console.warn('Locale ' + key +  ' not found. Did you forget to load it?');
+                }
+            }
+        }
+
+        return globalLocale._abbr;
+    }
+
+    function defineLocale (name, config) {
+        if (config !== null) {
+            var locale, parentConfig = baseConfig;
+            config.abbr = name;
+            if (locales[name] != null) {
+                deprecateSimple('defineLocaleOverride',
+                        'use moment.updateLocale(localeName, config) to change ' +
+                        'an existing locale. moment.defineLocale(localeName, ' +
+                        'config) should only be used for creating a new locale ' +
+                        'See http://momentjs.com/guides/#/warnings/define-locale/ for more info.');
+                parentConfig = locales[name]._config;
+            } else if (config.parentLocale != null) {
+                if (locales[config.parentLocale] != null) {
+                    parentConfig = locales[config.parentLocale]._config;
+                } else {
+                    locale = loadLocale(config.parentLocale);
+                    if (locale != null) {
+                        parentConfig = locale._config;
+                    } else {
+                        if (!localeFamilies[config.parentLocale]) {
+                            localeFamilies[config.parentLocale] = [];
+                        }
+                        localeFamilies[config.parentLocale].push({
+                            name: name,
+                            config: config
+                        });
+                        return null;
+                    }
+                }
+            }
+            locales[name] = new Locale(mergeConfigs(parentConfig, config));
+
+            if (localeFamilies[name]) {
+                localeFamilies[name].forEach(function (x) {
+                    defineLocale(x.name, x.config);
+                });
+            }
+
+            // backwards compat for now: also set the locale
+            // make sure we set the locale AFTER all child locales have been
+            // created, so we won't end up with the child locale set.
+            getSetGlobalLocale(name);
+
+
+            return locales[name];
+        } else {
+            // useful for testing
+            delete locales[name];
+            return null;
+        }
+    }
+
+    function updateLocale(name, config) {
+        if (config != null) {
+            var locale, tmpLocale, parentConfig = baseConfig;
+            // MERGE
+            tmpLocale = loadLocale(name);
+            if (tmpLocale != null) {
+                parentConfig = tmpLocale._config;
+            }
+            config = mergeConfigs(parentConfig, config);
+            locale = new Locale(config);
+            locale.parentLocale = locales[name];
+            locales[name] = locale;
+
+            // backwards compat for now: also set the locale
+            getSetGlobalLocale(name);
+        } else {
+            // pass null for config to unupdate, useful for tests
+            if (locales[name] != null) {
+                if (locales[name].parentLocale != null) {
+                    locales[name] = locales[name].parentLocale;
+                } else if (locales[name] != null) {
+                    delete locales[name];
+                }
+            }
+        }
+        return locales[name];
+    }
+
+    // returns locale data
+    function getLocale (key) {
+        var locale;
+
+        if (key && key._locale && key._locale._abbr) {
+            key = key._locale._abbr;
+        }
+
+        if (!key) {
+            return globalLocale;
+        }
+
+        if (!isArray(key)) {
+            //short-circuit everything else
+            locale = loadLocale(key);
+            if (locale) {
+                return locale;
+            }
+            key = [key];
+        }
+
+        return chooseLocale(key);
+    }
+
+    function listLocales() {
+        return keys(locales);
+    }
+
+    function checkOverflow (m) {
+        var overflow;
+        var a = m._a;
+
+        if (a && getParsingFlags(m).overflow === -2) {
+            overflow =
+                a[MONTH]       < 0 || a[MONTH]       > 11  ? MONTH :
+                a[DATE]        < 1 || a[DATE]        > daysInMonth(a[YEAR], a[MONTH]) ? DATE :
+                a[HOUR]        < 0 || a[HOUR]        > 24 || (a[HOUR] === 24 && (a[MINUTE] !== 0 || a[SECOND] !== 0 || a[MILLISECOND] !== 0)) ? HOUR :
+                a[MINUTE]      < 0 || a[MINUTE]      > 59  ? MINUTE :
+                a[SECOND]      < 0 || a[SECOND]      > 59  ? SECOND :
+                a[MILLISECOND] < 0 || a[MILLISECOND] > 999 ? MILLISECOND :
+                -1;
+
+            if (getParsingFlags(m)._overflowDayOfYear && (overflow < YEAR || overflow > DATE)) {
+                overflow = DATE;
+            }
+            if (getParsingFlags(m)._overflowWeeks && overflow === -1) {
+                overflow = WEEK;
+            }
+            if (getParsingFlags(m)._overflowWeekday && overflow === -1) {
+                overflow = WEEKDAY;
+            }
+
+            getParsingFlags(m).overflow = overflow;
+        }
+
+        return m;
+    }
+
+    // Pick the first defined of two or three arguments.
+    function defaults(a, b, c) {
+        if (a != null) {
+            return a;
+        }
+        if (b != null) {
+            return b;
+        }
+        return c;
+    }
+
+    function currentDateArray(config) {
+        // hooks is actually the exported moment object
+        var nowValue = new Date(hooks.now());
+        if (config._useUTC) {
+            return [nowValue.getUTCFullYear(), nowValue.getUTCMonth(), nowValue.getUTCDate()];
+        }
+        return [nowValue.getFullYear(), nowValue.getMonth(), nowValue.getDate()];
+    }
+
+    // convert an array to a date.
+    // the array should mirror the parameters below
+    // note: all values past the year are optional and will default to the lowest possible value.
+    // [year, month, day , hour, minute, second, millisecond]
+    function configFromArray (config) {
+        var i, date, input = [], currentDate, expectedWeekday, yearToUse;
+
+        if (config._d) {
+            return;
+        }
+
+        currentDate = currentDateArray(config);
+
+        //compute day of the year from weeks and weekdays
+        if (config._w && config._a[DATE] == null && config._a[MONTH] == null) {
+            dayOfYearFromWeekInfo(config);
+        }
+
+        //if the day of the year is set, figure out what it is
+        if (config._dayOfYear != null) {
+            yearToUse = defaults(config._a[YEAR], currentDate[YEAR]);
+
+            if (config._dayOfYear > daysInYear(yearToUse) || config._dayOfYear === 0) {
+                getParsingFlags(config)._overflowDayOfYear = true;
+            }
+
+            date = createUTCDate(yearToUse, 0, config._dayOfYear);
+            config._a[MONTH] = date.getUTCMonth();
+            config._a[DATE] = date.getUTCDate();
+        }
+
+        // Default to current date.
+        // * if no year, month, day of month are given, default to today
+        // * if day of month is given, default month and year
+        // * if month is given, default only year
+        // * if year is given, don't default anything
+        for (i = 0; i < 3 && config._a[i] == null; ++i) {
+            config._a[i] = input[i] = currentDate[i];
+        }
+
+        // Zero out whatever was not defaulted, including time
+        for (; i < 7; i++) {
+            config._a[i] = input[i] = (config._a[i] == null) ? (i === 2 ? 1 : 0) : config._a[i];
+        }
+
+        // Check for 24:00:00.000
+        if (config._a[HOUR] === 24 &&
+                config._a[MINUTE] === 0 &&
+                config._a[SECOND] === 0 &&
+                config._a[MILLISECOND] === 0) {
+            config._nextDay = true;
+            config._a[HOUR] = 0;
+        }
+
+        config._d = (config._useUTC ? createUTCDate : createDate).apply(null, input);
+        expectedWeekday = config._useUTC ? config._d.getUTCDay() : config._d.getDay();
+
+        // Apply timezone offset from input. The actual utcOffset can be changed
+        // with parseZone.
+        if (config._tzm != null) {
+            config._d.setUTCMinutes(config._d.getUTCMinutes() - config._tzm);
+        }
+
+        if (config._nextDay) {
+            config._a[HOUR] = 24;
+        }
+
+        // check for mismatching day of week
+        if (config._w && typeof config._w.d !== 'undefined' && config._w.d !== expectedWeekday) {
+            getParsingFlags(config).weekdayMismatch = true;
+        }
+    }
+
+    function dayOfYearFromWeekInfo(config) {
+        var w, weekYear, week, weekday, dow, doy, temp, weekdayOverflow;
+
+        w = config._w;
+        if (w.GG != null || w.W != null || w.E != null) {
+            dow = 1;
+            doy = 4;
+
+            // TODO: We need to take the current isoWeekYear, but that depends on
+            // how we interpret now (local, utc, fixed offset). So create
+            // a now version of current config (take local/utc/offset flags, and
+            // create now).
+            weekYear = defaults(w.GG, config._a[YEAR], weekOfYear(createLocal(), 1, 4).year);
+            week = defaults(w.W, 1);
+            weekday = defaults(w.E, 1);
+            if (weekday < 1 || weekday > 7) {
+                weekdayOverflow = true;
+            }
+        } else {
+            dow = config._locale._week.dow;
+            doy = config._locale._week.doy;
+
+            var curWeek = weekOfYear(createLocal(), dow, doy);
+
+            weekYear = defaults(w.gg, config._a[YEAR], curWeek.year);
+
+            // Default to current week.
+            week = defaults(w.w, curWeek.week);
+
+            if (w.d != null) {
+                // weekday -- low day numbers are considered next week
+                weekday = w.d;
+                if (weekday < 0 || weekday > 6) {
+                    weekdayOverflow = true;
+                }
+            } else if (w.e != null) {
+                // local weekday -- counting starts from beginning of week
+                weekday = w.e + dow;
+                if (w.e < 0 || w.e > 6) {
+                    weekdayOverflow = true;
+                }
+            } else {
+                // default to beginning of week
+                weekday = dow;
+            }
+        }
+        if (week < 1 || week > weeksInYear(weekYear, dow, doy)) {
+            getParsingFlags(config)._overflowWeeks = true;
+        } else if (weekdayOverflow != null) {
+            getParsingFlags(config)._overflowWeekday = true;
+        } else {
+            temp = dayOfYearFromWeeks(weekYear, week, weekday, dow, doy);
+            config._a[YEAR] = temp.year;
+            config._dayOfYear = temp.dayOfYear;
+        }
+    }
+
+    // iso 8601 regex
+    // 0000-00-00 0000-W00 or 0000-W00-0 + T + 00 or 00:00 or 00:00:00 or 00:00:00.000 + +00:00 or +0000 or +00)
+    var extendedIsoRegex = /^\s*((?:[+-]\d{6}|\d{4})-(?:\d\d-\d\d|W\d\d-\d|W\d\d|\d\d\d|\d\d))(?:(T| )(\d\d(?::\d\d(?::\d\d(?:[.,]\d+)?)?)?)([\+\-]\d\d(?::?\d\d)?|\s*Z)?)?$/;
+    var basicIsoRegex = /^\s*((?:[+-]\d{6}|\d{4})(?:\d\d\d\d|W\d\d\d|W\d\d|\d\d\d|\d\d))(?:(T| )(\d\d(?:\d\d(?:\d\d(?:[.,]\d+)?)?)?)([\+\-]\d\d(?::?\d\d)?|\s*Z)?)?$/;
+
+    var tzRegex = /Z|[+-]\d\d(?::?\d\d)?/;
+
+    var isoDates = [
+        ['YYYYYY-MM-DD', /[+-]\d{6}-\d\d-\d\d/],
+        ['YYYY-MM-DD', /\d{4}-\d\d-\d\d/],
+        ['GGGG-[W]WW-E', /\d{4}-W\d\d-\d/],
+        ['GGGG-[W]WW', /\d{4}-W\d\d/, false],
+        ['YYYY-DDD', /\d{4}-\d{3}/],
+        ['YYYY-MM', /\d{4}-\d\d/, false],
+        ['YYYYYYMMDD', /[+-]\d{10}/],
+        ['YYYYMMDD', /\d{8}/],
+        // YYYYMM is NOT allowed by the standard
+        ['GGGG[W]WWE', /\d{4}W\d{3}/],
+        ['GGGG[W]WW', /\d{4}W\d{2}/, false],
+        ['YYYYDDD', /\d{7}/]
+    ];
+
+    // iso time formats and regexes
+    var isoTimes = [
+        ['HH:mm:ss.SSSS', /\d\d:\d\d:\d\d\.\d+/],
+        ['HH:mm:ss,SSSS', /\d\d:\d\d:\d\d,\d+/],
+        ['HH:mm:ss', /\d\d:\d\d:\d\d/],
+        ['HH:mm', /\d\d:\d\d/],
+        ['HHmmss.SSSS', /\d\d\d\d\d\d\.\d+/],
+        ['HHmmss,SSSS', /\d\d\d\d\d\d,\d+/],
+        ['HHmmss', /\d\d\d\d\d\d/],
+        ['HHmm', /\d\d\d\d/],
+        ['HH', /\d\d/]
+    ];
+
+    var aspNetJsonRegex = /^\/?Date\((\-?\d+)/i;
+
+    // date from iso format
+    function configFromISO(config) {
+        var i, l,
+            string = config._i,
+            match = extendedIsoRegex.exec(string) || basicIsoRegex.exec(string),
+            allowTime, dateFormat, timeFormat, tzFormat;
+
+        if (match) {
+            getParsingFlags(config).iso = true;
+
+            for (i = 0, l = isoDates.length; i < l; i++) {
+                if (isoDates[i][1].exec(match[1])) {
+                    dateFormat = isoDates[i][0];
+                    allowTime = isoDates[i][2] !== false;
+                    break;
+                }
+            }
+            if (dateFormat == null) {
+                config._isValid = false;
+                return;
+            }
+            if (match[3]) {
+                for (i = 0, l = isoTimes.length; i < l; i++) {
+                    if (isoTimes[i][1].exec(match[3])) {
+                        // match[2] should be 'T' or space
+                        timeFormat = (match[2] || ' ') + isoTimes[i][0];
+                        break;
+                    }
+                }
+                if (timeFormat == null) {
+                    config._isValid = false;
+                    return;
+                }
+            }
+            if (!allowTime && timeFormat != null) {
+                config._isValid = false;
+                return;
+            }
+            if (match[4]) {
+                if (tzRegex.exec(match[4])) {
+                    tzFormat = 'Z';
+                } else {
+                    config._isValid = false;
+                    return;
+                }
+            }
+            config._f = dateFormat + (timeFormat || '') + (tzFormat || '');
+            configFromStringAndFormat(config);
+        } else {
+            config._isValid = false;
+        }
+    }
+
+    // RFC 2822 regex: For details see https://tools.ietf.org/html/rfc2822#section-3.3
+    var rfc2822 = /^(?:(Mon|Tue|Wed|Thu|Fri|Sat|Sun),?\s)?(\d{1,2})\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s(\d{2,4})\s(\d\d):(\d\d)(?::(\d\d))?\s(?:(UT|GMT|[ECMP][SD]T)|([Zz])|([+-]\d{4}))$/;
+
+    function extractFromRFC2822Strings(yearStr, monthStr, dayStr, hourStr, minuteStr, secondStr) {
+        var result = [
+            untruncateYear(yearStr),
+            defaultLocaleMonthsShort.indexOf(monthStr),
+            parseInt(dayStr, 10),
+            parseInt(hourStr, 10),
+            parseInt(minuteStr, 10)
+        ];
+
+        if (secondStr) {
+            result.push(parseInt(secondStr, 10));
+        }
+
+        return result;
+    }
+
+    function untruncateYear(yearStr) {
+        var year = parseInt(yearStr, 10);
+        if (year <= 49) {
+            return 2000 + year;
+        } else if (year <= 999) {
+            return 1900 + year;
+        }
+        return year;
+    }
+
+    function preprocessRFC2822(s) {
+        // Remove comments and folding whitespace and replace multiple-spaces with a single space
+        return s.replace(/\([^)]*\)|[\n\t]/g, ' ').replace(/(\s\s+)/g, ' ').replace(/^\s\s*/, '').replace(/\s\s*$/, '');
+    }
+
+    function checkWeekday(weekdayStr, parsedInput, config) {
+        if (weekdayStr) {
+            // TODO: Replace the vanilla JS Date object with an indepentent day-of-week check.
+            var weekdayProvided = defaultLocaleWeekdaysShort.indexOf(weekdayStr),
+                weekdayActual = new Date(parsedInput[0], parsedInput[1], parsedInput[2]).getDay();
+            if (weekdayProvided !== weekdayActual) {
+                getParsingFlags(config).weekdayMismatch = true;
+                config._isValid = false;
+                return false;
+            }
+        }
+        return true;
+    }
+
+    var obsOffsets = {
+        UT: 0,
+        GMT: 0,
+        EDT: -4 * 60,
+        EST: -5 * 60,
+        CDT: -5 * 60,
+        CST: -6 * 60,
+        MDT: -6 * 60,
+        MST: -7 * 60,
+        PDT: -7 * 60,
+        PST: -8 * 60
+    };
+
+    function calculateOffset(obsOffset, militaryOffset, numOffset) {
+        if (obsOffset) {
+            return obsOffsets[obsOffset];
+        } else if (militaryOffset) {
+            // the only allowed military tz is Z
+            return 0;
+        } else {
+            var hm = parseInt(numOffset, 10);
+            var m = hm % 100, h = (hm - m) / 100;
+            return h * 60 + m;
+        }
+    }
+
+    // date and time from ref 2822 format
+    function configFromRFC2822(config) {
+        var match = rfc2822.exec(preprocessRFC2822(config._i));
+        if (match) {
+            var parsedArray = extractFromRFC2822Strings(match[4], match[3], match[2], match[5], match[6], match[7]);
+            if (!checkWeekday(match[1], parsedArray, config)) {
+                return;
+            }
+
+            config._a = parsedArray;
+            config._tzm = calculateOffset(match[8], match[9], match[10]);
+
+            config._d = createUTCDate.apply(null, config._a);
+            config._d.setUTCMinutes(config._d.getUTCMinutes() - config._tzm);
+
+            getParsingFlags(config).rfc2822 = true;
+        } else {
+            config._isValid = false;
+        }
+    }
+
+    // date from iso format or fallback
+    function configFromString(config) {
+        var matched = aspNetJsonRegex.exec(config._i);
+
+        if (matched !== null) {
+            config._d = new Date(+matched[1]);
+            return;
+        }
+
+        configFromISO(config);
+        if (config._isValid === false) {
+            delete config._isValid;
+        } else {
+            return;
+        }
+
+        configFromRFC2822(config);
+        if (config._isValid === false) {
+            delete config._isValid;
+        } else {
+            return;
+        }
+
+        // Final attempt, use Input Fallback
+        hooks.createFromInputFallback(config);
+    }
+
+    hooks.createFromInputFallback = deprecate(
+        'value provided is not in a recognized RFC2822 or ISO format. moment construction falls back to js Date(), ' +
+        'which is not reliable across all browsers and versions. Non RFC2822/ISO date formats are ' +
+        'discouraged and will be removed in an upcoming major release. Please refer to ' +
+        'http://momentjs.com/guides/#/warnings/js-date/ for more info.',
+        function (config) {
+            config._d = new Date(config._i + (config._useUTC ? ' UTC' : ''));
+        }
+    );
+
+    // constant that refers to the ISO standard
+    hooks.ISO_8601 = function () {};
+
+    // constant that refers to the RFC 2822 form
+    hooks.RFC_2822 = function () {};
+
+    // date from string and format string
+    function configFromStringAndFormat(config) {
+        // TODO: Move this to another part of the creation flow to prevent circular deps
+        if (config._f === hooks.ISO_8601) {
+            configFromISO(config);
+            return;
+        }
+        if (config._f === hooks.RFC_2822) {
+            configFromRFC2822(config);
+            return;
+        }
+        config._a = [];
+        getParsingFlags(config).empty = true;
+
+        // This array is used to make a Date, either with `new Date` or `Date.UTC`
+        var string = '' + config._i,
+            i, parsedInput, tokens, token, skipped,
+            stringLength = string.length,
+            totalParsedInputLength = 0;
+
+        tokens = expandFormat(config._f, config._locale).match(formattingTokens) || [];
+
+        for (i = 0; i < tokens.length; i++) {
+            token = tokens[i];
+            parsedInput = (string.match(getParseRegexForToken(token, config)) || [])[0];
+            // console.log('token', token, 'parsedInput', parsedInput,
+            //         'regex', getParseRegexForToken(token, config));
+            if (parsedInput) {
+                skipped = string.substr(0, string.indexOf(parsedInput));
+                if (skipped.length > 0) {
+                    getParsingFlags(config).unusedInput.push(skipped);
+                }
+                string = string.slice(string.indexOf(parsedInput) + parsedInput.length);
+                totalParsedInputLength += parsedInput.length;
+            }
+            // don't parse if it's not a known token
+            if (formatTokenFunctions[token]) {
+                if (parsedInput) {
+                    getParsingFlags(config).empty = false;
+                }
+                else {
+                    getParsingFlags(config).unusedTokens.push(token);
+                }
+                addTimeToArrayFromToken(token, parsedInput, config);
+            }
+            else if (config._strict && !parsedInput) {
+                getParsingFlags(config).unusedTokens.push(token);
+            }
+        }
+
+        // add remaining unparsed input length to the string
+        getParsingFlags(config).charsLeftOver = stringLength - totalParsedInputLength;
+        if (string.length > 0) {
+            getParsingFlags(config).unusedInput.push(string);
+        }
+
+        // clear _12h flag if hour is <= 12
+        if (config._a[HOUR] <= 12 &&
+            getParsingFlags(config).bigHour === true &&
+            config._a[HOUR] > 0) {
+            getParsingFlags(config).bigHour = undefined;
+        }
+
+        getParsingFlags(config).parsedDateParts = config._a.slice(0);
+        getParsingFlags(config).meridiem = config._meridiem;
+        // handle meridiem
+        config._a[HOUR] = meridiemFixWrap(config._locale, config._a[HOUR], config._meridiem);
+
+        configFromArray(config);
+        checkOverflow(config);
+    }
+
+
+    function meridiemFixWrap (locale, hour, meridiem) {
+        var isPm;
+
+        if (meridiem == null) {
+            // nothing to do
+            return hour;
+        }
+        if (locale.meridiemHour != null) {
+            return locale.meridiemHour(hour, meridiem);
+        } else if (locale.isPM != null) {
+            // Fallback
+            isPm = locale.isPM(meridiem);
+            if (isPm && hour < 12) {
+                hour += 12;
+            }
+            if (!isPm && hour === 12) {
+                hour = 0;
+            }
+            return hour;
+        } else {
+            // this is not supposed to happen
+            return hour;
+        }
+    }
+
+    // date from string and array of format strings
+    function configFromStringAndArray(config) {
+        var tempConfig,
+            bestMoment,
+
+            scoreToBeat,
+            i,
+            currentScore;
+
+        if (config._f.length === 0) {
+            getParsingFlags(config).invalidFormat = true;
+            config._d = new Date(NaN);
+            return;
+        }
+
+        for (i = 0; i < config._f.length; i++) {
+            currentScore = 0;
+            tempConfig = copyConfig({}, config);
+            if (config._useUTC != null) {
+                tempConfig._useUTC = config._useUTC;
+            }
+            tempConfig._f = config._f[i];
+            configFromStringAndFormat(tempConfig);
+
+            if (!isValid(tempConfig)) {
+                continue;
+            }
+
+            // if there is any input that was not parsed add a penalty for that format
+            currentScore += getParsingFlags(tempConfig).charsLeftOver;
+
+            //or tokens
+            currentScore += getParsingFlags(tempConfig).unusedTokens.length * 10;
+
+            getParsingFlags(tempConfig).score = currentScore;
+
+            if (scoreToBeat == null || currentScore < scoreToBeat) {
+                scoreToBeat = currentScore;
+                bestMoment = tempConfig;
+            }
+        }
+
+        extend(config, bestMoment || tempConfig);
+    }
+
+    function configFromObject(config) {
+        if (config._d) {
+            return;
+        }
+
+        var i = normalizeObjectUnits(config._i);
+        config._a = map([i.year, i.month, i.day || i.date, i.hour, i.minute, i.second, i.millisecond], function (obj) {
+            return obj && parseInt(obj, 10);
+        });
+
+        configFromArray(config);
+    }
+
+    function createFromConfig (config) {
+        var res = new Moment(checkOverflow(prepareConfig(config)));
+        if (res._nextDay) {
+            // Adding is smart enough around DST
+            res.add(1, 'd');
+            res._nextDay = undefined;
+        }
+
+        return res;
+    }
+
+    function prepareConfig (config) {
+        var input = config._i,
+            format = config._f;
+
+        config._locale = config._locale || getLocale(config._l);
+
+        if (input === null || (format === undefined && input === '')) {
+            return createInvalid({nullInput: true});
+        }
+
+        if (typeof input === 'string') {
+            config._i = input = config._locale.preparse(input);
+        }
+
+        if (isMoment(input)) {
+            return new Moment(checkOverflow(input));
+        } else if (isDate(input)) {
+            config._d = input;
+        } else if (isArray(format)) {
+            configFromStringAndArray(config);
+        } else if (format) {
+            configFromStringAndFormat(config);
+        }  else {
+            configFromInput(config);
+        }
+
+        if (!isValid(config)) {
+            config._d = null;
+        }
+
+        return config;
+    }
+
+    function configFromInput(config) {
+        var input = config._i;
+        if (isUndefined(input)) {
+            config._d = new Date(hooks.now());
+        } else if (isDate(input)) {
+            config._d = new Date(input.valueOf());
+        } else if (typeof input === 'string') {
+            configFromString(config);
+        } else if (isArray(input)) {
+            config._a = map(input.slice(0), function (obj) {
+                return parseInt(obj, 10);
+            });
+            configFromArray(config);
+        } else if (isObject(input)) {
+            configFromObject(config);
+        } else if (isNumber(input)) {
+            // from milliseconds
+            config._d = new Date(input);
+        } else {
+            hooks.createFromInputFallback(config);
+        }
+    }
+
+    function createLocalOrUTC (input, format, locale, strict, isUTC) {
+        var c = {};
+
+        if (locale === true || locale === false) {
+            strict = locale;
+            locale = undefined;
+        }
+
+        if ((isObject(input) && isObjectEmpty(input)) ||
+                (isArray(input) && input.length === 0)) {
+            input = undefined;
+        }
+        // object construction must be done this way.
+        // https://github.com/moment/moment/issues/1423
+        c._isAMomentObject = true;
+        c._useUTC = c._isUTC = isUTC;
+        c._l = locale;
+        c._i = input;
+        c._f = format;
+        c._strict = strict;
+
+        return createFromConfig(c);
+    }
+
+    function createLocal (input, format, locale, strict) {
+        return createLocalOrUTC(input, format, locale, strict, false);
+    }
+
+    var prototypeMin = deprecate(
+        'moment().min is deprecated, use moment.max instead. http://momentjs.com/guides/#/warnings/min-max/',
+        function () {
+            var other = createLocal.apply(null, arguments);
+            if (this.isValid() && other.isValid()) {
+                return other < this ? this : other;
+            } else {
+                return createInvalid();
+            }
+        }
+    );
+
+    var prototypeMax = deprecate(
+        'moment().max is deprecated, use moment.min instead. http://momentjs.com/guides/#/warnings/min-max/',
+        function () {
+            var other = createLocal.apply(null, arguments);
+            if (this.isValid() && other.isValid()) {
+                return other > this ? this : other;
+            } else {
+                return createInvalid();
+            }
+        }
+    );
+
+    // Pick a moment m from moments so that m[fn](other) is true for all
+    // other. This relies on the function fn to be transitive.
+    //
+    // moments should either be an array of moment objects or an array, whose
+    // first element is an array of moment objects.
+    function pickBy(fn, moments) {
+        var res, i;
+        if (moments.length === 1 && isArray(moments[0])) {
+            moments = moments[0];
+        }
+        if (!moments.length) {
+            return createLocal();
+        }
+        res = moments[0];
+        for (i = 1; i < moments.length; ++i) {
+            if (!moments[i].isValid() || moments[i][fn](res)) {
+                res = moments[i];
+            }
+        }
+        return res;
+    }
+
+    // TODO: Use [].sort instead?
+    function min () {
+        var args = [].slice.call(arguments, 0);
+
+        return pickBy('isBefore', args);
+    }
+
+    function max () {
+        var args = [].slice.call(arguments, 0);
+
+        return pickBy('isAfter', args);
+    }
+
+    var now = function () {
+        return Date.now ? Date.now() : +(new Date());
+    };
+
+    var ordering = ['year', 'quarter', 'month', 'week', 'day', 'hour', 'minute', 'second', 'millisecond'];
+
+    function isDurationValid(m) {
+        for (var key in m) {
+            if (!(indexOf.call(ordering, key) !== -1 && (m[key] == null || !isNaN(m[key])))) {
+                return false;
+            }
+        }
+
+        var unitHasDecimal = false;
+        for (var i = 0; i < ordering.length; ++i) {
+            if (m[ordering[i]]) {
+                if (unitHasDecimal) {
+                    return false; // only allow non-integers for smallest unit
+                }
+                if (parseFloat(m[ordering[i]]) !== toInt(m[ordering[i]])) {
+                    unitHasDecimal = true;
+                }
+            }
+        }
+
+        return true;
+    }
+
+    function isValid$1() {
+        return this._isValid;
+    }
+
+    function createInvalid$1() {
+        return createDuration(NaN);
+    }
+
+    function Duration (duration) {
+        var normalizedInput = normalizeObjectUnits(duration),
+            years = normalizedInput.year || 0,
+            quarters = normalizedInput.quarter || 0,
+            months = normalizedInput.month || 0,
+            weeks = normalizedInput.week || normalizedInput.isoWeek || 0,
+            days = normalizedInput.day || 0,
+            hours = normalizedInput.hour || 0,
+            minutes = normalizedInput.minute || 0,
+            seconds = normalizedInput.second || 0,
+            milliseconds = normalizedInput.millisecond || 0;
+
+        this._isValid = isDurationValid(normalizedInput);
+
+        // representation for dateAddRemove
+        this._milliseconds = +milliseconds +
+            seconds * 1e3 + // 1000
+            minutes * 6e4 + // 1000 * 60
+            hours * 1000 * 60 * 60; //using 1000 * 60 * 60 instead of 36e5 to avoid floating point rounding errors https://github.com/moment/moment/issues/2978
+        // Because of dateAddRemove treats 24 hours as different from a
+        // day when working around DST, we need to store them separately
+        this._days = +days +
+            weeks * 7;
+        // It is impossible to translate months into days without knowing
+        // which months you are are talking about, so we have to store
+        // it separately.
+        this._months = +months +
+            quarters * 3 +
+            years * 12;
+
+        this._data = {};
+
+        this._locale = getLocale();
+
+        this._bubble();
+    }
+
+    function isDuration (obj) {
+        return obj instanceof Duration;
+    }
+
+    function absRound (number) {
+        if (number < 0) {
+            return Math.round(-1 * number) * -1;
+        } else {
+            return Math.round(number);
+        }
+    }
+
+    // FORMATTING
+
+    function offset (token, separator) {
+        addFormatToken(token, 0, 0, function () {
+            var offset = this.utcOffset();
+            var sign = '+';
+            if (offset < 0) {
+                offset = -offset;
+                sign = '-';
+            }
+            return sign + zeroFill(~~(offset / 60), 2) + separator + zeroFill(~~(offset) % 60, 2);
+        });
+    }
+
+    offset('Z', ':');
+    offset('ZZ', '');
+
+    // PARSING
+
+    addRegexToken('Z',  matchShortOffset);
+    addRegexToken('ZZ', matchShortOffset);
+    addParseToken(['Z', 'ZZ'], function (input, array, config) {
+        config._useUTC = true;
+        config._tzm = offsetFromString(matchShortOffset, input);
+    });
+
+    // HELPERS
+
+    // timezone chunker
+    // '+10:00' > ['10',  '00']
+    // '-1530'  > ['-15', '30']
+    var chunkOffset = /([\+\-]|\d\d)/gi;
+
+    function offsetFromString(matcher, string) {
+        var matches = (string || '').match(matcher);
+
+        if (matches === null) {
+            return null;
+        }
+
+        var chunk   = matches[matches.length - 1] || [];
+        var parts   = (chunk + '').match(chunkOffset) || ['-', 0, 0];
+        var minutes = +(parts[1] * 60) + toInt(parts[2]);
+
+        return minutes === 0 ?
+          0 :
+          parts[0] === '+' ? minutes : -minutes;
+    }
+
+    // Return a moment from input, that is local/utc/zone equivalent to model.
+    function cloneWithOffset(input, model) {
+        var res, diff;
+        if (model._isUTC) {
+            res = model.clone();
+            diff = (isMoment(input) || isDate(input) ? input.valueOf() : createLocal(input).valueOf()) - res.valueOf();
+            // Use low-level api, because this fn is low-level api.
+            res._d.setTime(res._d.valueOf() + diff);
+            hooks.updateOffset(res, false);
+            return res;
+        } else {
+            return createLocal(input).local();
+        }
+    }
+
+    function getDateOffset (m) {
+        // On Firefox.24 Date#getTimezoneOffset returns a floating point.
+        // https://github.com/moment/moment/pull/1871
+        return -Math.round(m._d.getTimezoneOffset() / 15) * 15;
+    }
+
+    // HOOKS
+
+    // This function will be called whenever a moment is mutated.
+    // It is intended to keep the offset in sync with the timezone.
+    hooks.updateOffset = function () {};
+
+    // MOMENTS
+
+    // keepLocalTime = true means only change the timezone, without
+    // affecting the local hour. So 5:31:26 +0300 --[utcOffset(2, true)]-->
+    // 5:31:26 +0200 It is possible that 5:31:26 doesn't exist with offset
+    // +0200, so we adjust the time as needed, to be valid.
+    //
+    // Keeping the time actually adds/subtracts (one hour)
+    // from the actual represented time. That is why we call updateOffset
+    // a second time. In case it wants us to change the offset again
+    // _changeInProgress == true case, then we have to adjust, because
+    // there is no such time in the given timezone.
+    function getSetOffset (input, keepLocalTime, keepMinutes) {
+        var offset = this._offset || 0,
+            localAdjust;
+        if (!this.isValid()) {
+            return input != null ? this : NaN;
+        }
+        if (input != null) {
+            if (typeof input === 'string') {
+                input = offsetFromString(matchShortOffset, input);
+                if (input === null) {
+                    return this;
+                }
+            } else if (Math.abs(input) < 16 && !keepMinutes) {
+                input = input * 60;
+            }
+            if (!this._isUTC && keepLocalTime) {
+                localAdjust = getDateOffset(this);
+            }
+            this._offset = input;
+            this._isUTC = true;
+            if (localAdjust != null) {
+                this.add(localAdjust, 'm');
+            }
+            if (offset !== input) {
+                if (!keepLocalTime || this._changeInProgress) {
+                    addSubtract(this, createDuration(input - offset, 'm'), 1, false);
+                } else if (!this._changeInProgress) {
+                    this._changeInProgress = true;
+                    hooks.updateOffset(this, true);
+                    this._changeInProgress = null;
+                }
+            }
+            return this;
+        } else {
+            return this._isUTC ? offset : getDateOffset(this);
+        }
+    }
+
+    function getSetZone (input, keepLocalTime) {
+        if (input != null) {
+            if (typeof input !== 'string') {
+                input = -input;
+            }
+
+            this.utcOffset(input, keepLocalTime);
+
+            return this;
+        } else {
+            return -this.utcOffset();
+        }
+    }
+
+    function setOffsetToUTC (keepLocalTime) {
+        return this.utcOffset(0, keepLocalTime);
+    }
+
+    function setOffsetToLocal (keepLocalTime) {
+        if (this._isUTC) {
+            this.utcOffset(0, keepLocalTime);
+            this._isUTC = false;
+
+            if (keepLocalTime) {
+                this.subtract(getDateOffset(this), 'm');
+            }
+        }
+        return this;
+    }
+
+    function setOffsetToParsedOffset () {
+        if (this._tzm != null) {
+            this.utcOffset(this._tzm, false, true);
+        } else if (typeof this._i === 'string') {
+            var tZone = offsetFromString(matchOffset, this._i);
+            if (tZone != null) {
+                this.utcOffset(tZone);
+            }
+            else {
+                this.utcOffset(0, true);
+            }
+        }
+        return this;
+    }
+
+    function hasAlignedHourOffset (input) {
+        if (!this.isValid()) {
+            return false;
+        }
+        input = input ? createLocal(input).utcOffset() : 0;
+
+        return (this.utcOffset() - input) % 60 === 0;
+    }
+
+    function isDaylightSavingTime () {
+        return (
+            this.utcOffset() > this.clone().month(0).utcOffset() ||
+            this.utcOffset() > this.clone().month(5).utcOffset()
+        );
+    }
+
+    function isDaylightSavingTimeShifted () {
+        if (!isUndefined(this._isDSTShifted)) {
+            return this._isDSTShifted;
+        }
+
+        var c = {};
+
+        copyConfig(c, this);
+        c = prepareConfig(c);
+
+        if (c._a) {
+            var other = c._isUTC ? createUTC(c._a) : createLocal(c._a);
+            this._isDSTShifted = this.isValid() &&
+                compareArrays(c._a, other.toArray()) > 0;
+        } else {
+            this._isDSTShifted = false;
+        }
+
+        return this._isDSTShifted;
+    }
+
+    function isLocal () {
+        return this.isValid() ? !this._isUTC : false;
+    }
+
+    function isUtcOffset () {
+        return this.isValid() ? this._isUTC : false;
+    }
+
+    function isUtc () {
+        return this.isValid() ? this._isUTC && this._offset === 0 : false;
+    }
+
+    // ASP.NET json date format regex
+    var aspNetRegex = /^(\-|\+)?(?:(\d*)[. ])?(\d+)\:(\d+)(?:\:(\d+)(\.\d*)?)?$/;
+
+    // from http://docs.closure-library.googlecode.com/git/closure_goog_date_date.js.source.html
+    // somewhat more in line with 4.4.3.2 2004 spec, but allows decimal anywhere
+    // and further modified to allow for strings containing both week and day
+    var isoRegex = /^(-|\+)?P(?:([-+]?[0-9,.]*)Y)?(?:([-+]?[0-9,.]*)M)?(?:([-+]?[0-9,.]*)W)?(?:([-+]?[0-9,.]*)D)?(?:T(?:([-+]?[0-9,.]*)H)?(?:([-+]?[0-9,.]*)M)?(?:([-+]?[0-9,.]*)S)?)?$/;
+
+    function createDuration (input, key) {
+        var duration = input,
+            // matching against regexp is expensive, do it on demand
+            match = null,
+            sign,
+            ret,
+            diffRes;
+
+        if (isDuration(input)) {
+            duration = {
+                ms : input._milliseconds,
+                d  : input._days,
+                M  : input._months
+            };
+        } else if (isNumber(input)) {
+            duration = {};
+            if (key) {
+                duration[key] = input;
+            } else {
+                duration.milliseconds = input;
+            }
+        } else if (!!(match = aspNetRegex.exec(input))) {
+            sign = (match[1] === '-') ? -1 : 1;
+            duration = {
+                y  : 0,
+                d  : toInt(match[DATE])                         * sign,
+                h  : toInt(match[HOUR])                         * sign,
+                m  : toInt(match[MINUTE])                       * sign,
+                s  : toInt(match[SECOND])                       * sign,
+                ms : toInt(absRound(match[MILLISECOND] * 1000)) * sign // the millisecond decimal point is included in the match
+            };
+        } else if (!!(match = isoRegex.exec(input))) {
+            sign = (match[1] === '-') ? -1 : 1;
+            duration = {
+                y : parseIso(match[2], sign),
+                M : parseIso(match[3], sign),
+                w : parseIso(match[4], sign),
+                d : parseIso(match[5], sign),
+                h : parseIso(match[6], sign),
+                m : parseIso(match[7], sign),
+                s : parseIso(match[8], sign)
+            };
+        } else if (duration == null) {// checks for null or undefined
+            duration = {};
+        } else if (typeof duration === 'object' && ('from' in duration || 'to' in duration)) {
+            diffRes = momentsDifference(createLocal(duration.from), createLocal(duration.to));
+
+            duration = {};
+            duration.ms = diffRes.milliseconds;
+            duration.M = diffRes.months;
+        }
+
+        ret = new Duration(duration);
+
+        if (isDuration(input) && hasOwnProp(input, '_locale')) {
+            ret._locale = input._locale;
+        }
+
+        return ret;
+    }
+
+    createDuration.fn = Duration.prototype;
+    createDuration.invalid = createInvalid$1;
+
+    function parseIso (inp, sign) {
+        // We'd normally use ~~inp for this, but unfortunately it also
+        // converts floats to ints.
+        // inp may be undefined, so careful calling replace on it.
+        var res = inp && parseFloat(inp.replace(',', '.'));
+        // apply sign while we're at it
+        return (isNaN(res) ? 0 : res) * sign;
+    }
+
+    function positiveMomentsDifference(base, other) {
+        var res = {};
+
+        res.months = other.month() - base.month() +
+            (other.year() - base.year()) * 12;
+        if (base.clone().add(res.months, 'M').isAfter(other)) {
+            --res.months;
+        }
+
+        res.milliseconds = +other - +(base.clone().add(res.months, 'M'));
+
+        return res;
+    }
+
+    function momentsDifference(base, other) {
+        var res;
+        if (!(base.isValid() && other.isValid())) {
+            return {milliseconds: 0, months: 0};
+        }
+
+        other = cloneWithOffset(other, base);
+        if (base.isBefore(other)) {
+            res = positiveMomentsDifference(base, other);
+        } else {
+            res = positiveMomentsDifference(other, base);
+            res.milliseconds = -res.milliseconds;
+            res.months = -res.months;
+        }
+
+        return res;
+    }
+
+    // TODO: remove 'name' arg after deprecation is removed
+    function createAdder(direction, name) {
+        return function (val, period) {
+            var dur, tmp;
+            //invert the arguments, but complain about it
+            if (period !== null && !isNaN(+period)) {
+                deprecateSimple(name, 'moment().' + name  + '(period, number) is deprecated. Please use moment().' + name + '(number, period). ' +
+                'See http://momentjs.com/guides/#/warnings/add-inverted-param/ for more info.');
+                tmp = val; val = period; period = tmp;
+            }
+
+            val = typeof val === 'string' ? +val : val;
+            dur = createDuration(val, period);
+            addSubtract(this, dur, direction);
+            return this;
+        };
+    }
+
+    function addSubtract (mom, duration, isAdding, updateOffset) {
+        var milliseconds = duration._milliseconds,
+            days = absRound(duration._days),
+            months = absRound(duration._months);
+
+        if (!mom.isValid()) {
+            // No op
+            return;
+        }
+
+        updateOffset = updateOffset == null ? true : updateOffset;
+
+        if (months) {
+            setMonth(mom, get(mom, 'Month') + months * isAdding);
+        }
+        if (days) {
+            set$1(mom, 'Date', get(mom, 'Date') + days * isAdding);
+        }
+        if (milliseconds) {
+            mom._d.setTime(mom._d.valueOf() + milliseconds * isAdding);
+        }
+        if (updateOffset) {
+            hooks.updateOffset(mom, days || months);
+        }
+    }
+
+    var add      = createAdder(1, 'add');
+    var subtract = createAdder(-1, 'subtract');
+
+    function getCalendarFormat(myMoment, now) {
+        var diff = myMoment.diff(now, 'days', true);
+        return diff < -6 ? 'sameElse' :
+                diff < -1 ? 'lastWeek' :
+                diff < 0 ? 'lastDay' :
+                diff < 1 ? 'sameDay' :
+                diff < 2 ? 'nextDay' :
+                diff < 7 ? 'nextWeek' : 'sameElse';
+    }
+
+    function calendar$1 (time, formats) {
+        // We want to compare the start of today, vs this.
+        // Getting start-of-today depends on whether we're local/utc/offset or not.
+        var now = time || createLocal(),
+            sod = cloneWithOffset(now, this).startOf('day'),
+            format = hooks.calendarFormat(this, sod) || 'sameElse';
+
+        var output = formats && (isFunction(formats[format]) ? formats[format].call(this, now) : formats[format]);
+
+        return this.format(output || this.localeData().calendar(format, this, createLocal(now)));
+    }
+
+    function clone () {
+        return new Moment(this);
+    }
+
+    function isAfter (input, units) {
+        var localInput = isMoment(input) ? input : createLocal(input);
+        if (!(this.isValid() && localInput.isValid())) {
+            return false;
+        }
+        units = normalizeUnits(units) || 'millisecond';
+        if (units === 'millisecond') {
+            return this.valueOf() > localInput.valueOf();
+        } else {
+            return localInput.valueOf() < this.clone().startOf(units).valueOf();
+        }
+    }
+
+    function isBefore (input, units) {
+        var localInput = isMoment(input) ? input : createLocal(input);
+        if (!(this.isValid() && localInput.isValid())) {
+            return false;
+        }
+        units = normalizeUnits(units) || 'millisecond';
+        if (units === 'millisecond') {
+            return this.valueOf() < localInput.valueOf();
+        } else {
+            return this.clone().endOf(units).valueOf() < localInput.valueOf();
+        }
+    }
+
+    function isBetween (from, to, units, inclusivity) {
+        var localFrom = isMoment(from) ? from : createLocal(from),
+            localTo = isMoment(to) ? to : createLocal(to);
+        if (!(this.isValid() && localFrom.isValid() && localTo.isValid())) {
+            return false;
+        }
+        inclusivity = inclusivity || '()';
+        return (inclusivity[0] === '(' ? this.isAfter(localFrom, units) : !this.isBefore(localFrom, units)) &&
+            (inclusivity[1] === ')' ? this.isBefore(localTo, units) : !this.isAfter(localTo, units));
+    }
+
+    function isSame (input, units) {
+        var localInput = isMoment(input) ? input : createLocal(input),
+            inputMs;
+        if (!(this.isValid() && localInput.isValid())) {
+            return false;
+        }
+        units = normalizeUnits(units) || 'millisecond';
+        if (units === 'millisecond') {
+            return this.valueOf() === localInput.valueOf();
+        } else {
+            inputMs = localInput.valueOf();
+            return this.clone().startOf(units).valueOf() <= inputMs && inputMs <= this.clone().endOf(units).valueOf();
+        }
+    }
+
+    function isSameOrAfter (input, units) {
+        return this.isSame(input, units) || this.isAfter(input, units);
+    }
+
+    function isSameOrBefore (input, units) {
+        return this.isSame(input, units) || this.isBefore(input, units);
+    }
+
+    function diff (input, units, asFloat) {
+        var that,
+            zoneDelta,
+            output;
+
+        if (!this.isValid()) {
+            return NaN;
+        }
+
+        that = cloneWithOffset(input, this);
+
+        if (!that.isValid()) {
+            return NaN;
+        }
+
+        zoneDelta = (that.utcOffset() - this.utcOffset()) * 6e4;
+
+        units = normalizeUnits(units);
+
+        switch (units) {
+            case 'year': output = monthDiff(this, that) / 12; break;
+            case 'month': output = monthDiff(this, that); break;
+            case 'quarter': output = monthDiff(this, that) / 3; break;
+            case 'second': output = (this - that) / 1e3; break; // 1000
+            case 'minute': output = (this - that) / 6e4; break; // 1000 * 60
+            case 'hour': output = (this - that) / 36e5; break; // 1000 * 60 * 60
+            case 'day': output = (this - that - zoneDelta) / 864e5; break; // 1000 * 60 * 60 * 24, negate dst
+            case 'week': output = (this - that - zoneDelta) / 6048e5; break; // 1000 * 60 * 60 * 24 * 7, negate dst
+            default: output = this - that;
+        }
+
+        return asFloat ? output : absFloor(output);
+    }
+
+    function monthDiff (a, b) {
+        // difference in months
+        var wholeMonthDiff = ((b.year() - a.year()) * 12) + (b.month() - a.month()),
+            // b is in (anchor - 1 month, anchor + 1 month)
+            anchor = a.clone().add(wholeMonthDiff, 'months'),
+            anchor2, adjust;
+
+        if (b - anchor < 0) {
+            anchor2 = a.clone().add(wholeMonthDiff - 1, 'months');
+            // linear across the month
+            adjust = (b - anchor) / (anchor - anchor2);
+        } else {
+            anchor2 = a.clone().add(wholeMonthDiff + 1, 'months');
+            // linear across the month
+            adjust = (b - anchor) / (anchor2 - anchor);
+        }
+
+        //check for negative zero, return zero if negative zero
+        return -(wholeMonthDiff + adjust) || 0;
+    }
+
+    hooks.defaultFormat = 'YYYY-MM-DDTHH:mm:ssZ';
+    hooks.defaultFormatUtc = 'YYYY-MM-DDTHH:mm:ss[Z]';
+
+    function toString () {
+        return this.clone().locale('en').format('ddd MMM DD YYYY HH:mm:ss [GMT]ZZ');
+    }
+
+    function toISOString(keepOffset) {
+        if (!this.isValid()) {
+            return null;
+        }
+        var utc = keepOffset !== true;
+        var m = utc ? this.clone().utc() : this;
+        if (m.year() < 0 || m.year() > 9999) {
+            return formatMoment(m, utc ? 'YYYYYY-MM-DD[T]HH:mm:ss.SSS[Z]' : 'YYYYYY-MM-DD[T]HH:mm:ss.SSSZ');
+        }
+        if (isFunction(Date.prototype.toISOString)) {
+            // native implementation is ~50x faster, use it when we can
+            if (utc) {
+                return this.toDate().toISOString();
+            } else {
+                return new Date(this.valueOf() + this.utcOffset() * 60 * 1000).toISOString().replace('Z', formatMoment(m, 'Z'));
+            }
+        }
+        return formatMoment(m, utc ? 'YYYY-MM-DD[T]HH:mm:ss.SSS[Z]' : 'YYYY-MM-DD[T]HH:mm:ss.SSSZ');
+    }
+
+    /**
+     * Return a human readable representation of a moment that can
+     * also be evaluated to get a new moment which is the same
+     *
+     * @link https://nodejs.org/dist/latest/docs/api/util.html#util_custom_inspect_function_on_objects
+     */
+    function inspect () {
+        if (!this.isValid()) {
+            return 'moment.invalid(/* ' + this._i + ' */)';
+        }
+        var func = 'moment';
+        var zone = '';
+        if (!this.isLocal()) {
+            func = this.utcOffset() === 0 ? 'moment.utc' : 'moment.parseZone';
+            zone = 'Z';
+        }
+        var prefix = '[' + func + '("]';
+        var year = (0 <= this.year() && this.year() <= 9999) ? 'YYYY' : 'YYYYYY';
+        var datetime = '-MM-DD[T]HH:mm:ss.SSS';
+        var suffix = zone + '[")]';
+
+        return this.format(prefix + year + datetime + suffix);
+    }
+
+    function format (inputString) {
+        if (!inputString) {
+            inputString = this.isUtc() ? hooks.defaultFormatUtc : hooks.defaultFormat;
+        }
+        var output = formatMoment(this, inputString);
+        return this.localeData().postformat(output);
+    }
+
+    function from (time, withoutSuffix) {
+        if (this.isValid() &&
+                ((isMoment(time) && time.isValid()) ||
+                 createLocal(time).isValid())) {
+            return createDuration({to: this, from: time}).locale(this.locale()).humanize(!withoutSuffix);
+        } else {
+            return this.localeData().invalidDate();
+        }
+    }
+
+    function fromNow (withoutSuffix) {
+        return this.from(createLocal(), withoutSuffix);
+    }
+
+    function to (time, withoutSuffix) {
+        if (this.isValid() &&
+                ((isMoment(time) && time.isValid()) ||
+                 createLocal(time).isValid())) {
+            return createDuration({from: this, to: time}).locale(this.locale()).humanize(!withoutSuffix);
+        } else {
+            return this.localeData().invalidDate();
+        }
+    }
+
+    function toNow (withoutSuffix) {
+        return this.to(createLocal(), withoutSuffix);
+    }
+
+    // If passed a locale key, it will set the locale for this
+    // instance.  Otherwise, it will return the locale configuration
+    // variables for this instance.
+    function locale (key) {
+        var newLocaleData;
+
+        if (key === undefined) {
+            return this._locale._abbr;
+        } else {
+            newLocaleData = getLocale(key);
+            if (newLocaleData != null) {
+                this._locale = newLocaleData;
+            }
+            return this;
+        }
+    }
+
+    var lang = deprecate(
+        'moment().lang() is deprecated. Instead, use moment().localeData() to get the language configuration. Use moment().locale() to change languages.',
+        function (key) {
+            if (key === undefined) {
+                return this.localeData();
+            } else {
+                return this.locale(key);
+            }
+        }
+    );
+
+    function localeData () {
+        return this._locale;
+    }
+
+    var MS_PER_SECOND = 1000;
+    var MS_PER_MINUTE = 60 * MS_PER_SECOND;
+    var MS_PER_HOUR = 60 * MS_PER_MINUTE;
+    var MS_PER_400_YEARS = (365 * 400 + 97) * 24 * MS_PER_HOUR;
+
+    // actual modulo - handles negative numbers (for dates before 1970):
+    function mod$1(dividend, divisor) {
+        return (dividend % divisor + divisor) % divisor;
+    }
+
+    function localStartOfDate(y, m, d) {
+        // the date constructor remaps years 0-99 to 1900-1999
+        if (y < 100 && y >= 0) {
+            // preserve leap years using a full 400 year cycle, then reset
+            return new Date(y + 400, m, d) - MS_PER_400_YEARS;
+        } else {
+            return new Date(y, m, d).valueOf();
+        }
+    }
+
+    function utcStartOfDate(y, m, d) {
+        // Date.UTC remaps years 0-99 to 1900-1999
+        if (y < 100 && y >= 0) {
+            // preserve leap years using a full 400 year cycle, then reset
+            return Date.UTC(y + 400, m, d) - MS_PER_400_YEARS;
+        } else {
+            return Date.UTC(y, m, d);
+        }
+    }
+
+    function startOf (units) {
+        var time;
+        units = normalizeUnits(units);
+        if (units === undefined || units === 'millisecond' || !this.isValid()) {
+            return this;
+        }
+
+        var startOfDate = this._isUTC ? utcStartOfDate : localStartOfDate;
+
+        switch (units) {
+            case 'year':
+                time = startOfDate(this.year(), 0, 1);
+                break;
+            case 'quarter':
+                time = startOfDate(this.year(), this.month() - this.month() % 3, 1);
+                break;
+            case 'month':
+                time = startOfDate(this.year(), this.month(), 1);
+                break;
+            case 'week':
+                time = startOfDate(this.year(), this.month(), this.date() - this.weekday());
+                break;
+            case 'isoWeek':
+                time = startOfDate(this.year(), this.month(), this.date() - (this.isoWeekday() - 1));
+                break;
+            case 'day':
+            case 'date':
+                time = startOfDate(this.year(), this.month(), this.date());
+                break;
+            case 'hour':
+                time = this._d.valueOf();
+                time -= mod$1(time + (this._isUTC ? 0 : this.utcOffset() * MS_PER_MINUTE), MS_PER_HOUR);
+                break;
+            case 'minute':
+                time = this._d.valueOf();
+                time -= mod$1(time, MS_PER_MINUTE);
+                break;
+            case 'second':
+                time = this._d.valueOf();
+                time -= mod$1(time, MS_PER_SECOND);
+                break;
+        }
+
+        this._d.setTime(time);
+        hooks.updateOffset(this, true);
+        return this;
+    }
+
+    function endOf (units) {
+        var time;
+        units = normalizeUnits(units);
+        if (units === undefined || units === 'millisecond' || !this.isValid()) {
+            return this;
+        }
+
+        var startOfDate = this._isUTC ? utcStartOfDate : localStartOfDate;
+
+        switch (units) {
+            case 'year':
+                time = startOfDate(this.year() + 1, 0, 1) - 1;
+                break;
+            case 'quarter':
+                time = startOfDate(this.year(), this.month() - this.month() % 3 + 3, 1) - 1;
+                break;
+            case 'month':
+                time = startOfDate(this.year(), this.month() + 1, 1) - 1;
+                break;
+            case 'week':
+                time = startOfDate(this.year(), this.month(), this.date() - this.weekday() + 7) - 1;
+                break;
+            case 'isoWeek':
+                time = startOfDate(this.year(), this.month(), this.date() - (this.isoWeekday() - 1) + 7) - 1;
+                break;
+            case 'day':
+            case 'date':
+                time = startOfDate(this.year(), this.month(), this.date() + 1) - 1;
+                break;
+            case 'hour':
+                time = this._d.valueOf();
+                time += MS_PER_HOUR - mod$1(time + (this._isUTC ? 0 : this.utcOffset() * MS_PER_MINUTE), MS_PER_HOUR) - 1;
+                break;
+            case 'minute':
+                time = this._d.valueOf();
+                time += MS_PER_MINUTE - mod$1(time, MS_PER_MINUTE) - 1;
+                break;
+            case 'second':
+                time = this._d.valueOf();
+                time += MS_PER_SECOND - mod$1(time, MS_PER_SECOND) - 1;
+                break;
+        }
+
+        this._d.setTime(time);
+        hooks.updateOffset(this, true);
+        return this;
+    }
+
+    function valueOf () {
+        return this._d.valueOf() - ((this._offset || 0) * 60000);
+    }
+
+    function unix () {
+        return Math.floor(this.valueOf() / 1000);
+    }
+
+    function toDate () {
+        return new Date(this.valueOf());
+    }
+
+    function toArray () {
+        var m = this;
+        return [m.year(), m.month(), m.date(), m.hour(), m.minute(), m.second(), m.millisecond()];
+    }
+
+    function toObject () {
+        var m = this;
+        return {
+            years: m.year(),
+            months: m.month(),
+            date: m.date(),
+            hours: m.hours(),
+            minutes: m.minutes(),
+            seconds: m.seconds(),
+            milliseconds: m.milliseconds()
+        };
+    }
+
+    function toJSON () {
+        // new Date(NaN).toJSON() === null
+        return this.isValid() ? this.toISOString() : null;
+    }
+
+    function isValid$2 () {
+        return isValid(this);
+    }
+
+    function parsingFlags () {
+        return extend({}, getParsingFlags(this));
+    }
+
+    function invalidAt () {
+        return getParsingFlags(this).overflow;
+    }
+
+    function creationData() {
+        return {
+            input: this._i,
+            format: this._f,
+            locale: this._locale,
+            isUTC: this._isUTC,
+            strict: this._strict
+        };
+    }
+
+    // FORMATTING
+
+    addFormatToken(0, ['gg', 2], 0, function () {
+        return this.weekYear() % 100;
+    });
+
+    addFormatToken(0, ['GG', 2], 0, function () {
+        return this.isoWeekYear() % 100;
+    });
+
+    function addWeekYearFormatToken (token, getter) {
+        addFormatToken(0, [token, token.length], 0, getter);
+    }
+
+    addWeekYearFormatToken('gggg',     'weekYear');
+    addWeekYearFormatToken('ggggg',    'weekYear');
+    addWeekYearFormatToken('GGGG',  'isoWeekYear');
+    addWeekYearFormatToken('GGGGG', 'isoWeekYear');
+
+    // ALIASES
+
+    addUnitAlias('weekYear', 'gg');
+    addUnitAlias('isoWeekYear', 'GG');
+
+    // PRIORITY
+
+    addUnitPriority('weekYear', 1);
+    addUnitPriority('isoWeekYear', 1);
+
+
+    // PARSING
+
+    addRegexToken('G',      matchSigned);
+    addRegexToken('g',      matchSigned);
+    addRegexToken('GG',     match1to2, match2);
+    addRegexToken('gg',     match1to2, match2);
+    addRegexToken('GGGG',   match1to4, match4);
+    addRegexToken('gggg',   match1to4, match4);
+    addRegexToken('GGGGG',  match1to6, match6);
+    addRegexToken('ggggg',  match1to6, match6);
+
+    addWeekParseToken(['gggg', 'ggggg', 'GGGG', 'GGGGG'], function (input, week, config, token) {
+        week[token.substr(0, 2)] = toInt(input);
+    });
+
+    addWeekParseToken(['gg', 'GG'], function (input, week, config, token) {
+        week[token] = hooks.parseTwoDigitYear(input);
+    });
+
+    // MOMENTS
+
+    function getSetWeekYear (input) {
+        return getSetWeekYearHelper.call(this,
+                input,
+                this.week(),
+                this.weekday(),
+                this.localeData()._week.dow,
+                this.localeData()._week.doy);
+    }
+
+    function getSetISOWeekYear (input) {
+        return getSetWeekYearHelper.call(this,
+                input, this.isoWeek(), this.isoWeekday(), 1, 4);
+    }
+
+    function getISOWeeksInYear () {
+        return weeksInYear(this.year(), 1, 4);
+    }
+
+    function getWeeksInYear () {
+        var weekInfo = this.localeData()._week;
+        return weeksInYear(this.year(), weekInfo.dow, weekInfo.doy);
+    }
+
+    function getSetWeekYearHelper(input, week, weekday, dow, doy) {
+        var weeksTarget;
+        if (input == null) {
+            return weekOfYear(this, dow, doy).year;
+        } else {
+            weeksTarget = weeksInYear(input, dow, doy);
+            if (week > weeksTarget) {
+                week = weeksTarget;
+            }
+            return setWeekAll.call(this, input, week, weekday, dow, doy);
+        }
+    }
+
+    function setWeekAll(weekYear, week, weekday, dow, doy) {
+        var dayOfYearData = dayOfYearFromWeeks(weekYear, week, weekday, dow, doy),
+            date = createUTCDate(dayOfYearData.year, 0, dayOfYearData.dayOfYear);
+
+        this.year(date.getUTCFullYear());
+        this.month(date.getUTCMonth());
+        this.date(date.getUTCDate());
+        return this;
+    }
+
+    // FORMATTING
+
+    addFormatToken('Q', 0, 'Qo', 'quarter');
+
+    // ALIASES
+
+    addUnitAlias('quarter', 'Q');
+
+    // PRIORITY
+
+    addUnitPriority('quarter', 7);
+
+    // PARSING
+
+    addRegexToken('Q', match1);
+    addParseToken('Q', function (input, array) {
+        array[MONTH] = (toInt(input) - 1) * 3;
+    });
+
+    // MOMENTS
+
+    function getSetQuarter (input) {
+        return input == null ? Math.ceil((this.month() + 1) / 3) : this.month((input - 1) * 3 + this.month() % 3);
+    }
+
+    // FORMATTING
+
+    addFormatToken('D', ['DD', 2], 'Do', 'date');
+
+    // ALIASES
+
+    addUnitAlias('date', 'D');
+
+    // PRIORITY
+    addUnitPriority('date', 9);
+
+    // PARSING
+
+    addRegexToken('D',  match1to2);
+    addRegexToken('DD', match1to2, match2);
+    addRegexToken('Do', function (isStrict, locale) {
+        // TODO: Remove "ordinalParse" fallback in next major release.
+        return isStrict ?
+          (locale._dayOfMonthOrdinalParse || locale._ordinalParse) :
+          locale._dayOfMonthOrdinalParseLenient;
+    });
+
+    addParseToken(['D', 'DD'], DATE);
+    addParseToken('Do', function (input, array) {
+        array[DATE] = toInt(input.match(match1to2)[0]);
+    });
+
+    // MOMENTS
+
+    var getSetDayOfMonth = makeGetSet('Date', true);
+
+    // FORMATTING
+
+    addFormatToken('DDD', ['DDDD', 3], 'DDDo', 'dayOfYear');
+
+    // ALIASES
+
+    addUnitAlias('dayOfYear', 'DDD');
+
+    // PRIORITY
+    addUnitPriority('dayOfYear', 4);
+
+    // PARSING
+
+    addRegexToken('DDD',  match1to3);
+    addRegexToken('DDDD', match3);
+    addParseToken(['DDD', 'DDDD'], function (input, array, config) {
+        config._dayOfYear = toInt(input);
+    });
+
+    // HELPERS
+
+    // MOMENTS
+
+    function getSetDayOfYear (input) {
+        var dayOfYear = Math.round((this.clone().startOf('day') - this.clone().startOf('year')) / 864e5) + 1;
+        return input == null ? dayOfYear : this.add((input - dayOfYear), 'd');
+    }
+
+    // FORMATTING
+
+    addFormatToken('m', ['mm', 2], 0, 'minute');
+
+    // ALIASES
+
+    addUnitAlias('minute', 'm');
+
+    // PRIORITY
+
+    addUnitPriority('minute', 14);
+
+    // PARSING
+
+    addRegexToken('m',  match1to2);
+    addRegexToken('mm', match1to2, match2);
+    addParseToken(['m', 'mm'], MINUTE);
+
+    // MOMENTS
+
+    var getSetMinute = makeGetSet('Minutes', false);
+
+    // FORMATTING
+
+    addFormatToken('s', ['ss', 2], 0, 'second');
+
+    // ALIASES
+
+    addUnitAlias('second', 's');
+
+    // PRIORITY
+
+    addUnitPriority('second', 15);
+
+    // PARSING
+
+    addRegexToken('s',  match1to2);
+    addRegexToken('ss', match1to2, match2);
+    addParseToken(['s', 'ss'], SECOND);
+
+    // MOMENTS
+
+    var getSetSecond = makeGetSet('Seconds', false);
+
+    // FORMATTING
+
+    addFormatToken('S', 0, 0, function () {
+        return ~~(this.millisecond() / 100);
+    });
+
+    addFormatToken(0, ['SS', 2], 0, function () {
+        return ~~(this.millisecond() / 10);
+    });
+
+    addFormatToken(0, ['SSS', 3], 0, 'millisecond');
+    addFormatToken(0, ['SSSS', 4], 0, function () {
+        return this.millisecond() * 10;
+    });
+    addFormatToken(0, ['SSSSS', 5], 0, function () {
+        return this.millisecond() * 100;
+    });
+    addFormatToken(0, ['SSSSSS', 6], 0, function () {
+        return this.millisecond() * 1000;
+    });
+    addFormatToken(0, ['SSSSSSS', 7], 0, function () {
+        return this.millisecond() * 10000;
+    });
+    addFormatToken(0, ['SSSSSSSS', 8], 0, function () {
+        return this.millisecond() * 100000;
+    });
+    addFormatToken(0, ['SSSSSSSSS', 9], 0, function () {
+        return this.millisecond() * 1000000;
+    });
+
+
+    // ALIASES
+
+    addUnitAlias('millisecond', 'ms');
+
+    // PRIORITY
+
+    addUnitPriority('millisecond', 16);
+
+    // PARSING
+
+    addRegexToken('S',    match1to3, match1);
+    addRegexToken('SS',   match1to3, match2);
+    addRegexToken('SSS',  match1to3, match3);
+
+    var token;
+    for (token = 'SSSS'; token.length <= 9; token += 'S') {
+        addRegexToken(token, matchUnsigned);
+    }
+
+    function parseMs(input, array) {
+        array[MILLISECOND] = toInt(('0.' + input) * 1000);
+    }
+
+    for (token = 'S'; token.length <= 9; token += 'S') {
+        addParseToken(token, parseMs);
+    }
+    // MOMENTS
+
+    var getSetMillisecond = makeGetSet('Milliseconds', false);
+
+    // FORMATTING
+
+    addFormatToken('z',  0, 0, 'zoneAbbr');
+    addFormatToken('zz', 0, 0, 'zoneName');
+
+    // MOMENTS
+
+    function getZoneAbbr () {
+        return this._isUTC ? 'UTC' : '';
+    }
+
+    function getZoneName () {
+        return this._isUTC ? 'Coordinated Universal Time' : '';
+    }
+
+    var proto = Moment.prototype;
+
+    proto.add               = add;
+    proto.calendar          = calendar$1;
+    proto.clone             = clone;
+    proto.diff              = diff;
+    proto.endOf             = endOf;
+    proto.format            = format;
+    proto.from              = from;
+    proto.fromNow           = fromNow;
+    proto.to                = to;
+    proto.toNow             = toNow;
+    proto.get               = stringGet;
+    proto.invalidAt         = invalidAt;
+    proto.isAfter           = isAfter;
+    proto.isBefore          = isBefore;
+    proto.isBetween         = isBetween;
+    proto.isSame            = isSame;
+    proto.isSameOrAfter     = isSameOrAfter;
+    proto.isSameOrBefore    = isSameOrBefore;
+    proto.isValid           = isValid$2;
+    proto.lang              = lang;
+    proto.locale            = locale;
+    proto.localeData        = localeData;
+    proto.max               = prototypeMax;
+    proto.min               = prototypeMin;
+    proto.parsingFlags      = parsingFlags;
+    proto.set               = stringSet;
+    proto.startOf           = startOf;
+    proto.subtract          = subtract;
+    proto.toArray           = toArray;
+    proto.toObject          = toObject;
+    proto.toDate            = toDate;
+    proto.toISOString       = toISOString;
+    proto.inspect           = inspect;
+    proto.toJSON            = toJSON;
+    proto.toString          = toString;
+    proto.unix              = unix;
+    proto.valueOf           = valueOf;
+    proto.creationData      = creationData;
+    proto.year       = getSetYear;
+    proto.isLeapYear = getIsLeapYear;
+    proto.weekYear    = getSetWeekYear;
+    proto.isoWeekYear = getSetISOWeekYear;
+    proto.quarter = proto.quarters = getSetQuarter;
+    proto.month       = getSetMonth;
+    proto.daysInMonth = getDaysInMonth;
+    proto.week           = proto.weeks        = getSetWeek;
+    proto.isoWeek        = proto.isoWeeks     = getSetISOWeek;
+    proto.weeksInYear    = getWeeksInYear;
+    proto.isoWeeksInYear = getISOWeeksInYear;
+    proto.date       = getSetDayOfMonth;
+    proto.day        = proto.days             = getSetDayOfWeek;
+    proto.weekday    = getSetLocaleDayOfWeek;
+    proto.isoWeekday = getSetISODayOfWeek;
+    proto.dayOfYear  = getSetDayOfYear;
+    proto.hour = proto.hours = getSetHour;
+    proto.minute = proto.minutes = getSetMinute;
+    proto.second = proto.seconds = getSetSecond;
+    proto.millisecond = proto.milliseconds = getSetMillisecond;
+    proto.utcOffset            = getSetOffset;
+    proto.utc                  = setOffsetToUTC;
+    proto.local                = setOffsetToLocal;
+    proto.parseZone            = setOffsetToParsedOffset;
+    proto.hasAlignedHourOffset = hasAlignedHourOffset;
+    proto.isDST                = isDaylightSavingTime;
+    proto.isLocal              = isLocal;
+    proto.isUtcOffset          = isUtcOffset;
+    proto.isUtc                = isUtc;
+    proto.isUTC                = isUtc;
+    proto.zoneAbbr = getZoneAbbr;
+    proto.zoneName = getZoneName;
+    proto.dates  = deprecate('dates accessor is deprecated. Use date instead.', getSetDayOfMonth);
+    proto.months = deprecate('months accessor is deprecated. Use month instead', getSetMonth);
+    proto.years  = deprecate('years accessor is deprecated. Use year instead', getSetYear);
+    proto.zone   = deprecate('moment().zone is deprecated, use moment().utcOffset instead. http://momentjs.com/guides/#/warnings/zone/', getSetZone);
+    proto.isDSTShifted = deprecate('isDSTShifted is deprecated. See http://momentjs.com/guides/#/warnings/dst-shifted/ for more information', isDaylightSavingTimeShifted);
+
+    function createUnix (input) {
+        return createLocal(input * 1000);
+    }
+
+    function createInZone () {
+        return createLocal.apply(null, arguments).parseZone();
+    }
+
+    function preParsePostFormat (string) {
+        return string;
+    }
+
+    var proto$1 = Locale.prototype;
+
+    proto$1.calendar        = calendar;
+    proto$1.longDateFormat  = longDateFormat;
+    proto$1.invalidDate     = invalidDate;
+    proto$1.ordinal         = ordinal;
+    proto$1.preparse        = preParsePostFormat;
+    proto$1.postformat      = preParsePostFormat;
+    proto$1.relativeTime    = relativeTime;
+    proto$1.pastFuture      = pastFuture;
+    proto$1.set             = set;
+
+    proto$1.months            =        localeMonths;
+    proto$1.monthsShort       =        localeMonthsShort;
+    proto$1.monthsParse       =        localeMonthsParse;
+    proto$1.monthsRegex       = monthsRegex;
+    proto$1.monthsShortRegex  = monthsShortRegex;
+    proto$1.week = localeWeek;
+    proto$1.firstDayOfYear = localeFirstDayOfYear;
+    proto$1.firstDayOfWeek = localeFirstDayOfWeek;
+
+    proto$1.weekdays       =        localeWeekdays;
+    proto$1.weekdaysMin    =        localeWeekdaysMin;
+    proto$1.weekdaysShort  =        localeWeekdaysShort;
+    proto$1.weekdaysParse  =        localeWeekdaysParse;
+
+    proto$1.weekdaysRegex       =        weekdaysRegex;
+    proto$1.weekdaysShortRegex  =        weekdaysShortRegex;
+    proto$1.weekdaysMinRegex    =        weekdaysMinRegex;
+
+    proto$1.isPM = localeIsPM;
+    proto$1.meridiem = localeMeridiem;
+
+    function get$1 (format, index, field, setter) {
+        var locale = getLocale();
+        var utc = createUTC().set(setter, index);
+        return locale[field](utc, format);
+    }
+
+    function listMonthsImpl (format, index, field) {
+        if (isNumber(format)) {
+            index = format;
+            format = undefined;
+        }
+
+        format = format || '';
+
+        if (index != null) {
+            return get$1(format, index, field, 'month');
+        }
+
+        var i;
+        var out = [];
+        for (i = 0; i < 12; i++) {
+            out[i] = get$1(format, i, field, 'month');
+        }
+        return out;
+    }
+
+    // ()
+    // (5)
+    // (fmt, 5)
+    // (fmt)
+    // (true)
+    // (true, 5)
+    // (true, fmt, 5)
+    // (true, fmt)
+    function listWeekdaysImpl (localeSorted, format, index, field) {
+        if (typeof localeSorted === 'boolean') {
+            if (isNumber(format)) {
+                index = format;
+                format = undefined;
+            }
+
+            format = format || '';
+        } else {
+            format = localeSorted;
+            index = format;
+            localeSorted = false;
+
+            if (isNumber(format)) {
+                index = format;
+                format = undefined;
+            }
+
+            format = format || '';
+        }
+
+        var locale = getLocale(),
+            shift = localeSorted ? locale._week.dow : 0;
+
+        if (index != null) {
+            return get$1(format, (index + shift) % 7, field, 'day');
+        }
+
+        var i;
+        var out = [];
+        for (i = 0; i < 7; i++) {
+            out[i] = get$1(format, (i + shift) % 7, field, 'day');
+        }
+        return out;
+    }
+
+    function listMonths (format, index) {
+        return listMonthsImpl(format, index, 'months');
+    }
+
+    function listMonthsShort (format, index) {
+        return listMonthsImpl(format, index, 'monthsShort');
+    }
+
+    function listWeekdays (localeSorted, format, index) {
+        return listWeekdaysImpl(localeSorted, format, index, 'weekdays');
+    }
+
+    function listWeekdaysShort (localeSorted, format, index) {
+        return listWeekdaysImpl(localeSorted, format, index, 'weekdaysShort');
+    }
+
+    function listWeekdaysMin (localeSorted, format, index) {
+        return listWeekdaysImpl(localeSorted, format, index, 'weekdaysMin');
+    }
+
+    getSetGlobalLocale('en', {
+        dayOfMonthOrdinalParse: /\d{1,2}(th|st|nd|rd)/,
+        ordinal : function (number) {
+            var b = number % 10,
+                output = (toInt(number % 100 / 10) === 1) ? 'th' :
+                (b === 1) ? 'st' :
+                (b === 2) ? 'nd' :
+                (b === 3) ? 'rd' : 'th';
+            return number + output;
+        }
+    });
+
+    // Side effect imports
+
+    hooks.lang = deprecate('moment.lang is deprecated. Use moment.locale instead.', getSetGlobalLocale);
+    hooks.langData = deprecate('moment.langData is deprecated. Use moment.localeData instead.', getLocale);
+
+    var mathAbs = Math.abs;
+
+    function abs () {
+        var data           = this._data;
+
+        this._milliseconds = mathAbs(this._milliseconds);
+        this._days         = mathAbs(this._days);
+        this._months       = mathAbs(this._months);
+
+        data.milliseconds  = mathAbs(data.milliseconds);
+        data.seconds       = mathAbs(data.seconds);
+        data.minutes       = mathAbs(data.minutes);
+        data.hours         = mathAbs(data.hours);
+        data.months        = mathAbs(data.months);
+        data.years         = mathAbs(data.years);
+
+        return this;
+    }
+
+    function addSubtract$1 (duration, input, value, direction) {
+        var other = createDuration(input, value);
+
+        duration._milliseconds += direction * other._milliseconds;
+        duration._days         += direction * other._days;
+        duration._months       += direction * other._months;
+
+        return duration._bubble();
+    }
+
+    // supports only 2.0-style add(1, 's') or add(duration)
+    function add$1 (input, value) {
+        return addSubtract$1(this, input, value, 1);
+    }
+
+    // supports only 2.0-style subtract(1, 's') or subtract(duration)
+    function subtract$1 (input, value) {
+        return addSubtract$1(this, input, value, -1);
+    }
+
+    function absCeil (number) {
+        if (number < 0) {
+            return Math.floor(number);
+        } else {
+            return Math.ceil(number);
+        }
+    }
+
+    function bubble () {
+        var milliseconds = this._milliseconds;
+        var days         = this._days;
+        var months       = this._months;
+        var data         = this._data;
+        var seconds, minutes, hours, years, monthsFromDays;
+
+        // if we have a mix of positive and negative values, bubble down first
+        // check: https://github.com/moment/moment/issues/2166
+        if (!((milliseconds >= 0 && days >= 0 && months >= 0) ||
+                (milliseconds <= 0 && days <= 0 && months <= 0))) {
+            milliseconds += absCeil(monthsToDays(months) + days) * 864e5;
+            days = 0;
+            months = 0;
+        }
+
+        // The following code bubbles up values, see the tests for
+        // examples of what that means.
+        data.milliseconds = milliseconds % 1000;
+
+        seconds           = absFloor(milliseconds / 1000);
+        data.seconds      = seconds % 60;
+
+        minutes           = absFloor(seconds / 60);
+        data.minutes      = minutes % 60;
+
+        hours             = absFloor(minutes / 60);
+        data.hours        = hours % 24;
+
+        days += absFloor(hours / 24);
+
+        // convert days to months
+        monthsFromDays = absFloor(daysToMonths(days));
+        months += monthsFromDays;
+        days -= absCeil(monthsToDays(monthsFromDays));
+
+        // 12 months -> 1 year
+        years = absFloor(months / 12);
+        months %= 12;
+
+        data.days   = days;
+        data.months = months;
+        data.years  = years;
+
+        return this;
+    }
+
+    function daysToMonths (days) {
+        // 400 years have 146097 days (taking into account leap year rules)
+        // 400 years have 12 months === 4800
+        return days * 4800 / 146097;
+    }
+
+    function monthsToDays (months) {
+        // the reverse of daysToMonths
+        return months * 146097 / 4800;
+    }
+
+    function as (units) {
+        if (!this.isValid()) {
+            return NaN;
+        }
+        var days;
+        var months;
+        var milliseconds = this._milliseconds;
+
+        units = normalizeUnits(units);
+
+        if (units === 'month' || units === 'quarter' || units === 'year') {
+            days = this._days + milliseconds / 864e5;
+            months = this._months + daysToMonths(days);
+            switch (units) {
+                case 'month':   return months;
+                case 'quarter': return months / 3;
+                case 'year':    return months / 12;
+            }
+        } else {
+            // handle milliseconds separately because of floating point math errors (issue #1867)
+            days = this._days + Math.round(monthsToDays(this._months));
+            switch (units) {
+                case 'week'   : return days / 7     + milliseconds / 6048e5;
+                case 'day'    : return days         + milliseconds / 864e5;
+                case 'hour'   : return days * 24    + milliseconds / 36e5;
+                case 'minute' : return days * 1440  + milliseconds / 6e4;
+                case 'second' : return days * 86400 + milliseconds / 1000;
+                // Math.floor prevents floating point math errors here
+                case 'millisecond': return Math.floor(days * 864e5) + milliseconds;
+                default: throw new Error('Unknown unit ' + units);
+            }
+        }
+    }
+
+    // TODO: Use this.as('ms')?
+    function valueOf$1 () {
+        if (!this.isValid()) {
+            return NaN;
+        }
+        return (
+            this._milliseconds +
+            this._days * 864e5 +
+            (this._months % 12) * 2592e6 +
+            toInt(this._months / 12) * 31536e6
+        );
+    }
+
+    function makeAs (alias) {
+        return function () {
+            return this.as(alias);
+        };
+    }
+
+    var asMilliseconds = makeAs('ms');
+    var asSeconds      = makeAs('s');
+    var asMinutes      = makeAs('m');
+    var asHours        = makeAs('h');
+    var asDays         = makeAs('d');
+    var asWeeks        = makeAs('w');
+    var asMonths       = makeAs('M');
+    var asQuarters     = makeAs('Q');
+    var asYears        = makeAs('y');
+
+    function clone$1 () {
+        return createDuration(this);
+    }
+
+    function get$2 (units) {
+        units = normalizeUnits(units);
+        return this.isValid() ? this[units + 's']() : NaN;
+    }
+
+    function makeGetter(name) {
+        return function () {
+            return this.isValid() ? this._data[name] : NaN;
+        };
+    }
+
+    var milliseconds = makeGetter('milliseconds');
+    var seconds      = makeGetter('seconds');
+    var minutes      = makeGetter('minutes');
+    var hours        = makeGetter('hours');
+    var days         = makeGetter('days');
+    var months       = makeGetter('months');
+    var years        = makeGetter('years');
+
+    function weeks () {
+        return absFloor(this.days() / 7);
+    }
+
+    var round = Math.round;
+    var thresholds = {
+        ss: 44,         // a few seconds to seconds
+        s : 45,         // seconds to minute
+        m : 45,         // minutes to hour
+        h : 22,         // hours to day
+        d : 26,         // days to month
+        M : 11          // months to year
+    };
+
+    // helper function for moment.fn.from, moment.fn.fromNow, and moment.duration.fn.humanize
+    function substituteTimeAgo(string, number, withoutSuffix, isFuture, locale) {
+        return locale.relativeTime(number || 1, !!withoutSuffix, string, isFuture);
+    }
+
+    function relativeTime$1 (posNegDuration, withoutSuffix, locale) {
+        var duration = createDuration(posNegDuration).abs();
+        var seconds  = round(duration.as('s'));
+        var minutes  = round(duration.as('m'));
+        var hours    = round(duration.as('h'));
+        var days     = round(duration.as('d'));
+        var months   = round(duration.as('M'));
+        var years    = round(duration.as('y'));
+
+        var a = seconds <= thresholds.ss && ['s', seconds]  ||
+                seconds < thresholds.s   && ['ss', seconds] ||
+                minutes <= 1             && ['m']           ||
+                minutes < thresholds.m   && ['mm', minutes] ||
+                hours   <= 1             && ['h']           ||
+                hours   < thresholds.h   && ['hh', hours]   ||
+                days    <= 1             && ['d']           ||
+                days    < thresholds.d   && ['dd', days]    ||
+                months  <= 1             && ['M']           ||
+                months  < thresholds.M   && ['MM', months]  ||
+                years   <= 1             && ['y']           || ['yy', years];
+
+        a[2] = withoutSuffix;
+        a[3] = +posNegDuration > 0;
+        a[4] = locale;
+        return substituteTimeAgo.apply(null, a);
+    }
+
+    // This function allows you to set the rounding function for relative time strings
+    function getSetRelativeTimeRounding (roundingFunction) {
+        if (roundingFunction === undefined) {
+            return round;
+        }
+        if (typeof(roundingFunction) === 'function') {
+            round = roundingFunction;
+            return true;
+        }
+        return false;
+    }
+
+    // This function allows you to set a threshold for relative time strings
+    function getSetRelativeTimeThreshold (threshold, limit) {
+        if (thresholds[threshold] === undefined) {
+            return false;
+        }
+        if (limit === undefined) {
+            return thresholds[threshold];
+        }
+        thresholds[threshold] = limit;
+        if (threshold === 's') {
+            thresholds.ss = limit - 1;
+        }
+        return true;
+    }
+
+    function humanize (withSuffix) {
+        if (!this.isValid()) {
+            return this.localeData().invalidDate();
+        }
+
+        var locale = this.localeData();
+        var output = relativeTime$1(this, !withSuffix, locale);
+
+        if (withSuffix) {
+            output = locale.pastFuture(+this, output);
+        }
+
+        return locale.postformat(output);
+    }
+
+    var abs$1 = Math.abs;
+
+    function sign(x) {
+        return ((x > 0) - (x < 0)) || +x;
+    }
+
+    function toISOString$1() {
+        // for ISO strings we do not use the normal bubbling rules:
+        //  * milliseconds bubble up until they become hours
+        //  * days do not bubble at all
+        //  * months bubble up until they become years
+        // This is because there is no context-free conversion between hours and days
+        // (think of clock changes)
+        // and also not between days and months (28-31 days per month)
+        if (!this.isValid()) {
+            return this.localeData().invalidDate();
+        }
+
+        var seconds = abs$1(this._milliseconds) / 1000;
+        var days         = abs$1(this._days);
+        var months       = abs$1(this._months);
+        var minutes, hours, years;
+
+        // 3600 seconds -> 60 minutes -> 1 hour
+        minutes           = absFloor(seconds / 60);
+        hours             = absFloor(minutes / 60);
+        seconds %= 60;
+        minutes %= 60;
+
+        // 12 months -> 1 year
+        years  = absFloor(months / 12);
+        months %= 12;
+
+
+        // inspired by https://github.com/dordille/moment-isoduration/blob/master/moment.isoduration.js
+        var Y = years;
+        var M = months;
+        var D = days;
+        var h = hours;
+        var m = minutes;
+        var s = seconds ? seconds.toFixed(3).replace(/\.?0+$/, '') : '';
+        var total = this.asSeconds();
+
+        if (!total) {
+            // this is the same as C#'s (Noda) and python (isodate)...
+            // but not other JS (goog.date)
+            return 'P0D';
+        }
+
+        var totalSign = total < 0 ? '-' : '';
+        var ymSign = sign(this._months) !== sign(total) ? '-' : '';
+        var daysSign = sign(this._days) !== sign(total) ? '-' : '';
+        var hmsSign = sign(this._milliseconds) !== sign(total) ? '-' : '';
+
+        return totalSign + 'P' +
+            (Y ? ymSign + Y + 'Y' : '') +
+            (M ? ymSign + M + 'M' : '') +
+            (D ? daysSign + D + 'D' : '') +
+            ((h || m || s) ? 'T' : '') +
+            (h ? hmsSign + h + 'H' : '') +
+            (m ? hmsSign + m + 'M' : '') +
+            (s ? hmsSign + s + 'S' : '');
+    }
+
+    var proto$2 = Duration.prototype;
+
+    proto$2.isValid        = isValid$1;
+    proto$2.abs            = abs;
+    proto$2.add            = add$1;
+    proto$2.subtract       = subtract$1;
+    proto$2.as             = as;
+    proto$2.asMilliseconds = asMilliseconds;
+    proto$2.asSeconds      = asSeconds;
+    proto$2.asMinutes      = asMinutes;
+    proto$2.asHours        = asHours;
+    proto$2.asDays         = asDays;
+    proto$2.asWeeks        = asWeeks;
+    proto$2.asMonths       = asMonths;
+    proto$2.asQuarters     = asQuarters;
+    proto$2.asYears        = asYears;
+    proto$2.valueOf        = valueOf$1;
+    proto$2._bubble        = bubble;
+    proto$2.clone          = clone$1;
+    proto$2.get            = get$2;
+    proto$2.milliseconds   = milliseconds;
+    proto$2.seconds        = seconds;
+    proto$2.minutes        = minutes;
+    proto$2.hours          = hours;
+    proto$2.days           = days;
+    proto$2.weeks          = weeks;
+    proto$2.months         = months;
+    proto$2.years          = years;
+    proto$2.humanize       = humanize;
+    proto$2.toISOString    = toISOString$1;
+    proto$2.toString       = toISOString$1;
+    proto$2.toJSON         = toISOString$1;
+    proto$2.locale         = locale;
+    proto$2.localeData     = localeData;
+
+    proto$2.toIsoString = deprecate('toIsoString() is deprecated. Please use toISOString() instead (notice the capitals)', toISOString$1);
+    proto$2.lang = lang;
+
+    // Side effect imports
+
+    // FORMATTING
+
+    addFormatToken('X', 0, 0, 'unix');
+    addFormatToken('x', 0, 0, 'valueOf');
+
+    // PARSING
+
+    addRegexToken('x', matchSigned);
+    addRegexToken('X', matchTimestamp);
+    addParseToken('X', function (input, array, config) {
+        config._d = new Date(parseFloat(input, 10) * 1000);
+    });
+    addParseToken('x', function (input, array, config) {
+        config._d = new Date(toInt(input));
+    });
+
+    // Side effect imports
+
+
+    hooks.version = '2.24.0';
+
+    setHookCallback(createLocal);
+
+    hooks.fn                    = proto;
+    hooks.min                   = min;
+    hooks.max                   = max;
+    hooks.now                   = now;
+    hooks.utc                   = createUTC;
+    hooks.unix                  = createUnix;
+    hooks.months                = listMonths;
+    hooks.isDate                = isDate;
+    hooks.locale                = getSetGlobalLocale;
+    hooks.invalid               = createInvalid;
+    hooks.duration              = createDuration;
+    hooks.isMoment              = isMoment;
+    hooks.weekdays              = listWeekdays;
+    hooks.parseZone             = createInZone;
+    hooks.localeData            = getLocale;
+    hooks.isDuration            = isDuration;
+    hooks.monthsShort           = listMonthsShort;
+    hooks.weekdaysMin           = listWeekdaysMin;
+    hooks.defineLocale          = defineLocale;
+    hooks.updateLocale          = updateLocale;
+    hooks.locales               = listLocales;
+    hooks.weekdaysShort         = listWeekdaysShort;
+    hooks.normalizeUnits        = normalizeUnits;
+    hooks.relativeTimeRounding  = getSetRelativeTimeRounding;
+    hooks.relativeTimeThreshold = getSetRelativeTimeThreshold;
+    hooks.calendarFormat        = getCalendarFormat;
+    hooks.prototype             = proto;
+
+    // currently HTML5 input type only supports 24-hour formats
+    hooks.HTML5_FMT = {
+        DATETIME_LOCAL: 'YYYY-MM-DDTHH:mm',             // <input type="datetime-local" />
+        DATETIME_LOCAL_SECONDS: 'YYYY-MM-DDTHH:mm:ss',  // <input type="datetime-local" step="1" />
+        DATETIME_LOCAL_MS: 'YYYY-MM-DDTHH:mm:ss.SSS',   // <input type="datetime-local" step="0.001" />
+        DATE: 'YYYY-MM-DD',                             // <input type="date" />
+        TIME: 'HH:mm',                                  // <input type="time" />
+        TIME_SECONDS: 'HH:mm:ss',                       // <input type="time" step="1" />
+        TIME_MS: 'HH:mm:ss.SSS',                        // <input type="time" step="0.001" />
+        WEEK: 'GGGG-[W]WW',                             // <input type="week" />
+        MONTH: 'YYYY-MM'                                // <input type="month" />
+    };
+
+    return hooks;
+
+})));
+
+/* flatpickr v4.6.11,, @license MIT */
+!function(e,n){"object"==typeof exports&&"undefined"!=typeof module?module.exports=n():"function"==typeof define&&define.amd?define(n):(e="undefined"!=typeof globalThis?globalThis:e||self).flatpickr=n()}(this,(function(){"use strict";var e=function(){return(e=Object.assign||function(e){for(var n,t=1,a=arguments.length;t<a;t++)for(var i in n=arguments[t])Object.prototype.hasOwnProperty.call(n,i)&&(e[i]=n[i]);return e}).apply(this,arguments)};function n(){for(var e=0,n=0,t=arguments.length;n<t;n++)e+=arguments[n].length;var a=Array(e),i=0;for(n=0;n<t;n++)for(var o=arguments[n],r=0,l=o.length;r<l;r++,i++)a[i]=o[r];return a}var t=["onChange","onClose","onDayCreate","onDestroy","onKeyDown","onMonthChange","onOpen","onParseConfig","onReady","onValueUpdate","onYearChange","onPreCalendarPosition"],a={_disable:[],allowInput:!1,allowInvalidPreload:!1,altFormat:"F j, Y",altInput:!1,altInputClass:"form-control input",animate:"object"==typeof window&&-1===window.navigator.userAgent.indexOf("MSIE"),ariaDateFormat:"F j, Y",autoFillDefaultTime:!0,clickOpens:!0,closeOnSelect:!0,conjunction:", ",dateFormat:"Y-m-d",defaultHour:12,defaultMinute:0,defaultSeconds:0,disable:[],disableMobile:!1,enableSeconds:!1,enableTime:!1,errorHandler:function(e){return"undefined"!=typeof console&&console.warn(e)},getWeek:function(e){var n=new Date(e.getTime());n.setHours(0,0,0,0),n.setDate(n.getDate()+3-(n.getDay()+6)%7);var t=new Date(n.getFullYear(),0,4);return 1+Math.round(((n.getTime()-t.getTime())/864e5-3+(t.getDay()+6)%7)/7)},hourIncrement:1,ignoredFocusElements:[],inline:!1,locale:"default",minuteIncrement:5,mode:"single",monthSelectorType:"dropdown",nextArrow:"<svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='0 0 17 17'><g></g><path d='M13.207 8.472l-7.854 7.854-0.707-0.707 7.146-7.146-7.146-7.148 0.707-0.707 7.854 7.854z' /></svg>",noCalendar:!1,now:new Date,onChange:[],onClose:[],onDayCreate:[],onDestroy:[],onKeyDown:[],onMonthChange:[],onOpen:[],onParseConfig:[],onReady:[],onValueUpdate:[],onYearChange:[],onPreCalendarPosition:[],plugins:[],position:"auto",positionElement:void 0,prevArrow:"<svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='0 0 17 17'><g></g><path d='M5.207 8.471l7.146 7.147-0.707 0.707-7.853-7.854 7.854-7.853 0.707 0.707-7.147 7.146z' /></svg>",shorthandCurrentMonth:!1,showMonths:1,static:!1,time_24hr:!1,weekNumbers:!1,wrap:!1},i={weekdays:{shorthand:["Sun","Mon","Tue","Wed","Thu","Fri","Sat"],longhand:["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"]},months:{shorthand:["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],longhand:["January","February","March","April","May","June","July","August","September","October","November","December"]},daysInMonth:[31,28,31,30,31,30,31,31,30,31,30,31],firstDayOfWeek:0,ordinal:function(e){var n=e%100;if(n>3&&n<21)return"th";switch(n%10){case 1:return"st";case 2:return"nd";case 3:return"rd";default:return"th"}},rangeSeparator:" to ",weekAbbreviation:"Wk",scrollTitle:"Scroll to increment",toggleTitle:"Click to toggle",amPM:["AM","PM"],yearAriaLabel:"Year",monthAriaLabel:"Month",hourAriaLabel:"Hour",minuteAriaLabel:"Minute",time_24hr:!1},o=function(e,n){return void 0===n&&(n=2),("000"+e).slice(-1*n)},r=function(e){return!0===e?1:0};function l(e,n){var t;return function(){var a=this,i=arguments;clearTimeout(t),t=setTimeout((function(){return e.apply(a,i)}),n)}}var c=function(e){return e instanceof Array?e:[e]};function s(e,n,t){if(!0===t)return e.classList.add(n);e.classList.remove(n)}function d(e,n,t){var a=window.document.createElement(e);return n=n||"",t=t||"",a.className=n,void 0!==t&&(a.textContent=t),a}function u(e){for(;e.firstChild;)e.removeChild(e.firstChild)}function f(e,n){return n(e)?e:e.parentNode?f(e.parentNode,n):void 0}function m(e,n){var t=d("div","numInputWrapper"),a=d("input","numInput "+e),i=d("span","arrowUp"),o=d("span","arrowDown");if(-1===navigator.userAgent.indexOf("MSIE 9.0")?a.type="number":(a.type="text",a.pattern="\\d*"),void 0!==n)for(var r in n)a.setAttribute(r,n[r]);return t.appendChild(a),t.appendChild(i),t.appendChild(o),t}function g(e){try{return"function"==typeof e.composedPath?e.composedPath()[0]:e.target}catch(n){return e.target}}var p=function(){},h=function(e,n,t){return t.months[n?"shorthand":"longhand"][e]},v={D:p,F:function(e,n,t){e.setMonth(t.months.longhand.indexOf(n))},G:function(e,n){e.setHours((e.getHours()>=12?12:0)+parseFloat(n))},H:function(e,n){e.setHours(parseFloat(n))},J:function(e,n){e.setDate(parseFloat(n))},K:function(e,n,t){e.setHours(e.getHours()%12+12*r(new RegExp(t.amPM[1],"i").test(n)))},M:function(e,n,t){e.setMonth(t.months.shorthand.indexOf(n))},S:function(e,n){e.setSeconds(parseFloat(n))},U:function(e,n){return new Date(1e3*parseFloat(n))},W:function(e,n,t){var a=parseInt(n),i=new Date(e.getFullYear(),0,2+7*(a-1),0,0,0,0);return i.setDate(i.getDate()-i.getDay()+t.firstDayOfWeek),i},Y:function(e,n){e.setFullYear(parseFloat(n))},Z:function(e,n){return new Date(n)},d:function(e,n){e.setDate(parseFloat(n))},h:function(e,n){e.setHours((e.getHours()>=12?12:0)+parseFloat(n))},i:function(e,n){e.setMinutes(parseFloat(n))},j:function(e,n){e.setDate(parseFloat(n))},l:p,m:function(e,n){e.setMonth(parseFloat(n)-1)},n:function(e,n){e.setMonth(parseFloat(n)-1)},s:function(e,n){e.setSeconds(parseFloat(n))},u:function(e,n){return new Date(parseFloat(n))},w:p,y:function(e,n){e.setFullYear(2e3+parseFloat(n))}},D={D:"",F:"",G:"(\\d\\d|\\d)",H:"(\\d\\d|\\d)",J:"(\\d\\d|\\d)\\w+",K:"",M:"",S:"(\\d\\d|\\d)",U:"(.+)",W:"(\\d\\d|\\d)",Y:"(\\d{4})",Z:"(.+)",d:"(\\d\\d|\\d)",h:"(\\d\\d|\\d)",i:"(\\d\\d|\\d)",j:"(\\d\\d|\\d)",l:"",m:"(\\d\\d|\\d)",n:"(\\d\\d|\\d)",s:"(\\d\\d|\\d)",u:"(.+)",w:"(\\d\\d|\\d)",y:"(\\d{2})"},w={Z:function(e){return e.toISOString()},D:function(e,n,t){return n.weekdays.shorthand[w.w(e,n,t)]},F:function(e,n,t){return h(w.n(e,n,t)-1,!1,n)},G:function(e,n,t){return o(w.h(e,n,t))},H:function(e){return o(e.getHours())},J:function(e,n){return void 0!==n.ordinal?e.getDate()+n.ordinal(e.getDate()):e.getDate()},K:function(e,n){return n.amPM[r(e.getHours()>11)]},M:function(e,n){return h(e.getMonth(),!0,n)},S:function(e){return o(e.getSeconds())},U:function(e){return e.getTime()/1e3},W:function(e,n,t){return t.getWeek(e)},Y:function(e){return o(e.getFullYear(),4)},d:function(e){return o(e.getDate())},h:function(e){return e.getHours()%12?e.getHours()%12:12},i:function(e){return o(e.getMinutes())},j:function(e){return e.getDate()},l:function(e,n){return n.weekdays.longhand[e.getDay()]},m:function(e){return o(e.getMonth()+1)},n:function(e){return e.getMonth()+1},s:function(e){return e.getSeconds()},u:function(e){return e.getTime()},w:function(e){return e.getDay()},y:function(e){return String(e.getFullYear()).substring(2)}},b=function(e){var n=e.config,t=void 0===n?a:n,o=e.l10n,r=void 0===o?i:o,l=e.isMobile,c=void 0!==l&&l;return function(e,n,a){var i=a||r;return void 0===t.formatDate||c?n.split("").map((function(n,a,o){return w[n]&&"\\"!==o[a-1]?w[n](e,i,t):"\\"!==n?n:""})).join(""):t.formatDate(e,n,i)}},C=function(e){var n=e.config,t=void 0===n?a:n,o=e.l10n,r=void 0===o?i:o;return function(e,n,i,o){if(0===e||e){var l,c=o||r,s=e;if(e instanceof Date)l=new Date(e.getTime());else if("string"!=typeof e&&void 0!==e.toFixed)l=new Date(e);else if("string"==typeof e){var d=n||(t||a).dateFormat,u=String(e).trim();if("today"===u)l=new Date,i=!0;else if(t&&t.parseDate)l=t.parseDate(e,d);else if(/Z$/.test(u)||/GMT$/.test(u))l=new Date(e);else{for(var f=void 0,m=[],g=0,p=0,h="";g<d.length;g++){var w=d[g],b="\\"===w,C="\\"===d[g-1]||b;if(D[w]&&!C){h+=D[w];var M=new RegExp(h).exec(e);M&&(f=!0)&&m["Y"!==w?"push":"unshift"]({fn:v[w],val:M[++p]})}else b||(h+=".")}l=t&&t.noCalendar?new Date((new Date).setHours(0,0,0,0)):new Date((new Date).getFullYear(),0,1,0,0,0,0),m.forEach((function(e){var n=e.fn,t=e.val;return l=n(l,t,c)||l})),l=f?l:void 0}}if(l instanceof Date&&!isNaN(l.getTime()))return!0===i&&l.setHours(0,0,0,0),l;t.errorHandler(new Error("Invalid date provided: "+s))}}};function M(e,n,t){return void 0===t&&(t=!0),!1!==t?new Date(e.getTime()).setHours(0,0,0,0)-new Date(n.getTime()).setHours(0,0,0,0):e.getTime()-n.getTime()}var y=function(e,n,t){return 3600*e+60*n+t},x=864e5;function E(e){var n=e.defaultHour,t=e.defaultMinute,a=e.defaultSeconds;if(void 0!==e.minDate){var i=e.minDate.getHours(),o=e.minDate.getMinutes(),r=e.minDate.getSeconds();n<i&&(n=i),n===i&&t<o&&(t=o),n===i&&t===o&&a<r&&(a=e.minDate.getSeconds())}if(void 0!==e.maxDate){var l=e.maxDate.getHours(),c=e.maxDate.getMinutes();(n=Math.min(n,l))===l&&(t=Math.min(c,t)),n===l&&t===c&&(a=e.maxDate.getSeconds())}return{hours:n,minutes:t,seconds:a}}"function"!=typeof Object.assign&&(Object.assign=function(e){for(var n=[],t=1;t<arguments.length;t++)n[t-1]=arguments[t];if(!e)throw TypeError("Cannot convert undefined or null to object");for(var a=function(n){n&&Object.keys(n).forEach((function(t){return e[t]=n[t]}))},i=0,o=n;i<o.length;i++){var r=o[i];a(r)}return e});function k(p,v){var w={config:e(e({},a),I.defaultConfig),l10n:i};function k(){var e;return(null===(e=w.calendarContainer)||void 0===e?void 0:e.getRootNode()).activeElement||document.activeElement}function T(e){return e.bind(w)}function S(){var e=w.config;!1===e.weekNumbers&&1===e.showMonths||!0!==e.noCalendar&&window.requestAnimationFrame((function(){if(void 0!==w.calendarContainer&&(w.calendarContainer.style.visibility="hidden",w.calendarContainer.style.display="block"),void 0!==w.daysContainer){var n=(w.days.offsetWidth+1)*e.showMonths;w.daysContainer.style.width=n+"px",w.calendarContainer.style.width=n+(void 0!==w.weekWrapper?w.weekWrapper.offsetWidth:0)+"px",w.calendarContainer.style.removeProperty("visibility"),w.calendarContainer.style.removeProperty("display")}}))}function _(e){if(0===w.selectedDates.length){var n=void 0===w.config.minDate||M(new Date,w.config.minDate)>=0?new Date:new Date(w.config.minDate.getTime()),t=E(w.config);n.setHours(t.hours,t.minutes,t.seconds,n.getMilliseconds()),w.selectedDates=[n],w.latestSelectedDateObj=n}void 0!==e&&"blur"!==e.type&&function(e){e.preventDefault();var n="keydown"===e.type,t=g(e),a=t;void 0!==w.amPM&&t===w.amPM&&(w.amPM.textContent=w.l10n.amPM[r(w.amPM.textContent===w.l10n.amPM[0])]);var i=parseFloat(a.getAttribute("min")),l=parseFloat(a.getAttribute("max")),c=parseFloat(a.getAttribute("step")),s=parseInt(a.value,10),d=e.delta||(n?38===e.which?1:-1:0),u=s+c*d;if(void 0!==a.value&&2===a.value.length){var f=a===w.hourElement,m=a===w.minuteElement;u<i?(u=l+u+r(!f)+(r(f)&&r(!w.amPM)),m&&L(void 0,-1,w.hourElement)):u>l&&(u=a===w.hourElement?u-l-r(!w.amPM):i,m&&L(void 0,1,w.hourElement)),w.amPM&&f&&(1===c?u+s===23:Math.abs(u-s)>c)&&(w.amPM.textContent=w.l10n.amPM[r(w.amPM.textContent===w.l10n.amPM[0])]),a.value=o(u)}}(e);var a=w._input.value;O(),ye(),w._input.value!==a&&w._debouncedChange()}function O(){if(void 0!==w.hourElement&&void 0!==w.minuteElement){var e,n,t=(parseInt(w.hourElement.value.slice(-2),10)||0)%24,a=(parseInt(w.minuteElement.value,10)||0)%60,i=void 0!==w.secondElement?(parseInt(w.secondElement.value,10)||0)%60:0;void 0!==w.amPM&&(e=t,n=w.amPM.textContent,t=e%12+12*r(n===w.l10n.amPM[1]));var o=void 0!==w.config.minTime||w.config.minDate&&w.minDateHasTime&&w.latestSelectedDateObj&&0===M(w.latestSelectedDateObj,w.config.minDate,!0),l=void 0!==w.config.maxTime||w.config.maxDate&&w.maxDateHasTime&&w.latestSelectedDateObj&&0===M(w.latestSelectedDateObj,w.config.maxDate,!0);if(void 0!==w.config.maxTime&&void 0!==w.config.minTime&&w.config.minTime>w.config.maxTime){var c=y(w.config.minTime.getHours(),w.config.minTime.getMinutes(),w.config.minTime.getSeconds()),s=y(w.config.maxTime.getHours(),w.config.maxTime.getMinutes(),w.config.maxTime.getSeconds()),d=y(t,a,i);if(d>s&&d<c){var u=function(e){var n=Math.floor(e/3600),t=(e-3600*n)/60;return[n,t,e-3600*n-60*t]}(c);t=u[0],a=u[1],i=u[2]}}else{if(l){var f=void 0!==w.config.maxTime?w.config.maxTime:w.config.maxDate;(t=Math.min(t,f.getHours()))===f.getHours()&&(a=Math.min(a,f.getMinutes())),a===f.getMinutes()&&(i=Math.min(i,f.getSeconds()))}if(o){var m=void 0!==w.config.minTime?w.config.minTime:w.config.minDate;(t=Math.max(t,m.getHours()))===m.getHours()&&a<m.getMinutes()&&(a=m.getMinutes()),a===m.getMinutes()&&(i=Math.max(i,m.getSeconds()))}}A(t,a,i)}}function F(e){var n=e||w.latestSelectedDateObj;n&&n instanceof Date&&A(n.getHours(),n.getMinutes(),n.getSeconds())}function A(e,n,t){void 0!==w.latestSelectedDateObj&&w.latestSelectedDateObj.setHours(e%24,n,t||0,0),w.hourElement&&w.minuteElement&&!w.isMobile&&(w.hourElement.value=o(w.config.time_24hr?e:(12+e)%12+12*r(e%12==0)),w.minuteElement.value=o(n),void 0!==w.amPM&&(w.amPM.textContent=w.l10n.amPM[r(e>=12)]),void 0!==w.secondElement&&(w.secondElement.value=o(t)))}function N(e){var n=g(e),t=parseInt(n.value)+(e.delta||0);(t/1e3>1||"Enter"===e.key&&!/[^\d]/.test(t.toString()))&&ee(t)}function P(e,n,t,a){return n instanceof Array?n.forEach((function(n){return P(e,n,t,a)})):e instanceof Array?e.forEach((function(e){return P(e,n,t,a)})):(e.addEventListener(n,t,a),void w._handlers.push({remove:function(){return e.removeEventListener(n,t,a)}}))}function Y(){De("onChange")}function j(e,n){var t=void 0!==e?w.parseDate(e):w.latestSelectedDateObj||(w.config.minDate&&w.config.minDate>w.now?w.config.minDate:w.config.maxDate&&w.config.maxDate<w.now?w.config.maxDate:w.now),a=w.currentYear,i=w.currentMonth;try{void 0!==t&&(w.currentYear=t.getFullYear(),w.currentMonth=t.getMonth())}catch(e){e.message="Invalid date supplied: "+t,w.config.errorHandler(e)}n&&w.currentYear!==a&&(De("onYearChange"),q()),!n||w.currentYear===a&&w.currentMonth===i||De("onMonthChange"),w.redraw()}function H(e){var n=g(e);~n.className.indexOf("arrow")&&L(e,n.classList.contains("arrowUp")?1:-1)}function L(e,n,t){var a=e&&g(e),i=t||a&&a.parentNode&&a.parentNode.firstChild,o=we("increment");o.delta=n,i&&i.dispatchEvent(o)}function R(e,n,t,a){var i=ne(n,!0),o=d("span",e,n.getDate().toString());return o.dateObj=n,o.$i=a,o.setAttribute("aria-label",w.formatDate(n,w.config.ariaDateFormat)),-1===e.indexOf("hidden")&&0===M(n,w.now)&&(w.todayDateElem=o,o.classList.add("today"),o.setAttribute("aria-current","date")),i?(o.tabIndex=-1,be(n)&&(o.classList.add("selected"),w.selectedDateElem=o,"range"===w.config.mode&&(s(o,"startRange",w.selectedDates[0]&&0===M(n,w.selectedDates[0],!0)),s(o,"endRange",w.selectedDates[1]&&0===M(n,w.selectedDates[1],!0)),"nextMonthDay"===e&&o.classList.add("inRange")))):o.classList.add("flatpickr-disabled"),"range"===w.config.mode&&function(e){return!("range"!==w.config.mode||w.selectedDates.length<2)&&(M(e,w.selectedDates[0])>=0&&M(e,w.selectedDates[1])<=0)}(n)&&!be(n)&&o.classList.add("inRange"),w.weekNumbers&&1===w.config.showMonths&&"prevMonthDay"!==e&&t%7==1&&w.weekNumbers.insertAdjacentHTML("beforeend","<span class='flatpickr-day'>"+w.config.getWeek(n)+"</span>"),De("onDayCreate",o),o}function W(e){e.focus(),"range"===w.config.mode&&oe(e)}function B(e){for(var n=e>0?0:w.config.showMonths-1,t=e>0?w.config.showMonths:-1,a=n;a!=t;a+=e)for(var i=w.daysContainer.children[a],o=e>0?0:i.children.length-1,r=e>0?i.children.length:-1,l=o;l!=r;l+=e){var c=i.children[l];if(-1===c.className.indexOf("hidden")&&ne(c.dateObj))return c}}function J(e,n){var t=k(),a=te(t||document.body),i=void 0!==e?e:a?t:void 0!==w.selectedDateElem&&te(w.selectedDateElem)?w.selectedDateElem:void 0!==w.todayDateElem&&te(w.todayDateElem)?w.todayDateElem:B(n>0?1:-1);void 0===i?w._input.focus():a?function(e,n){for(var t=-1===e.className.indexOf("Month")?e.dateObj.getMonth():w.currentMonth,a=n>0?w.config.showMonths:-1,i=n>0?1:-1,o=t-w.currentMonth;o!=a;o+=i)for(var r=w.daysContainer.children[o],l=t-w.currentMonth===o?e.$i+n:n<0?r.children.length-1:0,c=r.children.length,s=l;s>=0&&s<c&&s!=(n>0?c:-1);s+=i){var d=r.children[s];if(-1===d.className.indexOf("hidden")&&ne(d.dateObj)&&Math.abs(e.$i-s)>=Math.abs(n))return W(d)}w.changeMonth(i),J(B(i),0)}(i,n):W(i)}function K(e,n){for(var t=(new Date(e,n,1).getDay()-w.l10n.firstDayOfWeek+7)%7,a=w.utils.getDaysInMonth((n-1+12)%12,e),i=w.utils.getDaysInMonth(n,e),o=window.document.createDocumentFragment(),r=w.config.showMonths>1,l=r?"prevMonthDay hidden":"prevMonthDay",c=r?"nextMonthDay hidden":"nextMonthDay",s=a+1-t,u=0;s<=a;s++,u++)o.appendChild(R("flatpickr-day "+l,new Date(e,n-1,s),s,u));for(s=1;s<=i;s++,u++)o.appendChild(R("flatpickr-day",new Date(e,n,s),s,u));for(var f=i+1;f<=42-t&&(1===w.config.showMonths||u%7!=0);f++,u++)o.appendChild(R("flatpickr-day "+c,new Date(e,n+1,f%i),f,u));var m=d("div","dayContainer");return m.appendChild(o),m}function U(){if(void 0!==w.daysContainer){u(w.daysContainer),w.weekNumbers&&u(w.weekNumbers);for(var e=document.createDocumentFragment(),n=0;n<w.config.showMonths;n++){var t=new Date(w.currentYear,w.currentMonth,1);t.setMonth(w.currentMonth+n),e.appendChild(K(t.getFullYear(),t.getMonth()))}w.daysContainer.appendChild(e),w.days=w.daysContainer.firstChild,"range"===w.config.mode&&1===w.selectedDates.length&&oe()}}function q(){if(!(w.config.showMonths>1||"dropdown"!==w.config.monthSelectorType)){var e=function(e){return!(void 0!==w.config.minDate&&w.currentYear===w.config.minDate.getFullYear()&&e<w.config.minDate.getMonth())&&!(void 0!==w.config.maxDate&&w.currentYear===w.config.maxDate.getFullYear()&&e>w.config.maxDate.getMonth())};w.monthsDropdownContainer.tabIndex=-1,w.monthsDropdownContainer.innerHTML="";for(var n=0;n<12;n++)if(e(n)){var t=d("option","flatpickr-monthDropdown-month");t.value=new Date(w.currentYear,n).getMonth().toString(),t.textContent=h(n,w.config.shorthandCurrentMonth,w.l10n),t.tabIndex=-1,w.currentMonth===n&&(t.selected=!0),w.monthsDropdownContainer.appendChild(t)}}}function $(){var e,n=d("div","flatpickr-month"),t=window.document.createDocumentFragment();w.config.showMonths>1||"static"===w.config.monthSelectorType?e=d("span","cur-month"):(w.monthsDropdownContainer=d("select","flatpickr-monthDropdown-months"),w.monthsDropdownContainer.setAttribute("aria-label",w.l10n.monthAriaLabel),P(w.monthsDropdownContainer,"change",(function(e){var n=g(e),t=parseInt(n.value,10);w.changeMonth(t-w.currentMonth),De("onMonthChange")})),q(),e=w.monthsDropdownContainer);var a=m("cur-year",{tabindex:"-1"}),i=a.getElementsByTagName("input")[0];i.setAttribute("aria-label",w.l10n.yearAriaLabel),w.config.minDate&&i.setAttribute("min",w.config.minDate.getFullYear().toString()),w.config.maxDate&&(i.setAttribute("max",w.config.maxDate.getFullYear().toString()),i.disabled=!!w.config.minDate&&w.config.minDate.getFullYear()===w.config.maxDate.getFullYear());var o=d("div","flatpickr-current-month");return o.appendChild(e),o.appendChild(a),t.appendChild(o),n.appendChild(t),{container:n,yearElement:i,monthElement:e}}function V(){u(w.monthNav),w.monthNav.appendChild(w.prevMonthNav),w.config.showMonths&&(w.yearElements=[],w.monthElements=[]);for(var e=w.config.showMonths;e--;){var n=$();w.yearElements.push(n.yearElement),w.monthElements.push(n.monthElement),w.monthNav.appendChild(n.container)}w.monthNav.appendChild(w.nextMonthNav)}function z(){w.weekdayContainer?u(w.weekdayContainer):w.weekdayContainer=d("div","flatpickr-weekdays");for(var e=w.config.showMonths;e--;){var n=d("div","flatpickr-weekdaycontainer");w.weekdayContainer.appendChild(n)}return G(),w.weekdayContainer}function G(){if(w.weekdayContainer){var e=w.l10n.firstDayOfWeek,t=n(w.l10n.weekdays.shorthand);e>0&&e<t.length&&(t=n(t.splice(e,t.length),t.splice(0,e)));for(var a=w.config.showMonths;a--;)w.weekdayContainer.children[a].innerHTML="\n      <span class='flatpickr-weekday'>\n        "+t.join("</span><span class='flatpickr-weekday'>")+"\n      </span>\n      "}}function Z(e,n){void 0===n&&(n=!0);var t=n?e:e-w.currentMonth;t<0&&!0===w._hidePrevMonthArrow||t>0&&!0===w._hideNextMonthArrow||(w.currentMonth+=t,(w.currentMonth<0||w.currentMonth>11)&&(w.currentYear+=w.currentMonth>11?1:-1,w.currentMonth=(w.currentMonth+12)%12,De("onYearChange"),q()),U(),De("onMonthChange"),Ce())}function Q(e){return w.calendarContainer.contains(e)}function X(e){if(w.isOpen&&!w.config.inline){var n=g(e),t=Q(n),a=!(n===w.input||n===w.altInput||w.element.contains(n)||e.path&&e.path.indexOf&&(~e.path.indexOf(w.input)||~e.path.indexOf(w.altInput)))&&!t&&!Q(e.relatedTarget),i=!w.config.ignoredFocusElements.some((function(e){return e.contains(n)}));a&&i&&(w.config.allowInput&&w.setDate(w._input.value,!1,w.config.altInput?w.config.altFormat:w.config.dateFormat),void 0!==w.timeContainer&&void 0!==w.minuteElement&&void 0!==w.hourElement&&""!==w.input.value&&void 0!==w.input.value&&_(),w.close(),w.config&&"range"===w.config.mode&&1===w.selectedDates.length&&w.clear(!1))}}function ee(e){if(!(!e||w.config.minDate&&e<w.config.minDate.getFullYear()||w.config.maxDate&&e>w.config.maxDate.getFullYear())){var n=e,t=w.currentYear!==n;w.currentYear=n||w.currentYear,w.config.maxDate&&w.currentYear===w.config.maxDate.getFullYear()?w.currentMonth=Math.min(w.config.maxDate.getMonth(),w.currentMonth):w.config.minDate&&w.currentYear===w.config.minDate.getFullYear()&&(w.currentMonth=Math.max(w.config.minDate.getMonth(),w.currentMonth)),t&&(w.redraw(),De("onYearChange"),q())}}function ne(e,n){var t;void 0===n&&(n=!0);var a=w.parseDate(e,void 0,n);if(w.config.minDate&&a&&M(a,w.config.minDate,void 0!==n?n:!w.minDateHasTime)<0||w.config.maxDate&&a&&M(a,w.config.maxDate,void 0!==n?n:!w.maxDateHasTime)>0)return!1;if(!w.config.enable&&0===w.config.disable.length)return!0;if(void 0===a)return!1;for(var i=!!w.config.enable,o=null!==(t=w.config.enable)&&void 0!==t?t:w.config.disable,r=0,l=void 0;r<o.length;r++){if("function"==typeof(l=o[r])&&l(a))return i;if(l instanceof Date&&void 0!==a&&l.getTime()===a.getTime())return i;if("string"==typeof l){var c=w.parseDate(l,void 0,!0);return c&&c.getTime()===a.getTime()?i:!i}if("object"==typeof l&&void 0!==a&&l.from&&l.to&&a.getTime()>=l.from.getTime()&&a.getTime()<=l.to.getTime())return i}return!i}function te(e){return void 0!==w.daysContainer&&(-1===e.className.indexOf("hidden")&&-1===e.className.indexOf("flatpickr-disabled")&&w.daysContainer.contains(e))}function ae(e){!(e.target===w._input)||!(w.selectedDates.length>0||w._input.value.length>0)||e.relatedTarget&&Q(e.relatedTarget)||w.setDate(w._input.value,!0,e.target===w.altInput?w.config.altFormat:w.config.dateFormat)}function ie(e){var n=g(e),t=w.config.wrap?p.contains(n):n===w._input,a=w.config.allowInput,i=w.isOpen&&(!a||!t),o=w.config.inline&&t&&!a;if(13===e.keyCode&&t){if(a)return w.setDate(w._input.value,!0,n===w.altInput?w.config.altFormat:w.config.dateFormat),w.close(),n.blur();w.open()}else if(Q(n)||i||o){var r=!!w.timeContainer&&w.timeContainer.contains(n);switch(e.keyCode){case 13:r?(e.preventDefault(),_(),fe()):me(e);break;case 27:e.preventDefault(),fe();break;case 8:case 46:t&&!w.config.allowInput&&(e.preventDefault(),w.clear());break;case 37:case 39:if(r||t)w.hourElement&&w.hourElement.focus();else{e.preventDefault();var l=k();if(void 0!==w.daysContainer&&(!1===a||l&&te(l))){var c=39===e.keyCode?1:-1;e.ctrlKey?(e.stopPropagation(),Z(c),J(B(1),0)):J(void 0,c)}}break;case 38:case 40:e.preventDefault();var s=40===e.keyCode?1:-1;w.daysContainer&&void 0!==n.$i||n===w.input||n===w.altInput?e.ctrlKey?(e.stopPropagation(),ee(w.currentYear-s),J(B(1),0)):r||J(void 0,7*s):n===w.currentYearElement?ee(w.currentYear-s):w.config.enableTime&&(!r&&w.hourElement&&w.hourElement.focus(),_(e),w._debouncedChange());break;case 9:if(r){var d=[w.hourElement,w.minuteElement,w.secondElement,w.amPM].concat(w.pluginElements).filter((function(e){return e})),u=d.indexOf(n);if(-1!==u){var f=d[u+(e.shiftKey?-1:1)];e.preventDefault(),(f||w._input).focus()}}else!w.config.noCalendar&&w.daysContainer&&w.daysContainer.contains(n)&&e.shiftKey&&(e.preventDefault(),w._input.focus())}}if(void 0!==w.amPM&&n===w.amPM)switch(e.key){case w.l10n.amPM[0].charAt(0):case w.l10n.amPM[0].charAt(0).toLowerCase():w.amPM.textContent=w.l10n.amPM[0],O(),ye();break;case w.l10n.amPM[1].charAt(0):case w.l10n.amPM[1].charAt(0).toLowerCase():w.amPM.textContent=w.l10n.amPM[1],O(),ye()}(t||Q(n))&&De("onKeyDown",e)}function oe(e,n){if(void 0===n&&(n="flatpickr-day"),1===w.selectedDates.length&&(!e||e.classList.contains(n)&&!e.classList.contains("flatpickr-disabled"))){for(var t=e?e.dateObj.getTime():w.days.firstElementChild.dateObj.getTime(),a=w.parseDate(w.selectedDates[0],void 0,!0).getTime(),i=Math.min(t,w.selectedDates[0].getTime()),o=Math.max(t,w.selectedDates[0].getTime()),r=!1,l=0,c=0,s=i;s<o;s+=x)ne(new Date(s),!0)||(r=r||s>i&&s<o,s<a&&(!l||s>l)?l=s:s>a&&(!c||s<c)&&(c=s));Array.from(w.rContainer.querySelectorAll("*:nth-child(-n+"+w.config.showMonths+") > ."+n)).forEach((function(n){var i,o,s,d=n.dateObj.getTime(),u=l>0&&d<l||c>0&&d>c;if(u)return n.classList.add("notAllowed"),void["inRange","startRange","endRange"].forEach((function(e){n.classList.remove(e)}));r&&!u||(["startRange","inRange","endRange","notAllowed"].forEach((function(e){n.classList.remove(e)})),void 0!==e&&(e.classList.add(t<=w.selectedDates[0].getTime()?"startRange":"endRange"),a<t&&d===a?n.classList.add("startRange"):a>t&&d===a&&n.classList.add("endRange"),d>=l&&(0===c||d<=c)&&(o=a,s=t,(i=d)>Math.min(o,s)&&i<Math.max(o,s))&&n.classList.add("inRange")))}))}}function re(){!w.isOpen||w.config.static||w.config.inline||de()}function le(e){return function(n){var t=w.config["_"+e+"Date"]=w.parseDate(n,w.config.dateFormat),a=w.config["_"+("min"===e?"max":"min")+"Date"];void 0!==t&&(w["min"===e?"minDateHasTime":"maxDateHasTime"]=t.getHours()>0||t.getMinutes()>0||t.getSeconds()>0),w.selectedDates&&(w.selectedDates=w.selectedDates.filter((function(e){return ne(e)})),w.selectedDates.length||"min"!==e||F(t),ye()),w.daysContainer&&(ue(),void 0!==t?w.currentYearElement[e]=t.getFullYear().toString():w.currentYearElement.removeAttribute(e),w.currentYearElement.disabled=!!a&&void 0!==t&&a.getFullYear()===t.getFullYear())}}function ce(){return w.config.wrap?p.querySelector("[data-input]"):p}function se(){"object"!=typeof w.config.locale&&void 0===I.l10ns[w.config.locale]&&w.config.errorHandler(new Error("flatpickr: invalid locale "+w.config.locale)),w.l10n=e(e({},I.l10ns.default),"object"==typeof w.config.locale?w.config.locale:"default"!==w.config.locale?I.l10ns[w.config.locale]:void 0),D.D="("+w.l10n.weekdays.shorthand.join("|")+")",D.l="("+w.l10n.weekdays.longhand.join("|")+")",D.M="("+w.l10n.months.shorthand.join("|")+")",D.F="("+w.l10n.months.longhand.join("|")+")",D.K="("+w.l10n.amPM[0]+"|"+w.l10n.amPM[1]+"|"+w.l10n.amPM[0].toLowerCase()+"|"+w.l10n.amPM[1].toLowerCase()+")",void 0===e(e({},v),JSON.parse(JSON.stringify(p.dataset||{}))).time_24hr&&void 0===I.defaultConfig.time_24hr&&(w.config.time_24hr=w.l10n.time_24hr),w.formatDate=b(w),w.parseDate=C({config:w.config,l10n:w.l10n})}function de(e){if("function"!=typeof w.config.position){if(void 0!==w.calendarContainer){De("onPreCalendarPosition");var n=e||w._positionElement,t=Array.prototype.reduce.call(w.calendarContainer.children,(function(e,n){return e+n.offsetHeight}),0),a=w.calendarContainer.offsetWidth,i=w.config.position.split(" "),o=i[0],r=i.length>1?i[1]:null,l=n.getBoundingClientRect(),c=window.innerHeight-l.bottom,d="above"===o||"below"!==o&&c<t&&l.top>t,u=window.pageYOffset+l.top+(d?-t-2:n.offsetHeight+2);if(s(w.calendarContainer,"arrowTop",!d),s(w.calendarContainer,"arrowBottom",d),!w.config.inline){var f=window.pageXOffset+l.left,m=!1,g=!1;"center"===r?(f-=(a-l.width)/2,m=!0):"right"===r&&(f-=a-l.width,g=!0),s(w.calendarContainer,"arrowLeft",!m&&!g),s(w.calendarContainer,"arrowCenter",m),s(w.calendarContainer,"arrowRight",g);var p=window.document.body.offsetWidth-(window.pageXOffset+l.right),h=f+a>window.document.body.offsetWidth,v=p+a>window.document.body.offsetWidth;if(s(w.calendarContainer,"rightMost",h),!w.config.static)if(w.calendarContainer.style.top=u+"px",h)if(v){var D=function(){for(var e=null,n=0;n<document.styleSheets.length;n++){var t=document.styleSheets[n];if(t.cssRules){try{t.cssRules}catch(e){continue}e=t;break}}return null!=e?e:(a=document.createElement("style"),document.head.appendChild(a),a.sheet);var a}();if(void 0===D)return;var b=window.document.body.offsetWidth,C=Math.max(0,b/2-a/2),M=D.cssRules.length,y="{left:"+l.left+"px;right:auto;}";s(w.calendarContainer,"rightMost",!1),s(w.calendarContainer,"centerMost",!0),D.insertRule(".flatpickr-calendar.centerMost:before,.flatpickr-calendar.centerMost:after"+y,M),w.calendarContainer.style.left=C+"px",w.calendarContainer.style.right="auto"}else w.calendarContainer.style.left="auto",w.calendarContainer.style.right=p+"px";else w.calendarContainer.style.left=f+"px",w.calendarContainer.style.right="auto"}}}else w.config.position(w,e)}function ue(){w.config.noCalendar||w.isMobile||(q(),Ce(),U())}function fe(){w._input.focus(),-1!==window.navigator.userAgent.indexOf("MSIE")||void 0!==navigator.msMaxTouchPoints?setTimeout(w.close,0):w.close()}function me(e){e.preventDefault(),e.stopPropagation();var n=f(g(e),(function(e){return e.classList&&e.classList.contains("flatpickr-day")&&!e.classList.contains("flatpickr-disabled")&&!e.classList.contains("notAllowed")}));if(void 0!==n){var t=n,a=w.latestSelectedDateObj=new Date(t.dateObj.getTime()),i=(a.getMonth()<w.currentMonth||a.getMonth()>w.currentMonth+w.config.showMonths-1)&&"range"!==w.config.mode;if(w.selectedDateElem=t,"single"===w.config.mode)w.selectedDates=[a];else if("multiple"===w.config.mode){var o=be(a);o?w.selectedDates.splice(parseInt(o),1):w.selectedDates.push(a)}else"range"===w.config.mode&&(2===w.selectedDates.length&&w.clear(!1,!1),w.latestSelectedDateObj=a,w.selectedDates.push(a),0!==M(a,w.selectedDates[0],!0)&&w.selectedDates.sort((function(e,n){return e.getTime()-n.getTime()})));if(O(),i){var r=w.currentYear!==a.getFullYear();w.currentYear=a.getFullYear(),w.currentMonth=a.getMonth(),r&&(De("onYearChange"),q()),De("onMonthChange")}if(Ce(),U(),ye(),i||"range"===w.config.mode||1!==w.config.showMonths?void 0!==w.selectedDateElem&&void 0===w.hourElement&&w.selectedDateElem&&w.selectedDateElem.focus():W(t),void 0!==w.hourElement&&void 0!==w.hourElement&&w.hourElement.focus(),w.config.closeOnSelect){var l="single"===w.config.mode&&!w.config.enableTime,c="range"===w.config.mode&&2===w.selectedDates.length&&!w.config.enableTime;(l||c)&&fe()}Y()}}w.parseDate=C({config:w.config,l10n:w.l10n}),w._handlers=[],w.pluginElements=[],w.loadedPlugins=[],w._bind=P,w._setHoursFromDate=F,w._positionCalendar=de,w.changeMonth=Z,w.changeYear=ee,w.clear=function(e,n){void 0===e&&(e=!0);void 0===n&&(n=!0);w.input.value="",void 0!==w.altInput&&(w.altInput.value="");void 0!==w.mobileInput&&(w.mobileInput.value="");w.selectedDates=[],w.latestSelectedDateObj=void 0,!0===n&&(w.currentYear=w._initialDate.getFullYear(),w.currentMonth=w._initialDate.getMonth());if(!0===w.config.enableTime){var t=E(w.config),a=t.hours,i=t.minutes,o=t.seconds;A(a,i,o)}w.redraw(),e&&De("onChange")},w.close=function(){w.isOpen=!1,w.isMobile||(void 0!==w.calendarContainer&&w.calendarContainer.classList.remove("open"),void 0!==w._input&&w._input.classList.remove("active"));De("onClose")},w.onMouseOver=oe,w._createElement=d,w.createDay=R,w.destroy=function(){void 0!==w.config&&De("onDestroy");for(var e=w._handlers.length;e--;)w._handlers[e].remove();if(w._handlers=[],w.mobileInput)w.mobileInput.parentNode&&w.mobileInput.parentNode.removeChild(w.mobileInput),w.mobileInput=void 0;else if(w.calendarContainer&&w.calendarContainer.parentNode)if(w.config.static&&w.calendarContainer.parentNode){var n=w.calendarContainer.parentNode;if(n.lastChild&&n.removeChild(n.lastChild),n.parentNode){for(;n.firstChild;)n.parentNode.insertBefore(n.firstChild,n);n.parentNode.removeChild(n)}}else w.calendarContainer.parentNode.removeChild(w.calendarContainer);w.altInput&&(w.input.type="text",w.altInput.parentNode&&w.altInput.parentNode.removeChild(w.altInput),delete w.altInput);w.input&&(w.input.type=w.input._type,w.input.classList.remove("flatpickr-input"),w.input.removeAttribute("readonly"));["_showTimeInput","latestSelectedDateObj","_hideNextMonthArrow","_hidePrevMonthArrow","__hideNextMonthArrow","__hidePrevMonthArrow","isMobile","isOpen","selectedDateElem","minDateHasTime","maxDateHasTime","days","daysContainer","_input","_positionElement","innerContainer","rContainer","monthNav","todayDateElem","calendarContainer","weekdayContainer","prevMonthNav","nextMonthNav","monthsDropdownContainer","currentMonthElement","currentYearElement","navigationCurrentMonth","selectedDateElem","config"].forEach((function(e){try{delete w[e]}catch(e){}}))},w.isEnabled=ne,w.jumpToDate=j,w.updateValue=ye,w.open=function(e,n){void 0===n&&(n=w._positionElement);if(!0===w.isMobile){if(e){e.preventDefault();var t=g(e);t&&t.blur()}return void 0!==w.mobileInput&&(w.mobileInput.focus(),w.mobileInput.click()),void De("onOpen")}if(w._input.disabled||w.config.inline)return;var a=w.isOpen;w.isOpen=!0,a||(w.calendarContainer.classList.add("open"),w._input.classList.add("active"),De("onOpen"),de(n));!0===w.config.enableTime&&!0===w.config.noCalendar&&(!1!==w.config.allowInput||void 0!==e&&w.timeContainer.contains(e.relatedTarget)||setTimeout((function(){return w.hourElement.select()}),50))},w.redraw=ue,w.set=function(e,n){if(null!==e&&"object"==typeof e)for(var a in Object.assign(w.config,e),e)void 0!==ge[a]&&ge[a].forEach((function(e){return e()}));else w.config[e]=n,void 0!==ge[e]?ge[e].forEach((function(e){return e()})):t.indexOf(e)>-1&&(w.config[e]=c(n));w.redraw(),ye(!0)},w.setDate=function(e,n,t){void 0===n&&(n=!1);void 0===t&&(t=w.config.dateFormat);if(0!==e&&!e||e instanceof Array&&0===e.length)return w.clear(n);pe(e,t),w.latestSelectedDateObj=w.selectedDates[w.selectedDates.length-1],w.redraw(),j(void 0,n),F(),0===w.selectedDates.length&&w.clear(!1);ye(n),n&&De("onChange")},w.toggle=function(e){if(!0===w.isOpen)return w.close();w.open(e)};var ge={locale:[se,G],showMonths:[V,S,z],minDate:[j],maxDate:[j],positionElement:[ve],clickOpens:[function(){!0===w.config.clickOpens?(P(w._input,"focus",w.open),P(w._input,"click",w.open)):(w._input.removeEventListener("focus",w.open),w._input.removeEventListener("click",w.open))}]};function pe(e,n){var t=[];if(e instanceof Array)t=e.map((function(e){return w.parseDate(e,n)}));else if(e instanceof Date||"number"==typeof e)t=[w.parseDate(e,n)];else if("string"==typeof e)switch(w.config.mode){case"single":case"time":t=[w.parseDate(e,n)];break;case"multiple":t=e.split(w.config.conjunction).map((function(e){return w.parseDate(e,n)}));break;case"range":t=e.split(w.l10n.rangeSeparator).map((function(e){return w.parseDate(e,n)}))}else w.config.errorHandler(new Error("Invalid date supplied: "+JSON.stringify(e)));w.selectedDates=w.config.allowInvalidPreload?t:t.filter((function(e){return e instanceof Date&&ne(e,!1)})),"range"===w.config.mode&&w.selectedDates.sort((function(e,n){return e.getTime()-n.getTime()}))}function he(e){return e.slice().map((function(e){return"string"==typeof e||"number"==typeof e||e instanceof Date?w.parseDate(e,void 0,!0):e&&"object"==typeof e&&e.from&&e.to?{from:w.parseDate(e.from,void 0),to:w.parseDate(e.to,void 0)}:e})).filter((function(e){return e}))}function ve(){w._positionElement=w.config.positionElement||w._input}function De(e,n){if(void 0!==w.config){var t=w.config[e];if(void 0!==t&&t.length>0)for(var a=0;t[a]&&a<t.length;a++)t[a](w.selectedDates,w.input.value,w,n);"onChange"===e&&(w.input.dispatchEvent(we("change")),w.input.dispatchEvent(we("input")))}}function we(e){var n=document.createEvent("Event");return n.initEvent(e,!0,!0),n}function be(e){for(var n=0;n<w.selectedDates.length;n++){var t=w.selectedDates[n];if(t instanceof Date&&0===M(t,e))return""+n}return!1}function Ce(){w.config.noCalendar||w.isMobile||!w.monthNav||(w.yearElements.forEach((function(e,n){var t=new Date(w.currentYear,w.currentMonth,1);t.setMonth(w.currentMonth+n),w.config.showMonths>1||"static"===w.config.monthSelectorType?w.monthElements[n].textContent=h(t.getMonth(),w.config.shorthandCurrentMonth,w.l10n)+" ":w.monthsDropdownContainer.value=t.getMonth().toString(),e.value=t.getFullYear().toString()})),w._hidePrevMonthArrow=void 0!==w.config.minDate&&(w.currentYear===w.config.minDate.getFullYear()?w.currentMonth<=w.config.minDate.getMonth():w.currentYear<w.config.minDate.getFullYear()),w._hideNextMonthArrow=void 0!==w.config.maxDate&&(w.currentYear===w.config.maxDate.getFullYear()?w.currentMonth+1>w.config.maxDate.getMonth():w.currentYear>w.config.maxDate.getFullYear()))}function Me(e){return w.selectedDates.map((function(n){return w.formatDate(n,e)})).filter((function(e,n,t){return"range"!==w.config.mode||w.config.enableTime||t.indexOf(e)===n})).join("range"!==w.config.mode?w.config.conjunction:w.l10n.rangeSeparator)}function ye(e){void 0===e&&(e=!0),void 0!==w.mobileInput&&w.mobileFormatStr&&(w.mobileInput.value=void 0!==w.latestSelectedDateObj?w.formatDate(w.latestSelectedDateObj,w.mobileFormatStr):""),w.input.value=Me(w.config.dateFormat),void 0!==w.altInput&&(w.altInput.value=Me(w.config.altFormat)),!1!==e&&De("onValueUpdate")}function xe(e){var n=g(e),t=w.prevMonthNav.contains(n),a=w.nextMonthNav.contains(n);t||a?Z(t?-1:1):w.yearElements.indexOf(n)>=0?n.select():n.classList.contains("arrowUp")?w.changeYear(w.currentYear+1):n.classList.contains("arrowDown")&&w.changeYear(w.currentYear-1)}return function(){w.element=w.input=p,w.isOpen=!1,function(){var n=["wrap","weekNumbers","allowInput","allowInvalidPreload","clickOpens","time_24hr","enableTime","noCalendar","altInput","shorthandCurrentMonth","inline","static","enableSeconds","disableMobile"],i=e(e({},JSON.parse(JSON.stringify(p.dataset||{}))),v),o={};w.config.parseDate=i.parseDate,w.config.formatDate=i.formatDate,Object.defineProperty(w.config,"enable",{get:function(){return w.config._enable},set:function(e){w.config._enable=he(e)}}),Object.defineProperty(w.config,"disable",{get:function(){return w.config._disable},set:function(e){w.config._disable=he(e)}});var r="time"===i.mode;if(!i.dateFormat&&(i.enableTime||r)){var l=I.defaultConfig.dateFormat||a.dateFormat;o.dateFormat=i.noCalendar||r?"H:i"+(i.enableSeconds?":S":""):l+" H:i"+(i.enableSeconds?":S":"")}if(i.altInput&&(i.enableTime||r)&&!i.altFormat){var s=I.defaultConfig.altFormat||a.altFormat;o.altFormat=i.noCalendar||r?"h:i"+(i.enableSeconds?":S K":" K"):s+" h:i"+(i.enableSeconds?":S":"")+" K"}Object.defineProperty(w.config,"minDate",{get:function(){return w.config._minDate},set:le("min")}),Object.defineProperty(w.config,"maxDate",{get:function(){return w.config._maxDate},set:le("max")});var d=function(e){return function(n){w.config["min"===e?"_minTime":"_maxTime"]=w.parseDate(n,"H:i:S")}};Object.defineProperty(w.config,"minTime",{get:function(){return w.config._minTime},set:d("min")}),Object.defineProperty(w.config,"maxTime",{get:function(){return w.config._maxTime},set:d("max")}),"time"===i.mode&&(w.config.noCalendar=!0,w.config.enableTime=!0);Object.assign(w.config,o,i);for(var u=0;u<n.length;u++)w.config[n[u]]=!0===w.config[n[u]]||"true"===w.config[n[u]];t.filter((function(e){return void 0!==w.config[e]})).forEach((function(e){w.config[e]=c(w.config[e]||[]).map(T)})),w.isMobile=!w.config.disableMobile&&!w.config.inline&&"single"===w.config.mode&&!w.config.disable.length&&!w.config.enable&&!w.config.weekNumbers&&/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);for(u=0;u<w.config.plugins.length;u++){var f=w.config.plugins[u](w)||{};for(var m in f)t.indexOf(m)>-1?w.config[m]=c(f[m]).map(T).concat(w.config[m]):void 0===i[m]&&(w.config[m]=f[m])}i.altInputClass||(w.config.altInputClass=ce().className+" "+w.config.altInputClass);De("onParseConfig")}(),se(),function(){if(w.input=ce(),!w.input)return void w.config.errorHandler(new Error("Invalid input element specified"));w.input._type=w.input.type,w.input.type="text",w.input.classList.add("flatpickr-input"),w._input=w.input,w.config.altInput&&(w.altInput=d(w.input.nodeName,w.config.altInputClass),w._input=w.altInput,w.altInput.placeholder=w.input.placeholder,w.altInput.disabled=w.input.disabled,w.altInput.required=w.input.required,w.altInput.tabIndex=w.input.tabIndex,w.altInput.type="text",w.input.setAttribute("type","hidden"),!w.config.static&&w.input.parentNode&&w.input.parentNode.insertBefore(w.altInput,w.input.nextSibling));w.config.allowInput||w._input.setAttribute("readonly","readonly");ve()}(),function(){w.selectedDates=[],w.now=w.parseDate(w.config.now)||new Date;var e=w.config.defaultDate||("INPUT"!==w.input.nodeName&&"TEXTAREA"!==w.input.nodeName||!w.input.placeholder||w.input.value!==w.input.placeholder?w.input.value:null);e&&pe(e,w.config.dateFormat);w._initialDate=w.selectedDates.length>0?w.selectedDates[0]:w.config.minDate&&w.config.minDate.getTime()>w.now.getTime()?w.config.minDate:w.config.maxDate&&w.config.maxDate.getTime()<w.now.getTime()?w.config.maxDate:w.now,w.currentYear=w._initialDate.getFullYear(),w.currentMonth=w._initialDate.getMonth(),w.selectedDates.length>0&&(w.latestSelectedDateObj=w.selectedDates[0]);void 0!==w.config.minTime&&(w.config.minTime=w.parseDate(w.config.minTime,"H:i"));void 0!==w.config.maxTime&&(w.config.maxTime=w.parseDate(w.config.maxTime,"H:i"));w.minDateHasTime=!!w.config.minDate&&(w.config.minDate.getHours()>0||w.config.minDate.getMinutes()>0||w.config.minDate.getSeconds()>0),w.maxDateHasTime=!!w.config.maxDate&&(w.config.maxDate.getHours()>0||w.config.maxDate.getMinutes()>0||w.config.maxDate.getSeconds()>0)}(),w.utils={getDaysInMonth:function(e,n){return void 0===e&&(e=w.currentMonth),void 0===n&&(n=w.currentYear),1===e&&(n%4==0&&n%100!=0||n%400==0)?29:w.l10n.daysInMonth[e]}},w.isMobile||function(){var e=window.document.createDocumentFragment();if(w.calendarContainer=d("div","flatpickr-calendar"),w.calendarContainer.tabIndex=-1,!w.config.noCalendar){if(e.appendChild((w.monthNav=d("div","flatpickr-months"),w.yearElements=[],w.monthElements=[],w.prevMonthNav=d("span","flatpickr-prev-month"),w.prevMonthNav.innerHTML=w.config.prevArrow,w.nextMonthNav=d("span","flatpickr-next-month"),w.nextMonthNav.innerHTML=w.config.nextArrow,V(),Object.defineProperty(w,"_hidePrevMonthArrow",{get:function(){return w.__hidePrevMonthArrow},set:function(e){w.__hidePrevMonthArrow!==e&&(s(w.prevMonthNav,"flatpickr-disabled",e),w.__hidePrevMonthArrow=e)}}),Object.defineProperty(w,"_hideNextMonthArrow",{get:function(){return w.__hideNextMonthArrow},set:function(e){w.__hideNextMonthArrow!==e&&(s(w.nextMonthNav,"flatpickr-disabled",e),w.__hideNextMonthArrow=e)}}),w.currentYearElement=w.yearElements[0],Ce(),w.monthNav)),w.innerContainer=d("div","flatpickr-innerContainer"),w.config.weekNumbers){var n=function(){w.calendarContainer.classList.add("hasWeeks");var e=d("div","flatpickr-weekwrapper");e.appendChild(d("span","flatpickr-weekday",w.l10n.weekAbbreviation));var n=d("div","flatpickr-weeks");return e.appendChild(n),{weekWrapper:e,weekNumbers:n}}(),t=n.weekWrapper,a=n.weekNumbers;w.innerContainer.appendChild(t),w.weekNumbers=a,w.weekWrapper=t}w.rContainer=d("div","flatpickr-rContainer"),w.rContainer.appendChild(z()),w.daysContainer||(w.daysContainer=d("div","flatpickr-days"),w.daysContainer.tabIndex=-1),U(),w.rContainer.appendChild(w.daysContainer),w.innerContainer.appendChild(w.rContainer),e.appendChild(w.innerContainer)}w.config.enableTime&&e.appendChild(function(){w.calendarContainer.classList.add("hasTime"),w.config.noCalendar&&w.calendarContainer.classList.add("noCalendar");var e=E(w.config);w.timeContainer=d("div","flatpickr-time"),w.timeContainer.tabIndex=-1;var n=d("span","flatpickr-time-separator",":"),t=m("flatpickr-hour",{"aria-label":w.l10n.hourAriaLabel});w.hourElement=t.getElementsByTagName("input")[0];var a=m("flatpickr-minute",{"aria-label":w.l10n.minuteAriaLabel});w.minuteElement=a.getElementsByTagName("input")[0],w.hourElement.tabIndex=w.minuteElement.tabIndex=-1,w.hourElement.value=o(w.latestSelectedDateObj?w.latestSelectedDateObj.getHours():w.config.time_24hr?e.hours:function(e){switch(e%24){case 0:case 12:return 12;default:return e%12}}(e.hours)),w.minuteElement.value=o(w.latestSelectedDateObj?w.latestSelectedDateObj.getMinutes():e.minutes),w.hourElement.setAttribute("step",w.config.hourIncrement.toString()),w.minuteElement.setAttribute("step",w.config.minuteIncrement.toString()),w.hourElement.setAttribute("min",w.config.time_24hr?"0":"1"),w.hourElement.setAttribute("max",w.config.time_24hr?"23":"12"),w.hourElement.setAttribute("maxlength","2"),w.minuteElement.setAttribute("min","0"),w.minuteElement.setAttribute("max","59"),w.minuteElement.setAttribute("maxlength","2"),w.timeContainer.appendChild(t),w.timeContainer.appendChild(n),w.timeContainer.appendChild(a),w.config.time_24hr&&w.timeContainer.classList.add("time24hr");if(w.config.enableSeconds){w.timeContainer.classList.add("hasSeconds");var i=m("flatpickr-second");w.secondElement=i.getElementsByTagName("input")[0],w.secondElement.value=o(w.latestSelectedDateObj?w.latestSelectedDateObj.getSeconds():e.seconds),w.secondElement.setAttribute("step",w.minuteElement.getAttribute("step")),w.secondElement.setAttribute("min","0"),w.secondElement.setAttribute("max","59"),w.secondElement.setAttribute("maxlength","2"),w.timeContainer.appendChild(d("span","flatpickr-time-separator",":")),w.timeContainer.appendChild(i)}w.config.time_24hr||(w.amPM=d("span","flatpickr-am-pm",w.l10n.amPM[r((w.latestSelectedDateObj?w.hourElement.value:w.config.defaultHour)>11)]),w.amPM.title=w.l10n.toggleTitle,w.amPM.tabIndex=-1,w.timeContainer.appendChild(w.amPM));return w.timeContainer}());s(w.calendarContainer,"rangeMode","range"===w.config.mode),s(w.calendarContainer,"animate",!0===w.config.animate),s(w.calendarContainer,"multiMonth",w.config.showMonths>1),w.calendarContainer.appendChild(e);var i=void 0!==w.config.appendTo&&void 0!==w.config.appendTo.nodeType;if((w.config.inline||w.config.static)&&(w.calendarContainer.classList.add(w.config.inline?"inline":"static"),w.config.inline&&(!i&&w.element.parentNode?w.element.parentNode.insertBefore(w.calendarContainer,w._input.nextSibling):void 0!==w.config.appendTo&&w.config.appendTo.appendChild(w.calendarContainer)),w.config.static)){var l=d("div","flatpickr-wrapper");w.element.parentNode&&w.element.parentNode.insertBefore(l,w.element),l.appendChild(w.element),w.altInput&&l.appendChild(w.altInput),l.appendChild(w.calendarContainer)}w.config.static||w.config.inline||(void 0!==w.config.appendTo?w.config.appendTo:window.document.body).appendChild(w.calendarContainer)}(),function(){w.config.wrap&&["open","close","toggle","clear"].forEach((function(e){Array.prototype.forEach.call(w.element.querySelectorAll("[data-"+e+"]"),(function(n){return P(n,"click",w[e])}))}));if(w.isMobile)return void function(){var e=w.config.enableTime?w.config.noCalendar?"time":"datetime-local":"date";w.mobileInput=d("input",w.input.className+" flatpickr-mobile"),w.mobileInput.tabIndex=1,w.mobileInput.type=e,w.mobileInput.disabled=w.input.disabled,w.mobileInput.required=w.input.required,w.mobileInput.placeholder=w.input.placeholder,w.mobileFormatStr="datetime-local"===e?"Y-m-d\\TH:i:S":"date"===e?"Y-m-d":"H:i:S",w.selectedDates.length>0&&(w.mobileInput.defaultValue=w.mobileInput.value=w.formatDate(w.selectedDates[0],w.mobileFormatStr));w.config.minDate&&(w.mobileInput.min=w.formatDate(w.config.minDate,"Y-m-d"));w.config.maxDate&&(w.mobileInput.max=w.formatDate(w.config.maxDate,"Y-m-d"));w.input.getAttribute("step")&&(w.mobileInput.step=String(w.input.getAttribute("step")));w.input.type="hidden",void 0!==w.altInput&&(w.altInput.type="hidden");try{w.input.parentNode&&w.input.parentNode.insertBefore(w.mobileInput,w.input.nextSibling)}catch(e){}P(w.mobileInput,"change",(function(e){w.setDate(g(e).value,!1,w.mobileFormatStr),De("onChange"),De("onClose")}))}();var e=l(re,50);w._debouncedChange=l(Y,300),w.daysContainer&&!/iPhone|iPad|iPod/i.test(navigator.userAgent)&&P(w.daysContainer,"mouseover",(function(e){"range"===w.config.mode&&oe(g(e))}));P(w._input,"keydown",ie),void 0!==w.calendarContainer&&P(w.calendarContainer,"keydown",ie);w.config.inline||w.config.static||P(window,"resize",e);void 0!==window.ontouchstart?P(window.document,"touchstart",X):P(window.document,"mousedown",X);P(window.document,"focus",X,{capture:!0}),!0===w.config.clickOpens&&(P(w._input,"focus",w.open),P(w._input,"click",w.open));void 0!==w.daysContainer&&(P(w.monthNav,"click",xe),P(w.monthNav,["keyup","increment"],N),P(w.daysContainer,"click",me));if(void 0!==w.timeContainer&&void 0!==w.minuteElement&&void 0!==w.hourElement){var n=function(e){return g(e).select()};P(w.timeContainer,["increment"],_),P(w.timeContainer,"blur",_,{capture:!0}),P(w.timeContainer,"click",H),P([w.hourElement,w.minuteElement],["focus","click"],n),void 0!==w.secondElement&&P(w.secondElement,"focus",(function(){return w.secondElement&&w.secondElement.select()})),void 0!==w.amPM&&P(w.amPM,"click",(function(e){_(e)}))}w.config.allowInput&&P(w._input,"blur",ae)}(),(w.selectedDates.length||w.config.noCalendar)&&(w.config.enableTime&&F(w.config.noCalendar?w.latestSelectedDateObj:void 0),ye(!1)),S();var n=/^((?!chrome|android).)*safari/i.test(navigator.userAgent);!w.isMobile&&n&&de(),De("onReady")}(),w}function T(e,n){for(var t=Array.prototype.slice.call(e).filter((function(e){return e instanceof HTMLElement})),a=[],i=0;i<t.length;i++){var o=t[i];try{if(null!==o.getAttribute("data-fp-omit"))continue;void 0!==o._flatpickr&&(o._flatpickr.destroy(),o._flatpickr=void 0),o._flatpickr=k(o,n||{}),a.push(o._flatpickr)}catch(e){console.error(e)}}return 1===a.length?a[0]:a}"undefined"!=typeof HTMLElement&&"undefined"!=typeof HTMLCollection&&"undefined"!=typeof NodeList&&(HTMLCollection.prototype.flatpickr=NodeList.prototype.flatpickr=function(e){return T(this,e)},HTMLElement.prototype.flatpickr=function(e){return T([this],e)});var I=function(e,n){return"string"==typeof e?T(window.document.querySelectorAll(e),n):e instanceof Node?T([e],n):T(e,n)};return I.defaultConfig={},I.l10ns={en:e({},i),default:e({},i)},I.localize=function(n){I.l10ns.default=e(e({},I.l10ns.default),n)},I.setDefaults=function(n){I.defaultConfig=e(e({},I.defaultConfig),n)},I.parseDate=C({}),I.formatDate=b({}),I.compareDates=M,"undefined"!=typeof jQuery&&void 0!==jQuery.fn&&(jQuery.fn.flatpickr=function(e){return T(this,e)}),Date.prototype.fp_incr=function(e){return new Date(this.getFullYear(),this.getMonth(),this.getDate()+("string"==typeof e?parseInt(e,10):e))},"undefined"!=typeof window&&(window.flatpickr=I),I}));
+const settingHour24 = {
+  enableTime: true,
+  noCalendar: true,
+  dateFormat: 'H:i:S',
+  static: true,
+}
+
+const settingDate = {
+  enableTime: false,
+  dateFormat: "Y-m-d",
+}
+var modalChangePasswordUser = $('#modal-change-of-password')
+var formChangePasswordUser = $('#form-change-password-user')
+var messageErrorUserPass = modalChangePasswordUser.find(
+  '.error-change-password',
+)
+
+$(document).ready(function () {
+  modalChangePasswordUser.find('.button-send-password').click(function () {
+    messageErrorUserPass.text('')
+    messageErrorUserPass.hide()
+    UtilModalLoader(modalChangePasswordUser)
+    SendFormUpdateChangePasswordUser.Send()
+  })
+  $('.button-modal-change-of-password').click(function (e) {
+    e.preventDefault()
+    modalChangePasswordUser.modal('show')
+    messageErrorUserPass.text('')
+    messageErrorUserPass.hide()
+    UtilFormClose(formChangePasswordUser)
+  })
+})
+
+let SendFormUpdateChangePasswordUser = new QueryAjax({
+  form: 'form-change-password-user',
+  action: 'ActionUpdateChangePasswordUser',
+})
+
+function ActionUpdateChangePasswordUser(status, data) {
+  if (!status) {
+    console.log(status)
+  } else if (data.status) {
+    notify(
+      false,
+      'Usuario Actualizado',
+      'La contraseña se actualizo correctamente.',
+      2,
+    )
+    UtilFormClose(formChangePasswordUser)
+  } else {
+    messageErrorUserPass.html(data.message)
+    messageErrorUserPass.show()
+  }
+  UtilModalLoader(modalChangePasswordUser, false)
+}
+
+/**
+ * Tool for creating image Blocks for Editor.js
+ * Made with «Creating a Block Tool» tutorial {@link https://editorjs.io/creating-a-block-tool}
+ *
+ * @typedef {object} ImageToolData — Input/Output data format for our Tool
+ * @property {string} url - image source URL
+ * @property {string} caption - image caption
+ * @property {boolean} withBorder - flag for adding a border
+ * @property {boolean} withBackground - flag for adding a background
+ * @property {boolean} stretched - flag for stretching image to the full width of content
+ *
+ * @typedef {object} ImageToolConfig
+ * @property {string} placeholder — custom placeholder for URL field
+ */
+class SimpleImage {
+  /**
+   * Our tool should be placed at the Toolbox, so describe an icon and title
+   */
+  static get toolbox() {
+    return {
+      title: 'Image',
+      icon:
+        '<svg width="17" height="15" viewBox="0 0 336 276" xmlns="http://www.w3.org/2000/svg"><path d="M291 150V79c0-19-15-34-34-34H79c-19 0-34 15-34 34v42l67-44 81 72 56-29 42 30zm0 52l-43-30-56 30-81-67-66 39v23c0 19 15 34 34 34h178c17 0 31-13 34-29zM79 0h178c44 0 79 35 79 79v118c0 44-35 79-79 79H79c-44 0-79-35-79-79V79C0 35 35 0 79 0z"/></svg>',
+    }
+  }
+
+  /**
+   * Allow render Image Blocks by pasting HTML tags, files and URLs
+   * @see {@link https://editorjs.io/paste-substitutions}
+   * @return {{tags: string[], files: {mimeTypes: string[], extensions: string[]}, patterns: {image: RegExp}}}
+   */
+  static get pasteConfig() {
+    return {
+      tags: ['IMG'],
+      files: {
+        mimeTypes: ['image/*'],
+        extensions: ['gif', 'jpg', 'png'], // You can specify extensions instead of mime-types
+      },
+      patterns: {
+        image: /https?:\/\/\S+\.(gif|jpe?g|tiff|png)$/i,
+      },
+    }
+  }
+
+  /**
+   * Automatic sanitize config
+   * @see {@link https://editorjs.io/sanitize-saved-data}
+   */
+  static get sanitize() {
+    return {
+      url: {},
+      caption: {
+        b: true,
+        a: {
+          href: true,
+        },
+        i: true,
+      },
+    }
+  }
+
+  /**
+   * Tool class constructor
+   * @param {ImageToolData} data — previously saved data
+   * @param {object} api — Editor.js Core API {@link  https://editorjs.io/api}
+   * @param {ImageToolConfig} config — custom config that we provide to our tool's user
+   */
+  constructor({ data, api, config }) {
+    this.api = api
+    this.config = config || {}
+    this.data = {
+      images: data.images || [],
+      withBorder: data.withBorder !== undefined ? data.withBorder : false,
+      withBackground:
+        data.withBackground !== undefined ? data.withBackground : false,
+      stretched: data.stretched !== undefined ? data.stretched : false,
+    }
+
+    this.wrapper = undefined
+    this.settings = [
+      {
+        name: 'withBorder',
+        icon: `<svg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M15.8 10.592v2.043h2.35v2.138H15.8v2.232h-2.25v-2.232h-2.4v-2.138h2.4v-2.28h2.25v.237h1.15-1.15zM1.9 8.455v-3.42c0-1.154.985-2.09 2.2-2.09h4.2v2.137H4.15v3.373H1.9zm0 2.137h2.25v3.325H8.3v2.138H4.1c-1.215 0-2.2-.936-2.2-2.09v-3.373zm15.05-2.137H14.7V5.082h-4.15V2.945h4.2c1.215 0 2.2.936 2.2 2.09v3.42z"/></svg>`,
+      },
+      {
+        name: 'stretched',
+        icon: `<svg width="17" height="10" viewBox="0 0 17 10" xmlns="http://www.w3.org/2000/svg"><path d="M13.568 5.925H4.056l1.703 1.703a1.125 1.125 0 0 1-1.59 1.591L.962 6.014A1.069 1.069 0 0 1 .588 4.26L4.38.469a1.069 1.069 0 0 1 1.512 1.511L4.084 3.787h9.606l-1.85-1.85a1.069 1.069 0 1 1 1.512-1.51l3.792 3.791a1.069 1.069 0 0 1-.475 1.788L13.514 9.16a1.125 1.125 0 0 1-1.59-1.591l1.644-1.644z"/></svg>`,
+      },
+      {
+        name: 'withBackground',
+        icon: `<svg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10.043 8.265l3.183-3.183h-2.924L4.75 10.636v2.923l4.15-4.15v2.351l-2.158 2.159H8.9v2.137H4.7c-1.215 0-2.2-.936-2.2-2.09v-8.93c0-1.154.985-2.09 2.2-2.09h10.663l.033-.033.034.034c1.178.04 2.12.96 2.12 2.089v3.23H15.3V5.359l-2.906 2.906h-2.35zM7.951 5.082H4.75v3.201l3.201-3.2zm5.099 7.078v3.04h4.15v-3.04h-4.15zm-1.1-2.137h6.35c.635 0 1.15.489 1.15 1.092v5.13c0 .603-.515 1.092-1.15 1.092h-6.35c-.635 0-1.15-.489-1.15-1.092v-5.13c0-.603.515-1.092 1.15-1.092z"/></svg>`,
+      },
+    ]
+  }
+
+  /**
+   * Return a Tool's UI
+   * @return {HTMLElement}
+   */
+  render() {
+    this.wrapper = document.createElement('div')
+    this.wrapper.classList.add('simple-image')
+
+    this._addModalFile()
+    this._addButtonModal()
+
+    if (this.data && this.data.images) {
+      this.dataS3 = this.data.images
+      this._createImages(this.dataS3)
+    }
+
+    this.editorFileS3 = new updloadS3(this.ModalFile.find('.div-files-class'), {
+      url: '/admin/files/items',
+      typeFile: 1,
+      id: 1,
+      reload: false,
+      limitFiles: 10,
+    })
+
+    var cont = this
+    this.editorFileS3.send.click(function () {
+      cont.dataS3 = cont._setDataImages(cont.editorFileS3.data)
+      cont._createImages(cont.dataS3)
+      cont._openModal(false)
+    })
+
+    if (!this.data.images.length) {
+      this._openModal()
+    }
+
+    return this.wrapper
+  }
+
+  /**
+   * @private
+   * Add modal with template file
+   */
+  _addModalFile() {
+    let modalNameClass = 'modal_file_' + Math.floor(Math.random() * 1000 + 1)
+    let modalTemplate = $($('#template-file-modal').html()).clone()
+    modalTemplate.attr('class', 'modal fade modal-table-gear ' + modalNameClass)
+    $('.modals-files').append(modalTemplate)
+    this.ModalFile = $('.' + modalNameClass)
+  }
+
+  /**
+   * @private
+   * Open modal file
+   */
+  _openModal(status = true) {
+    if (status) {
+      this.ModalFile.modal('show')
+      this.ModalFile.find('.overlay').hide()
+    } else {
+      this.ModalFile.modal('hide')
+      this.ModalFile.find('.overlay').hide()
+    }
+  }
+
+  /**
+   * @private
+   * Add button open modal
+   */
+  _addButtonModal() {
+    const button = document.createElement('button')
+    button.type = 'button'
+    button.innerText = 'Editar'
+
+    button.value = this.config.placeholder || 'Paste an image URL...'
+    button.addEventListener('click', (event) => {
+      this.editorFileS3.clear()
+      if (this.dataS3) {
+        this.editorFileS3.loadData(this.dataS3, 1)
+      }
+      this.editorFileS3.loading.hide()
+      this._openModal()
+    })
+
+    this.wrapper.appendChild(button)
+  }
+
+  /**
+   * @private
+   * Create image with caption field
+   * @param {array} images — image source
+   * @param {object} datacomplete
+   */
+  _createImages(images) {
+    this.wrapper.innerHTML = ''
+    this._addButtonModal()
+
+    const galery = images.length > 6 ? 'general' : images.length
+    const divImages = document.createElement('div')
+    divImages.className = 'gallery-' + galery
+    var i = 1
+
+    images.forEach((image) => {
+      const divImage = document.createElement('figure')
+      divImage.className = 'gallery__item  gallery__item--' + i
+
+      const imageElement = document.createElement('img')
+      imageElement.src = image.name_tmp_complete
+      imageElement.className = 'gallery__img'
+      divImage.appendChild(imageElement)
+
+      // const divDescription = document.createElement('div')
+      // divDescription.className = "description"
+      // divDescription.innerHTML = image.description
+      // divImage.appendChild(divDescription)
+
+      divImages.appendChild(divImage)
+      i++
+    })
+    this.wrapper.appendChild(divImages)
+
+    this._acceptTuneView()
+  }
+
+  /**
+   * Extract data from the UI
+   * @param {HTMLElement} blockContent — element returned by render method
+   * @return {SimpleImageData}
+   */
+  save(blockContent) {
+    return Object.assign(this.data, {
+      images: this.dataS3,
+    })
+  }
+
+  /**
+   * Set data images by save
+   * @param {array} dataS3
+   * @returns {array}
+   */
+  _setDataImages(dataS3) {
+    if (!dataS3 && !data.isArray()) {
+      return false
+    }
+
+    dataS3 = this._sortImages(dataS3)
+
+    let data = []
+    dataS3.forEach((element) => {
+      data.push({
+        author_id: element.author.id,
+        author_name: element.author.name,
+        description: element.description,
+        ext: element.ext,
+        id: element.id + Math.floor(Math.random() * 10000 + 1),
+        name: element.name,
+        name_tmp: element.name_tmp,
+        name_tmp_complete: element.name_tmp_complete,
+        order: element.order,
+      })
+    })
+
+    return data
+  }
+
+  /**
+   * sort images
+   * @param {array} images
+   * @returns
+   */
+  _sortImages(images) {
+    return images.sort(function (a, b) {
+      if (a.order > b.order) {
+        return 1
+      }
+      if (a.order < b.order) {
+        return -1
+      }
+      return 0
+    })
+  }
+
+  /**
+   * Skip empty blocks
+   * @see {@link https://editorjs.io/saved-data-validation}
+   * @param {ImageToolConfig} savedData
+   * @return {boolean}
+   */
+  validate(savedData) {
+    if (savedData.images.length == 0) {
+      return false
+    }
+    return true
+  }
+
+  /**
+   * Making a Block settings: 'add border', 'add background', 'stretch to full width'
+   * @see https://editorjs.io/making-a-block-settings — tutorial
+   * @see https://editorjs.io/tools-api#rendersettings - API method description
+   * @return {HTMLDivElement}
+   */
+  renderSettings() {
+    const wrapper = document.createElement('div')
+
+    this.settings.forEach((tune) => {
+      let button = document.createElement('div')
+
+      button.classList.add(this.api.styles.settingsButton)
+      button.classList.toggle(
+        this.api.styles.settingsButtonActive,
+        this.data[tune.name],
+      )
+      button.innerHTML = tune.icon
+      wrapper.appendChild(button)
+
+      button.addEventListener('click', () => {
+        this._toggleTune(tune.name)
+        button.classList.toggle(this.api.styles.settingsButtonActive)
+      })
+    })
+
+    return wrapper
+  }
+
+  /**
+   * @private
+   * Click on the Settings Button
+   * @param {string} tune — tune name from this.settings
+   */
+  _toggleTune(tune) {
+    this.data[tune] = !this.data[tune]
+    this._acceptTuneView()
+  }
+
+  /**
+   * Add specified class corresponds with activated tunes
+   * @private
+   */
+  _acceptTuneView() {
+    this.settings.forEach((tune) => {
+      this.wrapper.classList.toggle(tune.name, !!this.data[tune.name])
+
+      if (tune.name === 'stretched') {
+        this.api.blocks.stretchBlock(
+          this.api.blocks.getCurrentBlockIndex(),
+          !!this.data.stretched,
+        )
+      }
+    })
+  }
+}

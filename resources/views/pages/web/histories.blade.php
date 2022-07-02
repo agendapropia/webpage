@@ -5,5 +5,6 @@
 @include('layouts.web.histories.intro')
 @include('layouts.web.histories.report')
 @include('layouts.web.histories.hs-cocreation')
-
+@include('layouts.web.histories.cocreation')
+<x-web.section.hs-cocreation />
 @endsection
