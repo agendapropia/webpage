@@ -1,0 +1,51 @@
+.comost{
+    &-container-histories {
+      max-width: 1200px;
+    }
+    &-section-intro {
+    background-color: var(--clr-white);
+      display: flex;
+      align-items: flex-start;
+      flex-direction: column;
+      margin-left: 18%;
+      width: 63%;
+
+    }
+  }
+  
+  .wrapper-coc {
+    background-color: var(--clr-white);
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    img {
+      width: 300px;
+      height: auto;
+      object-fit: cover;
+    }
+    .text-most-read {
+      h3 {
+        font-size: 1.125rem;
+        font-family: var(--ff-title);
+      }
+      p {
+        display: none;
+        margin: 0;
+      }
+    }
+  
+    @include media-up(lg) {
+      img {
+        width: 300px;
+        height: auto;
+      }
+      .text-most-read {
+        p {
+            
+          display: block;
+        }
+      }
+    }
+  }
