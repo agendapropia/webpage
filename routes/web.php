@@ -21,6 +21,10 @@ Route::get('/', function () {
 Route::get('/historias', function () {
     return view('pages.web.histories');
 });
+
+Route::get('/articulo-interno', function () {
+    return view('pages.web.internal-article');
+});
 Auth::routes();
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/home', [

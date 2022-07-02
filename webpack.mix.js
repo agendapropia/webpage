@@ -25,6 +25,12 @@ mix
       'node_modules/flatpickr/dist/flatpickr.min.js',
       'resources/js/util/flatpickr.js',
       'resources/js/util/change-password-user.js',
+      'public/argon/vendor/jquery/dist/jquery.min.js',
+      'public/argon/vendor/jquery/dist/jquery.slim.min.js',
+      'public/argon/vendor/jquery/dist/jquery.core.js',
+      'public/argon/vendor/jquery/dist/jquery.min.js',
+      'public/argon/vendor/jquery/dist/jquery.slim.min.js',
+      'public/argon/vendor/jquery/dist/jquery.core.js',
     ],
     'public/js/plugins.all.js',
   )
