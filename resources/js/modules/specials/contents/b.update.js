@@ -37,7 +37,10 @@ function UpdateActionModal(status, result) {
     $('#editorjs').html()
     editorContent.destroy()
 
-    if (result.data.content.content) {
+    if (
+      result.data.content.content &&
+      result.data.content.content != 'undefined'
+    ) {
       editorContent = new EditorJS({
         holder: 'editorjs',
         tools: settingEditor,
