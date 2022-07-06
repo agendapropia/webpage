@@ -2,7 +2,7 @@
 
 	<article class="container-report">
 		<div class="content-reportage">
-			<x-web.badge-location type="Cocreación" country="Colombia" city="Bogotá" />
+			<x-web.badge-location type="Cocreación" country="Colombia" city="Bogotá" dark />
 			<h1>Ome, Pütchi, Poraû - Mujer, Palabra y Resistencia es finalista del Premio Gabo 2021</h1>
 			<br>
 			<p>Otro invierno más en medio del barro, el hacinamiento y el hambre en

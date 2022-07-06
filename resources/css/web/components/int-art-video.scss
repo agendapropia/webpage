@@ -1,0 +1,34 @@
+.video{
+    &-container-content {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    &-section-intro {
+      display: flex;
+      align-items: flex-start;
+      flex-direction: column;
+      padding: 1.5rem 2.3125rem 3.125rem 2.3125rem;
+      margin-left: 15%;
+      width: 75%;
+      margin-top: -50px;
+
+    }
+
+    .vjs-big-play-button {
+        width: 38px !important;
+        height: 38px !important;
+        border-radius: 80% !important;
+        background-color: transparent !important;
+        border: 3px solid var(--clr-yellow-200) !important;
+        top: 53% !important;
+        left: 56% !important;
+        line-height: 33px !important;
+      }
+      .splide-video .vjs-big-play-button .vjs-icon-placeholder {
+        color: var(--clr-yellow-200);
+      }
+      
+      .vjs-play-progress {
+        background: var(--clr-yellow-200) !important;
+      }
+  }

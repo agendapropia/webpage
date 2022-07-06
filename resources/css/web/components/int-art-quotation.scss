@@ -1,0 +1,59 @@
+.section-quotes {
+    display: grid;
+    grid-template: 1fr / 1fr 1fr;
+    grid-gap: 17px;
+    margin-bottom: 50px;
+
+    @include media-up(md) {
+      margin: 24px 0;
+      padding: 0 60px;
+    }
+    @include media-up(lg) {
+      grid-template: 1fr / 1fr 1fr;
+    }
+  
+
+  
+    .container-quotes {
+      width: 100%;
+      height: auto;
+    }
+
+  .quotes__title {
+    width: 80%;
+    padding: 44px 35px;
+    margin-left: 20%;
+    h2 {
+      font-family: var(--ff-title);
+      font-weight: bold;
+      font-size: 1.5625rem;
+      color: var(--clr-cyan-100);
+      margin: 0;
+    }
+  }
+  
+  .img-quotes{
+    width: 25%; 
+    height: auto;
+
+    @include media-up(md) {
+        width: 20%; 
+     
+      } 
+    }
+
+    .quotes__text {
+        width: 548px;
+        height: auto;        
+        font-family: var(--ff-text);
+        color: var(--clr-black);
+        margin-left: 23%;
+        margin-top: -20%;
+        
+        @include media-up(md) {
+            width: 350px;
+            height: auto;
+          } 
+      }
+
+}
