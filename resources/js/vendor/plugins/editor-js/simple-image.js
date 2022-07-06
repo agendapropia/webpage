@@ -281,6 +281,9 @@ class SimpleImage {
    * @return {boolean}
    */
   validate(savedData) {
+    if (savedData.images.length == 0) {
+      return false
+    }
     return true
   }
 
@@ -339,34 +342,4 @@ class SimpleImage {
       }
     })
   }
-
-  /**
-   * Handle paste event
-   * @see https://editorjs.io/tools-api#onpaste - API description
-   * @param {CustomEvent }event
-   */
-  // onPaste(event) {
-  //   switch (event.type) {
-  //     case 'tag':
-  //       const imgTag = event.detail.data
-  //       this._createImage(imgTag.src)
-  //       break
-  //     case 'file':
-  //       /* We need to read file here as base64 string */
-  //       const file = event.detail.file
-  //       const reader = new FileReader()
-
-  //       reader.onload = (loadEvent) => {
-  //         this._createImage(loadEvent.target.result)
-  //       }
-
-  //       reader.readAsDataURL(file)
-  //       break
-  //     case 'pattern':
-  //       const src = event.detail.data
-
-  //       this._createImage(src)
-  //       break
-  //   }
-  // }
 }

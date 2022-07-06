@@ -61,12 +61,17 @@ buttonSaveContent.addEventListener('click', function () {
       ActionSaveContent(outputData)
     })
     .catch((error) => {
-      notify(false, 'Saving failed:', error, 1)
+      notify(false, 'Error guardando el contenido:', error, 1)
       overlayContent.hide()
     })
 })
 
 function ActionSaveContent(data) {
+  if(!data){
+    notify(false, 'Error guardando el contenido:', error, 1)
+    return false
+  }
+
   let content = JSON.stringify(data)
   SaveContent.var.content = encodeURIComponent(content)
   SaveContent.Send()
