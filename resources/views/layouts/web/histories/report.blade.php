@@ -2,12 +2,14 @@
 
 	<article class="container-report">
 		<div class="content-reportage">
-			<x-web.badge-location type="Reportaje" country="Colombia" city="Bogotá" />
+		<a href="{{ URL::route('articulo-interno') }}" style="text-decoration:none">
+			<x-web.badge-location type="Reportaje" country="Colombia" city="Bogotá" dark />
 			<h1>Ome, Pütchi, Poraû - Mujer, Palabra y Resistencia es finalista del Premio Gabo 2021</h1>
 			<br>
 			<p>Otro invierno más en medio del barro, el hacinamiento y el hambre en
 				Ya han pasado 12 años desde que una comunidas indígenas
 			</p>
+		</a>
 		</div>
 	</article>
 

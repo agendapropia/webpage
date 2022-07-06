@@ -35,10 +35,10 @@
         font-family: var(--ff-text);
         color: var(--clr-white);
     }
-    hr{
-        color: var(--clr-orange);
-        width:10%;
-        
+    hr {
+      width: 50%;
+      border: 3px solid;
+      border-color: var(--clr-primary);
     }
     @include media-up(md) {
       align-items: center;

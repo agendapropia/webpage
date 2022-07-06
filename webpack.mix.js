@@ -14,7 +14,7 @@ const mix = require('laravel-mix')
 mix
   .js('resources/js/app.js', 'public/js')
   .sass('resources/sass/app.scss', 'public/css')
-  /** Plugins */
+  /** Plugins SOLO ADMIN */
   .scripts(
     [
       'resources/js/vendor/plugins/table-gear/table-gear-plugins.js',
@@ -83,4 +83,12 @@ mix
   )
 
   .sass('resources/css/web/global.scss', 'public/css/web/web-plugins.all.css')
-  .scripts(['resources/js/web/**/*.js'], 'public/js/web/all.js')
+  .scripts([
+    'resources/js/web/**/*.js',
+    'public/argon/vendor/jquery/dist/jquery.min.js',
+    'public/argon/vendor/jquery/dist/jquery.slim.min.js',
+    'public/argon/vendor/jquery/dist/jquery.core.js',
+    'public/argon/vendor/jquery/dist/jquery.min.js',
+    'public/argon/vendor/jquery/dist/jquery.slim.min.js',
+    'public/argon/vendor/jquery/dist/jquery.core.js'
+  ], 'public/js/web/all.js')

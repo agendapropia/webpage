@@ -28,6 +28,7 @@
         "webpack": "^5.36.0"
     },
     "dependencies": {
+        "@glidejs/glide": "^3.5.2",
         "flatpickr": "^4.6.11"
     }
 }
