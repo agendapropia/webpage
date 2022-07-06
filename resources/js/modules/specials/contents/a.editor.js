@@ -1,7 +1,7 @@
 const settingEditor = {
   image: {
     class: SimpleImage,
-    inlineToolbar: true,
+    inlineToolbar: false,
     config: {
       placeholder: 'Ingresar la url',
     },
@@ -10,6 +10,9 @@ const settingEditor = {
   paragraph: {
     class: Paragraph,
     inlineToolbar: true,
+    config: {
+      placeholder: "Haga click en el (+) para agregar un texto, imágenes o recursos multimedia."
+    }
   },
   Marker: {
     class: Marker,

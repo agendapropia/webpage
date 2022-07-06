@@ -1,1 +1,83 @@
-let div=$("#tablePermissions"),route="/admin/accounts/permissions/list",structure=[" ","Nombre","Description","Módulo","guard_name"];var permissionTable=new tableGear(div,route,structure);permissionTable.filter.modules="",permissionTable.refresh(!0);let modalCreatePermissions=$("#modal-create-permissions"),formCreatePermissions=$("form[name=form-create-permissions]");function CreatePermissions(){permissionTable.ModalClearForm(formCreatePermissions),getDataPermission.action="setDataModalCreatePermission",getDataPermission.Send()}let getDataPermission=new QueryAjax({url:"/admin/accounts/permissions/create",method:"GET",listTable:permissionTable});function setDataModalCreatePermission(e,s){if(e){let e=modalCreatePermissions.find("select[name=module_id]");permissionTable.LoadSelect(e,s.data.modules)}}let SendCreatePermission=new QueryAjax({form:"form-create-permissions",action:"PermissionCreateAction",listTable:permissionTable});function PermissionCreateAction(e,s){e&&(notify(!1,"Permiso creado","Role creado exitosamente.",2),SendCreatePermission.FormClose(),permissionTable.refresh())}let modalUpdatePermissions=$("#modal-update-permissions"),formUpdatePermissions=$("form[name=form-update-permissions]");function UpdatePermissions(e){getDataPermission.action="setDataModalCreateUpdatePermission",getDataPermission.Send()}function setDataModalCreateUpdatePermission(e,s){if(e){permissionTable.ModalClearForm(formUpdatePermissions);let e=modalUpdatePermissions.find("select[name=module_id]");LoadFormInputs(modalUpdatePermissions,permissionTable.dataSelect),permissionTable.LoadSelect(e,s.data.modules,permissionTable.dataSelect.module_id),formUpdatePermissions.find("input[name=id]").val(permissionTable.dataSelect.id)}}let SendPermissionsUpdate=new QueryAjax({form:"form-update-permissions",action:"PermissionUpdateAction",listTable:permissionTable});function PermissionUpdateAction(e,s){e&&(notify(!1,"Permiso Actualizado","Operación realizada exitosamente",2),SendPermissionsUpdate.FormClose(),permissionTable.refresh())}
+let div = $('#tablePermissions')
+let route = '/admin/accounts/permissions/list'
+let structure = [' ', 'Nombre', 'Description', 'Módulo', 'guard_name']
+
+var permissionTable = new tableGear(div, route, structure)
+permissionTable.filter.modules = ''
+permissionTable.refresh(true)
+
+// create permission
+let modalCreatePermissions = $('#modal-create-permissions')
+let formCreatePermissions = $('form[name=form-create-permissions]')
+
+function CreatePermissions() {
+  permissionTable.ModalClearForm(formCreatePermissions)
+  getDataPermission.action = 'setDataModalCreatePermission'
+  getDataPermission.Send()
+}
+
+// load data modal create
+let getDataPermission = new QueryAjax({
+  url: '/admin/accounts/permissions/create',
+  method: 'GET',
+  listTable: permissionTable,
+})
+function setDataModalCreatePermission(status, result) {
+  if (status) {
+    let select = modalCreatePermissions.find('select[name=module_id]')
+    permissionTable.LoadSelect(select, result.data.modules)
+  }
+}
+
+// send data modal create
+let SendCreatePermission = new QueryAjax({
+  form: 'form-create-permissions',
+  action: 'PermissionCreateAction',
+  listTable: permissionTable,
+})
+function PermissionCreateAction(status, data) {
+  if (status) {
+    notify(false, 'Permiso creado', 'Role creado exitosamente.', 2)
+    SendCreatePermission.FormClose()
+    permissionTable.refresh()
+  }
+}
+
+// update permissions
+let modalUpdatePermissions = $('#modal-update-permissions')
+let formUpdatePermissions = $('form[name=form-update-permissions]')
+
+//Funtion Modal Update
+function UpdatePermissions(data) {
+  getDataPermission.action = 'setDataModalCreateUpdatePermission'
+  getDataPermission.Send()
+}
+function setDataModalCreateUpdatePermission(status, result) {
+  if (status) {
+    permissionTable.ModalClearForm(formUpdatePermissions)
+    let select = modalUpdatePermissions.find('select[name=module_id]')
+    LoadFormInputs(modalUpdatePermissions, permissionTable.dataSelect)
+    permissionTable.LoadSelect(
+      select,
+      result.data.modules,
+      permissionTable.dataSelect.module_id,
+    )
+    formUpdatePermissions
+      .find('input[name=id]')
+      .val(permissionTable.dataSelect.id)
+  }
+}
+
+//Send Update Data Modal
+let SendPermissionsUpdate = new QueryAjax({
+  form: 'form-update-permissions',
+  action: 'PermissionUpdateAction',
+  listTable: permissionTable,
+})
+function PermissionUpdateAction(status, data) {
+  if (status) {
+    notify(false, 'Permiso Actualizado', 'Operación realizada exitosamente', 2)
+    SendPermissionsUpdate.FormClose()
+    permissionTable.refresh()
+  }
+}
