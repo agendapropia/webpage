@@ -26,4 +26,4 @@
     <a><p>Compartir &#x27A6;</p></a>
   
 </section>
-<hr>
+<hr style="padding: 0 5%;">

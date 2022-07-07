@@ -8,7 +8,7 @@
 		</a>
 	</div>
 </section>
-<section class="grid-most">
+<section class="st">
 	<x-web.section.most-read  />
 	<x-web.section.most-read  />
 	<x-web.section.most-read  />
