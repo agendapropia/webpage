@@ -1,5 +1,7 @@
 let divUpdate = $('#div-update-main')
 let formUpdateMain = $('form[name=form-update-main]')
+let buttonUpdateDetails = divUpdate.find('.special-btn-details')
+let divUpdateDetails = divUpdate.find('.special-div-details')
 
 let selectLanguage = divUpdate.find('select[name=language_id]')
 let overlayContent = divUpdate.find('.overlay')
@@ -33,6 +35,9 @@ function UpdateActionModal(status, result) {
   if (status && result.status) {
     UtilFormClose(formUpdateMain)
     LoadFormInputs(divUpdate, result.data.content)
+    formUpdateMain
+      .find('select[name=status_id]')
+      .val(result.data.content.status_id)
 
     $('#editorjs').html()
     editorContent.destroy()
@@ -56,26 +61,27 @@ function UpdateActionModal(status, result) {
   overlayContent.hide()
 }
 
-// //Send Update Data Modal
-// let ActionMainUpdateSend = new QueryAjax({
-//   form: 'form-update-main',
-//   action: 'FunctionActionUpdateMain',
-// })
-// function FunctionActionUpdateMain(status) {
-//   if (status) {
-//     notify(
-//       false,
-//       'Medio Aliado Actualizado',
-//       'Operación realizada exitosamente',
-//       2,
-//     )
-//     ActionMainUpdateSend.FormClose()
-//     TableMain.refresh()
-//   }
-// }
-
 selectLanguage.change(function () {
   ActionMainUpdate()
+})
+
+buttonUpdateDetails.click(() => {
+  let status = $(this).attr('data-status')
+  if (!status) {
+    $(this).attr('data-status', true)
+    divUpdateDetails.removeClass('hide')
+
+    buttonUpdateDetails.addClass('button-detail-disabled')
+    buttonUpdateDetails.find('.fa').removeClass('fa-level-down')
+    buttonUpdateDetails.find('.fa').addClass('fa-level-up')
+  } else {
+    $(this).attr('data-status', false)
+    divUpdateDetails.addClass('hide')
+    buttonUpdateDetails.removeClass('button-detail-disabled')
+
+    buttonUpdateDetails.find('.fa').addClass('fa-level-down')
+    buttonUpdateDetails.find('.fa').removeClass('fa-level-up')
+  }
 })
 
 ActionMainUpdate()

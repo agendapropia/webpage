@@ -1,12 +1,18 @@
 const settingEditor = {
   image: {
     class: SimpleImage,
-    inlineToolbar: true,
+    inlineToolbar: false,
     config: {
       placeholder: 'Ingresar la url',
     },
   },
-  table: Table,
+  summary: {
+    class: SummaryTop,
+    inlineToolbar: false,
+    config: {
+      placeholder: 'Ingresar la url',
+    },
+  },
   paragraph: {
     class: Paragraph,
     inlineToolbar: true,
@@ -19,7 +25,6 @@ const settingEditor = {
     class: Header,
     shortcut: 'CMD+SHIFT+H',
   },
-  raw: RawTool,
   checklist: {
     class: Checklist,
     inlineToolbar: true,
@@ -67,13 +72,19 @@ buttonSaveContent.addEventListener('click', function () {
 })
 
 function ActionSaveContent(data) {
-  if(!data){
+  if (!data) {
     notify(false, 'Error guardando el contenido:', error, 1)
     return false
   }
 
   let content = JSON.stringify(data)
   SaveContent.var.content = encodeURIComponent(content)
+  SaveContent.var.title = formUpdateMain.find('input[name=title]').val()
+  SaveContent.var.subtitle = formUpdateMain.find('input[name=subtitle]').val()
+  SaveContent.var.summary = formUpdateMain.find('textarea[name=summary]').val()
+  SaveContent.var.status_id = formUpdateMain
+    .find('select[name=status_id]')
+    .val()
   SaveContent.Send()
 }
 

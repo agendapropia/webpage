@@ -12,6 +12,14 @@
             placeholder="Subtitulo"
             fieldWidth>
         </x-admin.forms.form-input-text>
+        <x-admin.forms.form-input-select 
+            label="Estado" 
+            name="status_id" 
+            required="true"
+            description="Estado del contenido." fieldWidth>
+            <option value="1">Publicado</option>
+            <option value="2">Editando</option>
+        </x-admin.forms.form-input-select>
     </div>
     <div class="col-md-7">
         <x-admin.forms.form-input-textarea 
