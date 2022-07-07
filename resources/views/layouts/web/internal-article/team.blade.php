@@ -1,9 +1,12 @@
 <section class="ia-section-intro">
     <x-web.badge-location country="Colombia" city="Bogotá" dark />
-	<h1>Caminos por la pachamama ¡Comunidades andinas en reexistencia!</h1>
+	<h2>Caminos por la pachamama ¡Comunidades andinas en reexistencia!</h2>
    
 </section>
-
+<div class="comp">
+    <p>Feb,18 2022 </p>
+    <a><p>Compartir &#x27A6;</p></a>
+</div>
 <section class="section-team">
     <p class='number'>+10</p> 
     <div class="container-image">
@@ -19,11 +22,12 @@
 			alt="" />
     </div>
     <div>
-    <h4 class="team-work">Equipo de trabajo</h4>
+    <p class="team-work">Equipo de trabajo</p>
     <a href="{{ URL::route('integrantes') }}" style="text-decoration:none"><p>Conoce a todos los integrantes de este proyecto > </p></a>
     </div>
+    <div class="fecha">
     <p>Feb,18 2022 </p>
     <a><p>Compartir &#x27A6;</p></a>
-  
+    </div>
 </section>
 <hr style="padding: 0 5%;">

@@ -57,6 +57,17 @@ const handleScrollHeader = () => {
 }
 
 window.addEventListener('scroll', handleScrollHeader);
+
+/**
+ * line-menu.
+ */
+var activePage = window.location.pathname;
+var navLink = document.querySelectorAll('nav a').forEach(link => {
+	if(link.href.includes(`${activePage}`)){
+		console.log(`${activePage}`)
+		link.classList.add('active');
+	}
+})
 const MAX_SCROLL_HEIGHT_SOCIAL_MEDIA = 432;
 const SCREEN_MD = 768;
 

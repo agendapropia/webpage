@@ -1,5 +1,5 @@
 @import '../base/mixins.scss';
-    .image-grid {
+  .image-grid {
         --gap: 16px;
         --num-cols: 4;
         --row-height: auto;
@@ -9,10 +9,14 @@
     padding: var(--gap);
   
     display: grid;
+    grid-template: 1fr;
+    margin-bottom: 7%;
+    @include media-up(md) {
     grid-template-columns: repeat(var(--num-cols), 1fr);
     grid-auto-rows: var(--row-height);
     gap: var(--gap);
-    margin-bottom: 7%;
+    
+    }
   }
   
   .image-grid > img {

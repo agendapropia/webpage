@@ -1,13 +1,14 @@
 @import '../base/mixins.scss';
 
 .section-weaving {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 50px;
-    background-color: var(--clr-white);
+  display: none;
     
     @include media-up(md) {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 50px;
+      background-color: var(--clr-white);
       margin: 24px 0;
       padding: 0 60px 100px;
     }
@@ -43,7 +44,7 @@
     }
   }
   .weaving-imgs-logo{
-    width: 100%;
+    width: 65%;
     height: auto;
 
     .img-logo{
@@ -66,17 +67,18 @@
 }
 
 .section-weaving-icons {
-    display: grid;
-    grid-template-columns: 1fr/1fr 1fr 1fr 1fr 1fr;
-    gap: 1rem;
-    margin-bottom: 1rem;
-    margin-top: 150px;
-  
+    
+  display: none;  
     
     @include media-up(md) {
-      grid-template: 1fr/1fr 1fr 1fr 1fr 1fr;
-      margin: 24px 0;
-      padding: 0 20px 50px;
+      display: grid;
+      grid-template-columns: 1fr/1fr 1fr 1fr 1fr 1fr;
+      gap: 1rem;
+      margin-bottom: 1rem;
+      margin-top: 150px;
+      margin: 16px 90px;
+      padding: 0 40px 50px;
+      width:90%;
     }
     @include media-up(lg) {
       grid-template: 1fr/1fr 1fr 1fr 1fr 1fr;

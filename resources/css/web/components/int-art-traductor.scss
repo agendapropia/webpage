@@ -16,11 +16,31 @@
         color: var(--clr-cyan-100);
         font-weight: bold;
       }
+      select {
+        background: var(--clr-primary);
+        color: var(--white);
+        border: 0;
+        border-radius: 1.875rem;
+        padding: 0.5rem 0 0.5rem 0.625rem;
+        font-family: var(--ff-text);
+        font-weight: 400;
+        font-size: 0.8125rem;
+        align-self: center;
+        margin-top: 34px;
+        margin-left: -78%;
+        @include media-up(md) {
+          display: none;
+        }
+      }
       .buttons{
         margin-left:auto;
         margin-top:-45px;
       }
       .web-button {
+        display: none;
+  
+        @include media-up(md) {
+        display: initial;
         background-color: var(--clr-primary);
         border-radius: 20px;
         border: 0;
@@ -31,7 +51,11 @@
         outline: 0;
         text-transform: uppercase;
         font-weight: 500;
-        width: 171px;
+        width: 112px;
+        margin: 0px 50px 0 0;
+          
+        }
+        
       }
       .web-button:disabled {
         color: var(--clr-grey-100);
