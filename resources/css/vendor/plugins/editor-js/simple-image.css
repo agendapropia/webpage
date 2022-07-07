@@ -1,5 +1,6 @@
 .simple-image {
   padding: 10px 0;
+  padding-top: 0px;
 }
 
 .simple-image .images {
@@ -8,19 +9,28 @@
 
 .simple-image button {
   position: absolute;
-  right: 10px;
-  border: 1px solid #b6b6b6;
-  border-radius: 3px;
+  right: 4px;
+  top: 4px;
   font-size: 0.875rem;
   transition: all 0.15s ease;
   letter-spacing: 0.025em;
   text-transform: none;
   will-change: transform;
-  color: #fff;
-  border-color: #017286;
-  background-color: #017286;
+  color: #646464;
+  background-color: #ffffff;
   box-shadow: 0 4px 6px rgb(50 50 93 / 11%), 0 1px 3px rgb(0 0 0 / 8%);
-  padding: 2px 9px;
+  padding: 3px 10px;
+  border: 1px solid rgba(201, 201, 204, 0.48);
+  border-radius: 5px;
+  -webkit-box-align: center;
+  cursor: pointer;
+}
+.simple-image button:hover {
+  background-color: #fafafa;
+}
+
+.simple-image button i {
+  font-style: normal;
 }
 
 .simple-image.withBorder img {

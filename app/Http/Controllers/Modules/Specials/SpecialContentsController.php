@@ -79,7 +79,7 @@ class SpecialContentsController extends Controller
         $content = SpecialContent::where('special_id', $special->id)
             ->where('language_id', $request->_language_id)
             ->first();
-        if(!$content){
+        if (!$content) {
             return $this->responseJson(false, 'update information', []);
         }
 
@@ -99,6 +99,10 @@ class SpecialContentsController extends Controller
         $request->validate([
             '_language_id' => 'integer|required',
             '_content' => 'string|nullable',
+            '_title' => 'string|nullable',
+            '_subtitle' => 'string|nullable',
+            '_summary' => 'string|nullable',
+            '_status_id' => 'required|integer',
         ]);
 
         $special = Special::where('slug', $slug)->first();
@@ -114,6 +118,10 @@ class SpecialContentsController extends Controller
         }
 
         $content->content = $request->_content;
+        $content->title = $request->_title;
+        $content->subtitle = $request->_subtitle;
+        $content->summary = $request->_summary;
+        $content->status_id = $request->_status_id;
         $content->save();
 
         return $this->responseJson(true, 'special content update');

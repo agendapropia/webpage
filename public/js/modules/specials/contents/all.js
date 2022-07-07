@@ -1,12 +1,18 @@
 const settingEditor = {
   image: {
     class: SimpleImage,
-    inlineToolbar: true,
+    inlineToolbar: false,
     config: {
       placeholder: 'Ingresar la url',
     },
   },
-  table: Table,
+  summary: {
+    class: SummaryTop,
+    inlineToolbar: false,
+    config: {
+      placeholder: 'Ingresar la url',
+    },
+  },
   paragraph: {
     class: Paragraph,
     inlineToolbar: true,
@@ -19,7 +25,6 @@ const settingEditor = {
     class: Header,
     shortcut: 'CMD+SHIFT+H',
   },
-  raw: RawTool,
   checklist: {
     class: Checklist,
     inlineToolbar: true,
@@ -67,13 +72,19 @@ buttonSaveContent.addEventListener('click', function () {
 })
 
 function ActionSaveContent(data) {
-  if(!data){
+  if (!data) {
     notify(false, 'Error guardando el contenido:', error, 1)
     return false
   }
 
   let content = JSON.stringify(data)
   SaveContent.var.content = encodeURIComponent(content)
+  SaveContent.var.title = formUpdateMain.find('input[name=title]').val()
+  SaveContent.var.subtitle = formUpdateMain.find('input[name=subtitle]').val()
+  SaveContent.var.summary = formUpdateMain.find('textarea[name=summary]').val()
+  SaveContent.var.status_id = formUpdateMain
+    .find('select[name=status_id]')
+    .val()
   SaveContent.Send()
 }
 
@@ -91,6 +102,8 @@ function AfterSaveContent(status) {
 
 let divUpdate = $('#div-update-main')
 let formUpdateMain = $('form[name=form-update-main]')
+let buttonUpdateDetails = divUpdate.find('.special-btn-details')
+let divUpdateDetails = divUpdate.find('.special-div-details')
 
 let selectLanguage = divUpdate.find('select[name=language_id]')
 let overlayContent = divUpdate.find('.overlay')
@@ -124,6 +137,9 @@ function UpdateActionModal(status, result) {
   if (status && result.status) {
     UtilFormClose(formUpdateMain)
     LoadFormInputs(divUpdate, result.data.content)
+    formUpdateMain
+      .find('select[name=status_id]')
+      .val(result.data.content.status_id)
 
     $('#editorjs').html()
     editorContent.destroy()
@@ -147,26 +163,27 @@ function UpdateActionModal(status, result) {
   overlayContent.hide()
 }
 
-// //Send Update Data Modal
-// let ActionMainUpdateSend = new QueryAjax({
-//   form: 'form-update-main',
-//   action: 'FunctionActionUpdateMain',
-// })
-// function FunctionActionUpdateMain(status) {
-//   if (status) {
-//     notify(
-//       false,
-//       'Medio Aliado Actualizado',
-//       'Operación realizada exitosamente',
-//       2,
-//     )
-//     ActionMainUpdateSend.FormClose()
-//     TableMain.refresh()
-//   }
-// }
-
 selectLanguage.change(function () {
   ActionMainUpdate()
+})
+
+buttonUpdateDetails.click(() => {
+  let status = $(this).attr('data-status')
+  if (!status) {
+    $(this).attr('data-status', true)
+    divUpdateDetails.removeClass('hide')
+
+    buttonUpdateDetails.addClass('button-detail-disabled')
+    buttonUpdateDetails.find('.fa').removeClass('fa-level-down')
+    buttonUpdateDetails.find('.fa').addClass('fa-level-up')
+  } else {
+    $(this).attr('data-status', false)
+    divUpdateDetails.addClass('hide')
+    buttonUpdateDetails.removeClass('button-detail-disabled')
+
+    buttonUpdateDetails.find('.fa').addClass('fa-level-down')
+    buttonUpdateDetails.find('.fa').removeClass('fa-level-up')
+  }
 })
 
 ActionMainUpdate()
