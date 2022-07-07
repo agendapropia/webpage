@@ -3,7 +3,7 @@
 <x-web.menu.navbar />
 
 @section('content')
-    <x-web.section.home-co-front-page />
+    <x-web.section.int-co-front-page />
     @include('layouts.web.cocreation-internal.team')
     @include('layouts.web.cocreation-internal.traductor')
     @include('layouts.web.cocreation-internal.content-header')

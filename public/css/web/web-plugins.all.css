@@ -3632,6 +3632,92 @@ hr {
   }
 }
 
+.int-img-sup {
+  width: 100%;
+  display: block;
+  margin-bottom: -5%;
+}
+
+.int-img-sup img {
+  width: 100%;
+  height: auto;
+}
+
+.grid-description {
+  display: grid;
+  grid-template: 1fr/1fr;
+  grid-gap: 17px;
+  margin-bottom: 50px;
+  margin-top: 50px;
+}
+
+@media (min-width: 768px) {
+  .grid-description {
+    padding: 0 60px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .grid-description {
+    grid-template: 1fr/1fr 1fr;
+  }
+}
+
+.grid-description .text-description {
+  font-family: var(--ff-text);
+  color: var(--clr-grey-500);
+  font-size: 12px;
+  margin-top: -40px;
+}
+
+.grid-description .container-camera {
+  width: 3%;
+  height: auto;
+  margin-top: -40px;
+  margin-left: 50%;
+}
+
+.grid-description .text-photographer {
+  font-family: var(--ff-text);
+  color: var(--clr-grey-500);
+  font-size: 12px;
+  margin-top: -40px;
+  padding: 0 38px;
+  margin-left: 50%;
+}
+
+.chr {
+  width: 100%;
+}
+
+.container {
+  width: 26rem;
+  margin: 3em auto 0;
+}
+
+.menu-option {
+  margin-bottom: 0.5em;
+  padding: 1em;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.menu-option img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+
+.next {
+  font-size: 2em;
+}
+
+.prev {
+  font-size: 2em;
+  opacity: 0.5px;
+}
+
 /*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */
 
 /* Document
