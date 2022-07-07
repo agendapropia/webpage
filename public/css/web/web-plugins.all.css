@@ -2297,10 +2297,14 @@ i.fa.fa-quote-left {
 hr {
   width: 80%;
 <<<<<<< HEAD
+<<<<<<< HEAD
   margin-left: 14%;
 =======
   margin: 1rem 10%;
 >>>>>>> 236aac9 (internal article and members were added. Routes were added to the menu)
+=======
+  margin-left: 14%;
+>>>>>>> ae38203 (The home co-creation was created)
 }
 
 .trad-container-traductor {
@@ -3165,6 +3169,9 @@ hr {
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> ae38203 (The home co-creation was created)
 .coc-img-sup {
   width: 100%;
   display: block;
@@ -3447,7 +3454,11 @@ hr {
   width: 63%;
 }
 
+<<<<<<< HEAD
 .wrapper-coc {
+=======
+.wrapper-most-read {
+>>>>>>> ae38203 (The home co-creation was created)
   background-color: var(--clr-white);
   width: 100%;
   height: auto;
@@ -3456,30 +3467,50 @@ hr {
   align-items: center;
 }
 
+<<<<<<< HEAD
 .wrapper-coc img {
+=======
+.wrapper-most-read img {
+>>>>>>> ae38203 (The home co-creation was created)
   width: 300px;
   height: auto;
   -o-object-fit: cover;
      object-fit: cover;
 }
 
+<<<<<<< HEAD
 .wrapper-coc .text-most-read h3 {
+=======
+.wrapper-most-read .text-most-read h3 {
+>>>>>>> ae38203 (The home co-creation was created)
   font-size: 1.125rem;
   font-family: var(--ff-title);
 }
 
+<<<<<<< HEAD
 .wrapper-coc .text-most-read p {
+=======
+.wrapper-most-read .text-most-read p {
+>>>>>>> ae38203 (The home co-creation was created)
   display: none;
   margin: 0;
 }
 
 @media (min-width: 1024px) {
+<<<<<<< HEAD
   .wrapper-coc img {
+=======
+  .wrapper-most-read img {
+>>>>>>> ae38203 (The home co-creation was created)
     width: 300px;
     height: auto;
   }
 
+<<<<<<< HEAD
   .wrapper-coc .text-most-read p {
+=======
+  .wrapper-most-read .text-most-read p {
+>>>>>>> ae38203 (The home co-creation was created)
     display: block;
   }
 }
@@ -3637,8 +3668,11 @@ hr {
   }
 }
 
+<<<<<<< HEAD
 =======
 >>>>>>> 236aac9 (internal article and members were added. Routes were added to the menu)
+=======
+>>>>>>> ae38203 (The home co-creation was created)
 /*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */
 
 /* Document
