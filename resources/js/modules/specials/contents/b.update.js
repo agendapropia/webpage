@@ -39,8 +39,8 @@ function UpdateActionModal(status, result) {
       .find('select[name=status_id]')
       .val(result.data.content.status_id)
 
-    $('#editorjs').html()
     editorContent.destroy()
+    $('#editorjs').html()
 
     if (
       result.data.content.content &&
