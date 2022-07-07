@@ -30,6 +30,10 @@ Route::get('/integrantes', function () {
     return view('pages.web.team-work');
 })->name('integrantes');
 
+Route::get('/home-cocreacion', function () {
+    return view('pages.web.home-cocreation');
+})->name('home-cocreacion');
+
 Auth::routes();
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/home', [

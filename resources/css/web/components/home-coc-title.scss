@@ -1,0 +1,26 @@
+@import '../base/_mixins.scss';
+.tit{
+    &-container-content {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    &-section-intro {
+      display: flex;
+      align-items: flex-start;
+      flex-direction: column;
+      padding: 1.5rem 2.3125rem 3.125rem 2.3125rem;
+      margin-left: 15%;
+      width: 75%;
+      margin-top: -50px;
+
+      h2{
+        font-family: var(--ff-title);
+        color: #2e2020;
+      }
+      p{
+        font-family: var(--ff-text);
+        color: var(--clr-black);
+
+      }
+    }
+  }
