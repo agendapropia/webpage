@@ -108,10 +108,10 @@ let divUpdateDetails = divUpdate.find('.special-div-details')
 let selectLanguage = divUpdate.find('select[name=language_id]')
 let overlayContent = divUpdate.find('.overlay')
 
-var editorContent = new EditorJS({
-  holder: 'editorjs',
-  tools: settingEditor,
-})
+// var editorContent = new EditorJS({
+//   holder: 'editorjs',
+//   tools: settingEditor,
+// })
 
 //Funtion Modal Update
 function ActionMainUpdate() {
@@ -141,8 +141,7 @@ function UpdateActionModal(status, result) {
       .find('select[name=status_id]')
       .val(result.data.content.status_id)
 
-    editorContent.destroy()
-    $('#editorjs').html()
+    $('#editorjs').html('')
 
     if (
       result.data.content.content &&
