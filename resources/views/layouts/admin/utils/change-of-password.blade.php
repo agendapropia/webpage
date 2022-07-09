@@ -11,6 +11,7 @@
             <x-admin.forms.form-input-password name="password_confirmation" label="Repetir contraseña nueva" classDiv="display-inline-block"></x-admin.forms.form-input-text>
         </div>
     </x-admin.forms.form>
+
     <x.slot name="footer">
         <x-admin.forms.form-button-primary data-dismiss="modal" buttonClass="button-send-password" text="Actualizar constraseña"></x-admin.forms.form-button-to-accept>
     </x.slot>

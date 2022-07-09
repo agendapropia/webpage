@@ -200,6 +200,10 @@
   }
 }
 
+.div-inline-block {
+  display: inline-block;
+}
+
 .flatpickr-calendar {
   background: transparent;
   opacity: 0;
