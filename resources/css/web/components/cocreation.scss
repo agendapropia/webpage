@@ -1,16 +1,17 @@
 @import '../base/mixins.scss';
 .section-cocreation {
-    display: grid;
-    grid-template-columns: 1fr/1fr 1fr 1fr 1fr;
-    gap: 1rem;
-    margin-bottom: 1rem;
-    margin-top: 150px;
+    display:none;
   
     
     @include media-up(md) {
-      grid-template: 1fr/1fr 1fr 1fr 1fr;
-      margin: 24px 0;
+      display: grid;
+      grid-template-columns: 1fr/1fr 1fr 1fr 1fr;
+      gap: 1rem;
+      margin-bottom: 2rem;
+      margin-top: 30px;
+      margin-left: 10%;
       padding: 0 20px 50px;
+      width: 85%;
     }
     @include media-up(lg) {
       grid-template: 1fr/1fr 1fr 1fr 1fr;
@@ -70,11 +71,15 @@
 }
 
 .cocreation__title {
+  display:none;
+  
+    
+  @include media-up(md) {
     width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 44px 35px;
+    padding: 44px 66px;
     h2 {
       font-family: var(--ff-title);
       font-weight: bold;
@@ -82,9 +87,9 @@
       color: var(--clr-cyan-100);
       margin: 0;
     }
-
+  }
     @include media-up(lg) {
 
-      padding: 30;
+      padding: 44px 66px;
     }
   }

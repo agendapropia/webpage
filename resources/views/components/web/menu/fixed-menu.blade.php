@@ -9,24 +9,32 @@
 			<span></span>
 		</button>
 		<div class="navbar__menu">
-			<ul>
+		<ul>
 				<x-web.menu.item>
-					Inicio
+				<a href="{{ URL::route('/') }}"  class="current" style="text-decoration:none">
+					Inicio</a>
 				</x-web.menu.item>
 				<x-web.menu.item>
-					Nosotros
+				<a href="{{ URL::route('historias') }}" style="text-decoration:none">
+					Historias</a>
 				</x-web.menu.item>
 				<x-web.menu.item>
-					Historias
+				<a style="text-decoration:none">
+					Mochilla de saberes</a>
 				</x-web.menu.item>
 				<x-web.menu.item>
-					Mochilla de saberes
+				<a style="text-decoration:none">
+					Red tejiendo historias</a>
 				</x-web.menu.item>
 				<x-web.menu.item>
-					Red tejiendo historias
+				<a style="text-decoration:none">
+					Oportunidades</a>
 				</x-web.menu.item>
 				<x-web.menu.item>
 					Contactenos
+				</x-web.menu.item>
+				<x-web.menu.item>
+				<i class="fa-solid fa-magnifying-glass"></i>
 				</x-web.menu.item>
 			</ul>
 		</div>

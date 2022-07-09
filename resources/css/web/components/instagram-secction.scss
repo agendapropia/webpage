@@ -46,8 +46,12 @@ $break-LG: 85em;
       border-radius: 0;
       object-fit: cover;
       transition: .4s ease;
+      margin: 0 0 0 15px;
+      width: 110px;
+      @include media-up(md) {
       margin: 5px 5px 5px 5px;
       width: 150px;
+      }
     }
     &:hover {
       background-color: transparent;
@@ -105,24 +109,13 @@ $break-LG: 85em;
     }
   }
 
-  .web-button {
-    background-color: var(--clr-primary);
-    border-radius: 20px;
-    border: 0;
-    color: var(--clr-white);
-    font-family: var(--ff-text);
-    font-size: 0.8125rem;
-    height: 34px;
-    outline: 0;
-    text-transform: uppercase;
-    font-weight: 500;
-    width: 171px;
-    margin-left: 25%;
-  }
+  
   
 }
 
-.container-most-read {
+.container-instagram {
+  padding-left: 0px;
+  @include media-up(md) {
     width: 100%;
     display: flex;
     align-items: flex-start;
@@ -130,6 +123,62 @@ $break-LG: 85em;
     padding-left: 37px;
     padding-right: 37px;
     margin-top: 30px;
+  }
+  
+    .bg-most-read {
+      @include media-up(lg) {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        height: 100%;
+      }
+    }
+    p{
+      font-size: 10px;
+      margin-left: 25%;
+
+      @include media-up(md) {
+        font-size: 15px;
+        margin-left: 5px;
+      }
+      
+    }
+
+    .btn-instagram {
+      background-color: var(--clr-primary);
+      border-radius: 20px;
+      border: 0;
+      color: var(--clr-white);
+      font-family: var(--ff-text);
+      font-size: 0.7rem;
+      height: 30px;
+      outline: 0;
+      text-transform: uppercase;
+      font-weight: 500;
+      width: 130px;
+      margin-left: 35%;
+  
+      @include media-up(md) {
+      font-size: 0.8125rem;
+      height: 34px;
+      width: 171px;
+      margin-left: 0%;
+      }
+    }
+  }
+
+  .container-recommended {
+    display: none;
+    @include media-up(md) {
+    width: 100%;
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    padding-left: 37px;
+    padding-right: 37px;
+    margin-top: 30px;
+    }
   
     .bg-most-read {
       @include media-up(lg) {

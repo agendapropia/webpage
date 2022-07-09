@@ -11,25 +11,32 @@
 		</button>
 		<div class="navbar__menu">
 			<ul>
-				<x-web.menu.item>
-				<a href="{{ URL::route('/') }}" style="text-decoration:none">
+			<x-web.menu.item>
+				<a href="{{ URL::route('/') }}"  class="act" style="text-decoration:none">
 					Inicio</a>
 				</x-web.menu.item>
 				<x-web.menu.item>
-					Nosotros
-				</x-web.menu.item>
-				<x-web.menu.item>
-				<a href="{{ URL::route('historias') }}" style="text-decoration:none">
+				<a href="{{ URL::route('historias') }}" class="act"  style="text-decoration:none">
 					Historias</a>
 				</x-web.menu.item>
 				<x-web.menu.item>
-					Mochilla de saberes
+				<a  class="act" style="text-decoration:none">
+					Mochilla de saberes</a>
 				</x-web.menu.item>
 				<x-web.menu.item>
-					Red tejiendo historias
+				<a class="act" style="text-decoration:none">
+					Red tejiendo historias</a>
 				</x-web.menu.item>
 				<x-web.menu.item>
-					Contactenos
+				<a  class="act" style="text-decoration:none">
+					Oportunidades</a>
+				</x-web.menu.item>
+				<x-web.menu.item>
+				<a  class="act"  style="text-decoration:none">
+					Contactenos</a>
+				</x-web.menu.item>
+				<x-web.menu.item>
+				<i class="fa-solid fa-magnifying-glass"></i>
 				</x-web.menu.item>
 			</ul>
 		</div>

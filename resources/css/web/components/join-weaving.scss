@@ -1,13 +1,14 @@
 @import '../base/mixins.scss';
 
 .section-join-weaving {
+  display: none; 
+
+    @include media-up(md) {
     display: grid;
     grid-template: 1fr / 1fr 1fr 1fr;
     grid-gap: 17px;
     margin-bottom: 50px;
     background-color: var(--clr-grey-50);
-
-    @include media-up(md) {
       margin: 24px 0;
       padding: 0 60px;
     }
