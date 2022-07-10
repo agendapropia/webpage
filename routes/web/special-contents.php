@@ -14,38 +14,38 @@ use Illuminate\Support\Facades\Route;
 */
 
 # code...
+Route::prefix('contents')
+    ->namespace('Specials')
+    ->group(function () {
+        Route::get(
+            '/search-by-autocomplete',
+            'SpecialContentsController@searchByAutocomplete'
+        );
+    });
+
 Route::prefix('{specialSlug}/contents')
     ->namespace('Specials')
     ->group(function () {
         Route::get('', 'SpecialContentsController@index')
             ->middleware('permission:content-module')
             ->name('module-content');
-        Route::post('', 'SpecialContentsController@create')->middleware(
-            'permission:content-create'
-        );
         Route::put('', 'SpecialContentsController@update')->middleware(
             'permission:content-update'
         );
-        Route::patch('/status', 'SpecialContentsController@status')->middleware(
-            'permission:content-update'
-        );
-        Route::get('/list', 'SpecialContentsController@list')->middleware(
-            'permission:content-list'
-        );
-        Route::get('/create', 'SpecialContentsController@createInfo')->middleware(
-            'permission:content-create'
-        );
-        Route::get('/update', 'SpecialContentsController@updateInfo')->middleware(
-            'permission:content-update'
-        );
-        Route::post('/files', 'SpecialContentsController@createFiles')->middleware(
-            'permission:content-update'
-        );
+        Route::get(
+            '/update',
+            'SpecialContentsController@updateInfo'
+        )->middleware('permission:content-update');
+        Route::post(
+            '/files',
+            'SpecialContentsController@createFiles'
+        )->middleware('permission:content-update');
         Route::get('/files', 'SpecialContentsController@files')->middleware(
             'permission:content-update'
         );
-        Route::get(
-            '/search-by-autocomplete',
-            'SpecialContentsController@searchByAutocomplete'
-        );
+
+        Route::post(
+            '/copies',
+            'SpecialContentsController@copy'
+        )->middleware('permission:content-update');
     });

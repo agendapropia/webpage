@@ -1,17 +1,17 @@
-let divUpdate = $('#div-update-main')
-let formUpdateMain = $('form[name=form-update-main]')
-let buttonUpdateDetails = divUpdate.find('.special-btn-details')
-let divUpdateDetails = divUpdate.find('.special-div-details')
+const divUpdate = $('#div-update-main')
+const formUpdateMain = $('form[name=form-update-main]')
+const buttonUpdateDetails = divUpdate.find('.special-btn-details')
+const divUpdateDetails = divUpdate.find('.special-div-details')
+const selectLanguage = divUpdate.find('select[name=language_id]')
+const overlayContent = divUpdate.find('.overlay')
 
-let selectLanguage = divUpdate.find('select[name=language_id]')
-let overlayContent = divUpdate.find('.overlay')
+const formCopyMain = $('form[name=form-copy-main]')
+const modalCopyMain = $('#modal-copy-main')
+const modalCopyOverlay = modalCopyMain.find('.overlay')
+const buttonCopy = divUpdate.find('.special-btn-copy')
 
-// var editorContent = new EditorJS({
-//   holder: 'editorjs',
-//   tools: settingEditor,
-// })
+var languageCurrent = 1
 
-//Funtion Modal Update
 function ActionMainUpdate() {
   overlayContent.show()
   UtilClearFormUi(formUpdateMain)
@@ -22,6 +22,7 @@ function ActionMainUpdate() {
   queryInitialUpdateMain.Send()
 
   SaveContent.url = `/admin/specials/${slug}/contents`
+  formCopyMain.attr('action', `/admin/specials/${slug}/contents/copies`)
   SaveContent.var.language_id = selectLanguage.val()
 }
 
@@ -39,23 +40,20 @@ function UpdateActionModal(status, result) {
       .find('select[name=status_id]')
       .val(result.data.content.status_id)
 
-    $('#editorjs').html('')
+    languageCurrent = result.data.content.language_id
 
     if (
       result.data.content.content &&
       result.data.content.content != 'undefined'
     ) {
-      editorContent = new EditorJS({
-        holder: 'editorjs',
-        tools: settingEditor,
-        data: JSON.parse(decodeURIComponent(result.data.content.content)),
-      })
+      initEditorJs(JSON.parse(decodeURIComponent(result.data.content.content)))
     } else {
-      editorContent = new EditorJS({
-        holder: 'editorjs',
-        tools: settingEditor,
-      })
+      initEditorJs()
     }
+  } else {
+    modalCopyMain.modal('show')
+    selectLanguage.val(languageCurrent)
+    modalCopyOverlay.hide()
   }
   overlayContent.hide()
 }
@@ -82,5 +80,16 @@ buttonUpdateDetails.click(() => {
     buttonUpdateDetails.find('.fa').removeClass('fa-level-up')
   }
 })
+
+var editorContent = null
+function initEditorJs(data = null) {
+  $('#editorjs').html('')
+
+  editorContent = new EditorJS({
+    holder: 'editorjs',
+    tools: settingEditor,
+    data: data ?? null,
+  })
+}
 
 ActionMainUpdate()
