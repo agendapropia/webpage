@@ -148,11 +148,10 @@
       &:hover {
         color: var(--clr-yellow-100);
         text-decoration: none;
+      
       }
     }
-    .active {
-      border-bottom: 2px solid var(--clr-primary);
-    }
+
     @include media-up(lg) {
       position: static;
       width: 100%;
@@ -170,7 +169,7 @@
       li {
         font-size: 1rem;
         text-transform: capitalize;
-        margin: 0 15px;
+        margin: 0 13px;
       }
     }
   }
@@ -180,4 +179,5 @@
       background-color: var(--clr-yellow-200);
     }
   }
+  
 }

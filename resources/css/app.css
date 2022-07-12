@@ -115,7 +115,7 @@
 }
 
 .textarea-min-height {
-  min-height: 116px;
+  min-height: 200px;
 }
 
 .overlay-div {
@@ -158,6 +158,12 @@
   box-shadow: 0px 3px 7px -8px rgb(0 0 0 / 75%);
 }
 
+.button-detail-disabled {
+  background-color: #58787d !important;
+  border-color: #58787d !important;
+  font-weight: 600;
+}
+
 .form-horizontal {
   display: inline-flex;
 }
@@ -172,6 +178,9 @@
   background: #fafafa;
   border-top-left-radius: 0px;
   border-top-right-radius: 0px;
+  margin: 0px;
+  margin-bottom: 18px;
+  margin-top: 0px !important;
 }
 
 .div-card-body {
@@ -189,4 +198,8 @@
   .no-padding-mobile {
     padding: 0px;
   }
+}
+
+.div-inline-block {
+  display: inline-block;
 }

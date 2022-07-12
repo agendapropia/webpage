@@ -18,7 +18,7 @@ class SimpleImage {
    */
   static get toolbox() {
     return {
-      title: 'Image',
+      title: 'Imagenes',
       icon:
         '<svg width="17" height="15" viewBox="0 0 336 276" xmlns="http://www.w3.org/2000/svg"><path d="M291 150V79c0-19-15-34-34-34H79c-19 0-34 15-34 34v42l67-44 81 72 56-29 42 30zm0 52l-43-30-56 30-81-67-66 39v23c0 19 15 34 34 34h178c17 0 31-13 34-29zM79 0h178c44 0 79 35 79 79v118c0 44-35 79-79 79H79c-44 0-79-35-79-79V79C0 35 35 0 79 0z"/></svg>',
     }
@@ -76,6 +76,8 @@ class SimpleImage {
       stretched: data.stretched !== undefined ? data.stretched : false,
     }
 
+    this.blockNumber = null
+
     this.wrapper = undefined
     this.settings = [
       {
@@ -121,16 +123,28 @@ class SimpleImage {
     this.editorFileS3.send.click(function () {
       cont.dataS3 = cont._setDataImages(cont.editorFileS3.data)
       cont._createImages(cont.dataS3)
-      this._openModal(false)
+      cont._openModal(false)
     })
 
     if (!this.data.images.length) {
       this._openModal()
     }
 
+    this._acceptTuneView(true)
+
+    setTimeout(() => {
+      if (this.blockNumber) {
+        this.api.blocks.stretchBlock(this.blockNumber, true)
+      }
+    }, 100)
+
     return this.wrapper
   }
 
+  /**
+   * @private
+   * Add modal with template file
+   */
   _addModalFile() {
     let modalNameClass = 'modal_file_' + Math.floor(Math.random() * 1000 + 1)
     let modalTemplate = $($('#template-file-modal').html()).clone()
@@ -139,6 +153,10 @@ class SimpleImage {
     this.ModalFile = $('.' + modalNameClass)
   }
 
+  /**
+   * @private
+   * Open modal file
+   */
   _openModal(status = true) {
     if (status) {
       this.ModalFile.modal('show')
@@ -156,7 +174,7 @@ class SimpleImage {
   _addButtonModal() {
     const button = document.createElement('button')
     button.type = 'button'
-    button.innerText = 'Editar'
+    button.innerHTML = '<i class="fa fa-image"></i> Editar'
 
     button.value = this.config.placeholder || 'Paste an image URL...'
     button.addEventListener('click', (event) => {
@@ -195,17 +213,10 @@ class SimpleImage {
       imageElement.className = 'gallery__img'
       divImage.appendChild(imageElement)
 
-      // const divDescription = document.createElement('div')
-      // divDescription.className = "description"
-      // divDescription.innerHTML = image.description
-      // divImage.appendChild(divDescription)
-
       divImages.appendChild(divImage)
       i++
     })
     this.wrapper.appendChild(divImages)
-
-    this._acceptTuneView()
   }
 
   /**
@@ -273,6 +284,9 @@ class SimpleImage {
    * @return {boolean}
    */
   validate(savedData) {
+    if (savedData.images.length == 0) {
+      return false
+    }
     return true
   }
 
@@ -319,46 +333,21 @@ class SimpleImage {
    * Add specified class corresponds with activated tunes
    * @private
    */
-  _acceptTuneView() {
+  _acceptTuneView(render = false) {
     this.settings.forEach((tune) => {
       this.wrapper.classList.toggle(tune.name, !!this.data[tune.name])
 
       if (tune.name === 'stretched') {
-        this.api.blocks.stretchBlock(
-          this.api.blocks.getCurrentBlockIndex(),
-          !!this.data.stretched,
-        )
+        if (this.data.stretched) {
+          this.blockNumber = this.api.blocks.getCurrentBlockIndex() + 1
+        }
+        if (!render) {
+          this.api.blocks.stretchBlock(
+            this.api.blocks.getCurrentBlockIndex(),
+            !!this.data.stretched,
+          )
+        }
       }
     })
   }
-
-  /**
-   * Handle paste event
-   * @see https://editorjs.io/tools-api#onpaste - API description
-   * @param {CustomEvent }event
-   */
-  // onPaste(event) {
-  //   switch (event.type) {
-  //     case 'tag':
-  //       const imgTag = event.detail.data
-  //       this._createImage(imgTag.src)
-  //       break
-  //     case 'file':
-  //       /* We need to read file here as base64 string */
-  //       const file = event.detail.file
-  //       const reader = new FileReader()
-
-  //       reader.onload = (loadEvent) => {
-  //         this._createImage(loadEvent.target.result)
-  //       }
-
-  //       reader.readAsDataURL(file)
-  //       break
-  //     case 'pattern':
-  //       const src = event.detail.data
-
-  //       this._createImage(src)
-  //       break
-  //   }
-  // }
 }

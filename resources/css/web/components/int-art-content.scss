@@ -1,0 +1,27 @@
+.content{
+    &-container-content {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    &-section-intro {
+      display: flex;
+      align-items: flex-start;
+      flex-direction: column;
+      padding: 1.5rem 2.3125rem 3.125rem 2.3125rem;
+      width: 100%;
+      margin-top: -50px;
+
+      @include media-up(md) {
+        width: 60%;
+        margin-left: 20%;
+      }
+
+
+      p{
+        font-family: var(--ff-text);
+        color: var(--clr-black);
+        line-height:35px;
+
+      }
+    }
+  }

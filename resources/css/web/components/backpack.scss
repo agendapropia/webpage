@@ -1,0 +1,74 @@
+@import '../base/mixins.scss';
+
+.section-backpack {
+
+  
+  @include media-up(md) {
+    display: grid;
+    grid-gap: 17px;
+    margin-bottom: 50px;
+    background-color: var(--clr-grey-50);
+  
+    .text-home-cards {
+      padding: 0 38px;
+  
+      @include media-up(md) {
+       padding-top: 30px;
+      }
+    }
+    hr {
+        width: 60%;
+        border: 0.1px solid var(--clr-grey-200);
+        margin-left: 1px;
+      }
+    
+  .backpack__title {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 44px 35px;
+    h2 {
+      font-family: var(--ff-title);
+      font-weight: bold;
+      font-size: 1.5625rem;
+      color: var(--clr-cyan-100);
+      margin: 0;
+    }
+ 
+  
+  }
+    & .nxt-btn,
+    & .spre-btn {
+      top: 70% !important;
+    }
+    & .nxt-btn:after,
+    & .pre-btn:after {
+      color: var(--clr-grey-400) !important;
+      font-size: 0.5625rem !important;
+      border: 1px solid var(--clr-grey-400) !important;
+      border-radius: 50% !important;
+      padding: 10px 12px !important;
+    }
+    @include media-up(md) {
+      & .pre-btn,
+      & .nxt-btn{
+
+        top: unset !important;
+      }
+      & .pre-btn:after,
+      & .nxt-btn:after {
+        font-size: 1rem !important;
+        padding: 9px 12px !important;
+      }
+      & .pre-btn{
+        left: 80% !important;
+        margin-top: 20px;
+      }
+      & .nxt-btn {
+        right: 85px !important;
+        margin-top: 20px;
+      }
+    }
+  }
+}

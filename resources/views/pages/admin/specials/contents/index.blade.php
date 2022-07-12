@@ -28,15 +28,17 @@
                     <option value="{{ $lang->id }}">{{ $lang->name }}</option>
                 @endforeach
             </x-admin.forms.form-input-select>
-            <x-admin.forms.form-button-primary buttonClass="special-btn-save" id="special-btn-save" text="Guardar"></x-admin.forms.form-button-primary>
+            <x-admin.forms.form-button-primary buttonClass="btn-sm special-btn-details" id="special-btn-details" text="Detalles" icon="fa-level-down"></x-admin.forms.form-button-primary>
+            <x-admin.forms.form-button-default buttonClass="btn-sm special-btn-copy" id="special-btn-details" text="" icon="fa-copy"></x-admin.forms.form-button-default>
+            <x-admin.forms.form-button-success buttonClass="special-btn-save" id="special-btn-save" text="Guardar"></x-admin.forms.form-button-success>
         </x-admin.layouts.card-complete>
 
 
-        <!-- <x-admin.layouts.card-medium divClass="div-card-content mt--3 hide">
+        <x-admin.layouts.card-complete divClass="div-card-content special-div-details mt--3 hide">
             <x-admin.forms.form method="POST" action="/admin/specials/contents" name="form-update-main">
                 @include('pages.admin.specials.contents.form.content')
             </x-admin.forms.form>
-        </x-admin.layouts.card-medium> -->
+        </x-admin.layouts.card-complete>
 
         <x-admin.layouts.card-complete divClass="div-card-body mt--3 pt-10">
             <div id="editorjs"></div>
@@ -48,6 +50,8 @@
     </div>
 
     <!-- Modals -->
+    @include('pages.admin.specials.contents.modals.copy')
+
     <div class="modals-files"></div>
     <script id="template-file-modal" type="text/x-custom-template">
     <div
@@ -255,7 +259,7 @@
             </div>
         </div>
     </div>
-</script>
+    </script>
 
 @endsection
 
@@ -264,7 +268,6 @@
     <script src="https://cdn.jsdelivr.net/npm/editorjs-paragraph-with-alignment@3.0.0"></script>
     <script src="https://cdn.jsdelivr.net/npm/@editorjs/header@latest"></script>
     <script src="https://cdn.jsdelivr.net/npm/@editorjs/link@latest"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@editorjs/raw"></script>
     <script src="https://cdn.jsdelivr.net/npm/@editorjs/embed@latest"></script>
     <script src="https://cdn.jsdelivr.net/npm/@editorjs/checklist@latest"></script>
     <script src="https://cdn.jsdelivr.net/npm/@editorjs/checklist@latest"></script>

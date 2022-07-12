@@ -1,0 +1,138 @@
+@import '../base/_mixins.scss';
+
+.grid-report {
+  display:none;
+  @include media-up(md) {
+    padding: 0 60px;
+  }
+  @include media-up(lg) {
+    display: grid;
+    grid-template: 1fr / 1fr 1fr;
+    padding: 0 60px;
+  }
+  margin-bottom: 40px;
+
+  .container-report {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+  
+  
+    }
+    .content-reportage {
+      top: 0;
+      padding: 25% 10%;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+     
+      h2 {
+        font-size: 25px;
+        font-family: var(--ff-title);
+        color: var(--clr-cyan-100);
+        line-height: 1.2;
+        margin-bottom: 0;
+        @include media-up(md) {
+          font-size: 1.5rem;
+        }
+      }
+      p {
+          font-size: 19px;
+          font-family: var(--ff-text);
+          color: var(--clr-cyan-100);
+          line-height: 1.2;
+          margin-bottom: 0;
+        
+        }
+    }
+  
+    /*COMPONENT*/
+    .wrapper-report {
+      display: grid;
+      grid-template: 1fr / 90px auto;
+      padding: 0 10px;
+      @include media-up(lg) {
+        align-items: center;
+        padding: 0;
+      }
+  
+      .container-text .text__badge {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        gap: 13px;
+        margin-bottom: 7px;
+      
+      }
+      
+    }
+  
+    .container-report-img {
+      margin-top: 30px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: flex-start;
+    
+      .report-img{
+          width:130%;
+          height:auto;
+      }
+  }
+}
+
+
+
+.grid-report-movil {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  margin-bottom: 16px;
+  margin-top: 24px;
+  @include media-up(md) {
+    display:none;
+  }
+
+  .container-article {
+    width: 100%;
+    height: auto;
+  }
+  
+  .container-article img {
+    height: 218px;
+    width: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+  
+  .container-article h2 {
+    font-size: 1.375rem;
+    font-family: var(--ff-title);
+    line-height: 2.125rem;
+  }
+  
+  .container-article p {
+    font-size: 1rem;
+    font-family: var(--ff-text);
+    margin: 0;
+    color: var(--clr-grey-500);
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+  }
+  
+  .container-article .body-article {
+    width: 100%;
+    padding: 21px 32px;
+    @include media-up(md) {
+      padding: 21px 8px;
+    }
+  }
+}
+
+/* COMPONENT */
+
+

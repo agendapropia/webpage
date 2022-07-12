@@ -1,0 +1,119 @@
+@import '../base/_mixins.scss';
+
+.hs-cocreation{
+    display: none;
+    width: 100%;
+    height: 402px;
+    @include media-up(md) {
+      display: initial;
+      height: 750px;
+    }
+
+    .hs-img-cocreation{
+        width: 100%;
+        height:auto !important;
+    }
+}
+
+.hs-container-cocreation {
+  display: none;
+  @include media-up(md) {
+    display: block;
+    align-items: center;
+    background-color: var(--clr-white);
+    height: 198px;
+    top: 340px;
+    width: 50%;
+    left: 10px;
+    margin-top: -30%;
+    margin-bottom:15%;
+    margin-left: 5%;
+
+    h2 {
+      font-family: var(--ff-title);
+      font-size: 1.5625rem;
+      line-height: 2.125rem;
+      color: var(--clr-white);
+      text-align: center;
+    }
+    p{
+        font-family: var(--ff-text);
+        color: var(--clr-white);
+    }
+    hr {
+      width: 50%;
+      border: 3px solid;
+      border-color: var(--clr-primary);
+    }
+    @include media-up(md) {
+      align-items: center;
+    background-color: var(--clr-white);
+    height: 198px;
+    top: 340px;
+    width: 50%;
+    left: 10px;
+    margin-top: -30%;
+      h2 {
+        text-align: start;
+        font-size: 1.5625rem;
+      line-height: 2.125rem;
+        color: var(--clr-white);
+        
+      }
+      p{
+        background-color: var(--clr-white);
+    }
+      
+    }
+  }
+}
+
+  .grid-cocreation-movil{
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    margin-top: 150px;
+    .container-reportage {
+      width: 100%;
+      //height: auto;
+      position: relative;
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+      }
+      .content-reportage {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        background-image: linear-gradient(
+          to bottom,
+          rgba(0, 0, 0, 0.1),
+          rgba(0, 0, 0, 0.4)
+        );
+        top: 0;
+        padding: 28px 37px;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        @include media-up(md) {
+          padding: 28px 8px;
+        }
+        h2 {
+          font-size: 15px;
+          font-family: var(--ff-title);
+          color: var(--clr-white);
+          line-height: 1.2;
+          margin-bottom: 0;
+          @include media-up(md) {
+            font-size: 1rem;
+          }
+        }
+      }
+    }
+    @include media-up(md) {
+      display:none;
+    }
+  }

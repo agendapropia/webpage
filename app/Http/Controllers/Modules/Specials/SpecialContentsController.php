@@ -10,6 +10,7 @@ use App\Models\Specials\SpecialContent;
 use App\Models\Utils\File;
 use App\Models\Utils\Language;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class SpecialContentsController extends Controller
 {
@@ -41,23 +42,9 @@ class SpecialContentsController extends Controller
 
         $languages = Language::get();
 
-        $specialContent = SpecialContent::where('special_id', $special->id)
-            ->where('language_id', self::LANGUAGE_DEFAULT)
-            ->first();
-
-        if (!$specialContent) {
-            $specialContent = new SpecialContent();
-            $specialContent->status_id = self::STATUS_EDIT;
-            $specialContent->special_id = $special->id;
-            $specialContent->special_id = $special->id;
-            $specialContent->language_id = self::LANGUAGE_DEFAULT;
-            $specialContent->title = $special->name;
-            $specialContent->save();
-        }
-
         return view(
             'pages.admin.specials.contents.index',
-            compact('special', 'specialContent', 'languages')
+            compact('special', 'languages')
         );
     }
 
@@ -79,8 +66,16 @@ class SpecialContentsController extends Controller
         $content = SpecialContent::where('special_id', $special->id)
             ->where('language_id', $request->_language_id)
             ->first();
-        if(!$content){
-            return $this->responseJson(false, 'update information', []);
+
+        if (!$content) {
+            $specialContent = new SpecialContent();
+            $specialContent->status_id = self::STATUS_EDIT;
+            $specialContent->special_id = $special->id;
+            $specialContent->language_id = $request->_language_id;
+            $specialContent->title = $special->name;
+            $specialContent->save();
+
+            $content = $specialContent;
         }
 
         $data = [
@@ -99,6 +94,10 @@ class SpecialContentsController extends Controller
         $request->validate([
             '_language_id' => 'integer|required',
             '_content' => 'string|nullable',
+            '_title' => 'string|nullable',
+            '_subtitle' => 'string|nullable',
+            '_summary' => 'string|nullable',
+            '_status_id' => 'required|integer',
         ]);
 
         $special = Special::where('slug', $slug)->first();
@@ -114,6 +113,50 @@ class SpecialContentsController extends Controller
         }
 
         $content->content = $request->_content;
+        $content->title = $request->_title;
+        $content->subtitle = $request->_subtitle;
+        $content->summary = $request->_summary;
+        $content->status_id = $request->_status_id;
+        $content->save();
+
+        return $this->responseJson(true, 'special content update');
+    }
+
+    /**
+     * Copy content
+     * PUT /admin/specials/{$slug}/contents/copies
+     */
+    public function copy($slug, Request $request)
+    {
+        $request->validate([
+            'language_id' => 'integer|required',
+            'special_content_id' => 'required|integer',
+        ]);
+
+        $special = Special::where('slug', $slug)->first();
+        if (!$special) {
+            return $this->responseJson(false, 'special not found');
+        }
+
+        $content = SpecialContent::where('special_id', $special->id)
+            ->where('language_id', $request->language_id)
+            ->first();
+        if (!$content) {
+            return $this->responseJson(false, 'special content not found');
+        }
+
+        $contentByCopy = SpecialContent::where(
+            'id',
+            $request->special_content_id
+        )->first();
+        if (!$contentByCopy) {
+            return $this->responseJson(false, 'special content copy not found');
+        }
+
+        $content->content = $contentByCopy->content;
+        $content->title = $contentByCopy->title;
+        $content->subtitle = $contentByCopy->subtitle;
+        $content->summary = $contentByCopy->summary;
         $content->save();
 
         return $this->responseJson(true, 'special content update');
@@ -121,19 +164,27 @@ class SpecialContentsController extends Controller
 
     /**
      * GET search by autocomplete
-     * POST /admin/specials/allied-media/search-by-autocomplete
+     * POST /admin/specials/contents/search-by-autocomplete
      */
     public function searchByAutocomplete(Request $request)
     {
         $search = $request->get('_search');
         $row = $request->get('_row') ?? 10;
-        $alliedMedia = AlliedMedia::select('am.id', 'am.name')
+        $contents = SpecialContent::select(
+            'sc.id',
+            DB::raw('CONCAT(sc.title, " (", l.name, ")") as name')
+        )
             ->from(self::FROM_TABLE_MAIN)
+            ->join(
+                'agendapropia_utils.languages as l',
+                'l.id',
+                'sc.language_id'
+            )
             ->search($search)
             ->limit($row)
             ->get();
 
-        return $this->responseJson(true, 'list alliedMedia', $alliedMedia);
+        return $this->responseJson(true, 'list contents', $contents);
     }
 
     /**

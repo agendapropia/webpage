@@ -1,15 +1,25 @@
 const settingEditor = {
   image: {
     class: SimpleImage,
-    inlineToolbar: true,
+    inlineToolbar: false,
     config: {
-      placeholder: 'Ingresar la url',
+      placeholder: '',
     },
   },
-  table: Table,
+  summary: {
+    class: SummaryTop,
+    inlineToolbar: false,
+    config: {
+      placeholder: 'Agrega un texto de resumen',
+    },
+  },
   paragraph: {
     class: Paragraph,
     inlineToolbar: true,
+    config: {
+      placeholder:
+        'Haga click en el (+) para agregar un texto, imágenes o recursos multimedia',
+    },
   },
   Marker: {
     class: Marker,
@@ -19,7 +29,6 @@ const settingEditor = {
     class: Header,
     shortcut: 'CMD+SHIFT+H',
   },
-  raw: RawTool,
   checklist: {
     class: Checklist,
     inlineToolbar: true,
@@ -61,14 +70,25 @@ buttonSaveContent.addEventListener('click', function () {
       ActionSaveContent(outputData)
     })
     .catch((error) => {
-      notify(false, 'Saving failed:', error, 1)
+      notify(false, 'Error guardando el contenido:', error, 1)
       overlayContent.hide()
     })
 })
 
 function ActionSaveContent(data) {
+  if (!data) {
+    notify(false, 'Error guardando el contenido:', error, 1)
+    return false
+  }
+
   let content = JSON.stringify(data)
   SaveContent.var.content = encodeURIComponent(content)
+  SaveContent.var.title = formUpdateMain.find('input[name=title]').val()
+  SaveContent.var.subtitle = formUpdateMain.find('input[name=subtitle]').val()
+  SaveContent.var.summary = formUpdateMain.find('textarea[name=summary]').val()
+  SaveContent.var.status_id = formUpdateMain
+    .find('select[name=status_id]')
+    .val()
   SaveContent.Send()
 }
 
@@ -84,18 +104,20 @@ function AfterSaveContent(status) {
   overlayContent.hide()
 }
 
-let divUpdate = $('#div-update-main')
-let formUpdateMain = $('form[name=form-update-main]')
+const divUpdate = $('#div-update-main')
+const formUpdateMain = $('form[name=form-update-main]')
+const buttonUpdateDetails = divUpdate.find('.special-btn-details')
+const divUpdateDetails = divUpdate.find('.special-div-details')
+const selectLanguage = divUpdate.find('select[name=language_id]')
+const overlayContent = divUpdate.find('.overlay')
 
-let selectLanguage = divUpdate.find('select[name=language_id]')
-let overlayContent = divUpdate.find('.overlay')
+const formCopyMain = $('form[name=form-copy-main]')
+const modalCopyMain = $('#modal-copy-main')
+const modalCopyOverlay = modalCopyMain.find('.overlay')
+const buttonCopy = divUpdate.find('.special-btn-copy')
 
-var editorContent = new EditorJS({
-  holder: 'editorjs',
-  tools: settingEditor,
-})
+var languageCurrent = 1
 
-//Funtion Modal Update
 function ActionMainUpdate() {
   overlayContent.show()
   UtilClearFormUi(formUpdateMain)
@@ -106,6 +128,7 @@ function ActionMainUpdate() {
   queryInitialUpdateMain.Send()
 
   SaveContent.url = `/admin/specials/${slug}/contents`
+  formCopyMain.attr('action', `/admin/specials/${slug}/contents/copies`)
   SaveContent.var.language_id = selectLanguage.val()
 }
 
@@ -119,46 +142,99 @@ function UpdateActionModal(status, result) {
   if (status && result.status) {
     UtilFormClose(formUpdateMain)
     LoadFormInputs(divUpdate, result.data.content)
+    formUpdateMain
+      .find('select[name=status_id]')
+      .val(result.data.content.status_id)
 
-    editorContent.destroy()
-    $('#editorjs').html()
+    languageCurrent = result.data.content.language_id
 
-    if (result.data.content.content) {
-      editorContent = new EditorJS({
-        holder: 'editorjs',
-        tools: settingEditor,
-        data: JSON.parse(decodeURIComponent(result.data.content.content)),
-      })
+    if (
+      result.data.content.content &&
+      result.data.content.content != 'undefined'
+    ) {
+      initEditorJs(JSON.parse(decodeURIComponent(result.data.content.content)))
     } else {
-      editorContent = new EditorJS({
-        holder: 'editorjs',
-        tools: settingEditor,
-      })
+      initEditorJs()
     }
+  } else {
+    modalCopyMain.modal('show')
+    selectLanguage.val(languageCurrent)
+    modalCopyOverlay.hide()
   }
   overlayContent.hide()
 }
-
-// //Send Update Data Modal
-// let ActionMainUpdateSend = new QueryAjax({
-//   form: 'form-update-main',
-//   action: 'FunctionActionUpdateMain',
-// })
-// function FunctionActionUpdateMain(status) {
-//   if (status) {
-//     notify(
-//       false,
-//       'Medio Aliado Actualizado',
-//       'Operación realizada exitosamente',
-//       2,
-//     )
-//     ActionMainUpdateSend.FormClose()
-//     TableMain.refresh()
-//   }
-// }
 
 selectLanguage.change(function () {
   ActionMainUpdate()
 })
 
+buttonUpdateDetails.click(() => {
+  let status = $(this).attr('data-status')
+  if (!status) {
+    $(this).attr('data-status', true)
+    divUpdateDetails.removeClass('hide')
+
+    buttonUpdateDetails.addClass('button-detail-disabled')
+    buttonUpdateDetails.find('.fa').removeClass('fa-level-down')
+    buttonUpdateDetails.find('.fa').addClass('fa-level-up')
+  } else {
+    $(this).attr('data-status', false)
+    divUpdateDetails.addClass('hide')
+    buttonUpdateDetails.removeClass('button-detail-disabled')
+
+    buttonUpdateDetails.find('.fa').addClass('fa-level-down')
+    buttonUpdateDetails.find('.fa').removeClass('fa-level-up')
+  }
+})
+
+var editorContent = null
+function initEditorJs(data = null) {
+  $('#editorjs').html('')
+
+  editorContent = new EditorJS({
+    holder: 'editorjs',
+    tools: settingEditor,
+    data: data ?? null,
+  })
+}
+
 ActionMainUpdate()
+
+// Autocomplete
+let specialContents = new searchByAutocomplete(
+  formCopyMain.find('.specialContents'),
+  {
+    params: [],
+    url: '/admin/specials/contents/search-by-autocomplete',
+    limitItems: 1,
+    minimumCharactersToSearch: 1,
+  },
+)
+
+buttonCopy.click(() => {
+  modalCopyMain.modal('show')
+  modalCopyOverlay.hide()
+  specialContents.clearSelect()
+})
+
+function ReplaceContent() {
+  formCopyMain.find('input[name=language_id]').val(languageCurrent)
+  modalCopyOverlay.show()
+  ReplaceContentQuery.Send()
+}
+
+let ReplaceContentQuery = new QueryAjax({
+  action: 'ReplaceContentAction',
+  form: 'form-copy-main',
+})
+function ReplaceContentAction(status, result) {
+  if (status && result.status) {
+    notify(false, 'Contenido reemplazado', '', 2)
+    ActionMainUpdate()
+  } else {
+    notify(false, 'Error guardando el contenido:', result.message, 1)
+  }
+
+  modalCopyMain.modal('hide')
+  modalCopyOverlay.hide()
+}

@@ -6462,7 +6462,7 @@ var URL_IMG = APP_URL + '/img/app/'
 const BUTTON_CONTROL_MAIN = 1
 const BUTTON_CONTROL_EDIT = 2
 const URL_S3_IMAGE =
-  'https://agendapropia-files.s3.us-east-2.amazonaws.com/files/images/'
+  'https://agendapropia-files.s3.us-east-2.amazonaws.com/'
 class formFiles {
   constructor(url, data) {
     this.url = url
@@ -6528,8 +6528,8 @@ class updloadS3 {
 
     this.url_uploadFile = '/uploadfiles_s3'
     this.url_removeFile = '/destroyfiles_s3'
-    this.files_url = URL_S3_IMAGE
-    this.awsBase = 'https://agendapropia-files.s3.us-east-2.amazonaws.com/'
+    this.files_url = URL_S3_IMAGE + 'files/images/'
+    this.awsBase = URL_S3_IMAGE
 
     this.textarea.keyup(function () {
       cont.changeTextarea(this)
@@ -7035,7 +7035,7 @@ class filesItem {
     }
     this.description = description
     this.divIndex = divIndex
-    this.name_tmp_complete = URL_S3_IMAGE + name_tmp
+    this.name_tmp_complete = URL_S3_IMAGE + 'files/images/' + name_tmp
   }
 }
 
@@ -7255,7 +7255,7 @@ function add_file(cont, data, type, file = '') {
       .find('.image')
       .css(
         'background-image',
-        'url(' + cont.awsBase + 'thumbnails/' + data.name_tmp + ')',
+        'url(' + cont.files_url + 'thumbnails/' + data.name_tmp + ')',
       )
     form.find('.image').css('background-size', '100%')
   } else if (type == 4) {
@@ -11998,7 +11998,7 @@ class SimpleImage {
    */
   static get toolbox() {
     return {
-      title: 'Image',
+      title: 'Imagenes',
       icon:
         '<svg width="17" height="15" viewBox="0 0 336 276" xmlns="http://www.w3.org/2000/svg"><path d="M291 150V79c0-19-15-34-34-34H79c-19 0-34 15-34 34v42l67-44 81 72 56-29 42 30zm0 52l-43-30-56 30-81-67-66 39v23c0 19 15 34 34 34h178c17 0 31-13 34-29zM79 0h178c44 0 79 35 79 79v118c0 44-35 79-79 79H79c-44 0-79-35-79-79V79C0 35 35 0 79 0z"/></svg>',
     }
@@ -12056,6 +12056,8 @@ class SimpleImage {
       stretched: data.stretched !== undefined ? data.stretched : false,
     }
 
+    this.blockNumber = null
+
     this.wrapper = undefined
     this.settings = [
       {
@@ -12101,16 +12103,28 @@ class SimpleImage {
     this.editorFileS3.send.click(function () {
       cont.dataS3 = cont._setDataImages(cont.editorFileS3.data)
       cont._createImages(cont.dataS3)
-      this._openModal(false)
+      cont._openModal(false)
     })
 
     if (!this.data.images.length) {
       this._openModal()
     }
 
+    this._acceptTuneView(true)
+
+    setTimeout(() => {
+      if (this.blockNumber) {
+        this.api.blocks.stretchBlock(this.blockNumber, true)
+      }
+    }, 100)
+
     return this.wrapper
   }
 
+  /**
+   * @private
+   * Add modal with template file
+   */
   _addModalFile() {
     let modalNameClass = 'modal_file_' + Math.floor(Math.random() * 1000 + 1)
     let modalTemplate = $($('#template-file-modal').html()).clone()
@@ -12119,6 +12133,10 @@ class SimpleImage {
     this.ModalFile = $('.' + modalNameClass)
   }
 
+  /**
+   * @private
+   * Open modal file
+   */
   _openModal(status = true) {
     if (status) {
       this.ModalFile.modal('show')
@@ -12136,7 +12154,7 @@ class SimpleImage {
   _addButtonModal() {
     const button = document.createElement('button')
     button.type = 'button'
-    button.innerText = 'Editar'
+    button.innerHTML = '<i class="fa fa-image"></i> Editar'
 
     button.value = this.config.placeholder || 'Paste an image URL...'
     button.addEventListener('click', (event) => {
@@ -12175,17 +12193,10 @@ class SimpleImage {
       imageElement.className = 'gallery__img'
       divImage.appendChild(imageElement)
 
-      // const divDescription = document.createElement('div')
-      // divDescription.className = "description"
-      // divDescription.innerHTML = image.description
-      // divImage.appendChild(divDescription)
-
       divImages.appendChild(divImage)
       i++
     })
     this.wrapper.appendChild(divImages)
-
-    this._acceptTuneView()
   }
 
   /**
@@ -12253,6 +12264,9 @@ class SimpleImage {
    * @return {boolean}
    */
   validate(savedData) {
+    if (savedData.images.length == 0) {
+      return false
+    }
     return true
   }
 
@@ -12299,46 +12313,202 @@ class SimpleImage {
    * Add specified class corresponds with activated tunes
    * @private
    */
-  _acceptTuneView() {
+  _acceptTuneView(render = false) {
     this.settings.forEach((tune) => {
       this.wrapper.classList.toggle(tune.name, !!this.data[tune.name])
 
       if (tune.name === 'stretched') {
-        this.api.blocks.stretchBlock(
-          this.api.blocks.getCurrentBlockIndex(),
-          !!this.data.stretched,
-        )
+        if (this.data.stretched) {
+          this.blockNumber = this.api.blocks.getCurrentBlockIndex() + 1
+        }
+        if (!render) {
+          this.api.blocks.stretchBlock(
+            this.api.blocks.getCurrentBlockIndex(),
+            !!this.data.stretched,
+          )
+        }
       }
     })
   }
+}
+
+/**
+ * Build styles
+ */
+// import './summary-top.css'
+
+/**
+ *
+ */
+class SummaryTop {
+  /**
+   * Notify core that read-only mode is supported
+   *
+   * @returns {boolean}
+   */
+  static get isReadOnlySupported() {
+    return true
+  }
 
   /**
-   * Handle paste event
-   * @see https://editorjs.io/tools-api#onpaste - API description
-   * @param {CustomEvent }event
+   * Should this tool be displayed at the Editor's Toolbox
+   *
+   * @returns {boolean}
+   * @public
    */
-  // onPaste(event) {
-  //   switch (event.type) {
-  //     case 'tag':
-  //       const imgTag = event.detail.data
-  //       this._createImage(imgTag.src)
-  //       break
-  //     case 'file':
-  //       /* We need to read file here as base64 string */
-  //       const file = event.detail.file
-  //       const reader = new FileReader()
+  static get displayInToolbox() {
+    return true
+  }
 
-  //       reader.onload = (loadEvent) => {
-  //         this._createImage(loadEvent.target.result)
-  //       }
+  /**
+   * Allow to press Enter inside the RawTool textarea
+   *
+   * @returns {boolean}
+   * @public
+   */
+  static get enableLineBreaks() {
+    return true
+  }
 
-  //       reader.readAsDataURL(file)
-  //       break
-  //     case 'pattern':
-  //       const src = event.detail.data
+  /**
+   * Get Tool toolbox settings
+   * icon - Tool icon's SVG
+   * title - title to show in toolbox
+   *
+   * @returns {{icon: string, title: string}}
+   */
+  static get toolbox() {
+    return {
+      icon:
+        '<svg width="19" height="13" viewBox="0 0 19 13"><path d="M18.004 5.794c.24.422.18.968-.18 1.328l-4.943 4.943a1.105 1.105 0 1 1-1.562-1.562l4.162-4.162-4.103-4.103A1.125 1.125 0 1 1 12.97.648l4.796 4.796c.104.104.184.223.239.35zm-15.142.547l4.162 4.162a1.105 1.105 0 1 1-1.562 1.562L.519 7.122c-.36-.36-.42-.906-.18-1.328a1.13 1.13 0 0 1 .239-.35L5.374.647a1.125 1.125 0 0 1 1.591 1.591L2.862 6.341z"/></svg>',
+      title: 'Resumen',
+    }
+  }
 
-  //       this._createImage(src)
-  //       break
-  //   }
-  // }
+  /**
+   * @typedef {object} RawData — plugin saved data
+   * @param {string} html - previously saved HTML code
+   * @property
+   */
+
+  /**
+   * Render plugin`s main Element and fill it with saved data
+   *
+   * @param {RawData} data — previously saved HTML data
+   * @param {object} config - user config for Tool
+   * @param {object} api - CodeX Editor API
+   * @param {boolean} readOnly - read-only mode flag
+   */
+  constructor({ data, config, api, readOnly }) {
+    this.api = api
+    this.readOnly = readOnly
+
+    this.placeholder = config.placeholder || RawTool.DEFAULT_PLACEHOLDER
+
+    this.CSS = {
+      baseClass: this.api.styles.block,
+      input: this.api.styles.input,
+      wrapper: 'ce-rawtool',
+      textarea: 'ce-rawtool__textarea',
+    }
+
+    this.data = {
+      html: data.html || '',
+    }
+
+    this.textarea = null
+    this.resizeDebounce = null
+  }
+
+  /**
+   * Return Tool's view
+   *
+   * @returns {HTMLDivElement} this.element - RawTool's wrapper
+   * @public
+   */
+  render() {
+    const wrapper = document.createElement('div')
+    const renderingTime = 100
+
+    this.textarea = document.createElement('textarea')
+
+    wrapper.classList.add(this.CSS.baseClass, this.CSS.wrapper)
+
+    this.textarea.classList.add(this.CSS.textarea, this.CSS.input)
+    this.textarea.textContent = this.data.html
+    this.textarea.placeholder = this.placeholder
+
+    if (this.readOnly) {
+      this.textarea.disabled = true
+    } else {
+      this.textarea.addEventListener('input', () => {
+        this.onInput()
+      })
+    }
+
+    wrapper.appendChild(this.textarea)
+
+    setTimeout(() => {
+      this.resize()
+    }, renderingTime)
+
+    return wrapper
+  }
+
+  /**
+   * Extract Tool's data from the view
+   *
+   * @param {HTMLDivElement} rawToolsWrapper - RawTool's wrapper, containing textarea with raw HTML code
+   * @returns {RawData} - raw HTML code
+   * @public
+   */
+  save(rawToolsWrapper) {
+    return {
+      html: rawToolsWrapper.querySelector('textarea').value,
+    }
+  }
+
+  /**
+   * Default placeholder for RawTool's textarea
+   *
+   * @public
+   * @returns {string}
+   */
+  static get DEFAULT_PLACEHOLDER() {
+    return 'Enter HTML code'
+  }
+
+  /**
+   * Automatic sanitize config
+   */
+  static get sanitize() {
+    return {
+      html: true, // Allow HTML tags
+    }
+  }
+
+  /**
+   * Textarea change event
+   *
+   * @returns {void}
+   */
+  onInput() {
+    if (this.resizeDebounce) {
+      clearTimeout(this.resizeDebounce)
+    }
+
+    this.resizeDebounce = setTimeout(() => {
+      this.resize()
+    }, 200)
+  }
+
+  /**
+   * Resize textarea to fit whole height
+   *
+   * @returns {void}
+   */
+  resize() {
+    this.textarea.style.height = 'auto'
+    this.textarea.style.height = this.textarea.scrollHeight + 'px'
+  }
 }

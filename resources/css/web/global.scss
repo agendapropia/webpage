@@ -1,4 +1,5 @@
 @import 'components/article.scss';
+@import 'components/social-btn.scss';
 @import 'components/badge-location.scss';
 @import 'components/button.scss';
 @import 'components/carousel.scss';
@@ -11,8 +12,44 @@
 @import 'components/social-media.scss';
 @import 'components/video.scss';
 @import 'components/histories.scss';
-
-
+@import 'components/backpack.scss';
+@import 'components/backpack-carousel.scss';
+@import 'components/join-weaving.scss';
+@import 'components/weaving-history.scss';
+@import 'components/cocreation.scss';
+@import 'components/instagram-secction.scss';
+@import 'components/section-recommended.scss';
+@import 'components/sinstagram-recommended.scss';
+@import 'components/report-histories.scss';
+@import 'components/hs-cocreation.scss';
+@import 'components/int-art-img-sup.scss';
+@import 'components/int-art-team.scss';
+@import 'components/int-art-traductor.scss';
+@import 'components/int-art-content-header.scss';
+@import 'components/int-art-content.scss';
+@import 'components/int-art-video.scss';
+@import 'components/int-art-title.scss';
+@import 'components/int-art-quotation.scss';
+@import 'components/int-art-content-img.scss';
+@import 'components/int-art-img-section.scss';
+@import 'components/int-art-video-loop.scss';
+@import 'components/int-art-carousel.scss';
+@import 'components/int-art-team-inte.scss';
+@import 'components/sountcloud.scss';
+@import 'components/galery.scss';
+@import 'components/pdf.scss';
+@import 'components/related.scss';
+@import 'components/most-read-generic.scss';
+@import 'components/home-co-front-page.scss';
+@import 'components/home-coc-header.scss';
+@import 'components/home-coc-title.scss';
+@import 'components/home-coc-gallery.scss';
+@import 'components/home-coc-citas.scss';
+@import 'components/home-coc-most.scss';
+@import 'components/credits.scss';
+@import 'components/img-credits.scss';
+@import 'components/share.scss';
+@import 'components/slider-cocreation.scss';
 @import 'base/_mixins.scss';
 
 
@@ -379,7 +416,7 @@ template {
   --clr-black-100: #151922;
   --clr-yellow-100: #e8b45d;
   --clr-yellow-200: #f1b24a;
-  --clr-cyan-100: #264a50;
+  --clr-cyan-100: #264950;
   --clr-cyan-200: #265b53;
   --clr-orange: #e27a30;
   --clr-grey-50: #f7f7f7;

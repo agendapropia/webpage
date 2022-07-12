@@ -1,0 +1,32 @@
+.int-art-img-sec{
+    width: 100%;
+    display: block;
+
+    img{
+        width: 100%;
+        height: auto;
+    }
+
+    
+    
+}
+
+.grid-description-sec {
+    display: block;
+    margin-bottom: 50px;
+    margin-top: 10%;
+    margin-left: 10%;
+    
+    .text-description {
+        font-family: var(--ff-text);
+        color: var(--clr-grey-500);
+        font-size: 12px;
+        margin-top:-40px;
+
+    }
+  
+    span {
+      font-family: var(--ff-text);
+      font-size: 0.75rem;
+    }
+  }

@@ -14,10 +14,10 @@
   width: 95%;
   z-index: 1;
   left: 10px;
-  h1 {
+  h2 {
     font-family: var(--ff-title);
     font-size: 1.5625rem;
-    line-height: 2.125rem;
+    line-height: 3rem;
     color: var(--clr-cyan-100);
     text-align: center;
   }
@@ -39,15 +39,16 @@
     left: 60px;
     top: 300px;
     margin-bottom: 10px;
-    h1 {
+    h2 {
       text-align: start;
       font-size: 2rem;
-      line-height: 2.5rem;
+      line-height: 3rem;
       color: var(--clr-white);
     }
     button {
       border: 0;
       font-weight: bold;
+      margin-top: 20px;
     }
   }
 }

@@ -3,5 +3,9 @@
 <x-web.menu.fixed-menu />
 @section('content')
 @include('layouts.web.histories.intro')
-
+@include('layouts.web.histories.report')
+@include('layouts.web.histories.hs-cocreation')
+@include('layouts.web.histories.cocreation')
+<x-web.carousel.slider-histories />
+<x-web.share />
 @endsection

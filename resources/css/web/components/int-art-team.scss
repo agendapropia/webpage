@@ -1,0 +1,116 @@
+.ia{
+    &-container-histories {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    &-section-intro {
+      display: flex;
+      align-items: flex-start;
+      flex-direction: column;
+      padding: .5rem 2.3125rem .15rem 2.3125rem;
+      width: 100%;
+
+      @include media-up(md) {
+        margin-left: 18%;
+        width: 70%;
+      }
+      h2 {
+        font-family: var(--ff-title);
+        color: var(--clr-cyan-100);
+        margin-bottom: 1.625rem;
+        text-transform: uppercase;
+        font-weight: 100;
+        font-size:20px;
+        @include media-up(md) {
+        
+          font-size: 2em;
+        }
+      }
+      
+      
+      
+    }
+}
+
+.section-team {
+    display: flex;
+    padding: .5rem 2.3125rem .15rem 1.3125rem;
+    width: 100%;
+    @include media-up(md) {
+      padding: .5rem 2.3125rem .15rem 2.3125rem;
+      margin-left: 18%;
+      width: 65%;
+    }
+    
+    
+    .number{
+        font-family: var(--ff-text);
+        color: var(--clr-cyan-100);
+        margin-bottom: 2.9375rem;
+        font-weight: bold;
+      }
+      .container-image {
+        border: 4px solid var(--clr-primary);
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+        margin-right:-6px;
+        
+        @include media-up(md) {
+          width: 80px;
+          height: 60px;
+        }
+
+        img {
+          width: 100%;
+          height: 100%;
+          border-radius: 50%;
+        }
+      }
+
+      .team-work{
+        font-family: var(--ff-text);
+        font-weight: bold;
+        margin-left: 20px;
+      }
+
+    .fecha{
+      display: none;
+      @include media-up(md) {
+        display: flex;
+      }
+    } 
+      p{
+        font-family: var(--ff-text);
+        margin-left: 20px;
+        color: var(--clr-black);
+        font-size:10px; 
+        @include media-up(md) {
+         font-size:20px; 
+        }
+      }
+      a{
+        font-family: var(--ff-text);
+        margin-left: 20px;
+        color: var(--clr-black)
+      }
+   
+    
+     
+}
+
+hr{
+    width: 80%;
+    margin: 1rem 10%;
+  }
+
+  .comp{
+    display: flex;
+    gap:210px;
+    margin-left: 7%;
+    font-size: 13px;
+    @include media-up(md) {
+      display: none;
+    }
+  } 
+    

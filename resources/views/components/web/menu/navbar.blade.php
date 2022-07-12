@@ -12,13 +12,12 @@
 		<div class="navbar__menu">
 			<ul>
 				<x-web.menu.item>
-					Inicio
+				<a href="{{ URL::route('/') }}" style="text-decoration:none">
+					Inicio</a>
 				</x-web.menu.item>
 				<x-web.menu.item>
-					Nosotros
-				</x-web.menu.item>
-				<x-web.menu.item>
-					Historias
+				<a href="{{ URL::route('historias') }}" style="text-decoration:none">
+					Historias</a>
 				</x-web.menu.item>
 				<x-web.menu.item>
 					Mochilla de saberes
@@ -27,9 +26,19 @@
 					Red tejiendo historias
 				</x-web.menu.item>
 				<x-web.menu.item>
+					Oportunidades
+				</x-web.menu.item>
+				<x-web.menu.item>
+					Nosotros
+				</x-web.menu.item>
+				<x-web.menu.item>
 					Contactenos
+				</x-web.menu.item>
+				<x-web.menu.item>
+				<i class="fa-solid fa-magnifying-glass"></i>
 				</x-web.menu.item>
 			</ul>
 		</div>
 	</nav>
 </header>
+	
