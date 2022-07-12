@@ -12,17 +12,11 @@
 }
 
 .grid-description-sec {
-    display: grid;
-    grid-template: 1fr / 1fr;
-    grid-gap: 17px;
+    display: block;
     margin-bottom: 50px;
     margin-top: 10%;
-    @include media-up(md) {
-      padding: 0 60px;
-    }
-    @include media-up(lg) {
-      grid-template: 1fr / 1fr 1fr;
-    }
+    margin-left: 10%;
+    
     .text-description {
         font-family: var(--ff-text);
         color: var(--clr-grey-500);
@@ -31,30 +25,8 @@
 
     }
   
-    .container-camera {
-      width: 6%;
-      height:auto;
-      margin-top:-40px;
-      margin-left: 40%;
-      @include media-up(md) {
-        
-      }
+    span {
+      font-family: var(--ff-text);
+      font-size: 0.75rem;
     }
-
-    .text-photographer {
-        font-family: var(--ff-text);
-        color: var(--clr-grey-500);
-        font-size: 12px;
-        margin-top:-40px;
-        padding: 0 38px;
-        margin-left: 35%;
-        @include media-up(md) {
-            font-size: 9px;
-            
-          }
-          @include media-up(lg) {
-           
-          }
-  
-      }
   }

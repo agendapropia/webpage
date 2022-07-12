@@ -6,10 +6,10 @@
 		</div>
 
     <p>Lorem Ipsum is simply dummy text of the printing</p>
-    <button class="btn-instagram"  href="href">Lorem Ipsum</button>
+    <button class="btn-instagram"  href="href">¡Ingresa!</button>
 	</div>
 	<div class="container-recommended">
-		<h2 class="title-section">Recomendados</h2>
+		<h2 class="title-section">Agenda propia te recomienda</h2>
 		<div class="bg-events-announ">
             <x-web.section.recommended />
 			<x-web.section.recommended />

@@ -6,5 +6,6 @@
 @include('layouts.web.histories.report')
 @include('layouts.web.histories.hs-cocreation')
 @include('layouts.web.histories.cocreation')
-<x-web.section.hs-cocreation />
+<x-web.carousel.slider-histories />
+<x-web.share />
 @endsection

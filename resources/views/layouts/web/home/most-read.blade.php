@@ -9,7 +9,7 @@
 		</div>
 	</div>
 	<div class="container-events-announ">
-		<h2 class="title-section">Convocatorias - Eventos</h2>
+		<h2 class="title-section">Oportunidades</h2>
 		<div class="bg-events-announ">
 			<x-web.events.event open />
 			<x-web.events.event />

@@ -11,29 +11,28 @@
 		</button>
 		<div class="navbar__menu">
 			<ul>
-			<x-web.menu.item>
-				<a href="{{ URL::route('/') }}"  class="act" style="text-decoration:none">
+				<x-web.menu.item>
+				<a href="{{ URL::route('/') }}" style="text-decoration:none">
 					Inicio</a>
 				</x-web.menu.item>
 				<x-web.menu.item>
-				<a href="{{ URL::route('historias') }}" class="act"  style="text-decoration:none">
+				<a href="{{ URL::route('historias') }}" style="text-decoration:none">
 					Historias</a>
 				</x-web.menu.item>
 				<x-web.menu.item>
-				<a  class="act" style="text-decoration:none">
-					Mochilla de saberes</a>
+					Mochilla de saberes
 				</x-web.menu.item>
 				<x-web.menu.item>
-				<a class="act" style="text-decoration:none">
-					Red tejiendo historias</a>
+					Red tejiendo historias
 				</x-web.menu.item>
 				<x-web.menu.item>
-				<a  class="act" style="text-decoration:none">
-					Oportunidades</a>
+					Oportunidades
 				</x-web.menu.item>
 				<x-web.menu.item>
-				<a  class="act"  style="text-decoration:none">
-					Contactenos</a>
+					Nosotros
+				</x-web.menu.item>
+				<x-web.menu.item>
+					Contactenos
 				</x-web.menu.item>
 				<x-web.menu.item>
 				<i class="fa-solid fa-magnifying-glass"></i>
@@ -42,3 +41,4 @@
 		</div>
 	</nav>
 </header>
+	

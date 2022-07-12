@@ -22,12 +22,12 @@
 			alt="" />
     </div>
     <div>
-    <p class="team-work">Equipo de trabajo</p>
-    <a href="{{ URL::route('integrantes') }}" style="text-decoration:none"><p>Conoce a todos los integrantes de este proyecto > </p></a>
+    <p class="team-work">Cocreadores</p>
+    <a href="{{ URL::route('integrantes') }}" style="text-decoration:none"><p>Conoce a las y los integrantes de este proyecto > </p></a>
     </div>
     <div class="fecha">
     <p>Feb,18 2022 </p>
-    <a><p>Compartir &#x27A6;</p></a>
+    <a><p>Comparta &#x27A6;</p></a>
     </div>
 </section>
 <hr style="padding: 0 5%;">
