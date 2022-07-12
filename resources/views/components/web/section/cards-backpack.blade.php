@@ -12,9 +12,9 @@
           <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deleniti, consequatur explicabo exercitationem velit aspernatur eveniet!</p>
         <div class="card-box-content-action">
             <button class="web-button"  href="href">Descargar</button>
-          <div class="circle-btn">
-            <img src="https://cdn.zeplin.io/626c221a3745ab96ae1e4665/assets/11825C53-0E2A-43AC-A22A-6A21D7E85212.svg" width="25" height="25">
-          </div>
+          
+          <x-web.menu.social-btn />
+       
         </div>
     </div>
   </div>

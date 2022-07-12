@@ -1,8 +1,13 @@
 .section-img {
-    display: grid;
-    grid-template: 1fr / 1fr 1fr;
-    grid-gap: 17px;
-    margin-bottom: 50px;
+  display: grid;
+  grid-template: 1fr;
+
+  @include media-up(md) {
+      display: grid;
+      grid-template: 1fr / 1fr 1fr;
+      grid-gap: 17px;
+      margin-bottom: 50px;
+  }
 
   
   .img-quotes{
@@ -16,7 +21,7 @@
         opacity: inherit;
       }
     .quotes__text {
-        width: 548px;
+        width: 350px;
         height: auto;        
         font-family: var(--ff-text);
         color: var(--clr-black);

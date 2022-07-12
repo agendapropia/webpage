@@ -1,12 +1,10 @@
 @extends('layouts.web.app')
 
 <x-web.menu.navbar />
-
 @section('content')
 
     <x-web.carousel.standar />
     <x-web.section.notice />
-
     @include('layouts.web.home.articles-images')
     @include('layouts.web.home.articles-text')
     @include('layouts.web.home.most-read')

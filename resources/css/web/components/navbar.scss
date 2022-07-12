@@ -151,13 +151,7 @@
       
       }
     }
-    .active {
-      border-bottom: 2px solid var(--clr-primary);
-    }
-    a:is(link, :active, :visited) {
-      color: var(--clr-yellow-100);
 
-    }
     @include media-up(lg) {
       position: static;
       width: 100%;

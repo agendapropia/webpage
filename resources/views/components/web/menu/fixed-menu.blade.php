@@ -31,6 +31,9 @@
 					Oportunidades</a>
 				</x-web.menu.item>
 				<x-web.menu.item>
+					Nosotros
+				</x-web.menu.item>
+				<x-web.menu.item>
 					Contactenos
 				</x-web.menu.item>
 				<x-web.menu.item>

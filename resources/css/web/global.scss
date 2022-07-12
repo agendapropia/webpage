@@ -1,4 +1,5 @@
 @import 'components/article.scss';
+@import 'components/social-btn.scss';
 @import 'components/badge-location.scss';
 @import 'components/button.scss';
 @import 'components/carousel.scss';
@@ -47,7 +48,8 @@
 @import 'components/home-coc-most.scss';
 @import 'components/credits.scss';
 @import 'components/img-credits.scss';
-
+@import 'components/share.scss';
+@import 'components/slider-cocreation.scss';
 @import 'base/_mixins.scss';
 
 
@@ -414,7 +416,7 @@ template {
   --clr-black-100: #151922;
   --clr-yellow-100: #e8b45d;
   --clr-yellow-200: #f1b24a;
-  --clr-cyan-100: #264a50;
+  --clr-cyan-100: #264950;
   --clr-cyan-200: #265b53;
   --clr-orange: #e27a30;
   --clr-grey-50: #f7f7f7;

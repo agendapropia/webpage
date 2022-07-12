@@ -3,8 +3,8 @@
         <div class="col-md-12">
             <div id="testimonial-slider" class="owl-carousel">
             <div class="owl-buttons">
-                <div class="owl-prev"><</div>
-                <div class="owl-next">></div>
+                <div class="prev owl-prev"></div>
+                <div class="next owl-next"></div>
             </div>
 
                 <!--  ////////////////////////////////////////////////////////  -->

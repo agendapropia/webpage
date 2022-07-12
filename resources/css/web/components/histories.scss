@@ -44,6 +44,9 @@
       color: var(--clr-grey-500);
       margin-bottom: 2.9375rem;
     }
+    .show{ 
+      display: none;
+    }
     .buttons{
       margin-left:21%;
       
@@ -53,7 +56,7 @@
 
       @include media-up(md) {
       display: initial;
-      background-color: var(--clr-primary);
+      background-color: var(--clr-grey-100);
       border-radius: 20px;
       border: 0;
       color: var(--clr-white);
@@ -69,8 +72,8 @@
       }
       
     }
-    .web-button:disabled {
-      color: var(--clr-grey-100);
+    .active {
+      background-color: var(--clr-primary);
     }
   }
 }

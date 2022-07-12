@@ -9,7 +9,7 @@
 	</div>
 	<div class="container-text">
 		<div class="text__badge {{$open ? 'text__badge--open' : 'text__badge--close'}}">
-			<h3>convocatoria</h3>
+			<h3>Oportunidades</h3>
 			<span>{{
 				$open ? 'abierta' : 'cerrada'
 			}}</span>
