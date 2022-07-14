@@ -1,13 +1,13 @@
 const settingEditor = {
   image: {
-    class: SimpleImage,
+    class: EditorJsSimpleImage,
     inlineToolbar: false,
     config: {
       placeholder: '',
     },
   },
   summary: {
-    class: SummaryTop,
+    class: EditorJsSummaryTop,
     inlineToolbar: false,
     config: {
       placeholder: 'Agrega un texto de resumen',

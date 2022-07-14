@@ -42,5 +42,5 @@ return [
 
     'publications' => 'Cocreaciones',
     'specials' => 'Especiales',
-    'articules' => 'Articulos',
+    'articles' => 'Articulos',
 ];

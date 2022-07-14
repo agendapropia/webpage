@@ -13,7 +13,7 @@ class CreateSpecialsTable extends Migration
      */
     public function up()
     {
-        Schema::connection('mysql_articules')->create('specials', function (
+        Schema::connection('mysql_articles')->create('specials', function (
             Blueprint $table
         ) {
             $table->integerIncrements('id');
@@ -22,13 +22,13 @@ class CreateSpecialsTable extends Migration
                 ->integer('status_id')
                 ->index()
                 ->comment(
-                    'Relación con la tabla agendapropia_articules.especial_status'
+                    'Relación con la tabla agendapropia_articles.especial_status'
                 );
             $table
                 ->integer('template_id')
                 ->index()
                 ->comment(
-                    'Relación con la tabla agendapropia_articules.specials_templates'
+                    'Relación con la tabla agendapropia_articles.specials_templates'
                 );
             $table->string('name', 150);
             $table->date('publication_date');
@@ -45,6 +45,6 @@ class CreateSpecialsTable extends Migration
      */
     public function down()
     {
-        Schema::connection('mysql_articules')->dropIfExists('specials');
+        Schema::connection('mysql_articles')->dropIfExists('specials');
     }
 }

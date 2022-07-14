@@ -16,7 +16,7 @@ class SpecialStatus extends Model
      *
      * @var string
      */
-    protected $connection = 'mysql_articules';
+    protected $connection = 'mysql_articles';
 
     /**
      * The attributes that are mass assignable.

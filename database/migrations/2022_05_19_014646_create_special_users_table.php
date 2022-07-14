@@ -13,7 +13,7 @@ class CreateSpecialUsersTable extends Migration
      */
     public function up()
     {
-        Schema::connection('mysql_articules')->create(
+        Schema::connection('mysql_articles')->create(
             'special_users',
             function (Blueprint $table) {
                 $table->integerIncrements('id');
@@ -32,6 +32,6 @@ class CreateSpecialUsersTable extends Migration
      */
     public function down()
     {
-        Schema::connection('mysql_articules')->dropIfExists('special_users');
+        Schema::connection('mysql_articles')->dropIfExists('special_users');
     }
 }

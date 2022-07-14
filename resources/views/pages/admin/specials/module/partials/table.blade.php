@@ -30,6 +30,9 @@
                         <a class="btn btn-mt btn-mt-primary" href="/admin/specials/#_slug_#/contents" title="Contenidos">
                             <i class="fa fa-file-text" aria-hidden="true"></i>
                         </a>
+                        <a class="btn btn-mt btn-mt-info" href="/admin/articles?special_id=#_id_#" title="Artículos">
+                            <i class="fa fa-list-alt" aria-hidden="true"></i>
+                        </a>
                     @endCan
                 </td>
                 <td>

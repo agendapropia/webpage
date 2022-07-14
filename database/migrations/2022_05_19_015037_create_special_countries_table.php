@@ -13,7 +13,7 @@ class CreateSpecialCountriesTable extends Migration
      */
     public function up()
     {
-        Schema::connection('mysql_articules')->create(
+        Schema::connection('mysql_articles')->create(
             'special_countries',
             function (Blueprint $table) {
                 $table->integerIncrements('id');
@@ -36,7 +36,7 @@ class CreateSpecialCountriesTable extends Migration
      */
     public function down()
     {
-        Schema::connection('mysql_articules')->dropIfExists(
+        Schema::connection('mysql_articles')->dropIfExists(
             'special_countries'
         );
     }

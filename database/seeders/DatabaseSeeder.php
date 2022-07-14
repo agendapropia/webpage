@@ -30,5 +30,8 @@ class DatabaseSeeder extends Seeder
         $this->call(SpecialSeeder::class);
         $this->call(SpecialTwoSeeder::class);
         $this->call(SpecialThreeSeeder::class);
+
+        $this->call(ArticleRolesSeeder::class);
+        $this->call(ArticleSeeder::class);
     }
 }

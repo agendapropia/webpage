@@ -251,6 +251,11 @@
   color: #fff;
   border-color: #035361;
 }
+.table-gear .btn-mt-info{
+  background-color: #0bb6d4;
+  color: #fff;
+  border-color: #0b8ba2;
+}
 
 /*
  * This section is used to implement css for the LOADER

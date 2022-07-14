@@ -13,7 +13,7 @@ class CreateSpecialStatusTable extends Migration
      */
     public function up()
     {
-        Schema::connection('mysql_articules')->create(
+        Schema::connection('mysql_articles')->create(
             'special_status',
             function (Blueprint $table) {
                 $table->integerIncrements('id');
@@ -32,6 +32,6 @@ class CreateSpecialStatusTable extends Migration
      */
     public function down()
     {
-        Schema::connection('mysql_articules')->dropIfExists('special_status');
+        Schema::connection('mysql_articles')->dropIfExists('special_status');
     }
 }
