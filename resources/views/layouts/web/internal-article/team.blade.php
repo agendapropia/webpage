@@ -5,7 +5,7 @@
 </section>
 <div class="comp">
     <p>Feb,18 2022 </p>
-    <a><p>Compartir &#x27A6;</p></a>
+    <p>Compartir  </p><a><x-web.menu.social-arrow-movil/></a>
 </div>
 <section class="section-team">
     <p class='number'>+10</p> 
@@ -27,7 +27,7 @@
     </div>
     <div class="fecha">
     <p>Feb,18 2022 </p>
-    <a><p>Comparta &#x27A6;</p></a>
+    <p>Comparta</p><a><x-web.menu.social-arrow/></a>
     </div>
 </section>
-<hr style="padding: 0 5%;">
+<hr class="vl">

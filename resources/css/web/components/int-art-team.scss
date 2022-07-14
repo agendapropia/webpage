@@ -18,9 +18,8 @@
         font-family: var(--ff-title);
         color: var(--clr-cyan-100);
         margin-bottom: 1.625rem;
-        text-transform: uppercase;
         font-weight: 100;
-        font-size:20px;
+        font-size:18px;
         @include media-up(md) {
         
           font-size: 2em;
@@ -77,16 +76,17 @@
     .fecha{
       display: none;
       @include media-up(md) {
-        display: flex;
+        display: grid;
+        grid: 1fr/3fr 1fr 1fr;
       }
     } 
       p{
         font-family: var(--ff-text);
         margin-left: 20px;
         color: var(--clr-black);
-        font-size:10px; 
+        font-size:10px;
         @include media-up(md) {
-         font-size:20px; 
+         font-size:13px; 
         }
       }
       a{
@@ -99,18 +99,174 @@
      
 }
 
-hr{
-    width: 80%;
-    margin: 1rem 10%;
+.vl{
+  display: none;
+  @include media-up(md) {
+    display: block;
+  width: 80%;
+  margin: 10%;
+  margin-top: 5%;
   }
+}
 
   .comp{
-    display: flex;
-    gap:210px;
+    display: grid;
+    grid: 1fr/3fr 0fr 1fr;
+    gap: 3px;
     margin-left: 7%;
     font-size: 13px;
+   
     @include media-up(md) {
       display: none;
     }
-  } 
-    
+
+    /*gooey menu style.css*/
+.fabs {
+  position: absolute;
+  right: 38px;
+  z-index: 0;
+}
+  
+.action {
+  background:#ffffff ;
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+  transition: background-color 0.4s ease-in-out;
+  border: 3px solid #ffff;
+  margin-top: -9px
+}
+
+.action i {
+  position: absolute;
+  color: black;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.action:hover {
+  background-color: #ffffff; ;
+}
+
+.g-btn {
+  position: absolute;
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  background-color: var(--clr-primary);
+  border: 1px solid #ffff;
+}
+
+.g-btn:hover{
+  transform: rotate(360deg);
+  transition: all 0.5s;
+}
+
+.g-btn i {
+  position: absolute;
+  font-size: 12px;
+  color: white;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.btns {
+  position: absolute;
+  bottom: 0px;
+  margin-bottom: 0px;
+  height: 20px;
+  width: 20px;
+  transition: 0.3s ease-in-out;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: -1;
+}
+.btns.open {
+  bottom: 50px;
+}
+}
+
+.fecha{
+  display: none;
+  @include media-up(md) {
+      /*gooey menu style.css*/
+.fabs {
+  position: absolute;
+  right: 20%;
+
+}
+  
+.action {
+  background:#ffffff ;
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+  transition: background-color 0.4s ease-in-out;
+  border: 3px solid #ffff;
+  margin-top: -9px;
+  z-index: 3;
+}
+
+.action i {
+  position: absolute;
+  background:#ffffff ;
+  color: black;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 15px;
+  cursor: pointer;
+  z-index: 3;
+
+}
+
+.action:hover {
+  background-color: #ffffff; ;
+}
+
+.g-btn {
+  position: absolute;
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  background-color: var(--clr-primary);
+  border: 1px solid #ffff;
+  margin-top:-9px;
+  left: -1;
+}
+
+.g-btn:hover{
+  transform: rotate(360deg);
+  transition: all 0.5s;
+}
+
+.g-btn i {
+  position: absolute;
+  font-size: 12px;
+  color: white;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.btnsh {
+  position: absolute;
+  bottom: 0px;
+  margin-bottom: 0px;
+  height: 20px;
+  width: 20px;
+  transition: 0.3s ease-in-out;
+  left: 0%;
+  transform: translateX(-50%);
+  z-index: -1;
+}
+.btnsh.open {
+  bottom: 50px;
+}
+
+}
+}   

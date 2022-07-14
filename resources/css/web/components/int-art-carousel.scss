@@ -1,15 +1,18 @@
 @import '../base/mixins.scss';
 .section-carousel{
     display: grid;
-    grid-template: 1fr / 1fr 1fr;
+    grid-template: 1fr ;
     grid-gap: 17px;
     margin-bottom: 50px;
 
     @include media-up(md) {
+      grid-template: 1fr / 1fr 1fr;
       padding: 0 60px;
     }
     @include media-up(lg) {
       grid-template: 1fr / 1fr 1fr;
     }
+
+
     
 }

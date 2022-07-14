@@ -45,8 +45,11 @@
       margin: 0;
     }
   }
-
+  @include media-up(md) {
+    margin: 39px 0;
+  }
   @include media-up(lg) {
+    margin: 45px 0;
     img {
       width: 150px;
     }

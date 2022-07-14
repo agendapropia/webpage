@@ -5,11 +5,11 @@
         <x-web.section.instagram />
 		</div>
 
-    <p>Lorem Ipsum is simply dummy text of the printing</p>
+    <p>Las cocreaciones pereodísticas tienen su propia narrativa en nuestro instagram.</p>
     <button class="btn-instagram"  href="href">¡Ingresa!</button>
 	</div>
 	<div class="container-recommended">
-		<h2 class="title-section">Agenda propia te recomienda</h2>
+		<h2 class="title-section">Agenda Propia recomienda</h2>
 		<div class="bg-events-announ">
             <x-web.section.recommended />
 			<x-web.section.recommended />

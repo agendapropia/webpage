@@ -17,6 +17,9 @@
 <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/gh/kenwheeler/slick@1.8.1/slick/slick.css"/>
 <!-- Add the slick-theme.css if you want default styling -->
 <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/gh/kenwheeler/slick@1.8.1/slick/slick-theme.css"/>
+
+<div id="fb-root"></div>
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/es_LA/sdk.js#xfbml=1&version=v14.0&appId=249192411857718&autoLogAppEvents=1" nonce="gfeQDqeW"></script>
 @stack('js-before')
 
 <script src="{{ mix('js/web/all.js') }}"></script>

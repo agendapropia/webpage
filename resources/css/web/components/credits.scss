@@ -1,10 +1,9 @@
 @import '../base/mixins.scss';
 
 .section-credits {
-    margin-bottom: 50px;
+  margin-bottom: 50px;
     background-color: #f0efe6;
-
-    
+  
     .button{
         margin-top: -15px;
         span {
@@ -13,6 +12,20 @@
             font-size: 0.75rem;
             text-align: center;
             .web-button {
+              background-color: var(--clr-primary);
+                border-radius: 20px;
+                border: 0;
+                color: var(--clr-white);
+                font-family: var(--ff-text);
+                font-size: 0.8125rem;
+                height: 34px;
+                outline: 0;
+                text-transform: uppercase;
+                font-weight: 500;
+                width: 171px;
+                margin-left: 28%;
+                margin-top: -15px;
+              @include media-up(md) {
                 background-color: var(--clr-primary);
                 border-radius: 20px;
                 border: 0;
@@ -27,18 +40,25 @@
                 margin-left: 43%;
                 margin-top: -79px
               }
+              }
               .vl{
+                @include media-up(md) {
                 width: 30%;
                 margin: 5%;
                 opacity: 1
-                
+              }
               }
               .vll{
+                width: 22%;
+                margin-top: -4%;
+                margin-left: 78%;
+                opacity: 1;
+                @include media-up(md) {
                 width: 30%;
                 margin-top: -5%;
                 margin-left: 64%;
                 opacity: 1
-                
+                }
               }
 
           }

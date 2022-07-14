@@ -25,9 +25,11 @@
         height: auto;        
         font-family: var(--ff-text);
         color: var(--clr-black);
+        line-height: 29px;
         
         @include media-up(md) {
             height: auto;
+            line-height: 29px;
           } 
       }
 

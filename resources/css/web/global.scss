@@ -8,6 +8,10 @@
 @import 'components/most-read.scss';
 @import 'components/navbar.scss';
 @import 'components/notice-hero.scss';
+@import 'components/sec-video.scss';
+@import 'components/carousel-sec.scss';
+@import 'components/map.scss';
+@import 'components/content-carousel.scss';
 @import 'components/reportage.scss';
 @import 'components/social-media.scss';
 @import 'components/video.scss';
@@ -40,16 +44,19 @@
 @import 'components/pdf.scss';
 @import 'components/related.scss';
 @import 'components/most-read-generic.scss';
+@import 'components/share.scss';
+@import 'components/slider-cocreation.scss';
 @import 'components/home-co-front-page.scss';
 @import 'components/home-coc-header.scss';
+@import 'components/home-coc-share.scss';
 @import 'components/home-coc-title.scss';
 @import 'components/home-coc-gallery.scss';
 @import 'components/home-coc-citas.scss';
 @import 'components/home-coc-most.scss';
 @import 'components/credits.scss';
 @import 'components/img-credits.scss';
-@import 'components/share.scss';
-@import 'components/slider-cocreation.scss';
+@import 'components/btn-pagination.scss';
+@import 'components/comments-face.scss';
 @import 'base/_mixins.scss';
 
 
@@ -428,6 +435,7 @@ template {
 
   --ff-title: 'Merriweather', serif;
   --ff-text: 'Poppins', sans-serif;
+  --ff-prueba:'Fredericka the Great', cursive;
 
   --ff-title-size: 1.5rem;
   --ff-sub-title-size: 0.875rem;

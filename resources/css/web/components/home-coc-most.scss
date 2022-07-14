@@ -14,8 +14,10 @@
   }
   
   .wrapper-coc {
+    display: none;
+  @include media-up(md) {
     background-color: var(--clr-white);
-    width: 100%;
+    width: 83%;
     height: auto;
     display: flex;
     justify-content: center;
@@ -42,6 +44,7 @@
         height: auto;
       }
       .text-most-read {
+        margin-left: 10%;
         p {
             
           display: block;
@@ -49,3 +52,4 @@
       }
     }
   }
+}

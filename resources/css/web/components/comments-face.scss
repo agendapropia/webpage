@@ -1,0 +1,12 @@
+.comments{
+    display: none;
+    @include media-up(md) {
+        display: flex;
+        width: 50%;
+        font-family: var(--ff-text);
+        font-weight: bold;
+        font-size: 1rem;
+        color: var(--clr-cyan-100);
+        margin-left: 50%;
+    }
+}
