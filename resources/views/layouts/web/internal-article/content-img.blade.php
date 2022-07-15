@@ -12,8 +12,7 @@
                     voluptatum, ea optio dignissimos quae.
                     Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum, aut ab beatae, illum dicta ratione sit
                     voluptatum, ea optio dignissimos quae.
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum, aut ab beatae, illum dicta ratione sit
-                    voluptatum, ea optio dignissimos quae.</p>
+                    </p>
         </div>
     </div>
 </section>

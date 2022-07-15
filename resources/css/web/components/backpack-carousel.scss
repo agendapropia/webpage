@@ -158,58 +158,59 @@
     }
     }
   }
-}
-.owl-carousel {
-  margin-bottom: 70px;
-}
-.owl-carousel .owl-item {
-  display: flex;
-  width: 17%;
-  float: left;
 
-}
-.et_right_sidebar #main-content .container:before{
-  display: none;
-}
-#main-content .container {
-  padding-top: 10px;
-}
-i.fa.fa-quote-left {
-  padding: 0px 10px;
-  color: rgb(252, 251, 251);
-}
-
-.owl-buttons{
-  margin-top:-56%;
-  margin-left: 85%;
-
- 
-}
-
-.owl-theme .owl-controls .owl-page.active span,
-        .owl-theme .owl-controls .owl-page span{
-            width: 60px !important;
-            height: 1px !important;
-            background: #2020206e !important;
-            box-sizing: content-box;
-            margin: 5px 7px;
-        }
-        .owl-theme .owl-controls .owl-page span{
-            border: 4px solid transparent;
-            background: #9c9c9c46 !important;
-            margin-top: -15px;
-        }
-
-.owl-theme .owl-controls .owl-buttons .owl-prev,
-.owl-theme .owl-controls .owl-buttons .owl-next {
-  border-radius: 50%;
-  background: #e0e0e036;
-  border: 1px solid;
-  border-color: #a5a0a5;
-  font-size: 25px;
-  opacity: 1;
-  color: #a5a0a5;
-  font-weight: lighter;
-  width: 40px;
-  height: 40px;
+  .owl-carousel {
+    margin-bottom: 70px;
+  }
+  .owl-carousel .owl-item {
+    display: flex;
+    width: 17%;
+    float: left;
+  
+  }
+  .et_right_sidebar #main-content .container:before{
+    display: none;
+  }
+  #main-content .container {
+    padding-top: 10px;
+  }
+  i.fa.fa-quote-left {
+    padding: 0px 10px;
+    color: rgb(252, 251, 251);
+  }
+  
+  .owl-buttons{
+    margin-top:-56%;
+    margin-left: 85%;
+  
+   
+  }
+  
+  .owl-theme .owl-controls .owl-page.active span,
+          .owl-theme .owl-controls .owl-page span{
+              width: 60px !important;
+              height: 1px !important;
+              background: #2020206e !important;
+              box-sizing: content-box;
+              margin: 5px 7px;
+          }
+          .owl-theme .owl-controls .owl-page span{
+              border: 4px solid transparent;
+              background: #9c9c9c46 !important;
+              margin-top: -15px;
+          }
+  
+  .owl-theme .owl-controls .owl-buttons .owl-prev,
+  .owl-theme .owl-controls .owl-buttons .owl-next {
+    border-radius: 50%;
+    background: #e0e0e036;
+    border: 1px solid;
+    border-color: #a5a0a5;
+    font-size: 25px;
+    opacity: 1;
+    color: #a5a0a5;
+    font-weight: lighter;
+    width: 40px;
+    height: 40px;
+  }
 }

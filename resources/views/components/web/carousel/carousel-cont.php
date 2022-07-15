@@ -1,6 +1,7 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-md-12">
+      <div class="content-sec">
       <div id="news-slider" class="owl-carousel">
         <div class="post-slide">
           <div class="post-img">
@@ -41,5 +42,6 @@
       </div>
     </div>
   </div>
+</div>
 </div>
 

@@ -13,7 +13,7 @@
         "@prettier/plugin-php": "^0.18.4",
         "axios": "^0.21",
         "bootstrap": "^4.0.0",
-        "jquery": "^3.2",
+        "jquery": "^3.2.1",
         "laravel-mix": "^6.0.18",
         "lodash": "^4.17.19",
         "popper.js": "^1.12",
@@ -29,6 +29,7 @@
     },
     "dependencies": {
         "@glidejs/glide": "^3.5.2",
-        "flatpickr": "^4.6.11"
+        "flatpickr": "^4.6.11",
+        "owl.carousel": "^2.3.4"
     }
 }

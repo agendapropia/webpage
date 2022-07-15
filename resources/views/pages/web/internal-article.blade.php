@@ -16,6 +16,7 @@
     @include('layouts.web.internal-article.content')
     <x-web.section.int-art-soundcloud />
     @include('layouts.web.internal-article.content')
+    @include('layouts.web.internal-article.content-img')
     @include('layouts.web.internal-article.video-loop')
     @include('layouts.web.internal-article.content')
     @include('layouts.web.internal-article.carousel')

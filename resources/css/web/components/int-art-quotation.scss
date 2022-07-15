@@ -41,8 +41,9 @@
   }
   
   .img-quotes{
-    width: 15%; 
+    width: 21%; 
     height: auto;
+    margin-left: -30%;
 
     @include media-up(md) {
         width: 25%; 

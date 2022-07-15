@@ -111,7 +111,7 @@
 
   .comp{
     display: grid;
-    grid: 1fr/3fr 0fr 1fr;
+    grid: 1fr/91px 0fr 1fr;
     gap: 3px;
     margin-left: 7%;
     font-size: 13px;
@@ -120,153 +120,88 @@
       display: none;
     }
 
-    /*gooey menu style.css*/
-.fabs {
-  position: absolute;
-  right: 38px;
-  z-index: 0;
-}
-  
-.action {
-  background:#ffffff ;
-  height: 30px;
-  width: 30px;
-  border-radius: 50%;
-  transition: background-color 0.4s ease-in-out;
-  border: 3px solid #ffff;
-  margin-top: -9px
-}
+    .fabs {
+      position: absolute;
+      right: 20%;
+    
+    }
+      
+    .action {
+      background:#ffffff ;
+      height: 30px;
+      width: 30px;
+      border-radius: 50%;
+      transition: background-color 0.4s ease-in-out;
+      border: 3px solid #ffff;
+      margin-top: -9px;
+      z-index: 3;
+    }
+    
+    .action i {
+      position: absolute;
+      background:#ffffff ;
+      color: black;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 15px;
+      cursor: pointer;
+      z-index: 3;
+    
+    }
+    
+    .action:hover {
+      background-color: #ffffff; ;
+    }
+    
+    .g-btn {
+      position: absolute;
+      height: 20px;
+      width: 20px;
+      border-radius: 50%;
+      background-color: var(--clr-primary);
+      border: 1px solid #ffff;
+      margin-top:-9px;
+      left: -1;
+    }
+    
+    .g-btn:hover{
+      transform: rotate(360deg);
+      transition: all 0.5s;
+    }
+    
+    .g-btn i {
+      position: absolute;
+      font-size: 12px;
+      color: white;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+    }
+    
+    .btnsh {
+      position: absolute;
+      bottom: 0px;
+      margin-bottom: 0px;
+      height: 20px;
+      width: 20px;
+      transition: 0.3s ease-in-out;
+      left: 0%;
+      transform: translateX(-50%);
+      z-index: -1;
+    }
+    .btnsh.open {
+      bottom: 50px;
+    }
+    
+    }
 
-.action i {
-  position: absolute;
-  color: black;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 15px;
-  cursor: pointer;
-}
-
-.action:hover {
-  background-color: #ffffff; ;
-}
-
-.g-btn {
-  position: absolute;
-  height: 20px;
-  width: 20px;
-  border-radius: 50%;
-  background-color: var(--clr-primary);
-  border: 1px solid #ffff;
-}
-
-.g-btn:hover{
-  transform: rotate(360deg);
-  transition: all 0.5s;
-}
-
-.g-btn i {
-  position: absolute;
-  font-size: 12px;
-  color: white;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-}
-
-.btns {
-  position: absolute;
-  bottom: 0px;
-  margin-bottom: 0px;
-  height: 20px;
-  width: 20px;
-  transition: 0.3s ease-in-out;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: -1;
-}
-.btns.open {
-  bottom: 50px;
-}
-}
 
 .fecha{
   display: none;
   @include media-up(md) {
       /*gooey menu style.css*/
-.fabs {
-  position: absolute;
-  right: 20%;
 
-}
-  
-.action {
-  background:#ffffff ;
-  height: 30px;
-  width: 30px;
-  border-radius: 50%;
-  transition: background-color 0.4s ease-in-out;
-  border: 3px solid #ffff;
-  margin-top: -9px;
-  z-index: 3;
-}
-
-.action i {
-  position: absolute;
-  background:#ffffff ;
-  color: black;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 15px;
-  cursor: pointer;
-  z-index: 3;
-
-}
-
-.action:hover {
-  background-color: #ffffff; ;
-}
-
-.g-btn {
-  position: absolute;
-  height: 20px;
-  width: 20px;
-  border-radius: 50%;
-  background-color: var(--clr-primary);
-  border: 1px solid #ffff;
-  margin-top:-9px;
-  left: -1;
-}
-
-.g-btn:hover{
-  transform: rotate(360deg);
-  transition: all 0.5s;
-}
-
-.g-btn i {
-  position: absolute;
-  font-size: 12px;
-  color: white;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-}
-
-.btnsh {
-  position: absolute;
-  bottom: 0px;
-  margin-bottom: 0px;
-  height: 20px;
-  width: 20px;
-  transition: 0.3s ease-in-out;
-  left: 0%;
-  transform: translateX(-50%);
-  z-index: -1;
-}
-.btnsh.open {
-  bottom: 50px;
-}
 
 }
 }   
