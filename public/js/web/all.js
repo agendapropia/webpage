@@ -24,6 +24,21 @@ function toggleBtn() {
     }
   }
 $(document).ready(function(){
+    $("#allied").owlCarousel({
+        items : 2,
+        temsCustom:[1442, 2],
+        itemsDesktop:[1099,2],
+        itemsDesktopSmall:[979,2],
+        temsCustom:[425, 2],
+        itemsMobile : [300,2],
+        itemsScaleUp:true,
+        navigation:true,
+        navigationText:["",""],
+        margin:40,
+
+    });
+    });
+$(document).ready(function(){
   $("#testimonial-slider").owlCarousel({
       items:3,
       itemsDesktop:[1000,4],

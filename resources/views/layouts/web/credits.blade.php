@@ -1,7 +1,7 @@
 <section class="section-credits">
 <div class="button">
     <span>
-        <hr class="vl">
+        <hr class="vlll">
 	    <button  class="web-button" >Creditos</button>
         <hr class="vll">
     </span>
