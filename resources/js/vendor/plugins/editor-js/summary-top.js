@@ -6,7 +6,7 @@
 /**
  *
  */
-class SummaryTop {
+class EditorJsSummaryTop {
   /**
    * Notify core that read-only mode is supported
    *

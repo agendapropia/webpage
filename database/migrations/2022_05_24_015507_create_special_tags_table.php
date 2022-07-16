@@ -13,7 +13,7 @@ class CreateSpecialTagsTable extends Migration
      */
     public function up()
     {
-        Schema::connection('mysql_articules')->create('special_tags', function (Blueprint $table) {
+        Schema::connection('mysql_articles')->create('special_tags', function (Blueprint $table) {
             $table->integerIncrements('id');
             $table->integer('special_id')->index();
             $table->integer('tag_id')->index()->comment('Relaciona con la tabla agendapropia_utils.tags');
@@ -28,6 +28,6 @@ class CreateSpecialTagsTable extends Migration
      */
     public function down()
     {
-        Schema::connection('mysql_articules')->dropIfExists('special_tags');
+        Schema::connection('mysql_articles')->dropIfExists('special_tags');
     }
 }

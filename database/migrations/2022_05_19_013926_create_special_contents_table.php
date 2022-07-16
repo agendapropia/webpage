@@ -13,7 +13,7 @@ class CreateSpecialContentsTable extends Migration
      */
     public function up()
     {
-        Schema::connection('mysql_articules')->create(
+        Schema::connection('mysql_articles')->create(
             'special_contents',
             function (Blueprint $table) {
                 $table->integerIncrements('id');
@@ -21,7 +21,7 @@ class CreateSpecialContentsTable extends Migration
                     ->integer('special_id')
                     ->index()
                     ->comment(
-                        'Relación con la tabla agendapropia_articules.specials'
+                        'Relación con la tabla agendapropia_articles.specials'
                     );
                 $table
                     ->integer('language_id')
@@ -46,6 +46,6 @@ class CreateSpecialContentsTable extends Migration
      */
     public function down()
     {
-        Schema::connection('mysql_articules')->dropIfExists('special_contents');
+        Schema::connection('mysql_articles')->dropIfExists('special_contents');
     }
 }

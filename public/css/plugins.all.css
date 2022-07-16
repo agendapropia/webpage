@@ -1649,6 +1649,11 @@ span.flatpickr-weekday {
   color: #fff;
   border-color: #035361;
 }
+.table-gear .btn-mt-info{
+  background-color: #0bb6d4;
+  color: #fff;
+  border-color: #0b8ba2;
+}
 
 /*
  * This section is used to implement css for the LOADER
@@ -2489,8 +2494,8 @@ span.flatpickr-weekday {
   padding: 0 5px;
 }
 
-.simple-image.withBackground img {
-  max-width: 55%;
+.simple-image.withBackground .gallery {
+  max-width: 70%;
   margin: 0 auto 15px;
 }
 

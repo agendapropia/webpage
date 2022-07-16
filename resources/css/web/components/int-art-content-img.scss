@@ -1,6 +1,5 @@
 .section-img {
-  display: grid;
-  grid-template: 1fr;
+  display: none;
 
   @include media-up(md) {
       display: grid;
@@ -25,9 +24,12 @@
         height: auto;        
         font-family: var(--ff-text);
         color: var(--clr-black);
+        line-height: 29px;
+        margin-left: 10%;
         
         @include media-up(md) {
             height: auto;
+            line-height: 29px;
           } 
       }
 

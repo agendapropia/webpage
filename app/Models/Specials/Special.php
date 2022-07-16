@@ -14,7 +14,7 @@ class Special extends Model
      *
      * @var string
      */
-    protected $connection = 'mysql_articules';
+    protected $connection = 'mysql_articles';
 
     /**
      * The attributes that are mass assignable.
@@ -40,5 +40,13 @@ class Special extends Model
         if (trim($value) != '') {
             $query->where('s.name', 'like', "%$value%");
         }
+    }
+
+    // ----------- util methods -------------
+    public function scopeGetDataBasic($query)
+    {
+        $query
+            ->select('id', 'name')
+            ->where('hidden', false);
     }
 }

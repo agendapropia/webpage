@@ -14,6 +14,7 @@ use stdClass;
 class SpecialsController extends Controller
 {
     const STATUS_EDITING = 2;
+    const FROM_TABLE_MAIN = 'specials as s';
 
     /**
      * Create a new controller instance.
@@ -53,10 +54,10 @@ class SpecialsController extends Controller
             'ss.name as status_name',
             'ss.label as status_label'
         )
-            ->from('specials as s')
+            ->from(self::FROM_TABLE_MAIN)
             ->join('special_status as ss', 'ss.id', 's.status_id')
             ->search($search)
-            ->where('s.hidden', true)
+            ->where('s.hidden', false)
             ->orderBy('s.id', 'DESC')
             ->paginate($row);
 
@@ -93,21 +94,21 @@ class SpecialsController extends Controller
 
         /** special creation */
         $special = new Special($request->all());
-        $special->slug = $this->getUuidSpecial($request->name);
+        $special->slug = $this->_getUuidSpecial($request->name);
         $special->status_id = self::STATUS_EDITING;
         $special->hidden = true;
         $special->number_views = 0;
         $special->save();
 
-        $this->setSpecialAlliedMedia(
+        $this->_setSpecialAlliedMedia(
             $special->id,
             explode(',', $request->alliedmedia_ids)
         );
-        $this->setSpecialCountries(
+        $this->_setSpecialCountries(
             $special->id,
             explode(',', $request->country_ids)
         );
-        $this->setSpecialTags($special->id, explode(',', $request->tags_ids));
+        $this->_setSpecialTags($special->id, explode(',', $request->tags_ids));
 
         return $this->responseJson(true, 'special created', $special);
     }
@@ -179,11 +180,11 @@ class SpecialsController extends Controller
             $request->id,
             explode(',', $request->alliedmedia_ids)
         );
-        $this->validateSpecialTags(
+        $this->_validateSpecialTags(
             $request->id,
             explode(',', $request->tags_ids)
         );
-        $this->validateSpecialCountries(
+        $this->_validateSpecialCountries(
             $request->id,
             explode(',', $request->country_ids)
         );
@@ -191,9 +192,26 @@ class SpecialsController extends Controller
         return $this->responseJson(true, 'special update', $special);
     }
 
+    /**
+     * GET search by autocomplete
+     * POST /admin/specials/search-by-autocomplete
+     */
+    public function searchByAutocomplete(Request $request)
+    {
+        $search = $request->get('_search');
+        $row = $request->get('_row') ?? 10;
+        $alliedMedia = Special::select('s.id', 's.name')
+            ->from(self::FROM_TABLE_MAIN)
+            ->search($search)
+            ->limit($row)
+            ->get();
+
+        return $this->responseJson(true, 'list alliedMedia', $alliedMedia);
+    }
+
     /** -------------------- PRIVATE -------------------- */
 
-    protected function getUuidSpecial($name)
+    protected function _getUuidSpecial($name)
     {
         $name = strtolower($name);
 
@@ -219,7 +237,7 @@ class SpecialsController extends Controller
         return $validate ? $slug : false;
     }
 
-    protected function validateSpecialCountries(int $id, array $array)
+    protected function _validateSpecialCountries(int $id, array $array)
     {
         $field = 'country_id';
         $currentArray = SpecialCountry::select($field)
@@ -241,10 +259,10 @@ class SpecialsController extends Controller
             }
         }
 
-        $this->setSpecialCountries($id, $arrayAdd);
-        $this->removeSpecialCountries($id, $arrayRemove);
+        $this->_setSpecialCountries($id, $arrayAdd);
+        $this->_removeSpecialCountries($id, $arrayRemove);
     }
-    protected function setSpecialCountries(int $specialId, array $countries)
+    protected function _setSpecialCountries(int $specialId, array $countries)
     {
         foreach (array_unique($countries) as $country) {
             $item = new SpecialCountry();
@@ -253,7 +271,7 @@ class SpecialsController extends Controller
             $item->save();
         }
     }
-    protected function removeSpecialCountries(int $specialId, array $countries)
+    protected function _removeSpecialCountries(int $specialId, array $countries)
     {
         foreach (array_unique($countries) as $country) {
             SpecialCountry::where('country_id', $country)
@@ -262,7 +280,7 @@ class SpecialsController extends Controller
         }
     }
 
-    protected function validateSpecialTags(int $id, array $array)
+    protected function _validateSpecialTags(int $id, array $array)
     {
         $field = 'tag_id';
         $currentArray = SpecialTag::select($field)
@@ -284,10 +302,10 @@ class SpecialsController extends Controller
             }
         }
 
-        $this->setSpecialTags($id, $arrayAdd);
-        $this->removeSpecialTags($id, $arrayRemove);
+        $this->_setSpecialTags($id, $arrayAdd);
+        $this->_removeSpecialTags($id, $arrayRemove);
     }
-    protected function setSpecialTags(int $specialId, array $tags)
+    protected function _setSpecialTags(int $specialId, array $tags)
     {
         foreach (array_unique($tags) as $tag) {
             $item = new SpecialTag();
@@ -296,7 +314,7 @@ class SpecialsController extends Controller
             $item->save();
         }
     }
-    protected function removeSpecialTags(int $specialId, array $tags)
+    protected function _removeSpecialTags(int $specialId, array $tags)
     {
         foreach (array_unique($tags) as $tag) {
             SpecialTag::where('tag_id', $tag)
@@ -305,7 +323,7 @@ class SpecialsController extends Controller
         }
     }
 
-    protected function validateSpecialAlliedMedia(int $id, array $array)
+    protected function _validateSpecialAlliedMedia(int $id, array $array)
     {
         $field = 'allied_media_id';
         $currentArray = SpecialAlliedMedia::select($field)
@@ -327,10 +345,10 @@ class SpecialsController extends Controller
             }
         }
 
-        $this->setSpecialAlliedMedia($id, $arrayAdd);
-        $this->removeSpecialAlliedMedia($id, $arrayRemove);
+        $this->_setSpecialAlliedMedia($id, $arrayAdd);
+        $this->_removeSpecialAlliedMedia($id, $arrayRemove);
     }
-    protected function setSpecialAlliedMedia(
+    protected function _setSpecialAlliedMedia(
         int $specialId,
         array $alliedMedias
     ) {
@@ -341,7 +359,7 @@ class SpecialsController extends Controller
             $item->save();
         }
     }
-    protected function removeSpecialAlliedMedia(
+    protected function _removeSpecialAlliedMedia(
         int $specialId,
         array $alliedMedias
     ) {

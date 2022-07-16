@@ -5,7 +5,6 @@
 			<x-web.section.most-read />
 			<x-web.section.most-read />
 			<x-web.section.most-read />
-			<x-web.section.most-read />
 		</div>
 	</div>
 	<div class="container-events-announ">

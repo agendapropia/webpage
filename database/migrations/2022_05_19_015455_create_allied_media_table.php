@@ -14,7 +14,7 @@ class CreateAlliedMediaTable extends Migration
      */
     public function up()
     {
-        Schema::connection('mysql_articules')->create('allied_media', function (
+        Schema::connection('mysql_articles')->create('allied_media', function (
             Blueprint $table
         ) {
             $table->integerIncrements('id');
@@ -25,7 +25,7 @@ class CreateAlliedMediaTable extends Migration
         });
 
         DB::statement(
-            'ALTER TABLE agendapropia_articules.allied_media AUTO_INCREMENT = 1000;'
+            'ALTER TABLE agendapropia_articles.allied_media AUTO_INCREMENT = 1000;'
         );
     }
 
@@ -36,6 +36,6 @@ class CreateAlliedMediaTable extends Migration
      */
     public function down()
     {
-        Schema::connection('mysql_articules')->dropIfExists('allied_media');
+        Schema::connection('mysql_articles')->dropIfExists('allied_media');
     }
 }

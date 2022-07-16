@@ -36,12 +36,14 @@
       font-size: 1.5625rem;
       color: var(--clr-cyan-100);
       margin: 0;
+      line-height: 41px;
     }
   }
   
   .img-quotes{
-    width: 15%; 
+    width: 21%; 
     height: auto;
+    margin-left: -30%;
 
     @include media-up(md) {
         width: 25%; 
@@ -56,12 +58,14 @@
         color: var(--clr-black);
         margin-left: 10%;
         margin-top: -5%;
+        line-height: 29px;
         
         @include media-up(md) {
             width: 350px;
             height: auto;
             margin-left: 13%;
             margin-top: -6%;
+            line-height: 29px;
           } 
       }
 

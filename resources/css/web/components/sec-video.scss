@@ -1,0 +1,20 @@
+.vjs-control-bar {
+    background-color: transparent !important;
+  }
+.vjs-big-play-button {
+    width: 38px !important;
+    height: 38px !important;
+    border-radius: 80% !important;
+    background-color: transparent !important;
+    border: 3px solid var(--clr-yellow-200) !important;
+    top: 53% !important;
+    left: 56% !important;
+    line-height: 33px !important;
+  }
+.vjs-big-play-button .vjs-icon-placeholder {
+    color: var(--clr-yellow-200);
+  }
+  
+.vjs-play-progress {
+    background: var(--clr-yellow-200) !important;
+  }

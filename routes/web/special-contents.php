@@ -27,25 +27,25 @@ Route::prefix('{specialSlug}/contents')
     ->namespace('Specials')
     ->group(function () {
         Route::get('', 'SpecialContentsController@index')
-            ->middleware('permission:content-module')
+            ->middleware('permission:special-content-module')
             ->name('module-content');
         Route::put('', 'SpecialContentsController@update')->middleware(
-            'permission:content-update'
+            'permission:special-content-update'
         );
         Route::get(
             '/update',
             'SpecialContentsController@updateInfo'
-        )->middleware('permission:content-update');
+        )->middleware('permission:special-content-update');
         Route::post(
             '/files',
             'SpecialContentsController@createFiles'
-        )->middleware('permission:content-update');
+        )->middleware('permission:special-content-update');
         Route::get('/files', 'SpecialContentsController@files')->middleware(
-            'permission:content-update'
+            'permission:special-content-update'
         );
 
         Route::post(
             '/copies',
             'SpecialContentsController@copy'
-        )->middleware('permission:content-update');
+        )->middleware('permission:special-content-update');
     });

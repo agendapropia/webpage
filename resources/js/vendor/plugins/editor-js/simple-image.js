@@ -12,7 +12,7 @@
  * @typedef {object} ImageToolConfig
  * @property {string} placeholder — custom placeholder for URL field
  */
-class SimpleImage {
+class EditorJsSimpleImage {
   /**
    * Our tool should be placed at the Toolbox, so describe an icon and title
    */
@@ -201,7 +201,7 @@ class SimpleImage {
 
     const galery = images.length > 6 ? 'general' : images.length
     const divImages = document.createElement('div')
-    divImages.className = 'gallery-' + galery
+    divImages.className = 'gallery gallery-' + galery
     var i = 1
 
     images.forEach((image) => {

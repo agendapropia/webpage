@@ -1,7 +1,7 @@
 @import '../base/mixins.scss';
 
 .section-backpack {
-
+  display: none;
   
   @include media-up(md) {
     display: grid;

@@ -9,10 +9,13 @@
       align-items: flex-start;
       flex-direction: column;
       padding: 1.5rem 2.3125rem 3.125rem 2.3125rem;
-      margin-left: 15%;
-      width: 75%;
+      width: 100%;
+      line-height: 29px;
       margin-top: -30px;
-
+      @include media-up(md) {
+        margin-left: 15%;
+        width: 75%;
+      }
 
       p::first-letter{
         font-family: var(--ff-title);

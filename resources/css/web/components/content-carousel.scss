@@ -1,0 +1,6 @@
+.content-carousel{
+        margin-left: -3%;
+        @include media-up(md) {
+        margin-left: 30%;
+        }
+}

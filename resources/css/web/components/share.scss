@@ -6,13 +6,10 @@
     margin: 0 auto;
   }
   &-wrapper-events-announ {
-      display: grid;
-      grid-template: 1fr/1fr 1fr;
-      margin-left: 10%;
-      width: 70%;
-      margin-top: 10%;
-      margin-bottom: 10%;
+      display: none;
+      
       @include media-up(md) {
+    display: grid;
       grid-template: 1fr/1fr  379px  1fr 1fr 1fr;
       padding: 0 10px;
       margin-left: 20%;
@@ -28,11 +25,7 @@
       .fabs {
         position: absolute;
         right: auto;
-        z-index: 500;
-        margin-top:1px;
-        @include media-up(md) {
         margin-top:-19px;
-        }
       }
         
       .action {
@@ -95,6 +88,8 @@
       }
        
       .text-share{
+        margin-left: -15%;
+        margin-top: 9px;
         p {
             font-family: var(--ff-text);
             color: var(--clr-cyan-100);
@@ -116,11 +111,142 @@
       .vl {
         display:none;
         @include media-up(md) {
-        height: 110%;
+        height: 33%;
         display:flex;
         margin-left: 50%;
-        border-left: 1px solid rgb(38, 73, 80);
+        border-left: 1px solid rgb(181, 181, 181);
+        margin-top: -9px;
         }
       }
     }
   }
+
+  .shm{
+    &-container-histories {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    &-wrapper-events-announ {
+        display: grid;
+        grid-template: 1fr;
+        margin-left: 5%;
+        width: 60%;
+        margin-top: 10%;
+        @include media-up(md) {
+            display: none;
+        }
+        @include media-up(lg) {
+            display: none;
+        }
+        
+        .fabs {
+          position: absolute;
+          right: auto;
+          margin-top:1px;
+          margin-left: 10%;
+        }
+          
+        .action {
+          background:#b3864f ;
+          height: 30px;
+          width: 30px;
+          border-radius: 50%;
+          transition: background-color 0.4s ease-in-out;
+        }
+        
+        .action i {
+          position: absolute;
+          color: white;
+          left: 50%;
+          top: 50%;
+          transform: translate(-50%, -50%);
+          font-size: 15px;
+          cursor: pointer;
+        }
+        
+        .action:hover {
+          background-color: var(--clr-primary);
+        }
+        
+        .g-btn {
+          position: absolute;
+          height: 30px;
+          width: 30px;
+          border-radius: 50%;
+          background-color: var(--clr-primary);
+        }
+        
+        .g-btn:hover{
+          transform: rotate(360deg);
+          transition: all 0.5s;
+        }
+        
+        .g-btn i {
+          position: absolute;
+          font-size: 12px;
+          color: white;
+          left: 50%;
+          top: 50%;
+          transform: translate(-50%, -50%);
+        }
+        
+        .btns {
+          position: absolute;
+          bottom: 0px;
+          margin-bottom: 0px;
+          height: 30px;
+          width: 30px;
+          transition: 0.3s ease-in-out;
+          left: 50%;
+          transform: translateX(-50%);
+          z-index: -1;
+        }
+        .btns.open {
+          bottom: 50px;
+        }
+        .cont{
+            display:grid;
+            grid-template: 1fr/1fr 2fr;
+
+        }
+
+        .cont-icon{
+            display:grid;
+            grid-template: 1fr/2fr 1fr 4fr 1fr 2fr;
+            margin-left: 14%;
+
+        }
+         
+        .text-share{
+            margin-top: 10px;
+            width: 200px;
+            margin-left: 90px;
+          p {
+              font-family: var(--ff-text);
+              color: var(--clr-cyan-100);
+              font-size:12px;
+            }
+        }
+  
+        .text{
+          p {
+              font-family: var(--ff-text);
+              color: var(--clr-cyan-100);
+            }
+            span {
+              font-family: var(--ff-text);
+              color: var(--clr-cyan-100);
+              font-size: 0.75rem;
+              text-align: center;
+            }
+        }
+        .vl {
+          height: 40%;
+          display:flex;
+          margin-left: 50%;
+          border-left: 1px solid rgb(181, 181, 181);
+          margin-top: 5px;
+          
+        }
+      }
+    }

@@ -34,6 +34,11 @@ Route::get('/home-cocreacion', function () {
     return view('pages.web.home-cocreation');
 })->name('home-cocreacion');
 
+Route::get('/cocreacion-interna', function () {
+    return view('pages.web.internal-cocreation');
+})->name('cocreacion-interna');
+
+
 Auth::routes();
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/home', [
@@ -61,6 +66,10 @@ Route::group(
             require __DIR__ . '/web/specials.php';
             require __DIR__ . '/web/special-alliedmedia.php';
             require __DIR__ . '/web/special-contents.php';
+        });
+        Route::group(['prefix' => 'admin/articles'], function () {
+            require __DIR__ . '/web/articles.php';
+            require __DIR__ . '/web/article-contents.php';
         });
         Route::group(['prefix' => 'admin'], function () {
             require __DIR__ . '/web/files.php';

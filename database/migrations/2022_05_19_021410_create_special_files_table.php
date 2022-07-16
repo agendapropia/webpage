@@ -14,7 +14,7 @@ class CreateSpecialFilesTable extends Migration
      */
     public function up()
     {
-        Schema::connection('mysql_articules')->create(
+        Schema::connection('mysql_articles')->create(
             'special_files',
             function (Blueprint $table) {
                 $table->integerIncrements('id');
@@ -26,7 +26,7 @@ class CreateSpecialFilesTable extends Migration
             }
         );
 
-        DB::statement('ALTER TABLE agendapropia_articules.special_files AUTO_INCREMENT = 1000;');
+        DB::statement('ALTER TABLE agendapropia_articles.special_files AUTO_INCREMENT = 1000;');
 
     }
 
@@ -37,6 +37,6 @@ class CreateSpecialFilesTable extends Migration
      */
     public function down()
     {
-        Schema::connection('mysql_articules')->dropIfExists('special_files');
+        Schema::connection('mysql_articles')->dropIfExists('special_files');
     }
 }

@@ -1,11 +1,13 @@
 @import '../base/_mixins.scss';
 .section-quotes-coc {
     display: grid;
-    grid-template: 1fr / 1fr 1fr;
-    grid-gap: 17px;
-    margin-bottom: 50px;
+    grid-template: 1fr;
+    
 
     @include media-up(md) {
+      grid-template: 1fr / 1fr 1fr;
+      grid-gap: 17px;
+      margin-bottom: 50px;
       padding: 0 60px;
     }
     @include media-up(lg) {
@@ -20,16 +22,24 @@
     }
 
   .quotes__title {
+    width: 60%;
+    padding: 44px 35px;
+    margin-left: 9%;
+
+    @include media-up(md) {
     width: 80%;
     padding: 44px 35px;
     margin-left: 20%;
+    }
     h2 {
       font-family: var(--ff-title);
       font-weight: bold;
       font-size: 1.5625rem;
       color: #2e2020;
       margin: 0;
+      line-height: 41px;
     }
+  
   }
   
   .img-quotes{
@@ -43,16 +53,20 @@
     }
 
     .quotes__text {
-        width: 548px;
+        width: 350px;
         height: auto;        
         font-family: var(--ff-text);
         color: var(--clr-black);
-        margin-left: 23%;
-        margin-top: -20%;
+        margin-left: 12%;
+        margin-top: 0%;
+        line-height: 29px;
         
         @include media-up(md) {
             width: 350px;
             height: auto;
+            margin-left: 23%;
+          margin-top: -20%;
+          line-height: 29px;
           } 
       }
 
