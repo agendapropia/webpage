@@ -17,6 +17,19 @@
     width: 69%;
     }
 
+    .desktop{
+      display: none;
+      @include media-up(md) {
+        display: block;
+      }
+    }
+    .movil{
+      display: block;
+      @include media-up(md) {
+        display: none;
+      }
+    }
+
     select {
       background: var(--clr-primary);
       color: var(--white);
@@ -27,6 +40,7 @@
       font-weight: 400;
       font-size: 0.8125rem;
       align-self: center;
+      margin-right: 77px;
       @include media-up(md) {
         display: none;
       }

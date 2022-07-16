@@ -10,15 +10,15 @@
             <p>Caminos por la Pachamama ¡Comunidades andinas en reexistencia! es una serie periodística intelectual que
                 visibiliza las preocupaciones, experiencias y luchas de las comunidades indígenas andinas para la protección.
             </p>
-            <x-web.button>Ver Cocreación</x-web.button>
+            <a href="{{ URL::route('home-cocreacion') }}" style="text-decoration:none"> <x-web.button>Ver Cocreación</x-web.button> </a>
 </div>
 
 <article class="grid-cocreation-movil">
-<div class="container-reportage">
+<a href="{{ URL::route('home-cocreacion') }}" style="text-decoration:none"><div class="container-reportage">
 	<img src="https://i.ibb.co/MgMDP6f/Captura-de-Pantalla-2022-07-12-a-la-s-9-38-34.png" alt="imagen">
 	<div class="content-reportage">
 		<x-web.badge-location type="Cocreación" country="Colombia" city="Bogotá" />
 		<h2>Ome, Pütchi, Poraû - Mujer, Palabra y Resistencia es finalista del Premio Gabo 2021</h2>
 	</div>
-</div>	
+</div></a>
 </article>

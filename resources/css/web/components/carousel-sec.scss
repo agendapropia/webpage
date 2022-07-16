@@ -1,0 +1,122 @@
+.content-sec{
+#news-slider{
+    margin-top: 80px;
+}
+.post-slide{
+    @include media-up(md) {
+    margin: 20px 15px 20px;
+    border-radius: 15px;
+    padding-top: 1px;
+    }
+
+}
+.post-slide .post-img{
+    position: relative;
+    overflow: hidden;
+    @include media-up(md) {
+    margin: -12px 15px 8px 15px;
+    margin-left: -10px;
+    }
+}
+.post-slide .post-img img{
+    width: 350px;
+    height: 350px;
+    @include media-up(md) {
+    height: 550px;
+    width: 100%;
+}
+}
+.owl-item{
+    width: 300px;
+    margin-left: 2px;
+}
+
+.owl-controls .owl-buttons{
+    text-align:center;
+    padding: 0px 10px;
+    margin-top: -57%;
+    margin-left: 75%;
+    margin-bottom: 75%;
+    @include media-up(md) {
+        margin-top: -49%;
+        margin-bottom: 70%;
+        margin-left: 85%;
+    }
+    @include media-up(lg) {
+        margin-top: -40%;
+        margin-bottom: 70%;
+        margin-left: 85%;
+    }
+    
+}
+.owl-controls .owl-buttons .owl-prev{
+    background: transparent;
+    position: absolute;
+    left:-3px;
+    padding: 0 18px 0 15px;
+    border-radius: 50px;
+    border: 1px solid red;
+    border-color: rgb(255, 255, 255);
+    opacity: 1;
+    @include media-up(md) {
+        left:-150px;
+        border: 1px solid red;
+        border-color: #333;
+    }
+}
+.owl-controls .owl-buttons .owl-next{
+    background: transparent;
+    position: absolute;
+    padding: 0 15px 0 18px;
+    border-radius: 50px;
+    border: 1px solid red;
+    border-color: rgb(255, 255, 255);
+    opacity: 1;
+    @include media-up(md) {
+        left:40px;
+        border: 1px solid red;
+        border-color: rgb(255, 255, 255);
+    }
+}
+.owl-controls .owl-buttons .owl-next:after{
+    content:"\f104";
+    font-family: FontAwesome;
+    color: rgb(255, 255, 255);
+    font-size:30px;
+}
+.owl-controls .owl-buttons .owl-prev:after{
+    content:"\f104";
+    font-family: FontAwesome;
+    color: rgb(255, 255, 255);
+    font-size:30px;
+    @include media-up(md) {
+    color: #333;
+    }
+}
+.owl-controls .owl-buttons .owl-next:after{
+    content:"\f105";
+}
+
+.owl-theme .owl-controls{
+    margin-left:0%;
+
+}
+
+.owl-theme .owl-controls .owl-page span{
+    width: 10px !important;
+    height:10px !important; 
+    background: #000000;
+    border: 1px solid red;
+    border-color: #000000;
+}
+
+.owl-theme .owl-controls .owl-page span:active{
+    width: 10px !important;
+    height:10px !important; 
+    background: #fcfcfc;
+    border: 1px solid red;
+    border-color: #000000;
+    opacity: 1;
+}
+
+}

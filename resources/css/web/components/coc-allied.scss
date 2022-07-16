@@ -1,0 +1,237 @@
+.allied-media{
+    .section-weaving {
+        display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 50px;
+            background-color: var(--clr-white);
+            margin: 24px 0;
+            padding: 0 60px 100px;
+          @include media-up(md) {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 50px;
+            background-color: var(--clr-white);
+            margin: 24px 0;
+            padding: 0 60px 100px;
+          }
+          @include media-up(lg) {
+            grid-template: 1fr / 1fr 1fr;
+          }
+        
+      
+        
+          .container-weaving {
+            width: 100%;
+            height: auto;
+          }
+        
+      
+        .weaving__title {
+          width: 100%;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 44px 35px;
+          h2 {
+            font-family: var(--ff-title);
+            font-weight: bold;
+            font-size: 1.5625rem;
+            color: var(--clr-cyan-100);
+            margin: 0;
+          }
+      
+          @include media-up(lg) {
+      
+            padding: 30;
+          }
+        }
+        .weaving-imgs-logo{
+          width: 65%;
+          height: auto;
+      
+          .img-logo{
+
+            width: 98%;
+            height: auto;
+            margin-left: -7%;
+            margin-top: 20px;
+
+        @include media-up(md) {
+          width: 40%; 
+          height: auto;
+          margin-left: 30%;
+          margin-top: 20px;
+          }
+        }
+        }
+        .weaving-imgs{
+          width: 100%;
+          height: auto;
+          
+      
+          .img-items{
+          width: 100%; 
+          height: auto;   
+          }
+        }
+        .title{
+            color:#264a50; 
+            margin-left:11%;
+            @include media-up(md) {
+            color:#264a50; 
+            margin-left:35%;
+            }
+        }
+      }
+      
+      .section-weaving-icons {
+        display: none;
+          
+          
+          @include media-up(lg) {
+            display: grid;
+            grid-template-columns: 1fr/1fr 1fr 1fr 1fr 1fr;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            margin-top: 150px;
+            margin: 16px 90px;
+            padding: 0 40px 50px;
+            width:90%;
+          }
+          @include media-up(lg) {
+            grid-template: 1fr/1fr 1fr 1fr 1fr 1fr;
+          }
+        
+      
+        .weaving__title {
+          width: 100%;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          font-family: var(--ff-text);
+          font-weight: bold;
+          font-size: 1rem;
+          color: var(--clr-cyan-100);
+      
+      
+          @include media-up(lg) {
+      
+            padding: 30;
+          }
+        }
+        .weaving-imgs{
+          width: 100%;
+          height: auto;
+          
+      
+          .img-items{
+              margin: 3px;
+              width: 90%;
+           
+          }
+        }
+      }
+
+}
+.content-allied{
+    #allied{
+
+        margin-top: 50px;
+        padding: 0 20px;
+        @include media-up(md) {
+        padding: 0 20px;
+        }
+    }
+    .post-slide{
+    
+        margin: 20px 15px 20px;
+        border-radius: 15px;
+        padding-top: 1px;
+        
+    }
+    .post-slide .post-img{
+        position: relative;
+        overflow: hidden;
+    }
+    .post-slide .post-img img{
+        width: 200px;
+        height:200px;
+    }
+    .owl-item{
+        width: 200px;
+        margin-left: 2px;
+    }
+    
+    .owl-controls .owl-buttons{
+        text-align:center;
+        padding: 0px 10px;
+        margin-top: -42%;
+        margin-left: 75%;
+        margin-bottom: 75%;
+        @include media-up(md) {
+            margin-top: -57%;
+        }
+    }
+    .owl-controls .owl-buttons .owl-prev{
+        background: transparent;
+        position: absolute;
+        left:-3px;
+        padding: 0 18px 0 15px;
+        border-radius: 50px;
+        border: 1px solid red;
+        border-color: #000000;
+        opacity: 1;
+      
+    }
+    .owl-controls .owl-buttons .owl-next{
+        background: transparent;
+        position: absolute;
+        padding: 0 15px 0 18px;
+        border-radius: 50px;
+        border: 1px solid red;
+        border-color: #000000;
+        opacity: 1;
+    }
+    .owl-controls .owl-buttons .owl-next:after{
+        content:"\f104";
+        font-family: FontAwesome;
+        color: #000000;
+        font-size:30px;
+    }
+    .owl-controls .owl-buttons .owl-prev:after{
+        content:"\f104";
+        font-family: FontAwesome;
+        color: #000000;
+        font-size:30px;
+    }
+    .owl-controls .owl-buttons .owl-next:after{
+        content:"\f105";
+    }
+    
+    .owl-theme .owl-controls{
+        margin-left:0%;
+    
+    }
+    
+    .owl-theme .owl-controls .owl-page span{
+        width: 10px !important;
+        height:10px !important; 
+        background: #000000;
+        border: 1px solid red;
+        border-color: #000000;
+    }
+    
+    .owl-theme .owl-controls .owl-page span:active{
+        width: 10px !important;
+        height:10px !important; 
+        background: #fcfcfc;
+        border: 1px solid red;
+        border-color: #000000;
+        opacity: 1;
+    }
+    @include media-up(lg) {
+        display: none;
+    }
+}

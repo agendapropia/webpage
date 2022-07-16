@@ -20,7 +20,7 @@
 				</x-web.menu.item>
 				<x-web.menu.item>
 				<a style="text-decoration:none">
-					Mochilla de saberes</a>
+					Mochila de saberes</a>
 				</x-web.menu.item>
 				<x-web.menu.item>
 				<a style="text-decoration:none">

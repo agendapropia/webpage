@@ -20,7 +20,7 @@
 					Historias</a>
 				</x-web.menu.item>
 				<x-web.menu.item>
-					Mochilla de saberes
+					Mochila de saberes
 				</x-web.menu.item>
 				<x-web.menu.item>
 					Red tejiendo historias

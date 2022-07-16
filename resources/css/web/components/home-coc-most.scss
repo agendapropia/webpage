@@ -14,12 +14,19 @@
   }
   
   .wrapper-coc {
+    display: none;
+  @include media-up(md) {
     background-color: var(--clr-white);
-    width: 100%;
+    width: 83%;
     height: auto;
     display: flex;
     justify-content: center;
     align-items: center;
+    
+    
+
+
+
     img {
       width: 300px;
       height: auto;
@@ -42,6 +49,7 @@
         height: auto;
       }
       .text-most-read {
+        margin-left: 10%;
         p {
             
           display: block;
@@ -49,3 +57,19 @@
       }
     }
   }
+}
+
+.cochr{
+  display: none;
+  @include media-up(md) {
+  opacity: 1;
+  border: 2px solid;
+  color: var(--clr-primary);
+
+  margin-left: 71%;
+  width:226px;
+  margin-top: auto;
+  margin-bottom: -4px;
+  z-index: 119;
+  }
+}

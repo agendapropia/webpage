@@ -17,3 +17,6 @@
 		</div>
 	</article>
 </section>
+<section class="grid-report-movil">
+<x-web.article.text  />	
+</section>

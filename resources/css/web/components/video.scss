@@ -56,11 +56,30 @@
   border-radius: 50% !important;
   padding: 7px 10px !important;
   background-color: transparent !important;
+
+  @include media-up(md) {
+    border: 1px solid var(--clr-grey-400) !important;
+    padding: 10px 10px !important;
+    right: 81%;
+    left: -26%;
+    top: 95%;
+    opacity: 1 !important;
+  }
+}
+
+.splide-video .splide__arrow--next {
+  @include media-up(md) {
+    margin-left: 80px;
+  }
 }
 
 .splide-video .splide__arrow--prev svg,
 .splide-video .splide__arrow--next svg {
   fill: var(--clr-white);
+  @include media-up(md) {
+    fill: var(--clr-grey-400);
+    opacity: 1 !important;
+  }
 }
 
 .splide-video .splide__pagination--ltr {
