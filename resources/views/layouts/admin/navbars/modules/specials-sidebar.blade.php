@@ -15,8 +15,8 @@
                 @endcan
                 @can('special-module')
                     <li class="nav-item">
-                        <a class="nav-link @yield('menu_articules_item', '')" href="{{ route('module-special') }}">
-                            {{ __('menu.articules') }}
+                        <a class="nav-link @yield('menu_articles_item', '')" href="{{ route('module-article') }}">
+                            {{ __('menu.articles') }}
                         </a>
                     </li>
                 @endcan

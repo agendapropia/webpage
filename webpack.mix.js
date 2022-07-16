@@ -29,7 +29,6 @@ mix
     ],
     'public/js/plugins.all.js',
   )
-
   .styles(
     [
       'resources/css/app.css',
@@ -76,6 +75,14 @@ mix
   .scripts(
     ['resources/js/modules/specials/contents/*.js'],
     'public/js/modules/specials/contents/all.js',
+  )
+  .scripts(
+    ['resources/js/modules/articles/contents/*.js'],
+    'public/js/modules/articles/contents/all.js',
+  )
+  .scripts(
+    ['resources/js/modules/articles/module/*.js'],
+    'public/js/modules/articles/module/all.js',
   )
   .scripts(
     ['resources/js/modules/utils/images/selections.js'],

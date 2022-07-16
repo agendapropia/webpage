@@ -40,6 +40,10 @@ Route::prefix('/')
         Route::get('/update', 'SpecialsController@updateInfo')->middleware(
             'permission:special-update'
         );
+        Route::get(
+            '/search-by-autocomplete',
+            'SpecialsController@searchByAutocomplete'
+        );
 
         // USERS
         Route::post('/users', 'SpecialUsersController@create');

@@ -45,4 +45,9 @@ return [
     'alliedmedia' => [
         'button_new' => 'Nuevo Medio Aliado',
     ],
+    'articles' => [
+        'button_new' => 'Nuevo artículo',
+        'filter_special' => 'Especial',
+        'filter_status' => 'Estados',
+    ],
 ];

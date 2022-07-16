@@ -57,23 +57,36 @@ class RolesSeeder extends Seeder
         Permission::create(['name' => 'tag-delete']);
         Permission::create(['name' => 'tag-update']);
 
+        Permission::create(['name' => 'alliedmedia-module']);
+        Permission::create(['name' => 'alliedmedia-list']);
+        Permission::create(['name' => 'alliedmedia-create']);
+        Permission::create(['name' => 'alliedmedia-delete']);
+        Permission::create(['name' => 'alliedmedia-update']);
+
         Permission::create(['name' => 'special-module']);
         Permission::create(['name' => 'special-list']);
         Permission::create(['name' => 'special-create']);
         Permission::create(['name' => 'special-delete']);
         Permission::create(['name' => 'special-update']);
         
-        Permission::create(['name' => 'alliedmedia-module']);
-        Permission::create(['name' => 'alliedmedia-list']);
-        Permission::create(['name' => 'alliedmedia-create']);
-        Permission::create(['name' => 'alliedmedia-delete']);
-        Permission::create(['name' => 'alliedmedia-update']);
-        
-        Permission::create(['name' => 'content-module']);
-        Permission::create(['name' => 'content-list']);
-        Permission::create(['name' => 'content-create']);
-        Permission::create(['name' => 'content-delete']);
-        Permission::create(['name' => 'content-update']);
+        Permission::create(['name' => 'special-content-module']);
+        Permission::create(['name' => 'special-content-list']);
+        Permission::create(['name' => 'special-content-create']);
+        Permission::create(['name' => 'special-content-delete']);
+        Permission::create(['name' => 'special-content-update']);
+
+        Permission::create(['name' => 'article-module']);
+        Permission::create(['name' => 'article-list']);
+        Permission::create(['name' => 'article-create']);
+        Permission::create(['name' => 'article-delete']);
+        Permission::create(['name' => 'article-update']);
+
+        Permission::create(['name' => 'article-content-module']);
+        Permission::create(['name' => 'article-content-list']);
+        Permission::create(['name' => 'article-content-create']);
+        Permission::create(['name' => 'article-content-delete']);
+        Permission::create(['name' => 'article-content-update']);
+
 
         $role = Role::create(['name' => 'super-admin']);
         $role->givePermissionTo(Permission::all());

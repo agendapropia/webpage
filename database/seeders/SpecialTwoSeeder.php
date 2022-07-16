@@ -24,7 +24,7 @@ class SpecialTwoSeeder extends Seeder
             'status_id' => 2,
             'template_id' => 1,
             'publication_date' => '2022-05-10',
-            'hidden' => true,
+            'hidden' => false,
             'number_views' => 0,
         ]);
 

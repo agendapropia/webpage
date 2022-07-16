@@ -13,7 +13,7 @@ class CreateTemplatesTable extends Migration
      */
     public function up()
     {
-        Schema::connection('mysql_articules')->create('templates', function (Blueprint $table) {
+        Schema::connection('mysql_articles')->create('templates', function (Blueprint $table) {
             $table->integerIncrements('id');
             $table->string('name', 120);
             $table->string('slug', 50)->unique();
@@ -28,6 +28,6 @@ class CreateTemplatesTable extends Migration
      */
     public function down()
     {
-        Schema::connection('mysql_articules')->dropIfExists('templates');
+        Schema::connection('mysql_articles')->dropIfExists('templates');
     }
 }
