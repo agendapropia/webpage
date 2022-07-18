@@ -203,3 +203,28 @@
 .div-inline-block {
   display: inline-block;
 }
+
+.btn-cursor {
+  cursor: pointer;
+}
+
+.btn-inline-block {
+  color: #2c7ba4;
+  cursor: pointer;
+}
+
+.modal-center {
+  display: block;
+}
+
+.modal-center .row {
+  display: block;
+  text-align: center;
+}
+
+.modal-center .row .form-group {
+  display: inline-block;
+}
+.modal-center .label-error {
+  width: 100%;
+}

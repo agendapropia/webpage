@@ -7,6 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class ArticleStatus extends Model
 {
+    const PUBLISHED_STATUS = 1;
+    const PUBLISHED_PERMISSION = 'article-status-published';
+
     use HasFactory;
 
     protected $table = 'article_status';

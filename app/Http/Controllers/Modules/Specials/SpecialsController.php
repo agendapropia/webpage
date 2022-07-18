@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Specials\Special;
 use App\Models\Specials\SpecialAlliedMedia;
 use App\Models\Specials\SpecialCountry;
+use App\Models\Specials\SpecialStatus;
 use App\Models\Specials\SpecialTag;
 use App\Models\Specials\Template;
 use stdClass;
@@ -30,9 +31,10 @@ class SpecialsController extends Controller
      * GET /admin/specials
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('pages.admin.specials.module.index');
+        $statuses = SpecialStatus::get();
+        return view('pages.admin.specials.module.index', compact('statuses'));
     }
 
     /**
@@ -43,6 +45,7 @@ class SpecialsController extends Controller
     {
         $row = isset($request->_row) ? $request->_row : 10;
         $search = $request->get('_search');
+        $statusId = $request->get('_status_id');
 
         $specials = Special::select(
             's.id',
@@ -57,6 +60,7 @@ class SpecialsController extends Controller
             ->from(self::FROM_TABLE_MAIN)
             ->join('special_status as ss', 'ss.id', 's.status_id')
             ->search($search)
+            ->status($statusId)
             ->where('s.hidden', false)
             ->orderBy('s.id', 'DESC')
             ->paginate($row);
@@ -87,16 +91,16 @@ class SpecialsController extends Controller
             'name' => 'required|max:255',
             'publication_date' => 'required',
             'template_id' => 'required',
-            'country_ids' => 'string',
-            'alliedmedia_ids' => 'string',
-            'tags_ids' => 'string',
+            'country_ids' => 'string|nullable',
+            'alliedmedia_ids' => 'string|nullable',
+            'tags_ids' => 'string|nullable',
         ]);
 
         /** special creation */
         $special = new Special($request->all());
         $special->slug = $this->_getUuidSpecial($request->name);
         $special->status_id = self::STATUS_EDITING;
-        $special->hidden = true;
+        $special->hidden = false;
         $special->number_views = 0;
         $special->save();
 
@@ -111,6 +115,81 @@ class SpecialsController extends Controller
         $this->_setSpecialTags($special->id, explode(',', $request->tags_ids));
 
         return $this->responseJson(true, 'special created', $special);
+    }
+
+    /**
+     * Data modal status special
+     * PATCH /admin/specials/status
+     */
+    public function status(Request $request)
+    {
+        /** validate */
+        $request->validate([
+            'id' => 'required|integer',
+            'status_id' => 'required|integer',
+        ]);
+
+        $status = SpecialStatus::find($request->status_id);
+        if (!$status) {
+            return $this->responseJson(false, 'status not found');
+        }
+
+        if (
+            $request->status_id == SpecialStatus::PUBLISHED_STATUS &&
+            !$request
+                ->user()
+                ->hasPermissionTo(SpecialStatus::PUBLISHED_PERMISSION)
+        ) {
+            return $this->responseJson(
+                false,
+                'El usuario no tiene permisos para esta acción'
+            );
+        }
+
+        $special = Special::find($request->id);
+        if (!$special) {
+            return $this->responseJson(false, 'special not found');
+        }
+
+        $special->status_id = $request->status_id;
+        $special->save();
+
+        return $this->responseJson(true, 'update information');
+    }
+
+    /**
+     * Data modal url special
+     * PATCH /admin/specials/slug
+     */
+    public function slug(Request $request)
+    {
+        /** validate */
+        $request->validate([
+            'id' => 'required|integer',
+            'slug' => 'required|string',
+        ]);
+
+        $special = Special::find($request->id);
+        if (!$special) {
+            return $this->responseJson(false, 'special not found');
+        }
+
+        if ($special->slug == $request->slug) {
+            return $this->responseJson(true, 'update information');
+        }
+
+        $specialRepeat = Special::where('slug', $request->slug)->first();
+        if ($specialRepeat) {
+            return $this->responseJson(
+                false,
+                'El nombre de URL ya se encuentra ocupado'
+            );
+        }
+
+        $special->slug = $request->slug;
+        $special->save();
+
+        return $this->responseJson(true, 'update information');
     }
 
     /**
@@ -176,7 +255,7 @@ class SpecialsController extends Controller
         $special->fill($request->all());
         $special->save();
 
-        $this->validateSpecialAlliedMedia(
+        $this->_validateSpecialAlliedMedia(
             $request->id,
             explode(',', $request->alliedmedia_ids)
         );

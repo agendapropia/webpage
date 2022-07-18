@@ -31,6 +31,9 @@ Route::prefix('/')
         Route::patch('/status', 'SpecialsController@status')->middleware(
             'permission:special-update'
         );
+        Route::patch('/slug', 'SpecialsController@slug')->middleware(
+            'permission:special-update'
+        );
         Route::get('/list', 'SpecialsController@list')->middleware(
             'permission:special-list'
         );

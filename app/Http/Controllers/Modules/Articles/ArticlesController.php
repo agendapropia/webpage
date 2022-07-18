@@ -37,11 +37,11 @@ class ArticlesController extends Controller
     public function index()
     {
         $specials = Special::getDataBasic()->get();
-        $status = ArticleStatus::get();
+        $statuses = ArticleStatus::get();
 
         return view(
             'pages.admin.articles.module.index',
-            compact('specials', 'status')
+            compact('specials', 'statuses')
         );
     }
 
@@ -112,23 +112,98 @@ class ArticlesController extends Controller
 
         /** article creation */
         $article = new Article($request->all());
-        $article->slug = $this->getUuidArticle($request->name);
+        $article->slug = $this->_getUuidArticle($request->name);
         $article->status_id = self::STATUS_EDITING;
         $article->special_id = $request->special_id ?? 1;
         $article->number_views = 0;
         $article->save();
 
-        $this->setArticleRegions(
+        $this->_setArticleRegions(
             $article->id,
             explode(',', $request->region_ids)
         );
-        $this->setArticleCountries(
+        $this->_setArticleCountries(
             $article->id,
             explode(',', $request->country_ids)
         );
-        $this->setArticleTags($article->id, explode(',', $request->tags_ids));
+        $this->_setArticleTags($article->id, explode(',', $request->tags_ids));
 
         return $this->responseJson(true, 'article created', $article);
+    }
+
+    /**
+     * Data modal status special
+     * PATCH /admin/articles/status
+     */
+    public function status(Request $request)
+    {
+        /** validate */
+        $request->validate([
+            'id' => 'required|integer',
+            'status_id' => 'required|integer',
+        ]);
+
+        $status = ArticleStatus::find($request->status_id);
+        if (!$status) {
+            return $this->responseJson(false, 'status not found');
+        }
+
+        if (
+            $request->status_id == ArticleStatus::PUBLISHED_STATUS &&
+            !$request
+                ->user()
+                ->hasPermissionTo(ArticleStatus::PUBLISHED_PERMISSION)
+        ) {
+            return $this->responseJson(
+                false,
+                'El usuario no tiene permisos para esta acción'
+            );
+        }
+
+        $article = Article::find($request->id);
+        if (!$article) {
+            return $this->responseJson(false, 'article not found');
+        }
+
+        $article->status_id = $request->status_id;
+        $article->save();
+
+        return $this->responseJson(true, 'update information');
+    }
+
+    /**
+     * Data modal url article
+     * PATCH /admin/articles/slug
+     */
+    public function slug(Request $request)
+    {
+        /** validate */
+        $request->validate([
+            'id' => 'required|integer',
+            'slug' => 'required|string',
+        ]);
+
+        $article = Article::find($request->id);
+        if (!$article) {
+            return $this->responseJson(false, 'article not found');
+        }
+
+        if ($article->slug == $request->slug) {
+            return $this->responseJson(true, 'update information');
+        }
+
+        $articleRepeat = Article::where('slug', $request->slug)->first();
+        if ($articleRepeat) {
+            return $this->responseJson(
+                false,
+                'El nombre de URL ya se encuentra ocupado'
+            );
+        }
+
+        $article->slug = $request->slug;
+        $article->save();
+
+        return $this->responseJson(true, 'update information');
     }
 
     /**
@@ -197,15 +272,15 @@ class ArticlesController extends Controller
         $article->fill($request->all());
         $article->save();
 
-        $this->validateArticleRegions(
+        $this->_validateArticleRegions(
             $request->id,
             explode(',', $request->region_ids)
         );
-        $this->validateArticleTags(
+        $this->_validateArticleTags(
             $request->id,
             explode(',', $request->tags_ids)
         );
-        $this->validateArticleCountries(
+        $this->_validateArticleCountries(
             $request->id,
             explode(',', $request->country_ids)
         );
@@ -214,8 +289,7 @@ class ArticlesController extends Controller
     }
 
     /** -------------------- PRIVATE -------------------- */
-
-    protected function getUuidArticle($name)
+    protected function _getUuidArticle($name)
     {
         $name = strtolower($name);
 
@@ -241,7 +315,7 @@ class ArticlesController extends Controller
         return $validate ? $slug : false;
     }
 
-    protected function validateArticleCountries(int $id, array $array)
+    protected function _validateArticleCountries(int $id, array $array)
     {
         $field = 'country_id';
         $currentArray = ArticleCountry::select($field)
@@ -263,10 +337,10 @@ class ArticlesController extends Controller
             }
         }
 
-        $this->setArticleCountries($id, $arrayAdd);
-        $this->removeArticleCountries($id, $arrayRemove);
+        $this->_setArticleCountries($id, $arrayAdd);
+        $this->_removeArticleCountries($id, $arrayRemove);
     }
-    protected function setArticleCountries(int $articleId, array $countries)
+    protected function _setArticleCountries(int $articleId, array $countries)
     {
         foreach (array_unique($countries) as $country) {
             $item = new ArticleCountry();
@@ -275,7 +349,7 @@ class ArticlesController extends Controller
             $item->save();
         }
     }
-    protected function removeArticleCountries(int $articleId, array $countries)
+    protected function _removeArticleCountries(int $articleId, array $countries)
     {
         foreach (array_unique($countries) as $country) {
             ArticleCountry::where('country_id', $country)
@@ -284,7 +358,7 @@ class ArticlesController extends Controller
         }
     }
 
-    protected function validateArticleTags(int $id, array $array)
+    protected function _validateArticleTags(int $id, array $array)
     {
         $field = 'tag_id';
         $currentArray = ArticleTag::select($field)
@@ -306,10 +380,10 @@ class ArticlesController extends Controller
             }
         }
 
-        $this->setArticleTags($id, $arrayAdd);
-        $this->removeArticleTags($id, $arrayRemove);
+        $this->_setArticleTags($id, $arrayAdd);
+        $this->_removeArticleTags($id, $arrayRemove);
     }
-    protected function setArticleTags(int $articleId, array $tags)
+    protected function _setArticleTags(int $articleId, array $tags)
     {
         foreach (array_unique($tags) as $tag) {
             $item = new ArticleTag();
@@ -318,7 +392,7 @@ class ArticlesController extends Controller
             $item->save();
         }
     }
-    protected function removeArticleTags(int $articleId, array $tags)
+    protected function _removeArticleTags(int $articleId, array $tags)
     {
         foreach (array_unique($tags) as $tag) {
             ArticleTag::where('tag_id', $tag)
@@ -327,7 +401,7 @@ class ArticlesController extends Controller
         }
     }
 
-    protected function validateArticleRegions(int $id, array $array)
+    protected function _validateArticleRegions(int $id, array $array)
     {
         $field = 'region_id';
         $currentArray = ArticleRegion::select($field)
@@ -349,10 +423,10 @@ class ArticlesController extends Controller
             }
         }
 
-        $this->setArticleRegions($id, $arrayAdd);
-        $this->removeArticleRegions($id, $arrayRemove);
+        $this->_setArticleRegions($id, $arrayAdd);
+        $this->_removeArticleRegions($id, $arrayRemove);
     }
-    protected function setArticleRegions(int $articleId, array $regions)
+    protected function _setArticleRegions(int $articleId, array $regions)
     {
         foreach (array_unique($regions) as $region) {
             $item = new ArticleRegion();
@@ -361,7 +435,7 @@ class ArticlesController extends Controller
             $item->save();
         }
     }
-    protected function removeArticleRegions(int $articleId, array $regions)
+    protected function _removeArticleRegions(int $articleId, array $regions)
     {
         foreach (array_unique($regions) as $region) {
             ArticleRegion::where('region_id', $region)

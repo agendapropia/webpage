@@ -29,6 +29,8 @@
     @include('pages.admin.articles.module.modals.update')
     @include('pages.admin.articles.module.modals.users')
     @include('pages.admin.articles.module.modals.files')
+    @include('pages.admin.articles.module.modals.status')
+    @include('pages.admin.articles.module.modals.url')
 @endsection
 
 @push('js-after')

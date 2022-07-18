@@ -13,16 +13,15 @@
 
 @section('content')
 
-    <!-- Breadcrumb -->
     <x-admin.plugins.breadcrumb>
-        <li class="breadcrumb-item"><a href="#">{{ __('menu.specials') }}</a></li>
+        <li class="breadcrumb-item">
+            <a href="#">{{ __('menu.specials') }}</a>
+        </li>
     </x-admin.plugins.breadcrumb>
 
-    <!-- Page Content -->
     <div id="tableMain">
         @include('pages.admin.specials.module.partials.table')
     </div>
-    <!-- END Page Content -->
     
     <div class="container-fluid">
         @include('layouts.admin.footers.auth')
@@ -33,6 +32,8 @@
     @include('pages.admin.specials.module.modals.update')
     @include('pages.admin.specials.module.modals.users')
     @include('pages.admin.specials.module.modals.files')
+    @include('pages.admin.specials.module.modals.status')
+    @include('pages.admin.specials.module.modals.url')
 @endsection
 
 @push('js-after')

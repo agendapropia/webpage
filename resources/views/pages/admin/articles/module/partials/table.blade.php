@@ -2,7 +2,7 @@
     <x-slot name="title"></x-slot>
 
     <x-slot name="menu_top">
-        @can('articles-create')
+        @can('article-create')
             <button type="button" class="btn btn-sm btn-success" data-modal="#modal-create-main" data-action="ActionMainCreate" onclick="TableMain.Modal(this);">
                 <i class="fa fa-plus" aria-hidden="true"></i> {{ __('modules.articles.button_new') }}
             </button>
@@ -22,8 +22,8 @@
 
         <select class="form-control filter filter_status_id mt-1">
             <option value="">Estados</option>
-            @foreach ($status as $statu)
-                <option value="{{ $statu->id }}">{{ $statu->name }}</option>
+            @foreach ($statuses as $status)
+                <option value="{{ $status->id }}">{{ $status->name }}</option>
             @endforeach
         </select>
     </x-slot>
@@ -37,19 +37,25 @@
                         <button class="btn btn-mt btn-primary" data-modal="#modal-update-main" data-action="ActionMainUpdate" onclick="TableMain.Modal(this);" title="Editar">
                             <i class="fa fa-cog" aria-hidden="true" title="Editar"></i>
                         </button>
-                        <button class="btn btn-mt btn-primary" data-modal="#modal-utils-imagen-selections" data-action="ActionFilesLoad" onclick="TableMain.Modal(this);" title="Imágenes">
-                            <i class="fa fa-image" aria-hidden="true" title="Imágenes"></i> 
+                        <button class="btn btn-mt btn-ext btn-primary" data-modal="#modal-utils-imagen-selections" data-action="ActionFilesLoad" onclick="TableMain.Modal(this);" title="Imágenes">
+                            <i class="fa fa-image" aria-hidden="true" title="Imágenes">
+                                <label>Imágenes</label>
+                            </i> 
                         </button>
-                        <button class="btn btn-mt btn-primary" data-modal="#modal-article-users" data-action="ActionModalUsers" onclick="TableMain.Modal(this);" title="Usuarios">
-                            <i class="fa fa-user" aria-hidden="true"></i>
+                        <button class="btn btn-mt btn-ext btn-primary" data-modal="#modal-article-users" data-action="ActionModalUsers" onclick="TableMain.Modal(this);" title="Usuarios">
+                            <i class="fa fa-user" aria-hidden="true">
+                                <label>Usuarios</label>
+                            </i>
                         </button>
-                        <a class="btn btn-mt btn-mt-primary" href="/admin/articles/#_slug_#/contents" title="Contenidos">
-                            <i class="fa fa-file-text" aria-hidden="true"></i>
+                        <a class="btn btn-mt btn-ext btn-mt-primary" href="/admin/articles/#_slug_#/contents" title="Contenidos">
+                            <i class="fa fa-file-text" aria-hidden="true">
+                                <label>Contenido</label>
+                            </i>
                         </a>
                     @endCan
                 </td>
                 <td>
-                    <span class="badge #_status_label_#">
+                    <span class="badge #_status_label_# btn-cursor" data-modal="#modal-status-main" data-action="ActionModalStatus" onclick="TableMain.Modal(this);">
                         #_status_name_#
                     </span>
                 </td>
@@ -60,6 +66,7 @@
                     #_article_type_name_#
                 </td>
                 <td>
+                    <em class="fa fa-pencil-square btn-inline-block" data-modal="#modal-url-main" data-action="ActionModalUrl" onclick="TableMain.Modal(this);"></em>
                     <a href="/articles/#_slug_#" target="_blank">/#_slug_#</a>
                 </td>
                 <td>
