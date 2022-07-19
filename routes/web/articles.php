@@ -31,6 +31,9 @@ Route::prefix('/')
         Route::patch('/status', 'ArticlesController@status')->middleware(
             'permission:article-update'
         );
+        Route::patch('/slug', 'ArticlesController@slug')->middleware(
+            'permission:article-update'
+        );
         Route::get('/list', 'ArticlesController@list')->middleware(
             'permission:article-list'
         );

@@ -5295,7 +5295,7 @@ class tableGear {
 
     this.dataSelect = tr ? this.data[tr - 1].data : 0
 
-    this.modalSelect.modal({backdrop: 'static', keyboard: false})
+    this.modalSelect.modal({ backdrop: 'static', keyboard: false })
     this.ModalLoader(false)
 
     action ? self[action](this.dataSelect) : false
@@ -5696,7 +5696,6 @@ String.prototype.replaceAll = function (search, replacement) {
   var target = this
   return target.split(search).join(replacement)
 }
-
 /**
  * Function to format number as currency
  */

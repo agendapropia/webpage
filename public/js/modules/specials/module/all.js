@@ -1,9 +1,18 @@
 let div = $('#tableMain')
 let route = '/admin/specials/list'
-let structure = [' ', 'Estado', 'Nombre', 'Url', 'Fecha publicación', '# vistos']
+let structure = [
+  ' ',
+  'Estado',
+  'Nombre',
+  'Url',
+  'Fecha publicación',
+  '# vistos',
+]
 
 var TableMain = new tableGear(div, route, structure)
+TableMain.filter.status_id = ''
 TableMain.refresh(true)
+
 let modalCreateMain = $('#modal-create-main')
 let formCreateMain = $('form[name=form-create-main]')
 
@@ -256,12 +265,11 @@ function ActionModalDeleteUsers(status) {
   TableSpecialUsers.refresh(false)
 }
 
-var modalFiles = $('#modal-utils-imagen-selections')
+const modalFiles = $('#modal-utils-imagen-selections')
+const divFiles = $('.div-files-class')
+const selectImageType = $('select[name=image_type]')
 
-var divFiles = $('.div-files-class')
-var selectImageType = $('select[name=image_type]')
-
-var specialFiles = new updloadS3(divFiles, {
+let specialFiles = new updloadS3(divFiles, {
   url: '/admin/specials/files',
   typeFile: 1,
   id: 1,
@@ -303,3 +311,75 @@ function FinishActionQueryFilesList(status, data) {
     specialFiles.loadData(data.data, ActionQueryFilesList.var.id)
   }
 }
+
+const modalStatus = $('#modal-status-main')
+const formStatus = $('form[name=form-status-main]')
+const selectStatus = formStatus.find('select[name=status_id]')
+
+function ActionModalStatus(data) {
+  UtilClearFormUi(formStatus)
+  formStatus.find('input[name=id]').val(data.id)
+  selectStatus.val(data.status_id)
+}
+
+function ActionQueryStatusSend() {
+  ActionQueryStatus.Send()
+  modalStatus.find('.overlay').show()
+}
+
+let ActionQueryStatus = new QueryAjax({
+  form: 'form-status-main',
+  action: 'ActionQueryStatusFinish',
+})
+function ActionQueryStatusFinish(status, data) {
+  if (status && data.status) {
+    notify(false, 'Estado actualizado', 'Operación realizada exitosamente', 2)
+    modalStatus.modal('hide')
+    TableMain.refresh(false)
+  } else if (!data.status) {
+    notify(false, data.message, '', 1)
+  }
+  modalStatus.find('.overlay').hide()
+  ActionQueryStatus.FormClose()
+}
+
+const modalUrl = $('#modal-url-main')
+const formUrl = $('form[name=form-url-main]')
+const inputUrl = formUrl.find('input[name=slug]')
+
+function ActionModalUrl(data) {
+  UtilClearFormUi(formUrl)
+  formUrl.find('input[name=id]').val(data.id)
+  inputUrl.val(data.slug)
+}
+
+function ActionQueryUrlSend() {
+  ActionQueryUrl.Send()
+  modalUrl.find('.overlay').show()
+}
+
+let ActionQueryUrl = new QueryAjax({
+  form: 'form-url-main',
+  action: 'ActionQueryUrlFinish',
+})
+function ActionQueryUrlFinish(status, data) {
+  if (status && data.status) {
+    notify(false, 'Url actualizada', 'Operación realizada exitosamente', 2)
+    modalUrl.modal('hide')
+    TableMain.refresh(false)
+    ActionQueryUrl.FormClose()
+  } else if (!data.status) {
+    notify(false, data.message, '', 1)
+  }
+
+  modalUrl.find('.overlay').hide()
+}
+
+inputUrl.bind('keypress', function (event) {
+  var regex = new RegExp('^[a-z-0-9]+$')
+  var key = String.fromCharCode(!event.charCode ? event.which : event.charCode)
+  if (!regex.test(key)) {
+    event.preventDefault()
+    return false
+  }
+})
