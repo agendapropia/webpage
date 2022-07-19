@@ -27,7 +27,7 @@
     </div>
     <div class="fecha">
     <p>Feb,18 2022 </p>
-    <p>Comparta</p><a><x-web.menu.social-arrow/></a>
+    <p>Comparta</p><a><x-web.menu.social-arrow-movil/></a>
     </div>
 </section>
 <hr class="vl">

@@ -41,6 +41,12 @@ class Special extends Model
             $query->where('s.name', 'like', "%$value%");
         }
     }
+    public function scopeStatus($query, $value)
+    {
+        if (trim($value) != '') {
+            $query->where('s.status_id', $value);
+        }
+    }
 
     // ----------- util methods -------------
     public function scopeGetDataBasic($query)

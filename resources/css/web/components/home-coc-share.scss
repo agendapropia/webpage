@@ -9,6 +9,67 @@
       margin-left: 18%;
       width: 65%;
     }
+
+
+    .menu-container {
+      width:25px;
+      height:25px;
+      position: relative;
+      cursor:pointer;
+      border-radius:50%;
+      z-index: 1;
+      margin-top: -11%;
+      margin-left: -757%;
+      @include media-up(md) {
+        margin-top: -4%;
+        margin-left: 679%;
+      }
+
+      @include media-up(lg) {
+        margin-top: -4%;
+        margin-left: 331%;
+      }
+  }
+  
+  .menu-item {
+      width:100%;
+      height:100%;
+      background-color:#b3864f;
+      border-radius:50%;
+      display:inline-block;
+      vertical-align:top;
+      position: absolute;
+      top:0;
+      left:0;
+      transition:transform .15s ease-out;
+      z-index: -1;
+      border: 1px solid #f0efe6;
+  }
+  
+  .menu-item span {
+      font-size:1em;
+  }
+  
+  .menu-item:hover {
+      transform:scale(1.2);
+  }
+  
+  #target {
+      width:100%;
+      height:100%;
+      background:#f0efe6;
+      position: absolute;
+      top:0;
+      left:0;
+      z-index: 9999;
+      border-radius:50%;
+      border:1px solid #f0efe6 ;
+  }
+  
+  #target > span {
+      font-size:.7em;
+      opacity:.85;
+  }
     
       .team-work{
         font-family: var(--ff-text);
@@ -25,55 +86,6 @@
         @include media-up(md) {
           display:none;
         }
-
-        .menu-container {
-          width:25px;
-          height:25px;
-          position: relative;
-          cursor:pointer;
-          border-radius:50%;
-          z-index: 1;
-      }
-      
-      .menu-item {
-          width:100%;
-          height:100%;
-          background-color:#b3864f;
-          border-radius:50%;
-          display:inline-block;
-          vertical-align:top;
-          position: absolute;
-          top:0;
-          left:0;
-          transition:transform .15s ease-out;
-          z-index: -1;
-          border: 1px solid #f0efe6;
-      }
-      
-      .menu-item span {
-          font-size:1em;
-      }
-      
-      .menu-item:hover {
-          transform:scale(1.2);
-      }
-      
-      #target {
-          width:100%;
-          height:100%;
-          background:#f0efe6;
-          position: absolute;
-          top:0;
-          left:0;
-          z-index: 9999;
-          border-radius:50%;
-          border:1px solid #f0efe6 ;
-      }
-      
-      #target > span {
-          font-size:.7em;
-          opacity:.85;
-      }
       }   
 
 

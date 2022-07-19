@@ -10,7 +10,7 @@
       
       @include media-up(md) {
     display: grid;
-      grid-template: 1fr/1fr  379px  1fr 1fr 1fr;
+      grid-template: 1fr/445px  1fr 1fr 1fr;
       padding: 0 10px;
       margin-left: 20%;
       width: 62%;
@@ -20,71 +20,6 @@
       @include media-up(lg) {
         align-items: center;
         padding: 0;
-      }
-      
-      .fabs {
-        position: absolute;
-        right: auto;
-        margin-top:-19px;
-      }
-        
-      .action {
-        background:#b3864f ;
-        height: 30px;
-        width: 30px;
-        border-radius: 50%;
-        transition: background-color 0.4s ease-in-out;
-      }
-      
-      .action i {
-        position: absolute;
-        color: white;
-        left: 50%;
-        top: 50%;
-        transform: translate(-50%, -50%);
-        font-size: 15px;
-        cursor: pointer;
-      }
-      
-      .action:hover {
-        background-color: var(--clr-primary);
-      }
-      
-      .g-btn {
-        position: absolute;
-        height: 30px;
-        width: 30px;
-        border-radius: 50%;
-        background-color: var(--clr-primary);
-      }
-      
-      .g-btn:hover{
-        transform: rotate(360deg);
-        transition: all 0.5s;
-      }
-      
-      .g-btn i {
-        position: absolute;
-        font-size: 12px;
-        color: white;
-        left: 50%;
-        top: 50%;
-        transform: translate(-50%, -50%);
-      }
-      
-      .btns {
-        position: absolute;
-        bottom: 0px;
-        margin-bottom: 0px;
-        height: 30px;
-        width: 30px;
-        transition: 0.3s ease-in-out;
-        left: 50%;
-        transform: translateX(-50%);
-        z-index: -1;
-      }
-      .btns.open {
-        bottom: 50px;
       }
        
       .text-share{
@@ -138,72 +73,6 @@
         @include media-up(lg) {
             display: none;
         }
-        
-        .fabs {
-          position: absolute;
-          right: auto;
-          margin-top:1px;
-          margin-left: 10%;
-        }
-          
-        .action {
-          background:#b3864f ;
-          height: 30px;
-          width: 30px;
-          border-radius: 50%;
-          transition: background-color 0.4s ease-in-out;
-        }
-        
-        .action i {
-          position: absolute;
-          color: white;
-          left: 50%;
-          top: 50%;
-          transform: translate(-50%, -50%);
-          font-size: 15px;
-          cursor: pointer;
-        }
-        
-        .action:hover {
-          background-color: var(--clr-primary);
-        }
-        
-        .g-btn {
-          position: absolute;
-          height: 30px;
-          width: 30px;
-          border-radius: 50%;
-          background-color: var(--clr-primary);
-        }
-        
-        .g-btn:hover{
-          transform: rotate(360deg);
-          transition: all 0.5s;
-        }
-        
-        .g-btn i {
-          position: absolute;
-          font-size: 12px;
-          color: white;
-          left: 50%;
-          top: 50%;
-          transform: translate(-50%, -50%);
-        }
-        
-        .btns {
-          position: absolute;
-          bottom: 0px;
-          margin-bottom: 0px;
-          height: 30px;
-          width: 30px;
-          transition: 0.3s ease-in-out;
-          left: 50%;
-          transform: translateX(-50%);
-          z-index: -1;
-        }
-        .btns.open {
-          bottom: 50px;
-        }
         .cont{
             display:grid;
             grid-template: 1fr/1fr 2fr;
@@ -250,3 +119,77 @@
         }
       }
     }
+
+.social{
+  .fabs {
+    position: absolute;
+    right: auto;
+    margin-top: 43px;
+    left: 13%;
+    @include media-up(md) {
+      margin-top: -178px;
+      left: 12%;
+    }
+  }
+    
+  .action {
+    background:#b3864f ;
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+    transition: background-color 0.4s ease-in-out;
+  }
+  
+  .action i {
+    position: absolute;
+    color: white;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 15px;
+    cursor: pointer;
+  }
+  
+  .action:hover {
+    background-color: var(--clr-primary);
+  }
+  
+  .g-btn {
+    position: absolute;
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    background-color: var(--clr-primary);
+  }
+  
+  .g-btn:hover{
+    transform: rotate(360deg);
+    transition: all 0.5s;
+  }
+  
+  .g-btn i {
+    position: absolute;
+    font-size: 12px;
+    color: white;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+  
+  .btns {
+    position: absolute;
+    bottom: 0px;
+    margin-bottom: 0px;
+    height: 20px;
+    width: 20px;
+    transition: 0.3s ease-in-out;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: -1;
+    top:1px
+  }
+  .btns.open {
+    bottom: 50px;
+    top:-100%;
+  }
+}

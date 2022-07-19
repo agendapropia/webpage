@@ -18,8 +18,8 @@
     @include('layouts.web.home-cocreation.content-color')
     @include('layouts.web.home-cocreation.share')
     <x-web.serie />
-    @include('layouts.web.allied-media')
     @include('layouts.web.credits')
+    @include('layouts.web.allied-media')
    
 
 @endsection

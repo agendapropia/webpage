@@ -7,6 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class SpecialStatus extends Model
 {
+    const PUBLISHED_STATUS = 1;
+    const PUBLISHED_PERMISSION = 'special-status-published';
+
     use HasFactory;
 
     protected $table = 'special_status';

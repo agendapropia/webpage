@@ -33,8 +33,8 @@
     <x-web.share />
     <x-web.comment />
     @include('layouts.web.related')
-    @include('layouts.web.allied-media')
     @include('layouts.web.credits')
+    @include('layouts.web.allied-media')
 
     
 @endsection

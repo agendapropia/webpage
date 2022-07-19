@@ -25,11 +25,11 @@ class SpecialSeeder extends Seeder
                 'id' => 4,
                 'name' => 'Inactivo',
                 'icon' => 'inactive.png',
-                'label' => 'badge-dange',
+                'label' => 'badge-warning',
             ],
             [
                 'id' => 1,
-                'name' => 'Activo',
+                'name' => 'Publicado',
                 'icon' => 'active.png',
                 'label' => 'badge-success',
             ],
@@ -41,9 +41,9 @@ class SpecialSeeder extends Seeder
             ],
             [
                 'id' => 3,
-                'name' => 'Programado',
-                'icon' => 'schedule.png',
-                'label' => 'badge-warning',
+                'name' => 'Revisión',
+                'icon' => 'review.png',
+                'label' => 'badge-primary',
             ],
         ]);
 

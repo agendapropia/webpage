@@ -68,6 +68,7 @@ class RolesSeeder extends Seeder
         Permission::create(['name' => 'special-create']);
         Permission::create(['name' => 'special-delete']);
         Permission::create(['name' => 'special-update']);
+        Permission::create(['name' => 'special-status-published']);
         
         Permission::create(['name' => 'special-content-module']);
         Permission::create(['name' => 'special-content-list']);
@@ -80,6 +81,8 @@ class RolesSeeder extends Seeder
         Permission::create(['name' => 'article-create']);
         Permission::create(['name' => 'article-delete']);
         Permission::create(['name' => 'article-update']);
+        Permission::create(['name' => 'article-status-published']);
+
 
         Permission::create(['name' => 'article-content-module']);
         Permission::create(['name' => 'article-content-list']);

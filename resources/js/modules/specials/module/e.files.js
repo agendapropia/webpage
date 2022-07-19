@@ -1,9 +1,8 @@
-var modalFiles = $('#modal-utils-imagen-selections')
+const modalFiles = $('#modal-utils-imagen-selections')
+const divFiles = $('.div-files-class')
+const selectImageType = $('select[name=image_type]')
 
-var divFiles = $('.div-files-class')
-var selectImageType = $('select[name=image_type]')
-
-var specialFiles = new updloadS3(divFiles, {
+let specialFiles = new updloadS3(divFiles, {
   url: '/admin/specials/files',
   typeFile: 1,
   id: 1,

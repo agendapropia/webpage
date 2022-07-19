@@ -5,13 +5,14 @@
 
     <div class="comp-coc">
     <p>Feb,18 2022 </p>
-    <p>Compartir  </p><a><x-web.menu.social-arrow-movil/></a>
+    <p>Compartir  </p>
 </div>
 <div class="fecha-coc">
 <div><x-web.badge-location country="Colombia" city="Bogotá" dark /></div>
     <p>Feb,18 2022 </p>
-    <p>Comparta</p><a><x-web.menu.social-arrow/></a>
+    <p>Comparta</p>
     </div>
+    <a><x-web.menu.social-arrow-movil/></a>
 </section>
 <br style="background-color:#f0efe6;">
 <hr style="background-color:#f0efe6; padding: 0 5%;">
