@@ -43,7 +43,46 @@
     hr {
       width: 50%;
       border: 3px solid;
-      border-color: var(--clr-primary);
+      border-color: var(--clr-yellow-200);
+      opacity: .9;
+    }
+    .badge-backpack {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      margin-bottom: 9px;
+      margin-left: 5px;
+    }
+    
+    .badge-backpack .badge-backpack__type {
+      text-transform: uppercase;
+      font-size: 10px;
+      background-color: var(--clr-yellow-200);
+      color: var(--clr-white);
+      padding: 0px 5px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: fit-content;
+    }
+    
+    .badge-backpack .badge-backpack{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-left: 5px;
+      gap: 5px;
+    }
+    
+    .badge-backpack .badge-backpack span {
+      color: var(--clr-white);
+      font-size: 0.75rem;
+      font-family:var(--ff-text)
+    }
+    
+    .badge-backpack .badge-backpack i {
+      font-size: 10px;
+      color: var(--clr-yellow-200);
     }
     @include media-up(md) {
       align-items: center;

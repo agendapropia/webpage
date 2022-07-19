@@ -29,8 +29,8 @@
     <x-web.section.int-art-map />
     @include('layouts.web.internal-article.content')
     <x-web.section.int-art-pdf />
-    @include('layouts.web.related')
-    @include('layouts.web.most-read')
     <x-web.share />
     <x-web.comment />
+    @include('layouts.web.related')
+    @include('layouts.web.most-read')  
 @endsection

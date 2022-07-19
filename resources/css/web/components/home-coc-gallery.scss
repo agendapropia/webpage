@@ -2,8 +2,8 @@
 .grid-coc-gallery{
     display: grid;
     grid-template-columns: 1fr;
-    gap: 1rem;
-    margin-bottom: 16px;
+    gap: 2rem;
+    margin-bottom: 50px;
     @include media-up(md) {
       grid-template-columns: 1fr 1fr 1fr;
       padding: 0 60px;

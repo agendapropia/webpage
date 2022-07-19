@@ -1,5 +1,10 @@
 @import '../base/mixins.scss';
-
+body,
+html {
+  @supports(display: grid) {
+    display: block;
+  }
+}
 .section-histories {
   display: grid;
   grid-template-columns: 1fr;

@@ -1,18 +1,16 @@
 <div class="allied-media">
 <section class="section-weaving">
     <div class="weaving-imgs-logo">
-<p class="title"><b>Proyecto periodístico de:</b></p>
+<p class="title"><b>Un proyecto de:</b></p>
 
         <div>
             <img class="img-logo" src="https://cdn.zeplin.io/626c221a3745ab96ae1e4665/assets/683AF953-13B1-4239-8A01-FCC77CBD4E67.png"></>
         </div>
     </div>
-    
+  
 </section>
-
-<p style="color:#264a50; margin-left:13%;"><b>Medios aliados:</b></p>
+<p class="title"><b>Medios aliados:</b></p> 
 <section class="section-weaving-icons">
-
 <div class="weaving-imgs">
 <img class='img-items'src="https://www.agendapropia.co/sites/default/files/sentarte_logo_1_01.jpeg" alt="icon1" />
 </div>
@@ -62,6 +60,16 @@
             </div>
         </div>
     </div>
+   
+<section class="section-weaving">
+    <div class="weaving-imgs-logo">
+        <p class="title"><b>Con el apoyo de:</b></p>
 
+        <div>
+        <img class="img-logo" style="width:150px; height:150px" src="https://www.agendapropia.co/sites/default/files/entre_ojos_0.jpg" alt="icon5" />
+        </div>
+    </div>
+  
+</section>
 </div>
 
