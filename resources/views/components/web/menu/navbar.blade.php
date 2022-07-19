@@ -32,7 +32,7 @@
 					Nosotros
 				</x-web.menu.item>
 				<x-web.menu.item>
-					Contactenos
+					Contáctenos
 				</x-web.menu.item>
 				<x-web.menu.item>
 				<i class="fa-solid fa-magnifying-glass"></i>

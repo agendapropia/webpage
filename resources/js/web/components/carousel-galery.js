@@ -3,5 +3,6 @@ new VenoBox({
   numeration: true,
   infinigall: true,
   share: true,
-  spinner: 'rotating-plane'
+  spinner: 'rotating-plane',
+  top: 90
 });

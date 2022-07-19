@@ -1,14 +1,21 @@
-<div class="fabs" onclick="toggleBtnHor()">
-            <div class="action">
-                <i class="fas fa-solid fa-share" id="addh"></i>
-                <i class="fas fa-times" id="removeh" style="display: none"></i>
-            </div>
-
-            <div class="btnsh">
-                <a href="" class="g-btn"><i class="fa-brands fa-facebook"></i></a>
-                <a href="" class="g-btn"><i class="fa-brands fa-twitter"></i></a>
-                <a href="" class="g-btn"><i class="fa-brands fa-instagram"></i></a>
-                <a href="" class="g-btn"><i class="fa-brands fa-whatsapp"></i></a>
-                <a href="" class="g-btn"><i class="fa-solid fa-link"></i></a>
-            </div>
+<div class="menu-container">
+                    <div id="targetDesck" class="d-flex align-items-center justify-content-center">
+                        <span class="fas fa-solid fa-share"></span>
+                    </div>
+                    
+                    <div class="menu-item d-flex align-items-center justify-content-center">
+                        <span class="fab fa-facebook-messenger" style="color:white;"></span>
+                    </div>
+                    <div class="menu-item d-flex align-items-center justify-content-center">
+                        <span class="fab fa-twitter" style="color:white;"></span>
+                    </div>
+                    <div class="menu-item d-flex align-items-center justify-content-center">
+                        <span class="fa-brands fa-instagram" style="color:white;"></span>
+                    </div>
+                    <div class="menu-item d-flex align-items-center justify-content-center">
+                        <span class="fa-brands fa-whatsapp" style="color:white;"></span>
+                    </div>
+                    <div class="menu-item d-flex align-items-center justify-content-center">
+                        <span class="fa-solid fa-link" style="color:white;"></span>
+                    </div>
 </div>

@@ -1,7 +1,6 @@
 <section class="sh-wrapper-events-announ">
-    <div class="text">
-    <x-web.menu.social-btn />
-    </div>
+   
+
     
     <div class="text-share">
         <p><b>Comparta en sus redes sociales</b></p>
@@ -15,12 +14,11 @@
     <p><i class="fa-solid fa-heart"></i> 40</p>
 </div>
 </section>
-
+<div class="social">
+<x-web.menu.social-btn />
+</div>
 <section class="shm-wrapper-events-announ">
     <div class="cont">
-        <div class="text">
-            <x-web.menu.social-btn />
-        </div>
         
         <div class="text-share">
             <p><b>Comparta en sus redes sociales</b></p>

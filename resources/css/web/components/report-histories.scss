@@ -1,5 +1,10 @@
 @import '../base/_mixins.scss';
-
+body,
+html {
+  @supports(display: grid) {
+    display: block;
+  }
+}
 .grid-report {
   display:none;
   @include media-up(md) {

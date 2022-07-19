@@ -2,7 +2,7 @@
 <div class="button">
     <span>
         <hr class="vlll">
-	    <button  class="web-button" >Creditos</button>
+	    <button  class="web-button" >Créditos</button>
         <hr class="vll">
     </span>
 </div>    
