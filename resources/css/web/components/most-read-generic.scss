@@ -19,7 +19,17 @@
         color: var(--clr-cyan-100);
         margin: 0;
       }
+      .relatedhr{
+        @include media-up(md) {
+        opacity: 1;
+        border: 1px solid;
+        color: var(--clr-grey-200);
+        width: 65%;
+        }
+      }
       .view-more {
+        display: none;
+        @include media-up(md) {
         font-family: var(--ff-text);
         font-size: 0.9375rem;
         color: var(--clr-black-100);
@@ -50,6 +60,7 @@
           color: var(--clr-white);
         }
       }
+    }
       @include media-up(md) {
         grid-column: 1 / span 2;
       }
@@ -68,6 +79,7 @@
     margin-bottom: 16px;
     margin-top: 24px;
     margin-bottom: 5rem;
+    padding: 0 16px;
     @include media-up(md) {
       grid-template-columns: 1fr 1fr 1fr;
       padding: 0 60px;

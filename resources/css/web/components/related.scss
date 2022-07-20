@@ -19,7 +19,17 @@
         color: var(--clr-cyan-100);
         margin: 0;
       }
+      .relatedhr{
+        @include media-up(md) {
+        opacity: 1;
+        border: 1px solid;
+        color: var(--clr-grey-200);
+        width: 48%;
+        }
+      }
       .view-more {
+        display: none;
+        @include media-up(md) {
         font-family: var(--ff-text);
         font-size: 0.9375rem;
         color: var(--clr-black-100);
@@ -49,6 +59,7 @@
           font-size: 1rem;
           color: var(--clr-white);
         }
+      }
       }
       @include media-up(md) {
         grid-column: 1 / span 2;

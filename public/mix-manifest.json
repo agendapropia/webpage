@@ -1,7 +1,6 @@
 {
     "/js/app.js": "/js/app.js",
     "/css/app.css": "/css/app.css",
-    "/css/web/web-plugins.all.css": "/css/web/web-plugins.all.css",
     "/js/plugins.all.js": "/js/plugins.all.js",
     "/css/plugins.all.css": "/css/plugins.all.css",
     "/js/modules/users/all.js": "/js/modules/users/all.js",
@@ -15,5 +14,6 @@
     "/js/modules/articles/contents/all.js": "/js/modules/articles/contents/all.js",
     "/js/modules/articles/module/all.js": "/js/modules/articles/module/all.js",
     "/js/modules/utils/images/all.js": "/js/modules/utils/images/all.js",
-    "/js/web/all.js": "/js/web/all.js"
+    "/js/web/all.js": "/js/web/all.js",
+    "/css/web/web-plugins.all.css": "/css/web/web-plugins.all.css"
 }

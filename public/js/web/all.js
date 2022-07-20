@@ -25,9 +25,9 @@ function toggleBtn() {
   }
 $(document).ready(function(){
     $("#allied").owlCarousel({
-        items : 2,
-        temsCustom:[1442, 2],
-        itemsDesktop:[1099,2],
+        items : 5,
+        temsCustom:[1442, 4],
+        itemsDesktop:[1099,5],
         itemsDesktopSmall:[979,2],
         temsCustom:[425, 2],
         itemsMobile : [300,2],
@@ -58,6 +58,7 @@ new VenoBox({
   spinner: 'rotating-plane',
   top: 90
 });
+
 
 $(document).ready(function() {
     $("#news-slider").owlCarousel({

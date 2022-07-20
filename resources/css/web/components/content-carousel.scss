@@ -1,8 +1,14 @@
 .content-carousel{
         margin-left: -3%;
+        margin-top: -27%;
         @include media-up(md) {
         margin-left: 30%;
-        margin-top: -6%;
+        margin-top: -12%;
         margin-bottom: -17%;
+        }
+        @include media-up(lg) {
+                margin-left: 30%;
+                margin-top: -7%;
+                margin-bottom: -17%;
         }
 }
