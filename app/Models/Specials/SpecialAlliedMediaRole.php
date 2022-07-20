@@ -5,7 +5,7 @@ namespace App\Models\Specials;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class SpecialAlliedMedia extends Model
+class SpecialAlliedMediaRole extends Model
 {
     use HasFactory;
 
@@ -21,10 +21,15 @@ class SpecialAlliedMedia extends Model
      *
      * @var array
      */
-    protected $fillable = [
-        'id',
-        'special_id',
-        'special_allied_media_role_id',
-        'allied_media_id',
-    ];
+    protected $fillable = ['id', 'name', 'label', 'icon'];
+
+    /**
+     * search scope
+     */
+    public function scopeSearch($query, $value)
+    {
+        if (trim($value) != '') {
+            $query->where('samr.name', 'like', "%$value%");
+        }
+    }
 }
