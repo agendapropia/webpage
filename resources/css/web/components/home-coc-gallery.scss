@@ -3,6 +3,7 @@
     display: grid;
     grid-template-columns: 1fr;
     gap: 2rem;
+    padding: 0 20px;
     margin-bottom: 50px;
     @include media-up(md) {
       grid-template-columns: 1fr 1fr 1fr;
@@ -53,9 +54,9 @@
             position: absolute;
             background-image: linear-gradient(
               to bottom,
-              rgba(1, 0, 0, 1),
+              rgba(0, 0, 0, 0.3),
               rgba(0, 0, 0, 0.4)
-            );
+            ); 
             top: 0;
             padding: 28px 37px;
             display: flex;

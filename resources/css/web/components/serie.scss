@@ -17,6 +17,9 @@
         margin-top: -8%;
         margin-bottom: 3%;
       }
+      @include media-up(xl) {
+        margin-bottom: -6%;
+      }
     
       p {
         font-family: var(--ff-text);

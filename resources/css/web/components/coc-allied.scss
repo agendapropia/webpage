@@ -151,6 +151,7 @@
         padding: 0 20px;
         @include media-up(md) {
         padding: 0 20px;
+        margin-left: 40px;
         }
     }
     .post-slide{
@@ -177,11 +178,15 @@
         text-align:center;
         padding: 0px 10px;
         margin-top: -42%;
-        margin-left: 75%;
+        margin-left: 80%;
         margin-bottom: 75%;
         @include media-up(md) {
             margin-top: -57%;
         }
+        @include media-up(lg) {
+          margin-top: -11%;
+          margin-bottom: 17%;
+      }
     }
     .owl-controls .owl-buttons .owl-prev{
         background: transparent;
@@ -192,6 +197,10 @@
         border: 1px solid red;
         border-color: #000000;
         opacity: 1;
+        @include media-up(md) {
+          left:-10px;
+      }
+
       
     }
     .owl-controls .owl-buttons .owl-next{
@@ -201,7 +210,12 @@
         border-radius: 50px;
         border: 1px solid red;
         border-color: #000000;
-        opacity: 1;
+        opacity: 1; 
+        @include media-up(md) {
+
+          
+      }
+ 
     }
     .owl-controls .owl-buttons .owl-next:after{
         content:"\f104";
@@ -239,8 +253,5 @@
         border: 1px solid red;
         border-color: #000000;
         opacity: 1;
-    }
-    @include media-up(lg) {
-        display: none;
     }
 }

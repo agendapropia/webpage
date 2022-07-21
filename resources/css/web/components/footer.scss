@@ -69,9 +69,12 @@
   span {
     font-family: var(--ff-text);
     color: var(--clr-cyan-200);
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     text-align: center;
     text-decoration:none;
+    @include media-up(md) {
+      font-size: 1.5rem;
+    }
     i{
       text-decoration:none;
       margin:0 40px 0 0;

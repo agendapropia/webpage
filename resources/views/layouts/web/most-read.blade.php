@@ -1,6 +1,7 @@
 <section class="section-read">
 	<div class="histories__title">
 		<h2>Lo más leído</h2>
+		<hr class="relatedhr">
 		<a class="view-more">Ver más
 			<span>
 				<i class="fa-solid fa-arrow-right"></i>
