@@ -145,11 +145,14 @@ return [
     | of "email". This simply helps us make messages a little cleaner.
     |
     */
-
     'attributes' => [
         'start_time' => 'hora de inicio',
         'end_time' => 'hora final',
         'day_id' => 'día',
+        'special_allied_media_role_id' => 'role',
+        'allied_media_id' => 'medio aliado',
+        'special_role_id' => 'role',
+        'user_id' => 'usuario',
     ],
 
 ];

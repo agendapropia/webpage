@@ -34,6 +34,7 @@
     @include('pages.admin.specials.module.modals.files')
     @include('pages.admin.specials.module.modals.status')
     @include('pages.admin.specials.module.modals.url')
+    @include('pages.admin.specials.module.modals.alliedmedia')
 @endsection
 
 @push('js-after')

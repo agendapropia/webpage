@@ -255,6 +255,14 @@
   margin: 0px 1px;
 }
 
+.table-gear .btn-mt:active {
+  background-color: #336270 !important;
+  color: #fff !important;
+}
+.table-gear .btn-mt:active label {
+  color: #fff !important;
+}
+
 .table-gear .btn-ext {
   width: 28px;
 }

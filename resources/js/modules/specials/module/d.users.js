@@ -35,7 +35,10 @@ let userSelectUpdate = new searchByAutocomplete(
 )
 
 /** --------- METHOD CREATE --------- */
-
+function QueryModalDataUsersAction(){
+  modalSpecialUsers.find('.overlay').show()
+  QueryModalCreateUsers.Send()
+}
 let QueryModalDataUsers = new QueryAjax({
   url: '/admin/specials/roles',
   method: 'GET',
@@ -56,6 +59,7 @@ let QueryModalCreateUsers = new QueryAjax({
   loaderSelected: modalSpecialUsers.find('.overlay-modal'),
 })
 function ActionModalCreateUsers(status, result) {
+  modalSpecialUsers.find('.overlay').hide()
   if (!status) {
     return false
   }

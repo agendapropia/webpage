@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSpecialAlliedMediaTable extends Migration
+class CreateSpecialAlliedMediaRolesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,12 +14,12 @@ class CreateSpecialAlliedMediaTable extends Migration
     public function up()
     {
         Schema::connection('mysql_articles')->create(
-            'special_allied_media',
+            'special_allied_media_roles',
             function (Blueprint $table) {
                 $table->integerIncrements('id');
-                $table->integer('special_id')->index();
-                $table->integer('special_allied_media_role_id')->index();
-                $table->integer('allied_media_id')->index();
+                $table->string('name', 100);
+                $table->string('label', 256);
+                $table->string('icon', 256);
                 $table->timestamps();
             }
         );
@@ -33,7 +33,7 @@ class CreateSpecialAlliedMediaTable extends Migration
     public function down()
     {
         Schema::connection('mysql_articles')->dropIfExists(
-            'special_allied_media'
+            'special_allied_media_roles'
         );
     }
 }

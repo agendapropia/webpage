@@ -12,5 +12,5 @@
         required="true"
         fieldWidth="col-md-4 field-items">
     </x-admin.forms.form-input-select>
-    <x-admin.forms.form-button-primary action="QueryModalCreateUsers.Send()" buttonClass="btn-sm col-md-3" text="Agregar usuario"></x-form-button-to-accept>
+    <x-admin.forms.form-button-primary action="QueryModalDataUsersAction()" buttonClass="btn-sm col-md-3" text="Agregar usuario"></x-form-button-to-accept>
 </div>

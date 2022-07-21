@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\Specials\AlliedMedia;
 use App\Models\Specials\Special;
 use App\Models\Specials\SpecialAlliedMedia;
+use App\Models\Specials\SpecialAlliedMediaRole;
 use App\Models\Specials\SpecialCountry;
 use App\Models\Specials\SpecialStatus;
 use App\Models\Specials\SpecialTag;
@@ -44,6 +45,27 @@ class SpecialSeeder extends Seeder
                 'name' => 'Revisión',
                 'icon' => 'review.png',
                 'label' => 'badge-primary',
+            ],
+        ]);
+
+        SpecialAlliedMediaRole::insert([
+            [
+                'id' => 4,
+                'name' => 'Proyecto',
+                'label' => 'Un proyecto de',
+                'icon' => 'project.png',
+            ],
+            [
+                'id' => 1,
+                'name' => 'Medios Aliados',
+                'label' => 'Medios Aliados',
+                'icon' => 'media.png',
+            ],
+            [
+                'id' => 2,
+                'name' => 'Apoyo',
+                'label' => 'Con el apoyo de',
+                'icon' => 'apoyo.png',
             ],
         ]);
 
