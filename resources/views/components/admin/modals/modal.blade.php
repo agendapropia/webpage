@@ -18,6 +18,7 @@
             <div class="modal-footer {{ isset($footerClass) ? $footerClass : ''  }}">
                 {{ isset($footer) ? $footer : ''  }}
             </div>
+            
             <x-admin.plugins.overlay></x-admin.plugins.overlay>
         </div>
     </div>

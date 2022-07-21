@@ -56,6 +56,24 @@ Route::prefix('/')
         // ROLES
         Route::get('/roles', 'SpecialRolesController@get');
 
+        // ALLIED MEDIA ROLES
+        Route::get(
+            '/allied-media/internal/roles',
+            'SpecialAlliedMediaRolesController@get'
+        );
+        Route::get(
+            '/allied-media/internal/list',
+            'SpecialAlliedMediaController@list'
+        );
+        Route::post(
+            '/allied-media/internal',
+            'SpecialAlliedMediaController@create'
+        );
+        Route::delete(
+            '/allied-media/internal',
+            'SpecialAlliedMediaController@delete'
+        );
+
         // FILES
         Route::post('/files', 'SpecialFilesController@create');
         Route::get('/files', 'SpecialFilesController@get');

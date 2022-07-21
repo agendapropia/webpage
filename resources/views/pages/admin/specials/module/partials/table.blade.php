@@ -41,6 +41,11 @@
                                 <label>Usuarios</label>
                             </i>
                         </button>
+                        <button class="btn btn-mt btn-ext btn-primary" data-modal="#modal-special-alliedmedia" data-action="ActionModalAlliedMedia" onclick="TableMain.Modal(this);" title="Medios aliados">
+                            <i class="fa fa-address-book" aria-hidden="true">
+                                <label>Medios</label>
+                            </i>
+                        </button>
                         <a class="btn btn-mt btn-ext btn-mt-primary" href="/admin/specials/#_slug_#/contents" title="Contenidos">
                             <i class="fa fa-file-text" aria-hidden="true">
                                 <label>Contenido</label>

@@ -92,7 +92,6 @@ class SpecialsController extends Controller
             'publication_date' => 'required',
             'template_id' => 'required',
             'country_ids' => 'string|nullable',
-            'alliedmedia_ids' => 'string|nullable',
             'tags_ids' => 'string|nullable',
         ]);
 
@@ -104,10 +103,6 @@ class SpecialsController extends Controller
         $special->number_views = 0;
         $special->save();
 
-        $this->_setSpecialAlliedMedia(
-            $special->id,
-            explode(',', $request->alliedmedia_ids)
-        );
         $this->_setSpecialCountries(
             $special->id,
             explode(',', $request->country_ids)

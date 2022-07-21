@@ -41,6 +41,7 @@ class SpecialTwoSeeder extends Seeder
 
         SpecialAlliedMedia::create([
             'special_id' => $special->id,
+            'special_allied_media_role_id' => 1,
             'allied_media_id' => 1002,
         ]);
 

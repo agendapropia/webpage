@@ -25,6 +25,5 @@
 </div>
 <div class="row">
     <x-admin.forms.form-search-by-autocomplete divClass="countrySelect" label="Países" fieldName="country_ids" fieldPlaceholder="Buscar país"></x-form-search-by-autocomplete>
-    <x-admin.forms.form-search-by-autocomplete divClass="alliedMediaSelect" label="Medios aliados" fieldName="alliedmedia_ids" fieldPlaceholder="Buscar medios aliados"></x-form-search-by-autocomplete>
     <x-admin.forms.form-search-by-autocomplete divClass="tagsSelect" label="Tags" fieldName="tags_ids" fieldPlaceholder="Buscar tags"></x-form-search-by-autocomplete>
 </div>

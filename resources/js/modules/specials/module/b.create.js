@@ -6,7 +6,6 @@ function ActionMainCreate() {
   queryCreateMain.Send()
   countrySelectCreate.clearSelect()
   tagsSelectCreate.clearSelect()
-  alliedMediasSelectCreate.clearSelect()
   modalCreateMain.find('input[name=publication_date]').flatpickr(settingDate)
 }
 
@@ -25,15 +24,6 @@ let tagsSelectCreate = new searchByAutocomplete(
   {
     params: [],
     url: '/admin/configurations/tags/search-by-autocomplete',
-    limitItems: 10,
-    minimumCharactersToSearch: 1,
-  },
-)
-let alliedMediasSelectCreate = new searchByAutocomplete(
-  formCreateMain.find('.alliedMediaSelect'),
-  {
-    params: [],
-    url: '/admin/specials/allied-media/search-by-autocomplete',
     limitItems: 10,
     minimumCharactersToSearch: 1,
   },
