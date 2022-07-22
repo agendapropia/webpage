@@ -24,6 +24,17 @@
                 <div class="modal-body">
                     <div id="upload-s3" class="div-files-class">
                         <div class="modal-files" style="">
+                            <div class="form-group no-padding-mobile col-md-6 focused">
+                                <label class="form-control-label">Tipo de imagen</label>
+                                <span class="is-required">*</span>
+                                <select class="form-control form-control-sm " name="image_type" data-placeholder="" autocomplete="off">
+                                    <option value="1">Fotografías</option>
+                                    <option value="2">Galería</option>
+                                </select>
+                                <small class="form-text text-muted">  
+                                    <div class="label-error"></div>
+                                </small>
+                            </div>
                             <ul class="upload-s3-list result ui-sortable"></ul>
                             <div id="photos_error">
                                 <input

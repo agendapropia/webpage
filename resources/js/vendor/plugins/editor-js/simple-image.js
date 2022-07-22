@@ -4,6 +4,7 @@
  *
  * @typedef {object} ImageToolData — Input/Output data format for our Tool
  * @property {string} url - image source URL
+ * @property {int} galleryType -  gallery type
  * @property {string} caption - image caption
  * @property {boolean} withBorder - flag for adding a border
  * @property {boolean} withBackground - flag for adding a background
@@ -70,6 +71,7 @@ class EditorJsSimpleImage {
     this.config = config || {}
     this.data = {
       images: data.images || [],
+      galleryType: data.galleryType || 1,
       withBorder: data.withBorder !== undefined ? data.withBorder : false,
       withBackground:
         data.withBackground !== undefined ? data.withBackground : false,
@@ -105,9 +107,13 @@ class EditorJsSimpleImage {
 
     this._addModalFile()
     this._addButtonModal()
+    
+    this.selectGalleryType = this.ModalFile.find('select[name=image_type]')
+    this._addLabelGalleryType()
 
     if (this.data && this.data.images) {
       this.dataS3 = this.data.images
+      this.galleryType = this.data.galleryType
       this._createImages(this.dataS3)
     }
 
@@ -122,8 +128,13 @@ class EditorJsSimpleImage {
     var cont = this
     this.editorFileS3.send.click(function () {
       cont.dataS3 = cont._setDataImages(cont.editorFileS3.data)
+      cont.galleryType = cont.selectGalleryType.val()
       cont._createImages(cont.dataS3)
       cont._openModal(false)
+    })
+
+    this.selectGalleryType.change(function () {
+      cont._activeButtonS3()
     })
 
     if (!this.data.images.length) {
@@ -169,6 +180,14 @@ class EditorJsSimpleImage {
 
   /**
    * @private
+   * active button of send s3
+   */
+  _activeButtonS3() {
+    this.editorFileS3.send.prop('disabled', false)
+  }
+
+  /**
+   * @private
    * Add button open modal
    */
   _addButtonModal() {
@@ -182,11 +201,25 @@ class EditorJsSimpleImage {
       if (this.dataS3) {
         this.editorFileS3.loadData(this.dataS3, 1)
       }
+
+      this.ModalFile.find('select[name=image_type]').val(this.galleryType)
+
       this.editorFileS3.loading.hide()
       this._openModal()
     })
 
     this.wrapper.appendChild(button)
+  }
+
+  /**
+   * @private
+   * Add label of gallery type
+   */
+  _addLabelGalleryType() {
+    const label = document.createElement('label')
+    label.className = 'label-type'
+    label.innerHTML = this.galleryType == 1 ? 'Fotografías' : 'Galería'
+    this.wrapper.appendChild(label)
   }
 
   /**
@@ -198,6 +231,7 @@ class EditorJsSimpleImage {
   _createImages(images) {
     this.wrapper.innerHTML = ''
     this._addButtonModal()
+    this._addLabelGalleryType()
 
     const galery = images.length > 6 ? 'general' : images.length
     const divImages = document.createElement('div')
@@ -227,6 +261,7 @@ class EditorJsSimpleImage {
   save(blockContent) {
     return Object.assign(this.data, {
       images: this.dataS3,
+      galleryType: this.galleryType,
     })
   }
 

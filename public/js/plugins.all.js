@@ -11983,6 +11983,7 @@ function ActionUpdateChangePasswordUser(status, data) {
  *
  * @typedef {object} ImageToolData — Input/Output data format for our Tool
  * @property {string} url - image source URL
+ * @property {int} galleryType -  gallery type
  * @property {string} caption - image caption
  * @property {boolean} withBorder - flag for adding a border
  * @property {boolean} withBackground - flag for adding a background
@@ -12049,6 +12050,7 @@ class EditorJsSimpleImage {
     this.config = config || {}
     this.data = {
       images: data.images || [],
+      galleryType: data.galleryType || 1,
       withBorder: data.withBorder !== undefined ? data.withBorder : false,
       withBackground:
         data.withBackground !== undefined ? data.withBackground : false,
@@ -12084,9 +12086,13 @@ class EditorJsSimpleImage {
 
     this._addModalFile()
     this._addButtonModal()
+    
+    this.selectGalleryType = this.ModalFile.find('select[name=image_type]')
+    this._addLabelGalleryType()
 
     if (this.data && this.data.images) {
       this.dataS3 = this.data.images
+      this.galleryType = this.data.galleryType
       this._createImages(this.dataS3)
     }
 
@@ -12101,8 +12107,13 @@ class EditorJsSimpleImage {
     var cont = this
     this.editorFileS3.send.click(function () {
       cont.dataS3 = cont._setDataImages(cont.editorFileS3.data)
+      cont.galleryType = cont.selectGalleryType.val()
       cont._createImages(cont.dataS3)
       cont._openModal(false)
+    })
+
+    this.selectGalleryType.change(function () {
+      cont._activeButtonS3()
     })
 
     if (!this.data.images.length) {
@@ -12148,6 +12159,14 @@ class EditorJsSimpleImage {
 
   /**
    * @private
+   * active button of send s3
+   */
+  _activeButtonS3() {
+    this.editorFileS3.send.prop('disabled', false)
+  }
+
+  /**
+   * @private
    * Add button open modal
    */
   _addButtonModal() {
@@ -12161,11 +12180,25 @@ class EditorJsSimpleImage {
       if (this.dataS3) {
         this.editorFileS3.loadData(this.dataS3, 1)
       }
+
+      this.ModalFile.find('select[name=image_type]').val(this.galleryType)
+
       this.editorFileS3.loading.hide()
       this._openModal()
     })
 
     this.wrapper.appendChild(button)
+  }
+
+  /**
+   * @private
+   * Add label of gallery type
+   */
+  _addLabelGalleryType() {
+    const label = document.createElement('label')
+    label.className = 'label-type'
+    label.innerHTML = this.galleryType == 1 ? 'Fotografías' : 'Galería'
+    this.wrapper.appendChild(label)
   }
 
   /**
@@ -12177,6 +12210,7 @@ class EditorJsSimpleImage {
   _createImages(images) {
     this.wrapper.innerHTML = ''
     this._addButtonModal()
+    this._addLabelGalleryType()
 
     const galery = images.length > 6 ? 'general' : images.length
     const divImages = document.createElement('div')
@@ -12206,6 +12240,7 @@ class EditorJsSimpleImage {
   save(blockContent) {
     return Object.assign(this.data, {
       images: this.dataS3,
+      galleryType: this.galleryType,
     })
   }
 
@@ -12331,14 +12366,6 @@ class EditorJsSimpleImage {
   }
 }
 
-/**
- * Build styles
- */
-// import './summary-top.css'
-
-/**
- *
- */
 class EditorJsSummaryTop {
   /**
    * Notify core that read-only mode is supported
@@ -12379,16 +12406,10 @@ class EditorJsSummaryTop {
   static get toolbox() {
     return {
       icon:
-        '<svg width="19" height="13" viewBox="0 0 19 13"><path d="M18.004 5.794c.24.422.18.968-.18 1.328l-4.943 4.943a1.105 1.105 0 1 1-1.562-1.562l4.162-4.162-4.103-4.103A1.125 1.125 0 1 1 12.97.648l4.796 4.796c.104.104.184.223.239.35zm-15.142.547l4.162 4.162a1.105 1.105 0 1 1-1.562 1.562L.519 7.122c-.36-.36-.42-.906-.18-1.328a1.13 1.13 0 0 1 .239-.35L5.374.647a1.125 1.125 0 0 1 1.591 1.591L2.862 6.341z"/></svg>',
+        '<svg width="18px" height="18px" viewBox="0 0 18 18" id="icon" xmlns="http://www.w3.org/2000/svg">  <defs>    <style>      .cls-1 {        fill: none;      }    </style>  </defs>  <rect x="19" y="10" width="7" height="2"/>  <rect x="19" y="15" width="7" height="2"/>  <rect x="19" y="20" width="7" height="2"/>  <rect x="6" y="10" width="7" height="2"/>  <rect x="6" y="15" width="7" height="2"/>  <rect x="6" y="20" width="7" height="2"/>  <path d="M28,5H4A2.002,2.002,0,0,0,2,7V25a2.002,2.002,0,0,0,2,2H28a2.002,2.002,0,0,0,2-2V7A2.002,2.002,0,0,0,28,5ZM4,7H15V25H4ZM17,25V7H28V25Z"/>  <rect id="_Transparent_Rectangle_" data-name="&lt;Transparent Rectangle&gt;" class="cls-1" width="32" height="32"/></svg>',
       title: 'Resumen',
     }
   }
-
-  /**
-   * @typedef {object} RawData — plugin saved data
-   * @param {string} html - previously saved HTML code
-   * @property
-   */
 
   /**
    * Render plugin`s main Element and fill it with saved data

@@ -79,16 +79,4 @@ buttonUpdateDetails.click(() => {
     buttonUpdateDetails.find('.fa').removeClass('fa-level-up')
   }
 })
-
-var editorContent = null
-function initEditorJs(data = null) {
-  $('#editorjs').html('')
-
-  editorContent = new EditorJS({
-    holder: 'editorjs',
-    tools: settingEditor,
-    data: data ?? null,
-  })
-}
-
 ActionMainUpdate()
