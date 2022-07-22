@@ -1,7 +1,8 @@
 <section class="hs-section-intro">
 	<div class="desktop">
 	<div id="histories" class="toggle histories">
-		<h2>Historias</h2>
+	<span class="title">	
+	<img class="logo" src="{{ asset('assets') }}/web/icons/logo-mochila.png"/><h2>Historias</h2></span>
 		<p>Tejemos historias con la metodología innovadora de Periodismo Colaborativo Intercultural. Cubrimos las realidades de los pueblos indígenas, la Madre Tierra y los territorios.</p>
 	</div>
 	<div id="cocreation" class="toggle histories" style=" display:none;">
@@ -16,7 +17,8 @@
 
 	<div class="movil">
 	<div id="historiesmov" class="historiesmov histories">
-		<h2>Historias</h2>
+	<span class="title">
+	<img class="logo" src="{{ asset('assets') }}/web/icons/logo-mochila.png"/><h2>Historias</h2></span>
 		<p>Tejemos historias con la metodología innovadora de Periodismo Colaborativo Intercultural. Cubrimos las realidades de los pueblos indígenas, la Madre Tierra y los territorios.</p>
 	</div>
 	<div id="cocreationmov" class=" cocreationmov histories" style=" display:none;">

@@ -8,11 +8,14 @@
       display: initial;
       height: 750px;
     }
-
+    
     .hs-img-cocreation{
         width: 100%;
         height:auto !important;
+        @include media-up(xxl) {
+        margin-bottom: 50px;
     }
+  }
 }
 
 .hs-container-cocreation {

@@ -1634,6 +1634,24 @@
   }
 }
 
+.hs-section-intro .logo {
+  width: 20px;
+  height: 40px;
+  margin-top: -15px;
+}
+
+@media (min-width: 768px) {
+  .hs-section-intro .logo {
+    width: 25px;
+    height: 49px;
+    margin-top: -15px;
+  }
+}
+
+.hs-section-intro .title {
+  display: flex;
+}
+
 .hs-section-intro select {
   background: var(--clr-primary);
   color: var(--white);

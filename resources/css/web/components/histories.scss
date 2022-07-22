@@ -29,7 +29,19 @@
         display: none;
       }
     }
-
+    .logo{
+      width: 20px;
+      height: 40px;
+      margin-top: -15px;
+      @include media-up(md) {
+        width: 25px;
+        height: 49px;
+        margin-top: -15px;
+    }
+  }
+    .title{
+      display: flex;
+    }
     select {
       background: var(--clr-primary);
       color: var(--white);
