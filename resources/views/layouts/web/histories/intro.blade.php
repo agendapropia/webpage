@@ -6,11 +6,13 @@
 		<p>Tejemos historias con la metodología innovadora de Periodismo Colaborativo Intercultural. Cubrimos las realidades de los pueblos indígenas, la Madre Tierra y los territorios.</p>
 	</div>
 	<div id="cocreation" class="toggle histories" style=" display:none;">
-		<h2>Cocreación</h2>
+	<span class="title">	
+		<img class="logo" src="{{ asset('assets') }}/web/icons/logo-mochila.png"/><h2>Cocreación</h2></span>
 		<p>Con comunicadoras, periodistas, narradores y personas con distintos saberes -indígenas y no indígenas- nos juntamos para producir historias en diversas narrativas.</p>
 	</div>
 	<div id="report" class="toggle histories" style=" display:none;">
-		<h2>Reportajes</h2>
+	<span class="title">	
+		<img class="logo" src="{{ asset('assets') }}/web/icons/logo-mochila.png"/><h2>Reportajes</h2></span>
 		<p>Producimos y compartimos historias propias y de los medios aliados.</p>
 	</div>
 	</div>
@@ -22,11 +24,13 @@
 		<p>Tejemos historias con la metodología innovadora de Periodismo Colaborativo Intercultural. Cubrimos las realidades de los pueblos indígenas, la Madre Tierra y los territorios.</p>
 	</div>
 	<div id="cocreationmov" class=" cocreationmov histories" style=" display:none;">
-		<h2>Cocreación</h2>
+	<span class="title">
+	<img class="logo" src="{{ asset('assets') }}/web/icons/logo-mochila.png"/><h2>Cocreación</h2></span>
 		<p>Con comunicadoras, periodistas, narradores y personas con distintos saberes -indígenas y no indígenas- nos juntamos para producir historias en diversas narrativas.</p>
 	</div>
 	<div id="reportmov" class=" reportmov histories" style=" display:none;">
-		<h2>Reportajes</h2>
+	<span class="title">	
+	<img class="logo" src="{{ asset('assets') }}/web/icons/logo-mochila.png"/><h2>Reportajes</h2></span>
 		<p>Producimos y compartimos historias propias y de los medios aliados.</p>
 	</div>
 	</div>
