@@ -12,8 +12,8 @@
     .hs-img-cocreation{
         width: 100%;
         height:auto !important;
-        @include media-up(xxl) {
-        margin-bottom: 50px;
+        @media ( min-width: 1400px ) {
+        margin-bottom: 5%;
     }
   }
 }

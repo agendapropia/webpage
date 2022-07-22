@@ -2911,6 +2911,12 @@
   height: auto !important;
 }
 
+@media (min-width: 1400px) {
+  .hs-cocreation .hs-img-cocreation {
+    margin-bottom: 5%;
+  }
+}
+
 .hs-container-cocreation {
   display: none;
 }
@@ -5770,6 +5776,7 @@
   align-items: center;
   justify-content: center;
   position: relative;
+  padding: 0 10px;
 }
 
 .pag-section-intro .list li {
