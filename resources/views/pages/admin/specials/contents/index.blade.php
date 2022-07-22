@@ -56,6 +56,7 @@
 @endsection
 
 @push('js-after')
-    @include('pages.admin.utils.editorjs')  
+    @include('pages.admin.utils.editorjs')
+    <script src="{{ mix('js/modules/utils/editorjs/all.js') }}"></script>
     <script src="{{ mix('js/modules/specials/contents/all.js') }}"></script>
 @endpush

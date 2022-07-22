@@ -2542,18 +2542,34 @@ span.flatpickr-weekday {
 }
 
 .simple-image {
-  padding: 10px 0;
-  padding-top: 0px;
+  padding: 15px 0;
 }
 
 .simple-image .images {
   display: flex;
 }
 
+.simple-image .label-type {
+  position: absolute;
+  right: 4px;
+  bottom: 10px;
+  font-size: 0.875rem;
+  transition: all 0.15s ease;
+  letter-spacing: 0.025em;
+  text-transform: none;
+  will-change: transform;
+  color: #ffffff;
+  background-color: #cc3d40;
+  box-shadow: 0 4px 6px rgb(50 50 93 / 11%), 0 1px 3px rgb(0 0 0 / 8%);
+  padding: 3px 10px;
+  border: 1px solid rgba(201, 201, 204, 0.48);
+  border-radius: 0px;
+  font-weight: 700;
+}
 .simple-image button {
   position: absolute;
   right: 4px;
-  top: 4px;
+  top: 20px;
   font-size: 0.875rem;
   transition: all 0.15s ease;
   letter-spacing: 0.025em;

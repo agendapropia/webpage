@@ -11,7 +11,6 @@ const modalCopyOverlay = modalCopyMain.find('.overlay')
 const buttonCopy = divUpdate.find('.special-btn-copy')
 
 var languageCurrent = 1
-
 function ActionMainUpdate() {
   overlayContent.show()
   UtilClearFormUi(formUpdateMain)
@@ -80,16 +79,5 @@ buttonUpdateDetails.click(() => {
     buttonUpdateDetails.find('.fa').removeClass('fa-level-up')
   }
 })
-
-var editorContent = null
-function initEditorJs(data = null) {
-  $('#editorjs').html('')
-
-  editorContent = new EditorJS({
-    holder: 'editorjs',
-    tools: settingEditor,
-    data: data ?? null,
-  })
-}
 
 ActionMainUpdate()
