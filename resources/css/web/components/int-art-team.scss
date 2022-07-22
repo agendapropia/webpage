@@ -32,10 +32,12 @@
 }
 
 .section-team {
-    display: flex;
+    display: grid;
+    grid-template: 1fr/1fr 0.4fr 0.4fr 1fr 2fr;
     padding: .5rem 2.3125rem .15rem 1.3125rem;
     width: 100%;
     @include media-up(md) {
+      grid-template: 1fr/1fr 0.4fr 0.4fr 1fr 2fr 2fr 1fr;
       padding: .5rem 2.3125rem .15rem 2.3125rem;
       margin-left: 18%;
       width: 65%;
@@ -53,21 +55,15 @@
         border-radius: 50%;
         width: 50px;
         height: 50px;
-        margin-right:-10px;
+        margin-left: -50px;
+  
         
         @include media-up(md) {
-          width: 80px;
-          height: 80px;
+          width: 65px;
+          height: 65px;
+          margin-left: -57px;
         }
-        @include media-up(lg) {
-          width: 90px;
-          height: 90px;
-        }
-
-        @include media-up(xl) {
-          width: 100px;
-          height: 100px;
-        }
+        
 
         img {
           width: 100%;
@@ -79,8 +75,17 @@
 
       .team-work{
         font-family: var(--ff-text);
-        font-weight: bold;
-        margin-left: 20px;
+        margin-left: -45px;
+        @include media-up(md) {
+        margin-left: -80px;
+        }
+      }
+      .team{
+        font-family: var(--ff-text);
+        margin-left: -45px;
+        @include media-up(md) {
+        margin-left: -80px;
+        }
       }
 
     .fecha{
@@ -92,7 +97,7 @@
     } 
       p{
         font-family: var(--ff-text);
-        margin-left: 20px;
+    
         color: var(--clr-black);
         font-size:10px;
         @include media-up(md) {
@@ -101,7 +106,6 @@
       }
       a{
         font-family: var(--ff-text);
-        margin-left: 20px;
         color: var(--clr-black)
       }
 

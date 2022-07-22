@@ -6,7 +6,7 @@
         <p><b>Comparta en sus redes sociales</b></p>
     </div>
     
-    <div class="text" style="margin-left:10px">
+    <div class="text">
     <p>400 visitas</p>
     </div>
 <div class="vl"></div>

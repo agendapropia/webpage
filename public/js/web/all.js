@@ -56,7 +56,8 @@ new VenoBox({
   infinigall: true,
   share: true,
   spinner: 'rotating-plane',
-  top: 90
+  titlePosition : 'top:80%',
+
 });
 
 

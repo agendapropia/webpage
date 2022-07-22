@@ -22,8 +22,8 @@
 			alt="" />
     </div>
     <div>
-    <p class="team-work">Cocreadores</p>
-    <a href="{{ URL::route('integrantes') }}" style="text-decoration:none"><p>Conoce a las y los integrantes de este proyecto > </p></a>
+    <p class="team-work"><b>Cocreadores</b></p>
+    <a href="{{ URL::route('integrantes') }}" style="text-decoration:none"><p class="team" >Conoce a las y los integrantes de este proyecto > </p></a>
     </div>
     <div class="fecha">
     <p>Feb,18 2022 </p>

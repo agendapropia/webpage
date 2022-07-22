@@ -24,22 +24,22 @@
                 
                 <!--  ////////////////////////////////////////////////////////  -->
 
-                <img style="width:150px; height:150px" src="https://www.agendapropia.co/sites/default/files/sentarte_logo_1_01.jpeg" alt="icon1" />
+                <img style="width:120px; height:120px" src="https://www.agendapropia.co/sites/default/files/sentarte_logo_1_01.jpeg" alt="icon1" />
 
-                <img style="width:150px; height:150px"  src="https://www.agendapropia.co/sites/default/files/corape_logo.jpg" alt="icon2" />
-
-    
-                <img style="width:150px; height:150px"   src="https://www.agendapropia.co/sites/default/files/confeniae_logo_1.jpg" alt="icon3" />
-
-
-                <img style="width:150px; height:150px"  src="https://www.agendapropia.co/sites/default/files/como_la_cigarra_logo_0.jpg" alt="icon4" />
-                <img style="width:150px; height:150px" src="https://www.agendapropia.co/sites/default/files/sentarte_logo_1_01.jpeg" alt="icon1" />
-
-                <img style="width:150px; height:150px"  src="https://www.agendapropia.co/sites/default/files/corape_logo.jpg" alt="icon2" />
+                <img style="width:120px; height:120px"  src="https://www.agendapropia.co/sites/default/files/corape_logo.jpg" alt="icon2" />
 
     
-                <img style="width:150px; height:150px"   src="https://www.agendapropia.co/sites/default/files/confeniae_logo_1.jpg" alt="icon3" />
-                <img style="width:150px; height:150px" src="https://www.agendapropia.co/sites/default/files/entre_ojos_0.jpg" alt="icon5" />
+                <img style="width:120px; height:120px"   src="https://www.agendapropia.co/sites/default/files/confeniae_logo_1.jpg" alt="icon3" />
+
+
+                <img style="width:120px; height:120px"  src="https://www.agendapropia.co/sites/default/files/como_la_cigarra_logo_0.jpg" alt="icon4" />
+                <img style="width:120px; height:120px" src="https://www.agendapropia.co/sites/default/files/sentarte_logo_1_01.jpeg" alt="icon1" />
+
+                <img style="width:120px; height:120px"  src="https://www.agendapropia.co/sites/default/files/corape_logo.jpg" alt="icon2" />
+
+    
+                <img style="width:120px; height:120px"   src="https://www.agendapropia.co/sites/default/files/confeniae_logo_1.jpg" alt="icon3" />
+                <img style="width:120px; height:120px" src="https://www.agendapropia.co/sites/default/files/entre_ojos_0.jpg" alt="icon5" />
                 
                 </div>
             </div>
