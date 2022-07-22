@@ -94,7 +94,7 @@ html {
   display: grid;
   grid-template-columns: 1fr;
   gap: 1rem;
-  margin-bottom: 16px;
+  margin-bottom: -100px;
   margin-top: 24px;
   @include media-up(md) {
     display:none;

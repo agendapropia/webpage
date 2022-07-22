@@ -1,13 +1,13 @@
 <div class="container js-pagination">
 
-  <ul class="list js-pagination-items" style="display: none;">
-    <li class="js-pagination-item">Item 1</li>
-    <li class="js-pagination-item">Item 2</li>
-    <li class="js-pagination-item">Item 3</li>
-    <li class="js-pagination-item">Item 4</li>
-    <li class="js-pagination-item">Item 5</li>
-    <li class="js-pagination-item">Item 6</li>
-    <li class="js-pagination-item">Item 7</li>
+  <div class="list js-pagination-items" style="display: none">
+    <div class="js-pagination-item"><x-web.section.hs-cocreation /><</div>
+    <div class="js-pagination-item"><x-web.section.hs-cocreation /><</div>
+    <div class="js-pagination-item"><x-web.section.hs-cocreation /><</div>
+    <div class="js-pagination-item"><x-web.section.hs-cocreation /></div>
+    <div class="js-pagination-item">Item 5</div>
+    <div class="js-pagination-item">Item 6</div>
+    <div class="js-pagination-item">Item 7</div>
     <li class="js-pagination-item">Item 8</li>
     <li class="js-pagination-item">Item 9</li>
     <li class="js-pagination-item">Item 10</li>
@@ -101,7 +101,7 @@
     <li class="js-pagination-item">Item 98</li>
     <li class="js-pagination-item">Item 99</li>
     <li class="js-pagination-item">Item 100</li>
-  </ul>
+</div>
 <div class="pag-section-intro">
   <nav class="pagination js-pagination-nav">
     <div class="pagination__inner">
