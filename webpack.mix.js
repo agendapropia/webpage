@@ -88,6 +88,10 @@ mix
     ['resources/js/modules/utils/images/selections.js'],
     'public/js/modules/utils/images/all.js',
   )
+  .scripts(
+    ['resources/js/modules/utils/editorjs/*.js'],
+    'public/js/modules/utils/editorjs/all.js',
+  )
 
   .sass('resources/css/web/global.scss', 'public/css/web/web-plugins.all.css')
   .scripts([
