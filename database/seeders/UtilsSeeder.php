@@ -55,7 +55,7 @@ class UtilsSeeder extends Seeder
             'status' => 1,
             'name' => 'Argentina',
             'icon' => 'country.png',
-            'country_code' => 56,
+            'country_code' => 43,
             'timezone' => 'America/Bogota',
         ]);
 
@@ -63,7 +63,7 @@ class UtilsSeeder extends Seeder
             'status' => 1,
             'name' => 'Bolivia',
             'icon' => 'country.png',
-            'country_code' => 56,
+            'country_code' => 526,
             'timezone' => 'America/Bogota',
         ]);
         
@@ -71,7 +71,7 @@ class UtilsSeeder extends Seeder
             'status' => 1,
             'name' => 'Ecuador',
             'icon' => 'country.png',
-            'country_code' => 56,
+            'country_code' => 546,
             'timezone' => 'America/Bogota',
         ]);
 
@@ -79,7 +79,7 @@ class UtilsSeeder extends Seeder
             'status' => 1,
             'name' => 'Venezuela',
             'icon' => 'country.png',
-            'country_code' => 56,
+            'country_code' => 59,
             'timezone' => 'America/Bogota',
         ]);
 
@@ -87,7 +87,7 @@ class UtilsSeeder extends Seeder
             'status' => 1,
             'name' => 'Perú',
             'icon' => 'country.png',
-            'country_code' => 56,
+            'country_code' => 65,
             'timezone' => 'America/Bogota',
         ]);
     }
