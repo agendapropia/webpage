@@ -68,36 +68,5 @@ class ArticleSeeder extends Seeder
         $day = ArticleStatus::find(4);
         $day->id = 0;
         $day->save();
-
-        $article = Article::create([
-            'name' => 'Articulo de prueba',
-            'slug' => 'article-de-prueba',
-            'status_id' => 3,
-            'article_type_id' => 1,
-            'special_id' => 1,
-            'publication_date' => '2022-05-10',
-            'number_views' => 0,
-        ]);
-
-        ArticleUser::create([
-            'article_id' => $article->id,
-            'user_id' => 1,
-            'article_role_id' => 1,
-        ]);
-
-        ArticleCountry::create([
-            'article_id' => $article->id,
-            'country_id' => 1,
-        ]);
-
-        ArticleRegion::create([
-            'article_id' => $article->id,
-            'region_id' => 1,
-        ]);
-
-        ArticleTag::create([
-            'article_id' => $article->id,
-            'tag_id' => 1,
-        ]);
     }
 }

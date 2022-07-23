@@ -20,16 +20,16 @@
                         </a>
                     </li>
                 @endcan
-                @can('tag-module')
+                @can('alliedmedia-module')
                     <li class="nav-item">
                         <a class="nav-link @yield('menu_configurations_alliedmedia', '')" href="{{ route('module-alliedmedia') }}">
                             {{ __('menu.configurations-alliedmedia') }}
                         </a>
                     </li>
                 @endcan
-                @can('tag-module')
+                @can('files-module')
                     <li class="nav-item">
-                        <a class="nav-link @yield('menu_configurations_tags', '')" href="{{ route('module-tags') }}">
+                        <a class="nav-link @yield('menu_configurations_files', '')" href="{{ route('module-tags') }}">
                             {{ __('menu.configurations-files') }}
                         </a>
                     </li>
