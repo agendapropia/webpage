@@ -18,7 +18,6 @@ class UserProfile extends Model
      */
     protected $fillable = [
         'user_id',
-        'email',
         'validated',
         'notifications_sms',
         'notifications_push',

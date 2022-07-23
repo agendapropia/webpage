@@ -72,33 +72,5 @@ class SpecialSeeder extends Seeder
         $day = SpecialStatus::find(4);
         $day->id = 0;
         $day->save();
-
-        AlliedMedia::insert([
-            [
-                'name' => 'Medium',
-                'image' => null,
-                'url' => 'https://medium.com',
-            ],
-            [
-                'name' => 'newyorktime',
-                'image' => null,
-                'url' => 'https://newyorktime.com',
-            ],
-            [
-                'name' => 'BCC',
-                'image' => null,
-                'url' => 'https://bcc.com',
-            ],
-        ]);
-
-        Special::create([
-            'name' => 'No aplica',
-            'slug' => 'no-aplica-especial',
-            'status_id' => 1,
-            'template_id' => 1,
-            'publication_date' => '2022-05-10',
-            'hidden' => true,
-            'number_views' => 0,
-        ]);
     }
 }

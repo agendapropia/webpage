@@ -153,6 +153,11 @@ return [
         'allied_media_id' => 'medio aliado',
         'special_role_id' => 'role',
         'user_id' => 'usuario',
+        'gender_id' => 'género',
+        'first_name' => 'nombre',
+        'last_name' => 'apellidos',
+        'phone_code' => 'código de país',
+        'phone_number' => 'numero de celular',
     ],
 
 ];
