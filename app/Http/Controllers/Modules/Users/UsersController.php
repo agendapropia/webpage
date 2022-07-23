@@ -53,6 +53,7 @@ class UsersController extends Controller
             'u.last_name',
             'u.phone_code',
             'u.phone_number',
+            'u.email',
             'u.location',
             'u.image as file'
         )
@@ -150,7 +151,7 @@ class UsersController extends Controller
             'gender_id' => 'required|integer',
             'phone_code' => 'required|min:1|integer',
             'phone_number' => 'required|min:10|unique:users',
-            'email' => 'required|max:160|email|unique:users',
+            'email' => 'required|email|unique:users',
             'location' => 'required|string|in:es,en',
         ]);
 
