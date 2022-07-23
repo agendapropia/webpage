@@ -19,9 +19,9 @@
                             <div class="form-group{{ $errors->has('email') ? ' has-danger' : '' }} mb-3">
                                 <div class="input-group input-group-alternative">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text"><i class="ni ni-single-02"></i></span>
+                                        <span class="input-group-text"><i class="ni ni-email-83"></i></span>
                                     </div>
-                                    <input class="form-control{{ $errors->has('phone_number') ? ' is-invalid' : '' }}" placeholder="{{ __('Teléfono') }}" type="text" name="phone_number" value="{{ old('phone_number') }}" required autofocus>
+                                    <input class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" placeholder="{{ __('Email') }}" type="text" name="email" value="{{ old('email') }}" required autofocus>
                                 </div>
                                 @if ($errors->has('phone_number'))
                                     <span class="invalid-feedback" style="display: block;" role="alert">

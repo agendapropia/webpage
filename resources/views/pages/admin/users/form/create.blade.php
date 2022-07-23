@@ -6,6 +6,7 @@
         <option value="es">Español</option>
         <option value="en">Ingles</option>
     </x-admin.forms.form-input-select>
+    <x-admin.forms.form-input-text label="Email" name="email" placeholder="example@mail.com" required="true"></x-admin.forms.form-input-text>
 
     <x-admin.forms.form-input-text-group
         label="Número de teléfono"

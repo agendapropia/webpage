@@ -17,13 +17,14 @@ class UserAdminitratorSeeder extends Seeder
     {
         User::create([
             'id' => 1,
-            'uuid' => 'gerardo-root',
+            'uuid' => 'gerardocv',
             'status' => true,
             'term_accepted_id' => 1,
             'gender_id' => 1,
             'first_name' => "Gerardo",
-            'last_name' => "Carvajal",
+            'last_name' => "Carvajal Vargas",
             'phone_code' => "57",
+            'email' => "gerardocarvajalvargas@gmail.com",
             'phone_number' => "3133545798",
             'has_password' => true,
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
@@ -31,7 +32,6 @@ class UserAdminitratorSeeder extends Seeder
         
         UserProfile::create([
             'user_id' => 1,
-            'email' => "gerardocarvajalvargas@gmail.com",
             'validated' => true,
             'notifications_sms' => true,
             'notifications_push' => true,
