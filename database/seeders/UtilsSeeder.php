@@ -36,16 +36,56 @@ class UtilsSeeder extends Seeder
         ]);
 
         Country::create([
-            'status' => 2,
-            'name' => 'Mexico',
+            'status' => 1,
+            'name' => 'México',
             'icon' => 'country.png',
             'country_code' => 52,
             'timezone' => 'America/Bogota',
         ]);
 
         Country::create([
-            'status' => 3,
+            'status' => 1,
             'name' => 'Brasil',
+            'icon' => 'country.png',
+            'country_code' => 56,
+            'timezone' => 'America/Bogota',
+        ]);
+
+        Country::create([
+            'status' => 1,
+            'name' => 'Argentina',
+            'icon' => 'country.png',
+            'country_code' => 56,
+            'timezone' => 'America/Bogota',
+        ]);
+
+        Country::create([
+            'status' => 1,
+            'name' => 'Bolivia',
+            'icon' => 'country.png',
+            'country_code' => 56,
+            'timezone' => 'America/Bogota',
+        ]);
+        
+        Country::create([
+            'status' => 1,
+            'name' => 'Ecuador',
+            'icon' => 'country.png',
+            'country_code' => 56,
+            'timezone' => 'America/Bogota',
+        ]);
+
+        Country::create([
+            'status' => 1,
+            'name' => 'Venezuela',
+            'icon' => 'country.png',
+            'country_code' => 56,
+            'timezone' => 'America/Bogota',
+        ]);
+
+        Country::create([
+            'status' => 1,
+            'name' => 'Perú',
             'icon' => 'country.png',
             'country_code' => 56,
             'timezone' => 'America/Bogota',
@@ -130,10 +170,6 @@ class UtilsSeeder extends Seeder
             'name' => 'Ingles',
             'icon' => 'en.png',
         ]);
-        Language::create([
-            'name' => 'Propia',
-            'icon' => 'pr.png',
-        ]);
     }
 
     private function templates()
@@ -145,10 +181,6 @@ class UtilsSeeder extends Seeder
         Template::create([
             'name' => 'Pueblos andinos',
             'slug' => 'template-pueblos-andinos',
-        ]);
-        Template::create([
-            'name' => 'Tierras fragmentadas',
-            'slug' => 'template-tierras-frag',
         ]);
     }
 }
