@@ -29,6 +29,7 @@ class CreateUsersTable extends Migration
                 );
             $table->string('phone_code', 10)->index();
             $table->string('phone_number', 30)->unique();
+            $table->string('email', 160)->unique();
             $table->boolean('has_password')->default(false);
             $table->string('password');
             $table->string('location')->default('es');

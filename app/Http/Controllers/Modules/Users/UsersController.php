@@ -150,6 +150,7 @@ class UsersController extends Controller
             'gender_id' => 'required|integer',
             'phone_code' => 'required|min:1|integer',
             'phone_number' => 'required|min:10|unique:users',
+            'email' => 'required|min:10|email|unique',
             'location' => 'required|string|in:es,en',
         ]);
 
@@ -243,6 +244,8 @@ class UsersController extends Controller
             'phone_code' => 'required|min:1|integer',
             'phone_number' =>
                 'required|min:10|unique:users,phone_number,' . $request->id,
+            'email' =>
+                'required|min:10|email|unique:users,email,' . $request->id,
             'location' => 'required|string|in:es,en',
         ]);
 
