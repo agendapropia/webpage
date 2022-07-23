@@ -88,7 +88,8 @@ class User extends Authenticatable
                 ->where('u.uuid', $value)
                 ->orWhere('u.last_name', 'like', "%$value%")
                 ->orWhere('u.first_name', $value)
-                ->orWhere('u.phone_code', $value);
+                ->orWhere('u.phone_code', $value)
+                ->orWhere('u.email', $value);
         }
     }
 }

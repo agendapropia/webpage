@@ -4,14 +4,9 @@ namespace App\Http\Controllers\Modules\Users;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\Permissions\Role;
 use App\Models\User;
-use App\Models\Users\Country;
-use App\Models\Users\UserGender;
 use App\Models\Utils\File;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Hash;
 
 class UserFilesController extends Controller
 {
