@@ -72,5 +72,15 @@ class SpecialSeeder extends Seeder
         $day = SpecialStatus::find(4);
         $day->id = 0;
         $day->save();
+
+        Special::create([
+            'name' => 'Sin espcial',
+            'slug' => 'special-not-found',
+            'status_id' => 0,
+            'template_id' => 1,
+            'publication_date' => '2022-05-10',
+            'hidden' => true,
+            'number_views' => 0,
+        ]);
     }
 }
