@@ -105,9 +105,12 @@ class SpecialsController extends Controller
 
         $this->_setSpecialCountries(
             $special->id,
-            explode(',', $request->country_ids)
+            $request->country_ids ? explode(',', $request->country_ids) : []
         );
-        $this->_setSpecialTags($special->id, explode(',', $request->tags_ids));
+        $this->_setSpecialTags(
+            $special->id,
+            $request->tags_ids ? explode(',', $request->tags_ids) : []
+        );
 
         return $this->responseJson(true, 'special created', $special);
     }

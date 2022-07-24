@@ -88,7 +88,7 @@ class ArticlesController extends Controller
     {
         $data = new stdClass();
         $data->articleTypes = ArticleType::get();
-        $data->specials = Special::get();
+        $data->specials = Special::getDataBasic()->get();
 
         return $this->responseJson(true, 'create information', $data);
     }
@@ -118,15 +118,24 @@ class ArticlesController extends Controller
         $article->number_views = 0;
         $article->save();
 
-        $this->_setArticleRegions(
-            $article->id,
-            explode(',', $request->region_ids)
-        );
-        $this->_setArticleCountries(
-            $article->id,
-            explode(',', $request->country_ids)
-        );
-        $this->_setArticleTags($article->id, explode(',', $request->tags_ids));
+        if ($request->region_ids) {
+            $this->_setArticleRegions(
+                $article->id,
+                explode(',', $request->region_ids)
+            );
+        }
+        if ($request->country_ids) {
+            $this->_setArticleCountries(
+                $article->id,
+                explode(',', $request->country_ids)
+            );
+        }
+        if ($request->tags_ids) {
+            $this->_setArticleTags(
+                $article->id,
+                explode(',', $request->tags_ids)
+            );
+        }
 
         return $this->responseJson(true, 'article created', $article);
     }
@@ -270,19 +279,20 @@ class ArticlesController extends Controller
         }
 
         $article->fill($request->all());
+        $article->special_id = $request->special_id ?? 1;
         $article->save();
 
         $this->_validateArticleRegions(
             $request->id,
-            explode(',', $request->region_ids)
+            $request->region_ids ? explode(',', $request->region_ids) : []
         );
         $this->_validateArticleTags(
             $request->id,
-            explode(',', $request->tags_ids)
+            $request->tags_ids ? explode(',', $request->tags_ids) : []
         );
         $this->_validateArticleCountries(
             $request->id,
-            explode(',', $request->country_ids)
+            $request->country_ids ? explode(',', $request->country_ids) : []
         );
 
         return $this->responseJson(true, 'article update', $article);
@@ -336,9 +346,12 @@ class ArticlesController extends Controller
                 $arrayRemove[] = $need;
             }
         }
-
-        $this->_setArticleCountries($id, $arrayAdd);
-        $this->_removeArticleCountries($id, $arrayRemove);
+        if ($arrayAdd) {
+            $this->_setArticleCountries($id, $arrayAdd);
+        }
+        if ($arrayRemove) {
+            $this->_removeArticleCountries($id, $arrayRemove);
+        }
     }
     protected function _setArticleCountries(int $articleId, array $countries)
     {
@@ -380,8 +393,12 @@ class ArticlesController extends Controller
             }
         }
 
-        $this->_setArticleTags($id, $arrayAdd);
-        $this->_removeArticleTags($id, $arrayRemove);
+        if ($arrayAdd) {
+            $this->_setArticleTags($id, $arrayAdd);
+        }
+        if ($arrayRemove) {
+            $this->_removeArticleTags($id, $arrayRemove);
+        }
     }
     protected function _setArticleTags(int $articleId, array $tags)
     {
@@ -423,8 +440,13 @@ class ArticlesController extends Controller
             }
         }
 
-        $this->_setArticleRegions($id, $arrayAdd);
-        $this->_removeArticleRegions($id, $arrayRemove);
+        if ($arrayAdd) {
+            $this->_setArticleRegions($id, $arrayAdd);
+        }
+
+        if ($arrayRemove) {
+            $this->_removeArticleRegions($id, $arrayRemove);
+        }
     }
     protected function _setArticleRegions(int $articleId, array $regions)
     {

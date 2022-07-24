@@ -9,7 +9,6 @@ function ActionMainUpdate(data) {
   queryInitialUpdateMain.Send()
   countrySelectUpdate.clearSelect()
   tagsSelectUpdate.clearSelect()
-  alliedMediasSelectUpdate.clearSelect()
   modalUpdateMain.find('input[name=publication_date]').flatpickr(settingDate)
 }
 
@@ -32,15 +31,6 @@ let tagsSelectUpdate = new searchByAutocomplete(
     minimumCharactersToSearch: 1,
   },
 )
-let alliedMediasSelectUpdate = new searchByAutocomplete(
-  formUpdateMain.find('.alliedMediaSelect'),
-  {
-    params: [],
-    url: '/admin/specials/allied-media/search-by-autocomplete',
-    limitItems: 10,
-    minimumCharactersToSearch: 1,
-  },
-)
 
 //Get data modal
 let queryInitialUpdateMain = new QueryAjax({
@@ -53,11 +43,7 @@ function UpdateActionModal(status, result) {
   if (status) {
     utilLoadAutoCompleteByArray(result.data.countries, countrySelectUpdate)
     utilLoadAutoCompleteByArray(result.data.tags, tagsSelectUpdate)
-    utilLoadAutoCompleteByArray(
-      result.data.alliedMedia,
-      alliedMediasSelectUpdate,
-    )
-
+  
     LoadSelectUtil(
       modalUpdateMain.find('select[name=template_id]'),
       result.data.templates,
