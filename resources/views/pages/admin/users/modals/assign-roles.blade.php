@@ -1,5 +1,5 @@
 <x-admin.modals.modal id="modal-assign-roles">
-    <x-slot name="title"><em class="fa fa-key"></em> Asignar roles al usuario "<strong class="name_user"></strong>"</x-slot>
+    <x-slot name="title"><em class="ni ni-lock-circle-open"></em> Asignar roles al usuario "<strong class="name_user"></strong>"</x-slot>
 
     <x-slot name="content">
         @include('pages.admin.users.partials.table-roles')

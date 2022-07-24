@@ -31,8 +31,10 @@
                         </button>
                     @endCan
                     @can('role-assign')
-                        <button class="btn btn-mt btn-primary" data-modal="#modal-assign-roles" data-action="AssignRoles" onclick="UserTable.Modal(this);"">
-                            <i class="fa fa-key" aria-hidden="true"></i>
+                        <button class="btn btn-mt btn-ext btn-primary" data-modal="#modal-assign-roles" data-action="AssignRoles" onclick="UserTable.Modal(this);"">
+                            <i class="ni ni-lock-circle-open" aria-hidden="true">
+                                <label>Permisos</label>
+                            </i>
                         </button>
                     @endCan
                     <div class="image-item image-change img-user" data-modal="#modal-utils-imagen-selections" data-action="ActionFilesLoad" onclick="UserTable.Modal(this);">

@@ -1,23 +1,22 @@
-var modalChangePasswordUser = $('#modal-change-of-password')
-var formChangePasswordUser = $('#form-change-password-user')
-var messageErrorUserPass = modalChangePasswordUser.find(
+const modalChangePasswordUser = $('#modal-change-of-password')
+const formChangePasswordUser = $('#form-change-password-user')
+const messageErrorUserPass = modalChangePasswordUser.find(
   '.error-change-password',
 )
 
-$(document).ready(function () {
-  modalChangePasswordUser.find('.button-send-password').click(function () {
-    messageErrorUserPass.text('')
-    messageErrorUserPass.hide()
-    UtilModalLoader(modalChangePasswordUser)
-    SendFormUpdateChangePasswordUser.Send()
-  })
-  $('.button-modal-change-of-password').click(function (e) {
-    e.preventDefault()
-    modalChangePasswordUser.modal('show')
-    messageErrorUserPass.text('')
-    messageErrorUserPass.hide()
-    UtilFormClose(formChangePasswordUser)
-  })
+$('.button-modal-change-of-password').click(function (e) {
+  modalChangePasswordUser.modal('show')
+  messageErrorUserPass.hide()
+  messageErrorUserPass.text('')
+  UtilFormClose(formChangePasswordUser)
+  modalChangePasswordUser.find('.overlay').hide()
+})
+
+modalChangePasswordUser.find('.button-send-password').click(function () {
+  messageErrorUserPass.text('')
+  messageErrorUserPass.hide()
+  UtilModalLoader(modalChangePasswordUser)
+  SendFormUpdateChangePasswordUser.Send()
 })
 
 let SendFormUpdateChangePasswordUser = new QueryAjax({
@@ -29,6 +28,7 @@ function ActionUpdateChangePasswordUser(status, data) {
   if (!status) {
     console.log(status)
   } else if (data.status) {
+    modalChangePasswordUser.modal('hide')
     notify(
       false,
       'Usuario Actualizado',
