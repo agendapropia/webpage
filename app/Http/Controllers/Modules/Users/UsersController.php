@@ -125,10 +125,7 @@ class UsersController extends Controller
     public function createInfo(Request $request)
     {
         $genders = UserGender::select('id', 'name')->get();
-        $countries = Country::select(
-            'country_code as id',
-            'country_code as name'
-        )->get();
+        $countries =  $this->_getCountriesMobile();
 
         $data = [
             'genders' => $genders,
@@ -217,10 +214,7 @@ class UsersController extends Controller
 
         $user = User::find($request->_id);
         $genders = UserGender::select('id', 'name')->get();
-        $countries = Country::select(
-            'country_code as id',
-            'country_code as name'
-        )->get();
+        $countries =  $this->_getCountriesMobile();
 
         $data = [
             'user' => $user,
@@ -303,5 +297,13 @@ class UsersController extends Controller
             ->get();
 
         return $this->responseJson(true, 'list user', $alliedMedia);
+    }
+
+    private function _getCountriesMobile()
+    {
+        return Country::select(
+            'country_code as id',
+            DB::raw('CONCAT("+", country_code, " (", name, ")") as name')
+        )->get();
     }
 }

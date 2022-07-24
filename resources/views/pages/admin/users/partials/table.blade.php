@@ -52,7 +52,7 @@
                 <td>
                     #_first_name_# #_last_name_#
                 </td>
-                <td>#_phone_code_##_phone_number_#</td>
+                <td>#_phone_number_#</td>
                 <td>#_email_#</td>
                 <td>#_location_#</td>
             </tr>
