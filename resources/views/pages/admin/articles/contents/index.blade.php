@@ -52,7 +52,7 @@
     <!-- Modals -->
     @include('pages.admin.articles.contents.modals.copy')
 
-    <div class="modals-files"></div>
+    <div class="modals-editorjs"></div>
 @endsection
 
 @push('js-after')

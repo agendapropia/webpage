@@ -2541,8 +2541,77 @@ span.flatpickr-weekday {
   height: 17px;
 }
 
+.editorjs-embed-html {
+  padding: 15px 0;
+}
+
+.editorjs-embed-html .base {
+  background-color: rgb(232, 232, 232);
+  width: 100%;
+  height: 80px;
+  text-align: center;
+}
+
+.editorjs-embed-html .base i {
+  margin-top: 30px;
+  font-style: normal;
+  font-size: 16px;
+}
+
+.editorjs-embed-html iframe {
+  width: 100%;
+}
+
+.editorjs-embed-html button {
+  position: absolute;
+  right: 4px;
+  top: 20px;
+  font-size: 0.875rem;
+  transition: all 0.15s ease;
+  letter-spacing: 0.025em;
+  text-transform: none;
+  will-change: transform;
+  color: #646464;
+  background-color: #ffffff;
+  box-shadow: 0 4px 6px rgb(50 50 93 / 11%), 0 1px 3px rgb(0 0 0 / 8%);
+  padding: 3px 10px;
+  border: 1px solid rgba(201, 201, 204, 0.48);
+  border-radius: 5px;
+  -webkit-box-align: center;
+  cursor: pointer;
+}
+.editorjs-embed-html button:hover {
+  background-color: #fafafa;
+}
+
+.editorjs-embed-html button i {
+  font-style: normal;
+}
+
+.editorjs-embed-html.withBorder iframe {
+  border: 1px solid #e8e8eb;
+}
+
+.editorjs-embed-html.withBackground {
+  background: #eff2f5;
+  padding: 0 5px;
+}
+
 .simple-image {
   padding: 15px 0;
+}
+
+.simple-image .base {
+  background-color: rgb(232, 232, 232);
+  width: 100%;
+  height: 80px;
+  text-align: center;
+}
+
+.simple-image .base i {
+  margin-top: 30px;
+  font-style: normal;
+  font-size: 16px;
 }
 
 .simple-image .images {
