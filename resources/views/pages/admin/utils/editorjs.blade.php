@@ -217,6 +217,76 @@
     </div>
 </script>
 
+<script id="template-embed-html-modal" type="text/x-custom-template">
+    <div
+        class="modal fade modal-table-gear"
+        tabindex="-1"
+        role="dialog"
+        style="display: none"
+        aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content" style="background: #fdfdfd">
+                <div class="modal-header">
+                    <h5 class="modal-title">
+                        <em class="ni ni-html5 mr-2"></em>Incrustar html (Embeber)
+                        <span class="modal-subtitle"></span>
+                    </h5>
+                    <button
+                        type="button"
+                        class="close"
+                        data-dismiss="modal"
+                        aria-label="Close"
+                    >
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div  class="row">
+                        <div class="form-group no-padding-mobile col-md-12 focused">
+                            <label class="form-control-label">Url</label>
+                            <span class="is-required">*</span>
+                            <input type="text" class="form-control form-control-sm " name="url" placeholder="Ingresa la URL" autocomplete="off"></input>
+                            <small class="form-text text-muted">  
+                                <div class="label-error"></div>
+                            </small>
+                        </div>
+
+                        <div class="form-group no-padding-mobile col-md-6 focused">
+                            <label class="form-control-label">Altura</label>
+                            <span class="is-required">*</span>
+                            <input type="text" class="form-control form-control-sm " name="height_full" placeholder="Altura del contendor" autocomplete="off" value="600"></input>
+                            <small class="form-text text-muted">  
+                                <div class="label-error"></div>
+                            </small>
+                        </div>
+
+                        <div class="form-group no-padding-mobile col-md-6 focused hide">
+                            <label class="form-control-label">Altura mobile</label>
+                            <span class="is-required">*</span>
+                            <input type="text" class="form-control form-control-sm " name="height_mobile" placeholder="Altura mobile del contendor" autocomplete="off" value="400"></input>
+                            <small class="form-text text-muted">  
+                                <div class="label-error"></div>
+                            </small>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button
+                        type="button"
+                        class="btn btn-primary btn-action">
+                        <em class="fa fa-save"></em> Guardar
+                    </button>
+                </div>
+                <div class="overlay overlay-div" style="display: none">
+                    <div class="content">
+                        <i class="fa fa-3x fa-spinner fa-spin"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>
+
 <script src="https://cdn.jsdelivr.net/npm/@editorjs/editorjs@latest"></script>
 <script src="https://cdn.jsdelivr.net/npm/editorjs-paragraph-with-alignment@3.0.0"></script>
 <script src="https://cdn.jsdelivr.net/npm/@editorjs/header@latest"></script>

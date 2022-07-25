@@ -1,10 +1,9 @@
 /**
- * Tool for creating image Blocks for Editor.js
- * Made with «Creating a Block Tool» tutorial {@link https://editorjs.io/creating-a-block-tool}
+ * Tool for creating blocks for Editor.js
  *
- * @typedef {object} ImageToolData — Input/Output data format for our Tool
  * @property {string} url - image source URL
- * @property {int} galleryType -  gallery type
+ * @property {int} heightFull
+ * @property {int} heightMobile
  * @property {string} caption - image caption
  * @property {boolean} withBorder - flag for adding a border
  * @property {boolean} withBackground - flag for adding a background
@@ -13,50 +12,15 @@
  * @typedef {object} ImageToolConfig
  * @property {string} placeholder — custom placeholder for URL field
  */
-class EditorJsSimpleImage {
+class EmbedHtml {
   /**
    * Our tool should be placed at the Toolbox, so describe an icon and title
    */
   static get toolbox() {
     return {
-      title: 'Imagenes',
+      title: 'Embeber Html',
       icon:
-        '<svg width="17" height="15" viewBox="0 0 336 276" xmlns="http://www.w3.org/2000/svg"><path d="M291 150V79c0-19-15-34-34-34H79c-19 0-34 15-34 34v42l67-44 81 72 56-29 42 30zm0 52l-43-30-56 30-81-67-66 39v23c0 19 15 34 34 34h178c17 0 31-13 34-29zM79 0h178c44 0 79 35 79 79v118c0 44-35 79-79 79H79c-44 0-79-35-79-79V79C0 35 35 0 79 0z"/></svg>',
-    }
-  }
-
-  /**
-   * Allow render Image Blocks by pasting HTML tags, files and URLs
-   * @see {@link https://editorjs.io/paste-substitutions}
-   * @return {{tags: string[], files: {mimeTypes: string[], extensions: string[]}, patterns: {image: RegExp}}}
-   */
-  static get pasteConfig() {
-    return {
-      tags: ['IMG'],
-      files: {
-        mimeTypes: ['image/*'],
-        extensions: ['gif', 'jpg', 'png'], // You can specify extensions instead of mime-types
-      },
-      patterns: {
-        image: /https?:\/\/\S+\.(gif|jpe?g|tiff|png)$/i,
-      },
-    }
-  }
-
-  /**
-   * Automatic sanitize config
-   * @see {@link https://editorjs.io/sanitize-saved-data}
-   */
-  static get sanitize() {
-    return {
-      url: {},
-      caption: {
-        b: true,
-        a: {
-          href: true,
-        },
-        i: true,
-      },
+        '<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 122.88 76.5"><title>embed-code</title><path d="M47.53,61.26l.15.15a8.91,8.91,0,0,1-.18,12.46s-.11.13-.16.16a8.91,8.91,0,0,1-12.42-.1c-9.66-8.86-23.59-20-32.1-29.25a8.92,8.92,0,0,1,.11-13.12c5.41-6.71,24.44-22.15,32-29A8.93,8.93,0,0,1,49.12,13a1.66,1.66,0,0,1-.44.56l-27,24.78c4.32,4.19,8.09,7.31,11.86,10.43a172.63,172.63,0,0,1,14,12.48Zm27.82,0-.15.15a8.91,8.91,0,0,0,.18,12.46s.11.13.16.16A8.91,8.91,0,0,0,88,73.93c9.66-8.86,23.59-20,32.1-29.25A8.92,8.92,0,0,0,120,31.56c-5.41-6.71-24.44-22.15-32-29A8.93,8.93,0,0,0,73.76,13a1.77,1.77,0,0,0,.43.56l27,24.78c-4.32,4.19-8.1,7.31-11.86,10.43a172.63,172.63,0,0,0-14,12.48Z"/></svg>',
     }
   }
 
@@ -70,8 +34,9 @@ class EditorJsSimpleImage {
     this.api = api
     this.config = config || {}
     this.data = {
-      images: data.images || [],
-      galleryType: data.galleryType || 1,
+      url: data.url || '',
+      heightFull: data.heightFull || 400,
+      heightMobile: data.heightMobile || 350,
       withBorder: data.withBorder !== undefined ? data.withBorder : false,
       withBackground:
         data.withBackground !== undefined ? data.withBackground : false,
@@ -103,43 +68,41 @@ class EditorJsSimpleImage {
    */
   render() {
     this.wrapper = document.createElement('div')
-    this.wrapper.classList.add('simple-image')
+    this.wrapper.classList.add('editorjs-embed-html')
 
     this._addModalFile()
+    this.ConfigUrl = this.ModalConfig.find('input[name=url]')
+    this.ConfigHeightFull = this.ModalConfig.find('input[name=height_full]')
+    this.ConfigHeightMobile = this.ModalConfig.find('input[name=height_mobile]')
+
     this._addWrapperBase()
     this._addButtonModal()
 
-    this.selectGalleryType = this.ModalFile.find('select[name=image_type]')
+    console.log(this.data)
+    if (this.data && this.data.url) {
+      this.url = this.data.url
+      this.heightFull = this.data.heightFull
+      this.heightMobile = this.data.heightMobile
 
-    if (this.data && this.data.images) {
-      this.dataS3 = this.data.images
-      this.galleryType = this.data.galleryType
-      if(this.data.images.length){
-        this._createImages(this.dataS3)
+      if (this.data.url) {
+        this._createIframe()
       }
     }
 
-    this.editorFileS3 = new updloadS3(this.ModalFile.find('.div-files-class'), {
-      url: '/admin/files/items',
-      typeFile: 1,
-      id: 1,
-      reload: false,
-      limitFiles: 10,
-    })
-
     var cont = this
-    this.editorFileS3.send.click(function () {
-      cont.dataS3 = cont._setDataImages(cont.editorFileS3.data)
-      cont.galleryType = cont.selectGalleryType.val()
-      cont._createImages(cont.dataS3)
+    this.ModalConfig.find('.btn-action').click(function () {
+      if (!cont.ConfigUrl.val()) {
+        return false
+      }
+
+      cont.url = cont.ConfigUrl.val()
+      cont.heightFull = cont.ConfigHeightFull.val()
+      cont.heightMobile = cont.ConfigHeightMobile.val()
+      cont._createIframe()
       cont._openModal(false)
     })
 
-    this.selectGalleryType.change(function () {
-      cont._activeButtonS3()
-    })
-
-    if (!this.data.images.length) {
+    if (!this.data.url) {
       this._openModal()
     }
 
@@ -159,11 +122,12 @@ class EditorJsSimpleImage {
    * Add modal with template file
    */
   _addModalFile() {
-    let modalNameClass = 'modal_file_' + Math.floor(Math.random() * 1000 + 1)
-    let modalTemplate = $($('#template-file-modal').html()).clone()
+    let modalNameClass =
+      'modal_embed_html_' + Math.floor(Math.random() * 1000 + 1)
+    let modalTemplate = $($('#template-embed-html-modal').html()).clone()
     modalTemplate.attr('class', 'modal fade modal-table-gear ' + modalNameClass)
     $('.modals-editorjs').append(modalTemplate)
-    this.ModalFile = $('.' + modalNameClass)
+    this.ModalConfig = $('.' + modalNameClass)
   }
 
   /**
@@ -172,20 +136,12 @@ class EditorJsSimpleImage {
    */
   _openModal(status = true) {
     if (status) {
-      this.ModalFile.modal('show')
-      this.ModalFile.find('.overlay').hide()
+      this.ModalConfig.modal('show')
+      this.ModalConfig.find('.overlay').hide()
     } else {
-      this.ModalFile.modal('hide')
-      this.ModalFile.find('.overlay').hide()
+      this.ModalConfig.modal('hide')
+      this.ModalConfig.find('.overlay').hide()
     }
-  }
-
-  /**
-   * @private
-   * active button of send s3
-   */
-  _activeButtonS3() {
-    this.editorFileS3.send.prop('disabled', false)
   }
 
   /**
@@ -195,7 +151,7 @@ class EditorJsSimpleImage {
   _addWrapperBase() {
     const div = document.createElement('div')
     div.className = 'base'
-    div.innerHTML = '<i class="fa fa-image"></i>'
+    div.innerHTML = '<i class="ni ni-html5"></i>'
 
     this.wrapper.appendChild(div)
   }
@@ -207,18 +163,12 @@ class EditorJsSimpleImage {
   _addButtonModal() {
     const button = document.createElement('button')
     button.type = 'button'
-    button.innerHTML = '<i class="fa fa-image"></i> Editar'
+    button.innerHTML = '<i class="ni ni-html5"></i> Editar'
 
-    button.value = this.config.placeholder || 'Paste an image URL...'
     button.addEventListener('click', (event) => {
-      this.editorFileS3.clear()
-      if (this.dataS3) {
-        this.editorFileS3.loadData(this.dataS3, 1)
-      }
-
-      this.ModalFile.find('select[name=image_type]').val(this.galleryType)
-
-      this.editorFileS3.loading.hide()
+      this.ConfigUrl.val(this.url)
+      this.ConfigHeightFull.val(this.heightFull)
+      this.ConfigHeightMobile.val(this.heightMobile)
       this._openModal()
     })
 
@@ -227,44 +177,19 @@ class EditorJsSimpleImage {
 
   /**
    * @private
-   * Add label of gallery type
-   */
-  _addLabelGalleryType() {
-    const label = document.createElement('label')
-    label.className = 'label-type'
-    label.innerHTML = this.galleryType == 1 ? 'Fotografías' : 'Galería'
-    this.wrapper.appendChild(label)
-  }
-
-  /**
-   * @private
    * Create image with caption field
    * @param {array} images — image source
    * @param {object} datacomplete
    */
-  _createImages(images) {
+  _createIframe() {
     this.wrapper.innerHTML = ''
     this._addButtonModal()
-    this._addLabelGalleryType()
 
-    const galery = images.length > 6 ? 'general' : images.length
-    const divImages = document.createElement('div')
-    divImages.className = 'gallery gallery-' + galery
-    var i = 1
-
-    images.forEach((image) => {
-      const divImage = document.createElement('figure')
-      divImage.className = 'gallery__item  gallery__item--' + i
-
-      const imageElement = document.createElement('img')
-      imageElement.src = image.name_tmp_complete
-      imageElement.className = 'gallery__img'
-      divImage.appendChild(imageElement)
-
-      divImages.appendChild(divImage)
-      i++
-    })
-    this.wrapper.appendChild(divImages)
+    const iframe = document.createElement('iframe')
+    iframe.className = 'iframe'
+    iframe.setAttribute('src', this.url)
+    iframe.setAttribute('height', this.heightFull)
+    this.wrapper.appendChild(iframe)
   }
 
   /**
@@ -274,55 +199,9 @@ class EditorJsSimpleImage {
    */
   save(blockContent) {
     return Object.assign(this.data, {
-      images: this.dataS3,
-      galleryType: this.galleryType,
-    })
-  }
-
-  /**
-   * Set data images by save
-   * @param {array} dataS3
-   * @returns {array}
-   */
-  _setDataImages(dataS3) {
-    if (!dataS3 && !data.isArray()) {
-      return false
-    }
-
-    dataS3 = this._sortImages(dataS3)
-
-    let data = []
-    dataS3.forEach((element) => {
-      data.push({
-        author_id: element.author.id,
-        author_name: element.author.name,
-        description: element.description,
-        ext: element.ext,
-        id: element.id + Math.floor(Math.random() * 10000 + 1),
-        name: element.name,
-        name_tmp: element.name_tmp,
-        name_tmp_complete: element.name_tmp_complete,
-        order: element.order,
-      })
-    })
-
-    return data
-  }
-
-  /**
-   * sort images
-   * @param {array} images
-   * @returns
-   */
-  _sortImages(images) {
-    return images.sort(function (a, b) {
-      if (a.order > b.order) {
-        return 1
-      }
-      if (a.order < b.order) {
-        return -1
-      }
-      return 0
+      url: this.url,
+      heightFull: this.heightFull,
+      heightMobile: this.heightMobile,
     })
   }
 
@@ -333,7 +212,7 @@ class EditorJsSimpleImage {
    * @return {boolean}
    */
   validate(savedData) {
-    if (savedData.images.length == 0) {
+    if (!savedData.url) {
       return false
     }
     return true
