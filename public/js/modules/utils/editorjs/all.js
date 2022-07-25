@@ -13,6 +13,13 @@ const settingEditor = {
       placeholder: 'Agrega un texto de resumen',
     },
   },
+  embedHtml: {
+    class: EmbedHtml,
+    inlineToolbar: false,
+    config: {
+      placeholder: '',
+    },
+  },
   paragraph: {
     class: Paragraph,
     inlineToolbar: true,
