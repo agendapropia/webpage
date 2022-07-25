@@ -3,7 +3,7 @@
 .section-join-weaving {
   display: none; 
 
-    @include media-up(md) {
+    @include media-up(lg) {
     display: grid;
     grid-template: 1fr / 1fr 1fr 1fr;
     grid-gap: 17px;
@@ -11,9 +11,11 @@
     background-color: var(--clr-grey-50);
       margin: 24px 0;
       padding: 0 60px;
+      height: 350px;
     }
-    @include media-up(lg) {
-      grid-template: 1fr / 1fr 1fr 1fr;
+    @media (min-width: 1600px)
+    {
+      height: 400px;
     }
   
 

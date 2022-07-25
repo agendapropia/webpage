@@ -1,0 +1,9 @@
+$(document).ready(function(){
+    $("#cocreation-home").owlCarousel({
+        items:4,
+        pagination:true,
+        navigation:true,
+        navigationText:["",""],
+        autoPlay:true
+    });
+  });

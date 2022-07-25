@@ -46,10 +46,19 @@ $(document).ready(function(){
       itemsTablet:[768,2],
       pagination:true,
       navigation:true,
-      navigationText:["<",">"],
+      navigationText:["",""],
       autoPlay:true
   });
 });
+$(document).ready(function(){
+    $("#cocreation-home").owlCarousel({
+        items:4,
+        pagination:true,
+        navigation:true,
+        navigationText:["",""],
+        autoPlay:true
+    });
+  });
 new VenoBox({
   selector: '.my-image-links',
   numeration: true,

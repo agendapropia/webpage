@@ -3,7 +3,7 @@
 .section-weaving {
   display: none;
     
-    @include media-up(md) {
+    @include media-up(lg) {
       display: flex;
       justify-content: center;
       align-items: center;
@@ -12,7 +12,7 @@
       margin: 24px 0;
       padding: 0 60px 100px;
     }
-    @include media-up(lg) {
+    @include media-up(xl) {
       grid-template: 1fr / 1fr 1fr;
     }
   
@@ -70,18 +70,15 @@
     
   display: none;  
     
-    @include media-up(md) {
-      display: grid;
-      grid-template-columns: 1fr/1fr 1fr 1fr 1fr 1fr;
+  @media (min-width: 1000px){ 
+      display: flex;
+     
       gap: 1rem;
       margin-bottom: 1rem;
       margin-top: 150px;
       margin: 16px 90px;
       padding: 0 40px 50px;
       width:90%;
-    }
-    @include media-up(lg) {
-      grid-template: 1fr/1fr 1fr 1fr 1fr 1fr;
     }
   
 
@@ -108,7 +105,8 @@
 
     .img-items{
         margin: 3px;
-        width: 90%;
+        width: 150px;
+        height: 140px;
      
     }
   }

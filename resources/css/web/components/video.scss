@@ -59,17 +59,19 @@
 
   @include media-up(md) {
     border: 1px solid var(--clr-grey-400) !important;
-    padding: 10px 10px !important;
+    padding: 14px 17px !important;
     right: 81%;
-    left: -26%;
-    top: 95%;
+    left: -31%;
+    top: 80%;
     opacity: 1 !important;
+    font-size: 25px;
+    font-weight: 100;
   }
 }
 
 .splide-video .splide__arrow--next {
   @include media-up(md) {
-    margin-left: 80px;
+    margin-left: 90px;
   }
 }
 

@@ -1,6 +1,7 @@
 
     <div class="cocreation__title">
 		<h2>Pasos De Cocreación Periodística</h2>
+    <hr class="backpackhr"/>
     </div>
 
-<x-web.section.cocreation />
+    <x-web.carousel.carousel-home />

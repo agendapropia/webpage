@@ -30,6 +30,7 @@
   align-items: center;
   gap: 10px;
   margin: 15px 0;
+  padding:10px;
   img {
     width: 118px;
     height: 100%;
@@ -47,6 +48,7 @@
   }
   @include media-up(md) {
     margin: 39px 0;
+    padding:0px;
   }
   @include media-up(lg) {
     margin: 45px 0;

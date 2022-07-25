@@ -1,6 +1,7 @@
 <div class="container">
     <div class="row">
         <div class="col-md-12">
+            <div class="content-backack">
             <div id="testimonial-slider" class="owl-carousel">
             <div class="owl-buttons">
                 <div class="prev owl-prev"></div>
@@ -17,4 +18,5 @@
             </div>
         </div>
     </div>
+</div>
 </div>

@@ -36,7 +36,7 @@
       border-radius: 50% !important;
       padding: 10px 12px !important;
     }
-    @include media-up(md) {
+    @media (min-width: 768px){
       & .swiper-button-prev,
       & .swiper-button-next {
         bottom: 40px !important;
@@ -48,11 +48,33 @@
         padding: 9px 12px !important;
       }
       & .swiper-button-prev {
-        left: 80% !important;
+        left: 85% !important;
       }
       & .swiper-button-next {
         right: 85px !important;
       }
     }
+
+
+    @media (min-width: 1400px){
+      & .swiper-button-prev,
+      & .swiper-button-next {
+        bottom: 40px !important;
+        top: unset !important;
+      }
+      & .swiper-button-prev:after,
+      & .swiper-button-next:after {
+        font-size: 1rem !important;
+        padding: 15px 18px !important;
+      }
+      & .swiper-button-prev {
+        left: 87% !important;
+      }
+      & .swiper-button-next {
+        right: 90px !important;
+      }
+    }
   }
+
+  
 }
