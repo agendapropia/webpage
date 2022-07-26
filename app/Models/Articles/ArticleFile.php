@@ -25,4 +25,21 @@ class ArticleFile extends Model
      * @var array
      */
     protected $fillable = ['id', 'article_id', 'image_id', 'type', 'position'];
+
+    // queries
+    public function scopegetImageByType($query, $id, $type)
+    {
+        $query
+            ->select(
+                'f.name_tmp',
+                'f.type',
+                'f.ext',
+                'f.description',
+                'f.author'
+            )
+            ->from('article_files as af')
+            ->join('agendapropia_utils.files as f', 'f.id', 'af.file_id')
+            ->where('af.article_id', $id)
+            ->where('af.type', $type);
+    }
 }
