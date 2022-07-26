@@ -135,16 +135,42 @@ class File extends Model
      * @param string $image name image
      * @param int $type
      */
-    static function setPathAndImageDefaultUnique($image, $type = 1)
-    {
+    static function setPathAndImageDefaultUnique(
+        $image,
+        $typeDefault = 1,
+        $typeImage = 1
+    ) {
         if (empty($image)) {
-            if ($type == 1) {
+            if ($typeDefault == 1) {
                 $image = self::FILE_DEFAULT;
             } else {
                 $image = self::FILE_PROFILE_DEFAULT;
             }
         }
 
-        return self::PATH_FILES . 'thumbnails/' . $image;
+        if ($typeImage == 1) {
+            return self::PATH_FILES . 'thumbnails/' . $image;
+        } else {
+            return self::PATH_FILES . $image;
+        }
+    }
+
+    /**
+     * return the full url of the file
+     *
+     * @param string $image name image
+     * @param int $type
+     */
+    static function setPathPublicImagen($image, $typeImage = 1)
+    {
+        if (empty($image)) {
+            $image = self::FILE_DEFAULT;
+        }
+
+        if ($typeImage == 1) {
+            return self::PATH_FILES . 'thumbnails/' . $image;
+        } else {
+            return self::PATH_FILES . $image;
+        }
     }
 }

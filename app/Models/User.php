@@ -12,6 +12,8 @@ use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
+    const DB_TABLE = 'agendapropia_users.users as u';
+
     use HasFactory, Notifiable, HasRoles;
 
     /**

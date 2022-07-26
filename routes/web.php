@@ -38,6 +38,17 @@ Route::get('/cocreacion-interna', function () {
     return view('pages.web.internal-cocreation');
 })->name('cocreacion-interna');
 
+Route::group(
+    [
+        'namespace' => 'App\Http\Controllers\Modules\Web',
+    ],
+    function () {
+        Route::get(
+            '/articles/{slug}',
+            'Articles\ArticlesController@index'
+        )->name('article');
+    }
+);
 
 Auth::routes();
 Route::group(['middleware' => 'auth'], function () {
@@ -50,7 +61,7 @@ Route::group(['middleware' => 'auth'], function () {
 Route::group(
     [
         'middleware' => 'auth',
-        'namespace' => 'App\Http\Controllers\Modules',
+        'namespace' => 'App\Http\Controllers\Modules\Admin',
     ],
     function () {
         Route::group(['prefix' => 'admin/accounts'], function () {
